@@ -1,6 +1,18 @@
-import { loadBlock, loadCSS, decorateBlock } from './aem.js';
+import {
+  buildBlock,
+  loadHeader,
+  loadFooter,
+  decorateIcons,
+  decorateSections,
+  decorateBlocks,
+  decorateTemplateAndTheme,
+  waitForFirstImage,
+  loadSection,
+  loadSections,
+  loadCSS,
+} from './aem.js';
 
-// ── Shared data used across blocks ──────────────────────────────────────────
+// ── Rinx Hockey Club shared data ─────────────────────────────────────────────
 
 export const RINX = {
   logoUrl: 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/icons/rinxlogo.png',
@@ -69,8 +81,6 @@ export const GAMES = [
   { date: 'May 4, 2025',  opp: 'North Park 10U A1',         loc: 'City Ice Pavilion, NYC',    score: '2–4', result: 'L', color: '#1a1a5e', logoId: '002ee8' },
 ];
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
-
 export function initials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
 }
@@ -85,25 +95,13 @@ export async function proxyGet(url) {
 export function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/);
   if (lines.length < 2) return [];
-  const headers = splitCSVLine(lines[0]);
+  const headers = lines[0].split(',').map((h) => h.trim().replace(/^"|"$/g, ''));
   return lines.slice(1).filter((l) => l.trim()).map((line) => {
-    const vals = splitCSVLine(line);
+    const vals = line.split(',').map((v) => v.trim().replace(/^"|"$/g, ''));
     const obj = {};
-    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
+    headers.forEach((h, i) => { obj[h] = vals[i] || ''; });
     return obj;
   });
-}
-
-function splitCSVLine(line) {
-  const result = [];
-  let cur = '';
-  let inQ = false;
-  for (let i = 0; i < line.length; i += 1) {
-    const ch = line[i];
-    if (ch === '"') { inQ = !inQ; } else if (ch === ',' && !inQ) { result.push(cur); cur = ''; } else { cur += ch; }
-  }
-  result.push(cur);
-  return result;
 }
 
 export function findKey(obj, ...candidates) {
@@ -115,32 +113,46 @@ export function findKey(obj, ...candidates) {
   return '';
 }
 
-// ── Page decoration ──────────────────────────────────────────────────────────
+// ── Standard AEM page decoration ─────────────────────────────────────────────
 
-function decorateBlocks(main) {
-  main.querySelectorAll(':scope > div > div').forEach((block) => {
-    const shortBlockName = block.classList[0];
-    if (shortBlockName) decorateBlock(block);
-  });
+async function loadFonts() {
+  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
 }
 
-function decorateSections(main) {
-  [...main.children].forEach((section) => {
-    if (section.tagName !== 'DIV') return;
-    section.classList.add('section');
-    section.dataset.sectionStatus = 'initialized';
-  });
+export function decorateMain(main) {
+  decorateIcons(main);
+  decorateSections(main);
+  decorateBlocks(main);
+}
+
+async function loadEager(doc) {
+  document.documentElement.lang = 'en';
+  decorateTemplateAndTheme();
+  const main = doc.querySelector('main');
+  if (main) {
+    decorateMain(main);
+    document.body.classList.add('appear');
+    await loadSection(main.querySelector('.section'), waitForFirstImage);
+  }
+}
+
+async function loadLazy(doc) {
+  loadHeader(doc.querySelector('header'));
+  const main = doc.querySelector('main');
+  await loadSections(main);
+  loadFooter(doc.querySelector('footer'));
+  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  loadFonts();
+}
+
+function loadDelayed() {
+  window.setTimeout(() => import('./delayed.js').catch(() => {}), 3000);
 }
 
 async function loadPage() {
-  await loadCSS('/styles/styles.css');
-  const main = document.querySelector('main');
-  if (!main) return;
-  decorateSections(main);
-  decorateBlocks(main);
-  const blocks = [...main.querySelectorAll('.block')];
-  await Promise.all(blocks.map((b) => loadBlock(b)));
-  loadCSS('/styles/lazy-styles.css');
+  await loadEager(document);
+  await loadLazy(document);
+  loadDelayed();
 }
 
 loadPage();
