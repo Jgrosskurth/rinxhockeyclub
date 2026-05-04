@@ -118,26 +118,44 @@ export function findKey(obj, ...candidates) {
 // ── Page decoration ──────────────────────────────────────────────────────────
 
 function decorateBlocks(main) {
-  main.querySelectorAll('div.section > div').forEach((block) => {
-    const cls = block.classList[0];
-    if (cls) decorateBlock(block);
+  // Handle both AEM section-wrapped and direct block divs
+  main.querySelectorAll('div').forEach((el) => {
+    const cls = el.classList[0];
+    if (cls && !el.classList.contains('block') && !el.closest('.block')) {
+      decorateBlock(el);
+    }
   });
 }
 
 async function loadPage() {
-  // Load global CSS
   await loadCSS('/styles/styles.css');
 
-  const main = document.querySelector('main');
-  if (!main) return;
+  // AEM wraps content in <main>, DA-served pages may have body content directly
+  let main = document.querySelector('main');
+  if (!main) {
+    // Wrap body content in a main tag
+    main = document.createElement('main');
+    while (document.body.firstChild) {
+      main.appendChild(document.body.firstChild);
+    }
+    document.body.appendChild(main);
+  }
+
+  // Wrap all direct block divs in section divs (AEM structure)
+  [...main.children].forEach((child) => {
+    if (child.tagName === 'DIV' && !child.classList.contains('section')) {
+      const section = document.createElement('div');
+      section.className = 'section';
+      child.parentNode.insertBefore(section, child);
+      section.appendChild(child);
+    }
+  });
 
   decorateBlocks(main);
 
-  // Load all blocks
   const blocks = [...main.querySelectorAll('.block')];
   await Promise.all(blocks.map((b) => loadBlock(b)));
 
-  // Lazy styles
   loadCSS('/styles/lazy-styles.css');
 }
 
