@@ -65,7 +65,7 @@
       +'<p>Official 2026 Rinx 10U team jerseys, hoodies, and more are now available.</p>'
       +'<a class="btn-shop" href="'+RINX.shopUrl+'" target="_blank">Shop the Official Store</a>'
       +'<div class="shop-items">'
-      +'<div class="shop-item"><span>&#127944;</span>Jerseys</div>'
+      +'<div class="shop-item">Jerseys</div>'
       +'<div class="shop-item"><span>&#128085;</span>T-Shirts</div>'
       +'<div class="shop-item"><span>&#129346;</span>Hats</div>'
       +'<div class="shop-item"><span>&#129399;</span>Hoodies</div>'
@@ -97,7 +97,6 @@
     setInterval(function(){go(idx+1>mx()?0:idx+1);},5000);
   }
 
-  // Wait for page to be ready
   if (document.readyState === 'complete') {
     setTimeout(init, 100);
   } else {
