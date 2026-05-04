@@ -1,0 +1,98 @@
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.player-card {
+  background: var(--color-white);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border-top: 3px solid var(--color-navy);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.player-card:hover { transform: translateY(-4px); border-color: var(--color-red); }
+
+.player-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--color-navy), var(--color-navy-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--color-white);
+}
+
+.player-card h3 {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  line-height: 1.2;
+}
+
+.player-pos { font-size: 0.75rem; color: var(--color-gray); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+.pp-badge {
+  display: inline-block;
+  margin-top: 8px;
+  background: var(--color-gold);
+  color: var(--color-navy);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.roster-coaches { margin-top: 48px; }
+
+.coaches-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+.coach-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--color-navy);
+  border-radius: 8px;
+  padding: 24px;
+  color: var(--color-white);
+}
+
+.coach-av {
+  width: 72px;
+  height: 72px;
+  background: var(--color-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.coach-info h4 {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.coach-info p { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+
+@media (max-width: 900px) {
+  .coaches-grid { grid-template-columns: 1fr; }
+}
