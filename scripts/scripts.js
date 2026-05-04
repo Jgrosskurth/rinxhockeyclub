@@ -1,6 +1,17 @@
-import { loadBlock, loadCSS, decorateBlock } from './aem.js';
+import {
+  loadHeader,
+  loadFooter,
+  decorateIcons,
+  decorateSections,
+  decorateBlocks,
+  decorateTemplateAndTheme,
+  waitForFirstImage,
+  loadSection,
+  loadSections,
+  loadCSS,
+} from './aem.js';
 
-// ── Shared data used across blocks ──────────────────────────────────────────
+// ── Rinx Hockey Club shared data ─────────────────────────────────────────────
 
 export const RINX = {
   logoUrl: 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/icons/rinxlogo.png',
@@ -35,171 +46,189 @@ export const PLAYERS = [
 ];
 
 export const GAMES = [
-  { date: 'Sep 22, 2024', opp: 'Long Island Royals 10U',    loc: 'The Rinx, Hauppauge',      score: '8–3', result: 'W', color: '#1a3a8f' },
-  { date: 'Sep 29, 2024', opp: 'Dix Hills Hawks 10U',       loc: 'Dix Hills Ice Rink',        score: '4–5', result: 'L', color: '#c8102e' },
-  { date: 'Oct 6, 2024',  opp: 'Long Island Edge 10U',      loc: 'The Rinx, Hauppauge',       score: '6–2', result: 'W', color: '#006633' },
-  { date: 'Oct 13, 2024', opp: 'Great Neck Bruins 10U',     loc: 'Great Neck Ice Rink',       score: '3–3', result: 'T', color: '#f5a800' },
-  { date: 'Oct 20, 2024', opp: 'Long Island Sharks 10U',    loc: 'The Rinx, Hauppauge',       score: '7–4', result: 'W', color: '#004488' },
-  { date: 'Oct 27, 2024', opp: 'NYC Cyclones 10U',          loc: 'Flushing Meadows Rink',     score: '2–5', result: 'L', color: '#1a1a6e' },
-  { date: 'Nov 3, 2024',  opp: 'Long Island Royals 10U',    loc: 'Northwell Health Ice Ctr',  score: '5–2', result: 'W', color: '#1a3a8f' },
-  { date: 'Nov 10, 2024', opp: 'NYC Skyliners 10U',         loc: 'The Rinx, Hauppauge',       score: '9–1', result: 'W', color: '#880000' },
-  { date: 'Nov 16, 2024', opp: 'North Park 10U A1',         loc: 'The Rinx, Hauppauge',       score: '4–1', result: 'W', color: '#1a1a5e', logoId: '002ee8' },
-  { date: 'Nov 17, 2024', opp: 'Long Island Edge 10U',      loc: 'The Rinx, Hauppauge',       score: '3–5', result: 'L', color: '#006633' },
-  { date: 'Nov 24, 2024', opp: 'Dix Hills Hawks 10U',       loc: 'The Rinx, Hauppauge',       score: '6–3', result: 'W', color: '#c8102e' },
-  { date: 'Dec 1, 2024',  opp: 'Great Neck Bruins 10U',     loc: 'The Rinx, Hauppauge',       score: '4–4', result: 'T', color: '#f5a800' },
-  { date: 'Dec 8, 2024',  opp: 'Long Island Sharks 10U',    loc: 'Long Island Skating Acad.', score: '3–6', result: 'L', color: '#004488' },
-  { date: 'Dec 15, 2024', opp: 'NYC Cyclones 10U',          loc: 'The Rinx, Hauppauge',       score: '8–2', result: 'W', color: '#1a1a6e' },
-  { date: 'Dec 22, 2024', opp: 'NYC Skyliners 10U',         loc: 'Chelsea Piers Ice Rink',    score: '2–4', result: 'L', color: '#880000' },
-  { date: 'Jan 5, 2025',  opp: 'Long Island Royals 10U',    loc: 'The Rinx, Hauppauge',       score: '7–3', result: 'W', color: '#1a3a8f' },
-  { date: 'Jan 12, 2025', opp: 'North Park 10U A1',         loc: 'John Wright Arena, NYC',    score: '1–3', result: 'L', color: '#1a1a5e', logoId: '002ee8' },
-  { date: 'Jan 19, 2025', opp: 'Dix Hills Hawks 10U',       loc: 'Dix Hills Ice Rink',        score: '5–5', result: 'T', color: '#c8102e' },
-  { date: 'Jan 26, 2025', opp: 'Long Island Edge 10U',      loc: 'The Rinx, Hauppauge',       score: '6–1', result: 'W', color: '#006633' },
-  { date: 'Feb 2, 2025',  opp: 'Great Neck Bruins 10U',     loc: 'Great Neck Ice Rink',       score: '2–4', result: 'L', color: '#f5a800' },
-  { date: 'Feb 9, 2025',  opp: 'Long Island Sharks 10U',    loc: 'The Rinx, Hauppauge',       score: '5–3', result: 'W', color: '#004488' },
-  { date: 'Feb 16, 2025', opp: 'NYC Cyclones 10U',          loc: 'The Rinx, Hauppauge',       score: '4–2', result: 'W', color: '#1a1a6e' },
-  { date: 'Feb 23, 2025', opp: 'NYC Skyliners 10U',         loc: 'The Rinx, Hauppauge',       score: '3–5', result: 'L', color: '#880000' },
-  { date: 'Mar 2, 2025',  opp: 'North Park 10U A1',         loc: 'The Rinx, Hauppauge',       score: '6–2', result: 'W', color: '#1a1a5e', logoId: '002ee8' },
-  { date: 'Mar 9, 2025',  opp: 'Long Island Royals 10U',    loc: 'Northwell Health Ice Ctr',  score: '2–4', result: 'L', color: '#1a3a8f' },
-  { date: 'Mar 16, 2025', opp: 'Dix Hills Hawks 10U',       loc: 'The Rinx, Hauppauge',       score: '7–1', result: 'W', color: '#c8102e' },
-  { date: 'Mar 23, 2025', opp: 'Long Island Edge 10U',      loc: 'Long Island Skating Acad.', score: '1–3', result: 'L', color: '#006633' },
-  { date: 'Mar 30, 2025', opp: 'Great Neck Bruins 10U',     loc: 'The Rinx, Hauppauge',       score: '5–2', result: 'W', color: '#f5a800' },
-  { date: 'Apr 6, 2025',  opp: 'Long Island Sharks 10U',    loc: 'The Rinx, Hauppauge',       score: '2–3', result: 'L', color: '#004488' },
-  { date: 'Apr 13, 2025', opp: 'NYC Cyclones 10U',          loc: 'Flushing Meadows Rink',     score: '3–6', result: 'L', color: '#1a1a6e' },
-  { date: 'Apr 27, 2025', opp: 'NYC Skyliners 10U',         loc: 'The Rinx, Hauppauge',       score: '6–3', result: 'W', color: '#880000' },
-  { date: 'May 4, 2025',  opp: 'North Park 10U A1',         loc: 'City Ice Pavilion, NYC',    score: '2–4', result: 'L', color: '#1a1a5e', logoId: '002ee8' },
+  { date: 'Sep 22, 2024', opp: 'Long Island Royals 10U', loc: 'The Rinx, Hauppauge', score: '8-3', result: 'W', color: '#1a3a8f' },
+  { date: 'Sep 29, 2024', opp: 'Dix Hills Hawks 10U', loc: 'Dix Hills Ice Rink', score: '4-5', result: 'L', color: '#c8102e' },
+  { date: 'Oct 6, 2024', opp: 'Long Island Edge 10U', loc: 'The Rinx, Hauppauge', score: '6-2', result: 'W', color: '#006633' },
+  { date: 'Oct 13, 2024', opp: 'Great Neck Bruins 10U', loc: 'Great Neck Ice Rink', score: '3-3', result: 'T', color: '#f5a800' },
+  { date: 'Oct 20, 2024', opp: 'Long Island Sharks 10U', loc: 'The Rinx, Hauppauge', score: '7-4', result: 'W', color: '#004488' },
+  { date: 'Oct 27, 2024', opp: 'NYC Cyclones 10U', loc: 'Flushing Meadows Rink', score: '2-5', result: 'L', color: '#1a1a6e' },
+  { date: 'Nov 3, 2024', opp: 'Long Island Royals 10U', loc: 'Northwell Health Ice Ctr', score: '5-2', result: 'W', color: '#1a3a8f' },
+  { date: 'Nov 10, 2024', opp: 'NYC Skyliners 10U', loc: 'The Rinx, Hauppauge', score: '9-1', result: 'W', color: '#880000' },
+  { date: 'Nov 16, 2024', opp: 'North Park 10U A1', loc: 'The Rinx, Hauppauge', score: '4-1', result: 'W', color: '#1a1a5e' },
+  { date: 'Nov 17, 2024', opp: 'Long Island Edge 10U', loc: 'The Rinx, Hauppauge', score: '3-5', result: 'L', color: '#006633' },
+  { date: 'Nov 24, 2024', opp: 'Dix Hills Hawks 10U', loc: 'The Rinx, Hauppauge', score: '6-3', result: 'W', color: '#c8102e' },
+  { date: 'Dec 1, 2024', opp: 'Great Neck Bruins 10U', loc: 'The Rinx, Hauppauge', score: '4-4', result: 'T', color: '#f5a800' },
+  { date: 'Dec 8, 2024', opp: 'Long Island Sharks 10U', loc: 'Long Island Skating Acad.', score: '3-6', result: 'L', color: '#004488' },
+  { date: 'Dec 15, 2024', opp: 'NYC Cyclones 10U', loc: 'The Rinx, Hauppauge', score: '8-2', result: 'W', color: '#1a1a6e' },
+  { date: 'Dec 22, 2024', opp: 'NYC Skyliners 10U', loc: 'Chelsea Piers Ice Rink', score: '2-4', result: 'L', color: '#880000' },
+  { date: 'Jan 5, 2025', opp: 'Long Island Royals 10U', loc: 'The Rinx, Hauppauge', score: '7-3', result: 'W', color: '#1a3a8f' },
+  { date: 'Jan 12, 2025', opp: 'North Park 10U A1', loc: 'John Wright Arena, NYC', score: '1-3', result: 'L', color: '#1a1a5e' },
+  { date: 'Jan 19, 2025', opp: 'Dix Hills Hawks 10U', loc: 'Dix Hills Ice Rink', score: '5-5', result: 'T', color: '#c8102e' },
+  { date: 'Jan 26, 2025', opp: 'Long Island Edge 10U', loc: 'The Rinx, Hauppauge', score: '6-1', result: 'W', color: '#006633' },
+  { date: 'Feb 2, 2025', opp: 'Great Neck Bruins 10U', loc: 'Great Neck Ice Rink', score: '2-4', result: 'L', color: '#f5a800' },
+  { date: 'Feb 9, 2025', opp: 'Long Island Sharks 10U', loc: 'The Rinx, Hauppauge', score: '5-3', result: 'W', color: '#004488' },
+  { date: 'Feb 16, 2025', opp: 'NYC Cyclones 10U', loc: 'The Rinx, Hauppauge', score: '4-2', result: 'W', color: '#1a1a6e' },
+  { date: 'Feb 23, 2025', opp: 'NYC Skyliners 10U', loc: 'The Rinx, Hauppauge', score: '3-5', result: 'L', color: '#880000' },
+  { date: 'Mar 2, 2025', opp: 'North Park 10U A1', loc: 'The Rinx, Hauppauge', score: '6-2', result: 'W', color: '#1a1a5e' },
+  { date: 'Mar 9, 2025', opp: 'Long Island Royals 10U', loc: 'Northwell Health Ice Ctr', score: '2-4', result: 'L', color: '#1a3a8f' },
+  { date: 'Mar 16, 2025', opp: 'Dix Hills Hawks 10U', loc: 'The Rinx, Hauppauge', score: '7-1', result: 'W', color: '#c8102e' },
+  { date: 'Mar 23, 2025', opp: 'Long Island Edge 10U', loc: 'Long Island Skating Acad.', score: '1-3', result: 'L', color: '#006633' },
+  { date: 'Mar 30, 2025', opp: 'Great Neck Bruins 10U', loc: 'The Rinx, Hauppauge', score: '5-2', result: 'W', color: '#f5a800' },
+  { date: 'Apr 6, 2025', opp: 'Long Island Sharks 10U', loc: 'The Rinx, Hauppauge', score: '2-3', result: 'L', color: '#004488' },
+  { date: 'Apr 13, 2025', opp: 'NYC Cyclones 10U', loc: 'Flushing Meadows Rink', score: '3-6', result: 'L', color: '#1a1a6e' },
+  { date: 'Apr 27, 2025', opp: 'NYC Skyliners 10U', loc: 'The Rinx, Hauppauge', score: '6-3', result: 'W', color: '#880000' },
+  { date: 'May 4, 2025', opp: 'North Park 10U A1', loc: 'City Ice Pavilion, NYC', score: '2-4', result: 'L', color: '#1a1a5e' },
 ];
-
-// ── Helpers ──────────────────────────────────────────────────────────────────
 
 export function initials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
 }
 
 export async function proxyGet(url) {
-  const resp = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}&ts=${Date.now()}`);
-  if (!resp.ok) throw new Error(`proxy ${resp.status}`);
-  const json = await resp.json();
-  return json.contents;
+  const resp = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url) + '&ts=' + Date.now());
+  if (!resp.ok) throw new Error('proxy ' + resp.status);
+  const data = await resp.json();
+  return data.contents;
 }
 
 export function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/);
   if (lines.length < 2) return [];
-  const headers = splitCSVLine(lines[0]);
+  const headers = lines[0].split(',').map((h) => h.trim().replace(/^"|"$/g, ''));
   return lines.slice(1).filter((l) => l.trim()).map((line) => {
-    const vals = splitCSVLine(line);
+    const vals = line.split(',').map((v) => v.trim().replace(/^"|"$/g, ''));
     const obj = {};
-    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
+    headers.forEach((h, i) => { obj[h] = vals[i] || ''; });
     return obj;
   });
 }
 
-function splitCSVLine(line) {
-  const result = [];
-  let cur = '';
-  let inQ = false;
-  for (let i = 0; i < line.length; i += 1) {
-    const ch = line[i];
-    if (ch === '"') { inQ = !inQ; } else if (ch === ',' && !inQ) { result.push(cur); cur = ''; } else { cur += ch; }
-  }
-  result.push(cur);
-  return result;
+// ── AEM page loading ──────────────────────────────────────────────────────────
+
+async function loadFonts() {
+  await loadCSS(window.hlx.codeBasePath + '/styles/fonts.css');
 }
 
-export function findKey(obj, ...candidates) {
-  const keys = Object.keys(obj);
-  for (const c of candidates) {
-    const found = keys.find((k) => k.trim().toLowerCase() === c.toLowerCase());
-    if (found !== undefined) return obj[found];
-  }
-  return '';
+export function decorateMain(main) {
+  decorateIcons(main);
+  decorateSections(main);
+  decorateBlocks(main);
 }
 
-// ── Page decoration ──────────────────────────────────────────────────────────
+async function loadEager(doc) {
+  document.documentElement.lang = 'en';
+  decorateTemplateAndTheme();
+  const main = doc.querySelector('main');
+  if (main) {
+    decorateMain(main);
+    document.body.classList.add('appear');
+    await loadSection(main.querySelector('.section'), waitForFirstImage);
+  }
+}
 
-function decorateBlocks(main) {
-  main.querySelectorAll('div.section > div').forEach((block) => {
-    const cls = block.classList[0];
-    if (cls) decorateBlock(block);
-  });
+async function loadLazy(doc) {
+  loadHeader(doc.querySelector('header'));
+  const main = doc.querySelector('main');
+  await loadSections(main);
+  loadFooter(doc.querySelector('footer'));
+  loadCSS(window.hlx.codeBasePath + '/styles/lazy-styles.css');
+  loadFonts();
+}
+
+function loadDelayed() {
+  window.setTimeout(() => import('./delayed.js').catch(() => {}), 3000);
 }
 
 async function loadPage() {
-  // Load global CSS
-  await loadCSS('/styles/styles.css');
-
-  const main = document.querySelector('main');
-  if (!main) return;
-
-  decorateBlocks(main);
-
-  // Load all blocks
-  const blocks = [...main.querySelectorAll('.block')];
-  await Promise.all(blocks.map((b) => loadBlock(b)));
-
-  // Lazy styles
-  loadCSS('/styles/lazy-styles.css');
+  await loadEager(document);
+  await loadLazy(document);
+  loadDelayed();
+  buildHomepage(document.querySelector('main'));
 }
 
-loadPage().then(() => { buildHomepage(document.querySelector('main')); });
-
-// ── Homepage sections ─────────────────────────────────────────────────────
+// ── Homepage sections ─────────────────────────────────────────────────────────
 
 function buildHomepage(main) {
-  if (window.location.pathname !== '/' && window.location.pathname !== '/index') return;
-  if (!main || main.querySelector('#homepage-content')) return;
+  const path = window.location.pathname;
+  if (path !== '/' && path !== '/index') return;
+  if (!main) return;
+  if (document.getElementById('hp-content')) return;
 
   const news = [
-    { tag: 'Roster', title: '2026\u20132027 Roster Finalized', body: "Congratulations to all players who made this year\u2019s Rinx Hockey Club 10U Squirts travel team! Roster signing night was held March 5, 2026 at The Rinx.", date: 'March 5, 2026' },
+    { tag: 'Roster', title: '2026-2027 Roster Finalized', body: 'Congratulations to all players who made this years Rinx Hockey Club 10U Squirts travel team! Roster signing night was held March 5, 2026 at The Rinx.', date: 'March 5, 2026' },
     { tag: 'Gear', title: 'Spring 2026 Gear Store Is Live', body: 'The official 2026 team gear store is now open. Order jerseys, shells, and team apparel before the deadline closes.', date: 'April 1, 2026' },
-    { tag: 'Season', title: '2026\u20132027 Season Begins This Fall', body: 'The upcoming season schedule is being finalized. Stay tuned for game dates, tournament registrations, and practice times.', date: 'May 1, 2026' },
-    { tag: 'Coaching', title: 'Coaching Staff Confirmed', body: "Head Coach Dan O\u2019Donoghue and Assistant Coach Joe Capozzoli return to lead the 10U Squirts for another exciting season.", date: 'April 15, 2026' },
-    { tag: 'Sponsors', title: 'Seeking 2026\u20132027 Sponsors', body: 'We are now accepting sponsorship applications. Multiple tiers are available starting at $250. Contact us to learn more today.', date: 'April 20, 2026' },
+    { tag: 'Season', title: '2026-2027 Season Begins This Fall', body: 'The upcoming season schedule is being finalized. Stay tuned for game dates, tournament registrations, and practice times.', date: 'May 1, 2026' },
+    { tag: 'Coaching', title: 'Coaching Staff Confirmed', body: 'Head Coach Dan ODonoghue and Assistant Coach Joe Capozzoli return to lead the 10U Squirts for another exciting season.', date: 'April 15, 2026' },
+    { tag: 'Sponsors', title: 'Seeking 2026-2027 Sponsors', body: 'We are now accepting sponsorship applications. Multiple tiers are available starting at $250. Contact us to learn more today.', date: 'April 20, 2026' },
   ];
 
-  const recentGames = GAMES.slice(-5).reverse();
+  const recent = GAMES.slice(-5).reverse();
 
-  const newsHTML = news.map((n) => '<div class="slide-card"><div class="slide-card-body"><div class="news-tag">' + n.tag + '</div><h3>' + n.title + '</h3><p>' + n.body + '</p><div class="news-date">' + n.date + '</div></div></div>').join('');
+  function newsCard(n) {
+    return '<div class="slide-card"><div class="slide-card-body"><div class="news-tag">' + n.tag + '</div><h3>' + n.title + '</h3><p>' + n.body + '</p><div class="news-date">' + n.date + '</div></div></div>';
+  }
 
-  const resultsHTML = recentGames.map((g) => {
-    const initials = g.opp.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+  function resultRow(g) {
+    const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
     const badge = g.result === 'W' ? 'win' : g.result === 'L' ? 'loss' : 'tie';
-    return '<div class="sg-row" data-result="' + g.result + '"><div class="sg-date">' + g.date + '</div><div class="sg-opp"><div class="sg-logo-fb" style="background:' + g.color + '">' + initials + '</div><div><div class="sg-name">' + g.opp + '</div><div class="sg-loc">' + g.loc + '</div></div></div><div class="sg-score">' + g.score + '</div><div class="sg-result"><span class="badge badge-' + badge + '">' + g.result + '</span></div></div>';
-  }).join('');
+    return '<div class="sg-row"><div class="sg-date">' + g.date + '</div><div class="sg-opp"><div class="sg-logo-fb" style="background:' + g.color + '">' + ini + '</div><div><div class="sg-name">' + g.opp + '</div><div class="sg-loc">' + g.loc + '</div></div></div><div class="sg-score">' + g.score + '</div><div class="sg-result"><span class="badge badge-' + badge + '">' + g.result + '</span></div></div>';
+  }
 
   const hp = document.createElement('div');
-  hp.id = 'homepage-content';
-  hp.innerHTML = '<div class="hp-news"><div class="hp-inner"><h2 class="section-title">Latest News</h2><div class="slider-outer"><div class="slider-track" id="hp-track">' + newsHTML + '</div></div><div class="slider-nav"><button class="snav-btn" id="hp-prev">&#8592;</button><div class="sdots" id="hp-dots"></div><button class="snav-btn" id="hp-next">&#8594;</button></div></div></div>'
-    + '<div class="hp-results"><div class="hp-inner"><h2 class="section-title">Recent Results</h2><div class="results-list">' + resultsHTML + '</div><p style="margin-top:16px"><a href="/schedule" style="color:var(--color-red);font-weight:700">View Full Schedule &rarr;</a></p></div></div>'
-    + '<div class="hp-about"><div class="hp-inner"><h2 class="section-title">About Our Team</h2><div class="bio-grid"><div class="bio-card bio-full"><img src="https://static.wixstatic.com/media/4d0004_9c4b74e112a042159df552c350dad98d~mv2.png/v1/crop/x_0,y_4,w_1280,h_355/fill/w_980,h_272,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/League%20Header.png" alt="Rinx Hockey Club" style="width:100%;border-radius:6px;margin-bottom:24px;display:block" onerror="this.style.display=\'none\'"><h3>2026&ndash;2027 Rinx Hockey Club &bull; 10U Squirts</h3><p>The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.</p></div><div class="bio-card"><h3>Coaching Staff</h3><div class="coach-card" style="margin-bottom:12px"><div class="coach-av">DO</div><div class="coach-info"><h4>Dan O\'Donoghue</h4><p>Head Coach &bull; 10U Squirts</p></div></div><div class="coach-card"><div class="coach-av">JC</div><div class="coach-info"><h4>Joe Capozzoli</h4><p>Assistant Coach &bull; 10U Squirts</p></div></div></div><div class="bio-card"><h3>Our Facility</h3><img src="https://github.com/Jgrosskurth/rinxhockeyclub/blob/main/icons/877c6298be0986da90566f459a2a2874.webp?raw=true" alt="The Rinx" style="width:100%;border-radius:6px;margin-bottom:16px;display:block;max-height:220px;object-fit:cover" onerror="this.style.display=\'none\'"><p>Located at 660 Terry Road, Hauppauge, The Rinx features two full-size indoor NHL rinks, a pro shop, skate sharpening, and year-round programming on 97 acres of Hidden Pond Park.</p><p style="margin-top:8px"><strong>Phone:</strong> (631) 232-3222</p></div></div></div></div>'
-    + '<div class="hp-shop"><h2>Get Your Gear</h2><p>Official 2026 Rinx 10U team jerseys, hoodies, and more are now available.</p><a class="btn-shop" href="' + RINX.shopUrl + '" target="_blank">Shop the Official Store</a><div class="shop-items"><div class="shop-item"><span>&#127944;</span>Jerseys</div><div class="shop-item"><span>&#128085;</span>T-Shirts</div><div class="shop-item"><span>&#129346;</span>Hats</div><div class="shop-item"><span>&#129399;</span>Hoodies</div></div></div>';
+  hp.id = 'hp-content';
+
+  const newsHTML = news.map(newsCard).join('');
+  const resultsHTML = recent.map(resultRow).join('');
+
+  hp.innerHTML = '<div class="hp-news"><div class="hp-inner"><h2 class="section-title">Latest News</h2>'
+    + '<div class="slider-outer"><div class="slider-track" id="hp-track">' + newsHTML + '</div></div>'
+    + '<div class="slider-nav"><button class="snav-btn" id="hp-prev">&#8592;</button><div class="sdots" id="hp-dots"></div><button class="snav-btn" id="hp-next">&#8594;</button></div>'
+    + '</div></div>'
+    + '<div class="hp-results"><div class="hp-inner"><h2 class="section-title">Recent Results</h2>'
+    + '<div class="results-list">' + resultsHTML + '</div>'
+    + '<p style="margin-top:16px"><a href="/schedule" style="color:var(--color-red);font-weight:700">View Full Schedule</a></p>'
+    + '</div></div>'
+    + '<div class="hp-about"><div class="hp-inner"><h2 class="section-title">About Our Team</h2>'
+    + '<div class="bio-grid">'
+    + '<div class="bio-card bio-full"><img src="https://static.wixstatic.com/media/4d0004_9c4b74e112a042159df552c350dad98d~mv2.png/v1/crop/x_0,y_4,w_1280,h_355/fill/w_980,h_272,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/League%20Header.png" alt="Rinx" style="width:100%;border-radius:6px;margin-bottom:24px;display:block" onerror="this.style.display=\'none\'"><h3>2026-2027 Rinx Hockey Club - 10U Squirts</h3><p>The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.</p></div>'
+    + '<div class="bio-card"><h3>Coaching Staff</h3><div class="coach-card" style="margin-bottom:12px"><div class="coach-av">DO</div><div class="coach-info"><h4>Dan ODonoghue</h4><p>Head Coach - 10U Squirts</p></div></div><div class="coach-card"><div class="coach-av">JC</div><div class="coach-info"><h4>Joe Capozzoli</h4><p>Assistant Coach - 10U Squirts</p></div></div></div>'
+    + '<div class="bio-card"><h3>Our Facility</h3><img src="https://github.com/Jgrosskurth/rinxhockeyclub/blob/main/icons/877c6298be0986da90566f459a2a2874.webp?raw=true" alt="The Rinx" style="width:100%;border-radius:6px;margin-bottom:16px;display:block;max-height:220px;object-fit:cover" onerror="this.style.display=\'none\'"><p>Located at 660 Terry Road, Hauppauge, The Rinx features two full-size indoor NHL rinks, a pro shop, skate sharpening, and year-round programming on 97 acres of Hidden Pond Park.</p><p style="margin-top:8px"><strong>Phone:</strong> (631) 232-3222</p></div>'
+    + '</div></div></div>'
+    + '<div class="hp-shop"><h2>Get Your Gear</h2><p>Official 2026 Rinx 10U team jerseys, hoodies, and more are now available.</p>'
+    + '<a class="btn-shop" href="' + RINX.shopUrl + '" target="_blank">Shop the Official Store</a>'
+    + '<div class="shop-items"><div class="shop-item"><span>&#127944;</span>Jerseys</div><div class="shop-item"><span>&#128085;</span>T-Shirts</div><div class="shop-item"><span>&#129346;</span>Hats</div><div class="shop-item"><span>&#129399;</span>Hoodies</div></div>'
+    + '</div>';
 
   main.insertAdjacentElement('afterend', hp);
 
-  // Slider
   let idx = 0;
   const track = hp.querySelector('#hp-track');
   const dots = hp.querySelector('#hp-dots');
-  const cards = [...hp.querySelectorAll('.slide-card')];
-  const vis = () => window.innerWidth < 900 ? 1 : 3;
-  const maxIdx = () => Math.max(0, cards.length - vis());
-  const buildDots = () => {
+  const cards = Array.from(hp.querySelectorAll('.slide-card'));
+  const vis = function() { return window.innerWidth < 900 ? 1 : 3; };
+  const maxIdx = function() { return Math.max(0, cards.length - vis()); };
+
+  const buildDots = function() {
     dots.innerHTML = '';
     for (let i = 0; i <= maxIdx(); i++) {
       const d = document.createElement('button');
       d.className = 'sdot' + (i === 0 ? ' on' : '');
-      d.addEventListener('click', () => go(i));
+      d.addEventListener('click', (function(i2) { return function() { go(i2); }; })(i));
       dots.appendChild(d);
     }
   };
-  const go = (i) => {
+
+  const go = function(i) {
     idx = Math.max(0, Math.min(i, maxIdx()));
     const w = cards[0].offsetWidth + 24;
     track.style.transform = 'translateX(-' + (idx * w) + 'px)';
-    dots.querySelectorAll('.sdot').forEach((d, j) => d.classList.toggle('on', j === idx));
+    dots.querySelectorAll('.sdot').forEach(function(d, j) { d.classList.toggle('on', j === idx); });
   };
-  hp.querySelector('#hp-prev').addEventListener('click', () => go(idx - 1));
-  hp.querySelector('#hp-next').addEventListener('click', () => go(idx + 1));
+
+  hp.querySelector('#hp-prev').addEventListener('click', function() { go(idx - 1); });
+  hp.querySelector('#hp-next').addEventListener('click', function() { go(idx + 1); });
   buildDots();
-  setInterval(() => go(idx + 1 > maxIdx() ? 0 : idx + 1), 5000);
+  setInterval(function() { go(idx + 1 > maxIdx() ? 0 : idx + 1); }, 5000);
 }
+
+loadPage();
