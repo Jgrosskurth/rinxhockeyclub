@@ -1,1 +1,56 @@
-/* add global styles that can be loaded post LCP here */
+/* Styles loaded after LCP — non-critical */
+
+/* Form inputs */
+input, select, textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--color-gray-light);
+  border-radius: 4px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  color: var(--color-navy);
+  background: var(--color-off-white);
+  transition: border-color 0.15s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-navy);
+}
+
+textarea { resize: vertical; min-height: 100px; }
+
+label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+}
+
+.form-group { margin-bottom: 16px; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-success {
+  background: #dcfce7;
+  border: 2px solid #86efac;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  color: #166534;
+  font-weight: 600;
+  margin-top: 16px;
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .form-row { grid-template-columns: 1fr; }
+}
