@@ -55,6 +55,10 @@ export default function decorate(block) {
             <div class="form-group"><label>Child&apos;s Name *</label><input type="text" id="ps-child" placeholder="Player&apos;s full name"></div>
           </div>
           <div class="form-row">
+            <div class="form-group"><label>Email Address *</label><input type="email" id="ps-email" placeholder="email@example.com"></div>
+            <div class="form-group"><label>Contact Phone *</label><input type="tel" id="ps-phone" placeholder="(631) 000-0000"></div>
+          </div>
+          <div class="form-row">
             <div class="form-group">
               <label>Child&apos;s Age *</label>
               <select id="ps-age">
