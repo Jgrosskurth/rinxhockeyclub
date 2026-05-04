@@ -1,3 +1,4 @@
+/* Same as before but with smaller stat strip */
 .hero.block,
 .block.hero,
 div[data-block-name="hero"] {
@@ -95,10 +96,10 @@ div[data-block-name="hero"] > div {
   overflow: hidden;
 }
 
-.hs-block { padding: 14px 24px; text-align: center; }
-.hs-num { font-family: var(--heading-font-family); font-weight: 900; font-size: 1.7rem; color: #fff; line-height: 1; }
+.hs-block { padding: 12px 16px; text-align: center; }
+.hs-num { font-family: var(--heading-font-family); font-weight: 900; font-size: 1.3rem; color: #fff; line-height: 1; white-space: nowrap; }
 .hs-num.red { color: #C8102E; }
-.hs-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+.hs-lbl { font-size: 0.6rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; white-space: nowrap; }
 .hs-div { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
 
 .hero-src { margin-top: 12px; font-size: 0.8rem; }
@@ -116,5 +117,5 @@ div[data-block-name="hero"] > div {
   .hero-content { padding: 40px 20px; }
   .hero-logo { width: 90px; height: 90px; }
   .hero-strip { flex-wrap: wrap; justify-content: center; }
-  .hs-block { padding: 10px 14px; }
+  .hs-block { padding: 10px 12px; }
 }
