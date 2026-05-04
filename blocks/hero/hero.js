@@ -14,7 +14,12 @@ export default function decorate(block) {
     { tag: 'Sponsors', title: 'Seeking 2026\u20132027 Sponsors', body: 'We are now accepting sponsorship applications. Multiple tiers are available starting at $250. Contact us to learn more today.', date: 'April 20, 2026' },
   ];
 
-  block.closest('.section').classList.add('hero-section');
+  // Make the block and its parents full width
+  block.style.padding = '0';
+  block.style.margin = '0';
+  block.style.width = '100%';
+  const section = block.closest('.section');
+  if (section) { section.style.padding = '0'; section.style.margin = '0'; section.style.width = '100%'; }
 
   block.innerHTML = `
     <div class="hero">
