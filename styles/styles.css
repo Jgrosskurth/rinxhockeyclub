@@ -74,7 +74,9 @@ img { max-width: 100%; height: auto; }
 
 /* Utility: section wrapper */
 .section {
-  width: 100%;
+  padding: var(--section-padding);
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 /* Utility: section title */
