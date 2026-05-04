@@ -81,10 +81,9 @@ export const GAMES = [
   { date: 'May 4, 2025',  opp: 'North Park 10U A1',         loc: 'City Ice Pavilion, NYC',    score: '2–4', result: 'L', color: '#1a1a5e', logoId: '002ee8' },
 ];
 
-// Expose data globally for delayed.js
+// Expose for delayed.js
 window.RINX_DATA = RINX;
 window.GAMES_DATA = GAMES;
-window.PLAYERS_DATA = PLAYERS;
 
 export function initials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
