@@ -1,0 +1,23 @@
+.sponsor-tiers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+
+.sp-tier { background: var(--color-white); border-radius: 8px; padding: 28px 24px; box-shadow: var(--shadow-card); text-align: center; }
+.sp-tier.gold { border-top: 4px solid #ffd700; }
+.sp-tier.silver { border-top: 4px solid #c0c0c0; }
+.sp-tier.bronze { border-top: 4px solid #cd7f32; }
+
+.sp-tier-label { font-family: var(--heading-font-family); font-weight: 900; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 4px; }
+.sp-tier.gold .sp-tier-label { color: #b8960c; }
+.sp-tier.silver .sp-tier-label { color: #808080; }
+.sp-tier.bronze .sp-tier-label { color: #8b4513; }
+
+.sp-price { font-family: var(--heading-font-family); font-weight: 800; font-size: 2rem; color: var(--color-navy); margin-bottom: 16px; }
+
+.sp-benefits { list-style: none; text-align: left; }
+.sp-benefits li { font-size: 0.85rem; color: var(--color-gray); margin-bottom: 6px; padding-left: 20px; position: relative; }
+.sp-benefits li::before { content: '✓'; color: var(--color-red); font-weight: 700; position: absolute; left: 0; }
+
+.sponsor-form-wrap { background: var(--color-white); border-radius: 8px; padding: 40px; box-shadow: var(--shadow-card); max-width: 700px; margin: 0 auto; }
+.sponsor-form-wrap h3 { font-family: var(--heading-font-family); font-weight: 800; font-size: 1.6rem; text-transform: uppercase; color: var(--color-navy); margin-bottom: 8px; }
+.sponsor-form-wrap > p { color: var(--color-gray); margin-bottom: 28px; font-size: 0.9rem; }
+
+@media (max-width: 900px) { .sponsor-tiers { grid-template-columns: 1fr; } }
