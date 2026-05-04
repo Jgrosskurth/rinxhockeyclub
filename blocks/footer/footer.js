@@ -1,20 +1,24 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+import { RINX } from '../../scripts/scripts.js';
 
-/**
- * loads and decorates the footer
- * @param {Element} block The footer block element
- */
-export default async function decorate(block) {
-  // load footer as fragment
-  const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const fragment = await loadFragment(footerPath);
-
-  // decorate footer DOM
-  block.textContent = '';
-  const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
-
-  block.append(footer);
+export default function decorate(block) {
+  block.innerHTML = `
+    <div class="footer-inner">
+      <img src="${RINX.logoUrl}" alt="Rinx Hockey Club" width="64" height="64"
+           class="footer-logo-img" onerror="this.style.display='none'">
+      <p class="footer-name">Rinx Hockey Club &bull; 10U Squirts</p>
+      <nav class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/roster">Roster</a>
+        <a href="/schedule">Schedule</a>
+        <a href="/stats">Stats</a>
+        <a href="/tournaments">Tournaments</a>
+        <a href="/sponsors">Sponsors</a>
+        <a href="/clinics">Clinics</a>
+        <a href="${RINX.shopUrl}" target="_blank">Shop Gear</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <p class="footer-address">The Rinx &bull; 660 Terry Road, Hauppauge, NY 11788 &bull; (631) 232-3222</p>
+      <p class="footer-copy">&copy; 2026 Rinx Hockey Club &bull; 10U Squirts. All rights reserved.</p>
+    </div>
+  `;
 }
