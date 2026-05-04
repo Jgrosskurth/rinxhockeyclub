@@ -1,16 +1,33 @@
-/* Hero block — full width navy rink banner */
-.hero.block { padding: 0 !important; margin: 0 !important; }
-.hero.block > div { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+/* ── Hero block — full width navy rink banner ── */
 
-.hero.block {
-  position: relative;
-  min-height: 560px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  width: 100%;
+/* Target the AEM block wrapper with ALL possible class combos */
+.hero.block,
+.block.hero,
+div[data-block-name="hero"],
+.hero-block {
+  position: relative !important;
+  min-height: 560px !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  background: #041E42 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Remove padding from AEM's inner wrappers */
+.hero.block > div,
+.block.hero > div,
+div[data-block-name="hero"] > div {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: static !important;
 }
 
 .hero-overlay {
@@ -51,7 +68,7 @@
 
 .hero-badge {
   display: inline-block;
-  background: var(--color-red);
+  background: #C8102E;
   color: #fff;
   font-family: var(--heading-font-family);
   font-weight: 700;
@@ -63,7 +80,8 @@
   margin-bottom: 20px;
 }
 
-.hero.block h2 {
+.hero.block h2,
+.block.hero h2 {
   font-family: var(--heading-font-family);
   font-weight: 900;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -73,7 +91,8 @@
   margin-bottom: 16px;
 }
 
-.hero.block h2 span { color: var(--color-red); }
+.hero.block h2 span,
+.block.hero h2 span { color: #C8102E; }
 
 .hero-content > p {
   color: rgba(255,255,255,0.75);
@@ -94,7 +113,7 @@
 
 .hs-block { padding: 14px 24px; text-align: center; }
 .hs-num { font-family: var(--heading-font-family); font-weight: 900; font-size: 1.7rem; color: #fff; line-height: 1; }
-.hs-num.red { color: var(--color-red); }
+.hs-num.red { color: #C8102E; }
 .hs-lbl { font-size: 0.65rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
 .hs-div { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
 
@@ -105,7 +124,7 @@
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 6px;
-  background: linear-gradient(90deg, var(--color-red) 33%, #fff 33%, #fff 66%, var(--color-red) 66%);
+  background: linear-gradient(90deg, #C8102E 33%, #fff 33%, #fff 66%, #C8102E 66%);
   z-index: 3;
 }
 
