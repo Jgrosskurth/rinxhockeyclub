@@ -1,18 +1,6 @@
-import {
-  buildBlock,
-  loadHeader,
-  loadFooter,
-  decorateIcons,
-  decorateSections,
-  decorateBlocks,
-  decorateTemplateAndTheme,
-  waitForFirstImage,
-  loadSection,
-  loadSections,
-  loadCSS,
-} from './aem.js';
+import { loadBlock, loadCSS, decorateBlock } from './aem.js';
 
-// ── Rinx Hockey Club shared data ─────────────────────────────────────────────
+// ── Shared data used across blocks ──────────────────────────────────────────
 
 export const RINX = {
   logoUrl: 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/icons/rinxlogo.png',
@@ -81,6 +69,8 @@ export const GAMES = [
   { date: 'May 4, 2025',  opp: 'North Park 10U A1',         loc: 'City Ice Pavilion, NYC',    score: '2–4', result: 'L', color: '#1a1a5e', logoId: '002ee8' },
 ];
 
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
 export function initials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
 }
@@ -95,13 +85,25 @@ export async function proxyGet(url) {
 export function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/);
   if (lines.length < 2) return [];
-  const headers = lines[0].split(',').map((h) => h.trim().replace(/^"|"$/g, ''));
+  const headers = splitCSVLine(lines[0]);
   return lines.slice(1).filter((l) => l.trim()).map((line) => {
-    const vals = line.split(',').map((v) => v.trim().replace(/^"|"$/g, ''));
+    const vals = splitCSVLine(line);
     const obj = {};
-    headers.forEach((h, i) => { obj[h] = vals[i] || ''; });
+    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] || '').trim(); });
     return obj;
   });
+}
+
+function splitCSVLine(line) {
+  const result = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    if (ch === '"') { inQ = !inQ; } else if (ch === ',' && !inQ) { result.push(cur); cur = ''; } else { cur += ch; }
+  }
+  result.push(cur);
+  return result;
 }
 
 export function findKey(obj, ...candidates) {
@@ -113,46 +115,170 @@ export function findKey(obj, ...candidates) {
   return '';
 }
 
-// ── Standard AEM page decoration ─────────────────────────────────────────────
+// ── Page decoration ──────────────────────────────────────────────────────────
 
-async function loadFonts() {
-  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
-}
-
-export function decorateMain(main) {
-  decorateIcons(main);
-  decorateSections(main);
-  decorateBlocks(main);
-}
-
-async function loadEager(doc) {
-  document.documentElement.lang = 'en';
-  decorateTemplateAndTheme();
-  const main = doc.querySelector('main');
-  if (main) {
-    decorateMain(main);
-    document.body.classList.add('appear');
-    await loadSection(main.querySelector('.section'), waitForFirstImage);
-  }
-}
-
-async function loadLazy(doc) {
-  loadHeader(doc.querySelector('header'));
-  const main = doc.querySelector('main');
-  await loadSections(main);
-  loadFooter(doc.querySelector('footer'));
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadFonts();
-}
-
-function loadDelayed() {
-  window.setTimeout(() => import('./delayed.js').catch(() => {}), 3000);
+function decorateBlocks(main) {
+  main.querySelectorAll('div.section > div').forEach((block) => {
+    const cls = block.classList[0];
+    if (cls) decorateBlock(block);
+  });
 }
 
 async function loadPage() {
-  await loadEager(document);
-  await loadLazy(document);
-  loadDelayed();
+  // Load global CSS
+  await loadCSS('/styles/styles.css');
+
+  const main = document.querySelector('main');
+  if (!main) return;
+
+  decorateBlocks(main);
+
+  // Load all blocks
+  const blocks = [...main.querySelectorAll('.block')];
+  await Promise.all(blocks.map((b) => loadBlock(b)));
+
+  // Lazy styles
+  loadCSS('/styles/lazy-styles.css');
 }
 
-loadPage();
+loadPage().then(() => buildHomepage(document.querySelector('main')));
+
+// ── Homepage sections (injected after AEM loads) ──────────────────────────
+
+function buildHomepage(main) {
+  // Only run on homepage
+  if (window.location.pathname !== '/' && window.location.pathname !== '/index') return;
+  // Check hero block is present
+  if (!main.querySelector('.hero')) return;
+
+  const news = [
+    { tag: 'Roster', title: '2026–2027 Roster Finalized', body: "Congratulations to all players who made this year’s Rinx Hockey Club 10U Squirts travel team! Roster signing night was held March 5, 2026 at The Rinx.", date: 'March 5, 2026' },
+    { tag: 'Gear', title: 'Spring 2026 Gear Store Is Live', body: 'The official 2026 team gear store is now open. Order jerseys, shells, and team apparel before the deadline closes.', date: 'April 1, 2026' },
+    { tag: 'Season', title: '2026–2027 Season Begins This Fall', body: 'The upcoming season schedule is being finalized. Stay tuned for game dates, tournament registrations, and practice times.', date: 'May 1, 2026' },
+    { tag: 'Coaching', title: 'Coaching Staff Confirmed', body: "Head Coach Dan O’Donoghue and Assistant Coach Joe Capozzoli return to lead the 10U Squirts for another exciting season.", date: 'April 15, 2026' },
+    { tag: 'Sponsors', title: 'Seeking 2026–2027 Sponsors', body: 'We are now accepting sponsorship applications. Multiple tiers are available starting at $250. Contact us to learn more today.', date: 'April 20, 2026' },
+  ];
+
+  const recentGames = GAMES.slice(-5).reverse();
+
+  const hp = document.createElement('div');
+  hp.id = 'homepage-content';
+  hp.innerHTML = `
+    <div class="hp-news">
+      <div class="hp-inner">
+        <h2 class="section-title">Latest News</h2>
+        <div class="slider-outer">
+          <div class="slider-track" id="hp-track">
+            ${news.map((n) => `
+              <div class="slide-card">
+                <div class="slide-card-body">
+                  <div class="news-tag">${n.tag}</div>
+                  <h3>${n.title}</h3>
+                  <p>${n.body}</p>
+                  <div class="news-date">${n.date}</div>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div class="slider-nav">
+          <button class="snav-btn" id="hp-prev">&#8592;</button>
+          <div class="sdots" id="hp-dots"></div>
+          <button class="snav-btn" id="hp-next">&#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hp-results">
+      <div class="hp-inner">
+        <h2 class="section-title">Recent Results</h2>
+        <div class="results-list">
+          ${recentGames.map((g) => `
+            <div class="sg-row" data-result="${g.result}">
+              <div class="sg-date">${g.date}</div>
+              <div class="sg-opp">
+                <div class="sg-logo-fb" style="background:${g.color}">${g.opp.split(' ').slice(0,2).map((w)=>w[0]).join('').toUpperCase()}</div>
+                <div><div class="sg-name">${g.opp}</div><div class="sg-loc">${g.loc}</div></div>
+              </div>
+              <div class="sg-score">${g.score}</div>
+              <div class="sg-result"><span class="badge badge-${g.result==='W'?'win':g.result==='L'?'loss':'tie'}">${g.result}</span></div>
+            </div>`).join('')}
+        </div>
+        <p style="margin-top:16px;"><a href="/schedule" style="color:var(--color-red);font-weight:700;">View Full Schedule &rarr;</a></p>
+      </div>
+    </div>
+
+    <div class="hp-about">
+      <div class="hp-inner">
+        <h2 class="section-title">About Our Team</h2>
+        <div class="bio-grid">
+          <div class="bio-card bio-full">
+            <img src="https://static.wixstatic.com/media/4d0004_9c4b74e112a042159df552c350dad98d~mv2.png/v1/crop/x_0,y_4,w_1280,h_355/fill/w_980,h_272,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/League%20Header.png"
+                 alt="Rinx Hockey Club" style="width:100%;border-radius:6px;margin-bottom:24px;display:block;" onerror="this.style.display='none'">
+            <h3>2026&ndash;2027 Rinx Hockey Club &bull; 10U Squirts</h3>
+            <p>The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.</p>
+            <p style="margin-top:12px;">This season, our roster features dedicated players, led by an experienced coaching staff committed to skill development, teamwork, and competitive excellence.</p>
+          </div>
+          <div class="bio-card">
+            <h3>Coaching Staff</h3>
+            <div class="coach-card" style="margin-bottom:12px;">
+              <div class="coach-av">DO</div>
+              <div class="coach-info"><h4>Dan O&apos;Donoghue</h4><p>Head Coach &bull; 10U Squirts</p></div>
+            </div>
+            <div class="coach-card">
+              <div class="coach-av">JC</div>
+              <div class="coach-info"><h4>Joe Capozzoli</h4><p>Assistant Coach &bull; 10U Squirts</p></div>
+            </div>
+          </div>
+          <div class="bio-card">
+            <h3>Our Facility</h3>
+            <img src="https://github.com/Jgrosskurth/rinxhockeyclub/blob/main/icons/877c6298be0986da90566f459a2a2874.webp?raw=true"
+                 alt="The Rinx" style="width:100%;border-radius:6px;margin-bottom:16px;display:block;max-height:220px;object-fit:cover;" onerror="this.style.display='none'">
+            <p>Located at 660 Terry Road, Hauppauge, The Rinx features two full-size indoor NHL rinks, a pro shop, skate sharpening, and year-round programming on 97 acres of Hidden Pond Park.</p>
+            <p style="margin-top:8px;"><strong>Phone:</strong> (631) 232-3222</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hp-shop">
+      <h2>Get Your Gear</h2>
+      <p>Official 2026 Rinx 10U team jerseys, hoodies, and more are now available.</p>
+      <a class="btn-shop" href="${RINX.shopUrl}" target="_blank">Shop the Official Store</a>
+      <div class="shop-items">
+        <div class="shop-item"><span>🏒</span>Jerseys</div>
+        <div class="shop-item"><span>👕</span>T-Shirts</div>
+        <div class="shop-item"><span>🧢</span>Hats</div>
+        <div class="shop-item"><span>🧥</span>Hoodies</div>
+      </div>
+    </div>
+  `;
+
+  // Insert after main (not inside it, to avoid AEM's layout)
+  main.insertAdjacentElement('afterend', hp);
+
+  // Slider
+  let idx = 0;
+  const track = hp.querySelector('#hp-track');
+  const dots = hp.querySelector('#hp-dots');
+  const cards = [...hp.querySelectorAll('.slide-card')];
+  const vis = () => window.innerWidth < 900 ? 1 : 3;
+  const max = () => Math.max(0, cards.length - vis());
+  const buildDots = () => {
+    dots.innerHTML = '';
+    for (let i = 0; i <= max(); i++) {
+      const d = document.createElement('button');
+      d.className = 'sdot' + (i === 0 ? ' on' : '');
+      d.addEventListener('click', () => go(i));
+      dots.appendChild(d);
+    }
+  };
+  const go = (i) => {
+    idx = Math.max(0, Math.min(i, max()));
+    track.style.transform = \`translateX(-\${idx * (cards[0].offsetWidth + 24)}px)\`;
+    dots.querySelectorAll('.sdot').forEach((d, j) => d.classList.toggle('on', j === idx));
+  };
+  hp.querySelector('#hp-prev').addEventListener('click', () => go(idx - 1));
+  hp.querySelector('#hp-next').addEventListener('click', () => go(idx + 1));
+  buildDots();
+  setInterval(() => go(idx + 1 > max() ? 0 : idx + 1), 5000);
+}
