@@ -61,7 +61,7 @@
 .header-nav a {
   font-family: var(--heading-font-family);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: rgba(255, 255, 255, 0.85);
