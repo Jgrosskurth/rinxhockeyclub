@@ -117,34 +117,30 @@ export function findKey(obj, ...candidates) {
 
 // ── Page decoration ──────────────────────────────────────────────────────────
 
-async function loadPage() {
-  await loadCSS('/styles/styles.css');
-
-  // AEM wraps DA content in <main><div class="section">
-  // Our block divs land directly inside .section
-  const main = document.querySelector('main') || document.body;
-
-  // Find all divs that are block candidates (have a class, not already a block)
-  main.querySelectorAll('div[class]').forEach((el) => {
-    const cls = el.classList[0];
-    if (cls && cls !== 'section' && !el.classList.contains('block') && !el.closest('.block')) {
-      decorateBlock(el);
-    }
+function decorateBlocks(main) {
+  main.querySelectorAll(':scope > div > div').forEach((block) => {
+    const shortBlockName = block.classList[0];
+    if (shortBlockName) decorateBlock(block);
   });
-
-  const blocks = [...main.querySelectorAll('.block')];
-  await Promise.all(blocks.map((b) => loadBlock(b)));
-
-  loadCSS('/styles/lazy-styles.css');
 }
 
-function decorateBlocks(main) {
-  main.querySelectorAll('div[class]').forEach((el) => {
-    const cls = el.classList[0];
-    if (cls && cls !== 'section' && !el.classList.contains('block')) {
-      decorateBlock(el);
-    }
+function decorateSections(main) {
+  [...main.children].forEach((section) => {
+    if (section.tagName !== 'DIV') return;
+    section.classList.add('section');
+    section.dataset.sectionStatus = 'initialized';
   });
+}
+
+async function loadPage() {
+  await loadCSS('/styles/styles.css');
+  const main = document.querySelector('main');
+  if (!main) return;
+  decorateSections(main);
+  decorateBlocks(main);
+  const blocks = [...main.querySelectorAll('.block')];
+  await Promise.all(blocks.map((b) => loadBlock(b)));
+  loadCSS('/styles/lazy-styles.css');
 }
 
 loadPage();
