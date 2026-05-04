@@ -1,34 +1,49 @@
-# Your Project's Title...
-Your project's description...
+# Rinx Hockey Club — AEM Edge Delivery Site
 
-## Environments
-- Preview: https://main--{repo}--{owner}.aem.page/
-- Live: https://main--{repo}--{owner}.aem.live/
+**Live URL:** `https://main--rinxhockeyclub--jgrosskurth.aem.page`  
+**DA Authoring:** `https://da.live/#/jgrosskurth/rinxhockeyclub`
 
-## Documentation
+## Setup Steps
 
-Before using the aem-boilerplate, we recommand you to go through the documentation on https://www.aem.live/docs/ and more specifically:
-1. [Developer Tutorial](https://www.aem.live/developer/tutorial)
-2. [The Anatomy of a Project](https://www.aem.live/developer/anatomy-of-a-project)
-3. [Web Performance](https://www.aem.live/developer/keeping-it-100)
-4. [Markup, Sections, Blocks, and Auto Blocking](https://www.aem.live/developer/markup-sections-blocks)
+### 1. Install AEM Code Sync GitHub App
+Visit: https://github.com/apps/aem-code-sync/installations/new  
+Select **Only select repositories** → choose `rinxhockeyclub` → Save.
 
-## Installation
-
-```sh
-npm i
+### 2. Verify the site is live
+Once Code Sync is installed your site is instantly available at:
+```
+https://main--rinxhockeyclub--jgrosskurth.aem.page
 ```
 
-## Linting
+### 3. Author content in da.live
+Go to https://da.live/#/jgrosskurth/rinxhockeyclub  
+You'll see all your pages (index, roster, schedule, stats, etc.).  
+Edit any page, hit **Preview**, then **Publish**.
 
-```sh
-npm run lint
+### 4. Local development (optional)
+```bash
+npm install -g @adobe/aem-cli
+git clone https://github.com/Jgrosskurth/rinxhockeyclub
+cd rinxhockeyclub
+aem up
 ```
+Opens http://localhost:3000/
 
-## Local development
+## Site Pages
 
-1. Create a new repository based on the `aem-boilerplate` template
-1. Add the [AEM Code Sync GitHub App](https://github.com/apps/aem-code-sync) to the repository
-1. Install the [AEM CLI](https://github.com/adobe/helix-cli): `npm install -g @adobe/aem-cli`
-1. Start AEM Proxy: `aem up` (opens your browser at `http://localhost:3000`)
-1. Open the `{repo}` directory in your favorite IDE and start coding :)
+| URL | File | Description |
+|-----|------|-------------|
+| / | index.md | Homepage with hero, news, recent results, about |
+| /roster | roster.md | Full player roster + coaching staff |
+| /schedule | schedule.md | 2024–25 season results |
+| /stats | stats.md | Player stats from rinxstats.csv |
+| /tournaments | tournaments.md | Tournament schedule |
+| /sponsors | sponsors.md | Sponsorship tiers + request form |
+| /clinics | clinics.md | Clinic schedule + private session form |
+| /contact | contact.md | Contact form |
+
+## Updating Stats
+Replace `rinxstats.csv` in this repo. The stats page fetches it live on every visit.
+
+## Updating the Logo
+Replace `icons/rinxlogo.png` in this repo.
