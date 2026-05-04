@@ -7,8 +7,8 @@ export default function decorate(block) {
         <img src="${RINX.logoUrl}" alt="Rinx Hockey Club" width="64" height="64"
              onerror="this.style.display='none'">
         <div class="header-text">
-          <span class="header-title">Rinx HC</span>
-          <span class="header-subtitle">10U Squirts &bull; Hauppauge, NY</span>
+          <span class="header-title">Rinx Hockey Club</span>
+          <span class="header-subtitle">10U Squirts &bull; Travel Hockey</span>
         </div>
       </div>
 
@@ -25,7 +25,7 @@ export default function decorate(block) {
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
         <a href="/contact">Contact</a>
-        <a href="${RINX.shopUrl}" target="_blank" class="nav-shop">Shop Gear</a>
+        <a href="${RINX.shopUrl}" target="_blank" class="nav-shop">🛒 Shop Gear</a>
       </nav>
     </div>
   `;
