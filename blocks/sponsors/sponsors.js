@@ -5,23 +5,27 @@ export default function decorate(block) {
         <div class="sp-tier-label">Gold Sponsor</div>
         <div class="sp-price">$1,000+</div>
         <ul class="sp-benefits">
-          <li>Large logo on team jerseys</li><li>Banner at all home games</li>
-          <li>Website logo placement</li><li>Social media shoutouts</li><li>4 season passes</li>
+          <li>Large logo on team jerseys</li>
+          <li>Banner at all home games</li>
+          <li>Website logo placement</li>
+          <li>Social media shoutouts</li>
         </ul>
       </div>
       <div class="sp-tier silver">
         <div class="sp-tier-label">Silver Sponsor</div>
         <div class="sp-price">$500</div>
         <ul class="sp-benefits">
-          <li>Logo on warm-up jerseys</li><li>Website listing</li>
-          <li>Social media mentions</li><li>2 season passes</li>
+          <li>Logo on warm-up jerseys</li>
+          <li>Website listing</li>
+          <li>Social media mentions</li>
         </ul>
       </div>
       <div class="sp-tier bronze">
         <div class="sp-tier-label">Bronze Sponsor</div>
         <div class="sp-price">$250</div>
         <ul class="sp-benefits">
-          <li>Name in game programs</li><li>Website listing</li><li>Social media mention</li>
+          <li>Website listing</li>
+          <li>Social media mention</li>
         </ul>
       </div>
     </div>
@@ -49,7 +53,7 @@ export default function decorate(block) {
       </div>
       <div class="form-group"><label>Comments</label><textarea id="s-notes" placeholder="Tell us about your business..."></textarea></div>
       <button class="btn btn-primary" id="sp-submit">Submit Sponsorship Request</button>
-      <div class="form-success" id="sp-ok">✅ Thank you! Your sponsorship request has been submitted. We&apos;ll be in touch within 48 hours.</div>
+      <div class="form-success" id="sp-ok">&#x2705; Thank you! Your sponsorship request has been submitted. We&apos;ll be in touch within 48 hours.</div>
     </div>
   `;
 
