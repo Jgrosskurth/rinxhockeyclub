@@ -5,7 +5,6 @@ export default function decorate(block) {
   const gp = record.w + record.l + record.t;
 
   block.innerHTML = `
-    <div class="hero-overlay"></div>
     <svg class="hero-rink" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <radialGradient id="rg1" cx="50%" cy="50%" r="70%">
@@ -26,6 +25,8 @@ export default function decorate(block) {
       <circle cx="920" cy="380" r="70" fill="none" stroke="#C8102E" stroke-width="3" opacity="0.35"/>
       <path d="M60 230 Q130 230 130 280 Q130 330 60 330" fill="none" stroke="#C8102E" stroke-width="4" opacity="0.35"/>
       <path d="M1140 230 Q1070 230 1070 280 Q1070 330 1140 330" fill="none" stroke="#C8102E" stroke-width="4" opacity="0.35"/>
+      <!-- Dark navy overlay baked into SVG -->
+      <rect width="1200" height="560" fill="#041E42" opacity="0.82"/>
     </svg>
     <div class="hero-content">
       <img src="${RINX.logoUrl}" class="hero-logo" alt="Rinx Hockey Club" onerror="this.style.display='none'">
