@@ -1,33 +1,120 @@
+/* Columns Block */
 .columns > div {
   display: flex;
   flex-direction: column;
 }
 
-.columns img {
-  width: 100%;
-}
-
 .columns > div > div {
   order: 1;
+  background: var(--color-white);
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: var(--shadow-card);
 }
 
 .columns > div > .columns-img-col {
   order: 0;
 }
 
-.columns > div > .columns-img-col img {
+.columns img {
+  width: 100%;
   display: block;
+}
+
+.columns h3 {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--color-red);
+}
+
+/* Coach cards */
+.coach-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.columns .coach-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--color-navy);
+  border-radius: 8px;
+  padding: 24px;
+  color: var(--color-white);
+}
+
+.columns .coach-av {
+  width: 64px;
+  height: 64px;
+  background: var(--color-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.columns .coach-info h4 {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+  margin-bottom: 2px;
+}
+
+.columns .coach-info p {
+  font-size: 0.85rem;
+  color: rgb(255 255 255 / 65%);
+}
+
+/* Facility column */
+.columns .col-facility img {
+  border-radius: 6px;
+  margin-bottom: 16px;
+  object-fit: cover;
+  max-height: 220px;
+  box-shadow: 0 4px 16px rgb(4 30 66 / 15%);
+}
+
+.columns .col-facility p {
+  color: var(--color-gray);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.columns .col-facility strong {
+  color: var(--color-navy);
 }
 
 @media (width >= 900px) {
   .columns > div {
-    align-items: center;
+    align-items: stretch;
     flex-direction: unset;
-    gap: 24px;
+    gap: 32px;
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+}
+
+@media (width <= 900px) {
+  .columns > div > div {
+    padding: 24px;
+    margin-bottom: 16px;
   }
 }
