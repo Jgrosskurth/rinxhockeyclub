@@ -1,8 +1,10 @@
 export default function decorate(block) {
-  const img = block.querySelector('img');
+  const imgs = block.querySelectorAll('img');
   const h3 = block.querySelector('h3');
   const paragraphs = [...block.querySelectorAll('p')];
 
+  // Use only the first image found
+  const img = imgs[0];
   const imgSrc = img?.src || '';
   const imgAlt = img?.alt || '';
   const heading = h3?.innerHTML || '';
