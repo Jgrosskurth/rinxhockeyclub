@@ -12,6 +12,26 @@ export default function decorate(block) {
     };
   }).filter((s) => s.title);
 
+  // Read private session content from sibling default content in the section
+  const section = block.closest('.section');
+  const sectionH2 = section?.querySelector(':scope > h2');
+  const sectionPs = [...(section?.querySelectorAll(':scope > p') || [])];
+  const sectionUl = section?.querySelector(':scope > ul');
+
+  const privateTitle = sectionH2?.textContent || 'Private Sessions';
+  const privateDesc = sectionPs[0]?.textContent || 'One-on-one or small-group sessions tailored to your child\'s skill level.';
+  const privateItems = sectionUl
+    ? [...sectionUl.querySelectorAll('li')].map((li) => li.textContent)
+    : ['Skating fundamentals & edge work', 'Shooting & stick handling', 'Goalie-specific training'];
+  const privateLocation = sectionPs[1]?.textContent || 'The Rinx • Hauppauge, NY';
+  const privatePricing = sectionPs[2]?.textContent || 'Confirmed upon request';
+  const privateFormNote = sectionPs[3]?.textContent || 'Complete the form below and we\'ll follow up within 48 hours.';
+
+  // Remove the default content since we'll render it styled
+  if (sectionH2) sectionH2.remove();
+  sectionPs.forEach((p) => p.remove());
+  if (sectionUl) sectionUl.remove();
+
   block.innerHTML = `
     <div class="clinics-intro">
       <h2>Player Development Clinics</h2>
@@ -36,22 +56,22 @@ export default function decorate(block) {
     </div>
 
     <div class="private-section">
-      <h2 class="section-title">Private Sessions</h2>
+      <h2 class="section-title">${privateTitle}</h2>
       <div class="private-grid">
         <div class="private-info">
           <span class="private-badge">By Appointment</span>
-          <h3>Private Sessions Available</h3>
-          <p>One-on-one or small-group sessions tailored to your child's skill level. Pricing confirmed upon request.</p>
+          <h3>${privateTitle} Available</h3>
+          <p>${privateDesc}</p>
           <ul class="private-list">
-            <li>Skating fundamentals &amp; edge work</li>
-            <li>Shooting &amp; stick handling</li>
-            <li>Goalie-specific training</li>
+            ${privateItems.map((item) => `<li>${item}</li>`).join('')}
           </ul>
+          <p class="private-detail">${privateLocation}</p>
+          <p class="private-detail">${privatePricing}</p>
         </div>
 
         <div class="private-form">
           <h3>Request a Private Session</h3>
-          <p>Complete the form below and we'll follow up within 48 hours.</p>
+          <p>${privateFormNote}</p>
           <div class="form-row">
             <div class="form-group"><label>Your Name *</label><input type="text" id="ps-name" placeholder="Parent / guardian name"></div>
             <div class="form-group"><label>Child's Name *</label><input type="text" id="ps-child" placeholder="Player's full name"></div>
@@ -84,9 +104,7 @@ export default function decorate(block) {
           <div class="form-group">
             <label>Skill Focus *</label>
             <div class="skill-tiles">
-              <label class="skill-tile"><input type="radio" name="ps-skill" value="Skating"><span>Skating</span></label>
-              <label class="skill-tile"><input type="radio" name="ps-skill" value="Shooting"><span>Shooting &amp; Stickhandling</span></label>
-              <label class="skill-tile"><input type="radio" name="ps-skill" value="Goalie"><span>Goalie</span></label>
+              ${privateItems.map((item) => `<label class="skill-tile"><input type="radio" name="ps-skill" value="${item}"><span>${item}</span></label>`).join('')}
             </div>
           </div>
           <div class="form-group"><label>Additional Notes</label><textarea id="ps-notes" placeholder="Availability preferences, goals, questions..."></textarea></div>
