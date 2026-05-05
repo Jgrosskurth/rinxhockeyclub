@@ -5,13 +5,23 @@ function getInitials(name) {
 }
 
 export default function decorate(block) {
+  // Read players from DA table (skip header row), fall back to scripts.js data
+  const daRows = [...block.querySelectorAll('tr')].slice(1).filter(r => r.cells[0]?.innerText?.trim());
+  const players = daRows.length
+    ? daRows.map(r => ({
+        name: r.cells[1]?.innerText?.trim() || r.cells[0]?.innerText?.trim() || '',
+        pos: r.cells[2]?.innerText?.trim() || '',
+        pp: (r.cells[3]?.innerText?.trim() || '').toLowerCase() === 'yes',
+      })).filter(p => p.name)
+    : PLAYERS;
+
   block.innerHTML = `
     <div class="roster-grid">
-      ${PLAYERS.map((p) => `
+      ${players.map((p) => `
         <div class="player-card">
           <div class="player-icon">${getInitials(p.name)}</div>
           <h3>${p.name}</h3>
-          <p class="player-pos">Forward / Defense</p>
+          <p class="player-pos">${p.pos || 'Forward / Defense'}</p>
           ${p.pp ? '<span class="pp-badge">Practice Player</span>' : ''}
         </div>
       `).join('')}
