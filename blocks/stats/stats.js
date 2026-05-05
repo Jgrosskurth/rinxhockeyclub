@@ -32,19 +32,22 @@ async function loadStats(block) {
 }
 
 function renderTable(block, container, rows) {
-  const sorted = [...rows].sort((a, b) => {
-    const pa = parseFloat(findKey(a, 'pts', 'points', 'pt')) || 0;
-    const pb = parseFloat(findKey(b, 'pts', 'points', 'pt')) || 0;
-    if (pb !== pa) return pb - pa;
-    return (parseFloat(findKey(b, 'g', 'goals')) || 0) - (parseFloat(findKey(a, 'g', 'goals')) || 0);
-  });
+  const chip = (pos) => {
+    const p = (pos || '').toUpperCase();
+    if (p.includes('G')) return 'pos-g';
+    if (p.includes('D')) return 'pos-d';
+    return 'pos-f';
+  };
+  const fmt = (v) => (v === '' || v == null) ? '—' : v;
+  const num = (v) => parseFloat(v) || 0;
 
+  // Compute summary totals
   let tg = 0; let ta = 0; let tp = 0; let maxGP = 0;
   rows.forEach((r) => {
-    tg += parseFloat(findKey(r, 'g', 'goals')) || 0;
-    ta += parseFloat(findKey(r, 'a', 'assists')) || 0;
-    tp += parseFloat(findKey(r, 'pts', 'points')) || 0;
-    maxGP = Math.max(maxGP, parseFloat(findKey(r, 'gp', 'games played')) || 0);
+    tg += num(findKey(r, 'g', 'goals'));
+    ta += num(findKey(r, 'a', 'assists'));
+    tp += num(findKey(r, 'pts', 'points'));
+    maxGP = Math.max(maxGP, num(findKey(r, 'gp', 'games played')));
   });
 
   const sum = block.querySelector('#stats-summary');
@@ -54,46 +57,102 @@ function renderTable(block, container, rows) {
   block.querySelector('#s-ta').textContent = ta;
   block.querySelector('#s-tp').textContent = tp;
 
-  const chip = (pos) => {
-    const p = (pos || '').toUpperCase();
-    if (p.includes('G')) return 'pos-g';
-    if (p.includes('D')) return 'pos-d';
-    return 'pos-f';
-  };
+  // Map each row to a display object
+  const players = rows.map((p) => {
+    const fn = findKey(p, 'first name', 'first_name', 'firstname');
+    const ln = findKey(p, 'last name', 'last_name', 'lastname');
+    return {
+      num:  fmt(findKey(p, '#', 'number', 'jersey', 'jersey_number', 'no')),
+      name: fmt(findKey(p, 'name', 'player', 'full name', 'player_name') || [fn, ln].filter(Boolean).join(' ')),
+      pos:  fmt(findKey(p, 'pos', 'position')),
+      gp:   fmt(findKey(p, 'gp', 'games played')),
+      g:    fmt(findKey(p, 'g', 'goals')),
+      a:    fmt(findKey(p, 'a', 'assists')),
+      pts:  fmt(findKey(p, 'pts', 'points')),
+      pm:   fmt(findKey(p, 'plus minus', '+/-', 'plus_minus', 'pm')),
+      pim:  fmt(findKey(p, 'pim', 'penalty minutes')),
+    };
+  });
 
-  const fmt = (v) => (v === '' || v == null) ? '—' : v;
+  // Sort state
+  let sortCol = 'pts';
+  let sortDir = -1; // -1 = desc, 1 = asc
+
+  const cols = [
+    { key: 'num',  label: '#',        numeric: false },
+    { key: 'name', label: 'Player',   numeric: false },
+    { key: 'pos',  label: 'Pos',      numeric: false },
+    { key: 'gp',   label: 'GP',       numeric: true  },
+    { key: 'g',    label: 'G',        numeric: true  },
+    { key: 'a',    label: 'A',        numeric: true  },
+    { key: 'pts',  label: 'PTS',      numeric: true  },
+    { key: 'pm',   label: '+/−',      numeric: true  },
+    { key: 'pim',  label: 'PIM',      numeric: true  },
+  ];
+
+  function sortedPlayers() {
+    return [...players].sort((a, b) => {
+      const col = cols.find((c) => c.key === sortCol);
+      const av = a[sortCol];
+      const bv = b[sortCol];
+      if (col && col.numeric) {
+        return (parseFloat(bv) || 0 - (parseFloat(av) || 0)) * sortDir * -1;
+      }
+      return av.localeCompare(bv) * sortDir;
+    });
+  }
+
+  function renderRows() {
+    return sortedPlayers().map((p) => `
+      <tr>
+        <td>${p.num}</td>
+        <td class="player-name">${p.name}</td>
+        <td><span class="pos-chip ${chip(p.pos)}">${p.pos === '—' ? 'F' : p.pos}</span></td>
+        <td>${p.gp}</td>
+        <td>${p.g}</td>
+        <td>${p.a}</td>
+        <td><strong>${p.pts}</strong></td>
+        <td>${p.pm}</td>
+        <td>${p.pim}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderHeaders() {
+    return cols.map((c) => {
+      const active = c.key === sortCol;
+      const arrow = active ? (sortDir === -1 ? ' ▼' : ' ▲') : ' ⇅';
+      return `<th class="sortable${active ? ' sort-active' : ''}" data-col="${c.key}">${c.label}<span class="sort-arrow">${arrow}</span></th>`;
+    }).join('');
+  }
 
   container.innerHTML = `
     <div class="stats-table-wrap">
       <table class="stats-tbl">
-        <thead>
-          <tr><th>#</th><th>Player</th><th>Pos</th><th>GP</th><th>G</th><th>A</th><th>PTS</th><th>+/&minus;</th><th>PIM</th></tr>
-        </thead>
-        <tbody>
-          ${sorted.map((p) => {
-            const num  = fmt(findKey(p, '#', 'number', 'jersey', 'jersey_number', 'no'));
-            const fn   = findKey(p, 'first name', 'first_name', 'firstname');
-            const ln   = findKey(p, 'last name', 'last_name', 'lastname');
-            const name = fmt(findKey(p, 'name', 'player', 'full name', 'player_name') || [fn, ln].filter(Boolean).join(' '));
-            const pos  = fmt(findKey(p, 'pos', 'position'));
-            const gp   = fmt(findKey(p, 'gp', 'games played'));
-            const g    = fmt(findKey(p, 'g', 'goals'));
-            const a    = fmt(findKey(p, 'a', 'assists'));
-            const pts  = fmt(findKey(p, 'pts', 'points'));
-            const pm   = fmt(findKey(p, 'plus minus', '+/-', 'plus_minus', 'pm'));
-            const pim  = fmt(findKey(p, 'pim', 'penalty minutes'));
-            return `<tr>
-              <td>${num}</td>
-              <td class="player-name">${name}</td>
-              <td><span class="pos-chip ${chip(pos)}">${pos || 'F'}</span></td>
-              <td>${gp}</td><td>${g}</td><td>${a}</td>
-              <td><strong>${pts}</strong></td>
-              <td>${pm}</td><td>${pim}</td>
-            </tr>`;
-          }).join('')}
-        </tbody>
+        <thead><tr>${renderHeaders()}</tr></thead>
+        <tbody id="stats-tbody">${renderRows()}</tbody>
       </table>
     </div>
     <p class="stats-src">Stats sourced from <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">ayrabo.com</a></p>
   `;
+
+  // Add sort click handlers
+  container.querySelectorAll('th.sortable').forEach((th) => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (sortCol === col) {
+        sortDir *= -1;
+      } else {
+        sortCol = col;
+        sortDir = cols.find((c) => c.key === col)?.numeric ? -1 : 1;
+      }
+      // Re-render headers and rows
+      container.querySelector('thead tr').innerHTML = renderHeaders();
+      container.querySelector('#stats-tbody').innerHTML = renderRows();
+      // Re-attach handlers
+      container.querySelectorAll('th.sortable').forEach((th2) => {
+        th2.addEventListener('click', arguments.callee);
+      });
+    });
+  });
 }
