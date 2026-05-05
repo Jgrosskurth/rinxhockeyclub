@@ -21,6 +21,9 @@ function buildAutoBlocks(main) {
   const isHome = path === '/' || path === '/index';
   if (!isHome) return;
 
+  // Remove old cards block FIRST (stale DA content)
+  main.querySelectorAll('.cards').forEach((el) => el.remove());
+
   // Insert recent-results block after news-slider if not present
   if (!main.querySelector('.recent-results')) {
     const sections = [...main.querySelectorAll(':scope > div')];
@@ -69,10 +72,6 @@ function buildAutoBlocks(main) {
     section.append(columnsBlock);
     main.append(section);
   }
-
-  // Remove old cards block if present (replaced by about + columns)
-  const cardsBlock = main.querySelector('.cards');
-  if (cardsBlock) cardsBlock.remove();
 }
 
 // eslint-disable-next-line import/prefer-default-export
