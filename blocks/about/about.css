@@ -1,6 +1,6 @@
 /* About Block */
 .about {
-  padding: 60px 40px;
+  padding: 40px;
   max-width: var(--max-width);
   margin: 0 auto;
 }

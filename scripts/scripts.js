@@ -72,10 +72,7 @@ function buildAutoBlocks(main) {
 
   // Remove old cards block if present (replaced by about + columns)
   const cardsBlock = main.querySelector('.cards');
-  if (cardsBlock) {
-    const cardsSection = cardsBlock.closest('.section') || cardsBlock.parentElement;
-    if (cardsSection) cardsSection.remove();
-  }
+  if (cardsBlock) cardsBlock.remove();
 }
 
 // eslint-disable-next-line import/prefer-default-export

@@ -1,7 +1,7 @@
 /* Recent Results Block */
 .recent-results {
   background: var(--color-ice);
-  padding: 60px 40px;
+  padding: 40px;
 }
 
 .recent-results .section-title {
