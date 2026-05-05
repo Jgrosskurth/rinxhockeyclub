@@ -1,28 +1,22 @@
-/* Cards Block — Bio/info grid style */
-.cards > div {
+/* Cards Block — Bio grid */
+.cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 32px;
 }
 
-.cards > div > div {
+.cards-card {
   background: var(--color-white);
   border-radius: 8px;
   padding: 32px;
   box-shadow: var(--shadow-card);
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.cards > div > div:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.cards > div > div:first-child {
+.cards-card-full {
   grid-column: 1 / -1;
 }
 
-.cards h3 {
+.cards-card h3 {
   font-family: var(--heading-font-family);
   font-weight: 800;
   font-size: 1.4rem;
@@ -33,29 +27,33 @@
   border-bottom: 2px solid var(--color-red);
 }
 
-.cards p {
+.cards-card p {
   color: var(--color-gray);
   line-height: 1.7;
   font-size: 0.95rem;
   margin-bottom: 12px;
 }
 
-.cards a {
+.cards-card strong {
+  color: var(--color-navy);
+}
+
+.cards-card a {
   color: var(--color-red);
   font-weight: 600;
   text-decoration: none;
 }
 
-.cards a:hover {
+.cards-card a:hover {
   text-decoration: underline;
 }
 
 @media (width <= 900px) {
-  .cards > div {
+  .cards-grid {
     grid-template-columns: 1fr;
   }
 
-  .cards > div > div:first-child {
+  .cards-card-full {
     grid-column: 1;
   }
 }

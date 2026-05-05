@@ -2,7 +2,7 @@ export default function decorate(block) {
   block.innerHTML = `
     <div class="header-inner">
       <div class="header-logo" onclick="window.location.href='/'">
-        <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" width="64" height="64"
+        <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" width="68" height="68"
              onerror="this.style.display='none'">
         <div class="header-text">
           <span class="header-title">Rinx Hockey Club</span>
@@ -23,7 +23,7 @@ export default function decorate(block) {
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
         <a href="/contact">Contact</a>
-        <a href="https://rinxspring2026.itemorder.com/shop/home/" target="_blank" class="nav-shop"><img src="/icons/cart.svg" alt="" class="cart-icon"> Shop Gear</a>
+        <a href="https://rinxspring2026.itemorder.com/shop/home/" target="_blank" class="nav-shop">Shop Gear</a>
       </nav>
     </div>
   `;
@@ -32,8 +32,9 @@ export default function decorate(block) {
   const nav = block.querySelector('#header-nav');
   hamburger.addEventListener('click', () => nav.classList.toggle('open'));
 
-  const path = window.location.pathname;
+  const path = window.location.pathname.replace(/\/$/, '') || '/';
   block.querySelectorAll('nav a').forEach((a) => {
-    if (a.getAttribute('href') === path) a.classList.add('active');
+    const href = a.getAttribute('href');
+    if (href === path || (path === '' && href === '/')) a.classList.add('active');
   });
 }
