@@ -19,9 +19,13 @@ export default function decorate(block) {
     const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
     const b = g.result === 'W' ? 'win' : g.result === 'L' ? 'loss' : 'tie';
     const logo = g.logoId
-      ? `<img src="${MHR}${g.logoId}_a.png" style="width:34px;height:34px;border-radius:50%;object-fit:contain;background:#fff;flex-shrink:0" onerror="this.style.display='none'">`
+      ? `<img src="${MHR}${g.logoId}_a.png" style="width:32px;height:32px;border-radius:50%;object-fit:contain;background:#fff;flex-shrink:0" onerror="this.style.display='none'">`
       : `<div class="sg-logo-fb" style="background:${g.color}">${ini}</div>`;
-    return `<div class="sg-row"><div class="sg-date">${g.date}</div><div class="sg-opp">${logo}<div><div class="sg-name">${g.opp}</div><div class="sg-loc">${g.loc}</div></div></div><div class="sg-score">${g.score}</div><div class="sg-result"><span class="badge badge-${b}">${g.result}</span></div></div>`;
+    return `<div class="sg-row" data-result="${g.result}">
+      <div class="sg-date">${g.date}</div>
+      <div class="sg-opp">${logo}<div><div class="sg-name">${g.opp}</div><div class="sg-loc">${g.loc}</div></div></div>
+      <div class="sg-bottom"><div class="sg-score">${g.score}</div><div class="sg-result"><span class="badge badge-${b}">${g.result}</span></div></div>
+    </div>`;
   };
 
   block.innerHTML = `
@@ -67,14 +71,12 @@ export default function decorate(block) {
     </div>
   `;
 
-  // Slider
   let idx = 0;
   const track = block.querySelector('#hpt');
   const dots = block.querySelector('#hpd');
   const cards = [...block.querySelectorAll('.slide-card')];
   const vis = () => window.innerWidth < 900 ? 1 : 3;
   const mx = () => Math.max(0, cards.length - vis());
-
   const bld = () => {
     dots.innerHTML = '';
     for (let i = 0; i <= mx(); i++) {
@@ -84,13 +86,11 @@ export default function decorate(block) {
       dots.appendChild(d);
     }
   };
-
   const go = (i) => {
     idx = Math.max(0, Math.min(i, mx()));
     track.style.transform = `translateX(-${idx * (cards[0].offsetWidth + 24)}px)`;
     dots.querySelectorAll('.sdot').forEach((d, j) => d.classList.toggle('on', j === idx));
   };
-
   block.querySelector('#hpv').addEventListener('click', () => go(idx - 1));
   block.querySelector('#hpn').addEventListener('click', () => go(idx + 1));
   bld();
