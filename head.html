@@ -5,6 +5,11 @@
     var path = window.location.pathname;
     if (path === '/' || path === '/index') {
       document.title = 'Rinx Hockey Club - Official Website';
+    } else {
+      var t = document.title;
+      if (t && !t.includes('Rinx Hockey Club')) {
+        document.title = t + ' | Rinx Hockey Club';
+      }
     }
   })();
 </script>
