@@ -61,7 +61,7 @@
       +'<p>Located at 660 Terry Road, Hauppauge, The Rinx features two full-size indoor NHL rinks, a pro shop, and year-round programming on 97 acres of Hidden Pond Park.</p>'
       +'<p style="margin-top:8px"><strong>Phone:</strong> (631) 232-3222</p></div>'
       +'</div></div></div>'
-      +'<div class="hp-shop"><h2>&#129346; Get Your Gear</h2>'
+      +'<div class="hp-shop"><h2>&#129506; Get Your Gear</h2>'
       +'<p>Official 2026 Rinx 10U team jerseys, hoodies, and more are now available.</p>'
       +'<a class="btn-shop" href="'+RINX.shopUrl+'" target="_blank">Shop the Official Store</a>'
       +'</div>';
