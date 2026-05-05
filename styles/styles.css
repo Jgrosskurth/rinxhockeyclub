@@ -183,14 +183,9 @@ img { max-width: 100%; height: auto; }
   .section-title { font-size: 1.8rem; }
 }
 
-/* Remove gap between header and first section */
-main > .section:first-child,
-main > div:first-child {
+/* Spacing between header and content on inner pages
+   Excludes homepage hero (which sits flush against the header) */
+main > .section:first-child:not(:has(.hero.block)):not(:has([data-block-name="hero"])) {
+  padding-top: 48px !important;
   margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-body {
-  margin: 0 !important;
-  padding: 0 !important;
 }
