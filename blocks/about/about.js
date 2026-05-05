@@ -10,8 +10,7 @@ export default function decorate(block) {
 
   const imgs = [...block.querySelectorAll('img')];
   const h3 = block.querySelector('h3');
-  const cell = block.querySelector(':scope > div > div') || block;
-  const paragraphs = [...cell.querySelectorAll(':scope p, :scope > div p')];
+  const paragraphs = [...block.querySelectorAll('p')];
   const uniqueTexts = new Set();
   const dedupedParagraphs = paragraphs.filter((p) => {
     const text = p.textContent.trim();

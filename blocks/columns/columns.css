@@ -92,19 +92,20 @@
   flex-shrink: 0;
 }
 
-.columns .coach-card .coach-info h4 {
+.columns .coach-card h4 {
   font-family: var(--heading-font-family);
   font-weight: 800;
   font-size: 1.05rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-white);
+  color: #fff;
   margin-bottom: 2px;
 }
 
-.columns .coach-card .coach-info p {
+.columns .coach-card p {
   font-size: 0.85rem;
   color: rgb(255 255 255 / 65%);
+  margin-bottom: 0;
 }
 
 @media (width >= 900px) {
