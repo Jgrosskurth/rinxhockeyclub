@@ -10,7 +10,6 @@ export default function decorate(block) {
     </div>
     <div id="stats-container"><div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div></div>
   `;
-
   loadStats(block);
 }
 
@@ -18,38 +17,35 @@ async function loadStats(block) {
   const container = block.querySelector('#stats-container');
   try {
     const resp = await fetch(RINX.statsUrl);
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const text = await resp.text();
     const rows = parseCSV(text);
-    if (!rows.length) throw new Error('empty CSV');
+    if (!rows.length) throw new Error('empty');
     renderTable(block, container, rows);
   } catch (e) {
-    container.innerHTML = `
-      <div class="err-box">
-        <p>Could not load stats. <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">View on ayrabo.com &rarr;</a></p>
-      </div>`;
+    container.innerHTML = '<div class="err-box"><p>Could not load stats. <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">View on ayrabo.com &rarr;</a></p></div>';
   }
 }
 
 function renderTable(block, container, rows) {
+  const fmt = (v) => (v === '' || v == null) ? '—' : v;
+  const n = (v) => parseFloat(v) || 0;
+
   const chip = (pos) => {
     const p = (pos || '').toUpperCase();
     if (p.includes('G')) return 'pos-g';
     if (p.includes('D')) return 'pos-d';
     return 'pos-f';
   };
-  const fmt = (v) => (v === '' || v == null) ? '—' : v;
-  const num = (v) => parseFloat(v) || 0;
 
-  // Compute summary totals
-  let tg = 0; let ta = 0; let tp = 0; let maxGP = 0;
+  // Summary totals
+  let tg = 0, ta = 0, tp = 0, maxGP = 0;
   rows.forEach((r) => {
-    tg += num(findKey(r, 'g', 'goals'));
-    ta += num(findKey(r, 'a', 'assists'));
-    tp += num(findKey(r, 'pts', 'points'));
-    maxGP = Math.max(maxGP, num(findKey(r, 'gp', 'games played')));
+    tg += n(findKey(r, 'g', 'goals'));
+    ta += n(findKey(r, 'a', 'assists'));
+    tp += n(findKey(r, 'pts', 'points'));
+    maxGP = Math.max(maxGP, n(findKey(r, 'gp', 'games played')));
   });
-
   const sum = block.querySelector('#stats-summary');
   sum.style.display = 'grid';
   block.querySelector('#s-gp').textContent = maxGP || '--';
@@ -57,7 +53,7 @@ function renderTable(block, container, rows) {
   block.querySelector('#s-ta').textContent = ta;
   block.querySelector('#s-tp').textContent = tp;
 
-  // Map each row to a display object
+  // Build player objects
   const players = rows.map((p) => {
     const fn = findKey(p, 'first name', 'first_name', 'firstname');
     const ln = findKey(p, 'last name', 'last_name', 'lastname');
@@ -74,85 +70,90 @@ function renderTable(block, container, rows) {
     };
   });
 
-  // Sort state
-  let sortCol = 'pts';
-  let sortDir = -1; // -1 = desc, 1 = asc
-
   const cols = [
-    { key: 'num',  label: '#',        numeric: false },
-    { key: 'name', label: 'Player',   numeric: false },
-    { key: 'pos',  label: 'Pos',      numeric: false },
-    { key: 'gp',   label: 'GP',       numeric: true  },
-    { key: 'g',    label: 'G',        numeric: true  },
-    { key: 'a',    label: 'A',        numeric: true  },
-    { key: 'pts',  label: 'PTS',      numeric: true  },
-    { key: 'pm',   label: '+/−',      numeric: true  },
-    { key: 'pim',  label: 'PIM',      numeric: true  },
+    { key: 'num',  label: '#',     numeric: false },
+    { key: 'name', label: 'Player',numeric: false },
+    { key: 'pos',  label: 'Pos',   numeric: false },
+    { key: 'gp',   label: 'GP',    numeric: true  },
+    { key: 'g',    label: 'G',     numeric: true  },
+    { key: 'a',    label: 'A',     numeric: true  },
+    { key: 'pts',  label: 'PTS',   numeric: true  },
+    { key: 'pm',   label: '+/−',   numeric: true  },
+    { key: 'pim',  label: 'PIM',   numeric: true  },
   ];
 
-  function sortedPlayers() {
+  let sortCol = 'pts';
+  let sortAsc = false;
+
+  function getSorted() {
+    const col = cols.find((c) => c.key === sortCol);
     return [...players].sort((a, b) => {
-      const col = cols.find((c) => c.key === sortCol);
-      const av = a[sortCol];
-      const bv = b[sortCol];
+      let av = a[sortCol];
+      let bv = b[sortCol];
+      let result;
       if (col && col.numeric) {
-        return (parseFloat(bv) || 0 - (parseFloat(av) || 0)) * sortDir * -1;
+        result = n(bv) - n(av); // default desc for numeric
+      } else {
+        result = String(av).localeCompare(String(bv));
       }
-      return av.localeCompare(bv) * sortDir;
+      return sortAsc ? -result : result;
     });
   }
 
-  function renderRows() {
-    return sortedPlayers().map((p) => `
-      <tr>
-        <td>${p.num}</td>
-        <td class="player-name">${p.name}</td>
-        <td><span class="pos-chip ${chip(p.pos)}">${p.pos === '—' ? 'F' : p.pos}</span></td>
-        <td>${p.gp}</td>
-        <td>${p.g}</td>
-        <td>${p.a}</td>
-        <td><strong>${p.pts}</strong></td>
-        <td>${p.pm}</td>
-        <td>${p.pim}</td>
-      </tr>
-    `).join('');
-  }
-
-  function renderHeaders() {
+  function buildHeaders() {
     return cols.map((c) => {
       const active = c.key === sortCol;
-      const arrow = active ? (sortDir === -1 ? ' ▼' : ' ▲') : ' ⇅';
-      return `<th class="sortable${active ? ' sort-active' : ''}" data-col="${c.key}">${c.label}<span class="sort-arrow">${arrow}</span></th>`;
+      const arrow = active ? (sortAsc ? ' ▲' : ' ▼') : ' ⇅';
+      return '<th class="sortable' + (active ? ' sort-active' : '') + '" data-col="' + c.key + '">' + c.label + '<span class="sort-arrow">' + arrow + '</span></th>';
     }).join('');
+  }
+
+  function buildRows() {
+    return getSorted().map((p) => {
+      const posVal = p.pos === '—' ? 'F' : p.pos;
+      return '<tr>'
+        + '<td>' + p.num + '</td>'
+        + '<td class="player-name">' + p.name + '</td>'
+        + '<td><span class="pos-chip ' + chip(p.pos) + '">' + posVal + '</span></td>'
+        + '<td>' + p.gp + '</td>'
+        + '<td>' + p.g + '</td>'
+        + '<td>' + p.a + '</td>'
+        + '<td><strong>' + p.pts + '</strong></td>'
+        + '<td>' + p.pm + '</td>'
+        + '<td>' + p.pim + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function render() {
+    const thead = container.querySelector('thead tr');
+    const tbody = container.querySelector('#stats-tbody');
+    if (thead) thead.innerHTML = buildHeaders();
+    if (tbody) tbody.innerHTML = buildRows();
+    // Attach sort handlers
+    container.querySelectorAll('th.sortable').forEach((th) => {
+      th.onclick = function() {
+        const col = this.dataset.col;
+        if (sortCol === col) {
+          sortAsc = !sortAsc;
+        } else {
+          sortCol = col;
+          sortAsc = false; // default desc when switching columns
+        }
+        render();
+      };
+    });
   }
 
   container.innerHTML = `
     <div class="stats-table-wrap">
       <table class="stats-tbl">
-        <thead><tr>${renderHeaders()}</tr></thead>
-        <tbody id="stats-tbody">${renderRows()}</tbody>
+        <thead><tr></tr></thead>
+        <tbody id="stats-tbody"></tbody>
       </table>
     </div>
     <p class="stats-src">Stats sourced from <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">ayrabo.com</a></p>
   `;
 
-  // Add sort click handlers
-  container.querySelectorAll('th.sortable').forEach((th) => {
-    th.addEventListener('click', () => {
-      const col = th.dataset.col;
-      if (sortCol === col) {
-        sortDir *= -1;
-      } else {
-        sortCol = col;
-        sortDir = cols.find((c) => c.key === col)?.numeric ? -1 : 1;
-      }
-      // Re-render headers and rows
-      container.querySelector('thead tr').innerHTML = renderHeaders();
-      container.querySelector('#stats-tbody').innerHTML = renderRows();
-      // Re-attach handlers
-      container.querySelectorAll('th.sortable').forEach((th2) => {
-        th2.addEventListener('click', arguments.callee);
-      });
-    });
-  });
+  render();
 }
