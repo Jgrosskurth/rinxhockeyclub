@@ -1,19 +1,21 @@
-/* Same as before but with smaller stat strip */
 .hero.block,
 .block.hero,
 div[data-block-name="hero"] {
   position: relative !important;
   min-height: 560px !important;
   overflow: hidden !important;
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   background: #041E42 !important;
   padding: 0 !important;
-  margin: 0 !important;
 }
 
 .hero.block > div,
