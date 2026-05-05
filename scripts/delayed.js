@@ -92,9 +92,10 @@
     setInterval(function(){go(idx+1>mx()?0:idx+1);},5000);
   }
 
-  if (document.readyState === 'complete') {
-    setTimeout(init, 100);
+  // Run immediately — no delay
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    window.addEventListener('load', function(){ setTimeout(init, 100); });
+    init();
   }
 })();
