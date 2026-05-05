@@ -1,4 +1,5 @@
 import {
+  buildBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -15,8 +16,25 @@ async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
 }
 
+function buildAutoBlocks(main) {
+  const isHome = window.location.pathname === '/' || window.location.pathname === '/index';
+  if (!isHome) return;
+
+  // Insert recent-results block after news-slider section if not already present
+  if (!main.querySelector('.recent-results')) {
+    const sections = [...main.querySelectorAll(':scope > div')];
+    const newsSection = sections.find((s) => s.querySelector('.news-slider'));
+    if (newsSection) {
+      const section = document.createElement('div');
+      section.append(buildBlock('recent-results', ''));
+      newsSection.after(section);
+    }
+  }
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  buildAutoBlocks(main);
   decorateIcons(main);
   decorateSections(main);
   decorateBlocks(main);
