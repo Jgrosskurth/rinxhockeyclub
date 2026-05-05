@@ -82,28 +82,12 @@
   .stat-num { font-size: 2rem; }
 }
 
-/* Sortable column headers */
 th.sortable {
   cursor: pointer !important;
   user-select: none !important;
   white-space: nowrap !important;
 }
-
-th.sortable:hover {
-  background: rgba(255,255,255,0.08) !important;
-}
-
-th.sort-active {
-  color: #C8102E !important;
-}
-
-.sort-arrow {
-  font-size: 0.7rem;
-  margin-left: 4px;
-  opacity: 0.7;
-}
-
-th.sort-active .sort-arrow {
-  opacity: 1;
-  color: #C8102E;
-}
+th.sortable:hover { background: rgba(255,255,255,0.08) !important; }
+th.sort-active { color: #C8102E !important; }
+.sort-arrow { font-size: 0.7rem; margin-left: 3px; opacity: 0.6; }
+th.sort-active .sort-arrow { opacity: 1; color: #C8102E; }
