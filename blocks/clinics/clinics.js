@@ -12,30 +12,37 @@ export default function decorate(block) {
     };
   }).filter((s) => s.title);
 
-  // Read private session content from sibling default content in the section
+  // Read page intro and private session content from sibling default content
   const section = block.closest('.section');
+  const pageH1 = section?.querySelector(':scope > h1');
   const sectionH2 = section?.querySelector(':scope > h2');
   const sectionPs = [...(section?.querySelectorAll(':scope > p') || [])];
   const sectionUl = section?.querySelector(':scope > ul');
 
+  // Page intro (above clinics block)
+  const pageTitle = pageH1?.textContent || 'Player Development Clinics';
+  const pageSubtitle = sectionPs[0]?.textContent || 'Open clinic sessions for Rinx Hockey Club players.';
+
+  // Private session content (below clinics block)
   const privateTitle = sectionH2?.textContent || 'Private Sessions';
-  const privateDesc = sectionPs[0]?.textContent || 'One-on-one or small-group sessions tailored to your child\'s skill level.';
+  const privateDesc = sectionPs[1]?.textContent || 'One-on-one or small-group sessions tailored to your child\'s skill level.';
   const privateItems = sectionUl
     ? [...sectionUl.querySelectorAll('li')].map((li) => li.textContent)
     : ['Skating fundamentals & edge work', 'Shooting & stick handling', 'Goalie-specific training'];
-  const privateLocation = sectionPs[1]?.textContent || 'The Rinx • Hauppauge, NY';
-  const privatePricing = sectionPs[2]?.textContent || 'Confirmed upon request';
-  const privateFormNote = sectionPs[3]?.textContent || 'Complete the form below and we\'ll follow up within 48 hours.';
+  const privateLocation = sectionPs[2]?.textContent || 'The Rinx • Hauppauge, NY';
+  const privatePricing = sectionPs[3]?.textContent || 'Confirmed upon request';
+  const privateFormNote = sectionPs[4]?.textContent || 'Complete the form below and we\'ll follow up within 48 hours.';
 
   // Remove the default content since we'll render it styled
+  if (pageH1) pageH1.remove();
   if (sectionH2) sectionH2.remove();
   sectionPs.forEach((p) => p.remove());
   if (sectionUl) sectionUl.remove();
 
   block.innerHTML = `
     <div class="clinics-intro">
-      <h2>Player Development Clinics</h2>
-      <p>Open clinic sessions for Rinx Hockey Club players. All sessions are held at The Rinx, 660 Terry Road, Hauppauge, NY.</p>
+      <h2>${pageTitle}</h2>
+      <p>${pageSubtitle}</p>
     </div>
 
     <div class="clinics-grid">
