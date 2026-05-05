@@ -14,8 +14,19 @@ export default function decorate(block) {
           </radialGradient>
         </defs>
         <rect width="1200" height="560" fill="url(#rinkG)"/>
+        <rect width="1200" height="560" fill="none" stroke="#041E42" stroke-width="12" rx="120"/>
+        <line x1="600" y1="0" x2="600" y2="560" stroke="#C8102E" stroke-width="8"/>
+        <line x1="380" y1="0" x2="380" y2="560" stroke="#041E42" stroke-width="6" opacity="0.7"/>
+        <line x1="820" y1="0" x2="820" y2="560" stroke="#041E42" stroke-width="6" opacity="0.7"/>
+        <circle cx="600" cy="280" r="120" fill="none" stroke="#C8102E" stroke-width="5" opacity="0.5"/>
+        <circle cx="600" cy="280" r="8" fill="#C8102E" opacity="0.5"/>
+        <circle cx="280" cy="180" r="70" fill="none" stroke="#C8102E" stroke-width="3" opacity="0.35"/>
+        <circle cx="280" cy="380" r="70" fill="none" stroke="#C8102E" stroke-width="3" opacity="0.35"/>
+        <circle cx="920" cy="180" r="70" fill="none" stroke="#C8102E" stroke-width="3" opacity="0.35"/>
+        <circle cx="920" cy="380" r="70" fill="none" stroke="#C8102E" stroke-width="3" opacity="0.35"/>
         <rect width="1200" height="560" fill="#041E42" opacity="0.88"/>
       </svg>
+      <div class="hero-overlay"></div>
     </div>
 
     <div class="hero-content">
@@ -25,25 +36,25 @@ export default function decorate(block) {
       <h1>Rinx <span>Hockey</span><br>Club &bull; 10U</h1>
       <p>Tier III/A Travel Hockey &bull; Hauppauge, New York</p>
 
-      <div class="hero-record-strip" style="display:inline-flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:8px;overflow:hidden;width:auto;">
-        <div class="hero-stat" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 24px;flex:0 0 auto;">
-          <span class="hero-stat-num red" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:#C8102E;line-height:1;white-space:nowrap;display:block;">${record.w}&ndash;${record.l}&ndash;${record.t}</span>
-          <span class="hero-stat-lbl" style="font-size:0.62rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;white-space:nowrap;display:block;">W&ndash;L&ndash;T</span>
+      <div class="hero-record-strip">
+        <div class="hero-stat">
+          <span class="hero-stat-num red">${record.w}&ndash;${record.l}&ndash;${record.t}</span>
+          <span class="hero-stat-lbl">W&ndash;L&ndash;T</span>
         </div>
-        <div class="hero-divider" style="width:1px;background:rgba(255,255,255,0.2);align-self:stretch;flex-shrink:0;"></div>
-        <div class="hero-stat" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 24px;flex:0 0 auto;">
-          <span class="hero-stat-num" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:#ffffff;line-height:1;white-space:nowrap;display:block;">${record.gf}&ndash;${record.ga}</span>
-          <span class="hero-stat-lbl" style="font-size:0.62rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;white-space:nowrap;display:block;">GF&ndash;GA</span>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">${record.gf}&ndash;${record.ga}</span>
+          <span class="hero-stat-lbl">GF&ndash;GA</span>
         </div>
-        <div class="hero-divider" style="width:1px;background:rgba(255,255,255,0.2);align-self:stretch;flex-shrink:0;"></div>
-        <div class="hero-stat" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 24px;flex:0 0 auto;">
-          <span class="hero-stat-num red" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:#C8102E;line-height:1;white-space:nowrap;display:block;">${record.rating}</span>
-          <span class="hero-stat-lbl" style="font-size:0.62rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;white-space:nowrap;display:block;">MHR Rating</span>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num red">${record.rating}</span>
+          <span class="hero-stat-lbl">MHR Rating</span>
         </div>
-        <div class="hero-divider" style="width:1px;background:rgba(255,255,255,0.2);align-self:stretch;flex-shrink:0;"></div>
-        <div class="hero-stat" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 24px;flex:0 0 auto;">
-          <span class="hero-stat-num" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:#ffffff;line-height:1;white-space:nowrap;display:block;">${gp}</span>
-          <span class="hero-stat-lbl" style="font-size:0.62rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;white-space:nowrap;display:block;">Games Played</span>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">${gp}</span>
+          <span class="hero-stat-lbl">Games Played</span>
         </div>
       </div>
       <p class="hero-src"><a href="${RINX.mhrUrl}" target="_blank">MyHockeyRankings.com</a></p>
