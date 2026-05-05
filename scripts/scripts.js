@@ -40,7 +40,7 @@ export const PLAYERS = [
   { name: 'Ari Mazzarone', pp: false },
   { name: 'Declan Nimmo', pp: false },
   { name: 'Tristen Pajak', pp: false },
-  { name: 'Conor Wilkens', pp: false },
+  { name: 'Conor Wilkins', pp: false },
   { name: 'Evan Martin', pp: true },
   { name: 'Luca Nucera', pp: true },
   { name: 'Edward Carbone', pp: true },
@@ -80,9 +80,6 @@ export const GAMES = [
   { date: 'Apr 27, 2025', opp: 'NYC Skyliners 10U',         loc: 'The Rinx, Hauppauge',       score: '6–3', result: 'W', color: '#880000' },
   { date: 'May 4, 2025',  opp: 'North Park 10U A1',         loc: 'City Ice Pavilion, NYC',    score: '2–4', result: 'L', color: '#1a1a5e', logoId: '002ee8' },
 ];
-
-window.RINX_DATA = RINX;
-window.GAMES_DATA = GAMES;
 
 export function initials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
@@ -149,7 +146,7 @@ async function loadLazy(doc) {
 }
 
 function loadDelayed() {
-  // homepage built inline
+  window.setTimeout(() => import('./delayed.js').catch(() => {}), 3000);
 }
 
 async function loadPage() {
@@ -158,4 +155,4 @@ async function loadPage() {
   loadDelayed();
 }
 
-loadPage().then(buildHomepage);
+loadPage();
