@@ -25,7 +25,12 @@ export default function decorate(block) {
           .filter((p) => p.textContent.includes('|'))
           .map((p) => {
             const parts = p.textContent.split('|');
-            return { name: parts[0]?.trim(), initials: parts[1]?.trim(), role: parts[2]?.trim() };
+            return {
+              name: parts[0]?.trim(),
+              initials: parts[1]?.trim(),
+              role: parts[2]?.trim(),
+              img: parts[3]?.trim() || '',
+            };
           });
 
         col.innerHTML = `
@@ -33,7 +38,10 @@ export default function decorate(block) {
           <div class="coach-cards">
             ${coaches.map((c) => `
               <div class="coach-card">
-                <div class="coach-av">${c.initials}</div>
+                ${c.img
+    ? `<img src="${c.img}" alt="${c.name}" class="coach-av coach-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    : ''}
+                <div class="coach-av"${c.img ? ' style="display:none"' : ''}>${c.initials}</div>
                 <div class="coach-info">
                   <h4>${c.name}</h4>
                   <p>${c.role}</p>

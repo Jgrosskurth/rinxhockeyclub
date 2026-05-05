@@ -64,6 +64,14 @@
   flex-shrink: 0;
 }
 
+.columns .coach-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .columns .coach-info h4 {
   font-family: var(--heading-font-family);
   font-weight: 800;
