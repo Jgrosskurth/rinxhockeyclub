@@ -1,35 +1,34 @@
 export default function decorate(block) {
-  block.innerHTML = `
-    <div class="sponsor-tiers">
-      <div class="sp-tier gold">
-        <div class="sp-tier-label">Gold Sponsor</div>
-        <div class="sp-price">$1,000+</div>
-        <ul class="sp-benefits">
-          <li>Large logo on team jerseys</li>
-          <li>Banner at all home games</li>
-          <li>Website logo placement</li>
-          <li>Social media shoutouts</li>
-        </ul>
-      </div>
-      <div class="sp-tier silver">
-        <div class="sp-tier-label">Silver Sponsor</div>
-        <div class="sp-price">$500</div>
-        <ul class="sp-benefits">
-          <li>Logo on warm-up jerseys</li>
-          <li>Website listing</li>
-          <li>Social media mentions</li>
-        </ul>
-      </div>
-      <div class="sp-tier bronze">
-        <div class="sp-tier-label">Bronze Sponsor</div>
-        <div class="sp-price">$250</div>
-        <ul class="sp-benefits">
-          <li>Website listing</li>
-          <li>Social media mention</li>
-        </ul>
-      </div>
-    </div>
+  const rows = [...block.querySelectorAll('tr')].slice(1);
 
+  let tiers;
+  if (rows.length > 1) {
+    tiers = rows.map(row => {
+      const cells = [...row.cells].map(c => c.innerText.trim());
+      return {
+        name: cells[0] || '',
+        price: cells[1] || '',
+        benefits: cells.slice(2).filter(b => b),
+        cls: (cells[0]||'').toLowerCase().split(' ')[0],
+      };
+    }).filter(t => t.name);
+  } else {
+    tiers = [
+      { name: 'Gold Sponsor', price: '$1,000+', cls: 'gold', benefits: ['Large logo on team jerseys', 'Banner at all home games', 'Website logo placement', 'Social media shoutouts'] },
+      { name: 'Silver Sponsor', price: '$500', cls: 'silver', benefits: ['Logo on warm-up jerseys', 'Website listing', 'Social media mentions'] },
+      { name: 'Bronze Sponsor', price: '$250', cls: 'bronze', benefits: ['Website listing', 'Social media mention'] },
+    ];
+  }
+
+  block.innerHTML = `
+    <div class="page-banner"><h2>Sponsors</h2><p>Support Rinx Hockey Club &bull; Your business, their future.</p></div>
+    <div class="sponsor-tiers">
+      ${tiers.map(t => `<div class="sp-tier ${t.cls}">
+        <div class="sp-tier-label">${t.name}</div>
+        <div class="sp-price">${t.price}</div>
+        <ul class="sp-benefits">${t.benefits.map(b => `<li>${b}</li>`).join('')}</ul>
+      </div>`).join('')}
+    </div>
     <div class="sponsor-form-wrap">
       <h3>Become a Sponsor</h3>
       <p>Fill out the form below and we&apos;ll reach out within 48 hours.</p>
@@ -45,15 +44,13 @@ export default function decorate(block) {
         <label>Sponsorship Level *</label>
         <select id="s-tier">
           <option value="">Select a tier...</option>
-          <option>Gold Sponsor ($1,000+)</option>
-          <option>Silver Sponsor ($500)</option>
-          <option>Bronze Sponsor ($250)</option>
+          ${tiers.map(t => `<option>${t.name} (${t.price})</option>`).join('')}
           <option>Custom Amount</option>
         </select>
       </div>
       <div class="form-group"><label>Comments</label><textarea id="s-notes" placeholder="Tell us about your business..."></textarea></div>
       <button class="btn btn-primary" id="sp-submit">Submit Sponsorship Request</button>
-      <div class="form-success" id="sp-ok">&#x2705; Thank you! Your sponsorship request has been submitted. We&apos;ll be in touch within 48 hours.</div>
+      <div class="form-success" id="sp-ok" style="display:none">&#x2705; Thank you! We&apos;ll be in touch within 48 hours.</div>
     </div>
   `;
 
@@ -64,7 +61,7 @@ export default function decorate(block) {
     const tier = block.querySelector('#s-tier').value;
     if (!biz || !contact || !email || !tier) { alert('Please fill in all required fields.'); return; }
     block.querySelector('#sp-ok').style.display = 'block';
-    ['#s-biz', '#s-contact', '#s-email', '#s-phone', '#s-notes'].forEach((id) => { block.querySelector(id).value = ''; });
+    ['#s-biz','#s-contact','#s-email','#s-phone','#s-notes'].forEach(id => { block.querySelector(id).value = ''; });
     block.querySelector('#s-tier').selectedIndex = 0;
   });
 }
