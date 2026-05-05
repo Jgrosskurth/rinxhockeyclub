@@ -1,4 +1,21 @@
 export default function decorate(block) {
+  // Read clinic sessions from DA table, fall back to defaults
+  const daRows = [...block.querySelectorAll('tr')].slice(1).filter(r => r.cells[0]?.innerText?.trim());
+  const sessions = daRows.length
+    ? daRows.map(r => ({
+        day:        r.cells[0]?.innerText?.trim() || '',
+        title:      r.cells[1]?.innerText?.trim() || '',
+        time:       r.cells[2]?.innerText?.trim() || '',
+        location:   r.cells[3]?.innerText?.trim() || 'The Rinx, Hauppauge, NY',
+        instructor: r.cells[4]?.innerText?.trim() || 'Rinx Staff',
+        frequency:  r.cells[5]?.innerText?.trim() || '',
+        color:      r.cells[6]?.innerText?.trim() || 'navy',
+      })).filter(s => s.title)
+    : [
+        { day: 'Monday',   title: 'Evening Skills Clinic',  time: '6:00 PM \u2013 7:00 PM',   location: 'The Rinx, Hauppauge, NY', instructor: 'Rinx Staff',        frequency: 'Every Monday',   color: 'navy' },
+        { day: 'Saturday', title: 'Morning Power Skate',    time: '7:20 AM \u2013 8:20 AM',   location: 'The Rinx, Hauppauge, NY', instructor: "Dan O'Donoghue",   frequency: 'Every Saturday', color: 'red'  },
+      ];
+
   block.innerHTML = `
     <div class="clinics-intro">
       <h2>Player Development Clinics</h2>
@@ -6,31 +23,20 @@ export default function decorate(block) {
     </div>
 
     <div class="clinics-grid">
-      <div class="clinic-card">
-        <div class="clinic-header navy">
-          <span class="clinic-day">Monday</span>
-          <h3>Evening Skills Clinic</h3>
-          <span class="clinic-time">6:00 PM &ndash; 7:00 PM</span>
+      ${sessions.map(s => `
+        <div class="clinic-card">
+          <div class="clinic-header ${s.color}">
+            <span class="clinic-day">${s.day}</span>
+            <h3>${s.title}</h3>
+            <span class="clinic-time">${s.time}</span>
+          </div>
+          <div class="clinic-body">
+            <div class="clinic-detail"><span class="cd-lbl">Location</span><span class="cd-val">${s.location}</span></div>
+            <div class="clinic-detail"><span class="cd-lbl">Instructor</span><span class="cd-val">${s.instructor}</span></div>
+            ${s.frequency ? `<div class="clinic-detail"><span class="cd-lbl">Frequency</span><span class="cd-val">${s.frequency}</span></div>` : ''}
+          </div>
         </div>
-        <div class="clinic-body">
-          <div class="clinic-detail"><span class="cd-lbl">Location</span><span class="cd-val">The Rinx, Hauppauge, NY</span></div>
-          <div class="clinic-detail"><span class="cd-lbl">Instructor</span><span class="cd-val">Rinx Staff</span></div>
-          <div class="clinic-detail"><span class="cd-lbl">Frequency</span><span class="cd-val">Every Monday</span></div>
-        </div>
-      </div>
-
-      <div class="clinic-card">
-        <div class="clinic-header red">
-          <span class="clinic-day">Saturday</span>
-          <h3>Morning Power Skate</h3>
-          <span class="clinic-time">7:20 AM &ndash; 8:20 AM</span>
-        </div>
-        <div class="clinic-body">
-          <div class="clinic-detail"><span class="cd-lbl">Location</span><span class="cd-val">The Rinx, Hauppauge, NY</span></div>
-          <div class="clinic-detail"><span class="cd-lbl">Instructor</span><span class="cd-val">Dan O&apos;Donoghue</span></div>
-          <div class="clinic-detail"><span class="cd-lbl">Frequency</span><span class="cd-val">Every Saturday</span></div>
-        </div>
-      </div>
+      `).join('')}
     </div>
 
     <div class="private-section">
@@ -53,6 +59,10 @@ export default function decorate(block) {
           <div class="form-row">
             <div class="form-group"><label>Your Name *</label><input type="text" id="ps-name" placeholder="Parent / guardian name"></div>
             <div class="form-group"><label>Child&apos;s Name *</label><input type="text" id="ps-child" placeholder="Player&apos;s full name"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email Address *</label><input type="email" id="ps-email" placeholder="email@example.com"></div>
+            <div class="form-group"><label>Contact Phone *</label><input type="tel" id="ps-phone" placeholder="(631) 000-0000"></div>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -91,7 +101,6 @@ export default function decorate(block) {
     </div>
   `;
 
-  // Skill tile selection
   block.querySelectorAll('.skill-tile input').forEach((radio) => {
     radio.addEventListener('change', () => {
       block.querySelectorAll('.skill-tile').forEach((t) => t.classList.remove('selected'));
@@ -99,18 +108,19 @@ export default function decorate(block) {
     });
   });
 
-  // Submit
   block.querySelector('#ps-submit').addEventListener('click', () => {
-    const name = block.querySelector('#ps-name').value.trim();
+    const name  = block.querySelector('#ps-name').value.trim();
     const child = block.querySelector('#ps-child').value.trim();
-    const age = block.querySelector('#ps-age').value;
+    const email = block.querySelector('#ps-email').value.trim();
+    const phone = block.querySelector('#ps-phone').value.trim();
+    const age   = block.querySelector('#ps-age').value;
     const level = block.querySelector('#ps-level').value;
     const skill = block.querySelector('input[name="ps-skill"]:checked');
-    if (!name || !child || !age || !level || !skill) { alert('Please fill in all required fields.'); return; }
+    if (!name || !child || !email || !phone || !age || !level || !skill) { alert('Please fill in all required fields.'); return; }
     block.querySelector('#ps-ok').style.display = 'block';
-    ['#ps-name', '#ps-child', '#ps-notes'].forEach((id) => { block.querySelector(id).value = ''; });
-    ['#ps-age', '#ps-level'].forEach((id) => { block.querySelector(id).selectedIndex = 0; });
-    block.querySelectorAll('input[name="ps-skill"]').forEach((r) => { r.checked = false; });
-    block.querySelectorAll('.skill-tile').forEach((t) => t.classList.remove('selected'));
+    ['#ps-name','#ps-child','#ps-email','#ps-phone','#ps-notes'].forEach(id => { block.querySelector(id).value = ''; });
+    ['#ps-age','#ps-level'].forEach(id => { block.querySelector(id).selectedIndex = 0; });
+    block.querySelectorAll('input[name="ps-skill"]').forEach(r => { r.checked = false; });
+    block.querySelectorAll('.skill-tile').forEach(t => t.classList.remove('selected'));
   });
 }
