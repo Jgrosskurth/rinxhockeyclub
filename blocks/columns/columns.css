@@ -32,6 +32,26 @@
   border-bottom: 3px solid var(--color-red);
 }
 
+/* Facility column */
+.columns .col-facility img {
+  border-radius: 6px;
+  margin-bottom: 16px;
+  object-fit: cover;
+  max-height: 220px;
+  box-shadow: 0 4px 16px rgb(4 30 66 / 15%);
+}
+
+.columns .col-facility p {
+  color: var(--color-gray);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.columns .col-facility strong {
+  color: var(--color-navy);
+}
+
 /* Coach cards */
 .coach-cards {
   display: flex;
@@ -72,7 +92,7 @@
   flex-shrink: 0;
 }
 
-.columns .coach-info h4 {
+.columns .coach-card .coach-info h4 {
   font-family: var(--heading-font-family);
   font-weight: 800;
   font-size: 1.05rem;
@@ -82,29 +102,9 @@
   margin-bottom: 2px;
 }
 
-.columns .coach-info p {
+.columns .coach-card .coach-info p {
   font-size: 0.85rem;
   color: rgb(255 255 255 / 65%);
-}
-
-/* Facility column */
-.columns .col-facility img {
-  border-radius: 6px;
-  margin-bottom: 16px;
-  object-fit: cover;
-  max-height: 220px;
-  box-shadow: 0 4px 16px rgb(4 30 66 / 15%);
-}
-
-.columns .col-facility p {
-  color: var(--color-gray);
-  line-height: 1.7;
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-}
-
-.columns .col-facility strong {
-  color: var(--color-navy);
 }
 
 @media (width >= 900px) {
