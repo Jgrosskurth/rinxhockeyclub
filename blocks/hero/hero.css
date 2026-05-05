@@ -1,3 +1,14 @@
+/* ── Hero block ─────────────────────────────────────── */
+
+/* Break out of AEM section container to full viewport width */
+.section:has(.hero.block),
+.section:has(div[data-block-name="hero"]) {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 .hero.block,
 .block.hero,
 div[data-block-name="hero"] {
@@ -9,28 +20,22 @@ div[data-block-name="hero"] {
   background: #041E42 !important;
   padding: 0 !important;
   margin: 0 !important;
+  display: block !important;
 }
 
-/* AEM inner wrappers — zero out, let hero-content do the work */
+/* Strip all AEM wrapper div styling */
 .hero.block > div,
 .block.hero > div,
-div[data-block-name="hero"] > div {
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
+div[data-block-name="hero"] > div,
 .hero.block > div > div,
 .block.hero > div > div,
 div[data-block-name="hero"] > div > div {
-  padding: 0 !important;
-  margin: 0 !important;
+  all: unset !important;
+  display: block !important;
   width: 100% !important;
-  max-width: 100% !important;
 }
 
-/* Rink SVG — absolute fill */
+/* Rink SVG — fills full block */
 .hero-rink {
   position: absolute !important;
   top: 0 !important;
@@ -38,16 +43,18 @@ div[data-block-name="hero"] > div > div {
   width: 100% !important;
   height: 100% !important;
   z-index: 0 !important;
+  display: block !important;
 }
 
-/* All content centered via text-align, no flex conflicts */
+/* Content — centered over SVG */
 .hero-content {
   position: relative !important;
   z-index: 2 !important;
-  padding: 60px 40px !important;
-  width: 100% !important;
+  padding: 60px 20px !important;
   text-align: center !important;
+  width: 100% !important;
   box-sizing: border-box !important;
+  display: block !important;
 }
 
 /* Logo */
@@ -56,21 +63,21 @@ div[data-block-name="hero"] > div > div {
   height: 140px !important;
   object-fit: contain !important;
   filter: drop-shadow(0 4px 20px rgba(0,0,0,0.7)) !important;
-  margin: 0 auto 16px !important;
+  margin: 0 auto 16px auto !important;
   display: block !important;
-  animation: floatLogo 3s ease-in-out infinite !important;
+  animation: heroFloat 3s ease-in-out infinite !important;
 }
 
-@keyframes floatLogo {
+@keyframes heroFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
 
-/* Badge */
+/* Season badge */
 .hero-badge {
   display: inline-block !important;
   background: #C8102E !important;
-  color: #ffffff !important;
+  color: #fff !important;
   font-family: 'Barlow Condensed', sans-serif !important;
   font-weight: 700 !important;
   font-size: 0.75rem !important;
@@ -81,7 +88,7 @@ div[data-block-name="hero"] > div > div {
   margin-bottom: 20px !important;
 }
 
-/* Heading */
+/* Main title */
 .hero.block h1, .hero.block h2,
 .block.hero h1, .block.hero h2,
 div[data-block-name="hero"] h1,
@@ -92,12 +99,16 @@ div[data-block-name="hero"] h2 {
   color: #ffffff !important;
   text-transform: uppercase !important;
   line-height: 0.95 !important;
-  margin-bottom: 16px !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
   text-align: center !important;
+  letter-spacing: 0.02em !important;
 }
 
 .hero.block h1 span, .hero.block h2 span,
-.block.hero h1 span, .block.hero h2 span {
+.block.hero h1 span, .block.hero h2 span,
+div[data-block-name="hero"] h1 span,
+div[data-block-name="hero"] h2 span {
   color: #C8102E !important;
 }
 
@@ -105,42 +116,52 @@ div[data-block-name="hero"] h2 {
 .hero-content > p:not(.hero-src) {
   color: rgba(255,255,255,0.8) !important;
   font-size: 1.1rem !important;
-  margin: 0 auto 24px !important;
+  font-family: 'Barlow', sans-serif !important;
   font-weight: 400 !important;
   text-transform: none !important;
+  margin: 0 auto 24px auto !important;
   text-align: center !important;
+  display: block !important;
 }
 
-/* Stat strip — inline-flex, centered via text-align on parent */
-.hero-record-strip, .hero-strip {
+/* Stat strip — compact, centered inline */
+.hero-record-strip,
+.hero-strip {
   display: inline-flex !important;
   align-items: center !important;
   background: rgba(255,255,255,0.1) !important;
   border: 1px solid rgba(255,255,255,0.2) !important;
   border-radius: 8px !important;
-  overflow: hidden !important;
-  margin-top: 8px !important;
+  overflow: visible !important;
+  margin: 8px auto 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
 }
 
 .hero-stat, .hs-block, .rec-block {
-  padding: 14px 22px !important;
+  padding: 14px 24px !important;
   text-align: center !important;
+  display: inline-block !important;
+  width: auto !important;
 }
 
 .hero-stat-num, .hs-num, .rec-num {
   font-family: 'Barlow Condensed', sans-serif !important;
   font-weight: 900 !important;
-  font-size: 1.4rem !important;
+  font-size: 1.5rem !important;
   color: #ffffff !important;
   line-height: 1 !important;
   display: block !important;
   white-space: nowrap !important;
+  text-transform: none !important;
 }
 
-.hero-stat-num.red, .hs-num.red, .rec-num.red { color: #C8102E !important; }
+.hero-stat-num.red, .hs-num.red, .rec-num.red {
+  color: #C8102E !important;
+}
 
 .hero-stat-lbl, .hs-lbl, .rec-lbl {
-  font-size: 0.6rem !important;
+  font-size: 0.62rem !important;
   color: rgba(255,255,255,0.55) !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em !important;
@@ -148,40 +169,48 @@ div[data-block-name="hero"] h2 {
   display: block !important;
   white-space: nowrap !important;
   font-weight: 400 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
 }
 
 .hero-divider, .hs-div, .rec-divider {
   width: 1px !important;
+  min-width: 1px !important;
   background: rgba(255,255,255,0.2) !important;
   align-self: stretch !important;
+  display: inline-block !important;
 }
 
-/* MHR source link */
+/* MHR link */
 .hero-src, .rec-src {
   margin-top: 12px !important;
   font-size: 0.8rem !important;
-  text-transform: none !important;
   font-weight: 400 !important;
+  text-transform: none !important;
   text-align: center !important;
+  display: block !important;
 }
 
 .hero-src a, .rec-src a {
   color: rgba(255,255,255,0.45) !important;
   text-decoration: none !important;
+  font-family: 'Barlow', sans-serif !important;
 }
 
 /* Bottom stripe */
 .hero-stripe, .hero-ice {
   position: absolute !important;
-  bottom: 0 !important; left: 0 !important; right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   height: 6px !important;
   background: linear-gradient(90deg, #C8102E 33%, #fff 33%, #fff 66%, #C8102E 66%) !important;
   z-index: 3 !important;
+  display: block !important;
 }
 
 @media (max-width: 900px) {
   .hero-content { padding: 40px 20px !important; }
   .hero-logo { width: 90px !important; height: 90px !important; }
-  .hero-record-strip, .hero-strip { flex-wrap: wrap !important; justify-content: center !important; }
+  .hero-record-strip, .hero-strip { flex-wrap: wrap !important; }
   .hero-stat, .hs-block, .rec-block { padding: 10px 14px !important; }
 }
