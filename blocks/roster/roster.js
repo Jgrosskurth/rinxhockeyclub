@@ -5,18 +5,22 @@ function getInitials(name) {
 }
 
 export default function decorate(block) {
-  // Read from DA table rows (skip header row), fall back to scripts.js PLAYERS
-  const daRows = [...block.querySelectorAll('tr')].slice(1).filter((r) => r.cells[1]?.innerText?.trim());
-  const players = daRows.length
-    ? daRows.map((r) => ({
-        num:  r.cells[0]?.innerText?.trim() || '',
-        name: r.cells[1]?.innerText?.trim() || '',
-        pos:  r.cells[2]?.innerText?.trim() || '',
-        pp:   (r.cells[3]?.innerText?.trim() || '').toLowerCase() === 'yes',
-      })).filter((p) => p.name)
+  // AEM converts DA tables to div rows: block > div(row) > div(cell)
+  // Row 0 = block name ("Roster"), Row 1 = column headers, Row 2+ = player data
+  const rows = [...block.children].slice(2); // skip block name row + header row
+
+  const players = rows.length
+    ? rows.map((row) => {
+        const cells = [...row.children];
+        return {
+          num:  cells[0]?.innerText?.trim() || '',
+          name: cells[1]?.innerText?.trim() || '',
+          pos:  cells[2]?.innerText?.trim() || '',
+          pp:   (cells[3]?.innerText?.trim() || '').toLowerCase() === 'yes',
+        };
+      }).filter((p) => p.name)
     : PLAYERS.map((p) => ({ num: '', name: p.name, pos: '', pp: p.pp }));
 
-  // Identical HTML output as original — design unchanged
   block.innerHTML = `
     <div class="roster-grid">
       ${players.map((p) => `
