@@ -1,3 +1,9 @@
+const TEAM_PHOTOS = [
+  '/images/r1.JPG',
+  '/images/r2.JPG',
+  '/images/r3.JPG',
+];
+
 export default function decorate(block) {
   // Prevent duplicate about blocks on the page
   const allAbouts = document.querySelectorAll('.about');
@@ -8,7 +14,6 @@ export default function decorate(block) {
     return;
   }
 
-  const imgs = [...block.querySelectorAll('img')];
   const h3 = block.querySelector('h3');
   const paragraphs = [...block.querySelectorAll('p')];
   const uniqueTexts = new Set();
@@ -19,17 +24,12 @@ export default function decorate(block) {
     return true;
   });
 
-  let imageRow = '';
-  if (imgs.length > 1) {
-    imageRow = `<div class="about-photos">${imgs.map((img) => `<img src="${img.src}" alt="${img.alt || ''}" class="about-photo" onerror="this.style.display='none'">`).join('')}</div>`;
-  } else if (imgs.length === 1) {
-    imageRow = `<img src="${imgs[0].src}" alt="${imgs[0].alt || ''}" class="about-img" onerror="this.style.display='none'">`;
-  }
-
   block.innerHTML = `
     <h2 class="section-title">About Our Team</h2>
     <div class="about-card">
-      ${imageRow}
+      <div class="about-photos">
+        ${TEAM_PHOTOS.map((src) => `<img src="${src}" alt="Rinx Hockey Club" class="about-photo" onerror="this.style.display='none'">`).join('')}
+      </div>
       ${h3 ? `<h3 class="about-heading">${h3.innerHTML}</h3>` : ''}
       <div class="about-body">
         ${dedupedParagraphs.map((p) => `<p>${p.innerHTML}</p>`).join('')}
