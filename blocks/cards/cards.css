@@ -1,27 +1,61 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Cards Block — Bio/info grid style */
+.cards > div {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
 }
 
-.cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+.cards > div > div {
+  background: var(--color-white);
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+.cards > div > div:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards > div > div:first-child {
+  grid-column: 1 / -1;
 }
 
-.cards > ul > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+.cards h3 {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-red);
+}
+
+.cards p {
+  color: var(--color-gray);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.cards a {
+  color: var(--color-red);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cards a:hover {
+  text-decoration: underline;
+}
+
+@media (width <= 900px) {
+  .cards > div {
+    grid-template-columns: 1fr;
+  }
+
+  .cards > div > div:first-child {
+    grid-column: 1;
+  }
 }

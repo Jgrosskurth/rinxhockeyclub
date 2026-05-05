@@ -1,7 +1,12 @@
 export default function decorate(block) {
   const slides = [...block.children].map((row) => {
     const cells = [...row.children];
-    return { tag: cells[0]?.textContent.trim(), title: cells[1]?.textContent.trim(), body: cells[2]?.textContent.trim(), date: cells[3]?.textContent.trim() };
+    return {
+      tag: cells[0]?.textContent.trim(),
+      title: cells[1]?.textContent.trim(),
+      body: cells[2]?.textContent.trim(),
+      date: cells[3]?.textContent.trim(),
+    };
   });
 
   block.innerHTML = `
@@ -31,6 +36,13 @@ export default function decorate(block) {
   const visible = () => (window.innerWidth < 900 ? 1 : 3);
   const max = () => Math.max(0, slides.length - visible());
 
+  const goTo = (i) => {
+    idx = Math.max(0, Math.min(i, max()));
+    const w = block.querySelector('.slide-card').offsetWidth + 24;
+    track.style.transform = `translateX(-${idx * w}px)`;
+    dots.querySelectorAll('.sdot').forEach((d, j) => d.classList.toggle('on', j === idx));
+  };
+
   const buildDots = () => {
     dots.innerHTML = '';
     for (let i = 0; i <= max(); i += 1) {
@@ -39,13 +51,6 @@ export default function decorate(block) {
       d.addEventListener('click', () => goTo(i));
       dots.appendChild(d);
     }
-  };
-
-  const goTo = (i) => {
-    idx = Math.max(0, Math.min(i, max()));
-    const w = block.querySelector('.slide-card').offsetWidth + 24;
-    track.style.transform = `translateX(-${idx * w}px)`;
-    dots.querySelectorAll('.sdot').forEach((d, j) => d.classList.toggle('on', j === idx));
   };
 
   block.querySelector('#prev').addEventListener('click', () => goTo(idx - 1));

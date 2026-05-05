@@ -1,34 +1,27 @@
-import { RINX, parseCSV, findKey } from '../../scripts/scripts.js';
-
-export default function decorate(block) {
-  block.innerHTML = `
-    <div class="stats-summary" id="stats-summary" style="display:none">
-      <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>
-      <div class="stat-tile"><span class="stat-num red" id="s-tg">--</span><span class="stat-lbl">Team Goals</span></div>
-      <div class="stat-tile"><span class="stat-num" id="s-ta">--</span><span class="stat-lbl">Team Assists</span></div>
-      <div class="stat-tile"><span class="stat-num red" id="s-tp">--</span><span class="stat-lbl">Team Points</span></div>
-    </div>
-    <div id="stats-container"><div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div></div>
-  `;
-  loadStats(block);
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',').map((h) => h.trim().replace(/^"|"$/g, ''));
+  return lines.slice(1).filter((l) => l.trim()).map((line) => {
+    const vals = line.split(',').map((v) => v.trim().replace(/^"|"$/g, ''));
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = vals[i] || ''; });
+    return obj;
+  });
 }
 
-async function loadStats(block) {
-  const container = block.querySelector('#stats-container');
-  try {
-    const resp = await fetch(RINX.statsUrl);
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const text = await resp.text();
-    const rows = parseCSV(text);
-    if (!rows.length) throw new Error('empty');
-    renderTable(block, container, rows);
-  } catch (e) {
-    container.innerHTML = '<div class="err-box"><p>Could not load stats. <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">View on ayrabo.com &rarr;</a></p></div>';
+function findKey(obj, ...candidates) {
+  const keys = Object.keys(obj);
+  for (let i = 0; i < candidates.length; i += 1) {
+    const c = candidates[i];
+    const found = keys.find((k) => k.trim().toLowerCase() === c.toLowerCase());
+    if (found !== undefined) return obj[found];
   }
+  return '';
 }
 
 function renderTable(block, container, rows) {
-  const fmt = (v) => (v === '' || v == null) ? '—' : v;
+  const fmt = (v) => ((v === '' || v == null) ? '—' : v);
   const n = (v) => parseFloat(v) || 0;
 
   const chip = (pos) => {
@@ -38,8 +31,10 @@ function renderTable(block, container, rows) {
     return 'pos-f';
   };
 
-  // Summary totals
-  let tg = 0, ta = 0, tp = 0, maxGP = 0;
+  let tg = 0;
+  let ta = 0;
+  let tp = 0;
+  let maxGP = 0;
   rows.forEach((r) => {
     tg += n(findKey(r, 'g', 'goals'));
     ta += n(findKey(r, 'a', 'assists'));
@@ -53,33 +48,32 @@ function renderTable(block, container, rows) {
   block.querySelector('#s-ta').textContent = ta;
   block.querySelector('#s-tp').textContent = tp;
 
-  // Build player objects
   const players = rows.map((p) => {
     const fn = findKey(p, 'first name', 'first_name', 'firstname');
     const ln = findKey(p, 'last name', 'last_name', 'lastname');
     return {
-      num:  fmt(findKey(p, '#', 'number', 'jersey', 'jersey_number', 'no')),
+      num: fmt(findKey(p, '#', 'number', 'jersey', 'jersey_number', 'no')),
       name: fmt(findKey(p, 'name', 'player', 'full name', 'player_name') || [fn, ln].filter(Boolean).join(' ')),
-      pos:  fmt(findKey(p, 'pos', 'position')),
-      gp:   fmt(findKey(p, 'gp', 'games played')),
-      g:    fmt(findKey(p, 'g', 'goals')),
-      a:    fmt(findKey(p, 'a', 'assists')),
-      pts:  fmt(findKey(p, 'pts', 'points')),
-      pm:   fmt(findKey(p, 'plus minus', '+/-', 'plus_minus', 'pm')),
-      pim:  fmt(findKey(p, 'pim', 'penalty minutes')),
+      pos: fmt(findKey(p, 'pos', 'position')),
+      gp: fmt(findKey(p, 'gp', 'games played')),
+      g: fmt(findKey(p, 'g', 'goals')),
+      a: fmt(findKey(p, 'a', 'assists')),
+      pts: fmt(findKey(p, 'pts', 'points')),
+      pm: fmt(findKey(p, 'plus minus', '+/-', 'plus_minus', 'pm')),
+      pim: fmt(findKey(p, 'pim', 'penalty minutes')),
     };
   });
 
   const cols = [
-    { key: 'num',  label: '#',     numeric: false },
-    { key: 'name', label: 'Player',numeric: false },
-    { key: 'pos',  label: 'Pos',   numeric: false },
-    { key: 'gp',   label: 'GP',    numeric: true  },
-    { key: 'g',    label: 'G',     numeric: true  },
-    { key: 'a',    label: 'A',     numeric: true  },
-    { key: 'pts',  label: 'PTS',   numeric: true  },
-    { key: 'pm',   label: '+/−',   numeric: true  },
-    { key: 'pim',  label: 'PIM',   numeric: true  },
+    { key: 'num', label: '#', numeric: false },
+    { key: 'name', label: 'Player', numeric: false },
+    { key: 'pos', label: 'Pos', numeric: false },
+    { key: 'gp', label: 'GP', numeric: true },
+    { key: 'g', label: 'G', numeric: true },
+    { key: 'a', label: 'A', numeric: true },
+    { key: 'pts', label: 'PTS', numeric: true },
+    { key: 'pm', label: '+/−', numeric: true },
+    { key: 'pim', label: 'PIM', numeric: true },
   ];
 
   let sortCol = 'pts';
@@ -88,11 +82,11 @@ function renderTable(block, container, rows) {
   function getSorted() {
     const col = cols.find((c) => c.key === sortCol);
     return [...players].sort((a, b) => {
-      let av = a[sortCol];
-      let bv = b[sortCol];
+      const av = a[sortCol];
+      const bv = b[sortCol];
       let result;
       if (col && col.numeric) {
-        result = n(bv) - n(av); // default desc for numeric
+        result = n(bv) - n(av);
       } else {
         result = String(av).localeCompare(String(bv));
       }
@@ -103,25 +97,26 @@ function renderTable(block, container, rows) {
   function buildHeaders() {
     return cols.map((c) => {
       const active = c.key === sortCol;
-      const arrow = active ? (sortAsc ? ' ▲' : ' ▼') : ' ⇅';
-      return '<th class="sortable' + (active ? ' sort-active' : '') + '" data-col="' + c.key + '">' + c.label + '<span class="sort-arrow">' + arrow + '</span></th>';
+      let arrow = ' ⇅';
+      if (active) arrow = sortAsc ? ' ▲' : ' ▼';
+      return `<th class="sortable${active ? ' sort-active' : ''}" data-col="${c.key}">${c.label}<span class="sort-arrow">${arrow}</span></th>`;
     }).join('');
   }
 
   function buildRows() {
     return getSorted().map((p) => {
       const posVal = p.pos === '—' ? 'F' : p.pos;
-      return '<tr>'
-        + '<td>' + p.num + '</td>'
-        + '<td class="player-name">' + p.name + '</td>'
-        + '<td><span class="pos-chip ' + chip(p.pos) + '">' + posVal + '</span></td>'
-        + '<td>' + p.gp + '</td>'
-        + '<td>' + p.g + '</td>'
-        + '<td>' + p.a + '</td>'
-        + '<td><strong>' + p.pts + '</strong></td>'
-        + '<td>' + p.pm + '</td>'
-        + '<td>' + p.pim + '</td>'
-        + '</tr>';
+      return `<tr>
+        <td>${p.num}</td>
+        <td class="player-name">${p.name}</td>
+        <td><span class="pos-chip ${chip(p.pos)}">${posVal}</span></td>
+        <td>${p.gp}</td>
+        <td>${p.g}</td>
+        <td>${p.a}</td>
+        <td><strong>${p.pts}</strong></td>
+        <td>${p.pm}</td>
+        <td>${p.pim}</td>
+      </tr>`;
     }).join('');
   }
 
@@ -130,15 +125,14 @@ function renderTable(block, container, rows) {
     const tbody = container.querySelector('#stats-tbody');
     if (thead) thead.innerHTML = buildHeaders();
     if (tbody) tbody.innerHTML = buildRows();
-    // Attach sort handlers
     container.querySelectorAll('th.sortable').forEach((th) => {
-      th.onclick = function() {
-        const col = this.dataset.col;
+      th.onclick = function onClick() {
+        const { col } = this.dataset;
         if (sortCol === col) {
           sortAsc = !sortAsc;
         } else {
           sortCol = col;
-          sortAsc = false; // default desc when switching columns
+          sortAsc = false;
         }
         render();
       };
@@ -156,4 +150,35 @@ function renderTable(block, container, rows) {
   `;
 
   render();
+}
+
+async function loadStats(block, statsUrl) {
+  const container = block.querySelector('#stats-container');
+  try {
+    const resp = await fetch(statsUrl);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const text = await resp.text();
+    const rows = parseCSV(text);
+    if (!rows.length) throw new Error('empty');
+    renderTable(block, container, rows);
+  } catch {
+    container.innerHTML = '<div class="err-box"><p>Could not load stats. <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">View on ayrabo.com &rarr;</a></p></div>';
+  }
+}
+
+export default function decorate(block) {
+  const row = block.children[0];
+  const statsUrl = row?.children[0]?.textContent?.trim()
+    || 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/rinxstats.csv';
+
+  block.innerHTML = `
+    <div class="stats-summary" id="stats-summary" style="display:none">
+      <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>
+      <div class="stat-tile"><span class="stat-num red" id="s-tg">--</span><span class="stat-lbl">Team Goals</span></div>
+      <div class="stat-tile"><span class="stat-num" id="s-ta">--</span><span class="stat-lbl">Team Assists</span></div>
+      <div class="stat-tile"><span class="stat-num red" id="s-tp">--</span><span class="stat-lbl">Team Points</span></div>
+    </div>
+    <div id="stats-container"><div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div></div>
+  `;
+  loadStats(block, statsUrl);
 }

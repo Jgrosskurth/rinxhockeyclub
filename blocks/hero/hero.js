@@ -1,8 +1,15 @@
-import { RINX } from '../../scripts/scripts.js';
-
 export default function decorate(block) {
-  const { record } = RINX;
-  const gp = record.w + record.l + record.t;
+  const row = block.children[0];
+  const cell = row?.children[0];
+  const h1 = cell?.querySelector('h1');
+  const paragraphs = [...(cell?.querySelectorAll('p') || [])];
+
+  const title = h1?.textContent || 'Rinx Hockey Club';
+  const subtitle = paragraphs[0]?.textContent || '';
+  const season = paragraphs[1]?.textContent || '';
+  const record = paragraphs[2]?.textContent || '';
+
+  const parts = record.split('|').map((s) => s.trim());
 
   block.innerHTML = `
     <div class="hero-inner">
@@ -27,32 +34,21 @@ export default function decorate(block) {
         <rect width="1200" height="560" fill="#041E42" opacity="0.88"/>
       </svg>
       <div class="hero-content">
-        <img src="${RINX.logoUrl}" alt="Rinx Hockey Club" class="hero-logo" onerror="this.style.display='none'">
-        <span class="hero-badge">2026&ndash;2027 Season</span>
-        <h1>Rinx <span>Hockey</span><br>Club &bull; 10U</h1>
-        <p>Tier III/A Travel Hockey &bull; Hauppauge, New York</p>
+        <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" class="hero-logo" onerror="this.style.display='none'">
+        <span class="hero-badge">${season}</span>
+        <h1>${title}</h1>
+        <p>${subtitle}</p>
+        ${parts.length > 1 ? `
         <div class="hero-record-strip">
-          <div class="hero-stat">
-            <span class="hero-stat-num red">${record.w}&ndash;${record.l}&ndash;${record.t}</span>
-            <span class="hero-stat-lbl">W&ndash;L&ndash;T</span>
-          </div>
-          <div class="hero-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">${record.gf}&ndash;${record.ga}</span>
-            <span class="hero-stat-lbl">GF&ndash;GA</span>
-          </div>
-          <div class="hero-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num red">${record.rating}</span>
-            <span class="hero-stat-lbl">MHR Rating</span>
-          </div>
-          <div class="hero-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">${gp}</span>
-            <span class="hero-stat-lbl">Games Played</span>
-          </div>
-        </div>
-        <p class="hero-src"><a href="${RINX.mhrUrl}" target="_blank">MyHockeyRankings.com</a></p>
+          ${parts.map((p, i) => `
+            <div class="hero-stat">
+              <span class="hero-stat-num${i % 2 === 0 ? ' red' : ''}">${p.split(' ')[0] || p}</span>
+              <span class="hero-stat-lbl">${p.split(' ').slice(1).join(' ') || ''}</span>
+            </div>
+            ${i < parts.length - 1 ? '<div class="hero-divider"></div>' : ''}
+          `).join('')}
+        </div>` : ''}
+        <p class="hero-src"><a href="https://myhockeyrankings.com/team-info?t=19306&y=2025" target="_blank">MyHockeyRankings.com</a></p>
       </div>
       <div class="hero-stripe"></div>
     </div>

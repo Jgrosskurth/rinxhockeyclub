@@ -1,20 +1,19 @@
 export default function decorate(block) {
-  // Read contact info from DA table rows
-  const daRows = [...block.querySelectorAll('tr')].slice(1).filter(r => r.cells[0]?.innerText?.trim());
+  const rows = [...block.children];
   const info = {};
-  daRows.forEach(r => {
-    const key = r.cells[0]?.innerText?.trim().toLowerCase().replace(/[^a-z0-9]/g, '') || '';
-    const val = r.cells[1]?.innerText?.trim() || '';
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    const key = cells[0]?.textContent?.trim().toLowerCase().replace(/[^a-z0-9]/g, '') || '';
+    const val = cells[1]?.textContent?.trim() || '';
     if (key && val) info[key] = val;
   });
 
-  // Defaults
-  const loc       = info.location       || 'The Rinx<br>660 Terry Road<br>Hauppauge, NY 11788';
-  const phone     = info.phone          || '(631) 232-3222';
-  const email     = info.email          || 'info@therinx.com';
-  const hemail    = info.hockeyemail    || 'AlisonC@therinx.com';
-  const head      = info.headcoach      || "Dan O'Donoghue";
-  const asst      = info.assistantcoach || 'Joe Capozzoli';
+  const loc = info.location || 'The Rinx, 660 Terry Road, Hauppauge, NY 11788';
+  const phone = info.phone || '(631) 232-3222';
+  const email = info.email || 'info@therinx.com';
+  const hemail = info.hockeyemail || 'AlisonC@therinx.com';
+  const head = info.headcoach || "Dan O'Donoghue";
+  const asst = info.assistantcoach || 'Joe Capozzoli';
 
   block.innerHTML = `
     <div class="contact-grid">
@@ -44,18 +43,22 @@ export default function decorate(block) {
         </div>
         <div class="form-group"><label>Message *</label><textarea id="c-msg" placeholder="How can we help you?"></textarea></div>
         <button class="btn btn-primary" id="c-submit">Send Message</button>
-        <div class="form-success" id="c-ok">✅ Message sent! We&apos;ll get back to you as soon as possible.</div>
+        <div class="form-success" id="c-ok">Message sent! We'll get back to you as soon as possible.</div>
       </div>
     </div>
   `;
 
   block.querySelector('#c-submit').addEventListener('click', () => {
     const first = block.querySelector('#c-first').value.trim();
-    const last  = block.querySelector('#c-last').value.trim();
-    const email = block.querySelector('#c-email').value.trim();
-    const msg   = block.querySelector('#c-msg').value.trim();
-    if (!first || !last || !email || !msg) { alert('Please fill in all required fields.'); return; }
+    const last = block.querySelector('#c-last').value.trim();
+    const cemail = block.querySelector('#c-email').value.trim();
+    const msg = block.querySelector('#c-msg').value.trim();
+    if (!first || !last || !cemail || !msg) {
+      // eslint-disable-next-line no-alert
+      alert('Please fill in all required fields.');
+      return;
+    }
     block.querySelector('#c-ok').style.display = 'block';
-    ['#c-first','#c-last','#c-email','#c-msg'].forEach(id => { block.querySelector(id).value = ''; });
+    ['#c-first', '#c-last', '#c-email', '#c-msg'].forEach((id) => { block.querySelector(id).value = ''; });
   });
 }

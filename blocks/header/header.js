@@ -1,10 +1,8 @@
-import { RINX } from '../../scripts/scripts.js';
-
 export default function decorate(block) {
   block.innerHTML = `
     <div class="header-inner">
       <div class="header-logo" onclick="window.location.href='/'">
-        <img src="${RINX.logoUrl}" alt="Rinx Hockey Club" width="64" height="64"
+        <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" width="64" height="64"
              onerror="this.style.display='none'">
         <div class="header-text">
           <span class="header-title">Rinx Hockey Club</span>
@@ -25,17 +23,15 @@ export default function decorate(block) {
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
         <a href="/contact">Contact</a>
-        <a href="${RINX.shopUrl}" target="_blank" class="nav-shop"><img src="/icons/cart.svg" alt="" class="cart-icon"> Shop Gear</a>
+        <a href="https://rinxspring2026.itemorder.com/shop/home/" target="_blank" class="nav-shop"><img src="/icons/cart.svg" alt="" class="cart-icon"> Shop Gear</a>
       </nav>
     </div>
   `;
 
-  // Mobile menu
   const hamburger = block.querySelector('#hamburger');
   const nav = block.querySelector('#header-nav');
   hamburger.addEventListener('click', () => nav.classList.toggle('open'));
 
-  // Active link
   const path = window.location.pathname;
   block.querySelectorAll('nav a').forEach((a) => {
     if (a.getAttribute('href') === path) a.classList.add('active');
