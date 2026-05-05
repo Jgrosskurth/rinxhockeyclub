@@ -1,13 +1,25 @@
+const FALLBACK_SPONSORS = [
+  { name: 'Sponsor', img: '/images/C5C5C820-D330-47DF-9084-222C832B51BC.png', link: '' },
+  { name: 'Sponsor', img: '/images/IMG_4278.jpg', link: '' },
+  { name: 'Sponsor', img: '/images/IMG_4390.jpg', link: '' },
+  { name: 'Sponsor', img: '/images/wiz.png', link: '' },
+];
+
 export default function decorate(block) {
   const rows = [...block.children];
-  const sponsors = rows.map((r) => {
+  let sponsors = rows.map((r) => {
     const cells = [...r.children];
+    const imgEl = cells[1]?.querySelector('img');
+    let imgSrc = imgEl?.src || cells[1]?.textContent?.trim() || '';
+    if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
     return {
       name: cells[0]?.textContent?.trim() || '',
-      img: cells[1]?.querySelector('img')?.src || cells[1]?.textContent?.trim() || '',
+      img: imgSrc,
       link: cells[2]?.querySelector('a')?.href || cells[2]?.textContent?.trim() || '',
     };
   }).filter((s) => s.img);
+
+  if (!sponsors.length) sponsors = FALLBACK_SPONSORS;
 
   const card = (s) => {
     const img = `<img src="${s.img}" alt="${s.name}" onerror="this.closest('.sp-card').style.display='none'">`;
