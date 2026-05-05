@@ -4,13 +4,22 @@ function getInitials(name) {
     .toUpperCase();
 }
 
+function getBadge(note) {
+  const lower = (note || '').toLowerCase();
+  if (lower.includes('practice')) return '<span class="pp-badge">Practice Player</span>';
+  if (lower.includes('goalie')) return '<span class="pos-badge pos-badge-goalie">Goalie</span>';
+  if (lower.includes('offense')) return '<span class="pos-badge pos-badge-offense">Offense</span>';
+  if (lower.includes('defense')) return '<span class="pos-badge pos-badge-defense">Defense</span>';
+  return '';
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
   const players = rows.map((row) => {
     const cells = [...row.children];
     const name = cells[0]?.textContent?.trim() || '';
     const note = cells[1]?.textContent?.trim() || '';
-    return { name, pp: note.toLowerCase().includes('practice') };
+    return { name, note };
   }).filter((p) => p.name);
 
   block.innerHTML = `
@@ -19,7 +28,7 @@ export default function decorate(block) {
         <div class="player-card">
           <div class="player-icon">${getInitials(p.name)}</div>
           <h3>${p.name}</h3>
-          ${p.pp ? '<span class="pp-badge">Practice Player</span>' : ''}
+          ${getBadge(p.note)}
         </div>
       `).join('')}
     </div>
