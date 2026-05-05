@@ -31,7 +31,26 @@ function renderRows(games) {
 }
 
 export default function decorate(block) {
-  const { w, l, t, gf, ga } = { w: 16, l: 13, t: 3, gf: 163, ga: 127 };
+  // Read games from DA table, fall back to GAMES from scripts.js
+  const daRows = [...block.querySelectorAll('tr')].slice(1).filter(r => r.cells[0]?.innerText?.trim());
+  const games = daRows.length
+    ? daRows.map(r => ({
+        date:   r.cells[0]?.innerText?.trim() || '',
+        opp:    r.cells[1]?.innerText?.trim() || '',
+        loc:    r.cells[2]?.innerText?.trim() || '',
+        score:  r.cells[3]?.innerText?.trim() || '',
+        result: r.cells[4]?.innerText?.trim() || '',
+        color:  r.cells[5]?.innerText?.trim() || '#041E42',
+        logoId: r.cells[6]?.innerText?.trim() || '',
+      })).filter(g => g.opp)
+    : GAMES;
+
+  // Compute record from games
+  const w = games.filter(g => g.result === 'W').length;
+  const l = games.filter(g => g.result === 'L').length;
+  const t = games.filter(g => g.result === 'T').length;
+  const gf = games.reduce((s, g) => s + (parseInt(g.score?.split(/[-–]/)[0]) || 0), 0);
+  const ga = games.reduce((s, g) => s + (parseInt(g.score?.split(/[-–]/)[1]) || 0), 0);
 
   block.innerHTML = `
     <div class="schedule-summary">
@@ -61,13 +80,12 @@ export default function decorate(block) {
         <span>Score</span>
         <span>Result</span>
       </div>
-      <div class="sg-rows">${renderRows(GAMES)}</div>
+      <div class="sg-rows">${renderRows(games)}</div>
     </div>
 
     <p class="schedule-src">2024&ndash;2025 season results &bull; Source: <a href="https://myhockeyrankings.com/team-info?t=19306&y=2025" target="_blank">MyHockeyRankings.com</a></p>
   `;
 
-  // Filter buttons
   block.querySelectorAll('.filter-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       block.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
