@@ -1,65 +1,63 @@
 export default function decorate(block) {
-  // Read tiers from DA table rows, fall back to defaults
-  const daRows = [...block.querySelectorAll('tr')].slice(1).filter(r => r.cells[0]?.innerText?.trim());
-  const tiers = daRows.length
-    ? daRows.map(r => ({
-        label:    r.cells[0]?.innerText?.trim() || '',
-        price:    r.cells[1]?.innerText?.trim() || '',
-        cls:      (r.cells[0]?.innerText?.trim() || '').toLowerCase().split(' ')[0],
-        benefits: [...r.cells].slice(2).map(c => c.innerText.trim()).filter(Boolean),
-      })).filter(t => t.label)
-    : [
-        { label: 'Gold Sponsor',   price: '$1,000+', cls: 'gold',   benefits: ['Large logo on team jerseys', 'Banner at all home games', 'Website logo placement', 'Social media shoutouts'] },
-        { label: 'Silver Sponsor', price: '$500',    cls: 'silver', benefits: ['Logo on warm-up jerseys', 'Website listing', 'Social media mentions'] },
-        { label: 'Bronze Sponsor', price: '$250',    cls: 'bronze', benefits: ['Website listing', 'Social media mention'] },
-      ];
+  const BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/images/';
+  const sponsors = [
+    'C5C5C820-D330-47DF-9084-222C832B51BC.png',
+    'IMG_4278.jpg',
+    'IMG_4390.jpg',
+    'wiz.png',
+  ];
 
   block.innerHTML = `
-    <div class="sponsor-tiers">
-      ${tiers.map(t => `
-        <div class="sp-tier ${t.cls}">
-          <div class="sp-tier-label">${t.label}</div>
-          <div class="sp-price">${t.price}</div>
-          <ul class="sp-benefits">
-            ${t.benefits.map(b => `<li>${b}</li>`).join('')}
-          </ul>
+    <div class="sp-header">
+      <h1 class="sp-title">Our Sponsors</h1>
+      <p class="sp-subtitle">Thank you to our proud 2026&ndash;2027 season sponsors for supporting Rinx Hockey Club 10U Squirts.</p>
+    </div>
+
+    <div class="sp-logos">
+      ${sponsors.map((img) => `
+        <div class="sp-card">
+          <img src="${BASE}${img}" alt="Sponsor" onerror="this.closest('.sp-card').style.display='none'">
         </div>
       `).join('')}
     </div>
 
-    <div class="sponsor-form-wrap">
-      <h3>Become a Sponsor</h3>
-      <p>Fill out the form below and we&apos;ll reach out within 48 hours.</p>
-      <div class="form-row">
-        <div class="form-group"><label>Business Name *</label><input type="text" id="s-biz" placeholder="Your company name"></div>
-        <div class="form-group"><label>Contact Name *</label><input type="text" id="s-contact" placeholder="Your name"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Email *</label><input type="email" id="s-email" placeholder="email@example.com"></div>
-        <div class="form-group"><label>Phone</label><input type="tel" id="s-phone" placeholder="(631) 000-0000"></div>
-      </div>
-      <div class="form-group">
-        <label>Sponsorship Level *</label>
-        <select id="s-tier">
-          <option value="">Select a tier...</option>
-          ${tiers.map(t => `<option>${t.label} (${t.price})</option>`).join('')}
-          <option>Custom Amount</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Comments</label><textarea id="s-notes" placeholder="Tell us about your business..."></textarea></div>
-      <button class="btn btn-primary" id="sp-submit">Submit Sponsorship Request</button>
-      <div class="form-success" id="sp-ok">✅ Thank you! Your sponsorship request has been submitted. We&apos;ll be in touch within 48 hours.</div>
+    <div class="sp-form-section">
+      <h2 class="sp-form-title">Interested in Sponsoring?</h2>
+      <p class="sp-form-desc">Join our growing family of sponsors and support youth hockey on Long Island. Contact us below and we'll be in touch with sponsorship details.</p>
+      <form class="sp-form" id="sp-form">
+        <div class="sp-form-row">
+          <div class="sp-field">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="sp-field">
+            <label>Company</label>
+            <input type="text" name="company" placeholder="Company name">
+          </div>
+        </div>
+        <div class="sp-form-row">
+          <div class="sp-field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="sp-field">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="(555) 000-0000">
+          </div>
+        </div>
+        <div class="sp-field">
+          <label>Message</label>
+          <textarea name="message" rows="4" placeholder="Tell us about your sponsorship interest..."></textarea>
+        </div>
+        <button type="submit" class="sp-submit">Send Inquiry</button>
+        <p class="sp-success" id="sp-success" style="display:none">&#10003; Thanks! We'll be in touch soon.</p>
+      </form>
     </div>
   `;
 
-  block.querySelector('#sp-submit').addEventListener('click', () => {
-    const biz     = block.querySelector('#s-biz').value.trim();
-    const contact = block.querySelector('#s-contact').value.trim();
-    const email   = block.querySelector('#s-email').value.trim();
-    const tier    = block.querySelector('#s-tier').value;
-    if (!biz || !contact || !email || !tier) { alert('Please fill in all required fields.'); return; }
-    block.querySelector('#sp-ok').style.display = 'block';
-    ['#s-biz','#s-contact','#s-email','#s-phone','#s-notes'].forEach(id => { block.querySelector(id).value = ''; });
-    block.querySelector('#s-tier').selectedIndex = 0;
+  block.querySelector('#sp-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    block.querySelector('#sp-success').style.display = 'block';
   });
 }
