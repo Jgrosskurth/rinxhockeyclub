@@ -25,7 +25,7 @@ export default function decorate(block) {
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
         <a href="/contact">Contact</a>
-        <a href="${RINX.shopUrl}" target="_blank" class="nav-shop">🛒 Shop Gear</a>
+        <a href="${RINX.shopUrl}" target="_blank" class="nav-shop"><img src="/icons/cart.svg" alt="" class="cart-icon"> Shop Gear</a>
       </nav>
     </div>
   `;
