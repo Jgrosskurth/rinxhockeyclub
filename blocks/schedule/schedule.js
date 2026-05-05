@@ -1,3 +1,38 @@
+const MHR_CDN = 'https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/';
+
+const TEAM_LOGOS = {
+  aviators: '001dfe',
+  kings: '001ba2',
+  'north park': '002ee8',
+  'great neck': '001934',
+  arrows: '0013c6',
+  lions: '00017d',
+  lightning: '0004c5',
+  sharks: '000bd3',
+  edge: '000723',
+  hawks: '000f90',
+  cyclones: '001589',
+  tigers: '00075f',
+  express: '001f15',
+  wildcats: '00153e',
+  vipers: '00000b',
+  panthers: '001d53',
+  predators: '00133e',
+  blues: '00018b',
+  'ice devils': '0014fd',
+  royals: '001dfe',
+  skyliners: '001589',
+};
+
+function findLogoId(oppName) {
+  const lower = oppName.toLowerCase();
+  const keys = Object.keys(TEAM_LOGOS);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (lower.includes(keys[i])) return TEAM_LOGOS[keys[i]];
+  }
+  return '';
+}
+
 function renderRows(games) {
   return games.map((g) => {
     const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
@@ -6,11 +41,16 @@ function renderRows(games) {
     let badge = 'tie';
     if (g.result === 'W') badge = 'win';
     else if (g.result === 'L') badge = 'loss';
+    const logoId = findLogoId(g.opp);
+    const logoImg = logoId
+      ? `<img class="sg-logo" src="${MHR_CDN}${logoId}_a.png" alt="${g.opp}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
     return `
     <div class="sg-row" data-result="${g.result}">
       <div class="sg-date">${g.date}</div>
       <div class="sg-opp">
-        <div class="sg-logo-fb">${ini}</div>
+        ${logoImg}
+        <div class="sg-logo-fb"${logoId ? ' style="display:none"' : ''}>${ini}</div>
         <div>
           <div class="sg-name">${g.opp}</div>
           <div class="sg-loc">${g.loc}</div>

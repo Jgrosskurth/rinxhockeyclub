@@ -1,3 +1,38 @@
+const MHR_CDN = 'https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/';
+
+const TEAM_LOGOS = {
+  aviators: '001dfe',
+  kings: '001ba2',
+  'north park': '002ee8',
+  'great neck': '001934',
+  arrows: '0013c6',
+  lions: '00017d',
+  lightning: '0004c5',
+  sharks: '000bd3',
+  edge: '000723',
+  hawks: '000f90',
+  cyclones: '001589',
+  tigers: '00075f',
+  express: '001f15',
+  wildcats: '00153e',
+  vipers: '00000b',
+  panthers: '001d53',
+  predators: '00133e',
+  blues: '00018b',
+  'ice devils': '0014fd',
+  royals: '001dfe',
+  skyliners: '001589',
+};
+
+function findLogoId(oppName) {
+  const lower = oppName.toLowerCase();
+  const keys = Object.keys(TEAM_LOGOS);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (lower.includes(keys[i])) return TEAM_LOGOS[keys[i]];
+  }
+  return '';
+}
+
 export default async function decorate(block) {
   block.innerHTML = '<div class="rr-loading"><div class="spinner"></div></div>';
 
@@ -33,11 +68,16 @@ export default async function decorate(block) {
     let badge = 'rr-tie';
     if (g.result === 'W') badge = 'rr-win';
     else if (g.result === 'L') badge = 'rr-loss';
+    const logoId = findLogoId(g.opp);
+    const logoImg = logoId
+      ? `<img class="rr-logo-img" src="${MHR_CDN}${logoId}_a.png" alt="${g.opp}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
     return `
             <div class="rr-card" data-result="${g.result}">
               <div class="rr-date">${g.date}</div>
               <div class="rr-team">
-                <div class="rr-logo">${ini}</div>
+                ${logoImg}
+                <div class="rr-logo"${logoId ? ' style="display:none"' : ''}>${ini}</div>
                 <div class="rr-info">
                   <div class="rr-opp">${g.opp}</div>
                   <div class="rr-loc">${g.loc}</div>
