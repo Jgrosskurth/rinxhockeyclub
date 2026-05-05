@@ -52,12 +52,16 @@ export default function decorate(block) {
     const first = block.querySelector('#c-first').value.trim();
     const last = block.querySelector('#c-last').value.trim();
     const cemail = block.querySelector('#c-email').value.trim();
+    const subj = block.querySelector('#c-subject').value;
     const msg = block.querySelector('#c-msg').value.trim();
     if (!first || !last || !cemail || !msg) {
       // eslint-disable-next-line no-alert
       alert('Please fill in all required fields.');
       return;
     }
+    const subject = `${subj} - ${first} ${last}`;
+    const body = `From: ${first} ${last}\nEmail: ${cemail}\nSubject: ${subj}\n\n${msg}`;
+    window.open(`mailto:info@therinx.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');
     block.querySelector('#c-ok').style.display = 'block';
     ['#c-first', '#c-last', '#c-email', '#c-msg'].forEach((id) => { block.querySelector(id).value = ''; });
   });

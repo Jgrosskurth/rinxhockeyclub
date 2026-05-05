@@ -54,6 +54,11 @@ export default function decorate(block) {
 
   block.querySelector('#sp-form').addEventListener('submit', (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    fetch('mailto:info@therinx.com');
+    const subject = `Sponsorship Inquiry from ${formData.get('name') || 'Website'}`;
+    const body = `Name: ${formData.get('name')}\nCompany: ${formData.get('company')}\nEmail: ${formData.get('email')}\nPhone: ${formData.get('phone')}\nMessage: ${formData.get('message')}`;
+    window.open(`mailto:info@therinx.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');
     e.target.style.display = 'none';
     block.querySelector('#sp-success').style.display = 'block';
   });

@@ -117,6 +117,9 @@ export default function decorate(block) {
       alert('Please fill in all required fields.');
       return;
     }
+    const subject = `Private Session Request - ${child}`;
+    const body = `Parent: ${name}\nChild: ${child}\nEmail: ${email}\nPhone: ${phone}\nAge: ${age}\nLevel: ${level}\nSkill Focus: ${skill.value}\nNotes: ${block.querySelector('#ps-notes').value}`;
+    window.open(`mailto:info@therinx.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');
     block.querySelector('#ps-ok').style.display = 'block';
     ['#ps-name', '#ps-child', '#ps-email', '#ps-phone', '#ps-notes'].forEach((id) => { block.querySelector(id).value = ''; });
     ['#ps-age', '#ps-level'].forEach((id) => { block.querySelector(id).selectedIndex = 0; });
