@@ -5,7 +5,7 @@ export default function decorate(block) {
   const gp = record.w + record.l + record.t;
 
   block.innerHTML = `
-    <div class="hero-bg">
+    <div class="hero-inner">
       <svg class="hero-rink" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
           <radialGradient id="rinkG" cx="50%" cy="50%" r="70%">
@@ -26,40 +26,35 @@ export default function decorate(block) {
         <circle cx="920" cy="380" r="70" fill="none" stroke="#C8102E" stroke-width="3" opacity="0.35"/>
         <rect width="1200" height="560" fill="#041E42" opacity="0.88"/>
       </svg>
-      <div class="hero-overlay"></div>
-    </div>
-
-    <div class="hero-content">
-      <img src="${RINX.logoUrl}" alt="Rinx Hockey Club" class="hero-logo"
-           onerror="this.style.display='none'">
-      <span class="hero-badge">2026&ndash;2027 Season</span>
-      <h1>Rinx <span>Hockey</span><br>Club &bull; 10U</h1>
-      <p>Tier III/A Travel Hockey &bull; Hauppauge, New York</p>
-
-      <div class="hero-record-strip">
-        <div class="hero-stat">
-          <span class="hero-stat-num red">${record.w}&ndash;${record.l}&ndash;${record.t}</span>
-          <span class="hero-stat-lbl">W&ndash;L&ndash;T</span>
+      <div class="hero-content">
+        <img src="${RINX.logoUrl}" alt="Rinx Hockey Club" class="hero-logo" onerror="this.style.display='none'">
+        <span class="hero-badge">2026&ndash;2027 Season</span>
+        <h1>Rinx <span>Hockey</span><br>Club &bull; 10U</h1>
+        <p>Tier III/A Travel Hockey &bull; Hauppauge, New York</p>
+        <div class="hero-record-strip">
+          <div class="hero-stat">
+            <span class="hero-stat-num red">${record.w}&ndash;${record.l}&ndash;${record.t}</span>
+            <span class="hero-stat-lbl">W&ndash;L&ndash;T</span>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">${record.gf}&ndash;${record.ga}</span>
+            <span class="hero-stat-lbl">GF&ndash;GA</span>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num red">${record.rating}</span>
+            <span class="hero-stat-lbl">MHR Rating</span>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">${gp}</span>
+            <span class="hero-stat-lbl">Games Played</span>
+          </div>
         </div>
-        <div class="hero-divider"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-num">${record.gf}&ndash;${record.ga}</span>
-          <span class="hero-stat-lbl">GF&ndash;GA</span>
-        </div>
-        <div class="hero-divider"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-num red">${record.rating}</span>
-          <span class="hero-stat-lbl">MHR Rating</span>
-        </div>
-        <div class="hero-divider"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-num">${gp}</span>
-          <span class="hero-stat-lbl">Games Played</span>
-        </div>
+        <p class="hero-src"><a href="${RINX.mhrUrl}" target="_blank">MyHockeyRankings.com</a></p>
       </div>
-      <p class="hero-src"><a href="${RINX.mhrUrl}" target="_blank">MyHockeyRankings.com</a></p>
+      <div class="hero-stripe"></div>
     </div>
-
-    <div class="hero-stripe"></div>
   `;
 }
