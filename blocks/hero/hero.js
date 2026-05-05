@@ -1,10 +1,7 @@
 export default function decorate(block) {
   const row = block.children[0];
   const cell = row?.children[0];
-  const h1 = cell?.querySelector('h1');
   const paragraphs = [...(cell?.querySelectorAll('p') || [])];
-
-  const title = h1?.innerHTML || 'Rinx Hockey Club';
   const subtitle = paragraphs[0]?.textContent || '';
   const season = paragraphs[1]?.textContent || '';
   const record = paragraphs[2]?.textContent || '';
