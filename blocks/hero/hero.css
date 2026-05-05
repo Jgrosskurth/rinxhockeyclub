@@ -6,40 +6,44 @@
 }
 
 .hero.block {
-  position: relative !important;
-  min-height: 560px !important;
-  overflow: hidden !important;
-  background: #041E42 !important;
   padding: 0 !important;
   margin: 0 !important;
   width: 100% !important;
   max-width: 100% !important;
+  display: block !important;
 }
 
 .hero.block > div,
 .hero.block > div > div {
-  display: block !important;
-  width: 100% !important;
   padding: 0 !important;
   margin: 0 !important;
-  position: static !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
 }
 
-.hero-bg {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
+/* Single container — SVG and content both inside */
+.hero-inner {
+  position: relative !important;
+  min-height: 560px !important;
+  overflow: hidden !important;
+  background: #041E42 !important;
+  width: 100% !important;
+  display: block !important;
 }
 
+/* SVG fills the container */
 .hero-rink {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
   display: block !important;
+  z-index: 0 !important;
 }
 
-.hero-overlay { display: none !important; }
-
+/* Content sits over SVG */
 .hero-content {
   position: relative !important;
   z-index: 2 !important;
@@ -85,7 +89,6 @@
   text-transform: uppercase !important;
   line-height: .95 !important;
   margin: 0 0 16px !important;
-  padding: 0 !important;
   text-align: center !important;
   display: block !important;
 }
@@ -132,28 +135,26 @@
   white-space: nowrap !important;
   display: block !important;
   text-transform: none !important;
-  letter-spacing: 0 !important;
 }
 .hero-stat-num.red { color: #C8102E !important; }
 
 .hero-stat-lbl {
-  font-family: 'Barlow Condensed',sans-serif !important;
   font-size: .62rem !important;
-  font-weight: 600 !important;
   color: rgba(255,255,255,.5) !important;
   text-transform: uppercase !important;
   letter-spacing: .1em !important;
   margin-top: 4px !important;
   white-space: nowrap !important;
   display: block !important;
+  font-weight: 600 !important;
 }
 
 .hero-divider {
   width: 1px !important;
   min-width: 1px !important;
-  flex-shrink: 0 !important;
   background: rgba(255,255,255,.2) !important;
   align-self: stretch !important;
+  flex-shrink: 0 !important;
   display: block !important;
 }
 
@@ -165,10 +166,7 @@
   font-weight: 400 !important;
   text-align: center !important;
 }
-.hero-src a {
-  color: rgba(255,255,255,.4) !important;
-  text-decoration: none !important;
-}
+.hero-src a { color: rgba(255,255,255,.4) !important; text-decoration: none !important; }
 
 .hero-stripe {
   position: absolute !important;
