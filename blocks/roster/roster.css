@@ -97,10 +97,10 @@
   .coaches-grid { grid-template-columns: 1fr; }
 }
 
-.coach-photo {
-  width: 44px !important;
-  height: 44px !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
-  flex-shrink: 0 !important;
+/* Coach card text — white on navy background */
+.roster-coaches .coach-info h4 {
+  color: #ffffff !important;
+}
+.roster-coaches .coach-info p {
+  color: rgba(255,255,255,0.7) !important;
 }
