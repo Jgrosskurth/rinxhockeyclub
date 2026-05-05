@@ -16,7 +16,6 @@
   max-width: 100% !important;
 }
 
-/* AEM wrapper divs — block, full width, no padding */
 .hero.block > div,
 .hero.block > div > div {
   display: block !important;
@@ -26,7 +25,6 @@
   position: static !important;
 }
 
-/* Background fills block */
 .hero-bg {
   position: absolute !important;
   inset: 0 !important;
@@ -42,7 +40,6 @@
 
 .hero-overlay { display: none !important; }
 
-/* Content centered over background */
 .hero-content {
   position: relative !important;
   z-index: 2 !important;
@@ -53,7 +50,6 @@
   display: block !important;
 }
 
-/* Logo */
 .hero-logo {
   width: 140px !important;
   height: 140px !important;
@@ -67,7 +63,6 @@
   0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}
 }
 
-/* Badge */
 .hero-badge {
   display: inline-block !important;
   background: #C8102E !important;
@@ -82,7 +77,6 @@
   margin-bottom: 20px !important;
 }
 
-/* Heading */
 .hero.block h1 {
   font-family: 'Barlow Condensed',sans-serif !important;
   font-weight: 900 !important;
@@ -97,7 +91,6 @@
 }
 .hero.block h1 span { color: #C8102E !important; }
 
-/* Subtitle */
 .hero-content > p:not(.hero-src) {
   color: rgba(255,255,255,.8) !important;
   font-size: 1.1rem !important;
@@ -108,7 +101,6 @@
   display: block !important;
 }
 
-/* Stat strip — inline-flex row, auto width so it stays compact */
 .hero-record-strip {
   display: inline-flex !important;
   flex-direction: row !important;
@@ -119,12 +111,10 @@
   border-radius: 8px !important;
   overflow: hidden !important;
   width: auto !important;
-  max-width: 560px !important;
 }
 
-/* Each stat cell — column layout (num on top, label below) */
 .hero-stat {
-  display: inline-flex !important;
+  display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
@@ -142,6 +132,7 @@
   white-space: nowrap !important;
   display: block !important;
   text-transform: none !important;
+  letter-spacing: 0 !important;
 }
 .hero-stat-num.red { color: #C8102E !important; }
 
@@ -157,7 +148,6 @@
   display: block !important;
 }
 
-/* Divider between stats */
 .hero-divider {
   width: 1px !important;
   min-width: 1px !important;
@@ -167,7 +157,6 @@
   display: block !important;
 }
 
-/* MHR link */
 .hero-src {
   display: block !important;
   margin-top: 14px !important;
@@ -181,7 +170,6 @@
   text-decoration: none !important;
 }
 
-/* Bottom stripe */
 .hero-stripe {
   position: absolute !important;
   bottom: 0 !important;
