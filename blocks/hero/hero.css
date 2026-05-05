@@ -1,6 +1,5 @@
-/* ── Hero block ─────────────────────────────────────── */
+/* ── Hero block ── */
 
-/* Break out of AEM section container to full viewport width */
 .section:has(.hero.block),
 .section:has(div[data-block-name="hero"]) {
   padding: 0 !important;
@@ -20,22 +19,30 @@ div[data-block-name="hero"] {
   background: #041E42 !important;
   padding: 0 !important;
   margin: 0 !important;
+}
+
+/* AEM wrapper divs — transparent pass-throughs only */
+.hero.block > div,
+.block.hero > div,
+div[data-block-name="hero"] > div {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
   display: block !important;
 }
 
-/* Strip all AEM wrapper div styling */
-.hero.block > div,
-.block.hero > div,
-div[data-block-name="hero"] > div,
 .hero.block > div > div,
 .block.hero > div > div,
 div[data-block-name="hero"] > div > div {
-  all: unset !important;
-  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
   width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
 }
 
-/* Rink SVG — fills full block */
+/* Rink SVG */
 .hero-rink {
   position: absolute !important;
   top: 0 !important;
@@ -46,7 +53,7 @@ div[data-block-name="hero"] > div > div {
   display: block !important;
 }
 
-/* Content — centered over SVG */
+/* Hero content — centered */
 .hero-content {
   position: relative !important;
   z-index: 2 !important;
@@ -73,7 +80,7 @@ div[data-block-name="hero"] > div > div {
   50% { transform: translateY(-8px); }
 }
 
-/* Season badge */
+/* Badge */
 .hero-badge {
   display: inline-block !important;
   background: #C8102E !important;
@@ -88,7 +95,7 @@ div[data-block-name="hero"] > div > div {
   margin-bottom: 20px !important;
 }
 
-/* Main title */
+/* Title */
 .hero.block h1, .hero.block h2,
 .block.hero h1, .block.hero h2,
 div[data-block-name="hero"] h1,
@@ -102,7 +109,6 @@ div[data-block-name="hero"] h2 {
   margin: 0 0 16px 0 !important;
   padding: 0 !important;
   text-align: center !important;
-  letter-spacing: 0.02em !important;
 }
 
 .hero.block h1 span, .hero.block h2 span,
@@ -116,7 +122,6 @@ div[data-block-name="hero"] h2 span {
 .hero-content > p:not(.hero-src) {
   color: rgba(255,255,255,0.8) !important;
   font-size: 1.1rem !important;
-  font-family: 'Barlow', sans-serif !important;
   font-weight: 400 !important;
   text-transform: none !important;
   margin: 0 auto 24px auto !important;
@@ -124,7 +129,7 @@ div[data-block-name="hero"] h2 span {
   display: block !important;
 }
 
-/* Stat strip — compact, centered inline */
+/* Stat strip — key: width:auto so it doesn't stretch */
 .hero-record-strip,
 .hero-strip {
   display: inline-flex !important;
@@ -132,16 +137,16 @@ div[data-block-name="hero"] h2 span {
   background: rgba(255,255,255,0.1) !important;
   border: 1px solid rgba(255,255,255,0.2) !important;
   border-radius: 8px !important;
-  overflow: visible !important;
-  margin: 8px auto 0 auto !important;
+  overflow: hidden !important;
   width: auto !important;
-  max-width: none !important;
+  max-width: 100% !important;
+  margin: 8px 0 0 0 !important;
 }
 
 .hero-stat, .hs-block, .rec-block {
   padding: 14px 24px !important;
   text-align: center !important;
-  display: inline-block !important;
+  display: table-cell !important;
   width: auto !important;
 }
 
@@ -153,12 +158,9 @@ div[data-block-name="hero"] h2 span {
   line-height: 1 !important;
   display: block !important;
   white-space: nowrap !important;
-  text-transform: none !important;
 }
 
-.hero-stat-num.red, .hs-num.red, .rec-num.red {
-  color: #C8102E !important;
-}
+.hero-stat-num.red, .hs-num.red, .rec-num.red { color: #C8102E !important; }
 
 .hero-stat-lbl, .hs-lbl, .rec-lbl {
   font-size: 0.62rem !important;
@@ -169,15 +171,13 @@ div[data-block-name="hero"] h2 span {
   display: block !important;
   white-space: nowrap !important;
   font-weight: 400 !important;
-  font-family: 'Barlow Condensed', sans-serif !important;
 }
 
 .hero-divider, .hs-div, .rec-divider {
   width: 1px !important;
-  min-width: 1px !important;
   background: rgba(255,255,255,0.2) !important;
   align-self: stretch !important;
-  display: inline-block !important;
+  flex-shrink: 0 !important;
 }
 
 /* MHR link */
@@ -193,7 +193,6 @@ div[data-block-name="hero"] h2 span {
 .hero-src a, .rec-src a {
   color: rgba(255,255,255,0.45) !important;
   text-decoration: none !important;
-  font-family: 'Barlow', sans-serif !important;
 }
 
 /* Bottom stripe */
@@ -211,6 +210,6 @@ div[data-block-name="hero"] h2 span {
 @media (max-width: 900px) {
   .hero-content { padding: 40px 20px !important; }
   .hero-logo { width: 90px !important; height: 90px !important; }
-  .hero-record-strip, .hero-strip { flex-wrap: wrap !important; }
-  .hero-stat, .hs-block, .rec-block { padding: 10px 14px !important; }
+  .hero-record-strip, .hero-strip { flex-wrap: wrap !important; justify-content: center !important; }
+  .hero-stat, .hs-block, .rec-block { padding: 10px 14px !important; display: inline-block !important; }
 }
