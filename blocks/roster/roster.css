@@ -77,13 +77,13 @@
 }
 
 .pos-badge-goalie {
-  background: var(--color-navy);
+  background: #16a34a;
   color: var(--color-white);
 }
 
 .pos-badge-offense {
-  background: #dbeafe;
-  color: var(--color-navy);
+  background: var(--color-navy);
+  color: var(--color-white);
 }
 
 .pos-badge-defense {
