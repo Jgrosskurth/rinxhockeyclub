@@ -5,9 +5,7 @@ function getInitials(name) {
 }
 
 export default function decorate(block) {
-  // AEM converts DA tables to div rows: block > div(row) > div(cell)
-  // Row 0 = block name ("Roster"), Row 1 = column headers, Row 2+ = player data
-  const rows = [...block.children].slice(2); // skip block name row + header row
+  const rows = [...block.children].slice(2);
 
   const players = rows.length
     ? rows.map((row) => {
@@ -15,11 +13,10 @@ export default function decorate(block) {
         return {
           num:  cells[0]?.innerText?.trim() || '',
           name: cells[1]?.innerText?.trim() || '',
-          pos:  cells[2]?.innerText?.trim() || '',
           pp:   (cells[3]?.innerText?.trim() || '').toLowerCase() === 'yes',
         };
       }).filter((p) => p.name)
-    : PLAYERS.map((p) => ({ num: '', name: p.name, pos: '', pp: p.pp }));
+    : PLAYERS.map((p) => ({ num: '', name: p.name, pp: p.pp }));
 
   block.innerHTML = `
     <div class="roster-grid">
@@ -27,7 +24,6 @@ export default function decorate(block) {
         <div class="player-card">
           <div class="player-icon">${getInitials(p.name)}</div>
           <h3>${p.name}</h3>
-          <p class="player-pos">${p.pos || 'Forward / Defense'}</p>
           ${p.pp ? '<span class="pp-badge">Practice Player</span>' : ''}
         </div>
       `).join('')}
