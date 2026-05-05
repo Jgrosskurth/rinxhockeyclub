@@ -81,6 +81,7 @@ export const GAMES = [
   { date: 'May 4, 2025',  opp: 'North Park 10U A1',         loc: 'City Ice Pavilion, NYC',    score: '2–4', result: 'L', color: '#1a1a5e', logoId: '002ee8' },
 ];
 
+// Expose for delayed.js
 window.RINX_DATA = RINX;
 window.GAMES_DATA = GAMES;
 
