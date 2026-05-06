@@ -17,21 +17,21 @@ export default function decorate(block) {
       <nav class="header-nav" id="header-nav">
         <a href="/">Home</a>
         <div class="nav-dropdown">
-          <a href="/roster" class="nav-dropdown-toggle">Roster</a>
+          <button class="nav-dropdown-toggle">Roster <span class="nav-plus">+</span></button>
           <div class="nav-dropdown-menu">
             <a href="/roster">10U Squirts</a>
             <a href="/roster-14u">14U Bantam</a>
           </div>
         </div>
         <div class="nav-dropdown">
-          <a href="/schedule" class="nav-dropdown-toggle">Schedule</a>
+          <button class="nav-dropdown-toggle">Schedule <span class="nav-plus">+</span></button>
           <div class="nav-dropdown-menu">
             <a href="/schedule">10U Squirts</a>
             <a href="/schedule-14u">14U Bantam</a>
           </div>
         </div>
         <div class="nav-dropdown">
-          <a href="/stats" class="nav-dropdown-toggle">Stats</a>
+          <button class="nav-dropdown-toggle">Stats <span class="nav-plus">+</span></button>
           <div class="nav-dropdown-menu">
             <a href="/stats">10U Squirts</a>
             <a href="/stats-14u">14U Bantam</a>
@@ -56,13 +56,14 @@ export default function decorate(block) {
     if (href === path || (path === '' && href === '/')) a.classList.add('active');
   });
 
-  // Mobile dropdown toggles
+  // Dropdown toggles
   block.querySelectorAll('.nav-dropdown-toggle').forEach((toggle) => {
-    toggle.addEventListener('click', (e) => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-        toggle.closest('.nav-dropdown').classList.toggle('open');
-      }
+    toggle.addEventListener('click', () => {
+      const dropdown = toggle.closest('.nav-dropdown');
+      const wasOpen = dropdown.classList.contains('open');
+      // Close all other dropdowns
+      block.querySelectorAll('.nav-dropdown').forEach((d) => d.classList.remove('open'));
+      if (!wasOpen) dropdown.classList.add('open');
     });
   });
 }
