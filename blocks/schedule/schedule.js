@@ -22,6 +22,23 @@ const TEAM_LOGOS = {
   'ice devils': '0014fd',
   royals: '001dfe',
   skyliners: '001589',
+  rebels: '000723',
+  'red wings': '001589',
+  wolfpack: '000f90',
+  phantoms: '001ba2',
+  mustangs: '00075f',
+  bears: '000f90',
+  wizards: '00153e',
+  wolves: '000bd3',
+  flames: '001589',
+  outlaws: '001d53',
+  whalers: '001ba2',
+  capitals: '001dfe',
+  ramparts: '00133e',
+  storm: '0004c5',
+  admirals: '00018b',
+  advantage: '001f15',
+  'sound tigers': '001ba2',
 };
 
 function findLogoId(oppName) {
