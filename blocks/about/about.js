@@ -1,7 +1,7 @@
 const TEAM_PHOTOS = [
   '/images/r1.JPG',
   '/images/4D0F41DF-57C2-45F0-A459-86825254D41B.JPG',
-  '/images/r3.JPG',
+  '/images/14u.jpg',
 ];
 
 export default function decorate(block) {
