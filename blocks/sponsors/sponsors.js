@@ -34,6 +34,7 @@ export default function decorate(block) {
     <div class="sp-grid">
       ${sponsors.map((s) => `
         <div class="sp-card">
+          <div class="sp-badge">Sponsor</div>
           ${s.img ? `<div class="sp-card-logo"><img src="${s.img}" alt="${s.name}" onerror="this.style.display='none'"></div>` : ''}
           <div class="sp-card-info">
             ${s.name ? `<h3 class="sp-card-name">${s.name}</h3>` : ''}
