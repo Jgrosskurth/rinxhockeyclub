@@ -60,7 +60,7 @@
   margin-bottom: 0;
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .about {
     padding: 40px 20px;
   }

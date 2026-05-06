@@ -60,7 +60,7 @@ label {
   display: none;
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .form-row {
     grid-template-columns: 1fr;
   }

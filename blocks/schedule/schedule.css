@@ -184,7 +184,7 @@
   color: var(--color-red);
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .schedule-summary {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -195,7 +195,7 @@
   }
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
   .schedule-summary {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -305,7 +305,7 @@
   color: var(--color-navy) !important;
 }
 
-@media (width <= 768px) {
+@media (max-width: 768px) {
   .schedule-block .sg-header,
   .schedule.block .sg-header,
   .schedule-block .sg-row,

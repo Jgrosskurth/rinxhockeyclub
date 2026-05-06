@@ -121,7 +121,7 @@
   border-radius: 2px;
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .header-inner { padding: 12px 20px; }
 
   .hamburger { display: flex; }
@@ -148,7 +148,7 @@
   }
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
   .header-inner { padding: 10px 12px; }
 
   .header-logo img {

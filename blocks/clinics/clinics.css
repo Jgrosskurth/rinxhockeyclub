@@ -239,7 +239,7 @@
   color: white;
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .clinics-grid {
     grid-template-columns: 1fr;
   }
@@ -249,7 +249,7 @@
   }
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
   .clinic-header {
     padding: 20px;
   }

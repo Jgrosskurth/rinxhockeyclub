@@ -48,7 +48,7 @@
   text-decoration: underline;
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .cards-grid {
     grid-template-columns: 1fr;
   }

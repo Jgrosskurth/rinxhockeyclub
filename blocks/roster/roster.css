@@ -147,7 +147,7 @@
   color: rgb(255 255 255 / 65%);
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .coaches-grid { grid-template-columns: 1fr; }
 }
 

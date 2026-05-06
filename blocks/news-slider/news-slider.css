@@ -110,7 +110,7 @@
   background: var(--color-red);
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .slide-card {
     flex: 0 0 calc(88% - 8px);
   }

@@ -128,7 +128,7 @@
   text-decoration: underline;
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .t-grid {
     grid-template-columns: 1fr;
     padding: 40px 20px;

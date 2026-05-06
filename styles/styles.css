@@ -313,7 +313,7 @@ img {
 }
 
 /* Responsive — tablet */
-@media (width <= 900px) {
+@media (max-width: 900px) {
   :root {
     --section-padding: 32px 20px;
   }
@@ -333,7 +333,7 @@ img {
 }
 
 /* Responsive — phone */
-@media (width <= 600px) {
+@media (max-width: 600px) {
   :root {
     --section-padding: 24px 16px;
     --heading-font-size-xxl: 2rem;

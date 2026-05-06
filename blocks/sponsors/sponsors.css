@@ -180,7 +180,7 @@
   margin-top: 12px;
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .sp-grid {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
@@ -195,7 +195,7 @@
   }
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
   .sp-grid {
     grid-template-columns: 1fr;
   }
