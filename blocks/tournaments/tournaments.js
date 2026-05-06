@@ -1,4 +1,4 @@
-const TOURNAMENTS = [
+const FALLBACK_TOURNAMENTS = [
   {
     logo: '/images/lobstahfest.png',
     name: 'Lobstah Fest 2026',
@@ -32,6 +32,25 @@ const TOURNAMENTS = [
 ];
 
 export default function decorate(block) {
+  const rows = [...block.children];
+  let tournaments = rows.map((row) => {
+    const cells = [...row.children];
+    if (cells.length < 3) return null;
+    const logoImg = cells[0]?.querySelector('img');
+    return {
+      logo: logoImg?.src || '',
+      name: cells[1]?.textContent?.trim() || '',
+      date: cells[2]?.textContent?.trim() || '',
+      loc: cells[3]?.textContent?.trim() || '',
+      format: cells[4]?.textContent?.trim() || '',
+      link: cells[5]?.querySelector('a')?.href || cells[5]?.textContent?.trim() || '',
+      status: (cells[6]?.textContent?.trim() || 'Upcoming').toLowerCase().replace(/\s+/g, '-'),
+      ages: cells[7]?.textContent?.trim() || '',
+    };
+  }).filter(Boolean);
+
+  if (!tournaments.length) tournaments = FALLBACK_TOURNAMENTS;
+
   const labels = {
     upcoming: 'Upcoming',
     registered: 'Registered',
@@ -41,7 +60,7 @@ export default function decorate(block) {
 
   block.innerHTML = `
     <div class="t-grid">
-      ${TOURNAMENTS.map((t) => `
+      ${tournaments.map((t) => `
         <div class="t-card">
           <div class="t-head">
             ${t.logo ? `<div class="t-logo-wrap"><img src="${t.logo}" alt="${t.name}" class="t-logo" onerror="this.closest('.t-logo-wrap').style.display='none'"></div>` : ''}
