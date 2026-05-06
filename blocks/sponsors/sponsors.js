@@ -25,6 +25,8 @@ export default function decorate(block) {
       name: cells[1]?.textContent?.trim() || '',
       phone: cells[2]?.textContent?.trim() || '',
       link: cells[3]?.querySelector('a')?.href || cells[3]?.textContent?.trim() || '',
+      badgeLabel: cells[4]?.textContent?.trim() || 'Sponsor',
+      badgeColor: cells[5]?.textContent?.trim() || '#041E42',
     };
   }).filter((s) => s.name || s.img);
 
@@ -34,7 +36,7 @@ export default function decorate(block) {
     <div class="sp-grid">
       ${sponsors.map((s) => `
         <div class="sp-card">
-          <div class="sp-badge">Sponsor</div>
+          <div class="sp-badge" style="background:${s.badgeColor}">${s.badgeLabel}</div>
           ${s.img ? `<div class="sp-card-logo"><img src="${s.img}" alt="${s.name}" onerror="this.style.display='none'"></div>` : ''}
           <div class="sp-card-info">
             ${s.name ? `<h3 class="sp-card-name">${s.name}</h3>` : ''}
