@@ -11,9 +11,6 @@ export default function decorate(block) {
   const loc = info.location || 'The Rinx, 660 Terry Road, Hauppauge, NY 11788';
   const phone = info.phone || '(631) 232-3222';
   const email = info.email || 'info@therinx.com';
-  const hemail = info.hockeyemail || 'AlisonC@therinx.com';
-  const head = info.headcoach || "Dan O'Donoghue";
-  const asst = info.assistantcoach || 'Joe Capozzoli';
 
   block.innerHTML = `
     <div class="contact-grid">
@@ -21,9 +18,7 @@ export default function decorate(block) {
         <h3>Get In Touch</h3>
         <div class="c-item"><div class="c-icon">📍</div><div><h4>Location</h4><p>${loc}</p></div></div>
         <div class="c-item"><div class="c-icon">📞</div><div><h4>Phone</h4><p>${phone}</p></div></div>
-        <div class="c-item"><div class="c-icon">✉️</div><div><h4>Email</h4><p>${email}<br>Hockey: ${hemail}</p></div></div>
-        <div class="c-item"><div class="c-icon">🏒</div><div><h4>Head Coach</h4><p>${head}</p></div></div>
-        <div class="c-item"><div class="c-icon">🏒</div><div><h4>Assistant Coach</h4><p>${asst}</p></div></div>
+        <div class="c-item"><div class="c-icon">✉️</div><div><h4>Email</h4><p>${email}</p></div></div>
       </div>
 
       <div class="contact-form">
