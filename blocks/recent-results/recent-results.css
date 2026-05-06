@@ -15,6 +15,34 @@
   padding: 40px;
 }
 
+.rr-picker {
+  display: flex;
+  gap: 8px;
+  max-width: var(--max-width);
+  margin: 0 auto 20px;
+}
+
+.rr-pick {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 7px 18px;
+  border-radius: 4px;
+  border: 2px solid var(--color-navy);
+  background: none;
+  color: var(--color-navy);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rr-pick.active,
+.rr-pick:hover {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
 .rr-grid {
   display: flex;
   gap: 16px;

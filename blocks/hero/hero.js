@@ -2,21 +2,7 @@ export default function decorate(block) {
   const row = block.children[0];
   const cell = row?.children[0];
   const paragraphs = [...(cell?.querySelectorAll('p') || [])];
-  const subtitle = paragraphs[0]?.textContent || '';
-  const season = paragraphs[1]?.textContent || '';
-  const record = paragraphs[2]?.textContent || '';
-
-  // Parse record like "16–13–3 | GF 163 – GA 127 | MHR Rating 77.2"
-  const parts = record.split('|').map((s) => s.trim()).filter(Boolean);
-  const wlt = parts[0] || '';
-  const gfga = parts[1] || '';
-  const rating = parts[2] || '';
-
-  // Extract numbers
-  const wltNums = wlt.match(/(\d+)/g) || [];
-  const gp = wltNums.length === 3
-    ? parseInt(wltNums[0], 10) + parseInt(wltNums[1], 10) + parseInt(wltNums[2], 10)
-    : '';
+  const season = paragraphs[0]?.textContent || '2026–2027 Season';
 
   block.innerHTML = `
     <div class="hero-inner">
@@ -45,30 +31,8 @@ export default function decorate(block) {
       <div class="hero-content">
         <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" class="hero-logo" onerror="this.style.display='none'">
         <span class="hero-badge">${season}</span>
-        <h1>Rinx <span>Hockey</span><br>Club &bull; 10U</h1>
-        <p>${subtitle}</p>
-        <div class="hero-record-strip">
-          <div class="hero-stat">
-            <span class="hero-stat-num red">${wlt}</span>
-            <span class="hero-stat-lbl">W&ndash;L&ndash;T</span>
-          </div>
-          <div class="hero-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">${gfga}</span>
-            <span class="hero-stat-lbl">GF&ndash;GA</span>
-          </div>
-          <div class="hero-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num red">${rating.replace(/[^0-9.]/g, '')}</span>
-            <span class="hero-stat-lbl">MHR Rating</span>
-          </div>
-          <div class="hero-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">${gp}</span>
-            <span class="hero-stat-lbl">Games Played</span>
-          </div>
-        </div>
-        <p class="hero-src">Live rankings: <a href="https://myhockeyrankings.com/team-info?t=19306&y=2025" target="_blank">MyHockeyRankings.com</a></p>
+        <h1>Rinx <span>Hockey</span><br>Club</h1>
+        <p>Tier III/A Travel Hockey &bull; Long Island, New York</p>
       </div>
       <div class="hero-stripe"></div>
     </div>

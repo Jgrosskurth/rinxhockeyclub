@@ -6,7 +6,7 @@ export default function decorate(block) {
              onerror="this.style.display='none'">
         <div class="header-text">
           <span class="header-title">Rinx Hockey Club</span>
-          <span class="header-subtitle">Travel Hockey &bull; Hauppauge, NY</span>
+          <span class="header-subtitle">Tier III/A &bull; Travel Hockey</span>
         </div>
       </div>
 
