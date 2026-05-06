@@ -1,20 +1,37 @@
-export default function decorate(block) {
-  const rows = [...block.children];
-  const tournaments = rows.map((row) => {
-    const cells = [...row.children];
-    const logoImg = cells[0]?.querySelector('img');
-    return {
-      logo: logoImg?.src || '',
-      name: cells[1]?.textContent?.trim() || '',
-      date: cells[2]?.textContent?.trim() || '',
-      loc: cells[3]?.textContent?.trim() || '',
-      format: cells[4]?.textContent?.trim() || '',
-      link: cells[5]?.querySelector('a')?.href || cells[5]?.textContent?.trim() || '',
-      status: (cells[6]?.textContent?.trim() || 'Upcoming').toLowerCase().replace(/\s+/g, '-'),
-      ages: cells[7]?.textContent?.trim() || '',
-    };
-  }).filter((t) => t.name);
+const TOURNAMENTS = [
+  {
+    logo: '/images/lobstahfest.png',
+    name: 'Lobstah Fest 2026',
+    date: 'October 2026',
+    loc: 'New England',
+    format: 'Round Robin',
+    link: 'https://www.nes.com/Flier/2569532.pdf',
+    status: 'upcoming',
+    ages: '10U, 14U',
+  },
+  {
+    logo: '/images/canam.png',
+    name: 'CAN/AM Challenge Cup',
+    date: 'November 6–8, 2026',
+    loc: 'The Rinks at CT Sports Center, Shelton, CT',
+    format: 'Double Elimination',
+    link: 'https://www.canamhockey.com/tournaments/tournaments/boys/shelton-november-6-8-2026',
+    status: 'upcoming',
+    ages: '10U, 14U',
+  },
+  {
+    logo: '/images/mht.png',
+    name: 'The Congressional Cup',
+    date: 'February 13–15, 2027',
+    loc: 'Washington, DC Area',
+    format: 'Round Robin + Playoffs',
+    link: 'https://myhockeytournaments.com/locations/washington/the-congressional-cup',
+    status: 'upcoming',
+    ages: '10U, 14U',
+  },
+];
 
+export default function decorate(block) {
   const labels = {
     upcoming: 'Upcoming',
     registered: 'Registered',
@@ -24,7 +41,7 @@ export default function decorate(block) {
 
   block.innerHTML = `
     <div class="t-grid">
-      ${tournaments.map((t) => `
+      ${TOURNAMENTS.map((t) => `
         <div class="t-card">
           <div class="t-head">
             ${t.logo ? `<div class="t-logo-wrap"><img src="${t.logo}" alt="${t.name}" class="t-logo" onerror="this.closest('.t-logo-wrap').style.display='none'"></div>` : ''}
