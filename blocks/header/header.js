@@ -6,7 +6,7 @@ export default function decorate(block) {
              onerror="this.style.display='none'">
         <div class="header-text">
           <span class="header-title">Rinx Hockey Club</span>
-          <span class="header-subtitle">10U Squirts &bull; Travel Hockey</span>
+          <span class="header-subtitle">Travel Hockey &bull; Hauppauge, NY</span>
         </div>
       </div>
 
@@ -16,9 +16,27 @@ export default function decorate(block) {
 
       <nav class="header-nav" id="header-nav">
         <a href="/">Home</a>
-        <a href="/roster">Roster</a>
-        <a href="/schedule">Schedule</a>
-        <a href="/stats">Stats</a>
+        <div class="nav-dropdown">
+          <a href="/roster" class="nav-dropdown-toggle">Roster</a>
+          <div class="nav-dropdown-menu">
+            <a href="/roster">10U Squirts</a>
+            <a href="/roster-14u">14U Bantam</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a href="/schedule" class="nav-dropdown-toggle">Schedule</a>
+          <div class="nav-dropdown-menu">
+            <a href="/schedule">10U Squirts</a>
+            <a href="/schedule-14u">14U Bantam</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a href="/stats" class="nav-dropdown-toggle">Stats</a>
+          <div class="nav-dropdown-menu">
+            <a href="/stats">10U Squirts</a>
+            <a href="/stats-14u">14U Bantam</a>
+          </div>
+        </div>
         <a href="/tournaments">Tournaments</a>
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
@@ -36,5 +54,15 @@ export default function decorate(block) {
   block.querySelectorAll('nav a').forEach((a) => {
     const href = a.getAttribute('href');
     if (href === path || (path === '' && href === '/')) a.classList.add('active');
+  });
+
+  // Mobile dropdown toggles
+  block.querySelectorAll('.nav-dropdown-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', (e) => {
+      if (window.innerWidth <= 900) {
+        e.preventDefault();
+        toggle.closest('.nav-dropdown').classList.toggle('open');
+      }
+    });
   });
 }
