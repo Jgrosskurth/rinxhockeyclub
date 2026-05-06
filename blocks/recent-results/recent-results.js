@@ -20,6 +20,7 @@ const TEAM_LOGOS = {
   predators: '00133e',
   blues: '00018b',
   'ice devils': '0014fd',
+  'red wings': '001dfe',
   rebels: '001506',
   wolfpack: '001570',
   phantoms: '00123e',
