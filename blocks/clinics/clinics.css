@@ -21,6 +21,31 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.clinic-badge {
+  position: absolute;
+  top: 14px;
+  left: -30px;
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 36px;
+  transform: rotate(-45deg);
+  z-index: 1;
+}
+
+.clinic-badge-open {
+  background: #dbeafe;
+  color: var(--color-navy);
+}
+
+.clinic-badge-invite {
+  background: var(--color-red);
+  color: var(--color-white);
 }
 
 .clinic-header {

@@ -9,6 +9,7 @@ export default function decorate(block) {
       location: cells[3]?.textContent?.trim() || 'The Rinx, Hauppauge, NY',
       instructor: cells[4]?.textContent?.trim() || 'Rinx Staff',
       frequency: cells[5]?.textContent?.trim() || '',
+      badge: cells[6]?.textContent?.trim() || '',
     };
   }).filter((s) => s.title);
 
@@ -35,8 +36,14 @@ export default function decorate(block) {
 
   block.innerHTML = `
     <div class="clinics-grid">
-      ${sessions.map((s) => `
+      ${sessions.map((s) => {
+    const badgeLower = s.badge.toLowerCase();
+    let badgeClass = '';
+    if (badgeLower.includes('open')) badgeClass = 'clinic-badge-open';
+    else if (badgeLower.includes('invite')) badgeClass = 'clinic-badge-invite';
+    return `
         <div class="clinic-card">
+          ${s.badge ? `<div class="clinic-badge ${badgeClass}">${s.badge}</div>` : ''}
           <div class="clinic-header navy">
             <span class="clinic-day">${s.day}</span>
             <h3>${s.title}</h3>
@@ -48,7 +55,8 @@ export default function decorate(block) {
             ${s.frequency ? `<div class="clinic-detail"><span class="cd-lbl">Frequency</span><span class="cd-val">${s.frequency}</span></div>` : ''}
           </div>
         </div>
-      `).join('')}
+      `;
+  }).join('')}
     </div>
 
     <div class="private-section">
