@@ -60,4 +60,18 @@ export default function decorate(block) {
       }
     });
   });
+
+  // Add map banner after the columns
+  const mapBanner = document.createElement('div');
+  mapBanner.className = 'columns-map-banner';
+  mapBanner.innerHTML = `
+    <a href="https://www.google.com/maps/search/The%20Rinx,%20660%20Terry%20Rd,%20Hauppauge,%20NY%2011788" target="_blank" class="map-link">
+      <div class="map-icon">📍</div>
+      <div class="map-text">
+        <span class="map-title">The Rinx &bull; 660 Terry Road, Hauppauge, NY 11788</span>
+        <span class="map-cta">Get Directions &rarr;</span>
+      </div>
+    </a>
+  `;
+  block.appendChild(mapBanner);
 }

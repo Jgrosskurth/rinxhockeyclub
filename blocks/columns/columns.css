@@ -121,9 +121,75 @@
   }
 }
 
+/* Map banner */
+.columns-map-banner {
+  margin-top: 24px;
+}
+
+.columns-map-banner .map-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--color-navy);
+  border-radius: 8px;
+  padding: 16px 24px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.columns-map-banner .map-link:hover {
+  background: var(--color-navy-light);
+  text-decoration: none;
+}
+
+.columns-map-banner .map-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.columns-map-banner .map-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 12px;
+}
+
+.columns-map-banner .map-title {
+  color: var(--color-white);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.columns-map-banner .map-cta {
+  color: var(--color-red);
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
 @media (max-width: 900px) {
   .columns > div > div {
     padding: 24px;
     margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .columns-map-banner .map-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .columns-map-banner .map-link {
+    padding: 14px 16px;
+  }
+
+  .columns-map-banner .map-title {
+    font-size: 0.8rem;
   }
 }
