@@ -13,6 +13,23 @@ function getBadge(note) {
   return '';
 }
 
+function buildCoaches(coaches) {
+  return coaches.map((c) => {
+    const imgHtml = c.img
+      ? `<img src="${c.img}" alt="${c.name}" class="coach-av coach-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    return `
+      <div class="coach-card">
+        ${imgHtml}
+        <div class="coach-av"${c.img ? ' style="display:none"' : ''}>${c.initials}</div>
+        <div class="coach-info">
+          <h4>${c.name}</h4>
+          <p>${c.role}</p>
+        </div>
+      </div>`;
+  }).join('');
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
   const players = rows.map((row) => {
@@ -24,6 +41,47 @@ export default function decorate(block) {
     if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
     return { name, note, img: imgSrc };
   }).filter((p) => p.name);
+
+  // Read coaches from section default content (pipe-delimited paragraphs after the block)
+  const section = block.closest('.section');
+  const sectionPs = [...(section?.querySelectorAll(':scope > p') || [])];
+  const coachData = sectionPs
+    .filter((p) => p.textContent.includes('|'))
+    .map((p) => {
+      const parts = p.textContent.split('|');
+      return {
+        name: parts[0]?.trim(),
+        initials: parts[1]?.trim(),
+        role: parts[2]?.trim(),
+        img: parts[3]?.trim() || '',
+      };
+    });
+  sectionPs.filter((p) => p.textContent.includes('|')).forEach((p) => p.remove());
+
+  // Determine which coaches to show
+  const is14u = window.location.pathname.includes('14u');
+  const defaultCoaches = is14u
+    ? [
+      {
+        name: 'Greg Skillman', initials: 'GS', role: 'Head Coach • 14U Bantam', img: '',
+      },
+      {
+        name: 'Joe Capozzoli', initials: 'JC', role: 'Assistant Coach • 14U Bantam', img: '/icons/cap.png',
+      },
+      {
+        name: 'Jon Mazzarone', initials: 'JM', role: 'Assistant Coach • 14U Bantam', img: '',
+      },
+    ]
+    : [
+      {
+        name: "Dan O'Donoghue", initials: 'DO', role: 'Head Coach • 10U Squirts', img: '/icons/dan.jpg',
+      },
+      {
+        name: 'Joe Capozzoli', initials: 'JC', role: 'Assistant Coach • 10U Squirts', img: '/icons/cap.png',
+      },
+    ];
+
+  const coaches = coachData.length ? coachData : defaultCoaches;
 
   block.innerHTML = `
     <div class="roster-grid">
@@ -42,26 +100,7 @@ export default function decorate(block) {
     <div class="roster-coaches">
       <h2 class="section-title">Coaching Staff</h2>
       <div class="coaches-grid">
-        <div class="coach-card">
-          <img src="/icons/dan.jpg"
-               alt="Dan O'Donoghue" class="coach-av coach-photo"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="coach-av" style="display:none">DO</div>
-          <div class="coach-info">
-            <h4>Dan O'Donoghue</h4>
-            <p>Head Coach &bull; 10U Squirts</p>
-          </div>
-        </div>
-        <div class="coach-card">
-          <img src="/icons/cap.png"
-               alt="Joe Capozzoli" class="coach-av coach-photo"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="coach-av" style="display:none">JC</div>
-          <div class="coach-info">
-            <h4>Joe Capozzoli</h4>
-            <p>Assistant Coach &bull; 10U Squirts</p>
-          </div>
-        </div>
+        ${buildCoaches(coaches)}
       </div>
     </div>
   `;
