@@ -53,9 +53,11 @@ export default function decorate(block) {
 
   const labels = {
     upcoming: 'Upcoming',
+    confirmed: 'Confirmed',
+    completed: 'Completed',
+    postponed: 'Postponed',
     registered: 'Registered',
     tbd: 'TBD',
-    completed: 'Completed',
   };
 
   block.innerHTML = `
