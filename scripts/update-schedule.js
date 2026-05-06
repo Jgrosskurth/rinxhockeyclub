@@ -20,61 +20,46 @@ async function fetchMHR() {
 }
 
 function parseGames(html) {
-  const games = [];
-  // MHR renders game rows with date, opponent, score, result
-  // Look for patterns like "Sep 6 2024" + opponent + score
-  const gamePattern = /(\w{3}\s+\d{1,2})[,\s]*(\d{4})[\s\S]*?(?:vs|at|@)?\s*([^<\n]+?)(?:\s*\d+\s*[-–]\s*\d+|\s*$)/gi;
-
-  // Alternative: parse the structured table rows
-  // MHR uses specific div/table structure for games
   const rowRegex = /<tr[^>]*>[\s\S]*?<\/tr>/gi;
   const rows = html.match(rowRegex) || [];
+  const stripTags = (s) => s.replace(/<[^>]+>/g, '').trim();
 
-  for (const row of rows) {
-    // Look for game data in table cells
+  return rows.map((row) => {
     const cells = row.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || [];
-    if (cells.length < 4) continue;
+    if (cells.length < 4) return null;
 
-    const stripTags = (s) => s.replace(/<[^>]+>/g, '').trim();
     const dateText = stripTags(cells[0] || '');
     const oppText = stripTags(cells[1] || '');
     const scoreText = stripTags(cells[2] || '');
     const resultText = stripTags(cells[3] || '');
 
-    // Validate this looks like a game row
-    if (!dateText || !oppText) continue;
-    if (!/\d/.test(dateText)) continue;
-    if (!/(W|L|T|OTL|SOL)/i.test(resultText) && !/(W|L|T)/i.test(scoreText)) continue;
+    if (!dateText || !oppText || !/\d/.test(dateText)) return null;
+    if (!/(W|L|T|OTL|SOL)/i.test(resultText) && !/(W|L|T)/i.test(scoreText)) return null;
 
     let result = '';
     if (/^W/i.test(resultText)) result = 'W';
     else if (/^L/i.test(resultText) || /OTL|SOL/i.test(resultText)) result = 'L';
     else if (/^T/i.test(resultText)) result = 'T';
 
-    if (!result) continue;
+    if (!result) return null;
 
-    // Extract score
-    const scoreMatch = (scoreText + ' ' + resultText).match(/(\d+)\s*[-–]\s*(\d+)/);
+    const scoreMatch = (`${scoreText} ${resultText}`).match(/(\d+)\s*[-–]\s*(\d+)/);
     const score = scoreMatch ? `${scoreMatch[1]}–${scoreMatch[2]}` : '';
 
-    if (!score) continue;
+    if (!score) return null;
 
-    games.push({
+    return {
       date: dateText,
       opp: oppText.replace(/\s+/g, ' ').trim(),
-      loc: '', // MHR doesn't always show location in table
+      loc: '',
       score,
       result,
-    });
-  }
-
-  return games;
+    };
+  }).filter(Boolean);
 }
 
 function buildScheduleHTML(games) {
-  const rows = games.map((g) =>
-    `    <div>\n      <div>${g.date}</div>\n      <div>${g.opp}</div>\n      <div>${g.loc}</div>\n      <div>${g.score}</div>\n      <div>${g.result}</div>\n    </div>`
-  ).join('\n');
+  const rows = games.map((g) => `    <div>\n      <div>${g.date}</div>\n      <div>${g.opp}</div>\n      <div>${g.loc}</div>\n      <div>${g.score}</div>\n      <div>${g.result}</div>\n    </div>`).join('\n');
 
   return `
 <div>
@@ -105,9 +90,7 @@ ${scheduleContent}
 }
 
 function gamesToDARows(games) {
-  return games.map((g) =>
-    `        <tr><td>${g.date}</td><td>${g.opp}</td><td>${g.loc}</td><td>${g.score}</td><td>${g.result}</td></tr>`
-  ).join('\n');
+  return games.map((g) => `        <tr><td>${g.date}</td><td>${g.opp}</td><td>${g.loc}</td><td>${g.score}</td><td>${g.result}</td></tr>`).join('\n');
 }
 
 async function pushToDA(html) {
@@ -120,7 +103,7 @@ async function pushToDA(html) {
   const resp = await fetch(`https://admin.da.live/source/${DA_ORG}/${DA_REPO}/schedule.html`, {
     method: 'PUT',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'text/html',
     },
     body: html,
@@ -135,13 +118,13 @@ async function pushToDA(html) {
 
   // Re-save to trigger publish
   const content = await (await fetch(`https://admin.da.live/source/${DA_ORG}/${DA_REPO}/schedule.html`, {
-    headers: { 'Authorization': `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}` },
   })).text();
 
   await fetch(`https://admin.da.live/source/${DA_ORG}/${DA_REPO}/schedule.html`, {
     method: 'PUT',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'text/html',
     },
     body: content,

@@ -17,30 +17,22 @@ async function fetchAyrabo() {
 }
 
 function parseStats(html) {
-  const players = [];
-
-  // Ayrabo uses table rows with player stats
   const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
   const rows = html.match(rowRegex) || [];
+  const stripTags = (s) => s.replace(/<[^>]+>/g, '').trim();
 
-  for (const row of rows) {
+  return rows.map((row) => {
     const cells = row.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || [];
-    if (cells.length < 5) continue;
+    if (cells.length < 5) return null;
 
-    const stripTags = (s) => s.replace(/<[^>]+>/g, '').trim();
     const values = cells.map(stripTags);
-
-    // Look for rows that have numeric stats (GP, G, A, etc.)
     const hasNumbers = values.slice(1).some((v) => /^\d+$/.test(v));
-    if (!hasNumbers) continue;
+    if (!hasNumbers) return null;
 
-    // Try to identify the column structure
-    // Common: #, Name, Pos, GP, G, A, PTS, +/-, PIM
-    // or: Name, Pos, GP, G, A, PTS, PIM
     const nameIdx = values.findIndex((v) => /[a-z]/i.test(v) && v.length > 2);
-    if (nameIdx === -1) continue;
+    if (nameIdx === -1) return null;
 
-    players.push({
+    return {
       name: values[nameIdx] || '',
       num: nameIdx > 0 ? values[0] : '',
       pos: values[nameIdx + 1] || '',
@@ -50,17 +42,13 @@ function parseStats(html) {
       pts: values[nameIdx + 5] || '',
       pm: values[nameIdx + 6] || '',
       pim: values[nameIdx + 7] || '',
-    });
-  }
-
-  return players;
+    };
+  }).filter(Boolean);
 }
 
 function buildCSV(players) {
   const header = '#,Name,Pos,GP,G,A,PTS,+/-,PIM';
-  const rows = players.map((p) =>
-    `${p.num},${p.name},${p.pos},${p.gp},${p.g},${p.a},${p.pts},${p.pm},${p.pim}`
-  );
+  const rows = players.map((p) => `${p.num},${p.name},${p.pos},${p.gp},${p.g},${p.a},${p.pts},${p.pm},${p.pim}`);
   return [header, ...rows].join('\n');
 }
 
