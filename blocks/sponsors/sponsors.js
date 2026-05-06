@@ -1,36 +1,47 @@
 const FALLBACK_SPONSORS = [
-  { name: 'Sponsor', img: '/images/C5C5C820-D330-47DF-9084-222C832B51BC.png', link: '' },
-  { name: 'Sponsor', img: '/images/IMG_4278.jpg', link: '' },
-  { name: 'Sponsor', img: '/images/IMG_4390.jpg', link: '' },
-  { name: 'Sponsor', img: '/images/wiz.png', link: '' },
+  {
+    name: 'Sponsor', img: '/images/C5C5C820-D330-47DF-9084-222C832B51BC.png', phone: '', link: '',
+  },
+  {
+    name: 'Sponsor', img: '/images/IMG_4278.jpg', phone: '', link: '',
+  },
+  {
+    name: 'Sponsor', img: '/images/IMG_4390.jpg', phone: '', link: '',
+  },
+  {
+    name: 'Sponsor', img: '/images/wiz.png', phone: '', link: '',
+  },
 ];
 
 export default function decorate(block) {
   const rows = [...block.children];
   let sponsors = rows.map((r) => {
     const cells = [...r.children];
-    const imgEl = cells[1]?.querySelector('img');
-    let imgSrc = imgEl?.src || cells[1]?.textContent?.trim() || '';
+    const imgEl = cells[0]?.querySelector('img');
+    let imgSrc = imgEl?.src || cells[0]?.textContent?.trim() || '';
     if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
     return {
-      name: cells[0]?.textContent?.trim() || '',
       img: imgSrc,
-      link: cells[2]?.querySelector('a')?.href || cells[2]?.textContent?.trim() || '',
+      name: cells[1]?.textContent?.trim() || '',
+      phone: cells[2]?.textContent?.trim() || '',
+      link: cells[3]?.querySelector('a')?.href || cells[3]?.textContent?.trim() || '',
     };
-  }).filter((s) => s.img);
+  }).filter((s) => s.name || s.img);
 
   if (!sponsors.length) sponsors = FALLBACK_SPONSORS;
 
-  const card = (s) => {
-    const img = `<img src="${s.img}" alt="${s.name}" onerror="this.closest('.sp-card').style.display='none'">`;
-    return s.link
-      ? `<a class="sp-card" href="${s.link}" target="_blank" rel="noopener">${img}${s.name ? `<span class="sp-card-name">${s.name}</span>` : ''}</a>`
-      : `<div class="sp-card">${img}${s.name ? `<span class="sp-card-name">${s.name}</span>` : ''}</div>`;
-  };
-
   block.innerHTML = `
-    <div class="sp-logos">
-      ${sponsors.map(card).join('')}
+    <div class="sp-grid">
+      ${sponsors.map((s) => `
+        <div class="sp-card">
+          ${s.img ? `<div class="sp-card-logo"><img src="${s.img}" alt="${s.name}" onerror="this.style.display='none'"></div>` : ''}
+          <div class="sp-card-info">
+            ${s.name ? `<h3 class="sp-card-name">${s.name}</h3>` : ''}
+            ${s.phone ? `<p class="sp-card-phone">${s.phone}</p>` : ''}
+            ${s.link ? `<a href="${s.link}" target="_blank" class="sp-card-cta">Visit Site &rarr;</a>` : ''}
+          </div>
+        </div>
+      `).join('')}
     </div>
 
     <div class="sp-form-section">
@@ -55,7 +66,6 @@ export default function decorate(block) {
   block.querySelector('#sp-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    fetch('mailto:info@therinx.com');
     const subject = `Sponsorship Inquiry from ${formData.get('name') || 'Website'}`;
     const body = `Name: ${formData.get('name')}\nCompany: ${formData.get('company')}\nEmail: ${formData.get('email')}\nPhone: ${formData.get('phone')}\nMessage: ${formData.get('message')}`;
     window.open(`mailto:info@therinx.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');

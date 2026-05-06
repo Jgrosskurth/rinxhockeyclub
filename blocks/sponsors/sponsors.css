@@ -1,34 +1,179 @@
-.sponsors-wrapper { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
-.sp-header { text-align: center; margin-bottom: 56px; }
-.sp-title { font-family: 'Barlow Condensed',sans-serif; font-weight: 900; font-size: 2.8rem; color: #041E42; text-transform: uppercase; margin-bottom: 12px; }
-.sp-subtitle { font-size: 1rem; color: #6b7280; max-width: 600px; margin: 0 auto; }
-.sp-logos { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-bottom: 72px; }
-.sp-card {
-  background: #fff; border-radius: 12px; padding: 32px 24px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(4,30,66,0.08); border: 1px solid #e5e7eb;
-  transition: box-shadow 0.2s, transform 0.2s; min-height: 140px;
-  text-decoration: none;
+/* Sponsors Block */
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 56px;
 }
-.sp-card:hover { box-shadow: 0 8px 32px rgba(4,30,66,0.15); transform: translateY(-3px); }
-.sp-card img { max-width: 100%; max-height: 100px; object-fit: contain; }
-.sp-card-name { font-family: 'Barlow Condensed',sans-serif; font-weight: 700; font-size: 0.85rem; color: #6b7280; text-transform: uppercase; margin-top: 10px; text-align: center; }
-.sp-form-section { background: #f5f6f8; border-radius: 16px; padding: 48px; }
-.sp-form-title { font-family: 'Barlow Condensed',sans-serif; font-weight: 900; font-size: 2rem; color: #041E42; text-transform: uppercase; margin-bottom: 8px; }
-.sp-form-desc { color: #6b7280; font-size: 0.95rem; margin-bottom: 32px; }
-.sp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 0; }
-.sp-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.sp-field label { font-size: 0.82rem; font-weight: 700; color: #041E42; text-transform: uppercase; letter-spacing: 0.05em; }
-.sp-field input, .sp-field textarea { padding: 12px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.95rem; font-family: inherit; color: #041E42; background: #fff; transition: border-color 0.15s; width: 100%; box-sizing: border-box; }
-.sp-field input:focus, .sp-field textarea:focus { outline: none; border-color: #C8102E; }
-.sp-field textarea { resize: vertical; }
-.sp-submit { background: #C8102E; color: #fff; border: none; border-radius: 6px; padding: 14px 40px; font-family: 'Barlow Condensed',sans-serif; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; transition: background 0.15s; }
-.sp-submit:hover { background: #041E42; }
-.sp-success { color: #16a34a; font-weight: 700; font-size: 1rem; margin-top: 12px; }
-@media (max-width: 900px) {
-  .sponsors-wrapper { padding: 40px 20px; }
-  .sp-logos { grid-template-columns: repeat(2,1fr); gap: 16px; }
-  .sp-form-row { grid-template-columns: 1fr; }
-  .sp-form-section { padding: 28px 20px; }
-  .sp-title { font-size: 2rem; }
+
+.sp-card {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-gray-light);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.sp-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.sp-card-logo {
+  margin-bottom: 16px;
+}
+
+.sp-card-logo img {
+  max-width: 140px;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.sp-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.sp-card-name {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--color-navy);
+  text-transform: uppercase;
+}
+
+.sp-card-phone {
+  font-size: 0.85rem;
+  color: var(--color-gray);
+}
+
+.sp-card-cta {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--color-red);
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.sp-card-cta:hover {
+  text-decoration: underline;
+}
+
+/* Sponsor form */
+.sp-form-section {
+  background: var(--color-off-white);
+  border-radius: 16px;
+  padding: 48px;
+}
+
+.sp-form-title {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 2rem;
+  color: var(--color-navy);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.sp-form-desc {
+  color: var(--color-gray);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+
+.sp-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.sp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.sp-field label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sp-field input,
+.sp-field textarea {
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--color-navy);
+  background: var(--color-white);
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sp-field textarea {
+  resize: vertical;
+}
+
+.sp-field input:focus,
+.sp-field textarea:focus {
+  outline: none;
+  border-color: var(--color-red);
+}
+
+.sp-submit {
+  background: var(--color-red);
+  color: var(--color-white);
+  border: none;
+  border-radius: 6px;
+  padding: 14px 40px;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sp-submit:hover {
+  background: var(--color-navy);
+}
+
+.sp-success {
+  color: #16a34a;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 12px;
+}
+
+@media (width <= 900px) {
+  .sp-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .sp-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-form-section {
+    padding: 28px 20px;
+  }
 }
