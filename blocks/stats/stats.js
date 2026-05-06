@@ -146,7 +146,7 @@ function renderTable(block, container, rows) {
         <tbody id="stats-tbody"></tbody>
       </table>
     </div>
-    <p class="stats-src">Stats sourced from <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">ayrabo.com</a></p>
+    <p class="stats-src">Stats sourced from <a href="https://ayrabo.com/sports/1/teams/${window.location.pathname.includes('14u') ? '573' : '572'}/roster/" target="_blank">ayrabo.com</a></p>
   `;
 
   render();
@@ -168,8 +168,12 @@ async function loadStats(block, statsUrl) {
 
 export default function decorate(block) {
   const row = block.children[0];
-  const statsUrl = row?.children[0]?.textContent?.trim()
-    || 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/rinxstats.csv';
+  const is14u = window.location.pathname.includes('14u');
+  const defaultUrl = is14u
+    ? 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/rinxstats-14u.csv'
+    : 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/rinxstats.csv';
+  const cellText = row?.children[0]?.textContent?.trim() || '';
+  const statsUrl = cellText.startsWith('http') ? cellText : defaultUrl;
 
   block.innerHTML = `
     <div class="stats-summary" id="stats-summary" style="display:none">
