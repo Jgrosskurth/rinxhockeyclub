@@ -45,6 +45,17 @@
   color: var(--color-white);
 }
 
+.player-num {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 0.7rem;
+  color: var(--color-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+  display: block;
+}
+
 .player-card h3 {
   font-family: var(--heading-font-family);
   font-weight: 800;

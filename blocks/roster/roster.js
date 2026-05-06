@@ -39,7 +39,10 @@ export default function decorate(block) {
     const imgEl = cells[2]?.querySelector('img');
     let imgSrc = imgEl?.src || '';
     if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
-    return { name, note, img: imgSrc };
+    const num = cells[3]?.textContent?.trim() || '';
+    return {
+      name, note, img: imgSrc, num,
+    };
   }).filter((p) => p.name);
 
   // Read coaches from section default content (pipe-delimited paragraphs after the block)
@@ -90,8 +93,9 @@ export default function decorate(block) {
           ${p.img
     ? `<img src="${p.img}" alt="${p.name}" class="player-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : ''}
-          <div class="player-icon"${p.img ? ' style="display:none"' : ''}>${getInitials(p.name)}</div>
+          <div class="player-icon"${p.img ? ' style="display:none"' : ''}>${p.num || getInitials(p.name)}</div>
           <h3>${p.name}</h3>
+          ${p.num ? `<span class="player-num">#${p.num}</span>` : ''}
           ${getBadge(p.note)}
         </div>
       `).join('')}
