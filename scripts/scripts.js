@@ -15,8 +15,20 @@ async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
 }
 
+function fixBlockNames(main) {
+  const path = window.location.pathname.replace(/\/$/, '');
+  // Clinics page: ensure the block has class "clinics"
+  if (path === '/clinics') {
+    const firstBlock = main.querySelector(':scope > div > div[class]');
+    if (firstBlock && !firstBlock.classList.contains('clinics')) {
+      firstBlock.className = 'clinics';
+    }
+  }
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  fixBlockNames(main);
   decorateIcons(main);
   decorateSections(main);
   decorateBlocks(main);
