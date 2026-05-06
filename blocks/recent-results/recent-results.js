@@ -1,6 +1,5 @@
 const MHR_CDN = 'https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/';
 
-// Only confirmed logo IDs from the user's original MHR data
 const TEAM_LOGOS = {
   aviators: '001dfe',
   kings: '001ba2',
@@ -21,6 +20,23 @@ const TEAM_LOGOS = {
   predators: '00133e',
   blues: '00018b',
   'ice devils': '0014fd',
+  rebels: '001506',
+  wolfpack: '001570',
+  phantoms: '00123e',
+  piedmont: '001729',
+  'sound tigers': '001888',
+  mustangs: '0010b0',
+  wizards: '000032',
+  bears: '000f91',
+  storm: '000cb9',
+  admirals: '002d89',
+  advantage: '00246a',
+  outlaws: '000114',
+  capitals: '000bc7',
+  whalers: '00230f',
+  ramparts: '001f58',
+  wolves: '000f98',
+  flames: '000f8c',
 };
 
 function findLogoId(oppName) {
