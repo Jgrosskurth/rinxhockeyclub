@@ -11,6 +11,7 @@ export default function decorate(block) {
       format: cells[4]?.textContent?.trim() || '',
       link: cells[5]?.querySelector('a')?.href || cells[5]?.textContent?.trim() || '',
       status: (cells[6]?.textContent?.trim() || 'Upcoming').toLowerCase().replace(/\s+/g, '-'),
+      ages: cells[7]?.textContent?.trim() || '',
     };
   }).filter((t) => t.name);
 
@@ -33,6 +34,11 @@ export default function decorate(block) {
             <div class="t-row"><span class="t-lbl">Dates</span><span class="t-val">${t.date}</span></div>
             <div class="t-row"><span class="t-lbl">Location</span><span class="t-val">${t.loc}</span></div>
             ${t.format ? `<div class="t-row"><span class="t-lbl">Format</span><span class="t-val">${t.format}</span></div>` : ''}
+            ${t.ages ? `<div class="t-row"><span class="t-lbl">Age Groups</span><span class="t-val t-ages">${t.ages.split(',').map((a) => {
+    const age = a.trim();
+    const cls = age.toLowerCase().includes('10u') ? 't-age-10u' : 't-age-14u';
+    return `<span class="t-age ${cls}">${age}</span>`;
+  }).join(' ')}</span></div>` : ''}
             <div class="t-row"><span class="t-lbl">Status</span><span class="t-val"><span class="ts ts-${t.status}">${labels[t.status] || t.status}</span></span></div>
             ${t.link ? `<a href="${t.link}" target="_blank" class="t-link">Learn More &rarr;</a>` : ''}
           </div>

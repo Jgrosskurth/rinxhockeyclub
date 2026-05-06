@@ -97,6 +97,32 @@
   letter-spacing: 0.05em;
 }
 
+.t-ages {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.t-age {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.t-age-10u {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.t-age-14u {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
 .ts-upcoming {
   background: #dbeafe;
   color: #1d4ed8;
