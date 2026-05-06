@@ -184,7 +184,7 @@
   color: var(--color-red);
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .schedule-summary {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -195,7 +195,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .schedule-summary {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -344,7 +344,7 @@
   color: var(--color-navy) !important;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .schedule-block .sg-header,
   .schedule.block .sg-header,
   .schedule-block .sg-row,
@@ -361,7 +361,7 @@
   .schedule.block .sg-score { font-size: 0.9rem !important; }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .schedule-block .sg-row,
   .schedule.block .sg-row {
     display: flex !important;
