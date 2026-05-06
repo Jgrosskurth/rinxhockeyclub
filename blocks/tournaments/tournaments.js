@@ -13,7 +13,7 @@ const TOURNAMENTS = [
     logo: '/images/canam.png',
     name: 'CAN/AM Challenge Cup',
     date: 'November 6–8, 2026',
-    loc: 'The Rinks at CT Sports Center, Shelton, CT',
+    loc: 'Shelton, CT',
     format: 'Double Elimination',
     link: 'https://www.canamhockey.com/tournaments/tournaments/boys/shelton-november-6-8-2026',
     status: 'upcoming',
