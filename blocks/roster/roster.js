@@ -63,21 +63,21 @@ export default function decorate(block) {
   const defaultCoaches = is14u
     ? [
       {
-        name: 'Greg Skillman', initials: 'GS', role: 'Head Coach • 14U Bantam', img: '',
+        name: 'Greg Skillman', initials: 'GS', role: 'Head Coach • 14U Bantam', img: '/images/headshots/coachskillman.png',
       },
       {
-        name: 'Joe Capozzoli', initials: 'JC', role: 'Assistant Coach • 14U Bantam', img: '/icons/cap.png',
+        name: 'Joe Capozzoli', initials: 'JC', role: 'Assistant Coach • 14U Bantam', img: '/images/headshots/joecap.png',
       },
       {
-        name: 'Jon Mazzarone', initials: 'JM', role: 'Assistant Coach • 14U Bantam', img: '',
+        name: 'Jon Mazzarone', initials: 'JM', role: 'Assistant Coach • 14U Bantam', img: '/images/headshots/coachmazz.png',
       },
     ]
     : [
       {
-        name: "Dan O'Donoghue", initials: 'DO', role: 'Head Coach • 10U Squirts', img: '/icons/dan.jpg',
+        name: "Dan O'Donoghue", initials: 'DO', role: 'Head Coach • 10U Squirts', img: '/images/headshots/coachdan.jpg',
       },
       {
-        name: 'Joe Capozzoli', initials: 'JC', role: 'Assistant Coach • 10U Squirts', img: '/icons/cap.png',
+        name: 'Joe Capozzoli', initials: 'JC', role: 'Assistant Coach • 10U Squirts', img: '/images/headshots/joecap.png',
       },
     ];
 
