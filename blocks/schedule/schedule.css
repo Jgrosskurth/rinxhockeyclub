@@ -360,3 +360,39 @@
   .schedule-block .sg-score,
   .schedule.block .sg-score { font-size: 0.9rem !important; }
 }
+
+@media (max-width: 600px) {
+  .schedule-block .sg-row,
+  .schedule.block .sg-row {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+    padding: 14px 16px !important;
+    gap: 8px !important;
+    border-bottom: none !important;
+    margin-bottom: 12px !important;
+    border-radius: 10px !important;
+    border-top: 4px solid var(--color-gray-light) !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+
+  .schedule-block .sg-row[data-result="W"],
+  .schedule.block .sg-row[data-result="W"] {
+    border-top-color: #16a34a !important;
+  }
+
+  .schedule-block .sg-row[data-result="L"],
+  .schedule.block .sg-row[data-result="L"] {
+    border-top-color: #dc2626 !important;
+  }
+
+  .schedule-block .sg-row[data-result="T"],
+  .schedule.block .sg-row[data-result="T"] {
+    border-top-color: #d97706 !important;
+  }
+
+  .schedule-block .sg-header,
+  .schedule.block .sg-header {
+    display: none !important;
+  }
+}
