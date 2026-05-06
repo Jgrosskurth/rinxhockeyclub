@@ -144,9 +144,18 @@
 .schedule-src { margin-top: 14px; font-size: 0.78rem; color: var(--color-gray); text-align: center; }
 .schedule-src a { color: var(--color-red); }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .schedule-summary { grid-template-columns: repeat(3, 1fr); }
   .sg-header, .sg-row { grid-template-columns: 80px 1fr 70px 60px; }
+}
+
+@media (width <= 600px) {
+  .schedule-summary { grid-template-columns: repeat(2, 1fr); }
+  .sum-num { font-size: 1.5rem; }
+  .sg-header, .sg-row { grid-template-columns: 70px 1fr 60px 50px; padding: 10px 12px; }
+  .sg-name { font-size: 0.8rem; }
+  .sg-date { font-size: 0.75rem; }
+  .filter-btn { font-size: 0.75rem; padding: 5px 12px; }
 }
 
 /* ── Override any global sg-row styles ── */

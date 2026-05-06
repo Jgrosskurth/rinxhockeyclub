@@ -194,3 +194,17 @@
     padding: 28px 20px;
   }
 }
+
+@media (width <= 600px) {
+  .sp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-form-title {
+    font-size: 1.4rem;
+  }
+
+  .sp-card {
+    padding: 20px 16px;
+  }
+}

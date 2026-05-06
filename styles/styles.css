@@ -312,10 +312,10 @@ img {
   z-index: 1;
 }
 
-/* Responsive */
+/* Responsive — tablet */
 @media (width <= 900px) {
   :root {
-    --section-padding: 40px 20px;
+    --section-padding: 32px 20px;
   }
 
   .section-title {
@@ -324,5 +324,35 @@ img {
 
   .page-banner {
     padding: 32px 20px;
+  }
+
+  .page-banner h1,
+  .page-banner h2 {
+    font-size: 2.2rem;
+  }
+}
+
+/* Responsive — phone */
+@media (width <= 600px) {
+  :root {
+    --section-padding: 24px 16px;
+    --heading-font-size-xxl: 2rem;
+    --heading-font-size-xl: 1.8rem;
+    --heading-font-size-l: 1.5rem;
+    --heading-font-size-m: 1.3rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    gap: 10px;
+  }
+
+  .page-banner h1,
+  .page-banner h2 {
+    font-size: 1.8rem;
+  }
+
+  .page-banner {
+    padding: 24px 16px;
   }
 }

@@ -248,3 +248,29 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (width <= 600px) {
+  .clinic-header {
+    padding: 20px;
+  }
+
+  .clinic-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .clinic-body {
+    padding: 16px 20px;
+  }
+
+  .private-info {
+    padding: 24px;
+  }
+
+  .private-form {
+    padding: 24px;
+  }
+
+  .skill-tiles {
+    grid-template-columns: 1fr 1fr;
+  }
+}

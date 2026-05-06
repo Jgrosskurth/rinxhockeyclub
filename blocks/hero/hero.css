@@ -179,9 +179,21 @@
   display: block !important;
 }
 
-@media(max-width:900px){
+@media (width <= 900px) {
+  .hero-inner { min-height: 420px !important; }
   .hero-content { padding: 40px 20px !important; }
   .hero-logo { width: 90px !important; height: 90px !important; }
   .hero-record-strip { flex-wrap: wrap !important; justify-content: center !important; }
   .hero-stat { padding: 10px 16px !important; }
+}
+
+@media (width <= 600px) {
+  .hero-inner { min-height: 360px !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-logo { width: 70px !important; height: 70px !important; }
+  .hero.block h1 { font-size: 2rem !important; }
+  .hero-stat { padding: 8px 12px !important; }
+  .hero-stat-num { font-size: 1.2rem !important; }
+  .hero-stat-lbl { font-size: 0.55rem !important; }
+  .hero-badge { font-size: 0.65rem !important; padding: 4px 12px !important; }
 }

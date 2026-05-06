@@ -12,4 +12,14 @@
 .contact-form { background: var(--color-white); border-radius: 8px; padding: 36px; box-shadow: var(--shadow-card); }
 .contact-form h3 { font-family: var(--heading-font-family); font-weight: 800; font-size: 1.4rem; text-transform: uppercase; color: var(--color-navy); margin-bottom: 24px; }
 
-@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+@media (width <= 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width <= 600px) {
+  .contact-form {
+    padding: 20px;
+  }
+}

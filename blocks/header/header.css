@@ -147,3 +147,15 @@
     padding: 10px 16px;
   }
 }
+
+@media (width <= 600px) {
+  .header-inner { padding: 10px 12px; }
+
+  .header-logo img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .header-title { font-size: 1.2rem; }
+  .header-subtitle { font-size: 0.7rem; }
+}
