@@ -29,7 +29,7 @@
   color: var(--color-white);
   font-family: var(--heading-font-family);
   font-weight: 800;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 5px 30px;
@@ -180,7 +180,7 @@
   margin-top: 12px;
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .sp-grid {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
@@ -195,7 +195,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .sp-grid {
     grid-template-columns: 1fr;
   }
