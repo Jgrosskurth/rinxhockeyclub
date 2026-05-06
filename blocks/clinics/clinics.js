@@ -1,42 +1,37 @@
+const CLINICS = [
+  {
+    day: 'Monday',
+    title: 'Evening Skills Clinic',
+    time: '6:00 PM – 7:00 PM',
+    location: 'The Rinx, Hauppauge, NY',
+    instructor: 'Rinx Staff',
+    frequency: 'Every Monday',
+    badge: 'Open',
+  },
+  {
+    day: 'Friday',
+    title: 'Skills & Drills',
+    time: '5:00 PM – 6:00 PM',
+    location: 'The Rinx, Hauppauge, NY',
+    instructor: 'Rinx Staff',
+    frequency: 'Every Friday',
+    badge: 'Open',
+  },
+  {
+    day: 'Saturday',
+    title: 'Morning Power Skate & Shoot',
+    time: '7:20 AM – 8:20 AM',
+    location: 'The Rinx, Hauppauge, NY',
+    instructor: "Dan O'Donoghue",
+    frequency: 'Every Saturday',
+    badge: 'Invite Only',
+  },
+];
+
 export default function decorate(block) {
-  const rows = [...block.children];
-  const sessions = rows.map((row) => {
-    const cells = [...row.children];
-    return {
-      day: cells[0]?.textContent?.trim() || '',
-      title: cells[1]?.textContent?.trim() || '',
-      time: cells[2]?.textContent?.trim() || '',
-      location: cells[3]?.textContent?.trim() || 'The Rinx, Hauppauge, NY',
-      instructor: cells[4]?.textContent?.trim() || 'Rinx Staff',
-      frequency: cells[5]?.textContent?.trim() || '',
-      badge: cells[6]?.textContent?.trim() || '',
-    };
-  }).filter((s) => s.title);
-
-  // Read page intro and private session content from sibling default content
-  const section = block.closest('.section');
-  const sectionH2 = section?.querySelector(':scope > h2');
-  const sectionPs = [...(section?.querySelectorAll(':scope > p') || [])];
-  const sectionUl = section?.querySelector(':scope > ul');
-
-  // Private session content (below clinics block)
-  const privateTitle = sectionH2?.textContent || 'Private Sessions';
-  const privateDesc = sectionPs[0]?.textContent || 'One-on-one or small-group sessions tailored to your child\'s skill level.';
-  const privateItems = sectionUl
-    ? [...sectionUl.querySelectorAll('li')].map((li) => li.textContent)
-    : ['Skating fundamentals & edge work', 'Shooting & stick handling', 'Goalie-specific training'];
-  const privateLocation = sectionPs[1]?.textContent || 'The Rinx • Hauppauge, NY';
-  const privatePricing = sectionPs[2]?.textContent || 'Confirmed upon request';
-  const privateFormNote = sectionPs[3]?.textContent || 'Complete the form below and we\'ll follow up within 48 hours.';
-
-  // Remove the default content since we'll render it styled
-  if (sectionH2) sectionH2.remove();
-  sectionPs.forEach((p) => p.remove());
-  if (sectionUl) sectionUl.remove();
-
   block.innerHTML = `
     <div class="clinics-grid">
-      ${sessions.map((s) => {
+      ${CLINICS.map((s) => {
     const badgeLower = s.badge.toLowerCase();
     let badgeClass = '';
     if (badgeLower.includes('open')) badgeClass = 'clinic-badge-open';
@@ -54,28 +49,29 @@ export default function decorate(block) {
             <div class="clinic-detail"><span class="cd-lbl">Instructor</span><span class="cd-val">${s.instructor}</span></div>
             ${s.frequency ? `<div class="clinic-detail"><span class="cd-lbl">Frequency</span><span class="cd-val">${s.frequency}</span></div>` : ''}
           </div>
-        </div>
-      `;
+        </div>`;
   }).join('')}
     </div>
 
     <div class="private-section">
-      <h2 class="section-title">${privateTitle}</h2>
+      <h2 class="section-title">Private Sessions</h2>
       <div class="private-grid">
         <div class="private-info">
           <span class="private-badge">By Appointment</span>
-          <h3>${privateTitle} Available</h3>
-          <p>${privateDesc}</p>
+          <h3>Private Sessions Available</h3>
+          <p>One-on-one or small-group sessions tailored to your child's skill level. Pricing confirmed upon request.</p>
           <ul class="private-list">
-            ${privateItems.map((item) => `<li>${item}</li>`).join('')}
+            <li>Skating fundamentals &amp; edge work</li>
+            <li>Shooting &amp; stick handling</li>
+            <li>Goalie-specific training</li>
           </ul>
-          <p class="private-detail">${privateLocation}</p>
-          <p class="private-detail">${privatePricing}</p>
+          <p class="private-detail"><strong>Location:</strong> The Rinx &bull; Hauppauge, NY</p>
+          <p class="private-detail"><strong>Pricing:</strong> Confirmed upon request</p>
         </div>
 
         <div class="private-form">
           <h3>Request a Private Session</h3>
-          <p>${privateFormNote}</p>
+          <p>Complete the form below and we'll follow up within 48 hours.</p>
           <div class="form-row">
             <div class="form-group"><label>Your Name *</label><input type="text" id="ps-name" placeholder="Parent / guardian name"></div>
             <div class="form-group"><label>Child's Name *</label><input type="text" id="ps-child" placeholder="Player's full name"></div>
@@ -108,7 +104,9 @@ export default function decorate(block) {
           <div class="form-group">
             <label>Skill Focus *</label>
             <div class="skill-tiles">
-              ${privateItems.map((item) => `<label class="skill-tile"><input type="radio" name="ps-skill" value="${item}"><span>${item}</span></label>`).join('')}
+              <label class="skill-tile"><input type="radio" name="ps-skill" value="Skating"><span>Skating</span></label>
+              <label class="skill-tile"><input type="radio" name="ps-skill" value="Shooting"><span>Shooting &amp; Stickhandling</span></label>
+              <label class="skill-tile"><input type="radio" name="ps-skill" value="Goalie"><span>Goalie</span></label>
             </div>
           </div>
           <div class="form-group"><label>Additional Notes</label><textarea id="ps-notes" placeholder="Availability preferences, goals, questions..."></textarea></div>
