@@ -1,0 +1,26 @@
+name: Update Schedule & Stats from MHR/Ayrabo
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  # 6am ET (10:00 UTC)
+  workflow_dispatch: # manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Scrape MHR schedule and update DA
+        env:
+          DA_TOKEN: ${{ secrets.DA_TOKEN }}
+        run: node scripts/update-schedule.js
+
+      - name: Scrape Ayrabo stats and update CSV
+        env:
+          DA_TOKEN: ${{ secrets.DA_TOKEN }}
+        run: node scripts/update-stats.js
