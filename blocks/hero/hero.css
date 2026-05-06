@@ -1,5 +1,5 @@
-.section:has(.hero.block),
-.section:has(div[data-block-name="hero"]) {
+.section:has(div[data-block-name="hero"]),
+.section:has(.hero.block) {
   padding: 0 !important;
   margin: 0 !important;
   max-width: 100% !important;
@@ -58,13 +58,21 @@
   width: 140px !important;
   height: 140px !important;
   object-fit: contain !important;
-  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.7)) !important;
+  filter: drop-shadow(0 4px 20px rgb(0 0 0 / 70%)) !important;
   margin: 0 auto 16px !important;
   display: block !important;
-  animation: hFloat 3s ease-in-out infinite !important;
+  animation: h-float 3s ease-in-out infinite !important;
 }
-@keyframes hFloat {
-  0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}
+
+@keyframes h-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .hero-badge {
@@ -95,7 +103,7 @@
 .hero.block h1 span { color: #C8102E !important; }
 
 .hero-content > p:not(.hero-src) {
-  color: rgba(255,255,255,.8) !important;
+  color: rgb(255 255 255 / 80%) !important;
   font-size: 1.1rem !important;
   font-weight: 400 !important;
   text-transform: none !important;
@@ -106,11 +114,10 @@
 
 .hero-record-strip {
   display: inline-flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  flex-flow: row nowrap !important;
   align-items: stretch !important;
-  background: rgba(255,255,255,.1) !important;
-  border: 1px solid rgba(255,255,255,.2) !important;
+  background: rgb(255 255 255 / 10%) !important;
+  border: 1px solid rgb(255 255 255 / 20%) !important;
   border-radius: 8px !important;
   overflow: hidden !important;
   width: auto !important;
@@ -140,7 +147,7 @@
 
 .hero-stat-lbl {
   font-size: .62rem !important;
-  color: rgba(255,255,255,.5) !important;
+  color: rgb(255 255 255 / 50%) !important;
   text-transform: uppercase !important;
   letter-spacing: .1em !important;
   margin-top: 4px !important;
@@ -152,7 +159,7 @@
 .hero-divider {
   width: 1px !important;
   min-width: 1px !important;
-  background: rgba(255,255,255,.2) !important;
+  background: rgb(255 255 255 / 20%) !important;
   align-self: stretch !important;
   flex-shrink: 0 !important;
   display: block !important;
@@ -166,7 +173,11 @@
   font-weight: 400 !important;
   text-align: center !important;
 }
-.hero-src a { color: rgba(255,255,255,.4) !important; text-decoration: none !important; }
+
+.hero-src a {
+  color: rgb(255 255 255 / 40%) !important;
+  text-decoration: none !important;
+}
 
 .hero-stripe {
   position: absolute !important;
@@ -180,20 +191,61 @@
 }
 
 @media (width <= 900px) {
-  .hero-inner { min-height: 420px !important; }
-  .hero-content { padding: 40px 20px !important; }
-  .hero-logo { width: 90px !important; height: 90px !important; }
-  .hero-record-strip { flex-wrap: wrap !important; justify-content: center !important; }
-  .hero-stat { padding: 10px 16px !important; }
+  .hero-inner {
+    min-height: 420px !important;
+  }
+
+  .hero-content {
+    padding: 40px 20px !important;
+  }
+
+  .hero-logo {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .hero-record-strip {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  .hero-stat {
+    padding: 10px 16px !important;
+  }
 }
 
 @media (width <= 600px) {
-  .hero-inner { min-height: 360px !important; }
-  .hero-content { padding: 30px 16px !important; }
-  .hero-logo { width: 70px !important; height: 70px !important; }
-  .hero.block h1 { font-size: 2rem !important; }
-  .hero-stat { padding: 8px 12px !important; }
-  .hero-stat-num { font-size: 1.2rem !important; }
-  .hero-stat-lbl { font-size: 0.55rem !important; }
-  .hero-badge { font-size: 0.65rem !important; padding: 4px 12px !important; }
+  .hero-inner {
+    min-height: 360px !important;
+  }
+
+  .hero-content {
+    padding: 30px 16px !important;
+  }
+
+  .hero-logo {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .hero.block h1 {
+    font-size: 2rem !important;
+  }
+
+  .hero-stat {
+    padding: 8px 12px !important;
+  }
+
+  .hero-stat-num {
+    font-size: 1.2rem !important;
+  }
+
+  .hero-stat-lbl {
+    font-size: 0.55rem !important;
+  }
+
+  .hero-badge {
+    font-size: 0.65rem !important;
+    padding: 4px 12px !important;
+  }
 }
