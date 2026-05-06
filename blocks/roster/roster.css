@@ -20,6 +20,16 @@
   border-color: var(--color-red);
 }
 
+.player-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 12px;
+  display: block;
+  border: 3px solid var(--color-navy);
+}
+
 .player-icon {
   width: 60px;
   height: 60px;

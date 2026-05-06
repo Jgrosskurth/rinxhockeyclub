@@ -19,14 +19,20 @@ export default function decorate(block) {
     const cells = [...row.children];
     const name = cells[0]?.textContent?.trim() || '';
     const note = cells[1]?.textContent?.trim() || '';
-    return { name, note };
+    const imgEl = cells[2]?.querySelector('img');
+    let imgSrc = imgEl?.src || '';
+    if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
+    return { name, note, img: imgSrc };
   }).filter((p) => p.name);
 
   block.innerHTML = `
     <div class="roster-grid">
       ${players.map((p) => `
         <div class="player-card">
-          <div class="player-icon">${getInitials(p.name)}</div>
+          ${p.img
+    ? `<img src="${p.img}" alt="${p.name}" class="player-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    : ''}
+          <div class="player-icon"${p.img ? ' style="display:none"' : ''}>${getInitials(p.name)}</div>
           <h3>${p.name}</h3>
           ${getBadge(p.note)}
         </div>
