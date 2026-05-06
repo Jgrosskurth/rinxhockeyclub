@@ -23,16 +23,16 @@
 
 .sp-badge {
   position: absolute;
-  top: 12px;
-  left: -28px;
+  top: 14px;
+  left: -24px;
   background: var(--color-navy);
   color: var(--color-white);
   font-family: var(--heading-font-family);
   font-weight: 800;
-  font-size: 0.55rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 4px 32px;
+  letter-spacing: 0.08em;
+  padding: 5px 30px;
   transform: rotate(-45deg);
 }
 
