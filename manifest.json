@@ -8,17 +8,17 @@
   "theme_color": "#041E42",
   "icons": [
     {
-      "src": "/icons/rinxlogo.png",
+      "src": "/icons/rinxlogo-pwa-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icons/rinxlogo.png",
+      "src": "/icons/rinxlogo-pwa-512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "/icons/rinxlogo.png",
+      "src": "/icons/rinxlogo-pwa-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
