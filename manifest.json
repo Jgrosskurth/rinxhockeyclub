@@ -1,0 +1,27 @@
+{
+  "name": "Rinx Hockey Club",
+  "short_name": "Rinx HC",
+  "description": "Rinx Hockey Club - 10U Squirts Travel Hockey",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#041E42",
+  "theme_color": "#041E42",
+  "icons": [
+    {
+      "src": "/icons/rinxlogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/rinxlogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/rinxlogo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,3 +1,8 @@
+// Service Worker registration
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+
 // delayed.js — homepage content builder
 (function () {
   'use strict';
