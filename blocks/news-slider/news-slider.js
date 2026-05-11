@@ -65,7 +65,7 @@ export default async function decorate(block) {
   const track = block.querySelector('#slider-track');
   const dots = block.querySelector('#sdots');
   const visible = () => (window.innerWidth < 900 ? 1 : 3);
-  const max = () => Math.max(0, slides.length - visible());
+  const max = () => Math.max(0, displaySlides.length - visible());
 
   const goTo = (i) => {
     idx = Math.max(0, Math.min(i, max()));
