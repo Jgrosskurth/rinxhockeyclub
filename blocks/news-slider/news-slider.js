@@ -36,7 +36,6 @@ export default async function decorate(block) {
   }
 
   const maxSlides = 5;
-  const hasMore = slides.length > maxSlides;
   const displaySlides = slides.slice(0, maxSlides);
 
   block.innerHTML = `
@@ -55,37 +54,22 @@ export default async function decorate(block) {
     </div>
     <div class="slider-nav">
       <button class="snav-btn" id="prev">&#8592;</button>
-      <div class="sdots" id="sdots"></div>
       <button class="snav-btn" id="next">&#8594;</button>
     </div>
-    ${hasMore ? '<p class="news-view-all"><a href="/news">View All News &rarr;</a></p>' : ''}
   `;
 
   let idx = 0;
   const track = block.querySelector('#slider-track');
-  const dots = block.querySelector('#sdots');
   const visible = () => (window.innerWidth < 900 ? 1 : 3);
   const max = () => Math.max(0, displaySlides.length - visible());
 
   const goTo = (i) => {
-    idx = Math.max(0, Math.min(i, max()));
+    idx = i > max() ? 0 : i < 0 ? max() : i;
     const w = block.querySelector('.slide-card').offsetWidth + 24;
     track.style.transform = `translateX(-${idx * w}px)`;
-    dots.querySelectorAll('.sdot').forEach((d, j) => d.classList.toggle('on', j === idx));
-  };
-
-  const buildDots = () => {
-    dots.innerHTML = '';
-    for (let i = 0; i <= max(); i += 1) {
-      const d = document.createElement('button');
-      d.className = `sdot${i === 0 ? ' on' : ''}`;
-      d.addEventListener('click', () => goTo(i));
-      dots.appendChild(d);
-    }
   };
 
   block.querySelector('#prev').addEventListener('click', () => goTo(idx - 1));
   block.querySelector('#next').addEventListener('click', () => goTo(idx + 1));
-  buildDots();
-  setInterval(() => goTo(idx + 1 > max() ? 0 : idx + 1), 5000);
+  setInterval(() => goTo(idx + 1), 5000);
 }
