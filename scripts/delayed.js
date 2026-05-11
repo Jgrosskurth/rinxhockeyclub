@@ -3,6 +3,50 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
 }
 
+// PWA Install Banner
+(function pwaInstallBanner() {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+    || window.navigator.standalone;
+  if (isStandalone) {
+    document.body.classList.add('pwa-standalone');
+    return;
+  }
+  if (localStorage.getItem('pwa-banner-dismissed')) return;
+
+  const banner = document.createElement('div');
+  banner.className = 'pwa-install-banner';
+  banner.innerHTML = `
+    <img src="/images/A9FBB1FE-F41E-4CE4-8E6D-C9099AD82806.JPG" alt="Rinx HC" width="36" height="36">
+    <div class="pwa-install-banner-text">
+      <strong>Rinx Hockey Club</strong>
+      Add to your home screen for quick access
+    </div>
+    <button class="pwa-install-btn" id="pwa-install-btn">Install</button>
+    <button class="pwa-install-close" id="pwa-close-btn" aria-label="Close">&times;</button>
+  `;
+  document.body.prepend(banner);
+
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  banner.querySelector('#pwa-install-btn').addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => { banner.remove(); });
+    } else {
+      alert('Tap the Share button in your browser, then "Add to Home Screen".');
+    }
+  });
+
+  banner.querySelector('#pwa-close-btn').addEventListener('click', () => {
+    banner.remove();
+    localStorage.setItem('pwa-banner-dismissed', '1');
+  });
+}());
+
 // delayed.js — homepage content builder
 (function () {
   'use strict';
