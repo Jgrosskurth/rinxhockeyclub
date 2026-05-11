@@ -35,9 +35,14 @@ if ('serviceWorker' in navigator) {
   banner.querySelector('#pwa-install-btn').addEventListener('click', () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => { banner.remove(); });
+      deferredPrompt.userChoice.then(() => {
+        banner.remove();
+        localStorage.setItem('pwa-banner-dismissed', '1');
+      });
     } else {
       alert('Tap the Share button in your browser, then "Add to Home Screen".');
+      banner.remove();
+      localStorage.setItem('pwa-banner-dismissed', '1');
     }
   });
 
