@@ -56,6 +56,7 @@ export default async function decorate(block) {
       <button class="snav-btn" id="prev">&#8592;</button>
       <button class="snav-btn" id="next">&#8594;</button>
     </div>
+    ${slides.length > maxSlides ? '<p class="news-view-all"><a href="/news">View All News &rarr;</a></p>' : ''}
   `;
 
   let idx = 0;
