@@ -1,3 +1,8 @@
+function toProperCase(str) {
+  if (!str || str !== str.toUpperCase()) return str;
+  return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/);
   if (lines.length < 2) return [];
@@ -53,7 +58,7 @@ function renderTable(block, container, rows) {
     const ln = findKey(p, 'last name', 'last_name', 'lastname');
     return {
       num: fmt(findKey(p, '#', 'number', 'jersey', 'jersey_number', 'no')),
-      name: fmt(findKey(p, 'name', 'player', 'full name', 'player_name') || [fn, ln].filter(Boolean).join(' ')),
+      name: toProperCase(fmt(findKey(p, 'name', 'player', 'full name', 'player_name') || [fn, ln].filter(Boolean).join(' '))),
       pos: fmt(findKey(p, 'pos', 'position')),
       gp: fmt(findKey(p, 'gp', 'games played')),
       g: fmt(findKey(p, 'g', 'goals')),
@@ -170,8 +175,8 @@ export default function decorate(block) {
   const row = block.children[0];
   const is14u = window.location.pathname.includes('14u');
   const defaultUrl = is14u
-    ? 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/rinxstats-14u.csv'
-    : 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/refs/heads/main/rinxstats.csv';
+    ? '/rinxstats-14u.csv'
+    : '/rinxstats.csv';
   const cellText = row?.children[0]?.textContent?.trim() || '';
   const statsUrl = cellText.startsWith('http') ? cellText : defaultUrl;
 

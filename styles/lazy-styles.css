@@ -8,7 +8,7 @@
   display: none;
   align-items: center;
   gap: 12px;
-  background: linear-gradient(135deg, #041E42 0%, #0a3060 100%);
+  background: linear-gradient(135deg, var(--color-red) 0%, var(--color-navy) 100%);
   padding: 10px 16px;
   position: relative;
   z-index: 1001;

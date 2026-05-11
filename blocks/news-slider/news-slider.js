@@ -1,18 +1,48 @@
-export default function decorate(block) {
-  const slides = [...block.children].map((row) => {
-    const cells = [...row.children];
-    return {
-      tag: cells[0]?.textContent.trim(),
-      title: cells[1]?.textContent.trim(),
-      body: cells[2]?.textContent.trim(),
-      date: cells[3]?.textContent.trim(),
-    };
-  });
+export default async function decorate(block) {
+  const sourceRow = block.querySelector(':scope > div > div a[href]');
+  let slides;
+
+  if (sourceRow) {
+    const href = sourceRow.getAttribute('href').replace(/\/$/, '');
+    try {
+      const resp = await fetch(`${href}.plain.html`);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const html = await resp.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const newsBlock = doc.querySelector('.news-slider');
+      const rows = newsBlock ? [...newsBlock.children] : [];
+      slides = rows.map((row) => {
+        const cells = [...row.children];
+        return {
+          tag: cells[0]?.textContent.trim(),
+          title: cells[1]?.textContent.trim(),
+          body: cells[2]?.textContent.trim(),
+          date: cells[3]?.textContent.trim(),
+        };
+      });
+    } catch {
+      slides = [];
+    }
+  } else {
+    slides = [...block.children].map((row) => {
+      const cells = [...row.children];
+      return {
+        tag: cells[0]?.textContent.trim(),
+        title: cells[1]?.textContent.trim(),
+        body: cells[2]?.textContent.trim(),
+        date: cells[3]?.textContent.trim(),
+      };
+    });
+  }
+
+  const maxSlides = 5;
+  const hasMore = slides.length > maxSlides;
+  const displaySlides = slides.slice(0, maxSlides);
 
   block.innerHTML = `
     <div class="slider-outer">
       <div class="slider-track" id="slider-track">
-        ${slides.map((s) => `
+        ${displaySlides.map((s) => `
           <div class="slide-card">
             <div class="slide-body">
               <span class="news-tag">${s.tag || 'News'}</span>
@@ -28,6 +58,7 @@ export default function decorate(block) {
       <div class="sdots" id="sdots"></div>
       <button class="snav-btn" id="next">&#8594;</button>
     </div>
+    ${hasMore ? '<p class="news-view-all"><a href="/news">View All News &rarr;</a></p>' : ''}
   `;
 
   let idx = 0;

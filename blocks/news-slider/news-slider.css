@@ -38,9 +38,12 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-red);
-  display: block;
+  color: var(--color-white);
+  background: var(--color-red);
+  display: inline-block;
   margin-bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 10px;
 }
 
 .slide-card h3 {
@@ -108,6 +111,22 @@
 
 .sdot.on {
   background: var(--color-red);
+}
+
+.news-view-all {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.news-view-all a {
+  color: var(--color-red);
+  font-weight: 700;
+  font-family: var(--heading-font-family);
+  text-decoration: none;
+}
+
+.news-view-all a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 900px) {

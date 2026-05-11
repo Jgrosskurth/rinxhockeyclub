@@ -37,6 +37,12 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  const suffix = ' | Rinx Hockey Club';
+  if (document.title && !document.title.includes('Rinx Hockey Club')) {
+    document.title = `${document.title}${suffix}`;
+  } else if (!document.title) {
+    document.title = 'Rinx Hockey Club';
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
