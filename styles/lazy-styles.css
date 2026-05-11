@@ -1,5 +1,8 @@
 /* Styles loaded after LCP — non-critical */
 
+/* Additional font weights for below-the-fold content */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;800&family=Barlow:wght@500;600&display=swap');
+
 /* PWA Install Banner — mobile only */
 .pwa-install-banner {
   display: none;
