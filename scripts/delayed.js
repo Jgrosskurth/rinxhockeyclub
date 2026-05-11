@@ -98,7 +98,7 @@ if ('serviceWorker' in navigator) {
     hp.innerHTML =
       '<div class="hp-news"><div class="hp-inner"><h2 class="section-title">Latest News</h2>'
       + '<div class="slider-outer"><div class="slider-track" id="hpt">' + news.map(nc).join('') + '</div></div>'
-      + '<div class="slider-nav"><button class="snav-btn" id="hpv">&#8592;</button><button class="snav-btn" id="hpn">&#8594;</button></div>'
+      + '<div class="slider-nav"><button class="snav-btn" id="hpv">&#8592;</button><div class="sdots" id="hpd"></div><button class="snav-btn" id="hpn">&#8594;</button></div>'
       + '</div></div>'
       + '<div class="hp-results"><div class="hp-inner"><h2 class="section-title">Recent Results</h2>'
       + '<div class="results-list">' + recent.map(rc).join('') + '</div>'
@@ -126,16 +126,28 @@ if ('serviceWorker' in navigator) {
 
     var idx = 0;
     var track = hp.querySelector('#hpt');
+    var dots = hp.querySelector('#hpd');
     var cards = Array.from(hp.querySelectorAll('.slide-card'));
     function vis() { return window.innerWidth < 900 ? 1 : 3; }
     function mx() { return Math.max(0, cards.length - vis()); }
+    function bld() {
+      dots.innerHTML = '';
+      for (var i = 0; i <= mx(); i++) {
+        var d = document.createElement('button');
+        d.className = 'sdot' + (i === 0 ? ' on' : '');
+        d.addEventListener('click', (function (x) { return function () { go(x); }; })(i));
+        dots.appendChild(d);
+      }
+    }
     function go(i) {
-      idx = i > mx() ? 0 : i < 0 ? mx() : i;
+      idx = Math.max(0, Math.min(i, mx()));
       track.style.transform = 'translateX(-' + (idx * (cards[0].offsetWidth + 24)) + 'px)';
+      dots.querySelectorAll('.sdot').forEach(function (d, j) { d.classList.toggle('on', j === idx); });
     }
     hp.querySelector('#hpv').addEventListener('click', function () { go(idx - 1); });
     hp.querySelector('#hpn').addEventListener('click', function () { go(idx + 1); });
-    setInterval(function () { go(idx + 1); }, 5000);
+    bld();
+    setInterval(function () { go(idx + 1 > mx() ? 0 : idx + 1); }, 5000);
   }
 
   // Run after page loads

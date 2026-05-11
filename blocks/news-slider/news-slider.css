@@ -113,22 +113,6 @@
   background: var(--color-red);
 }
 
-.news-view-all {
-  text-align: center;
-  margin-top: 16px;
-}
-
-.news-view-all a {
-  color: var(--color-red);
-  font-weight: 700;
-  font-family: var(--heading-font-family);
-  text-decoration: none;
-}
-
-.news-view-all a:hover {
-  text-decoration: underline;
-}
-
 @media (max-width: 900px) {
   .slide-card {
     flex: 0 0 calc(88% - 8px);
