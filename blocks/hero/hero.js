@@ -29,7 +29,7 @@ export default function decorate(block) {
         <rect width="1200" height="560" fill="#041E42" opacity="0.88"/>
       </svg>
       <div class="hero-content">
-        <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" class="hero-logo" onerror="this.style.display='none'">
+        <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" class="hero-logo" width="140" height="140" fetchpriority="high" onerror="this.style.display='none'">
         <span class="hero-badge">${season}</span>
         <h1>Rinx <span>Hockey</span><br>Club</h1>
         <p>Tier III/A Travel Hockey &bull; Long Island, New York</p>

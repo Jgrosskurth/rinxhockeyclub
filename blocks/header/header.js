@@ -2,7 +2,7 @@ export default function decorate(block) {
   block.innerHTML = `
     <div class="header-inner">
       <div class="header-logo" onclick="window.location.href='/'">
-        <img src="/images/A9FBB1FE-F41E-4CE4-8E6D-C9099AD82806.JPG" alt="Rinx Hockey Club" width="68" height="68"
+        <img src="/images/A9FBB1FE-F41E-4CE4-8E6D-C9099AD82806.JPG" alt="Rinx Hockey Club" width="68" height="68" loading="eager" fetchpriority="high"
              onerror="this.style.display='none'">
         <div class="header-text">
           <span class="header-title">Rinx Hockey Club</span>
