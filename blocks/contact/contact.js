@@ -46,6 +46,7 @@ export default function decorate(block) {
     <div class="c-item"><div class="c-icon">📍</div><div><h4>Location</h4><p>${loc}</p></div></div>
     <div class="c-item"><div class="c-icon">📞</div><div><h4>Phone</h4><p>${phone}</p></div></div>
     <div class="c-item"><div class="c-icon">✉️</div><div><h4>Email</h4><p>${email}</p></div></div>
+    <div class="c-item"><div class="c-icon">🌐</div><div><h4>Web</h4><p><a href="https://www.therinx.com" target="_blank">www.therinx.com</a></p></div></div>
   `;
   if (hockeyEmail) {
     contactItems += `<div class="c-item"><div class="c-icon">🏒</div><div><h4>Hockey Email</h4><p>${hockeyEmail}</p></div></div>`;

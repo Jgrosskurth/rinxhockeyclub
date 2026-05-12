@@ -72,6 +72,16 @@
   line-height: 1.5;
 }
 
+.c-item p a {
+  color: var(--color-red);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.c-item p a:hover {
+  text-decoration: underline;
+}
+
 .contact-form {
   background: var(--color-white);
   border-radius: 8px;
