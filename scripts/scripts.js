@@ -24,6 +24,16 @@ function fixBlockNames(main) {
       firstBlock.className = 'clinics';
     }
   }
+  // Contact page: wrap section content in a contact block if not already present
+  if (path === '/contact') {
+    const section = main.querySelector(':scope > div');
+    if (section && !section.querySelector('.contact')) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'contact';
+      while (section.firstChild) wrapper.appendChild(section.firstChild);
+      section.appendChild(wrapper);
+    }
+  }
 }
 
 // eslint-disable-next-line import/prefer-default-export

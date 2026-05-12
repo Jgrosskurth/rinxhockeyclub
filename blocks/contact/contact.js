@@ -1,24 +1,62 @@
 export default function decorate(block) {
-  const rows = [...block.children];
   const info = {};
-  rows.forEach((row) => {
-    const cells = [...row.children];
-    const key = cells[0]?.textContent?.trim().toLowerCase().replace(/[^a-z0-9]/g, '') || '';
-    const val = cells[1]?.textContent?.trim() || '';
-    if (key && val) info[key] = val;
-  });
+
+  // Handle both block table format (rows with cells) and flat paragraph format from DA
+  const rows = [...block.children];
+  const firstRow = rows[0];
+  const hasCells = firstRow && firstRow.children.length >= 2
+    && firstRow.tagName === 'DIV' && firstRow.children[0].tagName === 'DIV';
+
+  if (hasCells) {
+    rows.forEach((row) => {
+      const cells = [...row.children];
+      const key = cells[0]?.textContent?.trim().toLowerCase().replace(/[^a-z0-9]/g, '') || '';
+      const val = cells[1]?.textContent?.trim() || '';
+      if (key && val) info[key] = val;
+    });
+  } else {
+    // Flat paragraph format: alternating label/value <p> tags
+    const paragraphs = [...block.querySelectorAll('p')];
+    // Skip heading and subtitle, pair up label/value paragraphs
+    const pairs = paragraphs.filter((p) => {
+      const text = p.textContent.trim().toLowerCase();
+      return text !== 'get in touch with rinx hockey club';
+    });
+    for (let i = 0; i < pairs.length - 1; i += 2) {
+      const key = pairs[i].textContent.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+      const val = pairs[i + 1].textContent.trim();
+      if (key && val) info[key] = val;
+    }
+  }
 
   const loc = info.location || 'The Rinx, 660 Terry Road, Hauppauge, NY 11788';
   const phone = info.phone || '(631) 232-3222';
   const email = info.email || 'info@therinx.com';
+  const hockeyEmail = info.hockeyemail || '';
+  const headCoach = info.headcoach || '';
+  const assistantCoach = info.assistantcoach || '';
+
+  // Build contact items
+  let contactItems = `
+    <div class="c-item"><div class="c-icon">📍</div><div><h4>Location</h4><p>${loc}</p></div></div>
+    <div class="c-item"><div class="c-icon">📞</div><div><h4>Phone</h4><p>${phone}</p></div></div>
+    <div class="c-item"><div class="c-icon">✉️</div><div><h4>Email</h4><p>${email}</p></div></div>
+  `;
+  if (hockeyEmail) {
+    contactItems += `<div class="c-item"><div class="c-icon">🏒</div><div><h4>Hockey Email</h4><p>${hockeyEmail}</p></div></div>`;
+  }
+  if (headCoach) {
+    contactItems += `<div class="c-item"><div class="c-icon">👤</div><div><h4>Head Coach</h4><p>${headCoach}</p></div></div>`;
+  }
+  if (assistantCoach) {
+    contactItems += `<div class="c-item"><div class="c-icon">👤</div><div><h4>Assistant Coach</h4><p>${assistantCoach}</p></div></div>`;
+  }
 
   block.innerHTML = `
     <div class="contact-grid">
       <div class="contact-info">
         <h3>Get In Touch</h3>
-        <div class="c-item"><div class="c-icon">📍</div><div><h4>Location</h4><p>${loc}</p></div></div>
-        <div class="c-item"><div class="c-icon">📞</div><div><h4>Phone</h4><p>${phone}</p></div></div>
-        <div class="c-item"><div class="c-icon">✉️</div><div><h4>Email</h4><p>${email}</p></div></div>
+        ${contactItems}
       </div>
 
       <div class="contact-form">
