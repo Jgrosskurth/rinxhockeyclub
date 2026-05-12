@@ -82,13 +82,13 @@
   line-height: 1.5;
 }
 
-.c-item p a {
+.contact .c-item p a {
   color: var(--color-gray);
   text-decoration: none;
   font-weight: inherit;
 }
 
-.c-item p a:hover {
+.contact .c-item p a:hover {
   text-decoration: underline;
 }
 
