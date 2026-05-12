@@ -17,7 +17,6 @@ export default function decorate(block) {
   } else {
     // Flat paragraph format: alternating label/value <p> tags
     const paragraphs = [...block.querySelectorAll('p')];
-    // Skip heading and subtitle, pair up label/value paragraphs
     const pairs = paragraphs.filter((p) => {
       const text = p.textContent.trim().toLowerCase();
       return text !== 'get in touch with rinx hockey club';
@@ -28,6 +27,12 @@ export default function decorate(block) {
       if (key && val) info[key] = val;
     }
   }
+
+  // Extract heading and subtitle if present
+  const h1 = block.querySelector('h1');
+  const heading = h1 ? h1.textContent.trim() : 'Contact Us';
+  const subtitleEl = block.querySelector('p');
+  const subtitle = subtitleEl ? subtitleEl.textContent.trim() : '';
 
   const loc = info.location || 'The Rinx, 660 Terry Road, Hauppauge, NY 11788';
   const phone = info.phone || '(631) 232-3222';
@@ -53,6 +58,10 @@ export default function decorate(block) {
   }
 
   block.innerHTML = `
+    <div class="contact-header">
+      <h1>${heading}</h1>
+      ${subtitle ? `<p>${subtitle}</p>` : ''}
+    </div>
     <div class="contact-grid">
       <div class="contact-info">
         <h3>Get In Touch</h3>
