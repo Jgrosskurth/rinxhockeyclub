@@ -3,7 +3,7 @@ export default function decorate(block) {
     <div class="footer-inner">
       <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" width="64" height="64"
            class="footer-logo-img" onerror="this.style.display='none'">
-      <p class="footer-name">Rinx Hockey Club &bull; Long Island Tier III/A Travel Hockey</p>
+      <p class="footer-name">Rinx Hockey Club &bull; Long Island, NY</p>
       <nav class="footer-nav">
         <a href="/">Home</a>
         <a href="/roster">Roster</a>
