@@ -3,7 +3,7 @@ export default function decorate(block) {
     <div class="footer-inner">
       <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" width="64" height="64"
            class="footer-logo-img" onerror="this.style.display='none'">
-      <p class="footer-name">Rinx Hockey Club &bull; 10U Squirts</p>
+      <p class="footer-name">Rinx Hockey Club &bull; Long Island</p>
       <nav class="footer-nav">
         <a href="/">Home</a>
         <a href="/roster">Roster</a>
@@ -16,7 +16,7 @@ export default function decorate(block) {
         <a href="/contact">Contact</a>
       </nav>
       <p class="footer-address">The Rinx &bull; 660 Terry Road, Hauppauge, NY 11788 &bull; (631) 232-3222</p>
-      <p class="footer-copy">&copy; 2026 Rinx Hockey Club &bull; 10U Squirts. All rights reserved.</p>
+      <p class="footer-copy">&copy; 2026 Rinx Hockey Club. All rights reserved.</p>
     </div>
   `;
 }
