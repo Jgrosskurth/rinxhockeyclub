@@ -46,7 +46,7 @@ export default function decorate(block) {
     <div class="c-item"><div class="c-icon">📍</div><div><h4>Location</h4><p>${loc}</p></div></div>
     <div class="c-item"><div class="c-icon">📞</div><div><h4>Phone</h4><p>${phone}</p></div></div>
     <div class="c-item"><div class="c-icon">✉️</div><div><h4>Email</h4><p>${email}</p></div></div>
-    <div class="c-item"><div class="c-icon">🌐</div><div><h4>Web</h4><p><a href="https://www.therinx.com" target="_blank">www.therinx.com</a></p></div></div>
+    <div class="c-item"><div class="c-icon c-icon-img"><img src="https://static.wixstatic.com/media/4d0004_2af87e7c9fbb4072b107268f0403e04d~mv2.png/v1/crop/x_35,y_20,w_496,h_280/fill/w_368,h_210,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/THE_RINX_Corp_CS2__2_-removebg-preview.png" alt="The Rinx"></div><div><h4>Web</h4><p><a href="https://www.therinx.com" target="_blank">www.therinx.com</a></p></div></div>
   `;
   if (hockeyEmail) {
     contactItems += `<div class="c-item"><div class="c-icon">🏒</div><div><h4>Hockey Email</h4><p>${hockeyEmail}</p></div></div>`;

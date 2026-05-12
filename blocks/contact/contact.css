@@ -57,6 +57,16 @@
   flex-shrink: 0;
 }
 
+.c-icon-img {
+  background: none;
+}
+
+.c-icon-img img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
 .c-item h4 {
   font-weight: 700;
   font-size: 0.85rem;
