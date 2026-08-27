@@ -89,74 +89,23 @@ function oppCell(g) {
 
 function renderRows(games) {
   return games.map((g) => {
+    const hasResult = ['W', 'L', 'T'].includes(g.result);
     let badge = 'tie';
     if (g.result === 'W') badge = 'win';
     else if (g.result === 'L') badge = 'loss';
+    const resultCell = hasResult ? `<span class="badge badge-${badge}">${g.result}</span>` : '';
     return `
     <div class="sg-row" data-result="${g.result}">
       <div class="sg-date">${g.date}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
-      <div class="sg-result"><span class="badge badge-${badge}">${g.result}</span></div>
+      <div class="sg-result">${resultCell}</div>
     </div>`;
   }).join('');
 }
 
-function renderUpcomingRows(games) {
-  return games.map((g) => `
-    <div class="sg-row sg-row-upcoming">
-      <div class="sg-date">${g.date}</div>
-      <div class="sg-time">${g.time}</div>
-      ${oppCell(g)}
-    </div>`).join('');
-}
-
-function decorateUpcoming(block, games) {
-  block.classList.add('schedule-upcoming');
-  block.innerHTML = `
-    <div class="schedule-controls">
-      <p class="schedule-note">${games.length} games &bull; 2026&ndash;2027 season &bull; scores posted after each game</p>
-      <a href="https://myhockeyrankings.com/team-info?t=19306&y=2027" target="_blank" class="mhr-link">
-        MyHockeyRankings.com &rarr;
-      </a>
-    </div>
-
-    <div class="schedule-table">
-      <div class="sg-header sg-header-upcoming">
-        <span>Date</span>
-        <span>Time</span>
-        <span>Opponent</span>
-      </div>
-      <div class="sg-rows">${renderUpcomingRows(games)}</div>
-    </div>
-
-    <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change</p>
-  `;
-}
-
 export default function decorate(block) {
   const rows = [...block.children];
-
-  // Detect upcoming-games mode: rows carry a Time column and no W/L/T result.
-  const parsed = rows.map((row) => [...row.children].map((c) => c.textContent.trim()));
-  const bodyRows = parsed.filter((cells) => cells.some((c) => c));
-  const looksUpcoming = bodyRows.length > 0 && bodyRows.every((cells) => {
-    const hasResult = cells.some((c) => /^(W|L|T)$/i.test(c));
-    const hasTime = cells.some((c) => /^\d{1,2}:\d{2}\s*[ap]m?$/i.test(c));
-    return hasTime && !hasResult;
-  });
-
-  if (looksUpcoming) {
-    // Authored columns: Date | Time | Location | Opponent
-    const upcoming = bodyRows.map((cells) => ({
-      date: cells[0] || '',
-      time: cells[1] || '',
-      loc: cells[2] || '',
-      opp: (cells[3] || '').replace(/^vs\s+/i, ''),
-    })).filter((g) => g.opp);
-    decorateUpcoming(block, upcoming);
-    return;
-  }
 
   const games = rows.map((row) => {
     const cells = [...row.children];
@@ -168,6 +117,35 @@ export default function decorate(block) {
       result: cells[4]?.textContent?.trim() || '',
     };
   }).filter((g) => g.opp);
+
+  // Upcoming schedule — no games have results yet. Keep the same table
+  // layout (Date | Opponent | Score | Result) but drop the win/loss summary
+  // and filters, and leave the score/result columns blank.
+  const hasResults = games.some((g) => ['W', 'L', 'T'].includes(g.result));
+  if (!hasResults) {
+    block.classList.add('schedule-upcoming');
+    block.innerHTML = `
+    <div class="schedule-controls">
+      <p class="schedule-note">${games.length} games &bull; scores posted after each game</p>
+      <a href="https://myhockeyrankings.com/team-info?t=19306&y=2027" target="_blank" class="mhr-link">
+        MyHockeyRankings.com &rarr;
+      </a>
+    </div>
+
+    <div class="schedule-table">
+      <div class="sg-header">
+        <span>Date</span>
+        <span>Opponent</span>
+        <span>Score</span>
+        <span>Result</span>
+      </div>
+      <div class="sg-rows">${renderRows(games)}</div>
+    </div>
+
+    <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change</p>
+  `;
+    return;
+  }
 
   const w = games.filter((g) => g.result === 'W').length;
   const l = games.filter((g) => g.result === 'L').length;

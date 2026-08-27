@@ -184,16 +184,10 @@
   margin: 0;
 }
 
-.sg-header-upcoming,
-.sg-row-upcoming {
-  grid-template-columns: 130px 90px 1fr;
-}
-
-.sg-time {
-  font-family: var(--heading-font-family);
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--color-red);
+/* Placeholder dash in the empty score column while awaiting results. */
+.schedule-upcoming .sg-score::before {
+  content: "–";
+  color: var(--color-gray-light);
 }
 
 .schedule-src {
@@ -367,15 +361,6 @@
   color: var(--color-navy) !important;
 }
 
-/* stylelint-disable no-descending-specificity */
-.schedule-block .sg-row-upcoming,
-.schedule.block .sg-row-upcoming,
-.schedule-block .sg-header-upcoming,
-.schedule.block .sg-header-upcoming {
-  grid-template-columns: 130px 90px 1fr !important;
-}
-/* stylelint-enable no-descending-specificity */
-
 @media (width <= 768px) {
   .schedule-block .sg-header,
   .schedule.block .sg-header,
@@ -384,13 +369,6 @@
     grid-template-columns: 65px 1fr 60px 50px !important;
     padding: 10px !important;
     gap: 8px !important;
-  }
-
-  .schedule-block .sg-row-upcoming,
-  .schedule.block .sg-row-upcoming,
-  .schedule-block .sg-header-upcoming,
-  .schedule.block .sg-header-upcoming {
-    grid-template-columns: 95px 70px 1fr !important;
   }
 
   .schedule-block .sg-name,
