@@ -51,21 +51,15 @@ function findLogoId(oppName) {
   return '';
 }
 
-function renderRows(games) {
-  return games.map((g) => {
-    const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
-      .join('')
-      .toUpperCase();
-    let badge = 'tie';
-    if (g.result === 'W') badge = 'win';
-    else if (g.result === 'L') badge = 'loss';
-    const logoId = findLogoId(g.opp);
-    const logoImg = logoId
-      ? `<img class="sg-logo" src="${MHR_CDN}${logoId}_a.png" alt="${g.opp}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      : '';
-    return `
-    <div class="sg-row" data-result="${g.result}">
-      <div class="sg-date">${g.date}</div>
+function oppCell(g) {
+  const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
+    .join('')
+    .toUpperCase();
+  const logoId = findLogoId(g.opp);
+  const logoImg = logoId
+    ? `<img class="sg-logo" src="${MHR_CDN}${logoId}_a.png" alt="${g.opp}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    : '';
+  return `
       <div class="sg-opp">
         ${logoImg}
         <div class="sg-logo-fb"${logoId ? ' style="display:none"' : ''}>${ini}</div>
@@ -73,15 +67,80 @@ function renderRows(games) {
           <div class="sg-name">${g.opp}</div>
           <div class="sg-loc">${g.loc}</div>
         </div>
-      </div>
+      </div>`;
+}
+
+function renderRows(games) {
+  return games.map((g) => {
+    let badge = 'tie';
+    if (g.result === 'W') badge = 'win';
+    else if (g.result === 'L') badge = 'loss';
+    return `
+    <div class="sg-row" data-result="${g.result}">
+      <div class="sg-date">${g.date}</div>
+      ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
       <div class="sg-result"><span class="badge badge-${badge}">${g.result}</span></div>
     </div>`;
   }).join('');
 }
 
+function renderUpcomingRows(games) {
+  return games.map((g) => `
+    <div class="sg-row sg-row-upcoming">
+      <div class="sg-date">${g.date}</div>
+      <div class="sg-time">${g.time}</div>
+      ${oppCell(g)}
+    </div>`).join('');
+}
+
+function decorateUpcoming(block, games) {
+  block.classList.add('schedule-upcoming');
+  block.innerHTML = `
+    <div class="schedule-controls">
+      <p class="schedule-note">${games.length} games &bull; 2026&ndash;2027 season &bull; scores posted after each game</p>
+      <a href="https://myhockeyrankings.com/team-info?t=19306&y=2027" target="_blank" class="mhr-link">
+        MyHockeyRankings.com &rarr;
+      </a>
+    </div>
+
+    <div class="schedule-table">
+      <div class="sg-header sg-header-upcoming">
+        <span>Date</span>
+        <span>Time</span>
+        <span>Opponent</span>
+      </div>
+      <div class="sg-rows">${renderUpcomingRows(games)}</div>
+    </div>
+
+    <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change</p>
+  `;
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
+
+  // Detect upcoming-games mode: rows carry a Time column and no W/L/T result.
+  const parsed = rows.map((row) => [...row.children].map((c) => c.textContent.trim()));
+  const bodyRows = parsed.filter((cells) => cells.some((c) => c));
+  const looksUpcoming = bodyRows.length > 0 && bodyRows.every((cells) => {
+    const hasResult = cells.some((c) => /^(W|L|T)$/i.test(c));
+    const hasTime = cells.some((c) => /^\d{1,2}:\d{2}\s*[ap]m?$/i.test(c));
+    return hasTime && !hasResult;
+  });
+
+  if (looksUpcoming) {
+    // Authored columns: Date | Time | Location | Opponent
+    const upcoming = bodyRows.map((cells) => ({
+      date: cells[0] || '',
+      time: cells[1] || '',
+      loc: cells[2] || '',
+      opp: (cells[3] || '').replace(/^vs\s+/i, ''),
+    })).filter((g) => g.opp);
+    decorateUpcoming(block, upcoming);
+    return;
+  }
+
   const games = rows.map((row) => {
     const cells = [...row.children];
     return {
