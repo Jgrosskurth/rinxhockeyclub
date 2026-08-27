@@ -2,8 +2,8 @@
   "type": "da",
   "sites": {
     "rinxhockeyclub": {
-      "contentHostUrl": "https://content.da.live/Jgrosskurth/rinxhockeyclub/",
-      "previewOrg": "Jgrosskurth",
+      "contentHostUrl": "https://content.da.live/jgrosskurth/rinxhockeyclub/",
+      "previewOrg": "jgrosskurth",
       "previewSite": "rinxhockeyclub"
     }
   }
