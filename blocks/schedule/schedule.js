@@ -2,7 +2,7 @@ const MHR_CDN = 'https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/l
 
 const TEAM_LOGOS = {
   // 10U confirmed
-  aviators: '001dfe',
+  aviator: '001dfe',
   kings: '001ba2',
   'north park': '002ee8',
   'great neck': '001934',
@@ -42,6 +42,12 @@ const TEAM_LOGOS = {
   flames: '000f8c',
 };
 
+// Logos for teams not on the ranking CDN, uploaded to the site media library.
+const LOCAL_LOGOS = {
+  'dix hills selects': '/images/dh.png',
+  'beaver dam': '/images/beaverdam.png',
+};
+
 function findLogoId(oppName) {
   const lower = oppName.toLowerCase();
   const keys = Object.keys(TEAM_LOGOS);
@@ -51,37 +57,56 @@ function findLogoId(oppName) {
   return '';
 }
 
-function renderRows(games) {
-  return games.map((g) => {
-    const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
-      .join('')
-      .toUpperCase();
-    let badge = 'tie';
-    if (g.result === 'W') badge = 'win';
-    else if (g.result === 'L') badge = 'loss';
-    const logoId = findLogoId(g.opp);
-    const logoImg = logoId
-      ? `<img class="sg-logo" src="${MHR_CDN}${logoId}_a.png" alt="${g.opp}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      : '';
-    return `
-    <div class="sg-row" data-result="${g.result}">
-      <div class="sg-date">${g.date}</div>
+function findLocalLogo(oppName) {
+  const lower = oppName.toLowerCase();
+  const keys = Object.keys(LOCAL_LOGOS);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (lower.includes(keys[i])) return LOCAL_LOGOS[keys[i]];
+  }
+  return '';
+}
+
+function oppCell(g) {
+  const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
+    .join('')
+    .toUpperCase();
+  const localLogo = findLocalLogo(g.opp);
+  const logoId = localLogo ? '' : findLogoId(g.opp);
+  const logoSrc = localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '');
+  const logoImg = logoSrc
+    ? `<img class="sg-logo" src="${logoSrc}" alt="${g.opp}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    : '';
+  return `
       <div class="sg-opp">
         ${logoImg}
-        <div class="sg-logo-fb"${logoId ? ' style="display:none"' : ''}>${ini}</div>
+        <div class="sg-logo-fb"${logoSrc ? ' style="display:none"' : ''}>${ini}</div>
         <div>
           <div class="sg-name">${g.opp}</div>
           <div class="sg-loc">${g.loc}</div>
         </div>
-      </div>
+      </div>`;
+}
+
+function renderRows(games) {
+  return games.map((g) => {
+    const hasResult = ['W', 'L', 'T'].includes(g.result);
+    let badge = 'tie';
+    if (g.result === 'W') badge = 'win';
+    else if (g.result === 'L') badge = 'loss';
+    const resultCell = hasResult ? `<span class="badge badge-${badge}">${g.result}</span>` : '';
+    return `
+    <div class="sg-row" data-result="${g.result}">
+      <div class="sg-date">${g.date}</div>
+      ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
-      <div class="sg-result"><span class="badge badge-${badge}">${g.result}</span></div>
+      <div class="sg-result">${resultCell}</div>
     </div>`;
   }).join('');
 }
 
 export default function decorate(block) {
   const rows = [...block.children];
+
   const games = rows.map((row) => {
     const cells = [...row.children];
     return {
@@ -92,6 +117,35 @@ export default function decorate(block) {
       result: cells[4]?.textContent?.trim() || '',
     };
   }).filter((g) => g.opp);
+
+  // Upcoming schedule — no games have results yet. Keep the same table
+  // layout (Date | Opponent | Score | Result) but drop the win/loss summary
+  // and filters, and leave the score/result columns blank.
+  const hasResults = games.some((g) => ['W', 'L', 'T'].includes(g.result));
+  if (!hasResults) {
+    block.classList.add('schedule-upcoming');
+    block.innerHTML = `
+    <div class="schedule-controls">
+      <p class="schedule-note">${games.length} games &bull; scores posted after each game</p>
+      <a href="https://myhockeyrankings.com/team-info?t=19306&y=2027" target="_blank" class="mhr-link">
+        MyHockeyRankings.com &rarr;
+      </a>
+    </div>
+
+    <div class="schedule-table">
+      <div class="sg-header">
+        <span>Date</span>
+        <span>Opponent</span>
+        <span>Score</span>
+        <span>Result</span>
+      </div>
+      <div class="sg-rows">${renderRows(games)}</div>
+    </div>
+
+    <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change</p>
+  `;
+    return;
+  }
 
   const w = games.filter((g) => g.result === 'W').length;
   const l = games.filter((g) => g.result === 'L').length;

@@ -173,6 +173,23 @@
 
 .sg-result { text-align: center; }
 
+/* ── Upcoming (pre-season) schedule ── */
+.schedule-upcoming .schedule-note {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-navy);
+  margin: 0;
+}
+
+/* Placeholder dash in the empty score column while awaiting results. */
+.schedule-upcoming .sg-score::before {
+  content: "–";
+  color: var(--color-gray-light);
+}
+
 .schedule-src {
   margin-top: 14px;
   font-size: 0.78rem;
@@ -184,7 +201,7 @@
   color: var(--color-red);
 }
 
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .schedule-summary {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -195,7 +212,7 @@
   }
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
   .schedule-summary {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -344,7 +361,7 @@
   color: var(--color-navy) !important;
 }
 
-@media (width <= 768px) {
+@media (max-width: 768px) {
   .schedule-block .sg-header,
   .schedule.block .sg-header,
   .schedule-block .sg-row,
@@ -361,7 +378,7 @@
   .schedule.block .sg-score { font-size: 0.9rem !important; }
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
   .schedule-block .sg-row,
   .schedule.block .sg-row {
     display: flex !important;
