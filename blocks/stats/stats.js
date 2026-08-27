@@ -196,8 +196,11 @@ export default function decorate(block) {
 
   block.innerHTML = `
     <div class="stats-controls">
-      <label class="season-select-label" for="season-select">Season</label>
-      <select id="season-select" class="season-select">${options}</select>
+      <div class="season-picker">
+        <label class="season-select-label" for="season-select">Season</label>
+        <select id="season-select" class="season-select">${options}</select>
+      </div>
+      <p class="season-hint">&#128197; Choose a season to view past stats &amp; archives</p>
     </div>
     <div class="stats-summary" id="stats-summary" style="display:none">
       <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>

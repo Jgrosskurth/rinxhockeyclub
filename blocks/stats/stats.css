@@ -1,8 +1,27 @@
 .stats-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
   margin-bottom: 24px;
+  padding: 14px 20px;
+  background: var(--color-ice);
+  border-left: 4px solid var(--color-red);
+  border-radius: 8px;
+}
+
+.season-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.season-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  font-weight: 600;
 }
 
 .season-select-label {
