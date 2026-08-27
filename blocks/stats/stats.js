@@ -174,13 +174,31 @@ async function loadStats(block, statsUrl) {
 export default function decorate(block) {
   const row = block.children[0];
   const is14u = window.location.pathname.includes('14u');
-  const defaultUrl = is14u
-    ? '/rinxstats-14u.csv'
-    : '/rinxstats.csv';
+
+  // Available seasons per team, newest first. The first entry is the default.
+  const seasons = is14u
+    ? [
+      { label: '2026–2027', url: '/rinxstats-14u.csv' },
+      { label: '2025–2026', url: '/rinxstats-14u-2025-2026.csv' },
+    ]
+    : [
+      { label: '2026–2027', url: '/rinxstats.csv' },
+      { label: '2025–2026', url: '/rinxstats-2025-2026.csv' },
+    ];
+
+  // An authored http(s) source overrides the current-season CSV.
   const cellText = row?.children[0]?.textContent?.trim() || '';
-  const statsUrl = cellText.startsWith('http') ? cellText : defaultUrl;
+  if (cellText.startsWith('http')) seasons[0].url = cellText;
+
+  const options = seasons
+    .map((s, i) => `<option value="${s.url}"${i === 0 ? ' selected' : ''}>${s.label} Season</option>`)
+    .join('');
 
   block.innerHTML = `
+    <div class="stats-controls">
+      <label class="season-select-label" for="season-select">Season</label>
+      <select id="season-select" class="season-select">${options}</select>
+    </div>
     <div class="stats-summary" id="stats-summary" style="display:none">
       <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>
       <div class="stat-tile"><span class="stat-num red" id="s-tg">--</span><span class="stat-lbl">Team Goals</span></div>
@@ -189,5 +207,8 @@ export default function decorate(block) {
     </div>
     <div id="stats-container"><div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div></div>
   `;
-  loadStats(block, statsUrl);
+
+  const select = block.querySelector('#season-select');
+  select.addEventListener('change', () => loadStats(block, select.value));
+  loadStats(block, seasons[0].url);
 }

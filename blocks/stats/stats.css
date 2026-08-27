@@ -1,3 +1,37 @@
+.stats-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.season-select-label {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-navy);
+}
+
+.season-select {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-navy);
+  padding: 8px 14px;
+  border: 2px solid var(--color-navy);
+  border-radius: 6px;
+  background: var(--color-white);
+  cursor: pointer;
+}
+
+.season-select:hover,
+.season-select:focus {
+  border-color: var(--color-red);
+  outline: none;
+}
+
 .stats-summary {
   background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
   border-radius: 12px;
