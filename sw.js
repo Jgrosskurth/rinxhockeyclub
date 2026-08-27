@@ -1,3 +1,5 @@
+/* eslint-env serviceworker */
+/* eslint-disable no-restricted-globals */
 const CACHE_NAME = 'rinx-hc-v1';
 const PRECACHE_URLS = [
   '/',

@@ -4,10 +4,13 @@
   "description": "Rinx Hockey Club 10U Squirts — AEM Edge Delivery Site",
   "scripts": {
     "lint:js": "eslint .",
-    "lint:css": "stylelint blocks/**/*.css styles/*.css"
+    "lint:css": "stylelint blocks/**/*.css styles/*.css",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:fix": "eslint . --fix && stylelint blocks/**/*.css styles/*.css --fix"
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "2.0.4",
+    "@babel/eslint-parser": "^7.29.7",
     "eslint": "8.57.0",
     "stylelint": "16.6.1",
     "stylelint-config-standard": "36.0.1"
