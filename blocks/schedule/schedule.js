@@ -80,7 +80,7 @@ function oppCell(g) {
   const logoId = localLogo ? '' : findLogoId(g.opp);
   const logoSrc = localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '');
   const logoImg = logoSrc
-    ? `<img class="sg-logo" src="${logoSrc}" alt="${g.opp}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    ? `<img class="sg-logo" src="${logoSrc}" alt="${g.opp}" width="36" height="36" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : '';
   return `
       <div class="sg-opp">
