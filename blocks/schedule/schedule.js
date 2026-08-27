@@ -2,7 +2,7 @@ const MHR_CDN = 'https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/l
 
 const TEAM_LOGOS = {
   // 10U confirmed
-  aviators: '001dfe',
+  aviator: '001dfe',
   kings: '001ba2',
   'north park': '002ee8',
   'great neck': '001934',
@@ -42,6 +42,12 @@ const TEAM_LOGOS = {
   flames: '000f8c',
 };
 
+// Logos for teams not on the ranking CDN, uploaded to the site media library.
+const LOCAL_LOGOS = {
+  'dix hills selects': '/images/dh.png',
+  'beaver dam': '/images/beaverdam.png',
+};
+
 function findLogoId(oppName) {
   const lower = oppName.toLowerCase();
   const keys = Object.keys(TEAM_LOGOS);
@@ -51,18 +57,29 @@ function findLogoId(oppName) {
   return '';
 }
 
+function findLocalLogo(oppName) {
+  const lower = oppName.toLowerCase();
+  const keys = Object.keys(LOCAL_LOGOS);
+  for (let i = 0; i < keys.length; i += 1) {
+    if (lower.includes(keys[i])) return LOCAL_LOGOS[keys[i]];
+  }
+  return '';
+}
+
 function oppCell(g) {
   const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
     .join('')
     .toUpperCase();
-  const logoId = findLogoId(g.opp);
-  const logoImg = logoId
-    ? `<img class="sg-logo" src="${MHR_CDN}${logoId}_a.png" alt="${g.opp}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+  const localLogo = findLocalLogo(g.opp);
+  const logoId = localLogo ? '' : findLogoId(g.opp);
+  const logoSrc = localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '');
+  const logoImg = logoSrc
+    ? `<img class="sg-logo" src="${logoSrc}" alt="${g.opp}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : '';
   return `
       <div class="sg-opp">
         ${logoImg}
-        <div class="sg-logo-fb"${logoId ? ' style="display:none"' : ''}>${ini}</div>
+        <div class="sg-logo-fb"${logoSrc ? ' style="display:none"' : ''}>${ini}</div>
         <div>
           <div class="sg-name">${g.opp}</div>
           <div class="sg-loc">${g.loc}</div>
