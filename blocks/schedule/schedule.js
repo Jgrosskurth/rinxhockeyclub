@@ -40,6 +40,16 @@ const TEAM_LOGOS = {
   ramparts: '001f58',
   wolves: '000f98',
   flames: '000f8c',
+  // 14U South opponents sharing a 10U club logo
+  peconic: '00153e', // Peconic Wildcats
+  brewster: '001f15', // Westchester Express (Brewster)
+};
+
+// Logos for teams not on the ranking CDN, uploaded to the site media library.
+const LOCAL_LOGOS = {
+  'dix hills selects': '/images/dh.png',
+  'beaver dam': '/images/beaverdam.png',
+  'white plains': '/images/whiteplains.png',
 };
 
 // Logos for teams not on the ranking CDN, uploaded to the site media library.
