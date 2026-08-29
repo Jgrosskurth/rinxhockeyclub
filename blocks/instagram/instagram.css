@@ -1,0 +1,42 @@
+.instagram {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 0 40px;
+}
+
+.instagram .instagram-title {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: var(--heading-font-size-l);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-navy);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.instagram .instagram-handle {
+  text-align: center;
+  margin: 0 0 28px;
+  font-weight: 700;
+}
+
+.instagram .instagram-handle a {
+  color: var(--color-red);
+  text-decoration: none;
+}
+
+.instagram .instagram-handle a:hover {
+  text-decoration: underline;
+}
+
+/* Reserve space so the deferred feed doesn't cause layout shift. */
+.instagram [data-elfsight-app-lazy] {
+  min-height: 320px;
+}
+
+@media (min-width: 900px) {
+  .instagram [data-elfsight-app-lazy] {
+    min-height: 420px;
+  }
+}
