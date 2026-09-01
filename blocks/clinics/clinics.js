@@ -1,11 +1,11 @@
 const CLINICS = [
   {
     day: 'Monday',
-    title: 'Evening Skills Clinic',
-    time: '6:00 PM – 7:00 PM',
+    title: 'Skills Clinic',
+    time: '5:00 PM – 6:30 PM',
     location: 'The Rinx, Hauppauge, NY',
     instructor: 'Rinx Staff',
-    frequency: 'Every Monday',
+    frequency: 'Every Monday (9/14/26 – June 2027)',
     badge: 'Open',
   },
   {
