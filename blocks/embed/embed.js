@@ -49,7 +49,20 @@ export default function decorate(block) {
     load();
   }
 
-  block.append(frame);
+  // On schedule pages, clip GameSheet's team header (logo, record, tabs) so
+  // the game list starts at the top. The header can't be removed via a URL or
+  // config param, so we offset the iframe up inside an overflow-hidden wrapper.
+  // The offset is a fixed estimate (responsive in CSS) since we can't measure
+  // inside the cross-origin frame.
+  const isSchedule = window.location.pathname.includes('schedule');
+  if (isSchedule) {
+    const clip = document.createElement('div');
+    clip.className = 'embed-clip';
+    clip.append(frame);
+    block.append(clip);
+  } else {
+    block.append(frame);
+  }
 
   // On schedule pages, offer a "Print / Save as PDF" action. The browser
   // itself renders the live GameSheet iframe into the printout, so the export

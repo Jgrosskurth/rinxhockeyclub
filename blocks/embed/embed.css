@@ -13,6 +13,32 @@
   background: var(--color-white);
 }
 
+/* Clip GameSheet's team header on schedule pages so games start at the top.
+   The iframe is pushed up by --embed-clip-offset inside an overflow-hidden
+   wrapper; the frame is grown by the same amount so its usable height holds. */
+.embed .embed-clip {
+  --embed-clip-offset: 235px;
+
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+}
+
+.embed .embed-clip iframe {
+  margin-top: calc(-1 * var(--embed-clip-offset));
+  height: calc(80vh + var(--embed-clip-offset));
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .embed .embed-clip {
+    /* GameSheet's header wraps taller on narrow screens. */
+    --embed-clip-offset: 300px;
+  }
+}
+
 .embed .embed-actions {
   display: flex;
   justify-content: flex-end;
@@ -69,6 +95,16 @@
     box-shadow: none;
     height: auto;
     min-height: 100vh;
+  }
+
+  /* When printing, don't clip — show the full schedule from the top. */
+  .embed .embed-clip {
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .embed .embed-clip iframe {
+    margin-top: 0;
   }
 }
 /* stylelint-enable no-descending-specificity */
