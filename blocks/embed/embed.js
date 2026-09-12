@@ -22,11 +22,25 @@ export default function decorate(block) {
   if (!url) return;
 
   const frame = document.createElement('iframe');
-  frame.src = url;
   frame.title = title || 'Embedded content';
   frame.loading = 'lazy';
   frame.setAttribute('allowfullscreen', '');
   frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+
+  // Defer loading the third-party document until the iframe scrolls into
+  // view so it stays off the critical path and doesn't hurt page LCP.
+  const load = () => { if (!frame.src) frame.src = url; };
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        load();
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(frame);
+  } else {
+    load();
+  }
 
   block.append(frame);
 }
