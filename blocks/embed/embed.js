@@ -27,6 +27,13 @@ export default function decorate(block) {
   frame.setAttribute('allowfullscreen', '');
   frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
 
+  // Reserve the height inline (matching embed.css) so the space is claimed
+  // during eager decoration, before the lazy block CSS loads — prevents CLS.
+  frame.style.display = 'block';
+  frame.style.width = '100%';
+  frame.style.height = '80vh';
+  frame.style.minHeight = '600px';
+
   // Defer loading the third-party document until the iframe scrolls into
   // view so it stays off the critical path and doesn't hurt page LCP.
   const load = () => { if (!frame.src) frame.src = url; };
