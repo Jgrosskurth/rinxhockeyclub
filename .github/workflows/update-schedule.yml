@@ -1,9 +1,11 @@
 name: Update Schedule & Stats from MHR/Ayrabo
 
+# Daily scraping is disabled: the Schedule and Stats pages now embed live
+# GameSheet data via iframes, so the MHR/Ayrabo scrapers are no longer needed
+# and would overwrite the 10U schedule page. Kept as a manual-only workflow in
+# case we need to regenerate the legacy native tables.
 on:
-  schedule:
-    - cron: '0 10 * * *'  # 6am ET (10:00 UTC)
-  workflow_dispatch: # manual trigger
+  workflow_dispatch: # manual trigger only
 
 jobs:
   update:
