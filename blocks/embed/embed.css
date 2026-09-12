@@ -1,0 +1,14 @@
+.embed {
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+/* Sizing (height/width) is set inline in embed.js to reserve space before
+   this lazy stylesheet loads and avoid layout shift. */
+.embed iframe {
+  border: 1px solid var(--color-gray-light);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  background: var(--color-white);
+}
