@@ -50,4 +50,34 @@ export default function decorate(block) {
   }
 
   block.append(frame);
+
+  // On schedule pages, offer a "Print / Save as PDF" action. The browser
+  // itself renders the live GameSheet iframe into the printout, so the export
+  // always reflects the current schedule (our code never reads the frame).
+  if (window.location.pathname.includes('schedule')) {
+    const bar = document.createElement('div');
+    bar.className = 'embed-actions';
+
+    const printBtn = document.createElement('button');
+    printBtn.type = 'button';
+    printBtn.className = 'embed-print-btn';
+    printBtn.textContent = '🖨 Print / Save as PDF';
+    printBtn.addEventListener('click', () => {
+      // Make sure the frame is loaded, then expand it so more of the schedule
+      // lays out for the printout, print, and restore the on-screen height.
+      load();
+      const prev = frame.style.height;
+      frame.style.height = '2400px';
+      const restore = () => {
+        frame.style.height = prev;
+        window.removeEventListener('afterprint', restore);
+      };
+      window.addEventListener('afterprint', restore);
+      // Give the layout a moment to reflow before opening the print dialog.
+      setTimeout(() => window.print(), 300);
+    });
+
+    bar.append(printBtn);
+    block.prepend(bar);
+  }
 }

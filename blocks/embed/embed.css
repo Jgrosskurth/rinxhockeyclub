@@ -12,3 +12,63 @@
   box-shadow: var(--shadow-card);
   background: var(--color-white);
 }
+
+.embed .embed-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.embed .embed-print-btn {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 18px;
+  border-radius: 4px;
+  border: 2px solid var(--color-navy);
+  background: var(--color-navy);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.embed .embed-print-btn:hover {
+  background: var(--color-red);
+  border-color: var(--color-red);
+}
+
+/* Print: show only the schedule iframe and page title; drop site chrome,
+   the print button itself, and the frame's border/shadow. */
+/* stylelint-disable no-descending-specificity */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  main .embed,
+  main .embed * {
+    visibility: visible;
+  }
+
+  .embed .embed-actions {
+    display: none;
+  }
+
+  .embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .embed iframe {
+    border: none;
+    box-shadow: none;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+/* stylelint-enable no-descending-specificity */
