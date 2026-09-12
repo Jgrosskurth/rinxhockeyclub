@@ -171,36 +171,54 @@ async function loadStats(block, statsUrl) {
   }
 }
 
+// Render the current season's live GameSheet stats in a branded iframe.
+function renderEmbed(block, container, url) {
+  // The GameSheet widget carries its own summary, so hide our CSV tiles.
+  block.querySelector('#stats-summary').style.display = 'none';
+  container.innerHTML = '';
+
+  const frame = document.createElement('iframe');
+  frame.className = 'stats-embed';
+  frame.title = 'Team statistics';
+  frame.loading = 'lazy';
+  frame.setAttribute('allowfullscreen', '');
+  frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+  frame.src = url;
+  container.append(frame);
+}
+
 export default function decorate(block) {
   const row = block.children[0];
   const is14u = window.location.pathname.includes('14u');
 
-  // Available seasons per team, newest first. The first entry is the default.
-  const seasons = is14u
-    ? [
-      { label: '2026–2027', url: '/rinxstats-14u.csv' },
-      { label: '2025–2026', url: '/rinxstats-14u-2025-2026.csv' },
-    ]
-    : [
-      { label: '2026–2027', url: '/rinxstats.csv' },
-      { label: '2025–2026', url: '/rinxstats-2025-2026.csv' },
-    ];
-
-  // An authored http(s) source overrides the current-season CSV.
+  // The current season's source is authored in the block. A GameSheet URL is
+  // shown as a live iframe; anything else is treated as a CSV.
+  const authoredLink = row?.querySelector('a')?.getAttribute('href')?.trim() || '';
   const cellText = row?.children[0]?.textContent?.trim() || '';
-  if (cellText.startsWith('http')) seasons[0].url = cellText;
+  const currentSrc = authoredLink || (cellText.startsWith('http') ? cellText : '');
+  const currentIsEmbed = /gamesheetstats\.com/i.test(currentSrc);
 
-  const options = seasons
-    .map((s, i) => `<option value="${s.url}"${i === 0 ? ' selected' : ''}>${s.label} Season</option>`)
+  const archiveUrl = is14u ? '/rinxstats-14u-2025-2026.csv' : '/rinxstats-2025-2026.csv';
+  const defaultCurrentCsv = is14u ? '/rinxstats-14u.csv' : '/rinxstats.csv';
+
+  // Available seasons, newest first. The first entry is the default view.
+  const seasons = [
+    {
+      label: 'Current Season',
+      type: currentIsEmbed ? 'embed' : 'csv',
+      url: currentSrc || defaultCurrentCsv,
+    },
+    { label: '2025–2026', type: 'csv', url: archiveUrl },
+  ];
+
+  const buttons = seasons
+    .map((s, i) => `<button class="season-btn${i === 0 ? ' active' : ''}" data-idx="${i}">${s.label}</button>`)
     .join('');
 
   block.innerHTML = `
     <div class="stats-controls">
-      <div class="season-picker">
-        <label class="season-select-label" for="season-select">Season</label>
-        <select id="season-select" class="season-select">${options}</select>
-      </div>
-      <p class="season-hint">&#128197; Choose a season to view past stats &amp; archives</p>
+      <div class="season-toggle">${buttons}</div>
+      <p class="season-hint">&#128197; Current season is live from GameSheet &bull; switch to view past seasons</p>
     </div>
     <div class="stats-summary" id="stats-summary" style="display:none">
       <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>
@@ -211,7 +229,21 @@ export default function decorate(block) {
     <div id="stats-container"><div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div></div>
   `;
 
-  const select = block.querySelector('#season-select');
-  select.addEventListener('change', () => loadStats(block, select.value));
-  loadStats(block, seasons[0].url);
+  const container = block.querySelector('#stats-container');
+  const showSeason = (idx) => {
+    const season = seasons[idx];
+    block.querySelectorAll('.season-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+    if (season.type === 'embed') {
+      renderEmbed(block, container, season.url);
+    } else {
+      container.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div>';
+      loadStats(block, season.url);
+    }
+  };
+
+  block.querySelectorAll('.season-btn').forEach((btn) => {
+    btn.addEventListener('click', () => showSeason(Number(btn.dataset.idx)));
+  });
+
+  showSeason(0);
 }
