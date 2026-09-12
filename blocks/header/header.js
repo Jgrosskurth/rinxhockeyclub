@@ -37,6 +37,13 @@ export default function decorate(block) {
             <a href="/stats-14u">14U Bantam</a>
           </div>
         </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Standings <span class="nav-plus">+</span></button>
+          <div class="nav-dropdown-menu">
+            <a href="/standings">10U Squirts</a>
+            <a href="/standings-14u">14U Bantam</a>
+          </div>
+        </div>
         <a href="/tournaments">Tournaments</a>
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
