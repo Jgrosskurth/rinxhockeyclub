@@ -212,11 +212,14 @@ function renderRows(games) {
         </div>`
       : '';
     const box = boxScoreUrl(g);
-    const boxAttrs = box
-      ? ` data-href="${box}" role="link" tabindex="0" aria-label="View box score: ${label} vs ${g.opp}"`
+    // A real anchor (stretched over the row) so taps work on mobile too; the
+    // calendar button sits above it via z-index and stays independently clickable.
+    const boxLink = box
+      ? `<a class="sg-rowlink" href="${box}" target="_blank" rel="noopener" aria-label="View box score: ${label} vs ${g.opp}"></a>`
       : '';
     return `
-    <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}"${boxAttrs}>
+    <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}">
+      ${boxLink}
       <div class="sg-date">${g.date}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
@@ -224,25 +227,6 @@ function renderRows(games) {
       ${cal}
     </div>`;
   }).join('');
-}
-
-// Make rows with a box-score id navigate to GameSheet on click / Enter.
-// Clicks on the calendar button or its menu are ignored.
-function wireBoxScores(block) {
-  const go = (row) => {
-    const { href } = row.dataset;
-    if (href) window.open(href, '_blank', 'noopener');
-  };
-  block.querySelectorAll('.sg-row.sg-clickable').forEach((row) => {
-    row.addEventListener('click', (e) => {
-      if (e.target.closest('.sg-cal-wrap')) return; // let the calendar handle it
-      go(row);
-    });
-    row.addEventListener('keydown', (e) => {
-      if (e.target !== row) return;
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(row); }
-    });
-  });
 }
 
 // Wire calendar buttons: toggle the menu, and build the .ics Blob on demand.
@@ -376,7 +360,6 @@ function renderSchedule(block, games) {
   `;
     wirePrint(block);
     wireCalendars(block);
-    wireBoxScores(block);
     return;
   }
 
@@ -432,7 +415,6 @@ function renderSchedule(block, games) {
 
   wirePrint(block);
   wireCalendars(block);
-  wireBoxScores(block);
 }
 
 export default async function decorate(block) {

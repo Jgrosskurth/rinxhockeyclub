@@ -455,7 +455,9 @@
   border-color: var(--color-red);
 }
 
-/* Clickable game rows (open the GameSheet box score). */
+/* Clickable game rows (open the GameSheet box score). A stretched anchor
+   covers the whole row so taps work on mobile; the calendar button layers
+   above it via a higher z-index. */
 .schedule .sg-row.sg-clickable {
   cursor: pointer;
   transition: background 0.15s;
@@ -465,9 +467,27 @@
   background: var(--color-ice);
 }
 
-.schedule .sg-row.sg-clickable:focus-visible {
+.schedule .sg-rowlink {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-decoration: none;
+}
+
+.schedule .sg-rowlink:focus-visible {
   outline: 2px solid var(--color-navy);
   outline-offset: -2px;
+}
+
+/* Keep the game content above the stretched link so text stays selectable
+   and the score/opponent render normally; the link still covers gaps. */
+.schedule .sg-row.sg-clickable > .sg-date,
+.schedule .sg-row.sg-clickable > .sg-opp,
+.schedule .sg-row.sg-clickable > .sg-score,
+.schedule .sg-row.sg-clickable > .sg-result {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Per-game "add to calendar" button, pinned to the far right of the row. */
@@ -566,7 +586,8 @@
   .schedule .filter-buttons,
   .schedule .sg-result,
   .schedule .sg-cal,
-  .schedule .sg-cal-wrap {
+  .schedule .sg-cal-wrap,
+  .schedule .sg-rowlink {
     display: none !important;
   }
 
