@@ -11,7 +11,8 @@
       "location": "Peconic Ice Rink",
       "time": "",
       "score": "8-3",
-      "result": "W"
+      "result": "W",
+      "gameId": "2990043"
     },
     {
       "date": "Sep 13, 2026",
@@ -20,7 +21,8 @@
       "location": "The Rinx",
       "time": "",
       "score": "7-0",
-      "result": "W"
+      "result": "W",
+      "gameId": "2998286"
     },
     {
       "date": "Sep 26, 2026",
@@ -29,7 +31,8 @@
       "location": "The Rinx",
       "time": "3:45 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990036"
     },
     {
       "date": "Oct 3, 2026",
@@ -38,7 +41,8 @@
       "location": "The Rinx",
       "time": "4:40 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990034"
     },
     {
       "date": "Oct 18, 2026",
@@ -47,7 +51,8 @@
       "location": "The Rinx",
       "time": "11:40 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990035"
     },
     {
       "date": "Oct 24, 2026",
@@ -56,7 +61,8 @@
       "location": "Parkwood Ice Rink",
       "time": "6:30 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990058"
     },
     {
       "date": "Nov 8, 2026",
@@ -65,7 +71,8 @@
       "location": "City Ice Pavilion",
       "time": "7:10 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990053"
     },
     {
       "date": "Jan 9, 2027",
@@ -74,7 +81,8 @@
       "location": "Iceland",
       "time": "2:00 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990048"
     },
     {
       "date": "Jan 10, 2027",
@@ -83,7 +91,8 @@
       "location": "Dix Hills Ice Rink",
       "time": "3:00 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2992411"
     },
     {
       "date": "Jan 23, 2027",
@@ -92,7 +101,8 @@
       "location": "Aviator Sports Center",
       "time": "6:15 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990038"
     },
     {
       "date": "Jan 24, 2027",
@@ -101,7 +111,8 @@
       "location": "The Rinx",
       "time": "11:40 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990037"
     },
     {
       "date": "Jan 30, 2027",
@@ -110,7 +121,8 @@
       "location": "The Rinx",
       "time": "2:05 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2990033"
     },
     {
       "date": "Feb 6, 2027",
@@ -119,7 +131,8 @@
       "location": "The Rinx",
       "time": "4:40 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2992410"
     }
   ]
 }

@@ -11,7 +11,8 @@
       "location": "Peconic Ice Rink",
       "time": "",
       "score": "8-2",
-      "result": "W"
+      "result": "W",
+      "gameId": "2989476"
     },
     {
       "date": "Sep 20, 2026",
@@ -20,7 +21,8 @@
       "location": "The Rinx",
       "time": "11:40 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989524"
     },
     {
       "date": "Sep 27, 2026",
@@ -29,7 +31,8 @@
       "location": "The Rinx",
       "time": "10:00 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989517"
     },
     {
       "date": "Oct 17, 2026",
@@ -38,7 +41,8 @@
       "location": "Long Beach Arena",
       "time": "8:30 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989473"
     },
     {
       "date": "Oct 18, 2026",
@@ -47,7 +51,8 @@
       "location": "Iceland",
       "time": "8:15 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989472"
     },
     {
       "date": "Oct 24, 2026",
@@ -56,7 +61,8 @@
       "location": "Port Washington Skating Center",
       "time": "4:00 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989474"
     },
     {
       "date": "Nov 15, 2026",
@@ -65,7 +71,8 @@
       "location": "The Rinx",
       "time": "10:00 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989497"
     },
     {
       "date": "Nov 29, 2026",
@@ -74,7 +81,8 @@
       "location": "Northwell Twin Rinks",
       "time": "3:15 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989475"
     },
     {
       "date": "Dec 5, 2026",
@@ -83,7 +91,8 @@
       "location": "The Rinx",
       "time": "2:05 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989510"
     },
     {
       "date": "Dec 6, 2026",
@@ -92,7 +101,8 @@
       "location": "Parkwood Ice Rink",
       "time": "7:30 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989471"
     },
     {
       "date": "Dec 12, 2026",
@@ -101,7 +111,8 @@
       "location": "The Rinx",
       "time": "2:05 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989504"
     },
     {
       "date": "Dec 19, 2026",
@@ -110,7 +121,8 @@
       "location": "The Rinx",
       "time": "4:40 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989483"
     },
     {
       "date": "Dec 20, 2026",
@@ -119,7 +131,8 @@
       "location": "Aviator Sports Center",
       "time": "3:45 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989470"
     },
     {
       "date": "Jan 2, 2027",
@@ -128,7 +141,8 @@
       "location": "The Rinx",
       "time": "4:40 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2992376"
     },
     {
       "date": "Jan 23, 2027",
@@ -137,7 +151,8 @@
       "location": "The Rinx",
       "time": "3:10 PM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2989490"
     },
     {
       "date": "Jan 31, 2027",
@@ -146,7 +161,8 @@
       "location": "Dix Hills Ice Rink",
       "time": "7:35 AM",
       "score": "",
-      "result": ""
+      "result": "",
+      "gameId": "2992368"
     }
   ]
 }
