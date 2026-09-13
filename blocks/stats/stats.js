@@ -25,7 +25,7 @@ function findKey(obj, ...candidates) {
   return '';
 }
 
-function renderTable(block, container, rows) {
+function renderTable(block, container, rows, source) {
   const fmt = (v) => ((v === '' || v == null) ? '—' : v);
   const n = (v) => parseFloat(v) || 0;
 
@@ -151,7 +151,7 @@ function renderTable(block, container, rows) {
         <tbody id="stats-tbody"></tbody>
       </table>
     </div>
-    <p class="stats-src">Stats sourced from <a href="https://ayrabo.com/sports/1/teams/${window.location.pathname.includes('14u') ? '573' : '572'}/roster/" target="_blank">ayrabo.com</a></p>
+    <p class="stats-src">${source || 'Stats sourced from <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>'}</p>
   `;
 
   render();
@@ -165,7 +165,8 @@ async function loadStats(block, statsUrl) {
     const text = await resp.text();
     const rows = parseCSV(text);
     if (!rows.length) throw new Error('empty');
-    renderTable(block, container, rows);
+    const src = `Stats sourced from <a href="https://ayrabo.com/sports/1/teams/${window.location.pathname.includes('14u') ? '573' : '572'}/roster/" target="_blank" rel="noopener">ayrabo.com</a>`;
+    renderTable(block, container, rows, src);
   } catch {
     container.innerHTML = '<div class="err-box"><p>Could not load stats. <a href="https://ayrabo.com/sports/1/teams/572/roster/" target="_blank">View on ayrabo.com &rarr;</a></p></div>';
   }
