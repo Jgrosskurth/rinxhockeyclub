@@ -44,12 +44,14 @@ SCHEDULE_JS = r"""
     const weAreHome = isOurs(home);
     const opponent = weAreHome ? visitor : home;
     let result = '', score = '', gtime = '';
+    // GameSheet writes the score cell from the VIEWED team's perspective
+    // ("W 7 - 0" = our team won 7-0), with a W/L/T badge that is our result.
+    // So use the badge and the numbers as-is — do NOT flip on home/away.
     const m = mid.match(/([WLT])\s*(\d+)\s*-\s*(\d+)/i);
     if (m) {
-      const vis = +m[2], hom = +m[3];
-      const us = weAreHome ? hom : vis, them = weAreHome ? vis : hom;
+      const us = +m[2], them = +m[3];
       score = us + '-' + them;
-      result = us > them ? 'W' : (us < them ? 'L' : 'T');
+      result = m[1].toUpperCase();
     } else { gtime = mid; }
     games.push({ date, opponent, venue: weAreHome ? 'Home' : 'Away',
       location, time: gtime, score, result });
