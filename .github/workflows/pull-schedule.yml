@@ -1,0 +1,45 @@
+name: Pull GameSheet Schedule (test)
+
+# Manual-only for now. This is a TEST to find out whether a GitHub-hosted
+# runner can clear GameSheet's Cloudflare challenge. Trigger it from the
+# Actions tab (Run workflow), then inspect data/schedule.json in the repo.
+# If it works, we can add a `schedule:` cron later.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Playwright + Chromium
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: Pull 10U schedule from GameSheet
+        run: |
+          python pull_gamesheet_schedule.py \
+            --season 15381 --team 555061 --division 83000 \
+            --out data/schedule.json
+
+      - name: Show result
+        run: |
+          echo "----- data/schedule.json -----"
+          cat data/schedule.json | head -40
+
+      - name: Commit result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/schedule.json
+          git commit -m "Update GameSheet schedule data [skip ci]" || echo "No changes to commit"
+          git push
