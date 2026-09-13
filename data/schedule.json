@@ -1,0 +1,168 @@
+{
+  "team": "NYH0017-010 RINX TRAVEL 10U O'DONOGHUE",
+  "count": 16,
+  "blocked_by_cloudflare": false,
+  "last_page_title": "NYH0017-010 Rinx Travel 10U O'Donoghue - Schedule | Long Island Amateur Hockey League - 2026/2027 \u00bb USAH - New York District",
+  "games": [
+    {
+      "date": "Sep 13, 2026",
+      "opponent": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "venue": "Away",
+      "location": "Peconic Ice Rink",
+      "time": "",
+      "score": "8-2",
+      "result": "W",
+      "game_number": "12671489"
+    },
+    {
+      "date": "Sep 20, 2026",
+      "opponent": "NYH4033-002-North Park-10U Mauro",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "11:40 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671503"
+    },
+    {
+      "date": "Sep 27, 2026",
+      "opponent": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "10:00 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671515"
+    },
+    {
+      "date": "Oct 17, 2026",
+      "opponent": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "venue": "Away",
+      "location": "Long Beach Arena",
+      "time": "8:30 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671530"
+    },
+    {
+      "date": "Oct 18, 2026",
+      "opponent": "NYH0007-001 Long Island Sharks 10u Davis",
+      "venue": "Away",
+      "location": "Iceland",
+      "time": "8:15 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671536"
+    },
+    {
+      "date": "Oct 24, 2026",
+      "opponent": "NYH4033-002-North Park-10U Mauro",
+      "venue": "Away",
+      "location": "Port Washington Skating Center",
+      "time": "4:00 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12683247"
+    },
+    {
+      "date": "Nov 15, 2026",
+      "opponent": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "10:00 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671566"
+    },
+    {
+      "date": "Nov 29, 2026",
+      "opponent": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "venue": "Away",
+      "location": "Northwell Twin Rinks",
+      "time": "3:15 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12690043"
+    },
+    {
+      "date": "Dec 5, 2026",
+      "opponent": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "2:05 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671579"
+    },
+    {
+      "date": "Dec 6, 2026",
+      "opponent": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "venue": "Away",
+      "location": "Parkwood Ice Rink",
+      "time": "7:30 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671583"
+    },
+    {
+      "date": "Dec 12, 2026",
+      "opponent": "NYH0007-001 Long Island Sharks 10u Davis",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "2:05 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671589"
+    },
+    {
+      "date": "Dec 19, 2026",
+      "opponent": "NYH0036-010 Aviator Hockey Club 10U Janss",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "4:40 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671599"
+    },
+    {
+      "date": "Dec 20, 2026",
+      "opponent": "NYH0036-010 Aviator Hockey Club 10U Janss",
+      "venue": "Away",
+      "location": "Aviator Sports Center",
+      "time": "3:45 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12684418"
+    },
+    {
+      "date": "Jan 2, 2027",
+      "opponent": "NYH0093-006 Dix Hills Selects 10U Goldfine",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "4:40 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671606"
+    },
+    {
+      "date": "Jan 23, 2027",
+      "opponent": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "3:10 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671625"
+    },
+    {
+      "date": "Jan 31, 2027",
+      "opponent": "NYH0093-006 Dix Hills Selects 10U Goldfine",
+      "venue": "Away",
+      "location": "Dix Hills Ice Rink",
+      "time": "7:35 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671636"
+    }
+  ]
+}
