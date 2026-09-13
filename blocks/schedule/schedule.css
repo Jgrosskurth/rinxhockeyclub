@@ -413,3 +413,22 @@
     display: none !important;
   }
 }
+
+/* Loading / error states (feed-backed schedule) */
+.schedule .loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 60px 20px;
+}
+
+.schedule .err-box {
+  padding: 40px;
+  text-align: center;
+}
+
+.schedule .err-box a {
+  color: var(--color-red);
+  font-weight: 700;
+}

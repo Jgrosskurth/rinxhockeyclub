@@ -110,20 +110,43 @@ function renderRows(games) {
   }).join('');
 }
 
-export default function decorate(block) {
-  const rows = [...block.children];
+// GitHub-hosted JSON feed produced by the pull-schedule workflow.
+const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
-  const games = rows.map((row) => {
-    const cells = [...row.children];
-    return {
-      date: cells[0]?.textContent?.trim() || '',
-      opp: cells[1]?.textContent?.trim() || '',
-      loc: cells[2]?.textContent?.trim() || '',
-      score: cells[3]?.textContent?.trim() || '',
-      result: cells[4]?.textContent?.trim() || '',
-    };
-  }).filter((g) => g.opp);
+// Clean up GameSheet's verbose team names for display, e.g.
+// "NYH4033-002-North Park-10U Mauro" -> "North Park".
+function tidyOpponent(name) {
+  return (name || '')
+    .replace(/^NYH?\d+[-\s]*\d*\s*/i, '') // leading registration code
+    .replace(/[-\s]*\d{1,2}U\b.*$/i, '') // trailing "10U ..." / coach
+    .replace(/[-–]\s*$/, '')
+    .replace(/\s+/g, ' ')
+    .trim() || name;
+}
 
+// Map a feed game to the block's internal shape.
+function fromFeed(g) {
+  const opp = tidyOpponent(g.opponent);
+  const parts = [g.location, g.time].filter(Boolean);
+  return {
+    date: g.date || '',
+    opp,
+    loc: parts.join(' · '),
+    score: g.score || '',
+    result: g.result || '',
+  };
+}
+
+async function loadFeedGames() {
+  const is14u = window.location.pathname.includes('14u');
+  const url = `${FEED_BASE}/schedule-${is14u ? '14u' : '10u'}.json`;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`feed ${resp.status}`);
+  const data = await resp.json();
+  return (data.games || []).map(fromFeed).filter((g) => g.opp);
+}
+
+function renderSchedule(block, games) {
   // Upcoming schedule — no games have results yet. Keep the same table
   // layout (Date | Opponent | Score | Result) but drop the win/loss summary
   // and filters, and leave the score/result columns blank.
@@ -133,9 +156,6 @@ export default function decorate(block) {
     block.innerHTML = `
     <div class="schedule-controls">
       <p class="schedule-note">${games.length} games &bull; scores posted after each game</p>
-      <a href="https://myhockeyrankings.com/team-info?t=19306&y=2027" target="_blank" class="mhr-link">
-        MyHockeyRankings.com &rarr;
-      </a>
     </div>
 
     <div class="schedule-table">
@@ -175,9 +195,6 @@ export default function decorate(block) {
         <button class="filter-btn" data-filter="L">Losses</button>
         <button class="filter-btn" data-filter="T">Ties</button>
       </div>
-      <a href="https://myhockeyrankings.com/team-info?t=19306&y=2025" target="_blank" class="mhr-link">
-        MyHockeyRankings.com &rarr;
-      </a>
     </div>
 
     <div class="schedule-table">
@@ -190,7 +207,7 @@ export default function decorate(block) {
       <div class="sg-rows">${renderRows(games)}</div>
     </div>
 
-    <p class="schedule-src">2024&ndash;2025 season results &bull; Source: <a href="https://myhockeyrankings.com/team-info?t=19306&y=2025" target="_blank">MyHockeyRankings.com</a></p>
+    <p class="schedule-src">2026&ndash;2027 season &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a></p>
   `;
 
   block.querySelectorAll('.filter-btn').forEach((btn) => {
@@ -203,4 +220,36 @@ export default function decorate(block) {
       });
     });
   });
+}
+
+export default async function decorate(block) {
+  // Any authored rows act as a fallback if the live feed is unavailable.
+  const authored = [...block.children].map((row) => {
+    const cells = [...row.children];
+    return {
+      date: cells[0]?.textContent?.trim() || '',
+      opp: cells[1]?.textContent?.trim() || '',
+      loc: cells[2]?.textContent?.trim() || '',
+      score: cells[3]?.textContent?.trim() || '',
+      result: cells[4]?.textContent?.trim() || '',
+    };
+  }).filter((g) => g.opp);
+
+  block.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading schedule&hellip;</p></div>';
+
+  try {
+    const games = await loadFeedGames();
+    if (games.length) {
+      renderSchedule(block, games);
+      return;
+    }
+    throw new Error('empty feed');
+  } catch {
+    if (authored.length) {
+      renderSchedule(block, authored);
+    } else {
+      block.innerHTML = '<div class="err-box"><p>Schedule is temporarily unavailable. '
+        + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
+    }
+  }
 }

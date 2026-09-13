@@ -1,11 +1,13 @@
-name: Pull GameSheet Schedule (test)
+name: Pull GameSheet Schedule
 
-# Manual-only for now. This is a TEST to find out whether a GitHub-hosted
-# runner can clear GameSheet's Cloudflare challenge. Trigger it from the
-# Actions tab (Run workflow), then inspect data/schedule.json in the repo.
-# If it works, we can add a `schedule:` cron later.
+# Pulls 10U and 14U schedules/results from GameSheet into data/*.json, which
+# the native schedule block on the site fetches directly. Runs twice daily
+# (10:00 and 22:00 ET) plus on-demand from the Actions tab.
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 14 * * *'   # 10:00 ET (14:00 UTC)
+    - cron: '0 2 * * *'    # 22:00 ET (02:00 UTC)
 
 permissions:
   contents: write
@@ -25,21 +27,27 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Pull 10U schedule from GameSheet
+      - name: Pull 10U schedule
         run: |
           python pull_gamesheet_schedule.py \
             --season 15381 --team 555061 --division 83000 \
-            --out data/schedule.json
+            --out data/schedule-10u.json
 
-      - name: Show result
+      - name: Pull 14U schedule
         run: |
-          echo "----- data/schedule.json -----"
-          cat data/schedule.json | head -40
+          python pull_gamesheet_schedule.py \
+            --season 15381 --team 555117 --division 83002 \
+            --out data/schedule-14u.json
 
-      - name: Commit result
+      - name: Show results
+        run: |
+          echo "----- 10U -----"; head -12 data/schedule-10u.json
+          echo "----- 14U -----"; head -12 data/schedule-14u.json
+
+      - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/schedule.json
+          git add data/schedule-10u.json data/schedule-14u.json
           git commit -m "Update GameSheet schedule data [skip ci]" || echo "No changes to commit"
           git push
