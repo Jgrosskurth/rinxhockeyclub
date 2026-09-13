@@ -151,6 +151,32 @@ STANDINGS_JS = r"""
 }
 """
 
+# Box score: capture headings and every role-table (headers + all rows) plus a
+# trimmed text dump. Generic on purpose so one pull reveals the real structure,
+# which the native block then renders.
+BOXSCORE_JS = r"""
+() => {
+  const norm = (s) => (s || '').replace(/\s+/g, ' ').trim();
+  const headings = [...document.querySelectorAll('h1,h2,h3,h4,h5')]
+    .map((h) => norm(h.innerText)).filter(Boolean);
+  const tables = [...document.querySelectorAll('[role="table"], table')].map((t) => {
+    const heads = [...t.querySelectorAll('[role="columnheader"], th')].map((h) => norm(h.innerText));
+    const rows = [];
+    t.querySelectorAll('[role="row"], tr').forEach((r) => {
+      const cells = [...r.querySelectorAll('[role="cell"], td')].map((c) => norm(c.innerText));
+      if (cells.length) rows.push(cells);
+    });
+    return { heads, rows };
+  });
+  return {
+    title: norm(document.title),
+    headings,
+    tables,
+    text: norm(document.body.innerText).slice(0, 4000),
+  };
+}
+"""
+
 
 def build_url(page_type, season, team, division):
     kind = {"schedule": "schedule", "stats": "team-stats", "standings": "standings"}[page_type]
@@ -167,15 +193,19 @@ def build_url(page_type, season, team, division):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--type", required=True, choices=["schedule", "stats", "standings"])
+    ap.add_argument("--type", required=True, choices=["schedule", "stats", "standings", "boxscore"])
     ap.add_argument("--season", required=True)
-    ap.add_argument("--team", required=True)
-    ap.add_argument("--division", required=True)
+    ap.add_argument("--team", help="team id (team-page types)")
+    ap.add_argument("--division", help="division id (team-page types)")
+    ap.add_argument("--game", help="game id (boxscore type)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--timeout", type=int, default=60)
     args = ap.parse_args()
 
-    url = build_url(args.type, args.season, args.team, args.division)
+    if args.type == "boxscore":
+        url = f"https://gamesheetstats.com/seasons/{args.season}/games/{args.game}"
+    else:
+        url = build_url(args.type, args.season, args.team, args.division)
     print(f"[{args.type}] Opening: {url}", file=sys.stderr)
 
     ourteam, payload_data, last_title = "", None, ""
@@ -195,6 +225,13 @@ def main():
             page.wait_for_timeout(2000)
             last_title = page.title()
             if "Just a moment" in last_title:
+                continue
+            if args.type == "boxscore":
+                # Box score: wait until the page has rendered at least one table.
+                data = page.evaluate(BOXSCORE_JS)
+                if data and data.get("tables"):
+                    payload_data = data
+                    break
                 continue
             try:
                 ourteam = page.locator("h2").first.inner_text(timeout=1000).strip()

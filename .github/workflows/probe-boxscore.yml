@@ -1,0 +1,33 @@
+name: Probe Box Score (temp)
+
+# Temporary: pull two known games to reveal the box-score DOM structure.
+# Remove once the native box-score block is built.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright + Chromium
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+      - name: Pull box scores (10U 2989476, 14U 2998286)
+        run: |
+          python pull_gamesheet.py --type boxscore --season 15381 --game 2989476 --out data/boxscores/2989476.json
+          python pull_gamesheet.py --type boxscore --season 15381 --game 2998286 --out data/boxscores/2998286.json
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/boxscores/*.json
+          git commit -m "Probe box-score structure [skip ci]" || echo "No changes"
+          git push
