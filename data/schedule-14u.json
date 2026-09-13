@@ -1,0 +1,138 @@
+{
+  "team": "NYH0017-015 RINX TRAVEL 14U SOUTH SKILLMAN",
+  "count": 13,
+  "blocked_by_cloudflare": false,
+  "last_page_title": "NYH0017-015 Rinx Travel 14u South Skillman - Schedule | Long Island Amateur Hockey League - 2026/2027 \u00bb USAH - New York District",
+  "games": [
+    {
+      "date": "Sep 12, 2026",
+      "opponent": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "venue": "Away",
+      "location": "Peconic Ice Rink",
+      "time": "",
+      "score": "8-3",
+      "result": "W",
+      "game_number": "12671841"
+    },
+    {
+      "date": "Sep 13, 2026",
+      "opponent": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "",
+      "score": "0-7",
+      "result": "L",
+      "game_number": "12709010"
+    },
+    {
+      "date": "Sep 26, 2026",
+      "opponent": "NYH4033-014 North Park 14U -Pala",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "3:45 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671856"
+    },
+    {
+      "date": "Oct 3, 2026",
+      "opponent": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "4:40 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671863"
+    },
+    {
+      "date": "Oct 18, 2026",
+      "opponent": "NYH0007-004 Long Island Sharks 14u Manno",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "11:40 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671881"
+    },
+    {
+      "date": "Oct 24, 2026",
+      "opponent": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
+      "venue": "Away",
+      "location": "Parkwood Ice Rink",
+      "time": "6:30 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671888"
+    },
+    {
+      "date": "Nov 8, 2026",
+      "opponent": "NYH4033-014 North Park 14U -Pala",
+      "venue": "Away",
+      "location": "City Ice Pavilion",
+      "time": "7:10 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12683257"
+    },
+    {
+      "date": "Jan 9, 2027",
+      "opponent": "NYH0007-004 Long Island Sharks 14u Manno",
+      "venue": "Away",
+      "location": "Iceland",
+      "time": "2:00 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671951"
+    },
+    {
+      "date": "Jan 10, 2027",
+      "opponent": "NYH0093-008 Dix Hills Selects 14U Flanagan",
+      "venue": "Away",
+      "location": "Dix Hills Ice Rink",
+      "time": "3:00 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671955"
+    },
+    {
+      "date": "Jan 23, 2027",
+      "opponent": "NYH0036-007 Aviator Hockey Club 14U Leonard",
+      "venue": "Away",
+      "location": "Aviator Sports Center",
+      "time": "6:15 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12684427"
+    },
+    {
+      "date": "Jan 24, 2027",
+      "opponent": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "11:40 AM",
+      "score": "",
+      "result": "",
+      "game_number": "12671965"
+    },
+    {
+      "date": "Jan 30, 2027",
+      "opponent": "NYH0036-007 Aviator Hockey Club 14U Leonard",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "2:05 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671967"
+    },
+    {
+      "date": "Feb 6, 2027",
+      "opponent": "NYH0093-008 Dix Hills Selects 14U Flanagan",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "4:40 PM",
+      "score": "",
+      "result": "",
+      "game_number": "12671976"
+    }
+  ]
+}
