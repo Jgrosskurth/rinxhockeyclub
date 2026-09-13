@@ -455,6 +455,21 @@
   border-color: var(--color-red);
 }
 
+/* Clickable game rows (open the GameSheet box score). */
+.schedule .sg-row.sg-clickable {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.schedule .sg-row.sg-clickable:hover {
+  background: var(--color-ice);
+}
+
+.schedule .sg-row.sg-clickable:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: -2px;
+}
+
 /* Per-game "add to calendar" button, pinned to the far right of the row. */
 .schedule .sg-cal-wrap {
   position: absolute;

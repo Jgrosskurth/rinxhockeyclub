@@ -186,6 +186,11 @@ function teamLabel() {
   return window.location.pathname.includes('14u') ? 'Rinx 14U Bantam' : 'Rinx 10U Squirts';
 }
 
+// Link to a game's GameSheet box score, if we have its id.
+function boxScoreUrl(g) {
+  return g.gameId ? `https://gamesheetstats.com/seasons/15381/games/${g.gameId}` : '';
+}
+
 function renderRows(games) {
   const label = teamLabel();
   return games.map((g) => {
@@ -206,8 +211,12 @@ function renderRows(games) {
           </div>
         </div>`
       : '';
+    const box = boxScoreUrl(g);
+    const boxAttrs = box
+      ? ` data-href="${box}" role="link" tabindex="0" aria-label="View box score: ${label} vs ${g.opp}"`
+      : '';
     return `
-    <div class="sg-row" data-result="${g.result}">
+    <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}"${boxAttrs}>
       <div class="sg-date">${g.date}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
@@ -215,6 +224,25 @@ function renderRows(games) {
       ${cal}
     </div>`;
   }).join('');
+}
+
+// Make rows with a box-score id navigate to GameSheet on click / Enter.
+// Clicks on the calendar button or its menu are ignored.
+function wireBoxScores(block) {
+  const go = (row) => {
+    const { href } = row.dataset;
+    if (href) window.open(href, '_blank', 'noopener');
+  };
+  block.querySelectorAll('.sg-row.sg-clickable').forEach((row) => {
+    row.addEventListener('click', (e) => {
+      if (e.target.closest('.sg-cal-wrap')) return; // let the calendar handle it
+      go(row);
+    });
+    row.addEventListener('keydown', (e) => {
+      if (e.target !== row) return;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(row); }
+    });
+  });
 }
 
 // Wire calendar buttons: toggle the menu, and build the .ics Blob on demand.
@@ -291,6 +319,7 @@ function fromFeed(g) {
     time: g.time || '',
     location: g.location || '',
     venue: g.venue || '',
+    gameId: g.gameId || '',
   };
 }
 
@@ -347,6 +376,7 @@ function renderSchedule(block, games) {
   `;
     wirePrint(block);
     wireCalendars(block);
+    wireBoxScores(block);
     return;
   }
 
@@ -402,6 +432,7 @@ function renderSchedule(block, games) {
 
   wirePrint(block);
   wireCalendars(block);
+  wireBoxScores(block);
 }
 
 export default async function decorate(block) {

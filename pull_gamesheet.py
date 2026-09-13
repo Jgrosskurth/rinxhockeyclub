@@ -43,6 +43,13 @@ SCHEDULE_JS = r"""
     const location = norm(c[4].innerText);
     const weAreHome = isOurs(home);
     const opponent = weAreHome ? visitor : home;
+    // Box-score game id — the date cell links to /seasons/{s}/games/{id}.
+    let gameId = '';
+    const link = r.querySelector('a[href*="/games/"]');
+    if (link) {
+      const gm = (link.getAttribute('href') || '').match(/\/games\/(\d+)/);
+      if (gm) gameId = gm[1];
+    }
     let result = '', score = '', gtime = '';
     // GameSheet writes the score cell from the VIEWED team's perspective
     // ("W 7 - 0" = our team won 7-0), with a W/L/T badge that is our result.
@@ -54,7 +61,7 @@ SCHEDULE_JS = r"""
       result = m[1].toUpperCase();
     } else { gtime = mid; }
     games.push({ date, opponent, venue: weAreHome ? 'Home' : 'Away',
-      location, time: gtime, score, result });
+      location, time: gtime, score, result, gameId });
   });
   return games;
 }
