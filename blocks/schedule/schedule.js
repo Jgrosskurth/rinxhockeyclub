@@ -114,14 +114,17 @@ function renderRows(games) {
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
 // Clean up GameSheet's verbose team names for display, e.g.
-// "NYH4033-002-North Park-10U Mauro" -> "North Park".
+// "NYH4033-002-North Park-10U Mauro" -> "North Park"
+// "TB NYH0041-005 Great Neck Bruins 14U Bowden" -> "Great Neck Bruins".
 function tidyOpponent(name) {
-  return (name || '')
-    .replace(/^NYH?\d+[-\s]*\d*\s*/i, '') // leading registration code
-    .replace(/[-\s]*\d{1,2}U\b.*$/i, '') // trailing "10U ..." / coach
-    .replace(/[-–]\s*$/, '')
-    .replace(/\s+/g, ' ')
-    .trim() || name;
+  let s = (name || '').trim();
+  s = s.replace(/^TB\s+/i, ''); // drop "TB " (to be determined) prefix
+  // Drop the registration code block, e.g. "NYH4033-002-" or "NYH0041-005 ".
+  s = s.replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
+  // Cut everything from the age group onward ("10U ... coach", "14U-Pala").
+  s = s.replace(/[-\s]*\b\d{1,2}U\b.*$/i, '');
+  s = s.replace(/^[-–\s]+|[-–\s]+$/g, ''); // stray leading/trailing dashes
+  return s.replace(/\s+/g, ' ').trim() || name;
 }
 
 // Map a feed game to the block's internal shape.
