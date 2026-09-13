@@ -138,26 +138,48 @@ function icsStamp(p) {
     + `T${z(utc.getUTCHours())}${z(utc.getUTCMinutes())}00Z`;
 }
 
-// Build an .ics data-URL for one game (default 90-minute event).
-function icsHref(g, label) {
+// Calendar event fields for one game (90-minute default), or null if no time.
+function calEvent(g, label) {
   const p = parseGameDateTime(g.rawDate, g.time);
-  if (!p || !p.hasTime) return '';
+  if (!p || !p.hasTime) return null;
   const start = icsStamp(p);
-  const endParts = { ...p, hour: p.hour + 1, min: p.min + 30 };
-  const end = icsStamp(endParts);
+  const end = icsStamp({ ...p, hour: p.hour + 1, min: p.min + 30 });
+  return {
+    start,
+    end,
+    title: `${label} vs ${g.opp}`,
+    location: g.location || '',
+    details: `${label} ${g.venue || ''} game vs ${g.opp}`.replace(/\s+/g, ' ').trim(),
+  };
+}
+
+// Google Calendar "add event" URL — reliable on mobile (opens the app/site).
+function googleCalUrl(ev) {
+  const q = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: ev.title,
+    dates: `${ev.start}/${ev.end}`,
+    location: ev.location,
+    details: ev.details,
+  });
+  return `https://calendar.google.com/calendar/render?${q.toString()}`;
+}
+
+// A Blob-based .ics object URL (more reliable than a data: URL for download).
+function icsObjectUrl(ev) {
   const esc = (s) => (s || '').replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
-  const summary = `${label} vs ${g.opp}`;
-  const lines = [
+  const ics = [
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Rinx Hockey Club//Schedule//EN',
+    'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
     'BEGIN:VEVENT',
-    `UID:rinx-${start}-${(g.opp || '').replace(/\W+/g, '')}@rinxhockeyclub`,
-    `DTSTART:${start}`, `DTEND:${end}`,
-    `SUMMARY:${esc(summary)}`,
-    g.location ? `LOCATION:${esc(g.location)}` : '',
-    `DESCRIPTION:${esc(`${label} ${g.venue || ''} game vs ${g.opp}`)}`,
+    `UID:rinx-${ev.start}-${ev.title.replace(/\W+/g, '')}@rinxhockeyclub`,
+    `DTSTART:${ev.start}`, `DTEND:${ev.end}`,
+    `SUMMARY:${esc(ev.title)}`,
+    ev.location ? `LOCATION:${esc(ev.location)}` : '',
+    `DESCRIPTION:${esc(ev.details)}`,
     'END:VEVENT', 'END:VCALENDAR',
-  ].filter(Boolean);
-  return `data:text/calendar;charset=utf-8,${encodeURIComponent(lines.join('\r\n'))}`;
+  ].filter(Boolean).join('\r\n');
+  return URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
 }
 
 function teamLabel() {
@@ -172,18 +194,64 @@ function renderRows(games) {
     if (g.result === 'W') badge = 'win';
     else if (g.result === 'L') badge = 'loss';
     const resultCell = hasResult ? `<span class="badge badge-${badge}">${g.result}</span>` : '';
-    const ics = hasResult ? '' : icsHref(g, label);
-    const cal = ics
-      ? `<a class="sg-cal" href="${ics}" download="${label.replace(/\s+/g, '-')}-vs-${(g.opp || 'game').replace(/\s+/g, '-')}.ics" title="Add to calendar" aria-label="Add ${g.opp} game to calendar">🗓️</a>`
+    const ev = hasResult ? null : calEvent(g, label);
+    // Upcoming games get a calendar button with a Google / Apple(.ics) menu.
+    const evAttr = ev ? ` data-event="${encodeURIComponent(JSON.stringify(ev))}"` : '';
+    const cal = ev
+      ? `<div class="sg-cal-wrap"${evAttr}>
+          <button type="button" class="sg-cal" aria-haspopup="true" aria-expanded="false" aria-label="Add ${g.opp} game to calendar" title="Add to calendar">📅</button>
+          <div class="sg-cal-menu" hidden>
+            <a href="${googleCalUrl(ev)}" target="_blank" rel="noopener" data-cal="google">Google Calendar</a>
+            <a href="#" data-cal="ics" data-file="${label.replace(/\s+/g, '-')}-vs-${(g.opp || 'game').replace(/\s+/g, '-')}.ics">Apple / Outlook</a>
+          </div>
+        </div>`
       : '';
     return `
     <div class="sg-row" data-result="${g.result}">
-      <div class="sg-date">${g.date}${cal}</div>
+      <div class="sg-date">${g.date}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
       <div class="sg-result">${resultCell}</div>
+      ${cal}
     </div>`;
   }).join('');
+}
+
+// Wire calendar buttons: toggle the menu, and build the .ics Blob on demand.
+function wireCalendars(block) {
+  const closeAll = (except) => block.querySelectorAll('.sg-cal-menu').forEach((m) => {
+    if (m !== except) { m.hidden = true; m.previousElementSibling?.setAttribute('aria-expanded', 'false'); }
+  });
+
+  block.querySelectorAll('.sg-cal').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const menu = btn.nextElementSibling;
+      const willOpen = menu.hidden;
+      closeAll(menu);
+      menu.hidden = !willOpen;
+      btn.setAttribute('aria-expanded', String(willOpen));
+    });
+  });
+
+  block.querySelectorAll('.sg-cal-menu a[data-cal="ics"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const ev = JSON.parse(decodeURIComponent(a.closest('.sg-cal-wrap').dataset.event));
+      const url = icsObjectUrl(ev);
+      const tmp = document.createElement('a');
+      tmp.href = url;
+      tmp.download = a.dataset.file;
+      document.body.append(tmp);
+      tmp.click();
+      tmp.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      a.closest('.sg-cal-menu').hidden = true;
+    });
+  });
+
+  // Close menus when clicking elsewhere.
+  document.addEventListener('click', () => closeAll(null));
 }
 
 // GitHub-hosted JSON feed produced by the pull-schedule workflow.
@@ -278,6 +346,7 @@ function renderSchedule(block, games) {
     <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change &bull; 🗓️ = add game to your calendar</p>
   `;
     wirePrint(block);
+    wireCalendars(block);
     return;
   }
 
@@ -332,6 +401,7 @@ function renderSchedule(block, games) {
   });
 
   wirePrint(block);
+  wireCalendars(block);
 }
 
 export default async function decorate(block) {
