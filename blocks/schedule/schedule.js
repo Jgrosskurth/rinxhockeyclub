@@ -52,6 +52,7 @@ const LOCAL_LOGOS = {
   'beaver dam': '/images/beaverdam.png',
   'white plains': '/images/whiteplains.png',
   'isles elite': '/images/soundtigers.jpeg',
+  'iceworks islanders': '/images/iceworks-islanders.webp',
 };
 
 function findLogoId(oppName) {
