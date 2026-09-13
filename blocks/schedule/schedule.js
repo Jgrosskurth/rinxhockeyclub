@@ -94,16 +94,91 @@ function oppCell(g) {
       </div>`;
 }
 
+const MONTHS = {
+  jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+};
+
+// Parse "Sep 20, 2026" + "11:40 AM" into local Y/M/D/H/M parts, or null.
+function parseGameDateTime(dateStr, timeStr) {
+  const dm = (dateStr || '').match(/([A-Za-z]{3})\w*\s+(\d{1,2}),?\s+(\d{4})/);
+  if (!dm) return null;
+  const month = MONTHS[dm[1].toLowerCase().slice(0, 3)];
+  if (month === undefined) return null;
+  const day = parseInt(dm[2], 10);
+  const year = parseInt(dm[3], 10);
+  let hour = 0;
+  let min = 0;
+  const tm = (timeStr || '').match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (tm) {
+    hour = parseInt(tm[1], 10) % 12;
+    if (/pm/i.test(tm[3])) hour += 12;
+    min = parseInt(tm[2], 10);
+  }
+  return {
+    year, month, day, hour, min, hasTime: !!tm,
+  };
+}
+
+// US Eastern offset (EDT -4 / EST -5) for the given local date, so the .ics
+// UTC timestamps land on the right wall-clock time. DST: 2nd Sun Mar–1st Sun Nov.
+function easternOffsetHours(year, month, day) {
+  const marchSecondSunday = 14 - (((new Date(Date.UTC(year, 2, 1)).getUTCDay() + 6) % 7));
+  const novFirstSunday = 7 - (((new Date(Date.UTC(year, 10, 1)).getUTCDay() + 6) % 7));
+  const afterStart = month > 2 || (month === 2 && day >= marchSecondSunday);
+  const beforeEnd = month < 10 || (month === 10 && day < novFirstSunday);
+  return (afterStart && beforeEnd) ? 4 : 5;
+}
+
+function icsStamp(p) {
+  // Convert local Eastern parts to a UTC ICS timestamp (YYYYMMDDTHHMMSSZ).
+  const offset = easternOffsetHours(p.year, p.month, p.day);
+  const utc = new Date(Date.UTC(p.year, p.month, p.day, p.hour + offset, p.min, 0));
+  const z = (n) => String(n).padStart(2, '0');
+  return `${utc.getUTCFullYear()}${z(utc.getUTCMonth() + 1)}${z(utc.getUTCDate())}`
+    + `T${z(utc.getUTCHours())}${z(utc.getUTCMinutes())}00Z`;
+}
+
+// Build an .ics data-URL for one game (default 90-minute event).
+function icsHref(g, label) {
+  const p = parseGameDateTime(g.rawDate, g.time);
+  if (!p || !p.hasTime) return '';
+  const start = icsStamp(p);
+  const endParts = { ...p, hour: p.hour + 1, min: p.min + 30 };
+  const end = icsStamp(endParts);
+  const esc = (s) => (s || '').replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
+  const summary = `${label} vs ${g.opp}`;
+  const lines = [
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Rinx Hockey Club//Schedule//EN',
+    'BEGIN:VEVENT',
+    `UID:rinx-${start}-${(g.opp || '').replace(/\W+/g, '')}@rinxhockeyclub`,
+    `DTSTART:${start}`, `DTEND:${end}`,
+    `SUMMARY:${esc(summary)}`,
+    g.location ? `LOCATION:${esc(g.location)}` : '',
+    `DESCRIPTION:${esc(`${label} ${g.venue || ''} game vs ${g.opp}`)}`,
+    'END:VEVENT', 'END:VCALENDAR',
+  ].filter(Boolean);
+  return `data:text/calendar;charset=utf-8,${encodeURIComponent(lines.join('\r\n'))}`;
+}
+
+function teamLabel() {
+  return window.location.pathname.includes('14u') ? 'Rinx 14U Bantam' : 'Rinx 10U Squirts';
+}
+
 function renderRows(games) {
+  const label = teamLabel();
   return games.map((g) => {
     const hasResult = ['W', 'L', 'T'].includes(g.result);
     let badge = 'tie';
     if (g.result === 'W') badge = 'win';
     else if (g.result === 'L') badge = 'loss';
     const resultCell = hasResult ? `<span class="badge badge-${badge}">${g.result}</span>` : '';
+    const ics = hasResult ? '' : icsHref(g, label);
+    const cal = ics
+      ? `<a class="sg-cal" href="${ics}" download="${label.replace(/\s+/g, '-')}-vs-${(g.opp || 'game').replace(/\s+/g, '-')}.ics" title="Add to calendar" aria-label="Add ${g.opp} game to calendar">🗓️</a>`
+      : '';
     return `
     <div class="sg-row" data-result="${g.result}">
-      <div class="sg-date">${g.date}</div>
+      <div class="sg-date">${g.date}${cal}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
       <div class="sg-result">${resultCell}</div>
@@ -143,6 +218,11 @@ function fromFeed(g) {
     loc: parts.join(' · '),
     score: g.score || '',
     result: g.result || '',
+    // Raw fields kept for the "add to calendar" (.ics) feature.
+    rawDate: g.date || '',
+    time: g.time || '',
+    location: g.location || '',
+    venue: g.venue || '',
   };
 }
 
@@ -155,6 +235,13 @@ async function loadFeedGames() {
   return (data.games || []).map(fromFeed).filter((g) => g.opp);
 }
 
+// Wire the Print Schedule button to the browser's print dialog. A print
+// stylesheet (schedule.css) hides site chrome so only the schedule prints.
+function wirePrint(block) {
+  const btn = block.querySelector('.print-btn');
+  if (btn) btn.addEventListener('click', () => window.print());
+}
+
 function renderSchedule(block, games) {
   // Upcoming schedule — no games have results yet. Keep the same table
   // layout (Date | Opponent | Score | Result) but drop the win/loss summary
@@ -165,6 +252,7 @@ function renderSchedule(block, games) {
     block.innerHTML = `
     <div class="schedule-controls">
       <p class="schedule-note">${games.length} games &bull; scores posted after each game</p>
+      <button type="button" class="print-btn">🖨 Print Schedule</button>
     </div>
 
     <div class="schedule-table">
@@ -177,8 +265,9 @@ function renderSchedule(block, games) {
       <div class="sg-rows">${renderRows(games)}</div>
     </div>
 
-    <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change</p>
+    <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change &bull; 🗓️ = add game to your calendar</p>
   `;
+    wirePrint(block);
     return;
   }
 
@@ -204,6 +293,7 @@ function renderSchedule(block, games) {
         <button class="filter-btn" data-filter="L">Losses</button>
         <button class="filter-btn" data-filter="T">Ties</button>
       </div>
+      <button type="button" class="print-btn">🖨 Print Schedule</button>
     </div>
 
     <div class="schedule-table">
@@ -229,6 +319,8 @@ function renderSchedule(block, games) {
       });
     });
   });
+
+  wirePrint(block);
 }
 
 export default async function decorate(block) {

@@ -432,3 +432,67 @@
   color: var(--color-red);
   font-weight: 700;
 }
+
+/* Print Schedule button */
+.schedule .print-btn {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 7px 18px;
+  border-radius: 4px;
+  border: 2px solid var(--color-navy);
+  background: var(--color-navy);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.schedule .print-btn:hover {
+  background: var(--color-red);
+  border-color: var(--color-red);
+}
+
+/* Per-game "add to calendar" icon */
+.schedule .sg-cal {
+  margin-left: 8px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+
+.schedule .sg-cal:hover {
+  opacity: 1;
+}
+
+/* Print: show only the schedule, drop site chrome and interactive controls. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  main .schedule,
+  main .schedule * {
+    visibility: visible;
+  }
+
+  main .schedule {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .schedule .print-btn,
+  .schedule .filter-buttons,
+  .schedule .sg-cal {
+    display: none !important;
+  }
+
+  .schedule .schedule-table,
+  .schedule .sg-row {
+    box-shadow: none !important;
+  }
+}
