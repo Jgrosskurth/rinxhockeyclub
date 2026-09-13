@@ -242,6 +242,15 @@ function wirePrint(block) {
   if (btn) btn.addEventListener('click', () => window.print());
 }
 
+// A print-only header (hidden on screen) so the printed sheet is identifiable.
+function printHeader() {
+  const label = teamLabel();
+  return `<div class="sg-print-head">
+    <h2>${label} &mdash; 2026&ndash;2027 Schedule</h2>
+    <p>Rinx Hockey Club &bull; The Rinx at Hauppauge, NY</p>
+  </div>`;
+}
+
 function renderSchedule(block, games) {
   // Upcoming schedule — no games have results yet. Keep the same table
   // layout (Date | Opponent | Score | Result) but drop the win/loss summary
@@ -250,6 +259,7 @@ function renderSchedule(block, games) {
   if (!hasResults) {
     block.classList.add('schedule-upcoming');
     block.innerHTML = `
+    ${printHeader()}
     <div class="schedule-controls">
       <p class="schedule-note">${games.length} games &bull; scores posted after each game</p>
       <button type="button" class="print-btn">🖨 Print Schedule</button>
@@ -278,6 +288,7 @@ function renderSchedule(block, games) {
   const ga = games.reduce((s, g) => s + (parseInt(g.score?.split(/[-–]/)[1], 10) || 0), 0);
 
   block.innerHTML = `
+    ${printHeader()}
     <div class="schedule-summary">
       <div class="sum-tile navy"><span class="sum-num">${w}</span><span class="sum-lbl">Wins</span></div>
       <div class="sum-tile navy"><span class="sum-num">${l}</span><span class="sum-lbl">Losses</span></div>

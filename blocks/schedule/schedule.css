@@ -467,7 +467,12 @@
   opacity: 1;
 }
 
-/* Print: show only the schedule, drop site chrome and interactive controls. */
+/* Print-only header (hidden on screen). */
+.schedule .sg-print-head {
+  display: none;
+}
+
+/* Print: games only, laid out as a 2-column card grid. */
 @media print {
   body * {
     visibility: hidden;
@@ -485,14 +490,114 @@
     width: 100%;
   }
 
+  /* Hide everything except the print header and the games. */
+  .schedule .schedule-controls,
+  .schedule .schedule-summary,
+  .schedule .sg-header,
+  .schedule-block .sg-header,
+  .schedule.block .sg-header,
+  .schedule .schedule-src,
   .schedule .print-btn,
   .schedule .filter-buttons,
+  .schedule .sg-result,
   .schedule .sg-cal {
     display: none !important;
   }
 
-  .schedule .schedule-table,
-  .schedule .sg-row {
-    box-shadow: none !important;
+  .schedule .sg-print-head {
+    display: block;
+    text-align: center;
+    margin-bottom: 16px;
   }
+
+  .schedule .sg-print-head h2 {
+    font-family: var(--heading-font-family);
+    color: #041e42;
+    margin: 0 0 4px;
+  }
+
+  .schedule .sg-print-head p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #444;
+  }
+
+  /* 2-column grid of game cards. */
+  .schedule .schedule-table {
+    box-shadow: none !important;
+    background: none !important;
+  }
+
+  .schedule .sg-rows {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .schedule .sg-row,
+  .schedule-block .sg-row,
+  .schedule.block .sg-row {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    align-items: center !important;
+    gap: 4px 10px !important;
+    padding: 10px 12px !important;
+    border: 1px solid #ccc !important;
+    border-left: 4px solid #041e42 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .schedule .sg-date,
+  .schedule-block .sg-date,
+  .schedule.block .sg-date {
+    grid-column: 1 / -1 !important;
+    font-family: var(--heading-font-family);
+    font-weight: 700 !important;
+    font-size: 0.8rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #c8102e !important;
+  }
+
+  .schedule .sg-opp,
+  .schedule-block .sg-opp,
+  .schedule.block .sg-opp {
+    grid-column: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  .schedule .sg-score,
+  .schedule-block .sg-score,
+  .schedule.block .sg-score {
+    grid-column: 2 !important;
+    text-align: right !important;
+    font-family: var(--heading-font-family);
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    color: #041e42 !important;
+  }
+
+  .schedule .sg-logo,
+  .schedule .sg-logo-fb {
+    width: 28px;
+    height: 28px;
+  }
+
+  .schedule .sg-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #041e42;
+  }
+
+  .schedule .sg-loc {
+    font-size: 0.78rem;
+    color: #444;
+  }
+
 }
