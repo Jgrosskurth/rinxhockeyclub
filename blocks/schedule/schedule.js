@@ -124,7 +124,12 @@ function tidyOpponent(name) {
   // Cut everything from the age group onward ("10U ... coach", "14U-Pala").
   s = s.replace(/[-\s]*\b\d{1,2}U\b.*$/i, '');
   s = s.replace(/^[-–\s]+|[-–\s]+$/g, ''); // stray leading/trailing dashes
-  return s.replace(/\s+/g, ' ').trim() || name;
+  s = s.replace(/\s+/g, ' ').trim();
+  // GameSheet often stores names in ALL CAPS — make them Title Case.
+  if (s && s === s.toUpperCase()) {
+    s = s.toLowerCase().replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
+  }
+  return s || name;
 }
 
 // Map a feed game to the block's internal shape.

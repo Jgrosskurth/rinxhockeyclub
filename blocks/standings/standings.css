@@ -1,0 +1,132 @@
+.standings .st-division {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-navy);
+  margin: 0 0 12px;
+}
+
+.standings .st-table-wrap {
+  background: var(--color-white);
+  border-radius: 8px;
+  overflow: hidden;
+  overflow-x: auto;
+  box-shadow: var(--shadow-card);
+}
+
+.standings .st-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.standings .st-tbl thead {
+  background: var(--color-navy);
+}
+
+.standings .st-tbl thead th {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgb(255 255 255 / 70%);
+  padding: 12px 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.standings .st-tbl thead th.st-team {
+  text-align: left;
+}
+
+.standings .st-tbl tbody tr {
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.standings .st-tbl tbody tr:last-child {
+  border-bottom: none;
+}
+
+.standings .st-tbl tbody td {
+  padding: 11px 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-navy);
+  white-space: nowrap;
+}
+
+.standings .st-rank {
+  font-weight: 700;
+  width: 36px;
+}
+
+.standings .st-team {
+  text-align: left;
+  font-weight: 700;
+  font-family: var(--heading-font-family);
+}
+
+/* Our team highlighted. */
+.standings .st-tbl tbody tr.st-ours {
+  background: var(--color-ice);
+}
+
+.standings .st-tbl tbody tr.st-ours .st-team {
+  color: var(--color-red);
+}
+
+.standings .st-src {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: var(--color-gray);
+  text-align: center;
+}
+
+.standings .st-src a {
+  color: var(--color-red);
+}
+
+.standings .loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 60px 20px;
+}
+
+.standings .err-box {
+  padding: 40px;
+  text-align: center;
+}
+
+.standings .err-box a {
+  color: var(--color-red);
+  font-weight: 700;
+}
+
+/* Sticky rank + team columns on small screens. */
+@media (max-width: 768px) {
+  .standings .st-tbl th:nth-child(1),
+  .standings .st-tbl td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  .standings .st-tbl th:nth-child(2),
+  .standings .st-tbl td:nth-child(2) {
+    position: sticky;
+    left: 36px;
+    z-index: 2;
+    background: var(--color-white);
+  }
+
+  .standings .st-tbl tbody tr.st-ours td:nth-child(2) {
+    background: var(--color-ice);
+  }
+}

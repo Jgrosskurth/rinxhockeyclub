@@ -1,8 +1,8 @@
-name: Pull GameSheet Schedule
+name: Pull GameSheet Data
 
-# Pulls 10U and 14U schedules/results from GameSheet into data/*.json, which
-# the native schedule block on the site fetches directly. Runs twice daily
-# (10:00 and 22:00 ET) plus on-demand from the Actions tab.
+# Pulls schedule, stats, and standings for 10U and 14U from GameSheet into
+# data/*.json, which the native blocks on the site fetch directly. Runs twice
+# daily (10:00 and 22:00 ET) plus on-demand from the Actions tab.
 on:
   workflow_dispatch:
   schedule:
@@ -27,27 +27,22 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Pull 10U schedule
+      - name: Pull 10U (team 555061, div 83000)
         run: |
-          python pull_gamesheet_schedule.py \
-            --season 15381 --team 555061 --division 83000 \
-            --out data/schedule-10u.json
+          python pull_gamesheet.py --type schedule  --season 15381 --team 555061 --division 83000 --out data/schedule-10u.json
+          python pull_gamesheet.py --type stats      --season 15381 --team 555061 --division 83000 --out data/stats-10u.json
+          python pull_gamesheet.py --type standings  --season 15381 --team 555061 --division 83000 --out data/standings-10u.json
 
-      - name: Pull 14U schedule
+      - name: Pull 14U (team 555117, div 83002)
         run: |
-          python pull_gamesheet_schedule.py \
-            --season 15381 --team 555117 --division 83002 \
-            --out data/schedule-14u.json
-
-      - name: Show results
-        run: |
-          echo "----- 10U -----"; head -12 data/schedule-10u.json
-          echo "----- 14U -----"; head -12 data/schedule-14u.json
+          python pull_gamesheet.py --type schedule  --season 15381 --team 555117 --division 83002 --out data/schedule-14u.json
+          python pull_gamesheet.py --type stats      --season 15381 --team 555117 --division 83002 --out data/stats-14u.json
+          python pull_gamesheet.py --type standings  --season 15381 --team 555117 --division 83002 --out data/standings-14u.json
 
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/schedule-10u.json data/schedule-14u.json
-          git commit -m "Update GameSheet schedule data [skip ci]" || echo "No changes to commit"
+          git add data/*.json
+          git commit -m "Update GameSheet data [skip ci]" || echo "No changes to commit"
           git push

@@ -171,43 +171,41 @@ async function loadStats(block, statsUrl) {
   }
 }
 
-// Render the current season's live GameSheet stats in a branded iframe.
-function renderEmbed(block, container, url) {
-  // The GameSheet widget carries its own summary, so hide our CSV tiles.
-  block.querySelector('#stats-summary').style.display = 'none';
-  container.innerHTML = '';
+// Current-season player stats, pulled from GameSheet into a GitHub JSON feed
+// by the pull-gamesheet workflow. Map the feed's player objects to the same
+// header keys renderTable/findKey expect, so the existing table renders them.
+const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
-  const frame = document.createElement('iframe');
-  frame.className = 'stats-embed';
-  frame.title = 'Team statistics';
-  frame.loading = 'lazy';
-  frame.setAttribute('allowfullscreen', '');
-  frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-  frame.src = url;
-  container.append(frame);
+async function loadFeedStats(block, container) {
+  const is14u = window.location.pathname.includes('14u');
+  const url = `${FEED_BASE}/stats-${is14u ? '14u' : '10u'}.json`;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`feed ${resp.status}`);
+  const data = await resp.json();
+  const rows = (data.players || []).map((p) => ({
+    '#': p.number || '',
+    Name: p.name || '',
+    Pos: p.pos || '',
+    GP: p.gp || '',
+    G: p.g || '',
+    A: p.a || '',
+    PTS: p.pts || '',
+    '+/-': p.plusminus || '',
+    PIM: p.pim || '',
+  }));
+  if (!rows.length) throw new Error('empty feed');
+  renderTable(block, container, rows);
 }
 
 export default function decorate(block) {
-  const row = block.children[0];
   const is14u = window.location.pathname.includes('14u');
-
-  // The current season's source is authored in the block. A GameSheet URL is
-  // shown as a live iframe; anything else is treated as a CSV.
-  const authoredLink = row?.querySelector('a')?.getAttribute('href')?.trim() || '';
-  const cellText = row?.children[0]?.textContent?.trim() || '';
-  const currentSrc = authoredLink || (cellText.startsWith('http') ? cellText : '');
-  const currentIsEmbed = /gamesheetstats\.com/i.test(currentSrc);
-
   const archiveUrl = is14u ? '/rinxstats-14u-2025-2026.csv' : '/rinxstats-2025-2026.csv';
-  const defaultCurrentCsv = is14u ? '/rinxstats-14u.csv' : '/rinxstats.csv';
 
   // Available seasons, newest first. The first entry is the default view.
+  // Current season comes from the live GameSheet JSON feed; past seasons are
+  // archived CSVs committed to the repo.
   const seasons = [
-    {
-      label: 'Current Season',
-      type: currentIsEmbed ? 'embed' : 'csv',
-      url: currentSrc || defaultCurrentCsv,
-    },
+    { label: 'Current Season', type: 'feed' },
     { label: '2025–2026', type: 'csv', url: archiveUrl },
   ];
 
@@ -230,13 +228,18 @@ export default function decorate(block) {
   `;
 
   const container = block.querySelector('#stats-container');
-  const showSeason = (idx) => {
+  const showSeason = async (idx) => {
     const season = seasons[idx];
     block.querySelectorAll('.season-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
-    if (season.type === 'embed') {
-      renderEmbed(block, container, season.url);
+    container.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div>';
+    if (season.type === 'feed') {
+      try {
+        await loadFeedStats(block, container);
+      } catch {
+        container.innerHTML = '<div class="err-box"><p>Stats are temporarily unavailable. '
+          + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
+      }
     } else {
-      container.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div>';
       loadStats(block, season.url);
     }
   };
