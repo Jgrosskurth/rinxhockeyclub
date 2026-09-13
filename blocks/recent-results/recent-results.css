@@ -56,6 +56,46 @@
   scrollbar-color: var(--color-red) var(--color-gray-light);
 }
 
+/* Live-results call to action (shown in place of native score cards). */
+.rr-cta {
+  flex: 1;
+  background: var(--color-white);
+  border-radius: 12px;
+  border-left: 4px solid var(--color-red);
+  box-shadow: var(--shadow-card);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rr-cta-text {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-navy);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.rr-cta-btn {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 22px;
+  border-radius: 4px;
+  background: var(--color-navy);
+  color: var(--color-white);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.rr-cta-btn:hover {
+  background: var(--color-red);
+}
+
 .rr-grid::-webkit-scrollbar {
   height: 5px;
 }
