@@ -7,6 +7,7 @@ function getInitials(name) {
 function getBadge(note) {
   const lower = (note || '').toLowerCase();
   if (lower.includes('practice')) return '<span class="pp-badge">Practice Player</span>';
+  if (lower.includes('reserve')) return '<span class="pp-badge">Reserve</span>';
   if (lower.includes('goalie')) return '<span class="pos-badge pos-badge-goalie">Goalie</span>';
   if (lower.includes('offense')) return '<span class="pos-badge pos-badge-offense">Offense</span>';
   if (lower.includes('defense')) return '<span class="pos-badge pos-badge-defense">Defense</span>';
