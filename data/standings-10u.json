@@ -67,7 +67,7 @@
     },
     {
       "rank": "5",
-      "team": "NYH0007-001 Long Island Sharks 10u Davis",
+      "team": "NYH0093-006 Dix Hills Selects 10U Goldfine",
       "gp": "0",
       "w": "0",
       "l": "0",
@@ -82,17 +82,17 @@
     },
     {
       "rank": "6",
-      "team": "NYH0093-006 Dix Hills Selects 10U Goldfine",
-      "gp": "0",
+      "team": "NYH0007-001 Long Island Sharks 10u Davis",
+      "gp": "1",
       "w": "0",
-      "l": "0",
+      "l": "1",
       "t": "0",
       "otl": "0",
       "pts": "0",
-      "gf": "0",
-      "ga": "0",
-      "diff": "0",
-      "streak": "-",
+      "gf": "4",
+      "ga": "6",
+      "diff": "-2",
+      "streak": "Lost 1",
       "ours": false
     },
     {
