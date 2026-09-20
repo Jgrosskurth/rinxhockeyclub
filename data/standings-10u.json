@@ -37,6 +37,21 @@
     },
     {
       "rank": "3",
+      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "gp": "2",
+      "w": "1",
+      "l": "1",
+      "t": "0",
+      "otl": "0",
+      "pts": "2",
+      "gf": "15",
+      "ga": "8",
+      "diff": "+7",
+      "streak": "Won 1",
+      "ours": false
+    },
+    {
+      "rank": "4",
       "team": "NYH0017-010 Rinx Travel 10U O'Donoghue",
       "gp": "1",
       "w": "1",
@@ -51,7 +66,7 @@
       "ours": true
     },
     {
-      "rank": "4",
+      "rank": "5",
       "team": "NYH0041-009 Great Neck Bruins 10U Marsella",
       "gp": "0",
       "w": "0",
@@ -66,7 +81,7 @@
       "ours": false
     },
     {
-      "rank": "5",
+      "rank": "6",
       "team": "NYH0093-006 Dix Hills Selects 10U Goldfine",
       "gp": "0",
       "w": "0",
@@ -81,7 +96,7 @@
       "ours": false
     },
     {
-      "rank": "6",
+      "rank": "7",
       "team": "NYH0007-001 Long Island Sharks 10u Davis",
       "gp": "1",
       "w": "0",
@@ -96,37 +111,7 @@
       "ours": false
     },
     {
-      "rank": "7",
-      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
-      "gp": "1",
-      "w": "0",
-      "l": "1",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "2",
-      "ga": "8",
-      "diff": "-6",
-      "streak": "Lost 1",
-      "ours": false
-    },
-    {
       "rank": "8",
-      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
-      "gp": "1",
-      "w": "0",
-      "l": "1",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "1",
-      "ga": "7",
-      "diff": "-6",
-      "streak": "Lost 1",
-      "ours": false
-    },
-    {
-      "rank": "9",
       "team": "NYH4033-002-North Park-10U Mauro",
       "gp": "2",
       "w": "0",
@@ -137,6 +122,21 @@
       "gf": "4",
       "ga": "17",
       "diff": "-13",
+      "streak": "Lost 2",
+      "ours": false
+    },
+    {
+      "rank": "9",
+      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "gp": "2",
+      "w": "0",
+      "l": "2",
+      "t": "0",
+      "otl": "0",
+      "pts": "0",
+      "gf": "1",
+      "ga": "20",
+      "diff": "-19",
       "streak": "Lost 2",
       "ours": false
     }

@@ -22,21 +22,36 @@
     },
     {
       "rank": "2",
-      "team": "NYH0007-004 Long Island Sharks 14u Manno",
-      "gp": "1",
+      "team": "NYH4033-014 North Park 14U -Pala",
+      "gp": "2",
       "w": "1",
-      "l": "0",
+      "l": "1",
       "t": "0",
       "otl": "0",
       "pts": "2",
-      "gf": "5",
-      "ga": "3",
+      "gf": "10",
+      "ga": "8",
       "diff": "+2",
       "streak": "Won 1",
       "ours": false
     },
     {
       "rank": "3",
+      "team": "NYH0007-004 Long Island Sharks 14u Manno",
+      "gp": "2",
+      "w": "1",
+      "l": "1",
+      "t": "0",
+      "otl": "0",
+      "pts": "2",
+      "gf": "8",
+      "ga": "10",
+      "diff": "-2",
+      "streak": "Lost 1",
+      "ours": false
+    },
+    {
+      "rank": "4",
       "team": "NYH0036-007 Aviator Hockey Club 14U Leonard",
       "gp": "0",
       "w": "0",
@@ -51,7 +66,7 @@
       "ours": false
     },
     {
-      "rank": "4",
+      "rank": "5",
       "team": "NYH0093-008 Dix Hills Selects 14U Flanagan",
       "gp": "0",
       "w": "0",
@@ -63,21 +78,6 @@
       "ga": "0",
       "diff": "0",
       "streak": "-",
-      "ours": false
-    },
-    {
-      "rank": "5",
-      "team": "NYH4033-014 North Park 14U -Pala",
-      "gp": "1",
-      "w": "0",
-      "l": "1",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "3",
-      "ga": "5",
-      "diff": "-2",
-      "streak": "Lost 1",
       "ours": false
     },
     {
