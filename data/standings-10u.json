@@ -22,6 +22,21 @@
     },
     {
       "rank": "2",
+      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "gp": "3",
+      "w": "2",
+      "l": "1",
+      "t": "0",
+      "otl": "0",
+      "pts": "4",
+      "gf": "26",
+      "ga": "8",
+      "diff": "+18",
+      "streak": "Won 2",
+      "ours": false
+    },
+    {
+      "rank": "3",
       "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
       "gp": "2",
       "w": "2",
@@ -36,7 +51,7 @@
       "ours": false
     },
     {
-      "rank": "3",
+      "rank": "4",
       "team": "NYH0036-010 Aviator Hockey Club 10U Janss",
       "gp": "2",
       "w": "2",
@@ -48,21 +63,6 @@
       "ga": "3",
       "diff": "+10",
       "streak": "Won 2",
-      "ours": false
-    },
-    {
-      "rank": "4",
-      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
-      "gp": "2",
-      "w": "1",
-      "l": "1",
-      "t": "0",
-      "otl": "0",
-      "pts": "2",
-      "gf": "15",
-      "ga": "8",
-      "diff": "+7",
-      "streak": "Won 1",
       "ours": false
     },
     {
@@ -112,21 +112,6 @@
     },
     {
       "rank": "8",
-      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
-      "gp": "2",
-      "w": "0",
-      "l": "2",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "1",
-      "ga": "20",
-      "diff": "-19",
-      "streak": "Lost 2",
-      "ours": false
-    },
-    {
-      "rank": "9",
       "team": "NYH4033-002-North Park-10U Mauro",
       "gp": "3",
       "w": "0",
@@ -137,6 +122,21 @@
       "gf": "4",
       "ga": "30",
       "diff": "-26",
+      "streak": "Lost 3",
+      "ours": false
+    },
+    {
+      "rank": "9",
+      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "gp": "3",
+      "w": "0",
+      "l": "3",
+      "t": "0",
+      "otl": "0",
+      "pts": "0",
+      "gf": "1",
+      "ga": "31",
+      "diff": "-30",
       "streak": "Lost 3",
       "ours": false
     }

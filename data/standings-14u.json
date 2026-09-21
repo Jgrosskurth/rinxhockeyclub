@@ -22,6 +22,21 @@
     },
     {
       "rank": "2",
+      "team": "NYH0007-004 Long Island Sharks 14u Manno",
+      "gp": "3",
+      "w": "2",
+      "l": "1",
+      "t": "0",
+      "otl": "0",
+      "pts": "4",
+      "gf": "15",
+      "ga": "14",
+      "diff": "+1",
+      "streak": "Won 1",
+      "ours": false
+    },
+    {
+      "rank": "3",
       "team": "NYH4033-014 North Park 14U -Pala",
       "gp": "2",
       "w": "1",
@@ -33,21 +48,6 @@
       "ga": "8",
       "diff": "+2",
       "streak": "Won 1",
-      "ours": false
-    },
-    {
-      "rank": "3",
-      "team": "NYH0007-004 Long Island Sharks 14u Manno",
-      "gp": "2",
-      "w": "1",
-      "l": "1",
-      "t": "0",
-      "otl": "0",
-      "pts": "2",
-      "gf": "8",
-      "ga": "10",
-      "diff": "-2",
-      "streak": "Lost 1",
       "ours": false
     },
     {
@@ -82,21 +82,6 @@
     },
     {
       "rank": "6",
-      "team": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
-      "gp": "1",
-      "w": "0",
-      "l": "1",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "3",
-      "ga": "8",
-      "diff": "-5",
-      "streak": "Lost 1",
-      "ours": false
-    },
-    {
-      "rank": "7",
       "team": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
       "gp": "1",
       "w": "0",
@@ -108,6 +93,21 @@
       "ga": "7",
       "diff": "-7",
       "streak": "Lost 1",
+      "ours": false
+    },
+    {
+      "rank": "7",
+      "team": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "gp": "2",
+      "w": "0",
+      "l": "2",
+      "t": "0",
+      "otl": "0",
+      "pts": "0",
+      "gf": "7",
+      "ga": "15",
+      "diff": "-8",
+      "streak": "Lost 2",
       "ours": false
     }
   ]
