@@ -177,6 +177,19 @@ async function loadStats(block, statsUrl) {
 // header keys renderTable/findKey expect, so the existing table renders them.
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
+// Display-name overrides for players whose GameSheet feed name differs from
+// how the club wants them shown. Keyed by a lowercased substring of the feed
+// name (which may arrive ALL CAPS, e.g. "DONALD PIERRE CANEL").
+const NAME_OVERRIDES = [
+  { match: 'donald pierre can', display: 'DJ Pierre Canal' },
+];
+
+function overrideName(name) {
+  const lower = (name || '').toLowerCase();
+  const hit = NAME_OVERRIDES.find((o) => lower.includes(o.match));
+  return hit ? hit.display : name;
+}
+
 async function loadFeedStats(block, container) {
   const is14u = window.location.pathname.includes('14u');
   const url = `${FEED_BASE}/stats-${is14u ? '14u' : '10u'}.json`;
@@ -185,7 +198,7 @@ async function loadFeedStats(block, container) {
   const data = await resp.json();
   const rows = (data.players || []).map((p) => ({
     '#': p.number || '',
-    Name: p.name || '',
+    Name: overrideName(p.name || ''),
     Pos: p.pos || '',
     GP: p.gp || '',
     G: p.g || '',
