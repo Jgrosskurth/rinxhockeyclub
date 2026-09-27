@@ -7,33 +7,33 @@
   "teams": [
     {
       "rank": "1",
-      "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "team": "NYH0017-010 Rinx Travel 10U O'Donoghue",
       "gp": "3",
       "w": "3",
       "l": "0",
       "t": "0",
       "otl": "0",
       "pts": "6",
-      "gf": "23",
-      "ga": "7",
-      "diff": "+16",
+      "gf": "31",
+      "ga": "4",
+      "diff": "+27",
       "streak": "Won 3",
-      "ours": false
+      "ours": true
     },
     {
       "rank": "2",
-      "team": "NYH0017-010 Rinx Travel 10U O'Donoghue",
-      "gp": "2",
-      "w": "2",
-      "l": "0",
+      "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "gp": "4",
+      "w": "3",
+      "l": "1",
       "t": "0",
       "otl": "0",
-      "pts": "4",
-      "gf": "21",
-      "ga": "2",
-      "diff": "+19",
-      "streak": "Won 2",
-      "ours": true
+      "pts": "6",
+      "gf": "25",
+      "ga": "17",
+      "diff": "+8",
+      "streak": "Lost 1",
+      "ours": false
     },
     {
       "rank": "3",
