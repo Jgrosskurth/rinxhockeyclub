@@ -5,6 +5,8 @@
  * row is highlighted. Falls back to a GameSheet link if the feed is down.
  */
 
+import { gameSheetLogo, RINX_LOGO } from '../../scripts/team-logos.js';
+
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
 // Tidy GameSheet's verbose ALL-CAPS / coded team names for display.
@@ -23,6 +25,21 @@ function tidyTeam(name) {
 // Tournament pages read their own feed (see pull-schedule.yml).
 function isTournament() {
   return window.location.pathname.includes('mid-atlantic');
+}
+
+// Team logo (ours, or a known GameSheet logo) with an initials fallback.
+function teamCell(tm) {
+  const name = tidyTeam(tm.team);
+  const src = tm.ours ? RINX_LOGO : gameSheetLogo(name);
+  const ini = name.split(' ').slice(0, 2).map((w) => w[0])
+    .join('')
+    .toUpperCase();
+  // Same pattern as the schedule block: show initials if the logo fails.
+  const logo = src
+    ? `<img class="st-logo" src="${src}" alt="" width="28" height="28" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">`
+    : '';
+  const fb = `<span class="st-logo st-logo-fb" aria-hidden="true"${src ? ' style="display:none"' : ''}>${ini}</span>`;
+  return `<span class="st-team-wrap">${logo}${fb}<span>${name}</span></span>`;
 }
 
 const COLS = [
@@ -45,7 +62,7 @@ function renderStandings(block, data) {
     const cells = COLS.map((c) => `<td>${(tm[c.key] ?? '') === '' ? '—' : tm[c.key]}</td>`).join('');
     return `<tr${tm.ours ? ' class="st-ours"' : ''}>
       <td class="st-rank">${tm.rank || ''}</td>
-      <td class="st-team">${tidyTeam(tm.team)}</td>
+      <td class="st-team">${isTournament() ? teamCell(tm) : tidyTeam(tm.team)}</td>
       ${cells}
     </tr>`;
   }).join('');

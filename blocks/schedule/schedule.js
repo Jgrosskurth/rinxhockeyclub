@@ -1,3 +1,5 @@
+import { gameSheetLogo } from '../../scripts/team-logos.js';
+
 const MHR_CDN = 'https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/';
 
 const TEAM_LOGOS = {
@@ -84,16 +86,8 @@ const FEEDS = [
     season: '2026 Mid-Atlantic Fall Showcase',
     note: 'Tournament games at Hatfield Ice Arena, Colmar, PA',
     // Out-of-area opponents: mascot-name logo matching would pick wrong
-    // logos, so use GameSheet's own team logos (keyed by tidied team name).
+    // logos, so only GameSheet's own team logos are used (scripts/team-logos.js).
     logos: false,
-    teamLogos: {
-      'genesis hockey club': '3f442c23-a1f5-485d-8c69-6bdeebbd5000',
-      'cranford hockey club': '2d86cc59-2ae9-48de-414e-06ae3f1cd300',
-      'long island gulls': 'a9befe24-9496-499b-e5ce-aab9fba97c00',
-      'the st. james': 'a88eb313-d6aa-4a31-a15c-4c9c8b022800',
-      'delco phantoms': '547984bb-9b2f-44b0-2a7a-a011a7a21d00',
-      'central penn panthers': '4195975c-860c-4caa-37da-4197a76a3000',
-    },
   },
   {
     match: '14u',
@@ -118,21 +112,15 @@ function feedConfig() {
   return FEEDS.find((f) => path.includes(f.match));
 }
 
-// GameSheet team logos (Cloudflare Images); the 128px variant stays sharp
-// at the 36px display size on high-density screens.
-const GAMESHEET_LOGO_CDN = 'https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/';
-
 function oppCell(g) {
   const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
     .join('')
     .toUpperCase();
-  const feed = feedConfig();
-  const gsLogo = feed.teamLogos?.[g.opp.toLowerCase()];
-  const useLogos = feed.logos !== false;
+  const gsLogo = gameSheetLogo(g.opp);
+  const useLogos = feedConfig().logos !== false;
   const localLogo = useLogos ? findLocalLogo(g.opp) : '';
   const logoId = (localLogo || !useLogos) ? '' : findLogoId(g.opp);
-  const logoSrc = (gsLogo && `${GAMESHEET_LOGO_CDN}${gsLogo}/128`)
-    || localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '');
+  const logoSrc = gsLogo || localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '');
   const logoImg = logoSrc
     ? `<img class="sg-logo" src="${logoSrc}" alt="${g.opp}" width="36" height="36" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : '';
