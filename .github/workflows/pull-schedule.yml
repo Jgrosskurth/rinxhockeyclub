@@ -1,7 +1,8 @@
 name: Pull GameSheet Data
 
-# Pulls schedule, stats, and standings for 10U and 14U from GameSheet into
-# data/*.json, which the native blocks on the site fetch directly. Runs twice
+# Pulls schedule, stats, and standings for 10U and 14U (plus tournament
+# schedules) from GameSheet into data/*.json, which the native blocks on the
+# site fetch directly. Runs twice
 # daily (10:00 and 22:00 ET) plus on-demand from the Actions tab.
 on:
   workflow_dispatch:
@@ -38,6 +39,10 @@ jobs:
           python pull_gamesheet.py --type schedule  --season 15381 --team 555117 --division 83002 --out data/schedule-14u.json
           python pull_gamesheet.py --type stats      --season 15381 --team 555117 --division 83002 --out data/stats-14u.json
           python pull_gamesheet.py --type standings  --season 15381 --team 555117 --division 83002 --out data/standings-14u.json
+
+      - name: Pull Mid-Atlantic Fall Showcase (season 16150, team 573565)
+        run: |
+          python pull_gamesheet.py --type schedule  --season 16150 --team 573565 --out data/schedule-mid-atlantic.json
 
       - name: Commit results
         run: |

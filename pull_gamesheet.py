@@ -14,6 +14,9 @@ Verified to work from GitHub Actions runners (they clear Cloudflare). Run:
     python pull_gamesheet.py --type schedule  --season 15381 --team 555061 --division 83000 --out data/schedule-10u.json
     python pull_gamesheet.py --type stats      --season 15381 --team 555061 --division 83000 --out data/stats-10u.json
     python pull_gamesheet.py --type standings  --season 15381 --team 555061 --division 83000 --out data/standings-10u.json
+
+    # Tournaments (single-division seasons) can omit --division:
+    python pull_gamesheet.py --type schedule  --season 16150 --team 573565 --out data/schedule-mid-atlantic.json
 """
 
 import argparse
@@ -157,8 +160,9 @@ def build_url(page_type, season, team, division):
     params = [
         "configuration%5Binfinite-scroll%5D=false",
         "configuration%5Blogo%5D=false",
-        f"filter%5Bdivision%5D={division}",
     ]
+    if division:
+        params.append(f"filter%5Bdivision%5D={division}")
     if page_type in ("schedule", "standings"):
         params.append("filter%5Bstatus%5D=completed")
     return base + "?" + "&".join(params)
@@ -169,7 +173,7 @@ def main():
     ap.add_argument("--type", required=True, choices=["schedule", "stats", "standings"])
     ap.add_argument("--season", required=True)
     ap.add_argument("--team", required=True)
-    ap.add_argument("--division", required=True)
+    ap.add_argument("--division", default="", help="optional; omit for tournaments")
     ap.add_argument("--out", required=True)
     ap.add_argument("--timeout", type=int, default=60)
     args = ap.parse_args()
@@ -222,6 +226,7 @@ def main():
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
     payload = {
         "type": args.type,
+        "season": args.season,
         "team": ourteam,
         "blocked_by_cloudflare": blocked,
         "last_page_title": last_title,

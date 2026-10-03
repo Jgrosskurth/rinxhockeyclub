@@ -73,12 +73,49 @@ function findLocalLogo(oppName) {
   return '';
 }
 
+// Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
+// Tournament feeds come from their own GameSheet season (see pull-schedule.yml).
+const FEEDS = [
+  {
+    match: 'mid-atlantic',
+    key: 'mid-atlantic',
+    label: 'Rinx 10U Squirts',
+    title: 'Mid-Atlantic Fall Showcase',
+    season: '2026 Mid-Atlantic Fall Showcase',
+    note: 'Tournament games at Hatfield Ice Arena, Hatfield, PA',
+    // Out-of-area opponents: mascot-name logo matching would pick wrong logos.
+    logos: false,
+  },
+  {
+    match: '14u',
+    key: '14u',
+    label: 'Rinx 14U Bantam',
+    title: '2026&ndash;2027',
+    season: '2026&ndash;2027 season',
+    note: 'Home games at The Rinx at Hauppauge',
+  },
+  {
+    match: '',
+    key: '10u',
+    label: 'Rinx 10U Squirts',
+    title: '2026&ndash;2027',
+    season: '2026&ndash;2027 season',
+    note: 'Home games at The Rinx at Hauppauge',
+  },
+];
+
+function feedConfig() {
+  const path = window.location.pathname;
+  return FEEDS.find((f) => path.includes(f.match));
+}
+
 function oppCell(g) {
   const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
     .join('')
     .toUpperCase();
-  const localLogo = findLocalLogo(g.opp);
-  const logoId = localLogo ? '' : findLogoId(g.opp);
+  const useLogos = feedConfig().logos !== false;
+  const localLogo = useLogos ? findLocalLogo(g.opp) : '';
+  const logoId = (localLogo || !useLogos) ? '' : findLogoId(g.opp);
   const logoSrc = localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '');
   const logoImg = logoSrc
     ? `<img class="sg-logo" src="${logoSrc}" alt="${g.opp}" width="36" height="36" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
@@ -183,12 +220,12 @@ function icsObjectUrl(ev) {
 }
 
 function teamLabel() {
-  return window.location.pathname.includes('14u') ? 'Rinx 14U Bantam' : 'Rinx 10U Squirts';
+  return feedConfig().label;
 }
 
 // Link to a game's GameSheet box score, if we have its id.
 function boxScoreUrl(g) {
-  return g.gameId ? `https://gamesheetstats.com/seasons/15381/games/${g.gameId}` : '';
+  return g.gameId ? `https://gamesheetstats.com/seasons/${g.season || '15381'}/games/${g.gameId}` : '';
 }
 
 function renderRows(games) {
@@ -277,8 +314,9 @@ function tidyOpponent(name) {
   s = s.replace(/^TB\s+/i, ''); // drop "TB " (to be determined) prefix
   // Drop the registration code block, e.g. "NYH4033-002-" or "NYH0041-005 ".
   s = s.replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
-  // Cut everything from the age group onward ("10U ... coach", "14U-Pala").
-  s = s.replace(/[-\s]*\b\d{1,2}U\b.*$/i, '');
+  // Cut everything from the age group / tournament division onward
+  // ("10U ... coach", "14U-Pala", "Delco Phantoms 10A").
+  s = s.replace(/[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b.*$/i, '');
   s = s.replace(/^[-–\s]+|[-–\s]+$/g, ''); // stray leading/trailing dashes
   s = s.replace(/\s+/g, ' ').trim();
   // GameSheet often stores names in ALL CAPS — make them Title Case.
@@ -289,7 +327,7 @@ function tidyOpponent(name) {
 }
 
 // Map a feed game to the block's internal shape.
-function fromFeed(g) {
+function fromFeed(g, season) {
   const opp = tidyOpponent(g.opponent);
   const parts = [g.location, g.time].filter(Boolean);
   return {
@@ -304,16 +342,16 @@ function fromFeed(g) {
     location: g.location || '',
     venue: g.venue || '',
     gameId: g.gameId || '',
+    season,
   };
 }
 
 async function loadFeedGames() {
-  const is14u = window.location.pathname.includes('14u');
-  const url = `${FEED_BASE}/schedule-${is14u ? '14u' : '10u'}.json`;
+  const url = `${FEED_BASE}/schedule-${feedConfig().key}.json`;
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`feed ${resp.status}`);
   const data = await resp.json();
-  return (data.games || []).map(fromFeed).filter((g) => g.opp);
+  return (data.games || []).map((g) => fromFeed(g, data.season)).filter((g) => g.opp);
 }
 
 // Wire the Print Schedule button to the browser's print dialog. A print
@@ -325,9 +363,9 @@ function wirePrint(block) {
 
 // A print-only header (hidden on screen) so the printed sheet is identifiable.
 function printHeader() {
-  const label = teamLabel();
+  const { label, title } = feedConfig();
   return `<div class="sg-print-head">
-    <h2>${label} &mdash; 2026&ndash;2027 Schedule</h2>
+    <h2>${label} &mdash; ${title} Schedule</h2>
     <p>Rinx Hockey Club &bull; The Rinx at Hauppauge, NY</p>
   </div>`;
 }
@@ -356,7 +394,7 @@ function renderSchedule(block, games) {
       <div class="sg-rows">${renderRows(games)}</div>
     </div>
 
-    <p class="schedule-src">Home games at The Rinx at Hauppauge &bull; times and locations subject to change &bull; 🗓️ = add game to your calendar</p>
+    <p class="schedule-src">${feedConfig().note} &bull; times and locations subject to change &bull; 🗓️ = add game to your calendar</p>
   `;
     wirePrint(block);
     wireCalendars(block);
@@ -399,7 +437,7 @@ function renderSchedule(block, games) {
       <div class="sg-rows">${renderRows(games)}</div>
     </div>
 
-    <p class="schedule-src">2026&ndash;2027 season &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a></p>
+    <p class="schedule-src">${feedConfig().season} &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a></p>
   `;
 
   block.querySelectorAll('.filter-btn').forEach((btn) => {
@@ -419,7 +457,8 @@ function renderSchedule(block, games) {
 
 export default async function decorate(block) {
   // Any authored rows act as a fallback if the live feed is unavailable.
-  const authored = [...block.children].map((row) => {
+  // Two-cell rows (e.g. "src | url", "team | Rinx") are settings, not games.
+  const authored = [...block.children].filter((row) => row.children.length > 2).map((row) => {
     const cells = [...row.children];
     return {
       date: cells[0]?.textContent?.trim() || '',
