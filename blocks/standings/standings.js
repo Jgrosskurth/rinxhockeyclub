@@ -12,12 +12,17 @@ function tidyTeam(name) {
   let s = (name || '').trim();
   s = s.replace(/^TB\s+/i, '');
   s = s.replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
-  s = s.replace(/[-\s]*\b\d{1,2}U\b.*$/i, '');
+  s = s.replace(/[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b.*$/i, '');
   s = s.replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ').trim();
   if (s && s === s.toUpperCase()) {
     s = s.toLowerCase().replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
   }
   return s || name;
+}
+
+// Tournament pages read their own feed (see pull-schedule.yml).
+function isTournament() {
+  return window.location.pathname.includes('mid-atlantic');
 }
 
 const COLS = [
@@ -53,13 +58,14 @@ function renderStandings(block, data) {
         <tbody>${rows}</tbody>
       </table>
     </div>
-    <p class="st-src">2026&ndash;2027 season &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a></p>
+    <p class="st-src">${isTournament() ? '2026 Mid-Atlantic Fall Showcase' : '2026&ndash;2027 season'} &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a></p>
   `;
 }
 
 export default async function decorate(block) {
-  const is14u = window.location.pathname.includes('14u');
-  const url = `${FEED_BASE}/standings-${is14u ? '14u' : '10u'}.json`;
+  let key = window.location.pathname.includes('14u') ? '14u' : '10u';
+  if (isTournament()) key = 'mid-atlantic';
+  const url = `${FEED_BASE}/standings-${key}.json`;
 
   block.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading standings&hellip;</p></div>';
 

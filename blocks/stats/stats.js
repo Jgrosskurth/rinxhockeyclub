@@ -190,9 +190,19 @@ function overrideName(name) {
   return hit ? hit.display : name;
 }
 
+// Tournament pages read their own feed (see pull-schedule.yml) and have no
+// archived seasons to switch to.
+function isTournament() {
+  return window.location.pathname.includes('mid-atlantic');
+}
+
+function feedKey() {
+  if (isTournament()) return 'mid-atlantic';
+  return window.location.pathname.includes('14u') ? '14u' : '10u';
+}
+
 async function loadFeedStats(block, container) {
-  const is14u = window.location.pathname.includes('14u');
-  const url = `${FEED_BASE}/stats-${is14u ? '14u' : '10u'}.json`;
+  const url = `${FEED_BASE}/stats-${feedKey()}.json`;
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`feed ${resp.status}`);
   const data = await resp.json();
@@ -207,7 +217,13 @@ async function loadFeedStats(block, container) {
     '+/-': p.plusminus || '',
     PIM: p.pim || '',
   }));
-  if (!rows.length) throw new Error('empty feed');
+  if (!rows.length) {
+    if (isTournament()) {
+      container.innerHTML = '<div class="err-box"><p>Tournament stats will be posted here once games begin.</p></div>';
+      return;
+    }
+    throw new Error('empty feed');
+  }
   renderTable(block, container, rows);
 }
 
@@ -218,20 +234,24 @@ export default function decorate(block) {
   // Available seasons, newest first. The first entry is the default view.
   // Current season comes from the live GameSheet JSON feed; past seasons are
   // archived CSVs committed to the repo.
-  const seasons = [
-    { label: 'Current Season', type: 'feed' },
-    { label: '2025–2026', type: 'csv', url: archiveUrl },
-  ];
+  const seasons = isTournament()
+    ? [{ label: 'Tournament', type: 'feed' }]
+    : [
+      { label: 'Current Season', type: 'feed' },
+      { label: '2025–2026', type: 'csv', url: archiveUrl },
+    ];
 
   const buttons = seasons
     .map((s, i) => `<button class="season-btn${i === 0 ? ' active' : ''}" data-idx="${i}">${s.label}</button>`)
     .join('');
 
-  block.innerHTML = `
+  const controls = seasons.length > 1 ? `
     <div class="stats-controls">
       <div class="season-toggle">${buttons}</div>
       <p class="season-hint">&#128197; Current season is live from GameSheet &bull; switch to view past seasons</p>
-    </div>
+    </div>` : '';
+
+  block.innerHTML = `${controls}
     <div class="stats-summary" id="stats-summary" style="display:none">
       <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>
       <div class="stat-tile"><span class="stat-num red" id="s-tg">--</span><span class="stat-lbl">Team Goals</span></div>

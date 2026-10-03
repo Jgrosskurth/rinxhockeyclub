@@ -16,6 +16,8 @@
   box-shadow: 0 4px 20px rgb(4 30 66 / 10%);
   margin-top: 40px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .t-head {
@@ -61,7 +63,10 @@
   font-weight: 600;
 }
 
-.t-body { padding: 20px 24px; }
+.t-body {
+  padding: 20px 24px;
+  flex: 1;
+}
 
 .t-row {
   display: flex;
@@ -167,6 +172,28 @@
 
 .t-link:hover {
   text-decoration: underline;
+}
+
+.tournaments .t-cta {
+  display: block;
+  margin: 0 24px 24px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: background 0.2s;
+}
+
+.tournaments .t-cta:hover,
+.tournaments .t-cta:focus-visible {
+  background: var(--color-red-dark);
 }
 
 @media (max-width: 900px) {

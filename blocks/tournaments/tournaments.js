@@ -31,19 +31,35 @@ const FALLBACK_TOURNAMENTS = [
   },
 ];
 
+// Links in the "links" cell that point to a page on this site (e.g. a
+// tournament schedule page) are shown as a button at the bottom of the card;
+// the first off-site link stays the "Learn More" link.
+function splitLinks(cell) {
+  const links = [...(cell?.querySelectorAll('a') || [])];
+  const isLocal = (a) => new URL(a.href, window.location.href).origin === window.location.origin;
+  const external = links.find((a) => !isLocal(a));
+  const local = links.find(isLocal);
+  return {
+    link: external?.href || (links.length ? '' : cell?.textContent?.trim() || ''),
+    cta: local ? { href: local.getAttribute('href'), text: local.textContent.trim() } : null,
+  };
+}
+
 export default function decorate(block) {
   const rows = [...block.children];
   let tournaments = rows.map((row) => {
     const cells = [...row.children];
     if (cells.length < 3) return null;
     const logoImg = cells[0]?.querySelector('img');
+    const { link, cta } = splitLinks(cells[5]);
     return {
       logo: logoImg?.src || '',
       name: cells[1]?.textContent?.trim() || '',
       date: cells[2]?.textContent?.trim() || '',
       loc: cells[3]?.textContent?.trim() || '',
       format: cells[4]?.textContent?.trim() || '',
-      link: cells[5]?.querySelector('a')?.href || cells[5]?.textContent?.trim() || '',
+      link,
+      cta,
       status: (cells[6]?.textContent?.trim() || 'Upcoming').toLowerCase().replace(/\s+/g, '-'),
       ages: cells[7]?.textContent?.trim() || '',
     };
@@ -80,6 +96,7 @@ export default function decorate(block) {
             <div class="t-row"><span class="t-lbl">Status</span><span class="t-val"><span class="ts ts-${t.status}">${labels[t.status] || t.status}</span></span></div>
             ${t.link ? `<a href="${t.link}" target="_blank" class="t-link">Learn More &rarr;</a>` : ''}
           </div>
+          ${t.cta ? `<a href="${t.cta.href}" class="t-cta">${t.cta.text}</a>` : ''}
         </div>
       `).join('')}
     </div>

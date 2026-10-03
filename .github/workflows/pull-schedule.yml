@@ -43,6 +43,8 @@ jobs:
       - name: Pull Mid-Atlantic Fall Showcase (season 16150, team 573565)
         run: |
           python pull_gamesheet.py --type schedule  --season 16150 --team 573565 --out data/schedule-mid-atlantic.json
+          python pull_gamesheet.py --type stats      --season 16150 --team 573565 --out data/stats-mid-atlantic.json
+          python pull_gamesheet.py --type standings  --season 16150 --team 573565 --out data/standings-mid-atlantic.json
 
       - name: Commit results
         run: |

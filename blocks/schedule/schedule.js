@@ -82,7 +82,7 @@ const FEEDS = [
     label: 'Rinx 10U Squirts',
     title: 'Mid-Atlantic Fall Showcase',
     season: '2026 Mid-Atlantic Fall Showcase',
-    note: 'Tournament games at Hatfield Ice Arena, Hatfield, PA',
+    note: 'Tournament games at Hatfield Ice Arena, Colmar, PA',
     // Out-of-area opponents: mascot-name logo matching would pick wrong logos.
     logos: false,
   },
