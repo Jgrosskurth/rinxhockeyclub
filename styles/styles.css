@@ -117,6 +117,77 @@ header {
   margin: 0 auto;
 }
 
+/* Jump nav: sticky row of pill buttons built from an in-page link list
+   (see buildJumpNav in scripts.js). The active section's pill is red. */
+main > .jump-nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgb(245 246 248 / 92%);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.jump-nav ul {
+  display: flex;
+  gap: 12px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 14px 40px;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.jump-nav a {
+  display: inline-block;
+  padding: 10px 22px;
+  border: 2px solid var(--color-navy);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--heading-font-family);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.jump-nav a:hover,
+.jump-nav a:focus-visible {
+  background: var(--color-navy);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.jump-nav a[aria-current="true"] {
+  border-color: var(--color-red);
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+/* Tighter spacing around the nav, and keep jump targets clear of it. */
+main > .section:has(+ .jump-nav) {
+  padding-bottom: 20px;
+}
+
+main > .jump-nav + .section {
+  padding-top: 28px;
+}
+
+main:has(> .jump-nav) [id] {
+  scroll-margin-top: 90px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.jump-nav) {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Utility: section title */
 .section-title {
   font-family: var(--heading-font-family);
@@ -322,6 +393,10 @@ header {
 
 /* Responsive — tablet */
 @media (max-width: 900px) {
+  .jump-nav ul {
+    padding: 12px 20px;
+  }
+
   :root {
     --section-padding: 32px 20px;
   }
@@ -342,6 +417,23 @@ header {
 
 /* Responsive — phone */
 @media (max-width: 600px) {
+  .jump-nav ul {
+    gap: 6px;
+    padding: 10px 16px;
+  }
+
+  .jump-nav li {
+    flex: 1 1 auto;
+  }
+
+  .jump-nav a {
+    display: block;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
   :root {
     --section-padding: 24px 16px;
     --heading-font-size-xxl: 2rem;

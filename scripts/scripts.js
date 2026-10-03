@@ -36,8 +36,69 @@ function fixBlockNames(main) {
   }
 }
 
+// Highlight the jump-nav link for the section currently scrolled to.
+function trackJumpNav(nav) {
+  const links = [...nav.querySelectorAll('a')];
+  const targets = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const offset = nav.offsetHeight + 24;
+    let active = -1;
+    targets.forEach((t, i) => {
+      if (t && t.getBoundingClientRect().top <= offset) active = i;
+    });
+    links.forEach((a, i) => {
+      if (i === active) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  }, { passive: true });
+  update();
+}
+
+// A paragraph made up only of in-page links (e.g. "Schedule | Stats | Hotel")
+// becomes a sticky jump nav of pill buttons. It is moved out to be a direct
+// child of <main>, splitting its section in two, so it stays pinned for the
+// whole page. decorateSections only wraps <div>s, so the <nav> stays as-is.
+function buildJumpNav(main) {
+  const isSeparator = (n) => n.nodeType === Node.TEXT_NODE && /^[\s|•·/]*$/.test(n.textContent);
+  const p = [...main.querySelectorAll(':scope > div > p')].find((el) => {
+    const links = [...el.querySelectorAll('a')];
+    return links.length > 1
+      && links.every((a) => a.getAttribute('href')?.startsWith('#'))
+      && [...el.childNodes].every((n) => n.nodeName === 'A' || isSeparator(n));
+  });
+  if (!p) return;
+
+  const nav = document.createElement('nav');
+  nav.className = 'jump-nav';
+  nav.setAttribute('aria-label', 'On this page');
+  const list = document.createElement('ul');
+  p.querySelectorAll('a').forEach((a) => {
+    const li = document.createElement('li');
+    li.append(a);
+    list.append(li);
+  });
+  nav.append(list);
+
+  const section = p.parentElement;
+  const rest = document.createElement('div');
+  while (p.nextSibling) rest.append(p.nextSibling);
+  p.remove();
+  section.after(nav);
+  if (rest.children.length) nav.after(rest);
+  trackJumpNav(nav);
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  buildJumpNav(main);
   fixBlockNames(main);
   decorateIcons(main);
   decorateSections(main);
