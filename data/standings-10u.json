@@ -54,16 +54,16 @@
     {
       "rank": "4",
       "team": "NYH0036-010 Aviator Hockey Club 10U Janss",
-      "gp": "2",
+      "gp": "3",
       "w": "2",
       "l": "0",
-      "t": "0",
+      "t": "1",
       "otl": "0",
-      "pts": "4",
-      "gf": "13",
-      "ga": "3",
+      "pts": "5",
+      "gf": "14",
+      "ga": "4",
       "diff": "+10",
-      "streak": "Won 2",
+      "streak": "Tied 1",
       "ours": false
     },
     {
@@ -83,6 +83,21 @@
     },
     {
       "rank": "6",
+      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "gp": "4",
+      "w": "0",
+      "l": "3",
+      "t": "1",
+      "otl": "0",
+      "pts": "1",
+      "gf": "2",
+      "ga": "32",
+      "diff": "-30",
+      "streak": "Tied 1",
+      "ours": false
+    },
+    {
+      "rank": "7",
       "team": "NYH0041-009 Great Neck Bruins 10U Marsella",
       "gp": "0",
       "w": "0",
@@ -97,7 +112,7 @@
       "ours": false
     },
     {
-      "rank": "7",
+      "rank": "8",
       "team": "NYH0093-006 Dix Hills Selects 10U Goldfine",
       "gp": "1",
       "w": "0",
@@ -109,21 +124,6 @@
       "ga": "5",
       "diff": "-1",
       "streak": "Lost 1",
-      "ours": false
-    },
-    {
-      "rank": "8",
-      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
-      "gp": "3",
-      "w": "0",
-      "l": "3",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "1",
-      "ga": "31",
-      "diff": "-30",
-      "streak": "Lost 3",
       "ours": false
     },
     {
