@@ -9,16 +9,16 @@
     {
       "rank": "1",
       "team": "NYH0017-015 Rinx Travel 14u South Skillman",
-      "gp": "3",
-      "w": "3",
+      "gp": "4",
+      "w": "4",
       "l": "0",
       "t": "0",
       "otl": "0",
-      "pts": "6",
-      "gf": "20",
-      "ga": "4",
-      "diff": "+16",
-      "streak": "Won 3",
+      "pts": "8",
+      "gf": "27",
+      "ga": "5",
+      "diff": "+22",
+      "streak": "Won 4",
       "ours": true
     },
     {
@@ -83,21 +83,6 @@
     },
     {
       "rank": "6",
-      "team": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
-      "gp": "2",
-      "w": "0",
-      "l": "2",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "7",
-      "ga": "15",
-      "diff": "-8",
-      "streak": "Lost 2",
-      "ours": false
-    },
-    {
-      "rank": "7",
       "team": "NYH0036-007 Aviator Hockey Club 14U Leonard",
       "gp": "1",
       "w": "0",
@@ -109,6 +94,21 @@
       "ga": "9",
       "diff": "-9",
       "streak": "Lost 1",
+      "ours": false
+    },
+    {
+      "rank": "7",
+      "team": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "gp": "3",
+      "w": "0",
+      "l": "3",
+      "t": "0",
+      "otl": "0",
+      "pts": "0",
+      "gf": "8",
+      "ga": "22",
+      "diff": "-14",
+      "streak": "Lost 3",
       "ours": false
     }
   ]
