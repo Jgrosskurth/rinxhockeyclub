@@ -38,6 +38,21 @@
     },
     {
       "rank": "3",
+      "team": "NYH4033-014 North Park 14U -Pala",
+      "gp": "4",
+      "w": "2",
+      "l": "2",
+      "t": "0",
+      "otl": "0",
+      "pts": "4",
+      "gf": "15",
+      "ga": "15",
+      "diff": "0",
+      "streak": "Won 1",
+      "ours": false
+    },
+    {
+      "rank": "4",
       "team": "NYH0007-004 Long Island Sharks 14u Manno",
       "gp": "4",
       "w": "2",
@@ -48,21 +63,6 @@
       "gf": "15",
       "ga": "21",
       "diff": "-6",
-      "streak": "Lost 1",
-      "ours": false
-    },
-    {
-      "rank": "4",
-      "team": "NYH4033-014 North Park 14U -Pala",
-      "gp": "3",
-      "w": "1",
-      "l": "2",
-      "t": "0",
-      "otl": "0",
-      "pts": "2",
-      "gf": "11",
-      "ga": "13",
-      "diff": "-2",
       "streak": "Lost 1",
       "ours": false
     },
@@ -99,16 +99,16 @@
     {
       "rank": "7",
       "team": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
-      "gp": "3",
+      "gp": "4",
       "w": "0",
-      "l": "3",
+      "l": "4",
       "t": "0",
       "otl": "0",
       "pts": "0",
-      "gf": "8",
-      "ga": "22",
-      "diff": "-14",
-      "streak": "Lost 3",
+      "gf": "10",
+      "ga": "26",
+      "diff": "-16",
+      "streak": "Lost 4",
       "ours": false
     }
   ]
