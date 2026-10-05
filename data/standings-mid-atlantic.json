@@ -23,21 +23,6 @@
     },
     {
       "rank": "2",
-      "team": "Cranford Hockey Club",
-      "gp": "0",
-      "w": "0",
-      "l": "0",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "0",
-      "ga": "0",
-      "diff": "0",
-      "streak": "-",
-      "ours": false
-    },
-    {
-      "rank": "3",
       "team": "Long Island Gulls",
       "gp": "0",
       "w": "0",
@@ -52,7 +37,7 @@
       "ours": false
     },
     {
-      "rank": "4",
+      "rank": "3",
       "team": "The St. James",
       "gp": "0",
       "w": "0",
@@ -67,7 +52,7 @@
       "ours": false
     },
     {
-      "rank": "5",
+      "rank": "4",
       "team": "Delco Phantoms",
       "gp": "0",
       "w": "0",
@@ -82,7 +67,7 @@
       "ours": false
     },
     {
-      "rank": "6",
+      "rank": "5",
       "team": "Central Penn Panthers",
       "gp": "0",
       "w": "0",
@@ -97,7 +82,7 @@
       "ours": false
     },
     {
-      "rank": "7",
+      "rank": "6",
       "team": "Rinx",
       "gp": "0",
       "w": "0",
