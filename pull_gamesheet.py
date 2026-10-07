@@ -17,6 +17,9 @@ Verified to work from GitHub Actions runners (they clear Cloudflare). Run:
 
     # Tournaments (single-division seasons) can omit --division:
     python pull_gamesheet.py --type schedule  --season 16150 --team 573565 --out data/schedule-mid-atlantic.json
+
+    # Every completed game in a division (all teams), for the points race chart:
+    python pull_gamesheet.py --type games  --season 15381 --division 83000 --out data/games-10u.json
 """
 
 import argparse
@@ -154,7 +157,50 @@ STANDINGS_JS = r"""
 }
 """
 
+# Division-wide completed games (every team, not just ours). The score cell is
+# visitor-home ("6-2"), possibly with an OT/SO marker.
+GAMES_JS = r"""
+() => {
+  const norm = (s) => (s || '').replace(/\s+/g, ' ').trim();
+  // Team cells hold the name and, on a second line, the division label.
+  const teamName = (c) => norm((c.innerText || '').split('\n')[0]);
+  const games = [];
+  // This page renders a real <table>; team pages use ARIA role-tables.
+  document.querySelectorAll('[role="row"], tr').forEach((r) => {
+    const c = [...r.querySelectorAll('[role="cell"], td')];
+    if (c.length < 7) return;
+    const date = norm(c[0].innerText);
+    if (!/\d{4}/.test(date)) return;
+    const scoreText = norm(c[2].innerText);
+    const m = scoreText.match(/(\d+)\s*-\s*(\d+)/);
+    if (!m) return;
+    let gameId = '';
+    const link = r.querySelector('a[href*="/games/"]');
+    if (link) {
+      const gm = (link.getAttribute('href') || '').match(/\/games\/(\d+)/);
+      if (gm) gameId = gm[1];
+    }
+    games.push({
+      date, visitor: teamName(c[1]), home: teamName(c[3]),
+      visitorScore: +m[1], homeScore: +m[2],
+      ot: /\b(OT|SO)\b/i.test(scoreText),
+      type: norm(c[6].innerText), gameId,
+    });
+  });
+  return games;
+}
+"""
+
+
 def build_url(page_type, season, team, division):
+    if page_type == "games":
+        params = [
+            "configuration%5Binfinite-scroll%5D=false",
+            "configuration%5Blogo%5D=false",
+            f"filter%5Bdivision%5D={division}",
+            "filter%5Bstatus%5D=completed",
+        ]
+        return f"https://gamesheetstats.com/seasons/{season}/games?" + "&".join(params)
     kind = {"schedule": "schedule", "stats": "team-stats", "standings": "standings"}[page_type]
     base = f"https://gamesheetstats.com/seasons/{season}/teams/{team}/{kind}"
     params = [
@@ -170,9 +216,9 @@ def build_url(page_type, season, team, division):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--type", required=True, choices=["schedule", "stats", "standings"])
+    ap.add_argument("--type", required=True, choices=["schedule", "stats", "standings", "games"])
     ap.add_argument("--season", required=True)
-    ap.add_argument("--team", required=True)
+    ap.add_argument("--team", default="", help="required except for --type games")
     ap.add_argument("--division", default="", help="optional; omit for tournaments")
     ap.add_argument("--out", required=True)
     ap.add_argument("--timeout", type=int, default=60)
@@ -198,6 +244,21 @@ def main():
             page.wait_for_timeout(2000)
             last_title = page.title()
             if "Just a moment" in last_title:
+                continue
+            if args.type == "games":
+                data = page.evaluate(GAMES_JS)
+                if data:
+                    # Long lists may render in chunks: scroll and re-read until
+                    # the count stops growing.
+                    for _ in range(10):
+                        page.mouse.wheel(0, 20000)
+                        page.wait_for_timeout(1500)
+                        more = page.evaluate(GAMES_JS)
+                        if len(more) <= len(data):
+                            break
+                        data = more
+                    payload_data = {"games": data}
+                    break
                 continue
             try:
                 ourteam = page.locator("h2").first.inner_text(timeout=1000).strip()
