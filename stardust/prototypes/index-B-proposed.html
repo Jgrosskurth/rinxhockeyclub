@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- stardust:provenance
+    writtenBy:        impeccable:craft (for stardust:prototype)
+    writtenAt:        2026-10-07T12:40:00Z
+    page:             index
+    pageUrl:          https://www.rinxhockeyclub.com/
+    variant:          B — What if game day was the hero?
+    againstDirection: stardust/direction.md (Resolution 2026-10-07)
+    shapeBrief:       stardust/prototypes/index-B-shape.md
+    designSystem:     DESIGN-B.md / DESIGN-B.json
+    improvementsApplied: [1, 2, 3, 4, 5, 6, 7]
+    surprise:         medium
+    trait:            "Live-data promotion (#3) — anchor https://www.nycfc.com/ next-match hero + fixture rail"
+    fidelity:         quick
+    reflexRejectAudit: { bypassed: "Mode A — captured families pinned (Barlow Condensed, Barlow)" }
+    copyCadenceBypass: { rules: [em-dash-overuse], basis: "captured-verbatim copy (voiceClassification)" }
+    dataSources:      [stardust/current/pages/index.json, stardust/current/live-data/ (snapshot of data/schedule-10u.json, schedule-14u.json, schedule-mid-atlantic.json, standings-10u.json, standings-14u.json at 2026-10-07)]
+    dataNotes:        "News card 'Comeback Tie' (14U, Sep 21) is captured verbatim; the 14U league record 4-0-0 comes from standings-14u.json — the tie was not a league game in the feed. Not reconciled in copy (captured content is not rewritten)."
+    paletteNotes:     "Captured palette only. 'Hockey' in the wordmark keeps #C8102E (logotype exemption, as on the live site); small labels on navy use ice/sheet-white text."
+    unsourcedContent:
+      - selector: "section[data-section=\"instagram\"] > .wrap > .ig-band > [data-placeholder]"
+        type: other
+        reason: "Instagram handle / profile URL not present in current/pages/index.json (the third-party embed hid it)"
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rinx Hockey Club | Long Island - Tier III Travel Hockey</title>
+  <meta name="description" content="The Rinx Hockey Club is a premier Tier III Long Island travel hockey program dedicated to developing young athletes through competitive hockey, professional coaching, and a commitment to teamwork and sportsmanship.">
+  <link rel="icon" href="data:image/png;base64,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">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --heading-font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+      --body-font-family: 'Barlow', -apple-system, 'Segoe UI', sans-serif;
+      --heading-xxl: clamp(2.75rem, 7vw, 4.75rem);
+      --heading-xl: clamp(2rem, 4vw, 2.44rem);
+      --heading-lg: 1.563rem;
+      --heading-md: 1.25rem;
+      --heading-sm: 1.125rem;
+      --body: 1rem;
+      --body-sm: 0.875rem;
+      --label: 0.75rem;
+      --line-height-heading: 0.95;
+      --line-height-body: 1.6;
+
+      --color-bg: #F5F6F8;
+      --color-fg: #041E42;
+      --color-accent: #C8102E;
+      --rink-navy: #041E42;
+      --rink-navy-light: #0a2d5e;
+      --goal-red: #C8102E;
+      --goal-red-deep: #a00d24;
+      --ice: #e8f0f9;
+      --boards: #F5F6F8;
+      --sheet-white: #FDFDFE;
+      --slate: #5b6472;
+      --line: #e5e7eb;
+      --win-green: #16a34a;
+      --surface-alt: #e8f0f9;
+
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 48px;
+      --section-padding: 64px;
+      --max-width: 1200px;
+      --radius: 8px;
+      --radius-sm: 4px;
+      --shadow-card: 0 2px 12px rgb(4 30 66 / 8%);
+      --shadow-lift: 0 6px 20px rgb(4 30 66 / 14%);
+    }
+
+    /* Hamburger base rule first (source order is load-bearing). */
+    .ds-nav-burger { display: none; }
+    .ds-nav-toggle { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: var(--body-font-family); font-size: var(--body); line-height: var(--line-height-body); color: var(--color-fg); background: var(--color-bg); }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    h1, h2, h3, h4 { font-family: var(--heading-font-family); text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; margin: 0; text-wrap: balance; }
+    p { margin: 0; }
+    .skip { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--sheet-white); color: var(--rink-navy); padding: 10px 14px; border-radius: var(--radius-sm); font-weight: 700; }
+    .skip:focus { left: 8px; }
+    :focus-visible { outline: 3px solid var(--goal-red); outline-offset: 2px; }
+    .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .section { padding: var(--section-padding) 0; }
+    .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+    /* Section heading with the captured red rule */
+    .head { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .head h2 { font-size: var(--heading-xl); font-weight: 900; color: var(--rink-navy); white-space: nowrap; }
+    .head::after { content: ""; flex: 1; height: 3px; background: linear-gradient(90deg, var(--goal-red), rgb(200 16 46 / 0)); }
+    .head .more { order: 3; font-family: var(--heading-font-family); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--body-sm); color: var(--goal-red); text-decoration: none; white-space: nowrap; }
+    .head .more:hover { text-decoration: underline; }
+
+    /* ---------- Header ---------- */
+    header.site { position: sticky; top: 0; z-index: 50; background: var(--rink-navy); color: var(--sheet-white); border-bottom: 3px solid var(--goal-red); }
+    .site-inner { max-width: 1320px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+    .brand img { width: 52px; height: 52px; border-radius: 10px; background: var(--sheet-white); padding: 3px; flex: none; }
+    .brand-name { font-family: var(--heading-font-family); font-weight: 900; font-size: var(--heading-lg); line-height: 1; text-transform: uppercase; letter-spacing: 0.03em; display: block; }
+    .brand-strap { display: block; margin-top: 4px; font-size: var(--label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ice); }
+    .ds-nav { display: flex; align-items: center; gap: 4px; }
+    .nav-item { position: relative; }
+    .nav-link, .nav-trigger { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border: 0; background: none; color: var(--sheet-white); font-family: var(--heading-font-family); font-weight: 800; font-size: var(--body); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer; border-radius: var(--radius-sm); }
+    .nav-link:hover, .nav-item:hover > .nav-trigger, .nav-item:focus-within > .nav-trigger { background: rgb(253 253 254 / 10%); }
+    .nav-trigger::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); opacity: 0.8; }
+    .menu { position: absolute; top: calc(100% + 6px); left: 0; min-width: 210px; padding: 8px; background: var(--sheet-white); border-radius: var(--radius); box-shadow: var(--shadow-lift); display: none; }
+    .nav-item:hover > .menu, .nav-item:focus-within > .menu { display: block; }
+    .menu::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
+    .menu a { display: block; padding: 10px 12px; border-radius: var(--radius-sm); color: var(--rink-navy); font-weight: 600; text-decoration: none; }
+    .menu a:hover { background: var(--ice); }
+    .menu .menu-head { padding: 6px 12px 4px; font-size: var(--label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--slate); }
+    .shop { margin-left: 8px; background: var(--goal-red); color: var(--sheet-white); border-radius: var(--radius-sm); }
+    .shop:hover { background: var(--goal-red-deep) !important; }
+    .drawer-team { display: none; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; color: var(--sheet-white); background: var(--rink-navy); overflow: hidden; isolation: isolate; }
+    .hero-rink { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+    .hero-inner { max-width: var(--max-width); margin: 0 auto; padding: 56px 24px 0; text-align: center; }
+    .crest { width: 120px; height: 120px; margin: 0 auto 18px; border-radius: 50%; background: var(--sheet-white); padding: 6px; box-shadow: 0 6px 24px rgb(0 0 0 / 35%); }
+    .hero h1 { font-size: var(--heading-xxl); font-weight: 900; line-height: 0.92; letter-spacing: 0.01em; }
+    .hero h1 span { color: var(--goal-red); } /* logotype word, captured red (WCAG 1.4.3 logotype exemption) */
+    .hero-line { margin-top: 14px; font-size: var(--heading-sm); font-weight: 500; color: rgb(253 253 254 / 88%); }
+    .season-pill { display: inline-block; margin-top: 16px; background: var(--goal-red); color: var(--sheet-white); border-radius: 999px; padding: 4px 14px; font-size: var(--label); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+    .season-pill + .hero-line { margin-top: 10px; }
+
+    .gameday { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 40px auto 0; max-width: 980px; text-align: left; padding-bottom: 32px; }
+    .gd-team { background: var(--rink-navy-light); border: 1px solid rgb(253 253 254 / 14%); border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 14px; }
+    .gd-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .gd-top h2 { font-size: var(--heading-lg); font-weight: 900; }
+    .gd-standing { font-size: var(--body-sm); font-weight: 600; color: rgb(253 253 254 / 82%); white-space: nowrap; }
+    .gd-standing b { color: var(--sheet-white); }
+    .gd-row { display: grid; grid-template-columns: 78px 1fr; gap: 12px; align-items: start; }
+    .gd-label { font-size: var(--label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgb(253 253 254 / 75%); padding-top: 3px; }
+    .gd-label.next { color: var(--sheet-white); }
+    .gd-what { font-family: var(--heading-font-family); font-weight: 800; font-size: 1.25rem; line-height: 1.1; text-transform: uppercase; }
+    .gd-where { margin-top: 3px; font-size: var(--body-sm); color: rgb(253 253 254 / 82%); }
+    .gd-score { display: inline-flex; align-items: center; gap: 8px; }
+    .badge-w { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--win-green); color: var(--rink-navy); font-family: var(--heading-font-family); font-weight: 900; font-size: var(--body-sm); }
+    .gd-link { justify-self: start; font-family: var(--heading-font-family); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: var(--body-sm); color: var(--sheet-white); text-decoration: none; border-bottom: 2px solid var(--goal-red); padding-bottom: 2px; }
+    .gd-link:hover { color: var(--sheet-white); border-bottom-color: var(--sheet-white); }
+    .hero-stripe { height: 6px; background: linear-gradient(90deg, var(--goal-red) 0 33%, var(--sheet-white) 33% 67%, var(--goal-red) 67%); }
+
+    /* ---------- News rail ---------- */
+    .rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .rail > * { scroll-snap-align: start; }
+    .news-card { position: relative; overflow: hidden; background: var(--sheet-white); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: 26px 22px 20px; display: flex; flex-direction: column; gap: 10px; min-height: 200px; }
+    /* Captured 4px top edge, drawn inside the card so it follows the radius. */
+    .news-card::before, .rr-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--goal-red); }
+    .rr-card::before { background: var(--win-green); }
+    .news-card h3 { font-size: var(--heading-md); font-weight: 900; color: var(--rink-navy); line-height: 1.1; }
+    .news-card p { color: #3b4351; }
+    .news-meta { margin-top: auto; display: flex; align-items: center; gap: 10px; font-size: var(--label); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--slate); }
+    .tag { background: var(--goal-red); color: var(--sheet-white); border-radius: 999px; padding: 3px 10px; letter-spacing: 0.12em; }
+    .rail-hint { display: none; margin-top: 6px; font-size: var(--body-sm); color: var(--slate); }
+
+    /* ---------- Recent results ---------- */
+    .results { background: var(--ice); }
+    .toggle { display: inline-flex; gap: 6px; margin-bottom: 22px; }
+    .toggle input { position: absolute; opacity: 0; pointer-events: none; }
+    .toggle label { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 2px solid var(--rink-navy); border-radius: var(--radius-sm); font-family: var(--heading-font-family); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: var(--body); cursor: pointer; color: var(--rink-navy); background: var(--sheet-white); }
+    .toggle input:checked + label { background: var(--rink-navy); color: var(--sheet-white); }
+    .toggle input:focus-visible + label { outline: 3px solid var(--goal-red); outline-offset: 2px; }
+    .pane { display: none; }
+    .results:has(#rr-10u:checked) .pane-10u, .results:has(#rr-14u:checked) .pane-14u { display: grid; }
+    .rr-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .rr-card { position: relative; overflow: hidden; background: var(--sheet-white); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: 22px 20px 18px; display: grid; grid-template-columns: 52px 1fr auto; grid-template-rows: auto auto; column-gap: 14px; row-gap: 4px; align-items: center; }
+    .rr-date { grid-column: 1 / -1; font-size: var(--label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+    .rr-logo { width: 52px; height: 52px; object-fit: contain; }
+    .rr-opp { font-family: var(--heading-font-family); font-weight: 800; font-size: var(--heading-md); line-height: 1.05; text-transform: uppercase; }
+    .rr-where { font-size: var(--body-sm); color: var(--slate); margin-top: 2px; }
+    .rr-score { text-align: right; font-family: var(--heading-font-family); font-weight: 900; font-size: var(--heading-xl); line-height: 1; color: var(--rink-navy); display: grid; justify-items: end; gap: 6px; }
+    .results-foot { margin-top: 22px; }
+    .results-foot a { display: none; }
+    .results:has(#rr-10u:checked) .foot-10u, .results:has(#rr-14u:checked) .foot-14u { display: inline-flex; }
+    .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: var(--radius-sm); font-family: var(--heading-font-family); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
+    .btn-primary { background: var(--goal-red); color: var(--sheet-white); }
+    .btn-primary:hover { background: var(--goal-red-deep); }
+    .btn-ghost { border: 2px solid var(--rink-navy); color: var(--rink-navy); }
+    .btn-ghost:hover { background: var(--rink-navy); color: var(--sheet-white); }
+
+    /* ---------- About (photo-led) ---------- */
+    .about-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+    .about-photo { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-card); aspect-ratio: 3 / 2; }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-copy h3 { font-size: var(--heading-lg); font-weight: 900; color: var(--rink-navy); margin-bottom: 16px; }
+    .about-copy p { color: #3b4351; max-width: 62ch; }
+    .about-copy p + p { margin-top: 14px; }
+    .about-pair { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .about-pair figure { margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--shadow-card); }
+    .about-pair img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- Coaches + facility ---------- */
+    .cf { background: var(--sheet-white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .cf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .coach-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .coach { display: flex; align-items: center; gap: 14px; background: var(--rink-navy); color: var(--sheet-white); border-radius: var(--radius); padding: 14px 16px; }
+    .coach img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid rgb(253 253 254 / 60%); flex: none; }
+    .coach h3 { font-size: var(--heading-sm); font-weight: 900; line-height: 1.05; }
+    .coach p { margin-top: 4px; font-size: var(--body-sm); color: rgb(253 253 254 / 82%); }
+    .facility { border-radius: var(--radius); overflow: hidden; background: var(--boards); box-shadow: var(--shadow-card); }
+    .facility img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    .facility-body { padding: 20px 22px 22px; display: grid; gap: 12px; }
+    .facility-body p { color: #3b4351; }
+    .facility-body .phone a { font-weight: 700; color: var(--rink-navy); }
+    .facility-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* ---------- Instagram band ---------- */
+    .ig { padding: 48px 0; }
+    .ig-band { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; background: var(--rink-navy); color: var(--sheet-white); border-radius: var(--radius); padding: 28px 32px; }
+    .ig-band h2 { font-size: var(--heading-xl); font-weight: 900; }
+    .ig-band p { margin-top: 6px; color: rgb(253 253 254 / 85%); }
+    [data-placeholder] { display: inline-grid; gap: 2px; outline: 2px dashed var(--goal-red); outline-offset: 2px; background: rgb(232 240 249 / 70%); color: var(--rink-navy); padding: 8px 12px; border-radius: var(--radius-sm); }
+    .placeholder-eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--label); letter-spacing: 0.06em; color: var(--goal-red-deep); font-weight: 700; }
+    .placeholder-shape { font-size: var(--body-sm); }
+
+    /* ---------- Footer ---------- */
+    footer.site-foot { background: var(--rink-navy); color: rgb(253 253 254 / 82%); border-top: 3px solid var(--goal-red); padding: 44px 0 36px; text-align: center; }
+    .foot-crest { width: 60px; height: 60px; margin: 0 auto 14px; border-radius: 50%; background: var(--sheet-white); padding: 3px; }
+    .foot-name { font-family: var(--heading-font-family); font-weight: 900; font-size: var(--heading-md); letter-spacing: 0.04em; text-transform: uppercase; color: var(--sheet-white); }
+    .foot-links { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 6px; }
+    .foot-links a { display: inline-flex; min-height: 44px; align-items: center; padding: 0 10px; color: var(--sheet-white); text-decoration: none; font-weight: 500; }
+    .foot-links a:hover { text-decoration: underline; }
+    .foot-meta { margin-top: 10px; font-size: var(--body-sm); }
+    .foot-meta a { color: var(--sheet-white); }
+    .foot-copy { margin-top: 6px; font-size: var(--label); color: rgb(253 253 254 / 70%); }
+
+
+    /* ======== Variant B: matchday hero, fixture rail, standings, club band ======== */
+    .mhero { position: relative; isolation: isolate; overflow: hidden; background: var(--rink-navy); color: var(--sheet-white); }
+    .mhero .hero-rink { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+    .mhero-inner { max-width: var(--max-width); margin: 0 auto; padding: 48px 24px 40px; display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: center; }
+    .ident { display: grid; gap: 14px; justify-items: start; }
+    .ident .crest { margin: 0; width: 104px; height: 104px; }
+    .ident h1 { font-size: clamp(2.75rem, 6vw, 4.5rem); font-weight: 900; line-height: 0.92; }
+    .ident h1 span { color: var(--goal-red); }
+    .ident .hero-line, .ident .season-pill { margin: 0; }
+    .ident-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+    .btn-light { border: 2px solid rgb(253 253 254 / 75%); color: var(--sheet-white); }
+    .btn-light:hover { background: var(--sheet-white); color: var(--rink-navy); }
+
+    .nextup { background: var(--sheet-white); color: var(--rink-navy); border-radius: var(--radius); box-shadow: 0 18px 48px rgb(0 0 0 / 35%); overflow: hidden; }
+    .nextup-tabs { display: grid; grid-template-columns: 1fr 1fr; background: var(--rink-navy-light); }
+    .nextup-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+    .nextup-tabs label { display: grid; place-items: center; min-height: 52px; font-family: var(--heading-font-family); font-weight: 900; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgb(253 253 254 / 80%); cursor: pointer; border-bottom: 4px solid transparent; }
+    .nextup-tabs input:checked + label { color: var(--sheet-white); border-bottom-color: var(--goal-red); background: rgb(253 253 254 / 6%); }
+    .nextup-tabs input:focus-visible + label { outline: 3px solid var(--goal-red); outline-offset: -3px; }
+    .np { display: none; padding: 24px 28px 26px; }
+    .nextup:has(#nu-10u:checked) .np-10u, .nextup:has(#nu-14u:checked) .np-14u { display: block; }
+    .np-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .np-head h2 { font-size: 1.1rem; font-weight: 900; letter-spacing: 0.06em; color: var(--goal-red); }
+    .np-comp { font-size: var(--body-sm); font-weight: 600; color: var(--slate); }
+    .np-when { margin-top: 14px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; font-family: var(--heading-font-family); text-transform: uppercase; }
+    .np-date { font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 900; line-height: 0.9; }
+    .np-time { font-size: 1.6rem; font-weight: 800; color: var(--rink-navy-light); }
+    .np-match { margin-top: 18px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .side { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .side.away { flex-direction: row-reverse; text-align: right; }
+    .side img { width: 56px; height: 56px; object-fit: contain; flex: none; }
+    .side span { font-family: var(--heading-font-family); font-weight: 900; font-size: 1.3rem; line-height: 1.05; text-transform: uppercase; }
+    .vs { font-family: var(--heading-font-family); font-weight: 800; color: var(--slate); text-transform: uppercase; font-size: 1rem; }
+    .np-where { margin-top: 12px; font-weight: 600; }
+    .np-last { margin-top: 6px; font-size: var(--body-sm); color: var(--slate); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+    .np-actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .fixtures { background: var(--rink-navy-light); color: var(--sheet-white); border-top: 1px solid rgb(253 253 254 / 12%); }
+    .fixtures .wrap { padding-top: 18px; padding-bottom: 18px; }
+    .fx-rail { list-style: none; margin: 0; padding: 0 0 6px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(196px, 1fr); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: rgb(253 253 254 / 40%) transparent; }
+    .fx { scroll-snap-align: start; background: rgb(4 30 66 / 55%); border: 1px solid rgb(253 253 254 / 14%); border-radius: var(--radius); padding: 12px 14px; display: grid; gap: 6px; }
+    .fx.is-next { background: var(--sheet-white); color: var(--rink-navy); border-color: var(--sheet-white); }
+    .fx-top span:first-child { white-space: nowrap; }
+    .fx-top { display: flex; justify-content: space-between; gap: 8px; font-size: var(--label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgb(253 253 254 / 78%); }
+    .fx.is-next .fx-top { color: var(--goal-red); }
+    .fx-team { border-radius: 999px; padding: 1px 8px; background: rgb(253 253 254 / 14%); color: var(--sheet-white); }
+    .fx.is-next .fx-team { background: var(--rink-navy); }
+    .fx-opp { display: flex; align-items: center; gap: 8px; font-family: var(--heading-font-family); font-weight: 800; text-transform: uppercase; line-height: 1.05; }
+    .fx-opp img { width: 26px; height: 26px; object-fit: contain; flex: none; background: var(--sheet-white); border-radius: 50%; padding: 2px; }
+    .fx-res { display: flex; align-items: center; gap: 8px; font-family: var(--heading-font-family); font-weight: 900; font-size: 1.5rem; line-height: 1; }
+    .fx-meta { font-size: var(--label); color: rgb(253 253 254 / 75%); }
+    .fx.is-next .fx-meta { color: var(--slate); }
+
+    .standings { background: var(--ice); }
+    .st-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .st-card { background: var(--sheet-white); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: 20px 20px 14px; }
+    .st-card h3 { font-size: var(--heading-md); font-weight: 900; }
+    .st-div { font-size: var(--body-sm); color: var(--slate); margin-top: 2px; }
+    .st-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-variant-numeric: tabular-nums; }
+    .st-table th { font-size: var(--label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); text-align: right; padding: 6px 8px; border-bottom: 2px solid var(--line); }
+    .st-table th:nth-child(-n+2), .st-table td:nth-child(-n+2) { text-align: left; }
+    .st-table td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: right; }
+    .st-table td:nth-child(2) { font-weight: 600; }
+    .st-table td:last-child { font-family: var(--heading-font-family); font-weight: 900; font-size: 1.1rem; }
+    .st-table tr.ours td { background: var(--rink-navy); color: var(--sheet-white); }
+    .st-table tr.ours td:first-child { border-radius: var(--radius-sm) 0 0 var(--radius-sm); }
+    .st-table tr.ours td:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+    .st-card .more-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; font-family: var(--heading-font-family); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--goal-red); text-decoration: none; }
+
+    .clubband { background: var(--sheet-white); border-top: 1px solid var(--line); }
+    .club-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: start; }
+    .club-photo { margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--shadow-card); }
+    .club-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .club-copy h3 { font-size: var(--heading-lg); font-weight: 900; margin-bottom: 12px; }
+    .club-copy > p { color: #3b4351; max-width: 62ch; }
+    .coach-row { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .coach-row li { text-align: center; }
+    .coach-row img { width: 72px; height: 72px; margin: 0 auto 8px; border-radius: 50%; object-fit: cover; border: 3px solid var(--rink-navy); }
+    .coach-row h4 { font-size: 1rem; font-weight: 900; line-height: 1.05; }
+    .coach-row p { font-size: var(--label); color: var(--slate); margin-top: 3px; line-height: 1.35; }
+    .club-facility { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
+    .club-facility p { color: #3b4351; max-width: 52ch; font-size: var(--body-sm); }
+    .club-facility .phone a { font-weight: 700; color: var(--rink-navy); }
+
+    @media (max-width: 900px) {
+      .mhero-inner { grid-template-columns: 1fr; gap: 28px; padding-top: 32px; }
+      .ident { justify-items: center; text-align: center; }
+      .ident-actions { justify-content: center; }
+      .st-grid, .club-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .np { padding: 20px 18px 22px; }
+      .np-match { grid-template-columns: 1fr auto 1fr; gap: 8px; }
+      .side, .side.away { flex-direction: column; text-align: center; gap: 6px; }
+      .side img { width: 48px; height: 48px; }
+      .side span { font-size: 1.05rem; }
+      .fx-rail { grid-auto-columns: 72%; }
+      .fx.final { order: 2; }
+      .ident { grid-template-columns: auto 1fr; align-items: center; justify-items: start; text-align: left; column-gap: 14px; row-gap: 6px; }
+      .ident .crest { width: 64px; height: 64px; grid-row: span 2; }
+      .ident h1 { font-size: 2.4rem; }
+      .ident .season-pill { margin: 0; justify-self: start; }
+      .ident .hero-line { grid-column: 1 / -1; font-size: var(--body-sm); }
+      .ident-actions { display: none; }
+      .mhero-inner { gap: 20px; padding-top: 24px; }
+      .coach-row { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+      .st-table th:nth-child(3), .st-table td:nth-child(3) { display: none; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      :root { --section-padding: 48px; }
+      .ds-nav-burger { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 2px solid rgb(253 253 254 / 70%); border-radius: var(--radius-sm); color: var(--sheet-white); font-family: var(--heading-font-family); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; user-select: none; }
+      .ds-nav-burger-icon { width: 18px; height: 12px; position: relative; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+      .ds-nav-burger-icon::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 2px; background: currentColor; }
+      .ds-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; max-height: calc(100vh - 76px); overflow-y: auto; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 16px 20px; background: var(--rink-navy); border-bottom: 3px solid var(--goal-red); }
+      .ds-nav-toggle:checked ~ .ds-nav { display: flex; }
+      .nav-item.team > .nav-trigger, .nav-item.team > .menu, .nav-item.club > .nav-trigger, .nav-item.club > .menu { display: none !important; }
+      .drawer-team { display: block; border-bottom: 1px solid rgb(253 253 254 / 15%); }
+      .drawer-team summary { list-style: none; display: flex; align-items: center; justify-content: space-between; min-height: 52px; font-family: var(--heading-font-family); font-weight: 900; font-size: var(--heading-md); letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; }
+      .drawer-team summary::-webkit-details-marker { display: none; }
+      .drawer-team summary::after { content: "+"; font-size: var(--heading-lg); font-weight: 700; }
+      .drawer-team[open] summary::after { content: "–"; }
+      .drawer-team a { display: flex; align-items: center; min-height: 44px; padding-left: 12px; color: var(--sheet-white); text-decoration: none; font-weight: 600; }
+      .nav-item { border-bottom: 1px solid rgb(253 253 254 / 15%); }
+      .nav-item .nav-link { width: 100%; min-height: 52px; font-size: var(--heading-md); padding: 0; }
+      .shop { margin: 14px 0 0; justify-content: center; }
+      .gameday { grid-template-columns: 1fr; max-width: 560px; }
+      .rail { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 78%; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 18px; margin: 0 -4px; scrollbar-width: thin; scrollbar-color: var(--rink-navy) var(--line); }
+      .rail > * { scroll-snap-align: start; }
+      .rail-hint { display: block; }
+      .rr-grid { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+      .rr-card { scroll-snap-align: start; }
+      .about-grid, .cf-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+    @media (max-width: 600px) {
+      :root { --section-padding: 32px; }
+      .wrap { padding: 0 16px; }
+      .site-inner { padding: 8px 16px; }
+      .brand img { width: 44px; height: 44px; }
+      .brand-name { font-size: var(--heading-sm); }
+      .brand-strap { font-size: var(--label); letter-spacing: 0.08em; }
+      .hero-inner { padding-top: 36px; }
+      .crest { width: 92px; height: 92px; }
+      .hero-line { font-size: 1rem; }
+      .gameday { margin-top: 28px; }
+      .gd-team { padding: 16px; }
+      .gd-row { grid-template-columns: 64px 1fr; }
+      .head { margin-bottom: 20px; }
+      .head h2 { white-space: normal; }
+      .head .more { display: none; }
+      .rail { grid-auto-columns: 86%; gap: 14px; }
+      .coach-list { grid-template-columns: 1fr; }
+      .ig-band { padding: 22px 20px; }
+    }
+    @media (max-width: 480px) {
+      .brand-strap { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+<!-- THESIS: Game day is the hero — the next puck drop for each team is the first thing a family sees, then every recent final and upcoming game in one rail, then where both teams stand. Refuses the brochure wordmark hero and the SaaS centred-CTA hero.
+OWN-WORLD: rink navy + goal red on boards; Barlow Condensed scoreboard numerals; a white "Next up" scoreboard card on the navy rink; navy-light fixture rail.
+STORY: parent picks their team, sees date/time/rink and last score, adds it to the calendar, scans the rail and the standings, then the club story.
+FIRST VIEWPORT: split 5/7 — crest + wordmark left over the rink diagram; Next up card right with 10U/14U tabs, big date numerals, both crests, rink, actions; fixture rail begins at the fold.
+FORM: stardust Mode A variant B (live-data promotion), anchor nycfc.com matchday hero; concept roll substituted by the stardust direction pin — key stardust/direction.md "Resolution (stardust:direct, 2026-10-07T12:25:58Z)".
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site" data-section="header" data-intent="navigate" data-layout="full-width" data-nav-collapse="hamburger">
+  <div class="site-inner">
+    <a class="brand" href="https://www.rinxhockeyclub.com/">
+      <img src="https://www.rinxhockeyclub.com/icons/rinx-header-128.webp" alt="" width="52" height="52">
+      <span><span class="brand-name">Rinx Hockey Club</span><span class="brand-strap">Tier III/A • Travel Hockey • LIAHL</span></span>
+    </a>
+    <input type="checkbox" id="ds-nav-toggle" class="ds-nav-toggle">
+    <label class="ds-nav-burger" for="ds-nav-toggle" role="button" tabindex="0" aria-controls="ds-nav-list" aria-expanded="false">
+      <span class="ds-nav-burger-icon" aria-hidden="true"></span><span class="ds-nav-burger-label">Menu</span>
+    </label>
+    <nav id="ds-nav-list" class="ds-nav" aria-label="Main">
+      <div class="nav-item team">
+        <button class="nav-trigger" type="button" aria-haspopup="true">10U Squirts</button>
+        <div class="menu">
+          <a href="https://www.rinxhockeyclub.com/schedule">Schedule</a>
+          <a href="https://www.rinxhockeyclub.com/roster">Roster</a>
+          <a href="https://www.rinxhockeyclub.com/stats">Stats</a>
+          <a href="https://www.rinxhockeyclub.com/standings">Standings</a>
+        </div>
+      </div>
+      <details class="drawer-team"><summary>10U Squirts</summary>
+        <a href="https://www.rinxhockeyclub.com/schedule">Schedule</a><a href="https://www.rinxhockeyclub.com/roster">Roster</a><a href="https://www.rinxhockeyclub.com/stats">Stats</a><a href="https://www.rinxhockeyclub.com/standings">Standings</a>
+      </details>
+      <div class="nav-item team">
+        <button class="nav-trigger" type="button" aria-haspopup="true">14U Bantam</button>
+        <div class="menu">
+          <a href="https://www.rinxhockeyclub.com/schedule-14u">Schedule</a>
+          <a href="https://www.rinxhockeyclub.com/roster-14u">Roster</a>
+          <a href="https://www.rinxhockeyclub.com/stats-14u">Stats</a>
+          <a href="https://www.rinxhockeyclub.com/standings-14u">Standings</a>
+        </div>
+      </div>
+      <details class="drawer-team"><summary>14U Bantam</summary>
+        <a href="https://www.rinxhockeyclub.com/schedule-14u">Schedule</a><a href="https://www.rinxhockeyclub.com/roster-14u">Roster</a><a href="https://www.rinxhockeyclub.com/stats-14u">Stats</a><a href="https://www.rinxhockeyclub.com/standings-14u">Standings</a>
+      </details>
+      <div class="nav-item"><a class="nav-link" href="https://www.rinxhockeyclub.com/tournaments">Tournaments</a></div>
+      <div class="nav-item club">
+        <button class="nav-trigger" type="button" aria-haspopup="true">Club</button>
+        <div class="menu">
+          <a href="https://www.rinxhockeyclub.com/clinics">Clinics</a>
+          <a href="https://www.rinxhockeyclub.com/sponsors">Sponsors</a>
+          <a href="https://www.rinxhockeyclub.com/contact">Contact</a>
+        </div>
+      </div>
+      <details class="drawer-team"><summary>Club</summary>
+        <a href="https://www.rinxhockeyclub.com/clinics">Clinics</a><a href="https://www.rinxhockeyclub.com/sponsors">Sponsors</a><a href="https://www.rinxhockeyclub.com/contact">Contact</a>
+      </details>
+      <a class="nav-link shop" href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="mhero" data-section="matchday-hero" data-intent="drive action" data-layout="split-media" data-interactive="tabs" aria-labelledby="hero-title">
+    <svg class="hero-rink" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id="ice" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#e8f0f9"/><stop offset="100%" stop-color="#bcd6f0"/></radialGradient>
+      </defs>
+      <rect width="1200" height="560" fill="url(#ice)"/>
+      <rect x="6" y="6" width="1188" height="548" rx="150" fill="none" stroke="#041E42" stroke-width="12"/>
+      <line x1="380" y1="0" x2="380" y2="560" stroke="#0a2d5e" stroke-width="10"/>
+      <line x1="820" y1="0" x2="820" y2="560" stroke="#0a2d5e" stroke-width="10"/>
+      <line x1="600" y1="0" x2="600" y2="560" stroke="#C8102E" stroke-width="10"/>
+      <circle cx="600" cy="280" r="120" fill="none" stroke="#C8102E" stroke-width="5"/>
+      <circle cx="600" cy="280" r="8" fill="#C8102E"/>
+      <g fill="none" stroke="#C8102E" stroke-width="4">
+        <circle cx="200" cy="160" r="72"/><circle cx="200" cy="400" r="72"/><circle cx="1000" cy="160" r="72"/><circle cx="1000" cy="400" r="72"/>
+      </g>
+      <g fill="#C8102E"><circle cx="200" cy="160" r="7"/><circle cx="200" cy="400" r="7"/><circle cx="1000" cy="160" r="7"/><circle cx="1000" cy="400" r="7"/></g>
+      <line x1="70" y1="40" x2="70" y2="520" stroke="#C8102E" stroke-width="4"/>
+      <line x1="1130" y1="40" x2="1130" y2="520" stroke="#C8102E" stroke-width="4"/>
+      <rect width="1200" height="560" fill="#041E42" opacity="0.88"/>
+    </svg>
+    <div class="mhero-inner">
+      <div class="ident">
+        <img class="crest" src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="Rinx Hockey Club crest" width="104" height="104" fetchpriority="high" loading="eager">
+        <h1 id="hero-title">Rinx <span>Hockey</span> Club</h1>
+        <p class="season-pill">2026–2027 Season</p>
+        <p class="hero-line">Travel Hockey • Long Island, New York</p>
+        <div class="ident-actions"><a class="btn btn-light" href="https://www.rinxhockeyclub.com/tournaments">Tournaments</a><a class="btn btn-light" href="https://www.rinxhockeyclub.com/contact">Contact</a></div>
+      </div>
+      <div class="nextup">
+        <div class="nextup-tabs" role="radiogroup" aria-label="Team">
+          <input type="radio" name="nu" id="nu-10u" checked><label for="nu-10u">10U Squirts</label>
+          <input type="radio" name="nu" id="nu-14u"><label for="nu-14u">14U Bantam</label>
+        </div>
+        <div class="np np-10u">
+          <div class="np-head"><h2>Next up</h2><p class="np-comp">Mid-Atlantic Fall Showcase · 10A</p></div>
+          <p class="np-when"><span class="np-date num">Fri Oct 9</span><span class="np-time num">5:05 PM</span></p>
+          <div class="np-match"><p class="side"><img src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="" width="56" height="56"><span>Rinx</span></p><p class="vs">vs</p><p class="side away"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/547984bb-9b2f-44b0-2a7a-a011a7a21d00/128" alt="" width="56" height="56"><span>Delco Phantoms</span></p></div>
+          <p class="np-where">Hatfield Ice Arena (Blue)</p>
+          <p class="np-last">Last result: <span class="badge-w" aria-label="Win">W</span><span class="num">10-2</span> vs Long Beach Lightning · Sep 27</p>
+          <div class="np-actions"><a class="btn btn-primary" href="https://www.rinxhockeyclub.com/mid-atlantic-fall-classic-schedule">Tournament schedule</a><a class="btn btn-ghost" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Rinx+10U+Squirts+vs+Delco+Phantoms&amp;dates=20261009T210500Z%2F20261009T223500Z&amp;location=Hatfield+Ice+Arena+%28Blue%29&amp;details=Mid-Atlantic+Fall+Showcase" target="_blank" rel="noopener">Add to calendar</a></div>
+        </div>
+        <div class="np np-14u">
+          <div class="np-head"><h2>Next up</h2><p class="np-comp">LIAHL · 12- 14U Silver</p></div>
+          <p class="np-when"><span class="np-date num">Sun Oct 18</span><span class="np-time num">11:40 AM</span></p>
+          <div class="np-match"><p class="side"><img src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="" width="56" height="56"><span>Rinx</span></p><p class="vs">vs</p><p class="side away"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="56" height="56"><span>Long Island Sharks</span></p></div>
+          <p class="np-where">The Rinx · Home</p>
+          <p class="np-last">Last result: <span class="badge-w" aria-label="Win">W</span><span class="num">7-1</span> vs Peconic Wildcats · Oct 3</p>
+          <div class="np-actions"><a class="btn btn-primary" href="https://www.rinxhockeyclub.com/schedule-14u">Full 14U schedule</a><a class="btn btn-ghost" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Rinx+14U+Bantam+vs+Long+Island+Sharks&amp;dates=20261018T154000Z%2F20261018T171000Z&amp;location=The+Rinx%2C+660+Terry+Road%2C+Hauppauge%2C+NY+11788&amp;details=LIAHL" target="_blank" rel="noopener">Add to calendar</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fixtures" data-section="fixture-rail" data-intent="live results" data-layout="edge-to-edge" data-items="8" aria-label="Recent finals and upcoming games, both teams">
+    <div class="wrap"><ul class="fx-rail" tabindex="0" aria-label="Fixtures, scroll for more"><li class="fx final"><p class="fx-top"><span>Final · Sat Sep 26</span><span class="fx-team">14U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="26" height="26" loading="lazy">vs North Park</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>5-1</p><p class="fx-meta">The Rinx</p></li><li class="fx final"><p class="fx-top"><span>Final · Sun Sep 27</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="26" height="26" loading="lazy">vs Long Beach Lightning</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>10-2</p><p class="fx-meta">The Rinx</p></li><li class="fx final"><p class="fx-top"><span>Final · Sat Oct 3</span><span class="fx-team">14U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="26" height="26" loading="lazy">vs Peconic Wildcats</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>7-1</p><p class="fx-meta">The Rinx</p></li><li class="fx is-next"><p class="fx-top"><span>Next · Fri Oct 9</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/547984bb-9b2f-44b0-2a7a-a011a7a21d00/128" alt="" width="26" height="26" loading="lazy">vs Delco Phantoms</p><p class="fx-res num">5:05 PM</p><p class="fx-meta">Hatfield Ice Arena (Blue)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 10</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/4195975c-860c-4caa-37da-4197a76a3000/128" alt="" width="26" height="26" loading="lazy">vs Central Penn Panthers</p><p class="fx-res num">7:50 AM</p><p class="fx-meta">Hatfield Ice Arena (Blue)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 10</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/3f442c23-a1f5-485d-8c69-6bdeebbd5000/128" alt="" width="26" height="26" loading="lazy">vs Genesis Hockey Club</p><p class="fx-res num">6:30 PM</p><p class="fx-meta">Hatfield Ice Arena (Green)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 17</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="26" height="26" loading="lazy">at Long Beach Lightning</p><p class="fx-res num">8:30 AM</p><p class="fx-meta">Long Beach Arena</p></li><li class="fx"><p class="fx-top"><span>Sun Oct 18</span><span class="fx-team">14U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="26" height="26" loading="lazy">vs Long Island Sharks</p><p class="fx-res num">11:40 AM</p><p class="fx-meta">The Rinx</p></li></ul></div>
+  </section>
+
+  <section class="section standings" data-section="standings" data-intent="live results" data-layout="grid" data-items="2" aria-labelledby="st-title">
+    <div class="wrap">
+      <div class="head"><h2 id="st-title">Standings</h2></div>
+      <div class="st-grid">
+        <article class="st-card"><h3>10U Squirts</h3><p class="st-div">04 - 10U Silver</p><table class="st-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">GP</th><th scope="col">W-L-T</th><th scope="col">PTS</th></tr></thead><tbody><tr class="ours"><td>1</td><td>Rinx</td><td>3</td><td>3-0-0</td><td>6</td></tr><tr><td>2</td><td>Peconic Wildcats</td><td>5</td><td>3-2-0</td><td>6</td></tr><tr><td>3</td><td>Long Beach Lightning</td><td>4</td><td>3-1-0</td><td>6</td></tr><tr><td>4</td><td>Aviator Hockey Club</td><td>3</td><td>2-0-1</td><td>5</td></tr><tr><td>5</td><td>Long Island Sharks</td><td>5</td><td>1-2-2</td><td>4</td></tr></tbody></table><a class="more-link" href="https://www.rinxhockeyclub.com/standings">Full 10U standings →</a></article>
+        <article class="st-card"><h3>14U Bantam</h3><p class="st-div">12- 14U Silver</p><table class="st-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">GP</th><th scope="col">W-L-T</th><th scope="col">PTS</th></tr></thead><tbody><tr class="ours"><td>1</td><td>Rinx</td><td>4</td><td>4-0-0</td><td>8</td></tr><tr><td>2</td><td>Great Neck Bruins</td><td>3</td><td>2-1-0</td><td>4</td></tr><tr><td>3</td><td>North Park</td><td>4</td><td>2-2-0</td><td>4</td></tr><tr><td>4</td><td>Long Island Sharks</td><td>4</td><td>2-2-0</td><td>4</td></tr><tr><td>5</td><td>Dix Hills Selects</td><td>0</td><td>0-0-0</td><td>0</td></tr></tbody></table><a class="more-link" href="https://www.rinxhockeyclub.com/standings-14u">Full 14U standings →</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" data-section="news" data-intent="latest news" data-layout="grid" data-items="6" data-interactive="carousel" aria-labelledby="news-title">
+    <div class="wrap">
+      <div class="head"><h2 id="news-title">Game Updates</h2></div>
+      <div class="rail" role="region" aria-label="Game updates" tabindex="0">
+        <article class="news-card"><h3>14U Remains Undefeated</h3><p>14U powers through Peconic, winning 7-1 at the Rinx</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-10-03">October 3, 2026</time></p></article>
+        <article class="news-card"><h3>10U Pours on the Goals</h3><p>10U overwhelmed Long Beach flooding the back of the net in a 10-2 victory</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-27">September 27, 2026</time></p></article>
+        <article class="news-card"><h3>14U Keep Rolling</h3><p>14U takes the early lead and holds off North Park 5-1</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-26">September 26, 2026</time></p></article>
+        <article class="news-card"><h3>10U Landslide Victory</h3><p>10U dominates North Park 56 SOG to 2, winning 13-0</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-21">September 21, 2026</time></p></article>
+        <article class="news-card"><h3>Comeback Tie</h3><p>14U come back from behind in the 3rd to tie</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-21">September 21, 2026</time></p></article>
+        <article class="news-card"><h3>Clean Sweep</h3><p>10U and 14U sweep the weekend with 4 total wins</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-13">September 13, 2026</time></p></article>
+      </div>
+      <p class="rail-hint">6 updates · scroll or swipe for more</p>
+    </div>
+  </section>
+
+  <section class="section clubband" data-section="club-band" data-intent="build trust" data-layout="split-media" data-media="image" aria-labelledby="club-title">
+    <div class="wrap">
+      <div class="head"><h2 id="club-title">About Our Team</h2></div>
+      <div class="club-grid">
+        <figure class="club-photo"><img src="https://www.rinxhockeyclub.com/images/r1-720.webp" alt="Rinx goalie in full gear stepping onto the ice" width="720" height="480" loading="lazy"></figure>
+        <div class="club-copy">
+          <h3>2026–2027 Rinx Hockey Club</h3>
+          <p>The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.</p>
+          <ul class="coach-row" aria-label="Coaching staff">
+            <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachdan.webp" alt="" width="72" height="72" loading="lazy"><h4>Dan O'Donoghue</h4><p>Head Coach • 10U Squirts</p></li>
+            <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachskillman.webp" alt="" width="72" height="72" loading="lazy"><h4>Greg Skillman</h4><p>Head Coach • 14U Bantam</p></li>
+            <li><img src="https://www.rinxhockeyclub.com/images/headshots/joecap.webp" alt="" width="72" height="72" loading="lazy"><h4>Joe Capozzoli</h4><p>Assistant Coach • 10U, 14U</p></li>
+            <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachmazz.webp" alt="" width="72" height="72" loading="lazy"><h4>Jon Mazzarone</h4><p>Assistant Coach • 14U Bantam</p></li>
+          </ul>
+          <div class="club-facility"><p>Located at 660 Terry Road, Hauppauge, The Rinx features two full-size indoor NHL rinks, a pro shop, skate sharpening, and year-round programming on 97 acres of Hidden Pond Park.</p><p class="phone">Phone: <a href="tel:+16312323222">(631) 232-3222</a></p><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=660%20Terry%20Rd%2C%20Hauppauge%2C%20NY%2011788">Get Directions</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ig" data-section="instagram" data-intent="cross-link" data-layout="contained" aria-labelledby="ig-title">
+    <div class="wrap">
+      <div class="ig-band">
+        <h2 id="ig-title">Follow Us on Instagram</h2>
+        <span data-placeholder="true" data-placeholder-type="other" data-placeholder-source="Instagram handle not in current/pages/index.json (third-party embed hid it)">
+          <span class="placeholder-eyebrow">PLACEHOLDER · other</span>
+          <span class="placeholder-shape">Instagram handle — e.g. @handle → instagram.com/handle</span>
+        </span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot" data-section="footer" data-intent="navigate" data-layout="contained">
+  <div class="wrap">
+    <img class="foot-crest" src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="" width="60" height="60" loading="lazy">
+    <p class="foot-name">Rinx Hockey Club • Long Island, NY</p>
+    <ul class="foot-links">
+      <li><a href="https://www.rinxhockeyclub.com/">Home</a></li>
+      <li><a href="https://www.rinxhockeyclub.com/roster">Roster</a></li>
+      <li><a href="https://www.rinxhockeyclub.com/schedule">Schedule</a></li>
+      <li><a href="https://www.rinxhockeyclub.com/stats">Stats</a></li>
+      <li><a href="https://www.rinxhockeyclub.com/tournaments">Tournaments</a></li>
+      <li><a href="https://www.rinxhockeyclub.com/sponsors">Sponsors</a></li>
+      <li><a href="https://www.rinxhockeyclub.com/clinics">Clinics</a></li>
+      <li><a href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a></li>
+      <li><a href="https://www.rinxhockeyclub.com/contact">Contact</a></li>
+    </ul>
+    <p class="foot-meta">The Rinx • 660 Terry Road, Hauppauge, NY 11788 • <a href="tel:+16312323222">(631) 232-3222</a></p>
+    <p class="foot-copy">© 2026 Rinx Hockey Club. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const t = document.getElementById('ds-nav-toggle');
+  const b = document.querySelector('.ds-nav-burger');
+  if (!t || !b) return;
+  const sync = () => b.setAttribute('aria-expanded', t.checked);
+  t.addEventListener('change', sync); sync();
+  b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); } });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && t.checked) { t.checked = false; sync(); b.focus(); } });
+})();
+</script>
+</body>
+</html>
