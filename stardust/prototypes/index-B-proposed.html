@@ -19,7 +19,7 @@
     dataSources:      [stardust/current/pages/index.json, stardust/current/live-data/ (snapshot of data/schedule-10u.json, schedule-14u.json, schedule-mid-atlantic.json, standings-10u.json, standings-14u.json at 2026-10-07)]
     dataNotes:        "News card 'Comeback Tie' (14U, Sep 21) is captured verbatim; the 14U league record 4-0-0 comes from standings-14u.json — the tie was not a league game in the feed. Not reconciled in copy (captured content is not rewritten)."
     paletteNotes:     "Captured palette only. 'Hockey' in the wordmark keeps #C8102E (logotype exemption, as on the live site); small labels on navy use ice/sheet-white text."
-    iteration:        "2026-10-07 user request: opponent logos in standings; Tournaments/schedule buttons removed from hero; Latest Updates as a one-row carousel; restrained motion (faceoff focal moment, standings row settle, carousel, hover feedback)"
+    iteration:        "2026-10-07 user request: fixture rail split into 10U/14U tabs (default 10U, synced with the hero team tabs); opponent logos in standings; Tournaments/schedule buttons removed from hero; Latest Updates as a one-row carousel; restrained motion (faceoff focal moment, standings row settle, carousel, hover feedback)"
     unsourcedContent:
       - selector: "section[data-section=\"instagram\"] > .wrap > .ig-band > [data-placeholder]"
         type: other
@@ -280,8 +280,13 @@
     .fx-top span:first-child { white-space: nowrap; }
     .fx-top { display: flex; justify-content: space-between; gap: 8px; font-size: var(--label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgb(253 253 254 / 78%); }
     .fx.is-next .fx-top { color: var(--goal-red); }
-    .fx-team { border-radius: 999px; padding: 1px 8px; background: rgb(253 253 254 / 14%); color: var(--sheet-white); }
-    .fx.is-next .fx-team { background: var(--rink-navy); }
+    .fx-tabs { display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 14px; border-radius: 999px; background: rgb(4 30 66 / 55%); border: 1px solid rgb(253 253 254 / 14%); }
+    .fx-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+    .fx-tabs label { display: grid; place-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; font-family: var(--heading-font-family); font-weight: 800; font-size: 1rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgb(253 253 254 / 80%); cursor: pointer; transition: background-color 200ms ease, color 200ms ease; }
+    .fx-tabs label:hover { color: var(--sheet-white); }
+    .fx-tabs input:checked + label { background: var(--sheet-white); color: var(--rink-navy); }
+    .fx-tabs input:focus-visible + label { outline: 3px solid var(--goal-red); outline-offset: 2px; }
+    .fixtures:has(#fx-10u:checked) .fx-rail-14u, .fixtures:has(#fx-14u:checked) .fx-rail-10u { display: none; }
     .fx-opp { display: flex; align-items: center; gap: 8px; font-family: var(--heading-font-family); font-weight: 800; text-transform: uppercase; line-height: 1.05; }
     .fx-opp img { width: 26px; height: 26px; object-fit: contain; flex: none; background: var(--sheet-white); border-radius: 50%; padding: 2px; }
     .fx-res { display: flex; align-items: center; gap: 8px; font-family: var(--heading-font-family); font-weight: 900; font-size: 1.5rem; line-height: 1; }
@@ -340,6 +345,12 @@
       .np-date, .np-time { display: inline-block; animation: score-roll 560ms cubic-bezier(0.16, 1, 0.3, 1) both; }
       .np-time { animation-delay: 90ms; }
       .np-where, .np-last, .np-actions { animation: np-fade 400ms ease-out 560ms both; }
+      /* Team switch on the rail: the cards deal in left to right (capped). */
+      .fx-rail .fx { animation: fx-deal 380ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+      .fx-rail .fx:nth-child(2) { animation-delay: 30ms; } .fx-rail .fx:nth-child(3) { animation-delay: 60ms; }
+      .fx-rail .fx:nth-child(4) { animation-delay: 90ms; } .fx-rail .fx:nth-child(5) { animation-delay: 120ms; }
+      .fx-rail .fx:nth-child(n+6) { animation-delay: 150ms; }
+      @keyframes fx-deal { from { opacity: 0; transform: translateX(16px); } }
       @keyframes np-arrive { from { opacity: 0; transform: translateY(18px); } }
       @keyframes np-fade { from { opacity: 0; } }
       @keyframes faceoff-home { from { opacity: 0; transform: translateX(-36px); } }
@@ -381,6 +392,8 @@
       .side img { width: 48px; height: 48px; }
       .side span { font-size: 1.05rem; }
       .fx-rail { grid-auto-columns: 72%; }
+      .fx-tabs { display: flex; }
+      .fx-tabs label { flex: 1; }
       .fx.final { order: 2; }
       .ident { grid-template-columns: auto 1fr; align-items: center; justify-items: start; text-align: left; column-gap: 14px; row-gap: 6px; }
       .ident .crest { width: 64px; height: 64px; grid-row: span 2; }
@@ -457,7 +470,7 @@
 <body>
 <!-- THESIS: Game day is the hero — the next puck drop for each team is the first thing a family sees, then every recent final and upcoming game in one rail, then where both teams stand. Refuses the brochure wordmark hero and the SaaS centred-CTA hero.
 OWN-WORLD: rink navy + goal red on boards; Barlow Condensed scoreboard numerals; a white "Next up" scoreboard card on the navy rink; navy-light fixture rail.
-STORY: parent picks their team, sees date/time/rink and last score, adds it to the calendar, scans the rail and the standings, the latest updates, then the club story.
+STORY: parent picks their team, sees date/time/rink and last score, adds it to the calendar, scans that team's results-and-upcoming rail and the standings, the latest updates, then the club story.
 MOTION: one authored moment — the faceoff (crests skate to centre ice, the puck-drop time rolls up like a scoreboard), replayed on team switch; elsewhere only feedback and a single standings settle.
 FIRST VIEWPORT: split 5/7 — crest + wordmark left over the rink diagram; Next up card right with 10U/14U tabs, big date numerals, both crests, rink, actions; fixture rail begins at the fold.
 FORM: stardust Mode A variant B (live-data promotion), anchor nycfc.com matchday hero; concept roll substituted by the stardust direction pin — key stardust/direction.md "Resolution (stardust:direct, 2026-10-07T12:25:58Z)".
@@ -570,8 +583,15 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     </div>
   </section>
 
-  <section class="fixtures" data-section="fixture-rail" data-intent="live results" data-layout="edge-to-edge" data-items="8" aria-label="Recent finals and upcoming games, both teams">
-    <div class="wrap"><ul class="fx-rail" tabindex="0" aria-label="Fixtures, scroll for more"><li class="fx final"><p class="fx-top"><span>Final · Sat Sep 26</span><span class="fx-team">14U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="26" height="26" loading="lazy">vs North Park</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>5-1</p><p class="fx-meta">The Rinx</p></li><li class="fx final"><p class="fx-top"><span>Final · Sun Sep 27</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="26" height="26" loading="lazy">vs Long Beach Lightning</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>10-2</p><p class="fx-meta">The Rinx</p></li><li class="fx final"><p class="fx-top"><span>Final · Sat Oct 3</span><span class="fx-team">14U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="26" height="26" loading="lazy">vs Peconic Wildcats</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>7-1</p><p class="fx-meta">The Rinx</p></li><li class="fx is-next"><p class="fx-top"><span>Next · Fri Oct 9</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/547984bb-9b2f-44b0-2a7a-a011a7a21d00/128" alt="" width="26" height="26" loading="lazy">vs Delco Phantoms</p><p class="fx-res num">5:05 PM</p><p class="fx-meta">Hatfield Ice Arena (Blue)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 10</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/4195975c-860c-4caa-37da-4197a76a3000/128" alt="" width="26" height="26" loading="lazy">vs Central Penn Panthers</p><p class="fx-res num">7:50 AM</p><p class="fx-meta">Hatfield Ice Arena (Blue)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 10</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/3f442c23-a1f5-485d-8c69-6bdeebbd5000/128" alt="" width="26" height="26" loading="lazy">vs Genesis Hockey Club</p><p class="fx-res num">6:30 PM</p><p class="fx-meta">Hatfield Ice Arena (Green)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 17</span><span class="fx-team">10U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="26" height="26" loading="lazy">at Long Beach Lightning</p><p class="fx-res num">8:30 AM</p><p class="fx-meta">Long Beach Arena</p></li><li class="fx"><p class="fx-top"><span>Sun Oct 18</span><span class="fx-team">14U</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="26" height="26" loading="lazy">vs Long Island Sharks</p><p class="fx-res num">11:40 AM</p><p class="fx-meta">The Rinx</p></li></ul></div>
+  <section class="fixtures" data-section="fixture-rail" data-intent="live results" data-layout="edge-to-edge" data-items="8" data-interactive="tabs" aria-label="Results and upcoming games">
+    <div class="wrap">
+      <div class="fx-tabs" role="radiogroup" aria-label="Team">
+        <input type="radio" name="fx" id="fx-10u" checked><label for="fx-10u">10U Squirts</label>
+        <input type="radio" name="fx" id="fx-14u"><label for="fx-14u">14U Bantam</label>
+      </div>
+      <ul class="fx-rail fx-rail-10u" tabindex="0" aria-label="10U Squirts results and upcoming games, scroll for more"><li class="fx final"><p class="fx-top"><span>Final · Sun Sep 13</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="26" height="26" loading="lazy">at Peconic Wildcats</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>8-2</p><p class="fx-meta">Peconic Ice Rink</p></li><li class="fx final"><p class="fx-top"><span>Final · Sun Sep 20</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="26" height="26" loading="lazy">vs North Park</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>13-0</p><p class="fx-meta">The Rinx</p></li><li class="fx final"><p class="fx-top"><span>Final · Sun Sep 27</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="26" height="26" loading="lazy">vs Long Beach Lightning</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>10-2</p><p class="fx-meta">The Rinx</p></li><li class="fx is-next"><p class="fx-top"><span>Next · Fri Oct 9</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/547984bb-9b2f-44b0-2a7a-a011a7a21d00/128" alt="" width="26" height="26" loading="lazy">vs Delco Phantoms</p><p class="fx-res num">5:05 PM</p><p class="fx-meta">Hatfield Ice Arena (Blue)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 10</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/4195975c-860c-4caa-37da-4197a76a3000/128" alt="" width="26" height="26" loading="lazy">vs Central Penn Panthers</p><p class="fx-res num">7:50 AM</p><p class="fx-meta">Hatfield Ice Arena (Blue)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 10</span></p><p class="fx-opp"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/3f442c23-a1f5-485d-8c69-6bdeebbd5000/128" alt="" width="26" height="26" loading="lazy">vs Genesis Hockey Club</p><p class="fx-res num">6:30 PM</p><p class="fx-meta">Hatfield Ice Arena (Green)</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 17</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="26" height="26" loading="lazy">at Long Beach Lightning</p><p class="fx-res num">8:30 AM</p><p class="fx-meta">Long Beach Arena</p></li><li class="fx"><p class="fx-top"><span>Sun Oct 18</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="26" height="26" loading="lazy">at Long Island Sharks</p><p class="fx-res num">8:15 AM</p><p class="fx-meta">Iceland</p></li></ul>
+      <ul class="fx-rail fx-rail-14u" tabindex="0" aria-label="14U Bantam results and upcoming games, scroll for more"><li class="fx final"><p class="fx-top"><span>Final · Sun Sep 13</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/001934_a.png" alt="" width="26" height="26" loading="lazy">vs Great Neck Bruins</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>7-0</p><p class="fx-meta">The Rinx</p></li><li class="fx final"><p class="fx-top"><span>Final · Sat Sep 26</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="26" height="26" loading="lazy">vs North Park</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>5-1</p><p class="fx-meta">The Rinx</p></li><li class="fx final"><p class="fx-top"><span>Final · Sat Oct 3</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="26" height="26" loading="lazy">vs Peconic Wildcats</p><p class="fx-res num"><span class="badge-w" aria-label="Win">W</span>7-1</p><p class="fx-meta">The Rinx</p></li><li class="fx is-next"><p class="fx-top"><span>Next · Sun Oct 18</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="26" height="26" loading="lazy">vs Long Island Sharks</p><p class="fx-res num">11:40 AM</p><p class="fx-meta">The Rinx</p></li><li class="fx"><p class="fx-top"><span>Sat Oct 24</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/001934_a.png" alt="" width="26" height="26" loading="lazy">at Great Neck Bruins</p><p class="fx-res num">6:30 PM</p><p class="fx-meta">Parkwood Ice Rink</p></li><li class="fx"><p class="fx-top"><span>Sun Nov 8</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="26" height="26" loading="lazy">at North Park</p><p class="fx-res num">7:10 PM</p><p class="fx-meta">City Ice Pavilion</p></li><li class="fx"><p class="fx-top"><span>Sat Jan 9</span></p><p class="fx-opp"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="26" height="26" loading="lazy">at Long Island Sharks</p><p class="fx-res num">2:00 PM</p><p class="fx-meta">Iceland</p></li><li class="fx"><p class="fx-top"><span>Sun Jan 10</span></p><p class="fx-opp"><img src="https://www.rinxhockeyclub.com/images/dh.png" alt="" width="26" height="26" loading="lazy">at Dix Hills Selects</p><p class="fx-res num">3:00 PM</p><p class="fx-meta">Dix Hills Ice Rink</p></li></ul>
+    </div>
   </section>
 
   <section class="section standings" data-section="standings" data-intent="live results" data-layout="grid" data-items="2" aria-labelledby="st-title">
@@ -685,6 +705,14 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     ctrl.hidden = false;
     sync();
   }
+  // Picking a team in the hero or on the rail keeps the other in step.
+  [['nu-10u', 'fx-10u'], ['nu-14u', 'fx-14u']].forEach(([h, r]) => {
+    const hero = document.getElementById(h);
+    const rail2 = document.getElementById(r);
+    if (!hero || !rail2) return;
+    hero.addEventListener('change', () => { rail2.checked = true; });
+    rail2.addEventListener('change', () => { hero.checked = true; });
+  });
   // Standings rows settle into place the first time each table is seen.
   if (reduce || !('IntersectionObserver' in window)) return;
   document.documentElement.classList.add('motion');
