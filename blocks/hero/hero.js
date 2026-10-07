@@ -35,7 +35,7 @@ export default function decorate(block) {
         </picture>
         <span class="hero-badge">${season}</span>
         <h1>Rinx <span>Hockey</span><br>Club</h1>
-        <p>Tier III/A Travel Hockey &bull; Long Island, New York</p>
+        <p>Travel Hockey &bull; Long Island, New York</p>
       </div>
       <div class="hero-stripe"></div>
     </div>
