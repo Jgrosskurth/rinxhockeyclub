@@ -157,7 +157,7 @@
 .hero .np {
   display: flex;
   flex-direction: column;
-  min-height: 396px;
+  min-height: 343px;
   padding: 20px 18px 22px;
 }
 
@@ -279,45 +279,6 @@
   font-weight: 600;
 }
 
-.hero .np-last {
-  min-height: 2.8em;
-  align-content: flex-start;
-  line-height: 1.4;
-  margin-top: 6px;
-  font-size: var(--body-font-size-s);
-  color: var(--color-gray);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 8px;
-}
-
-.hero .np-num {
-  font-variant-numeric: tabular-nums;
-}
-
-.hero .result-badge {
-  display: inline-grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  font-family: var(--heading-font-family);
-  font-weight: 900;
-  font-size: var(--body-font-size-s);
-  background: var(--color-gray-light);
-  color: var(--color-navy);
-}
-
-.hero .result-w {
-  background: #16a34a;
-}
-
-.hero .result-l {
-  background: var(--color-red);
-  color: var(--color-white);
-}
-
 .hero .np-actions {
   margin-top: auto;
   padding-top: 16px;
@@ -383,7 +344,6 @@
   }
 
   .hero .np-where,
-  .hero .np-last,
   .hero .np-actions {
     animation: hero-fade 400ms ease-out 480ms both;
   }
@@ -441,7 +401,7 @@
   }
 
   .hero .np {
-    min-height: 372px;
+    min-height: 327px;
     padding: 24px 28px 26px;
   }
 
@@ -466,7 +426,9 @@
     height: 56px;
   }
 
+  /* Side by side, the 56px logo sets the row height; no two-line reserve */
   .hero .np-side span {
+    min-height: 0;
     font-size: 1.3rem;
   }
 }
@@ -480,7 +442,7 @@
   }
 
   .hero .np {
-    min-height: 378px;
+    min-height: 333px;
   }
 
   .hero .hero-ident {

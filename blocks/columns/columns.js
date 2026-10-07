@@ -75,5 +75,13 @@ export default function decorate(block) {
     directions.className = 'facility-actions';
     directions.innerHTML = '<a class="facility-directions" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Rinx%2C%20660%20Terry%20Rd%2C%20Hauppauge%2C%20NY%2011788" target="_blank" rel="noopener">Get Directions</a>';
     facilityCol.append(directions);
+
+    // Homepage: the facility sits under the club intro in the About block,
+    // and the coaching staff runs as its own full-width row.
+    const aboutCopy = document.querySelector('.about .about-copy');
+    if (aboutCopy && block.querySelector('.col-coaches')) {
+      aboutCopy.append(facilityCol);
+      block.classList.add('columns-coaches-row');
+    }
   }
 }
