@@ -9,6 +9,31 @@ function loadElfsightPlatform() {
   document.head.append(script);
 }
 
+// The feed renders inside its own shadow root and pins its "Free Instagram
+// Feed Widget" link visible with inline !important styles, so remove the link
+// instead, and keep removing it if the widget redraws it.
+const BADGE = 'a[href*="elfsight.com"]';
+
+function hideBadge(app) {
+  let tries = 0;
+  const watch = () => {
+    const root = app.querySelector('.es-embed-root')?.shadowRoot;
+    if (!root) {
+      tries += 1;
+      if (tries < 40) setTimeout(watch, 250);
+      return;
+    }
+    const strip = () => root.querySelectorAll(BADGE).forEach((a) => a.remove());
+    strip();
+    new MutationObserver(strip).observe(root, { childList: true, subtree: true });
+  };
+  new MutationObserver((list, obs) => {
+    if (!app.querySelector('.es-embed-root')) return;
+    obs.disconnect();
+    watch();
+  }).observe(app, { childList: true, subtree: true });
+}
+
 /**
  * loads and decorates the instagram feed block
  * @param {Element} block The block element
@@ -46,6 +71,7 @@ export default function decorate(block) {
   app.className = `elfsight-app-${appId}`;
   app.setAttribute('data-elfsight-app-lazy', '');
   block.append(app);
+  hideBadge(app);
 
   // Defer loading the third-party script until the feed scrolls into view,
   // keeping it off the critical path for LCP/PageSpeed.
