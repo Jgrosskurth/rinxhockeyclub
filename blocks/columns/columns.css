@@ -133,6 +133,38 @@
   outline-offset: 2px;
 }
 
+/* Homepage: coaching staff as one centred, full-width row (the facility
+   column moves into the About block) */
+.columns.columns-coaches-row > div {
+  padding-top: 32px;
+}
+
+.columns.columns-coaches-row .col-coaches {
+  border-top: 1px solid var(--color-gray-light);
+  padding-top: 32px;
+  text-align: center;
+}
+
+.columns.columns-coaches-row .coach-cards {
+  max-width: 960px;
+  margin: 0 auto;
+  gap: 28px 24px;
+}
+
+.columns.columns-coaches-row .coach-av {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 12px;
+}
+
+.columns.columns-coaches-row .coach-card h4 {
+  font-size: 1.1rem;
+}
+
+.columns.columns-coaches-row .coach-card p {
+  font-size: var(--body-font-size-s);
+}
+
 @media (min-width: 600px) {
   .columns > div {
     padding: 24px 24px 48px;
@@ -140,6 +172,10 @@
 
   .columns .coach-cards {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .columns.columns-coaches-row .coach-cards {
+    gap: 32px 48px;
   }
 }
 

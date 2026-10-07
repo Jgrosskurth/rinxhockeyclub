@@ -1,5 +1,5 @@
 import {
-  TEAMS, DEFAULT_TEAM, loadTeamGames, calendarUrl, resultBadge, selectTeam, onTeamChange,
+  TEAMS, DEFAULT_TEAM, loadTeamGames, calendarUrl, selectTeam, onTeamChange,
 } from '../../scripts/team-feeds.js';
 import { RINX_LOGO } from '../../scripts/team-logos.js';
 
@@ -28,19 +28,12 @@ const side = (logo, name, away) => `
     <span>${name}</span>
   </p>`;
 
-function lastResult(finals) {
-  const g = finals[finals.length - 1];
-  if (!g) return '';
-  return `<p class="np-last">Last result: ${resultBadge(g.result)}<span class="np-num">${g.score}</span> ${g.prefix} ${g.opp} · ${g.shortDate}</p>`;
-}
-
-function renderNext(panel, key, { finals, upcoming }) {
+function renderNext(panel, key, { upcoming }) {
   const next = upcoming[0];
   if (!next) {
     panel.innerHTML = `
       <div class="np-head"><h2>Next up</h2></div>
-      <p class="np-empty">No upcoming ${TEAMS[key].label} games are posted yet.</p>
-      ${lastResult(finals)}`;
+      <p class="np-empty">No upcoming ${TEAMS[key].label} games are posted yet.</p>`;
     return;
   }
   const cal = calendarUrl(next, key);
@@ -53,7 +46,6 @@ function renderNext(panel, key, { finals, upcoming }) {
       ${side(next.oppLogo, next.opp, true)}
     </div>
     <p class="np-where">${next.home ? 'The Rinx · Home' : next.location}</p>
-    ${lastResult(finals)}
     ${cal ? `<p class="np-actions"><a class="np-cal" href="${cal}" target="_blank" rel="noopener">Add to calendar</a></p>` : ''}`;
 }
 
