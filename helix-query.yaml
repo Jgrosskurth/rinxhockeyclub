@@ -1,0 +1,33 @@
+version: 1
+
+# Index of every published page. Edge Delivery updates it on each publish,
+# and helix-sitemap.yaml builds /sitemap.xml from it, so new pages land in
+# the sitemap automatically. Pages with robots "noindex" metadata are left
+# out of the sitemap (via the robots property below).
+indices:
+  site:
+    include:
+      - '/**'
+    exclude:
+      - '/nav'
+      - '/footer'
+      - '/fragments/**'
+      - '/drafts/**'
+      - '/tools/**'
+    target: /query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: match(attribute(el, "content"), "https:\/\/[^/]+(\/.*)")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      robots:
+        select: head > meta[name="robots"]
+        value: attribute(el, "content")

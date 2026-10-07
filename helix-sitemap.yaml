@@ -1,3 +1,8 @@
+# /sitemap.xml, generated from the page index (helix-query.yaml) and
+# refreshed automatically whenever a page is published or unpublished.
 sitemaps:
-  - root: /
+  default:
     origin: https://www.rinxhockeyclub.com
+    source: /query-index.json
+    destination: /sitemap.xml
+    lastmod: YYYY-MM-DD
