@@ -1,148 +1,106 @@
 /*
  * Recent Results Block
- * Shows each team's most recent completed games as cards, from the GameSheet
- * JSON feeds produced by the pull-gamesheet workflow. A 10U/14U toggle switches
- * teams. Falls back to a live-results link if a feed is unavailable.
+ * One team at a time (10U by default): its last three finals, then its next
+ * five games, as a scrolling rail. The team tabs stay in step with the hero's
+ * "Next up" card. Data comes from the GameSheet feeds (see team-feeds.js).
  */
+import {
+  TEAMS, DEFAULT_TEAM, loadTeamGames, resultBadge, selectTeam, onTeamChange,
+} from '../../scripts/team-feeds.js';
 
-const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
-const MHR_CDN = 'https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/';
+const FINALS = 3;
+const UPCOMING = 5;
 
-const TEAMS = {
-  '10u': { label: '10U Squirts', feed: 'schedule-10u.json', schedulePath: '/schedule' },
-  '14u': { label: '14U Bantam', feed: 'schedule-14u.json', schedulePath: '/schedule-14u' },
-};
-
-// Opponents whose crest is uploaded to the site (keyed by lowercased name).
-const LOCAL_LOGOS = {
-  'dix hills selects': '/images/dh.png',
-  'beaver dam': '/images/beaverdam.png',
-  'white plains': '/images/whiteplains.png',
-  'iceworks islanders': '/images/iceworks-islanders.webp',
-};
-
-// Opponents on the MyHockeyRankings logo CDN (keyed by a substring of the name).
-const TEAM_LOGOS = {
-  aviator: '001dfe',
-  'north park': '002ee8',
-  'great neck': '001934',
-  lightning: '0004c5',
-  sharks: '000bd3',
-  wildcats: '00153e',
-  peconic: '00153e',
-  'long beach': '0004c5',
-};
-
-function logoFor(opp) {
-  const lower = opp.toLowerCase();
-  const local = Object.keys(LOCAL_LOGOS).find((k) => lower.includes(k));
-  if (local) return LOCAL_LOGOS[local];
-  const id = Object.keys(TEAM_LOGOS).find((k) => lower.includes(k));
-  return id ? `${MHR_CDN}${TEAM_LOGOS[id]}_a.png` : '';
+function card(g, isNext) {
+  let top = g.dayLabel;
+  let cls = 'fx';
+  if (g.result) {
+    top = `Final · ${g.dayLabel}`;
+    cls += ' fx-final';
+  } else if (isNext) {
+    top = `Next · ${g.dayLabel}`;
+    cls += ' fx-next';
+  }
+  const logo = g.oppLogo
+    ? `<img src="${g.oppLogo}" alt="" width="26" height="26" loading="lazy" onerror="this.style.visibility='hidden'">`
+    : '<span class="fx-logo-gap"></span>';
+  const res = g.result
+    ? `<p class="fx-res">${resultBadge(g.result)}<span>${g.score}</span></p>`
+    : `<p class="fx-res"><span>${g.time || 'TBA'}</span></p>`;
+  return `<li class="${cls}">
+    <p class="fx-top">${top}</p>
+    <p class="fx-opp">${logo}<span>${g.prefix} ${g.opp}</span></p>
+    ${res}
+    <p class="fx-meta">${g.home ? 'The Rinx' : g.location}</p>
+  </li>`;
 }
 
-function renderCards(block, games, team) {
-  const grid = block.querySelector('.rr-grid');
-  // Most recent completed games first.
-  const recent = games.filter((g) => g.result).slice(-5).reverse();
-
-  if (!recent.length) {
-    grid.innerHTML = `<div class="rr-cta">
-      <p class="rr-cta-text">No ${team.label} results yet — check back after the first game.</p>
-    </div>`;
+// Open on the next game when it would start off-screen (phones). The section
+// may still be hidden while it loads, so wait until the rail has a width.
+function openOnNext(rail) {
+  const position = () => {
+    const next = rail.querySelector('.fx-next');
+    rail.scrollLeft = 0;
+    if (next && next.offsetLeft + next.offsetWidth > rail.clientWidth) {
+      rail.scrollLeft = next.offsetLeft - rail.firstElementChild.offsetLeft;
+    }
+  };
+  if (rail.clientWidth) {
+    position();
     return;
   }
-
-  grid.innerHTML = recent.map((g) => {
-    const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
-      .join('')
-      .toUpperCase();
-    let badge = 'rr-tie';
-    if (g.result === 'W') badge = 'rr-win';
-    else if (g.result === 'L') badge = 'rr-loss';
-    const src = logoFor(g.opp);
-    const logoImg = src
-      ? `<img class="rr-logo-img" src="${src}" alt="${g.opp}" width="36" height="36" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      : '';
-    return `
-      <div class="rr-card" data-result="${g.result}">
-        <div class="rr-date">${g.date}</div>
-        <div class="rr-team">
-          ${logoImg}
-          <div class="rr-logo"${src ? ' style="display:none"' : ''}>${ini}</div>
-          <div class="rr-info">
-            <div class="rr-opp">${g.opp}</div>
-            <div class="rr-loc">${g.loc}</div>
-          </div>
-        </div>
-        <div class="rr-bottom">
-          <div class="rr-score">${g.score}</div>
-          <div class="rr-badge ${badge}">${g.result}</div>
-        </div>
-      </div>`;
-  }).join('');
+  const ro = new ResizeObserver(() => {
+    if (!rail.clientWidth) return;
+    ro.disconnect();
+    position();
+  });
+  ro.observe(rail);
 }
 
-// Clean up GameSheet's verbose ALL-CAPS / coded team names for display.
-function tidy(name) {
-  let s = (name || '').trim();
-  s = s.replace(/^TB\s+/i, '').replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
-  s = s.replace(/[-\s]*\b\d{1,2}U\b.*$/i, '').replace(/^[-–\s]+|[-–\s]+$/g, '');
-  s = s.replace(/\s+/g, ' ').trim();
-  if (s && s === s.toUpperCase()) s = s.toLowerCase().replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
-  return s || name;
-}
-
-async function loadTeam(team) {
-  const resp = await fetch(`${FEED_BASE}/${team.feed}`);
-  if (!resp.ok) throw new Error(`feed ${resp.status}`);
-  const data = await resp.json();
-  return (data.games || []).map((g) => ({
-    date: g.date,
-    opp: tidy(g.opponent),
-    loc: g.venue === 'Home' ? g.location : `@ ${g.location}`,
-    score: g.score,
-    result: g.result,
-  }));
-}
-
+/**
+ * loads and decorates the block
+ * @param {Element} block The block element
+ */
 export default function decorate(block) {
   block.innerHTML = `
-    <h2 class="section-title">Recent Results</h2>
-    <div class="rr-picker">
-      <button class="rr-pick active" data-team="10u">10U Squirts</button>
-      <button class="rr-pick" data-team="14u">14U Bantam</button>
-    </div>
-    <div class="rr-grid"></div>
-    <p class="rr-link"><a href="/schedule">View Full Schedule &rarr;</a></p>
-  `;
+    <div class="rr-inner">
+      <h2 class="rr-title">Results &amp; upcoming games</h2>
+      <div class="team-toggle" role="group" aria-label="Team">
+        ${Object.values(TEAMS).map((t) => `<button type="button" data-team="${t.key}" aria-pressed="${t.key === DEFAULT_TEAM}">${t.label}</button>`).join('')}
+      </div>
+      <ul class="fx-rail" tabindex="0"></ul>
+    </div>`;
 
-  const cache = {};
-  const grid = block.querySelector('.rr-grid');
+  const rail = block.querySelector('.fx-rail');
+  const buttons = [...block.querySelectorAll('.team-toggle button')];
+  let shown = null;
 
   const show = async (key) => {
+    shown = key;
     const team = TEAMS[key];
-    const link = block.querySelector('.rr-link a');
-    if (link) link.href = team.schedulePath;
-    grid.innerHTML = '<div class="rr-loading"><div class="spinner"></div></div>';
+    buttons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.team === key));
+    rail.setAttribute('aria-label', `${team.label} results and upcoming games, scroll for more`);
     try {
-      if (!cache[key]) cache[key] = await loadTeam(team);
-      renderCards(block, cache[key], team);
+      const { finals, upcoming } = await loadTeamGames(key);
+      if (shown !== key) return;
+      const games = [...finals.slice(-FINALS), ...upcoming.slice(0, UPCOMING)];
+      if (!games.length) {
+        rail.innerHTML = `<li class="fx fx-note">No ${team.label} games are posted yet.</li>`;
+        return;
+      }
+      const nextIndex = Math.min(finals.slice(-FINALS).length, games.length - 1);
+      rail.innerHTML = games.map((g, i) => card(g, i === nextIndex && !g.result)).join('');
+      openOnNext(rail);
     } catch {
-      grid.innerHTML = `<div class="rr-cta">
-        <p class="rr-cta-text">Results are temporarily unavailable.</p>
-        <a class="rr-cta-btn" href="${team.schedulePath}">View Full Schedule &rarr;</a>
-      </div>`;
+      if (shown !== key) return;
+      rail.innerHTML = `<li class="fx fx-note">Results are unavailable right now. <a href="${team.schedulePath}">${team.label} schedule</a></li>`;
     }
   };
 
-  block.querySelectorAll('.rr-pick').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      block.querySelectorAll('.rr-pick').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      show(btn.dataset.team);
-    });
-  });
-
-  show('10u');
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    selectTeam(b.dataset.team);
+    if (shown !== b.dataset.team) show(b.dataset.team);
+  }));
+  onTeamChange((key) => { if (shown !== key) show(key); });
+  show(DEFAULT_TEAM);
 }

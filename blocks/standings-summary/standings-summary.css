@@ -1,0 +1,195 @@
+/* Standings Summary: both divisions side by side on the ice band */
+.standings-summary {
+  background: var(--color-ice);
+}
+
+.standings-summary .ss-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.standings-summary .ss-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.standings-summary .ss-card {
+  background: var(--color-white);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  padding: 20px 20px 14px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.standings-summary .ss-card h3 {
+  font-family: var(--heading-font-family);
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.standings-summary .ss-div {
+  min-height: 1.5em;
+  font-size: var(--body-font-size-s);
+  color: var(--color-gray);
+  margin-top: 2px;
+}
+
+.standings-summary .ss-body {
+  flex: 1;
+}
+
+.standings-summary .ss-note {
+  margin-top: 16px;
+  color: var(--color-gray);
+}
+
+.standings-summary .ss-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.standings-summary .ss-table th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-gray);
+  text-align: right;
+  padding: 6px 8px;
+  border-bottom: 2px solid var(--color-gray-light);
+}
+
+.standings-summary .ss-table td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--color-gray-light);
+  text-align: right;
+  vertical-align: middle;
+}
+
+.standings-summary .ss-ours td {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.standings-summary .ss-ours td:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.standings-summary .ss-ours td:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.standings-summary .ss-table th:nth-child(-n + 2),
+.standings-summary .ss-table td:nth-child(-n + 2) {
+  text-align: left;
+}
+
+/* GP is the first column to go on phones */
+.standings-summary .ss-table th:nth-child(3),
+.standings-summary .ss-table td:nth-child(3) {
+  display: none;
+}
+
+.standings-summary .ss-table td:nth-child(2) {
+  font-weight: 600;
+}
+
+.standings-summary .ss-table td:last-child {
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.standings-summary .ss-team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.standings-summary .ss-team img,
+.standings-summary .ss-logo-gap {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex: none;
+  border-radius: 50%;
+  background: var(--color-white);
+  padding: 2px;
+}
+
+.standings-summary .ss-ours .ss-team img {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 40%);
+}
+
+.standings-summary .ss-more {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 44px;
+  margin-top: 4px;
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  text-decoration: none;
+}
+
+.standings-summary .ss-more:hover {
+  text-decoration: underline;
+}
+
+.standings-summary .ss-more:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* Rows take their places once, as a list (JS adds .ss-motion, so the table
+   stays visible without scripts or with reduced motion). */
+.standings-summary.ss-motion tbody tr {
+  transition: opacity 360ms ease-out, transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+
+.standings-summary.ss-motion .ss-card:not(.ss-in) tbody tr {
+  opacity: 0;
+  transform: translateX(-14px);
+}
+
+@media (min-width: 600px) {
+  .standings-summary .ss-inner {
+    padding: 48px 24px;
+  }
+
+  .standings-summary .ss-table th:nth-child(3),
+  .standings-summary .ss-table td:nth-child(3) {
+    display: table-cell;
+  }
+
+  .standings-summary .ss-team {
+    gap: 10px;
+  }
+
+  .standings-summary .ss-team img,
+  .standings-summary .ss-logo-gap {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (min-width: 900px) {
+  .standings-summary .ss-inner {
+    padding: 64px 24px;
+  }
+
+  .standings-summary .ss-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
