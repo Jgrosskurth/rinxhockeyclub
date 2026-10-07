@@ -30,13 +30,21 @@
   text-decoration: underline;
 }
 
-/* Reserve space so the deferred feed doesn't cause layout shift. */
+/* Reserve the feed's measured height so the deferred widget doesn't shift
+   the page or leave a gap: square tiles on phones (viewport width plus the
+   carousel's own chrome), then a fixed-height row. */
 .instagram [data-elfsight-app-lazy] {
-  min-height: 320px;
+  min-height: calc(100vw + 98px);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 600px) {
   .instagram [data-elfsight-app-lazy] {
-    min-height: 420px;
+    min-height: 360px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .instagram [data-elfsight-app-lazy] {
+    min-height: 326px;
   }
 }
