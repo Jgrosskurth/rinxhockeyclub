@@ -19,6 +19,7 @@
     dataSources:      [stardust/current/pages/index.json, stardust/current/live-data/ (snapshot of data/schedule-10u.json, schedule-14u.json, schedule-mid-atlantic.json, standings-10u.json, standings-14u.json at 2026-10-07)]
     dataNotes:        "News card 'Comeback Tie' (14U, Sep 21) is captured verbatim; the 14U league record 4-0-0 comes from standings-14u.json — the tie was not a league game in the feed. Not reconciled in copy (captured content is not rewritten)."
     paletteNotes:     "Captured palette only. 'Hockey' in the wordmark keeps #C8102E (logotype exemption, as on the live site); small labels on navy use ice/sheet-white text."
+    iteration:        "2026-10-07 user request: opponent logos in standings; Tournaments/schedule buttons removed from hero; Latest Updates as a one-row carousel; restrained motion (faceoff focal moment, standings row settle, carousel, hover feedback)"
     unsourcedContent:
       - selector: "section[data-section=\"instagram\"] > .wrap > .ig-band > [data-placeholder]"
         type: other
@@ -303,6 +304,54 @@
     .st-table tr.ours td:last-child { border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
     .st-card .more-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; font-family: var(--heading-font-family); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--goal-red); text-decoration: none; }
 
+    .st-table td { vertical-align: middle; }
+    .st-table th { white-space: nowrap; }
+    .st-team { display: flex; align-items: center; gap: 10px; }
+    .st-team img { width: 28px; height: 28px; object-fit: contain; flex: none; border-radius: 50%; background: var(--sheet-white); padding: 2px; }
+    .st-table tr.ours .st-team img { box-shadow: 0 0 0 1px rgb(253 253 254 / 40%); }
+
+    /* Latest Updates: one row at every width, arrows on wider screens */
+    [data-section="news"] .rail { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 48px) / 3); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 4px; scrollbar-width: none; padding: 6px 4px 12px; margin: -6px -4px 0; }
+    [data-section="news"] .rail::-webkit-scrollbar { display: none; }
+    .rail-ctrl { order: 3; display: flex; gap: 8px; }
+    .rail-ctrl[hidden] { display: none; }
+    .rail-btn { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--rink-navy); background: var(--sheet-white); color: var(--rink-navy); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, opacity 150ms ease, transform 100ms ease; }
+    .rail-btn:hover:not(:disabled) { background: var(--rink-navy); color: var(--sheet-white); }
+    .rail-btn:active:not(:disabled) { transform: scale(0.94); }
+    .rail-btn:focus-visible { outline: 3px solid var(--goal-red); outline-offset: 2px; }
+    .rail-btn:disabled { opacity: 0.3; cursor: default; }
+
+    /* Feedback: cards and buttons answer the pointer */
+    .news-card, .fx { transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease; }
+    .news-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgb(4 30 66 / 14%); }
+    .fx:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgb(0 0 0 / 28%); }
+    .btn { transition: background-color 150ms ease, color 150ms ease, transform 100ms ease; }
+    .btn:active { transform: scale(0.97); }
+    .nextup-tabs label { transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+
+    /* Focal moment, the faceoff: the crests skate in to centre ice and the
+       puck-drop time rolls up like a scoreboard. It replays on every team switch
+       because the panel goes from display:none to block. Ends visible; CSS only. */
+    @media (prefers-reduced-motion: no-preference) {
+      .nextup { animation: np-arrive 600ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both; }
+      .np .side { animation: faceoff-home 650ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both; }
+      .np .side.away { animation-name: faceoff-away; }
+      .np .vs { animation: puck-drop 420ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both; }
+      .np-date, .np-time { display: inline-block; animation: score-roll 560ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+      .np-time { animation-delay: 90ms; }
+      .np-where, .np-last, .np-actions { animation: np-fade 400ms ease-out 560ms both; }
+      @keyframes np-arrive { from { opacity: 0; transform: translateY(18px); } }
+      @keyframes np-fade { from { opacity: 0; } }
+      @keyframes faceoff-home { from { opacity: 0; transform: translateX(-36px); } }
+      @keyframes faceoff-away { from { opacity: 0; transform: translateX(36px); } }
+      @keyframes puck-drop { from { opacity: 0; transform: scale(0.4); } }
+      @keyframes score-roll { from { clip-path: inset(0 0 100% 0); transform: translateY(40%); } to { clip-path: inset(0 0 -10% 0); transform: none; } }
+
+      /* Standings rows take their places once, as a list (JS-gated so no-JS stays visible). */
+      .motion .st-card tbody tr { transition: opacity 360ms ease-out, transform 460ms cubic-bezier(0.16, 1, 0.3, 1); transition-delay: calc(var(--i, 0) * 55ms); }
+      .motion .st-card:not(.in) tbody tr { opacity: 0; transform: translateX(-14px); }
+    }
+
     .clubband { background: var(--sheet-white); border-top: 1px solid var(--line); }
     .club-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: start; }
     .club-photo { margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--shadow-card); }
@@ -323,6 +372,7 @@
       .ident { justify-items: center; text-align: center; }
       .ident-actions { justify-content: center; }
       .st-grid, .club-grid { grid-template-columns: 1fr; }
+      [data-section="news"] .rail { grid-auto-columns: calc((100% - 24px) / 2); }
     }
     @media (max-width: 600px) {
       .np { padding: 20px 18px 22px; }
@@ -341,6 +391,13 @@
       .mhero-inner { gap: 20px; padding-top: 24px; }
       .coach-row { grid-template-columns: 1fr 1fr; row-gap: 18px; }
       .st-table th:nth-child(3), .st-table td:nth-child(3) { display: none; }
+      .st-team { gap: 8px; }
+      .st-team img { width: 24px; height: 24px; }
+      [data-section="news"] .rail { grid-auto-columns: 84%; }
+      .rail-ctrl { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .news-card:hover, .fx:hover { transform: none; }
     }
 
     /* ---------- Responsive ---------- */
@@ -400,7 +457,8 @@
 <body>
 <!-- THESIS: Game day is the hero — the next puck drop for each team is the first thing a family sees, then every recent final and upcoming game in one rail, then where both teams stand. Refuses the brochure wordmark hero and the SaaS centred-CTA hero.
 OWN-WORLD: rink navy + goal red on boards; Barlow Condensed scoreboard numerals; a white "Next up" scoreboard card on the navy rink; navy-light fixture rail.
-STORY: parent picks their team, sees date/time/rink and last score, adds it to the calendar, scans the rail and the standings, then the club story.
+STORY: parent picks their team, sees date/time/rink and last score, adds it to the calendar, scans the rail and the standings, the latest updates, then the club story.
+MOTION: one authored moment — the faceoff (crests skate to centre ice, the puck-drop time rolls up like a scoreboard), replayed on team switch; elsewhere only feedback and a single standings settle.
 FIRST VIEWPORT: split 5/7 — crest + wordmark left over the rink diagram; Next up card right with 10U/14U tabs, big date numerals, both crests, rink, actions; fixture rail begins at the fold.
 FORM: stardust Mode A variant B (live-data promotion), anchor nycfc.com matchday hero; concept roll substituted by the stardust direction pin — key stardust/direction.md "Resolution (stardust:direct, 2026-10-07T12:25:58Z)".
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
@@ -485,7 +543,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <h1 id="hero-title">Rinx <span>Hockey</span> Club</h1>
         <p class="season-pill">2026–2027 Season</p>
         <p class="hero-line">Travel Hockey • Long Island, New York</p>
-        <div class="ident-actions"><a class="btn btn-light" href="https://www.rinxhockeyclub.com/tournaments">Tournaments</a><a class="btn btn-light" href="https://www.rinxhockeyclub.com/contact">Contact</a></div>
+        <div class="ident-actions"><a class="btn btn-light" href="https://www.rinxhockeyclub.com/contact">Contact</a></div>
       </div>
       <div class="nextup">
         <div class="nextup-tabs" role="radiogroup" aria-label="Team">
@@ -498,7 +556,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <div class="np-match"><p class="side"><img src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="" width="56" height="56"><span>Rinx</span></p><p class="vs">vs</p><p class="side away"><img src="https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/547984bb-9b2f-44b0-2a7a-a011a7a21d00/128" alt="" width="56" height="56"><span>Delco Phantoms</span></p></div>
           <p class="np-where">Hatfield Ice Arena (Blue)</p>
           <p class="np-last">Last result: <span class="badge-w" aria-label="Win">W</span><span class="num">10-2</span> vs Long Beach Lightning · Sep 27</p>
-          <div class="np-actions"><a class="btn btn-primary" href="https://www.rinxhockeyclub.com/mid-atlantic-fall-classic-schedule">Tournament schedule</a><a class="btn btn-ghost" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Rinx+10U+Squirts+vs+Delco+Phantoms&amp;dates=20261009T210500Z%2F20261009T223500Z&amp;location=Hatfield+Ice+Arena+%28Blue%29&amp;details=Mid-Atlantic+Fall+Showcase" target="_blank" rel="noopener">Add to calendar</a></div>
+          <div class="np-actions"><a class="btn btn-primary" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Rinx+10U+Squirts+vs+Delco+Phantoms&amp;dates=20261009T210500Z%2F20261009T223500Z&amp;location=Hatfield+Ice+Arena+%28Blue%29&amp;details=Mid-Atlantic+Fall+Showcase" target="_blank" rel="noopener">Add to calendar</a></div>
         </div>
         <div class="np np-14u">
           <div class="np-head"><h2>Next up</h2><p class="np-comp">LIAHL · 12- 14U Silver</p></div>
@@ -506,7 +564,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <div class="np-match"><p class="side"><img src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="" width="56" height="56"><span>Rinx</span></p><p class="vs">vs</p><p class="side away"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="56" height="56"><span>Long Island Sharks</span></p></div>
           <p class="np-where">The Rinx · Home</p>
           <p class="np-last">Last result: <span class="badge-w" aria-label="Win">W</span><span class="num">7-1</span> vs Peconic Wildcats · Oct 3</p>
-          <div class="np-actions"><a class="btn btn-primary" href="https://www.rinxhockeyclub.com/schedule-14u">Full 14U schedule</a><a class="btn btn-ghost" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Rinx+14U+Bantam+vs+Long+Island+Sharks&amp;dates=20261018T154000Z%2F20261018T171000Z&amp;location=The+Rinx%2C+660+Terry+Road%2C+Hauppauge%2C+NY+11788&amp;details=LIAHL" target="_blank" rel="noopener">Add to calendar</a></div>
+          <div class="np-actions"><a class="btn btn-primary" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Rinx+14U+Bantam+vs+Long+Island+Sharks&amp;dates=20261018T154000Z%2F20261018T171000Z&amp;location=The+Rinx%2C+660+Terry+Road%2C+Hauppauge%2C+NY+11788&amp;details=LIAHL" target="_blank" rel="noopener">Add to calendar</a></div>
         </div>
       </div>
     </div>
@@ -520,16 +578,16 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div class="wrap">
       <div class="head"><h2 id="st-title">Standings</h2></div>
       <div class="st-grid">
-        <article class="st-card"><h3>10U Squirts</h3><p class="st-div">04 - 10U Silver</p><table class="st-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">GP</th><th scope="col">W-L-T</th><th scope="col">PTS</th></tr></thead><tbody><tr class="ours"><td>1</td><td>Rinx</td><td>3</td><td>3-0-0</td><td>6</td></tr><tr><td>2</td><td>Peconic Wildcats</td><td>5</td><td>3-2-0</td><td>6</td></tr><tr><td>3</td><td>Long Beach Lightning</td><td>4</td><td>3-1-0</td><td>6</td></tr><tr><td>4</td><td>Aviator Hockey Club</td><td>3</td><td>2-0-1</td><td>5</td></tr><tr><td>5</td><td>Long Island Sharks</td><td>5</td><td>1-2-2</td><td>4</td></tr></tbody></table><a class="more-link" href="https://www.rinxhockeyclub.com/standings">Full 10U standings →</a></article>
-        <article class="st-card"><h3>14U Bantam</h3><p class="st-div">12- 14U Silver</p><table class="st-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">GP</th><th scope="col">W-L-T</th><th scope="col">PTS</th></tr></thead><tbody><tr class="ours"><td>1</td><td>Rinx</td><td>4</td><td>4-0-0</td><td>8</td></tr><tr><td>2</td><td>Great Neck Bruins</td><td>3</td><td>2-1-0</td><td>4</td></tr><tr><td>3</td><td>North Park</td><td>4</td><td>2-2-0</td><td>4</td></tr><tr><td>4</td><td>Long Island Sharks</td><td>4</td><td>2-2-0</td><td>4</td></tr><tr><td>5</td><td>Dix Hills Selects</td><td>0</td><td>0-0-0</td><td>0</td></tr></tbody></table><a class="more-link" href="https://www.rinxhockeyclub.com/standings-14u">Full 14U standings →</a></article>
+        <article class="st-card"><h3>10U Squirts</h3><p class="st-div">04 - 10U Silver</p><table class="st-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">GP</th><th scope="col">W-L-T</th><th scope="col">PTS</th></tr></thead><tbody><tr class="ours" style="--i: 0"><td>1</td><td><span class="st-team"><img src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="" width="28" height="28" loading="lazy">Rinx</span></td><td>3</td><td>3-0-0</td><td>6</td></tr><tr style="--i: 1"><td>2</td><td><span class="st-team"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="28" height="28" loading="lazy">Peconic Wildcats</span></td><td>5</td><td>3-2-0</td><td>6</td></tr><tr style="--i: 2"><td>3</td><td><span class="st-team"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="28" height="28" loading="lazy">Long Beach Lightning</span></td><td>4</td><td>3-1-0</td><td>6</td></tr><tr style="--i: 3"><td>4</td><td><span class="st-team"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/001dfe_a.png" alt="" width="28" height="28" loading="lazy">Aviator Hockey Club</span></td><td>3</td><td>2-0-1</td><td>5</td></tr><tr style="--i: 4"><td>5</td><td><span class="st-team"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="28" height="28" loading="lazy">Long Island Sharks</span></td><td>5</td><td>1-2-2</td><td>4</td></tr></tbody></table><a class="more-link" href="https://www.rinxhockeyclub.com/standings">Full 10U standings →</a></article>
+        <article class="st-card"><h3>14U Bantam</h3><p class="st-div">12- 14U Silver</p><table class="st-table"><thead><tr><th scope="col">#</th><th scope="col">Team</th><th scope="col">GP</th><th scope="col">W-L-T</th><th scope="col">PTS</th></tr></thead><tbody><tr class="ours" style="--i: 0"><td>1</td><td><span class="st-team"><img src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="" width="28" height="28" loading="lazy">Rinx</span></td><td>4</td><td>4-0-0</td><td>8</td></tr><tr style="--i: 1"><td>2</td><td><span class="st-team"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/001934_a.png" alt="" width="28" height="28" loading="lazy">Great Neck Bruins</span></td><td>3</td><td>2-1-0</td><td>4</td></tr><tr style="--i: 2"><td>3</td><td><span class="st-team"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="28" height="28" loading="lazy">North Park</span></td><td>4</td><td>2-2-0</td><td>4</td></tr><tr style="--i: 3"><td>4</td><td><span class="st-team"><img src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/000bd3_a.png" alt="" width="28" height="28" loading="lazy">Long Island Sharks</span></td><td>4</td><td>2-2-0</td><td>4</td></tr><tr style="--i: 4"><td>5</td><td><span class="st-team"><img src="https://www.rinxhockeyclub.com/images/dh.png" alt="" width="28" height="28" loading="lazy">Dix Hills Selects</span></td><td>0</td><td>0-0-0</td><td>0</td></tr></tbody></table><a class="more-link" href="https://www.rinxhockeyclub.com/standings-14u">Full 14U standings →</a></article>
       </div>
     </div>
   </section>
 
-  <section class="section" data-section="news" data-intent="latest news" data-layout="grid" data-items="6" data-interactive="carousel" aria-labelledby="news-title">
+  <section class="section" data-section="news" data-intent="latest news" data-layout="edge-to-edge" data-items="6" data-interactive="carousel" aria-labelledby="news-title">
     <div class="wrap">
-      <div class="head"><h2 id="news-title">Game Updates</h2></div>
-      <div class="rail" role="region" aria-label="Game updates" tabindex="0">
+      <div class="head"><h2 id="news-title">Latest Updates</h2><div class="rail-ctrl" hidden><button type="button" class="rail-btn" data-dir="-1" aria-controls="news-rail" aria-label="Previous updates"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="rail-btn" data-dir="1" aria-controls="news-rail" aria-label="Next updates"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+      <div class="rail" id="news-rail" role="region" aria-label="Latest updates" tabindex="0">
         <article class="news-card"><h3>14U Remains Undefeated</h3><p>14U powers through Peconic, winning 7-1 at the Rinx</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-10-03">October 3, 2026</time></p></article>
         <article class="news-card"><h3>10U Pours on the Goals</h3><p>10U overwhelmed Long Beach flooding the back of the net in a 10-2 victory</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-27">September 27, 2026</time></p></article>
         <article class="news-card"><h3>14U Keep Rolling</h3><p>14U takes the early lead and holds off North Park 5-1</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-26">September 26, 2026</time></p></article>
@@ -537,7 +595,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <article class="news-card"><h3>Comeback Tie</h3><p>14U come back from behind in the 3rd to tie</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-21">September 21, 2026</time></p></article>
         <article class="news-card"><h3>Clean Sweep</h3><p>10U and 14U sweep the weekend with 4 total wins</p><p class="news-meta"><span class="tag">Game Update</span><time datetime="2026-09-13">September 13, 2026</time></p></article>
       </div>
-      <p class="rail-hint">6 updates · scroll or swipe for more</p>
+      <p class="rail-hint">6 updates · swipe for more</p>
     </div>
   </section>
 
@@ -603,6 +661,37 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   t.addEventListener('change', sync); sync();
   b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); } });
   addEventListener('keydown', e => { if (e.key === 'Escape' && t.checked) { t.checked = false; sync(); b.focus(); } });
+})();
+</script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Latest Updates carousel: arrows page by one card and disable at the ends.
+  const rail = document.getElementById('news-rail');
+  const ctrl = document.querySelector('.rail-ctrl');
+  if (rail && ctrl) {
+    const btns = ctrl.querySelectorAll('.rail-btn');
+    const sync = () => {
+      btns[0].disabled = rail.scrollLeft <= 2;
+      btns[1].disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+    };
+    btns.forEach((btn) => btn.addEventListener('click', () => {
+      const card = rail.firstElementChild;
+      const step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(rail).columnGap || 0);
+      rail.scrollBy({ left: step * Number(btn.dataset.dir), behavior: reduce ? 'auto' : 'smooth' });
+    }));
+    rail.addEventListener('scroll', sync, { passive: true });
+    addEventListener('resize', sync);
+    ctrl.hidden = false;
+    sync();
+  }
+  // Standings rows settle into place the first time each table is seen.
+  if (reduce || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('motion');
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.25 });
+  document.querySelectorAll('.st-card').forEach((c) => io.observe(c));
 })();
 </script>
 </body>
