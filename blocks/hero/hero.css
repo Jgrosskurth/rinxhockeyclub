@@ -157,7 +157,7 @@
 .hero .np {
   display: flex;
   flex-direction: column;
-  min-height: 343px;
+  min-height: 363px;
   padding: 20px 18px 22px;
 }
 
@@ -178,7 +178,7 @@
 
 .hero .np-head h2,
 .hero .np-comp,
-.hero .np-where {
+.hero .np-where span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -254,7 +254,7 @@
   flex: none;
 }
 
-.hero .np-side span {
+.hero .np-name {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -267,6 +267,26 @@
   text-transform: uppercase;
 }
 
+.hero .np-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* W-L-T record beside the team name; the line is reserved even when empty */
+.hero .np-rec {
+  min-height: 1.2em;
+  font-family: var(--heading-font-family);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gray);
+}
+
 .hero .np-vs {
   font-family: var(--heading-font-family);
   font-weight: 800;
@@ -276,7 +296,35 @@
 
 .hero .np-where {
   margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 600;
+}
+
+.hero .np-where span {
+  min-width: 0;
+}
+
+/* Pin: Google Maps directions to the rink */
+.hero .np-pin {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: -6px 0 -6px -7px;
+  border-radius: 50%;
+  color: var(--color-red);
+  transition: background-color 150ms ease, transform 100ms ease;
+}
+
+.hero .np-pin:hover {
+  background: var(--color-ice);
+}
+
+.hero .np-pin:active {
+  transform: scale(0.92);
 }
 
 .hero .np-actions {
@@ -310,6 +358,7 @@
 
 .hero .hero-actions a:focus-visible,
 .hero .team-toggle button:focus-visible,
+.hero .np-pin:focus-visible,
 .hero .np-cal:focus-visible {
   outline: 3px solid var(--color-red);
   outline-offset: 2px;
@@ -401,7 +450,7 @@
   }
 
   .hero .np {
-    min-height: 327px;
+    min-height: 335px;
     padding: 24px 28px 26px;
   }
 
@@ -420,6 +469,16 @@
     text-align: right;
   }
 
+  .hero .np-team {
+    flex-flow: row wrap;
+    align-items: baseline;
+    column-gap: 8px;
+  }
+
+  .hero .np-away .np-team {
+    justify-content: flex-end;
+  }
+
   .hero .np-side img,
   .hero .np-logo-gap {
     width: 56px;
@@ -427,7 +486,7 @@
   }
 
   /* Side by side, the 56px logo sets the row height; no two-line reserve */
-  .hero .np-side span {
+  .hero .np-name {
     min-height: 0;
     font-size: 1.3rem;
   }

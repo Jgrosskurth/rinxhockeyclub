@@ -1,5 +1,6 @@
 import {
-  TEAMS, DEFAULT_TEAM, loadTeamGames, calendarUrl, selectTeam, onTeamChange,
+  TEAMS, DEFAULT_TEAM, loadTeamGames, loadRecords, calendarUrl, directionsUrl,
+  selectTeam, onTeamChange,
 } from '../../scripts/team-feeds.js';
 import { RINX_LOGO } from '../../scripts/team-logos.js';
 
@@ -22,13 +23,17 @@ const RINK = `
     <rect width="1200" height="560" fill="#041E42" opacity="0.88"/>
   </svg>`;
 
-const side = (logo, name, away) => `
+// The record line is always present (empty if unknown) so the card height
+// doesn't depend on whether the standings feed answered.
+const side = (logo, name, record, away) => `
   <p class="np-side${away ? ' np-away' : ''}">
     ${logo ? `<img src="${logo}" alt="" width="56" height="56" loading="lazy" onerror="this.style.visibility='hidden'">` : '<span class="np-logo-gap"></span>'}
-    <span>${name}</span>
+    <span class="np-team"><span class="np-name">${name}</span><span class="np-rec"${record ? ` aria-label="Record ${record} (wins, losses, ties)"` : ''}>${record || ''}</span></span>
   </p>`;
 
-function renderNext(panel, key, { upcoming }) {
+const PIN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>';
+
+function renderNext(panel, key, { upcoming }, records = {}) {
   const next = upcoming[0];
   if (!next) {
     panel.innerHTML = `
@@ -41,11 +46,14 @@ function renderNext(panel, key, { upcoming }) {
     <div class="np-head"><h2>Next up</h2><p class="np-comp">${next.competition}</p></div>
     <p class="np-when"><span class="np-date">${next.dayLabel}</span>${next.time ? `<span class="np-time">${next.time}</span>` : ''}</p>
     <div class="np-match">
-      ${side(RINX_LOGO, 'Rinx')}
+      ${side(RINX_LOGO, 'Rinx', records.us)}
       <p class="np-vs">vs</p>
-      ${side(next.oppLogo, next.opp, true)}
+      ${side(next.oppLogo, next.opp, records.them, true)}
     </div>
-    <p class="np-where">${next.home ? 'The Rinx · Home' : next.location}</p>
+    <p class="np-where">
+      <a class="np-pin" href="${directionsUrl(next)}" target="_blank" rel="noopener" aria-label="Directions to ${next.home ? 'The Rinx' : next.location} (opens Google Maps)">${PIN}</a>
+      <span>${next.home ? 'The Rinx · Home' : next.location}</span>
+    </p>
     ${cal ? `<p class="np-actions"><a class="np-cal" href="${cal}" target="_blank" rel="noopener">Add to calendar</a></p>` : ''}`;
 }
 
@@ -85,7 +93,9 @@ export default function decorate(block) {
     buttons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.team === key));
     try {
       const games = await loadTeamGames(key);
-      if (shown === key) renderNext(panel, key, games);
+      // Fetch records before the first paint of the card, so it renders once.
+      const records = games.upcoming[0] ? await loadRecords(games.upcoming[0]) : {};
+      if (shown === key) renderNext(panel, key, games, records);
     } catch {
       if (shown !== key) return;
       panel.innerHTML = `

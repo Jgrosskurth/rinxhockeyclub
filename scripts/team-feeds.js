@@ -5,9 +5,10 @@ import { teamLogo, RINX_LOGO } from './team-logos.js';
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
-// Tournament feeds and the name shown on the "Next up" card.
+// Tournament feeds: the name shown on the "Next up" card and the feed with
+// that tournament's standings.
 const TOURNAMENTS = {
-  'schedule-mid-atlantic.json': 'Mid-Atlantic Fall Showcase',
+  'schedule-mid-atlantic.json': { name: 'Mid-Atlantic Fall Showcase', standings: 'standings-mid-atlantic.json' },
 };
 
 export const TEAMS = {
@@ -98,10 +99,11 @@ function parseWhen(date, time) {
   };
 }
 
-function normalizeGame(g, feed) {
+function normalizeGame(g, feed, team) {
   const when = parseWhen(g.date, g.time);
   if (!when) return null;
-  const tournament = TOURNAMENTS[feed] || null;
+  const event = TOURNAMENTS[feed];
+  const tournament = event?.name || null;
   const opponent = g.opponent || '';
   // League opponents end "04 - 10U SILVER"; tournament ones "10A".
   const division = tournament
@@ -125,6 +127,8 @@ function normalizeGame(g, feed) {
     score: g.score || '',
     result: g.result || '',
     tournament,
+    // Records on the "Next up" card come from the game's own competition.
+    standingsFeed: event ? event.standings : team.standings,
     competition: tournament
       ? [tournament, division].filter(Boolean).join(' · ')
       : ['LIAHL', tidyDivision(division)].filter(Boolean).join(' · '),
@@ -142,7 +146,7 @@ export async function loadTeamGames(key) {
   const results = await Promise.allSettled(team.feeds.map(loadFeed));
   if (results.every((r) => r.status === 'rejected')) throw new Error('feeds unavailable');
   const games = results.flatMap((r, i) => (r.status === 'fulfilled'
-    ? (r.value.games || []).map((g) => normalizeGame(g, team.feeds[i])).filter(Boolean)
+    ? (r.value.games || []).map((g) => normalizeGame(g, team.feeds[i], team)).filter(Boolean)
     : []));
   const order = (g) => Date.UTC(g.when.year, g.when.month, g.when.day, g.when.hour, g.when.minute);
   games.sort((a, b) => order(a) - order(b));
@@ -175,6 +179,54 @@ export async function loadStandings(key) {
       };
     }),
   };
+}
+
+/**
+ * W-L-T records for both sides of a game, from its competition's standings.
+ * Resolves to {} when the standings feed is unavailable.
+ * @param {object} game from loadTeamGames
+ * @returns {Promise<{us?: string, them?: string}>}
+ */
+export async function loadRecords(game) {
+  try {
+    const data = await loadFeed(game.standingsFeed);
+    const rec = (t) => `${t.w}-${t.l}-${t.t}`;
+    const teams = data.teams || [];
+    const ours = teams.find((t) => t.ours);
+    const opp = game.opp.toLowerCase();
+    const theirs = teams.find((t) => !t.ours && tidyTeam(t.team).toLowerCase() === opp);
+    return { us: ours && rec(ours), them: theirs && rec(theirs) };
+  } catch {
+    return {};
+  }
+}
+
+// Rinks the teams play at, keyed by the feed's location name (lowercased,
+// without a "(Blue)"-style sheet suffix), so map searches land on the right
+// building. Unknown rinks fall back to a name search.
+const RINKS = {
+  'the rinx': 'The Rinx, 660 Terry Road, Hauppauge, NY 11788',
+  'hatfield ice arena': 'Hatfield Ice Arena, 350 County Line Rd, Colmar, PA 18915',
+  'peconic ice rink': 'Peconic Ice Rink, Riverhead, NY',
+  'long beach arena': 'Long Beach Ice Arena, Long Beach, NY',
+  iceland: 'Iceland, New Hyde Park, NY',
+  'port washington skating center': 'Port Washington Skating Center, Port Washington, NY',
+  'northwell twin rinks': 'Northwell Twin Rinks, East Meadow, NY',
+  'parkwood ice rink': 'Parkwood Ice Rink, Great Neck, NY',
+  'aviator sports center': 'Aviator Sports and Events Center, Brooklyn, NY',
+  'dix hills ice rink': 'Dix Hills Ice Rink, Dix Hills, NY',
+  'city ice pavilion': 'City Ice Pavilion, Long Island City, NY',
+};
+
+/**
+ * Google Maps directions link to a game's rink.
+ * @param {object} game from loadTeamGames
+ */
+export function directionsUrl(game) {
+  const name = game.home ? 'The Rinx' : game.location;
+  const key = name.replace(/\s*\([^)]*\)\s*$/, '').trim().toLowerCase();
+  const dest = RINKS[key] || (/rink|arena|ice|center|pavilion/i.test(name) ? name : `${name} ice rink`);
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
 }
 
 // Eastern wall-clock time -> UTC Date (handles daylight saving).
