@@ -27,6 +27,9 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  // Leave Google Analytics alone: every hit has a unique URL, so caching
+  // them would grow the cache without bound.
+  if (/(^|\.)(googletagmanager|google-analytics)\.com$/.test(new URL(event.request.url).hostname)) return;
   event.respondWith(
     fetch(event.request)
       .then((response) => {
