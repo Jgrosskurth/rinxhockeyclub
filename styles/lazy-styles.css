@@ -79,6 +79,11 @@
   body.pwa-dismissed .pwa-install-banner {
     display: none;
   }
+
+  /* Room at the end of the page so the pinned banner never hides the footer. */
+  body:has(> .pwa-install-banner):not(.pwa-standalone, .pwa-dismissed) {
+    padding-bottom: 76px;
+  }
 }
 
 /* Form inputs */
