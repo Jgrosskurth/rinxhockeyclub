@@ -104,25 +104,25 @@
 /* Call + directions: one row of matching buttons */
 .about .facility-actions {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
   margin-top: 6px;
 }
 
 .about .facility-btn {
   flex: 1 1 0;
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   min-height: 44px;
-  padding: 0 18px;
+  padding: 0 10px;
   border: 2px solid var(--color-red);
   border-radius: 4px;
   font-family: var(--heading-font-family);
   font-weight: 800;
-  font-size: 1rem;
-  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
   text-decoration: none;
@@ -185,9 +185,6 @@
     align-self: end;
   }
 
-  .about .facility-btn {
-    flex: 0 1 auto;
-  }
 
   .about .col-facility img {
     aspect-ratio: 4 / 3;
