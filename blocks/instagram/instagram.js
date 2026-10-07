@@ -9,31 +9,28 @@ function loadElfsightPlatform() {
   document.head.append(script);
 }
 
-// The feed renders inside its own shadow root, out of reach of page CSS, so
-// hide the "Free Instagram Feed Widget" link by adding a rule inside it.
-const HIDE_BADGE = 'a[href*="elfsight.com"] { display: none !important; }';
+// The feed renders inside its own shadow root and pins its "Free Instagram
+// Feed Widget" link visible with inline !important styles, so remove the link
+// instead, and keep removing it if the widget redraws it.
+const BADGE = 'a[href*="elfsight.com"]';
 
 function hideBadge(app) {
   let tries = 0;
-  const inject = () => {
+  const watch = () => {
     const root = app.querySelector('.es-embed-root')?.shadowRoot;
-    if (root) {
-      if (!root.querySelector('style[data-rinx]')) {
-        const style = document.createElement('style');
-        style.dataset.rinx = '';
-        style.textContent = HIDE_BADGE;
-        root.append(style);
-      }
+    if (!root) {
+      tries += 1;
+      if (tries < 40) setTimeout(watch, 250);
       return;
     }
-    tries += 1;
-    if (tries < 40) setTimeout(inject, 250);
+    const strip = () => root.querySelectorAll(BADGE).forEach((a) => a.remove());
+    strip();
+    new MutationObserver(strip).observe(root, { childList: true, subtree: true });
   };
   new MutationObserver((list, obs) => {
-    if (app.querySelector('.es-embed-root')) {
-      obs.disconnect();
-      inject();
-    }
+    if (!app.querySelector('.es-embed-root')) return;
+    obs.disconnect();
+    watch();
   }).observe(app, { childList: true, subtree: true });
 }
 
