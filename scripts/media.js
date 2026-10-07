@@ -6,7 +6,6 @@
  * @param {string} src image URL, absolute or relative
  * @param {number} width rendition width in CSS pixels x ~2 for high-DPI screens
  */
-// eslint-disable-next-line import/prefer-default-export
 export function optimizedMediaUrl(src, width) {
   if (!src) return src;
   try {
@@ -21,3 +20,16 @@ export function optimizedMediaUrl(src, width) {
     return src;
   }
 }
+
+/**
+ * Repo headshots in /images/headshots have 160px WebP copies (shown at
+ * 64-72px). Returns the WebP path plus a data-orig attribute so
+ * HEADSHOT_ONERROR can fall back to the original, then to initials.
+ * @param {string} src e.g. "/images/headshots/joecap.png"
+ */
+export function headshotAttrs(src) {
+  if (!/^\/images\/headshots\/[^/]+\.(png|jpe?g)$/i.test(src || '')) return `src="${src}"`;
+  return `src="${src.replace(/\.(png|jpe?g)$/i, '.webp')}" data-orig="${src}"`;
+}
+
+export const HEADSHOT_ONERROR = "if(this.dataset.orig){this.src=this.dataset.orig;this.removeAttribute('data-orig')}else{this.style.display='none';this.nextElementSibling.style.display='flex'}";

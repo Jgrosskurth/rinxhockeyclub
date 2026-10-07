@@ -1,4 +1,4 @@
-import { optimizedMediaUrl } from '../../scripts/media.js';
+import { optimizedMediaUrl, headshotAttrs, HEADSHOT_ONERROR } from '../../scripts/media.js';
 
 function getInitials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0])
@@ -16,22 +16,10 @@ function getBadge(note) {
   return '';
 }
 
-// Repo headshots in /images/headshots have 160px WebP copies (shown at
-// 64-72px). If a copy is missing, the onerror handler falls back to the
-// original file, then to the initials avatar.
-function headshotSrc(src) {
-  return /^\/images\/headshots\/[^/]+\.(png|jpe?g)$/i.test(src)
-    ? src.replace(/\.(png|jpe?g)$/i, '.webp') : src;
-}
-
-const IMG_FALLBACK = "if(this.dataset.orig){this.src=this.dataset.orig;this.removeAttribute('data-orig')}else{this.style.display='none';this.nextElementSibling.style.display='flex'}";
-
 function buildCoaches(coaches) {
   return coaches.map((c) => {
-    const src = headshotSrc(c.img);
-    const orig = src !== c.img ? ` data-orig="${c.img}"` : '';
     const imgHtml = c.img
-      ? `<img src="${src}"${orig} alt="${c.name}" class="coach-av coach-photo" width="72" height="72" loading="lazy" onerror="${IMG_FALLBACK}">`
+      ? `<img ${headshotAttrs(c.img)} alt="${c.name}" class="coach-av coach-photo" width="72" height="72" loading="lazy" onerror="${HEADSHOT_ONERROR}">`
       : '';
     return `
       <div class="coach-card">

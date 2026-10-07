@@ -72,6 +72,7 @@ if ('serviceWorker' in navigator) {
 
 // delayed.js — homepage content builder
 (function () {
+  let attempts = 0;
   function build() {
     if (window.location.pathname !== '/' && window.location.pathname !== '/index') return;
     if (document.getElementById('hp-content')) return;
@@ -80,7 +81,13 @@ if ('serviceWorker' in navigator) {
 
     const RINX = window.RINX_DATA;
     const GAMES = window.GAMES_DATA;
-    if (!RINX || !GAMES) { setTimeout(build, 200); return; }
+    // Legacy data globals; nothing defines them any more, so give up after
+    // ~5s instead of waking the main thread every 200ms forever.
+    if (!RINX || !GAMES) {
+      attempts += 1;
+      if (attempts < 25) setTimeout(build, 200);
+      return;
+    }
 
     const news = [
       {

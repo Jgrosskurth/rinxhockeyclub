@@ -1,3 +1,5 @@
+import { headshotAttrs, HEADSHOT_ONERROR } from '../../scripts/media.js';
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -39,7 +41,7 @@ export default function decorate(block) {
             ${coaches.map((c) => `
               <div class="coach-card">
                 ${c.img
-    ? `<img src="${c.img}" alt="${c.name}" class="coach-av coach-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    ? `<img ${headshotAttrs(c.img)} alt="${c.name}" class="coach-av coach-photo" width="72" height="72" loading="lazy" onerror="${HEADSHOT_ONERROR}">`
     : ''}
                 <div class="coach-av"${c.img ? ' style="display:none"' : ''}>${c.initials}</div>
                 <div class="coach-info">
