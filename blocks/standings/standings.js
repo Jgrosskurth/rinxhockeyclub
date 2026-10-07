@@ -95,19 +95,21 @@ export default async function decorate(block) {
     renderStandings(block, data);
     // League pages also get the season points race, from the division's
     // completed games. Optional: the table stands on its own if this fails.
+    // The chart's legend and plot space render right away (from the
+    // standings) so the table doesn't shift down when the games arrive.
     if (!isTournament()) {
+      const wrap = document.createElement('div');
+      wrap.className = 'points-race';
+      block.querySelector('.st-table-wrap')?.before(wrap);
+      renderPointsRace(wrap, buildRace([], data.teams, tidyTeam));
       fetch(`${FEED_BASE}/games-${key}.json`)
         .then((r) => (r.ok ? r.json() : null))
         .then((games) => {
-          if (!games?.games?.length) return;
-          const race = buildRace(games.games, data.teams, tidyTeam);
-          if (!race.some((t) => t.series.length > 1)) return;
-          const wrap = document.createElement('div');
-          wrap.className = 'points-race';
-          block.querySelector('.st-table-wrap')?.before(wrap);
+          const race = buildRace(games?.games || [], data.teams, tidyTeam);
+          if (!race.some((t) => t.series.length > 1)) throw new Error('no games');
           renderPointsRace(wrap, race);
         })
-        .catch(() => {});
+        .catch(() => wrap.remove());
     }
   } catch {
     block.innerHTML = '<div class="err-box"><p>Standings are temporarily unavailable. '

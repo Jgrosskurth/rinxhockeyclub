@@ -3,15 +3,19 @@
 /* Additional font weights for below-the-fold content */
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;800&family=Barlow:wght@500;600&display=swap');
 
-/* PWA Install Banner — mobile only */
+/* PWA Install Banner — mobile only. Pinned to the bottom of the screen: it
+   appears a few seconds after load, and inserting it above the header pushed
+   the whole page down (a ~0.1 layout shift on every mobile page view). */
 .pwa-install-banner {
   display: none;
   align-items: center;
   gap: 12px;
   background: linear-gradient(135deg, var(--color-red) 0%, var(--color-navy) 100%);
-  padding: 10px 16px;
-  position: relative;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  position: fixed;
+  inset: auto 0 0;
   z-index: 1001;
+  box-shadow: 0 -4px 16px rgb(4 30 66 / 25%);
 }
 
 .pwa-install-banner img {
