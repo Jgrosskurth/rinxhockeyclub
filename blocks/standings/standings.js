@@ -6,6 +6,7 @@
  */
 
 import { gameSheetLogo, RINX_LOGO } from '../../scripts/team-logos.js';
+import { buildRace, renderPointsRace } from './points-race.js';
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
@@ -92,6 +93,22 @@ export default async function decorate(block) {
     const data = await resp.json();
     if (!data.teams || !data.teams.length) throw new Error('empty');
     renderStandings(block, data);
+    // League pages also get the season points race, from the division's
+    // completed games. Optional: the table stands on its own if this fails.
+    if (!isTournament()) {
+      fetch(`${FEED_BASE}/games-${key}.json`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((games) => {
+          if (!games?.games?.length) return;
+          const race = buildRace(games.games, data.teams, tidyTeam);
+          if (!race.some((t) => t.series.length > 1)) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'points-race';
+          block.querySelector('.st-table-wrap')?.before(wrap);
+          renderPointsRace(wrap, race);
+        })
+        .catch(() => {});
+    }
   } catch {
     block.innerHTML = '<div class="err-box"><p>Standings are temporarily unavailable. '
       + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';

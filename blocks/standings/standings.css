@@ -160,3 +160,242 @@
     background: var(--color-ice);
   }
 }
+
+/* ---- Season points race (points-race.js) ---- */
+.standings .points-race {
+  --pr-ours: var(--color-red);
+  --pr-other: #8a95a5;
+  --pr-focus: var(--color-navy);
+  --pr-grid: var(--color-gray-light);
+
+  position: relative;
+  margin-bottom: 24px;
+  padding: 20px 20px 12px;
+  border-radius: 10px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+}
+
+.standings .pr-title {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+
+.standings .pr-sub {
+  margin: 2px 0 12px;
+  font-size: 0.8rem;
+  color: var(--color-gray);
+}
+
+/* Legend: line key + team name + points; hover/focus brings a team forward. */
+.standings .pr-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.standings .pr-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--body-font-family);
+  font-size: 0.78rem;
+  color: var(--color-navy);
+  cursor: default;
+}
+
+.standings .pr-key.is-active,
+.standings .pr-key:focus-visible {
+  border-color: var(--color-gray-light);
+  background: var(--color-off-white);
+}
+
+.standings .pr-key-line {
+  flex: none;
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--pr-other);
+}
+
+.standings .is-ours > .pr-key-line {
+  background: var(--pr-ours);
+}
+
+.standings .pr-key.is-ours .pr-key-name {
+  font-weight: 700;
+}
+
+.standings .pr-key-pts {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gray);
+}
+
+/* Plot */
+.standings .pr-plot {
+  position: relative;
+  outline: none;
+}
+
+.standings .pr-plot:focus-visible {
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px var(--color-navy);
+}
+
+.standings .pr-plot svg {
+  display: block;
+  overflow: visible;
+}
+
+.standings .pr-grid line {
+  stroke: var(--pr-grid);
+  stroke-width: 1;
+}
+
+.standings .pr-grid line.pr-base {
+  stroke: #c3c8d0;
+}
+
+.standings .pr-tick,
+.standings .pr-axis-title {
+  font-family: var(--body-font-family);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  fill: var(--color-gray);
+}
+
+.standings .pr-axis-title {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.standings .pr-area {
+  fill: var(--pr-ours);
+  fill-opacity: 0.1;
+}
+
+.standings .pr-line {
+  fill: none;
+  stroke: var(--pr-other);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: opacity 0.15s, stroke 0.15s;
+}
+
+.standings .pr-line.is-ours {
+  stroke: var(--pr-ours);
+  stroke-width: 3;
+}
+
+.standings .points-race.has-active .pr-line:not(.is-active, .is-ours) {
+  opacity: 0.25;
+}
+
+.standings .pr-line.is-active:not(.is-ours) {
+  stroke: var(--pr-focus);
+  stroke-width: 3;
+}
+
+.standings .pr-cross {
+  stroke: #c3c8d0;
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+/* End-of-line logo discs, with a 2px surface ring. */
+.standings .pr-disc {
+  fill: var(--color-white);
+  stroke: var(--pr-other);
+  stroke-width: 2;
+}
+
+.standings .pr-end.is-ours .pr-disc {
+  stroke: var(--pr-ours);
+  stroke-width: 2.5;
+}
+
+.standings .pr-end.is-active .pr-disc {
+  stroke: var(--pr-focus);
+}
+
+.standings .points-race.has-active .pr-end:not(.is-active, .is-ours) {
+  opacity: 0.4;
+}
+
+.standings .pr-leader {
+  stroke: var(--pr-other);
+  stroke-width: 1;
+}
+
+.standings .pr-ini {
+  font-family: var(--heading-font-family);
+  font-size: 9px;
+  font-weight: 800;
+  fill: var(--color-navy);
+}
+
+/* Tooltip: values lead, names follow. */
+.standings .pr-tip {
+  position: absolute;
+  z-index: 3;
+  min-width: 170px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-gray-light);
+  border-radius: 8px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card-hover);
+  font-size: 0.78rem;
+  pointer-events: none;
+}
+
+.standings .pr-tip-head {
+  margin-bottom: 4px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  color: var(--color-gray);
+}
+
+.standings .pr-tip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.6;
+}
+
+.standings .pr-tip-val {
+  min-width: 18px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-navy);
+}
+
+.standings .pr-tip-name {
+  color: var(--color-gray);
+}
+
+.standings .pr-tip-row.is-ours .pr-tip-name {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+@media (min-width: 900px) {
+  .standings .points-race {
+    padding: 24px 28px 16px;
+  }
+}
