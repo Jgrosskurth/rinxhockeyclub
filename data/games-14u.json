@@ -1,0 +1,109 @@
+{
+  "type": "games",
+  "season": "15381",
+  "team": "",
+  "blocked_by_cloudflare": false,
+  "last_page_title": "Games | Long Island Amateur Hockey League - 2026/2027 \u00bb USAH - New York District",
+  "games": [
+    {
+      "date": "Sep 12, 2026",
+      "visitor": "NYH4033-014 North Park 14U -Pala",
+      "home": "NYH0007-004 Long Island Sharks 14u Manno",
+      "visitorScore": 3,
+      "homeScore": 5,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990051"
+    },
+    {
+      "date": "Sep 12, 2026",
+      "visitor": "NYH0017-015 Rinx Travel 14u South Skillman",
+      "home": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "visitorScore": 8,
+      "homeScore": 3,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990043"
+    },
+    {
+      "date": "Sep 13, 2026",
+      "visitor": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
+      "home": "NYH0017-015 Rinx Travel 14u South Skillman",
+      "visitorScore": 0,
+      "homeScore": 7,
+      "ot": false,
+      "type": "Exhibition",
+      "gameId": "2998286"
+    },
+    {
+      "date": "Sep 19, 2026",
+      "visitor": "NYH0007-004 Long Island Sharks 14u Manno",
+      "home": "NYH4033-014 North Park 14U -Pala",
+      "visitorScore": 3,
+      "homeScore": 7,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990056"
+    },
+    {
+      "date": "Sep 20, 2026",
+      "visitor": "NYH0007-004 Long Island Sharks 14u Manno",
+      "home": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "visitorScore": 7,
+      "homeScore": 4,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990045"
+    },
+    {
+      "date": "Sep 26, 2026",
+      "visitor": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
+      "home": "NYH0036-007 Aviator Hockey Club 14U Leonard",
+      "visitorScore": 9,
+      "homeScore": 0,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990042"
+    },
+    {
+      "date": "Sep 26, 2026",
+      "visitor": "NYH4033-014 North Park 14U -Pala",
+      "home": "NYH0017-015 Rinx Travel 14u South Skillman",
+      "visitorScore": 1,
+      "homeScore": 5,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990036"
+    },
+    {
+      "date": "Oct 2, 2026",
+      "visitor": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
+      "home": "NYH0007-004 Long Island Sharks 14u Manno",
+      "visitorScore": 7,
+      "homeScore": 0,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990052"
+    },
+    {
+      "date": "Oct 3, 2026",
+      "visitor": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "home": "NYH0017-015 Rinx Travel 14u South Skillman",
+      "visitorScore": 1,
+      "homeScore": 7,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990034"
+    },
+    {
+      "date": "Oct 4, 2026",
+      "visitor": "NYH4033-014 North Park 14U -Pala",
+      "home": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "visitorScore": 4,
+      "homeScore": 2,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990046"
+    }
+  ]
+}
