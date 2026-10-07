@@ -4,6 +4,11 @@
   padding: 20px 0 40px;
 }
 
+/* The section and the block share the "instagram" name; pad only once */
+.section.instagram {
+  padding-bottom: 0;
+}
+
 .instagram .instagram-title {
   font-family: var(--heading-font-family);
   font-weight: 900;
