@@ -422,6 +422,10 @@
   align-items: center;
   gap: 16px;
   padding: 60px 20px;
+
+  /* Reserve roughly the schedule's height so the footer doesn't sit in view
+     and then get pushed down when the feed renders. */
+  min-height: 70vh;
 }
 
 .schedule .err-box {

@@ -1,3 +1,5 @@
+import { optimizedMediaUrl } from '../../scripts/media.js';
+
 const FALLBACK_SPONSORS = [
   {
     name: 'Sponsor', img: '/images/C5C5C820-D330-47DF-9084-222C832B51BC.png', phone: '', link: '',
@@ -18,7 +20,7 @@ export default function decorate(block) {
   let sponsors = rows.map((r) => {
     const cells = [...r.children];
     const imgEl = cells[0]?.querySelector('img');
-    let imgSrc = imgEl?.src || cells[0]?.textContent?.trim() || '';
+    let imgSrc = optimizedMediaUrl(imgEl?.src || cells[0]?.textContent?.trim() || '', 320);
     if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
     return {
       img: imgSrc,

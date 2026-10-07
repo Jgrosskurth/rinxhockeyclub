@@ -1,7 +1,8 @@
+// 720px WebP copies of the team photos (shown at ~340px wide).
 const TEAM_PHOTOS = [
-  '/images/r1.JPG',
-  '/images/4D0F41DF-57C2-45F0-A459-86825254D41B.JPG',
-  '/images/14u.jpg',
+  '/images/r1-720.webp',
+  '/images/4D0F41DF-57C2-45F0-A459-86825254D41B-720.webp',
+  '/images/14u-720.webp',
 ];
 
 export default function decorate(block) {
@@ -28,7 +29,7 @@ export default function decorate(block) {
     <h2 class="section-title">About Our Team</h2>
     <div class="about-card">
       <div class="about-photos">
-        ${TEAM_PHOTOS.map((src) => `<img src="${src}" alt="Rinx Hockey Club" class="about-photo" onerror="this.style.display='none'">`).join('')}
+        ${TEAM_PHOTOS.map((src) => `<img src="${src}" alt="Rinx Hockey Club" class="about-photo" width="720" height="480" loading="lazy" onerror="this.style.display='none'">`).join('')}
       </div>
       ${h3 ? `<h3 class="about-heading">${h3.innerHTML}</h3>` : ''}
       <div class="about-body">

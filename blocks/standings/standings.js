@@ -80,37 +80,47 @@ function renderStandings(block, data) {
   `;
 }
 
-export default async function decorate(block) {
+export default function decorate(block) {
   let key = window.location.pathname.includes('14u') ? '14u' : '10u';
   if (isTournament()) key = 'mid-atlantic';
   const url = `${FEED_BASE}/standings-${key}.json`;
 
   block.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading standings&hellip;</p></div>';
 
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) throw new Error(`feed ${resp.status}`);
-    const data = await resp.json();
-    if (!data.teams || !data.teams.length) throw new Error('empty');
-    renderStandings(block, data);
-    // League pages also get the season points race, from the division's
-    // completed games. Optional: the table stands on its own if this fails.
-    if (!isTournament()) {
-      fetch(`${FEED_BASE}/games-${key}.json`)
-        .then((r) => (r.ok ? r.json() : null))
-        .then((games) => {
-          if (!games?.games?.length) return;
-          const race = buildRace(games.games, data.teams, tidyTeam);
-          if (!race.some((t) => t.series.length > 1)) return;
-          const wrap = document.createElement('div');
-          wrap.className = 'points-race';
-          block.querySelector('.st-table-wrap')?.before(wrap);
-          renderPointsRace(wrap, race);
-        })
-        .catch(() => {});
+  // League pages also get the season points race, from the division's
+  // completed games; fetch it alongside the standings.
+  const gamesFeed = isTournament() ? null : fetch(`${FEED_BASE}/games-${key}.json`)
+    .then((r) => (r.ok ? r.json() : null))
+    .catch(() => null);
+
+  // Don't hold the section (and the page title, usually the LCP element)
+  // until the feeds arrive; the loading box reserves the space meanwhile.
+  (async () => {
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`feed ${resp.status}`);
+      const data = await resp.json();
+      if (!data.teams || !data.teams.length) throw new Error('empty');
+      renderStandings(block, data);
+      if (!gamesFeed) return;
+      // The chart's legend and plot space render right away (from the
+      // standings) so the table doesn't shift down when the games arrive.
+      // Optional: the table stands on its own if the games feed fails.
+      const wrap = document.createElement('div');
+      wrap.className = 'points-race';
+      block.querySelector('.st-table-wrap')?.before(wrap);
+      try {
+        renderPointsRace(wrap, buildRace([], data.teams, tidyTeam));
+        const games = await gamesFeed;
+        const race = buildRace(games?.games || [], data.teams, tidyTeam);
+        if (!race.some((t) => t.series.length > 1)) throw new Error('no games');
+        renderPointsRace(wrap, race);
+      } catch {
+        wrap.remove();
+      }
+    } catch {
+      block.innerHTML = '<div class="err-box"><p>Standings are temporarily unavailable. '
+        + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
     }
-  } catch {
-    block.innerHTML = '<div class="err-box"><p>Standings are temporarily unavailable. '
-      + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
-  }
+  })();
 }

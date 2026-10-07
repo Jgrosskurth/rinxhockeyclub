@@ -121,6 +121,9 @@
   align-items: center;
   gap: 16px;
   padding: 60px 20px;
+
+  /* Reserve space so the footer isn't pushed down when the feed renders. */
+  min-height: 70vh;
 }
 
 .standings .err-box {

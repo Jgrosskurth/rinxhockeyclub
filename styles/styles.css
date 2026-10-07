@@ -110,6 +110,15 @@ header {
   background: var(--color-navy);
 }
 
+/* The header/footer blocks can render their markup before their CSS has
+   arrived; an unstyled menu briefly pushed the page down ~300px on mobile.
+   Keep them out of layout until aem.js marks them loaded (header space stays
+   reserved above, so nothing moves when it appears). */
+header .header:not([data-block-status="loaded"]),
+footer .footer:not([data-block-status="loaded"]) {
+  display: none;
+}
+
 /* Utility: section wrapper */
 .section {
   padding: var(--section-padding);

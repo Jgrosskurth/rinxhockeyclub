@@ -1,5 +1,6 @@
 .section:has(div[data-block-name="hero"]),
-.section:has(.hero.block) {
+.section:has(.hero.block),
+.section.hero-followup {
   padding: 0 !important;
   margin: 0 !important;
   max-width: 100% !important;

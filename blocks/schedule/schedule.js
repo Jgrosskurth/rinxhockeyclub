@@ -386,7 +386,7 @@ function renderSchedule(block, games) {
   wireCalendars(block);
 }
 
-export default async function decorate(block) {
+export default function decorate(block) {
   // Any authored rows act as a fallback if the live feed is unavailable.
   // Two-cell rows (e.g. "src | url", "team | Rinx") are settings, not games.
   const authored = [...block.children].filter((row) => row.children.length > 2).map((row) => {
@@ -402,19 +402,19 @@ export default async function decorate(block) {
 
   block.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading schedule&hellip;</p></div>';
 
-  try {
-    const games = await loadFeedGames();
-    if (games.length) {
+  // Don't hold the section (and the page title, usually the LCP element)
+  // until the feed arrives; the loading box reserves the space meanwhile.
+  loadFeedGames()
+    .then((games) => {
+      if (!games.length) throw new Error('empty feed');
       renderSchedule(block, games);
-      return;
-    }
-    throw new Error('empty feed');
-  } catch {
-    if (authored.length) {
-      renderSchedule(block, authored);
-    } else {
-      block.innerHTML = '<div class="err-box"><p>Schedule is temporarily unavailable. '
-        + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
-    }
-  }
+    })
+    .catch(() => {
+      if (authored.length) {
+        renderSchedule(block, authored);
+      } else {
+        block.innerHTML = '<div class="err-box"><p>Schedule is temporarily unavailable. '
+          + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
+      }
+    });
 }

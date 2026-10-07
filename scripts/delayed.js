@@ -1,3 +1,21 @@
+// Google Analytics (gtag.js, G-T5CF6Q1J6Q). Loaded here, in the delayed
+// phase (~3s after the page has rendered), so the 180 KB library doesn't
+// compete with the page for bandwidth or main-thread time. The 404 page
+// loads scripts.js too, so it is covered by the same single tag.
+(function loadGoogleAnalytics() {
+  const id = 'G-T5CF6Q1J6Q';
+  window.dataLayer = window.dataLayer || [];
+  // gtag.js expects the arguments object itself, not an array.
+  // eslint-disable-next-line prefer-rest-params
+  window.gtag = function gtag() { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', id);
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+  document.head.append(script);
+}());
+
 // Service Worker registration
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
@@ -16,7 +34,7 @@ if ('serviceWorker' in navigator) {
   const banner = document.createElement('div');
   banner.className = 'pwa-install-banner';
   banner.innerHTML = `
-    <img src="/images/A9FBB1FE-F41E-4CE4-8E6D-C9099AD82806.JPG" alt="Rinx HC" width="36" height="36">
+    <img src="/icons/rinx-header-128.webp" alt="Rinx HC" width="36" height="36">
     <div class="pwa-install-banner-text">
       <strong>Rinx Hockey Club</strong>
       Add to your home screen for quick access
@@ -54,6 +72,7 @@ if ('serviceWorker' in navigator) {
 
 // delayed.js — homepage content builder
 (function () {
+  let attempts = 0;
   function build() {
     if (window.location.pathname !== '/' && window.location.pathname !== '/index') return;
     if (document.getElementById('hp-content')) return;
@@ -62,7 +81,13 @@ if ('serviceWorker' in navigator) {
 
     const RINX = window.RINX_DATA;
     const GAMES = window.GAMES_DATA;
-    if (!RINX || !GAMES) { setTimeout(build, 200); return; }
+    // Legacy data globals; nothing defines them any more, so give up after
+    // ~5s instead of waking the main thread every 200ms forever.
+    if (!RINX || !GAMES) {
+      attempts += 1;
+      if (attempts < 25) setTimeout(build, 200);
+      return;
+    }
 
     const news = [
       {

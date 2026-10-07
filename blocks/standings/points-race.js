@@ -73,17 +73,21 @@ export function buildRace(games, teams, tidy) {
       award(byName.get(tidy(g.home)), g.homeScore, g.visitorScore, g.ot);
     });
   const race = [...byName.values()].sort((a, b) => a.rank - b.rank);
-  race.forEach((t) => {
-    const last = t.series[t.series.length - 1];
-    // eslint-disable-next-line no-console
-    if (last !== t.pts) console.warn(`points race: ${t.name} computed ${last}, standings ${t.pts}`);
-  });
+  if (games.length) {
+    race.forEach((t) => {
+      const last = t.series[t.series.length - 1];
+      // eslint-disable-next-line no-console
+      if (last !== t.pts) console.warn(`points race: ${t.name} computed ${last}, standings ${t.pts}`);
+    });
+  }
   return race;
 }
 
 /**
- * Render the points race into a container.
- * @param {Element} root empty container
+ * Render the points race into a container. Called first with a race built
+ * from no games (legend + an empty plot at its final height, so the table
+ * below doesn't jump when the chart arrives), then again with the real data.
+ * @param {Element} root container (re-rendered in place)
  * @param {Array} race output of buildRace
  */
 export function renderPointsRace(root, race) {
@@ -145,6 +149,14 @@ export function renderPointsRace(root, race) {
     const yMax = Math.max(4, Math.ceil(maxPts / step) * step);
     const x = (i) => m.l + (i / maxGP) * (w - m.l - m.r);
     const y = (p) => m.t + (1 - p / yMax) * (h - m.t - m.b);
+
+    // Placeholder render: hold the plot's space until the games arrive.
+    if (!race.some((t) => t.series.length > 1)) {
+      plot.textContent = '';
+      plot.style.height = `${h}px`;
+      return;
+    }
+    plot.style.height = '';
 
     const chart = svg('svg', {
       width: w, height: h, viewBox: `0 0 ${w} ${h}`, 'aria-hidden': 'true', focusable: 'false',

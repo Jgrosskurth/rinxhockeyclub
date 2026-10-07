@@ -1,7 +1,7 @@
 export default function decorate(block) {
   block.innerHTML = `
     <div class="footer-inner">
-      <img src="/icons/rinxlogo.png" alt="Rinx Hockey Club" width="64" height="64"
+      <img src="/icons/rinxlogo-140.webp" alt="Rinx Hockey Club" width="64" height="64" loading="lazy"
            class="footer-logo-img" onerror="this.style.display='none'">
       <p class="footer-name">Rinx Hockey Club &bull; Long Island, NY</p>
       <nav class="footer-nav">
