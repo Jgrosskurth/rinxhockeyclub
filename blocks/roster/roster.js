@@ -1,3 +1,5 @@
+import { optimizedMediaUrl } from '../../scripts/media.js';
+
 function getInitials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0])
     .join('')
@@ -14,10 +16,22 @@ function getBadge(note) {
   return '';
 }
 
+// Repo headshots in /images/headshots have 160px WebP copies (shown at
+// 64-72px). If a copy is missing, the onerror handler falls back to the
+// original file, then to the initials avatar.
+function headshotSrc(src) {
+  return /^\/images\/headshots\/[^/]+\.(png|jpe?g)$/i.test(src)
+    ? src.replace(/\.(png|jpe?g)$/i, '.webp') : src;
+}
+
+const IMG_FALLBACK = "if(this.dataset.orig){this.src=this.dataset.orig;this.removeAttribute('data-orig')}else{this.style.display='none';this.nextElementSibling.style.display='flex'}";
+
 function buildCoaches(coaches) {
   return coaches.map((c) => {
+    const src = headshotSrc(c.img);
+    const orig = src !== c.img ? ` data-orig="${c.img}"` : '';
     const imgHtml = c.img
-      ? `<img src="${c.img}" alt="${c.name}" class="coach-av coach-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      ? `<img src="${src}"${orig} alt="${c.name}" class="coach-av coach-photo" width="72" height="72" loading="lazy" onerror="${IMG_FALLBACK}">`
       : '';
     return `
       <div class="coach-card">
@@ -38,7 +52,7 @@ export default function decorate(block) {
     const name = cells[0]?.textContent?.trim() || '';
     const note = cells[1]?.textContent?.trim() || '';
     const imgEl = cells[2]?.querySelector('img');
-    let imgSrc = imgEl?.src || '';
+    let imgSrc = optimizedMediaUrl(imgEl?.src || '', 160);
     if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
     const num = cells[3]?.textContent?.trim() || '';
     return {
@@ -92,7 +106,7 @@ export default function decorate(block) {
       ${players.map((p) => `
         <div class="player-card">
           ${p.img
-    ? `<img src="${p.img}" alt="${p.name}" class="player-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    ? `<img src="${p.img}" alt="${p.name}" class="player-photo" width="70" height="70" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : ''}
           <div class="player-icon"${p.img ? ' style="display:none"' : ''}>${p.num || getInitials(p.name)}</div>
           <h3>${p.name}</h3>

@@ -96,8 +96,24 @@ function buildJumpNav(main) {
   trackJumpNav(nav);
 }
 
+// A section is only shown once every block in it has loaded. The homepage
+// authors its hero together with five blocks below it in one section, so the
+// hero (the LCP element) waited on all of them. Move everything after a
+// leading hero into its own section; .hero-followup keeps the hero section's
+// full-bleed styling (see hero.css) so the layout is unchanged.
+function splitHeroSection(main) {
+  const first = main.querySelector(':scope > div');
+  const hero = first?.querySelector(':scope > .hero');
+  if (!hero || hero !== first.firstElementChild || !hero.nextElementSibling) return;
+  const rest = document.createElement('div');
+  rest.className = 'hero-followup';
+  while (hero.nextSibling) rest.append(hero.nextSibling);
+  first.after(rest);
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  splitHeroSection(main);
   buildJumpNav(main);
   fixBlockNames(main);
   decorateIcons(main);

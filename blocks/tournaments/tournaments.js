@@ -1,3 +1,5 @@
+import { optimizedMediaUrl } from '../../scripts/media.js';
+
 const FALLBACK_TOURNAMENTS = [
   {
     logo: '/images/lobstahfest.png',
@@ -53,7 +55,7 @@ export default function decorate(block) {
     const logoImg = cells[0]?.querySelector('img');
     const { link, cta } = splitLinks(cells[5]);
     return {
-      logo: logoImg?.src || '',
+      logo: optimizedMediaUrl(logoImg?.src || '', 160),
       name: cells[1]?.textContent?.trim() || '',
       date: cells[2]?.textContent?.trim() || '',
       loc: cells[3]?.textContent?.trim() || '',
