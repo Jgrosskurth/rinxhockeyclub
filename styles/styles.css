@@ -126,6 +126,12 @@ footer .footer:not([data-block-status="loaded"]) {
   margin: 0 auto;
 }
 
+/* A section left empty (e.g. once the page metadata is pulled out) shouldn't
+   add its padding to the page */
+main > .section:empty {
+  display: none;
+}
+
 /* Jump nav: sticky row of pill buttons built from an in-page link list
    (see buildJumpNav in scripts.js). The active section's pill is red. */
 main > .jump-nav {

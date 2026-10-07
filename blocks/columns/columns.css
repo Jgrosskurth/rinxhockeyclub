@@ -94,20 +94,22 @@
   margin-top: 0;
 }
 
-.columns .facility-phone a {
-  font-weight: 700;
-  color: var(--color-navy);
-}
-
+/* Call + directions: one row of matching buttons (when the facility stays in
+   this block; on the homepage it moves into About, styled there) */
 .columns .facility-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 16px;
 }
 
-.columns .facility-directions {
+.columns .facility-btn {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   min-height: 44px;
-  padding: 0 22px;
+  padding: 0 18px;
+  border: 2px solid var(--color-red);
   border-radius: 4px;
   background: var(--color-red);
   color: var(--color-white);
@@ -116,19 +118,15 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color 150ms ease, transform 100ms ease;
 }
 
-.columns .facility-directions:hover {
-  background: var(--color-red-dark);
+.columns .facility-call {
+  background: none;
+  border-color: var(--color-navy);
+  color: var(--color-navy);
 }
 
-.columns .facility-directions:active {
-  transform: scale(0.97);
-}
-
-.columns .facility-directions:focus-visible,
-.columns .facility-phone a:focus-visible {
+.columns .facility-btn:focus-visible {
   outline: 3px solid var(--color-red);
   outline-offset: 2px;
 }

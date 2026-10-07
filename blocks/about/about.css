@@ -101,41 +101,64 @@
   box-shadow: var(--shadow-card);
 }
 
-.about .facility-phone a {
-  font-weight: 700;
-  color: var(--color-navy);
+/* Call + directions: one row of matching buttons */
+.about .facility-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
 }
 
-.about .facility-actions {
-  margin-top: 4px;
+.about .facility-btn {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 2px solid var(--color-red);
+  border-radius: 4px;
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, transform 100ms ease;
+}
+
+.about .facility-btn svg {
+  flex: none;
+}
+
+.about .facility-call {
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.about .facility-call:hover {
+  background: var(--color-navy);
+  color: var(--color-white);
 }
 
 .about .facility-directions {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 22px;
-  border-radius: 4px;
   background: var(--color-red);
   color: var(--color-white);
-  font-family: var(--heading-font-family);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background-color 150ms ease, transform 100ms ease;
 }
 
 .about .facility-directions:hover {
   background: var(--color-red-dark);
+  border-color: var(--color-red-dark);
 }
 
-.about .facility-directions:active {
+.about .facility-btn:active {
   transform: scale(0.97);
 }
 
-.about .facility-directions:focus-visible,
-.about .facility-phone a:focus-visible {
+.about .facility-btn:focus-visible {
   outline: 3px solid var(--color-red);
   outline-offset: 2px;
 }
@@ -155,7 +178,15 @@
   }
 
   .about .col-facility p:has(picture) {
-    grid-row: span 3;
+    grid-row: span 2;
+  }
+
+  .about .facility-actions {
+    align-self: end;
+  }
+
+  .about .facility-btn {
+    flex: 0 1 auto;
   }
 
   .about .col-facility img {

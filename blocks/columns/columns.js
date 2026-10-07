@@ -1,5 +1,10 @@
 import { headshotAttrs, HEADSHOT_ONERROR } from '../../scripts/media.js';
 
+const ICONS = {
+  phone: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1Z" fill="currentColor"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>',
+};
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -61,20 +66,21 @@ export default function decorate(block) {
     });
   });
 
-  // Facility: tap-to-call phone number and a directions button
+  // Facility: the authored "Phone: ..." line becomes a call button that sits
+  // beside a directions button, in one action row under the description.
   const facilityCol = block.querySelector('.col-facility');
   if (facilityCol) {
+    const actions = document.createElement('p');
+    actions.className = 'facility-actions';
     facilityCol.querySelectorAll('p').forEach((p) => {
       const m = p.textContent.match(/\(\d{3}\)\s*\d{3}-\d{4}/);
-      if (!m || p.querySelector('a')) return;
+      if (!m) return;
       const digits = m[0].replace(/\D/g, '');
-      p.classList.add('facility-phone');
-      p.innerHTML = p.innerHTML.replace(m[0], `<a href="tel:+1${digits}">${m[0]}</a>`);
+      actions.insertAdjacentHTML('beforeend', `<a class="facility-btn facility-call" href="tel:+1${digits}" aria-label="Call The Rinx at ${m[0]}">${ICONS.phone}<span>${m[0]}</span></a>`);
+      p.remove();
     });
-    const directions = document.createElement('p');
-    directions.className = 'facility-actions';
-    directions.innerHTML = '<a class="facility-directions" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Rinx%2C%20660%20Terry%20Rd%2C%20Hauppauge%2C%20NY%2011788" target="_blank" rel="noopener">Get Directions</a>';
-    facilityCol.append(directions);
+    actions.insertAdjacentHTML('beforeend', `<a class="facility-btn facility-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=The%20Rinx%2C%20660%20Terry%20Rd%2C%20Hauppauge%2C%20NY%2011788" target="_blank" rel="noopener">${ICONS.pin}<span>Get Directions</span></a>`);
+    facilityCol.append(actions);
 
     // Homepage: the facility sits under the club intro in the About block,
     // and the coaching staff runs as its own full-width row.
