@@ -63,6 +63,14 @@
   gap: 4px;
 }
 
+/* Where the full nav fits on one line, keep it there, so the header can't
+   grow while web fonts load (narrower screens wrap the labels as before). */
+@media (min-width: 1320px) {
+  .header-nav {
+    white-space: nowrap;
+  }
+}
+
 .header-nav a {
   font-family: var(--heading-font-family);
   font-weight: 700;

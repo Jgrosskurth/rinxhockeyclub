@@ -1,195 +1,157 @@
-/* Columns Block */
-.columns > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.columns > div > div {
-  order: 1;
+/* Columns: generic side-by-side columns. On the homepage it carries the
+   coaching staff and the facility, continuing the white club band. */
+.columns {
   background: var(--color-white);
-  border-radius: 8px;
-  padding: 32px;
-  box-shadow: var(--shadow-card);
 }
 
-.columns > div > .columns-img-col {
-  order: 0;
+.columns > div {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  display: grid;
+  gap: 28px;
 }
 
 .columns img {
-  width: 100%;
   display: block;
+  width: 100%;
 }
 
 .columns h3 {
   font-family: var(--heading-font-family);
-  font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
+  font-weight: 900;
   text-transform: uppercase;
   color: var(--color-navy);
   margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 3px solid var(--color-red);
 }
 
-/* Facility column */
-.columns .col-facility img {
-  border-radius: 6px;
-  margin-bottom: 16px;
-  object-fit: cover;
-  max-height: 220px;
-  box-shadow: 0 4px 16px rgb(4 30 66 / 15%);
-}
-
-.columns .col-facility p {
-  color: var(--color-gray);
-  line-height: 1.7;
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-}
-
-.columns .col-facility strong {
-  color: var(--color-navy);
-}
-
-/* Coach cards */
-.coach-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* Coaching staff: avatar tiles */
+.columns .coach-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 12px;
 }
 
 .columns .coach-card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  background: var(--color-navy);
-  border-radius: 8px;
-  padding: 24px;
-  color: var(--color-white);
+  text-align: center;
 }
 
 .columns .coach-av {
-  width: 64px;
-  height: 64px;
-  background: var(--color-red);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  border: 3px solid var(--color-navy);
+  background: var(--color-navy);
+  color: var(--color-white);
   font-family: var(--heading-font-family);
   font-weight: 900;
-  font-size: 1.4rem;
-  color: var(--color-white);
-  flex-shrink: 0;
 }
 
 .columns .coach-photo {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0;
+  background: var(--color-off-white);
 }
 
 .columns .coach-card h4 {
   font-family: var(--heading-font-family);
-  font-weight: 800;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.05;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #fff;
-  margin-bottom: 2px;
+  color: var(--color-navy);
 }
 
 .columns .coach-card p {
-  font-size: 0.85rem;
-  color: rgb(255 255 255 / 65%);
-  margin-bottom: 0;
+  margin-top: 3px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--color-gray);
+}
+
+/* Facility: photo, copy, tap-to-call and directions */
+.columns .col-facility img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+}
+
+.columns .col-facility p {
+  margin-top: 12px;
+  color: #3b4351;
+  font-size: var(--body-font-size-s);
+}
+
+.columns .col-facility p:has(picture) {
+  margin-top: 0;
+}
+
+.columns .facility-phone a {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.columns .facility-actions {
+  margin-top: 16px;
+}
+
+.columns .facility-directions {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 4px;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 150ms ease, transform 100ms ease;
+}
+
+.columns .facility-directions:hover {
+  background: var(--color-red-dark);
+}
+
+.columns .facility-directions:active {
+  transform: scale(0.97);
+}
+
+.columns .facility-directions:focus-visible,
+.columns .facility-phone a:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+@media (min-width: 600px) {
+  .columns > div {
+    padding: 24px 24px 48px;
+  }
+
+  .columns .coach-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 900px) {
   .columns > div {
-    align-items: stretch;
-    flex-direction: unset;
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 40px;
+    padding-bottom: 64px;
   }
 
-  .columns > div > div {
-    flex: 1;
-    order: unset;
-  }
-}
-
-/* Map banner */
-.columns-map-banner {
-  margin-top: 24px;
-}
-
-.columns-map-banner .map-link {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: var(--color-navy);
-  border-radius: 8px;
-  padding: 16px 24px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.columns-map-banner .map-link:hover {
-  background: var(--color-navy-light);
-  text-decoration: none;
-}
-
-.columns-map-banner .map-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.columns-map-banner .map-text {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
-  gap: 12px;
-}
-
-.columns-map-banner .map-title {
-  color: var(--color-white);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.columns-map-banner .map-cta {
-  color: var(--color-red);
-  font-family: var(--heading-font-family);
-  font-weight: 700;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-
-@media (max-width: 900px) {
-  .columns > div > div {
-    padding: 24px;
-    margin-bottom: 16px;
-  }
-}
-
-@media (max-width: 600px) {
-  .columns-map-banner .map-text {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .columns-map-banner .map-link {
-    padding: 14px 16px;
-  }
-
-  .columns-map-banner .map-title {
-    font-size: 0.8rem;
+  .columns > div > div + div {
+    border-left: 1px solid var(--color-gray-light);
+    padding-left: 40px;
   }
 }

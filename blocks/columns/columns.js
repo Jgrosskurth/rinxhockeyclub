@@ -37,20 +37,18 @@ export default function decorate(block) {
 
         col.innerHTML = `
           <h3>${h3.innerHTML}</h3>
-          <div class="coach-cards">
+          <ul class="coach-cards">
             ${coaches.map((c) => `
-              <div class="coach-card">
+              <li class="coach-card">
                 ${c.img
-    ? `<img ${headshotAttrs(c.img)} alt="${c.name}" class="coach-av coach-photo" width="72" height="72" loading="lazy" onerror="${HEADSHOT_ONERROR}">`
+    ? `<img ${headshotAttrs(c.img)} alt="" class="coach-av coach-photo" width="72" height="72" loading="lazy" onerror="${HEADSHOT_ONERROR}">`
     : ''}
-                <div class="coach-av"${c.img ? ' style="display:none"' : ''}>${c.initials}</div>
-                <div class="coach-info">
-                  <h4>${c.name}</h4>
-                  <p>${c.role}</p>
-                </div>
-              </div>
+                <span class="coach-av" aria-hidden="true"${c.img ? ' style="display:none"' : ''}>${c.initials}</span>
+                <h4>${c.name}</h4>
+                <p>${c.role}</p>
+              </li>
             `).join('')}
-          </div>
+          </ul>
         `;
       }
 
@@ -63,20 +61,19 @@ export default function decorate(block) {
     });
   });
 
-  // Add map banner inside the facility column
+  // Facility: tap-to-call phone number and a directions button
   const facilityCol = block.querySelector('.col-facility');
   if (facilityCol) {
-    const mapBanner = document.createElement('div');
-    mapBanner.className = 'columns-map-banner';
-    mapBanner.innerHTML = `
-      <a href="https://www.google.com/maps/search/The%20Rinx,%20660%20Terry%20Rd,%20Hauppauge,%20NY%2011788" target="_blank" class="map-link">
-        <div class="map-icon">📍</div>
-        <div class="map-text">
-          <span class="map-title">Get Directions</span>
-          <span class="map-cta">Open in Maps &rarr;</span>
-        </div>
-      </a>
-    `;
-    facilityCol.appendChild(mapBanner);
+    facilityCol.querySelectorAll('p').forEach((p) => {
+      const m = p.textContent.match(/\(\d{3}\)\s*\d{3}-\d{4}/);
+      if (!m || p.querySelector('a')) return;
+      const digits = m[0].replace(/\D/g, '');
+      p.classList.add('facility-phone');
+      p.innerHTML = p.innerHTML.replace(m[0], `<a href="tel:+1${digits}">${m[0]}</a>`);
+    });
+    const directions = document.createElement('p');
+    directions.className = 'facility-actions';
+    directions.innerHTML = '<a class="facility-directions" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Rinx%2C%20660%20Terry%20Rd%2C%20Hauppauge%2C%20NY%2011788" target="_blank" rel="noopener">Get Directions</a>';
+    facilityCol.append(directions);
   }
 }

@@ -1,254 +1,515 @@
-.section:has(div[data-block-name="hero"]),
+/* Hero: club ident + "Next up" game card over the rink diagram. The hero and
+   the blocks that follow it (see splitHeroSection in scripts.js) run full bleed. */
 .section:has(.hero.block),
 .section.hero-followup {
-  padding: 0 !important;
-  margin: 0 !important;
-  max-width: 100% !important;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
 }
 
 .hero.block {
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  display: block !important;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-navy);
+  color: var(--color-white);
 }
 
-.hero.block > div,
-.hero.block > div > div {
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  display: block !important;
+/* Paragraphs here are labels and numbers, not body copy */
+.hero p {
+  color: inherit;
+  line-height: 1.4;
 }
 
-/* Single container — SVG and content both inside */
-.hero-inner {
-  position: relative !important;
-  min-height: 560px !important;
-  overflow: hidden !important;
-  background: #041E42 !important;
-  width: 100% !important;
-  display: block !important;
+.hero .hero-rink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
-/* SVG fills the container */
-.hero-rink {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-  z-index: 0 !important;
+.hero .hero-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  display: grid;
+  gap: 20px;
 }
 
-/* Content sits over SVG */
-.hero-content {
-  position: relative !important;
-  z-index: 2 !important;
-  padding: 60px 40px !important;
-  text-align: center !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  display: block !important;
+/* Ident: compact row on phones, stacked column from 900px */
+.hero .hero-ident {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 6px 14px;
 }
 
-.hero-logo {
-  width: 140px !important;
-  height: 140px !important;
-  object-fit: contain !important;
-  filter: drop-shadow(0 4px 20px rgb(0 0 0 / 70%)) !important;
-  margin: 0 auto 16px !important;
-  display: block !important;
-  animation: h-float 3s ease-in-out infinite !important;
-  will-change: transform !important;
-  contain: layout style !important;
+.hero .hero-logo {
+  grid-row: span 2;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-white);
+  padding: 4px;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 35%);
 }
 
-@keyframes h-float {
-  0%,
-  100% {
-    transform: translateY(0);
+.hero h1 {
+  font-family: var(--heading-font-family);
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+
+  /* Fixed two-line wordmark: the fallback font can't add a line before
+     Barlow Condensed arrives, so nothing below it moves */
+  white-space: nowrap;
+}
+
+/* Logotype word in the club's red (WCAG 1.4.3 logotype exemption) */
+.hero h1 span {
+  color: var(--color-red);
+}
+
+.hero .hero-badge {
+  justify-self: start;
+  background: var(--color-red);
+  color: var(--color-white);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero .hero-tagline {
+  grid-column: 1 / -1;
+  font-size: var(--body-font-size-s);
+  font-weight: 500;
+  color: rgb(255 255 255 / 88%);
+}
+
+.hero .hero-actions {
+  display: none;
+}
+
+.hero .hero-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 2px solid rgb(255 255 255 / 75%);
+  border-radius: 4px;
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.hero .hero-actions a:hover {
+  background: var(--color-white);
+  color: var(--color-navy);
+}
+
+/* Next up card */
+.hero .nextup {
+  background: var(--color-white);
+  color: var(--color-navy);
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgb(0 0 0 / 35%);
+  overflow: hidden;
+}
+
+.hero .team-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-navy-light);
+}
+
+.hero .team-toggle button {
+  min-height: 52px;
+  border: 0;
+  border-bottom: 4px solid transparent;
+  background: none;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 80%);
+  cursor: pointer;
+  transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease;
+}
+
+.hero .team-toggle button[aria-pressed="true"] {
+  color: var(--color-white);
+  border-bottom-color: var(--color-red);
+  background: rgb(255 255 255 / 6%);
+}
+
+/* Reserve the card's height so the page doesn't jump when the feed lands */
+.hero .np {
+  display: flex;
+  flex-direction: column;
+  min-height: 396px;
+  padding: 20px 18px 22px;
+}
+
+.hero .np-loading,
+.hero .np-empty {
+  color: var(--color-gray);
+  margin-top: 12px;
+}
+
+/* Every line has a fixed size (one line or two), so the card is the same
+   height whether it's loading, filled in, or still on fallback fonts. */
+.hero .np-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.hero .np-head h2,
+.hero .np-comp,
+.hero .np-where {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero .np-head h2 {
+  font-family: var(--heading-font-family);
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-red);
+}
+
+.hero .np-comp {
+  min-width: 0;
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  color: var(--color-gray);
+}
+
+.hero .np-when {
+  margin-top: 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  white-space: nowrap;
+  font-family: var(--heading-font-family);
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.hero .np-date {
+  display: inline-block;
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 0.95;
+}
+
+.hero .np-time {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-navy-light);
+}
+
+.hero .np-match {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0;
+  border-top: 1px solid var(--color-gray-light);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.hero .np-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  text-align: center;
+}
+
+.hero .np-side img,
+.hero .np-logo-gap {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex: none;
+}
+
+.hero .np-side span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.1em;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 1.05rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.hero .np-vs {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  color: var(--color-gray);
+  text-transform: uppercase;
+}
+
+.hero .np-where {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.hero .np-last {
+  min-height: 2.8em;
+  align-content: flex-start;
+  line-height: 1.4;
+  margin-top: 6px;
+  font-size: var(--body-font-size-s);
+  color: var(--color-gray);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.hero .np-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.hero .result-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: var(--body-font-size-s);
+  background: var(--color-gray-light);
+  color: var(--color-navy);
+}
+
+.hero .result-w {
+  background: #16a34a;
+}
+
+.hero .result-l {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.hero .np-actions {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.hero .np-cal {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 4px;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 150ms ease, transform 100ms ease;
+}
+
+.hero .np-cal:hover {
+  background: var(--color-red-dark);
+}
+
+.hero .np-cal:active {
+  transform: scale(0.97);
+}
+
+.hero .hero-actions a:focus-visible,
+.hero .team-toggle button:focus-visible,
+.hero .np-cal:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* The faceoff: when a game card lands (and on every team switch) the crests
+   skate in to centre ice and the puck-drop time rolls up like a scoreboard. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .nextup {
+    animation: hero-arrive 600ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
   }
 
-  50% {
-    transform: translateY(-8px);
+  .hero .np-side {
+    animation: hero-faceoff-home 650ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+  }
+
+  .hero .np-away {
+    animation-name: hero-faceoff-away;
+  }
+
+  .hero .np-vs {
+    animation: hero-puck-drop 420ms cubic-bezier(0.16, 1, 0.3, 1) 460ms both;
+  }
+
+  .hero .np-date,
+  .hero .np-time {
+    animation: hero-score-roll 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero .np-time {
+    animation-delay: 90ms;
+  }
+
+  .hero .np-where,
+  .hero .np-last,
+  .hero .np-actions {
+    animation: hero-fade 400ms ease-out 480ms both;
   }
 }
 
-.hero-badge {
-  display: inline-block !important;
-  background: #C8102E !important;
-  color: #fff !important;
-  font-family: 'Barlow Condensed',sans-serif !important;
-  font-weight: 700 !important;
-  font-size: .75rem !important;
-  letter-spacing: .2em !important;
-  text-transform: uppercase !important;
-  padding: 5px 16px !important;
-  border-radius: 2px !important;
-  margin-bottom: 20px !important;
-}
-
-.hero.block h1 {
-  font-family: 'Barlow Condensed',sans-serif !important;
-  font-weight: 900 !important;
-  font-size: clamp(2.5rem,6vw,4.5rem) !important;
-  color: #fff !important;
-  text-transform: uppercase !important;
-  line-height: .95 !important;
-  margin: 0 0 16px !important;
-  text-align: center !important;
-  display: block !important;
-}
-.hero.block h1 span { color: #C8102E !important; }
-
-.hero-content > p:not(.hero-src) {
-  color: rgb(255 255 255 / 80%) !important;
-  font-size: 1.1rem !important;
-  font-weight: 400 !important;
-  text-transform: none !important;
-  margin: 0 0 24px !important;
-  text-align: center !important;
-  display: block !important;
-}
-
-.hero-record-strip {
-  display: inline-flex !important;
-  flex-flow: row nowrap !important;
-  align-items: stretch !important;
-  background: rgb(255 255 255 / 10%) !important;
-  border: 1px solid rgb(255 255 255 / 20%) !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-  width: auto !important;
-}
-
-.hero-stat {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 14px 24px !important;
-  flex: 0 0 auto !important;
-  width: auto !important;
-}
-
-.hero-stat-num {
-  font-family: 'Barlow Condensed',sans-serif !important;
-  font-weight: 900 !important;
-  font-size: 1.5rem !important;
-  color: #fff !important;
-  line-height: 1 !important;
-  white-space: nowrap !important;
-  display: block !important;
-  text-transform: none !important;
-}
-.hero-stat-num.red { color: #C8102E !important; }
-
-.hero-stat-lbl {
-  font-size: .62rem !important;
-  color: rgb(255 255 255 / 50%) !important;
-  text-transform: uppercase !important;
-  letter-spacing: .1em !important;
-  margin-top: 4px !important;
-  white-space: nowrap !important;
-  display: block !important;
-  font-weight: 600 !important;
-}
-
-.hero-divider {
-  width: 1px !important;
-  min-width: 1px !important;
-  background: rgb(255 255 255 / 20%) !important;
-  align-self: stretch !important;
-  flex-shrink: 0 !important;
-  display: block !important;
-}
-
-.hero-src {
-  display: block !important;
-  margin-top: 14px !important;
-  font-size: .8rem !important;
-  text-transform: none !important;
-  font-weight: 400 !important;
-  text-align: center !important;
-}
-
-.hero-src a {
-  color: rgb(255 255 255 / 40%) !important;
-  text-decoration: none !important;
-}
-
-.hero-stripe {
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 6px !important;
-  background: linear-gradient(90deg,#C8102E 33%,#fff 33%,#fff 66%,#C8102E 66%) !important;
-  z-index: 3 !important;
-  display: block !important;
-}
-
-@media (max-width: 900px) {
-  .hero-inner {
-    min-height: 420px !important;
-  }
-
-  .hero-content {
-    padding: 40px 20px !important;
-  }
-
-  .hero-logo {
-    width: 90px !important;
-    height: 90px !important;
-  }
-
-  .hero-record-strip {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-  }
-
-  .hero-stat {
-    padding: 10px 16px !important;
+@keyframes hero-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
   }
 }
 
-@media (max-width: 600px) {
-  .hero-inner {
-    min-height: 360px !important;
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-faceoff-home {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+}
+
+@keyframes hero-faceoff-away {
+  from {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+}
+
+@keyframes hero-puck-drop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+@keyframes hero-score-roll {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(40%);
   }
 
-  .hero-content {
-    padding: 30px 16px !important;
+  to {
+    clip-path: inset(0 0 -10% 0);
+    transform: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .hero .hero-grid {
+    padding: 32px 24px 40px;
   }
 
-  .hero-logo {
-    width: 70px !important;
-    height: 70px !important;
+  .hero .np {
+    min-height: 372px;
+    padding: 24px 28px 26px;
   }
 
-  .hero.block h1 {
-    font-size: 2rem !important;
+  .hero .np-date {
+    font-size: 3.2rem;
   }
 
-  .hero-stat {
-    padding: 8px 12px !important;
+  .hero .np-side {
+    flex-direction: row;
+    gap: 12px;
+    text-align: left;
   }
 
-  .hero-stat-num {
-    font-size: 1.2rem !important;
+  .hero .np-away {
+    flex-direction: row-reverse;
+    text-align: right;
   }
 
-  .hero-stat-lbl {
-    font-size: 0.55rem !important;
+  .hero .np-side img,
+  .hero .np-logo-gap {
+    width: 56px;
+    height: 56px;
   }
 
-  .hero-badge {
-    font-size: 0.65rem !important;
-    padding: 4px 12px !important;
+  .hero .np-side span {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero .hero-grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 40px;
+    align-items: center;
+    padding: 48px 24px;
+  }
+
+  .hero .np {
+    min-height: 378px;
+  }
+
+  .hero .hero-ident {
+    grid-template-columns: none;
+    justify-items: start;
+    row-gap: 14px;
+  }
+
+  .hero .hero-logo {
+    grid-row: auto;
+    width: 104px;
+    height: 104px;
+    padding: 6px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+  }
+
+  .hero .hero-tagline {
+    font-size: 1.125rem;
+  }
+
+  .hero .hero-actions {
+    display: block;
+    margin-top: 6px;
+  }
+
+  .hero .np-date {
+    font-size: clamp(2.6rem, 5vw, 3.6rem);
   }
 }

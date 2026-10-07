@@ -1,79 +1,86 @@
-/* About Block */
+/* About: the club band — lead photo beside the club copy, on white */
 .about {
-  padding: 40px;
+  background: var(--color-white);
+  border-top: 1px solid var(--color-gray-light);
+}
+
+.about .about-inner {
   max-width: var(--max-width);
   margin: 0 auto;
+  padding: 32px 16px 8px;
 }
 
-.about .section-title {
-  margin-bottom: 32px;
+.about .about-grid {
+  display: grid;
+  gap: 24px;
 }
 
-.about-card {
-  background: var(--color-white);
+.about .about-media {
+  display: grid;
+  gap: 12px;
+}
+
+.about figure {
+  margin: 0;
   border-radius: 8px;
-  padding: 40px;
+  overflow: hidden;
   box-shadow: var(--shadow-card);
 }
 
-.about-photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.about-photo {
-  width: 100%;
-  height: 220px;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-.about-img {
-  width: 100%;
-  border-radius: 6px;
+.about figure img {
   display: block;
-  margin-bottom: 24px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.about-heading {
+.about .about-lead {
+  aspect-ratio: 4 / 3;
+}
+
+.about .about-more {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.about .about-thumb {
+  aspect-ratio: 3 / 2;
+}
+
+.about .about-copy h3 {
   font-family: var(--heading-font-family);
+  font-size: 1.563rem;
   font-weight: 900;
-  font-size: 1.4rem;
+  line-height: 1.05;
   text-transform: uppercase;
   color: var(--color-navy);
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 3px solid var(--color-red);
+  margin-bottom: 12px;
 }
 
-.about-body p {
-  color: var(--color-gray);
-  line-height: 1.7;
-  font-size: 0.95rem;
-  margin-bottom: 14px;
+.about .about-copy p {
+  color: #3b4351;
+  max-width: 62ch;
 }
 
-.about-body p:last-child {
-  margin-bottom: 0;
+.about .about-copy p + p {
+  margin-top: 12px;
 }
 
-@media (max-width: 900px) {
-  .about {
-    padding: 40px 20px;
+@media (min-width: 600px) {
+  .about .about-inner {
+    padding: 48px 24px 8px;
+  }
+}
+
+@media (min-width: 900px) {
+  .about .about-inner {
+    padding: 64px 24px 8px;
   }
 
-  .about-card {
-    padding: 24px;
-  }
-
-  .about-photos {
-    grid-template-columns: 1fr;
-  }
-
-  .about-photo {
-    height: 180px;
+  .about .about-grid {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 40px;
+    align-items: start;
   }
 }
