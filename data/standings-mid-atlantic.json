@@ -8,6 +8,36 @@
   "teams": [
     {
       "rank": "1",
+      "team": "Rinx",
+      "gp": "1",
+      "w": "1",
+      "l": "0",
+      "t": "0",
+      "otl": "0",
+      "pts": "2",
+      "gf": "7",
+      "ga": "1",
+      "diff": "+6",
+      "streak": "Won 1",
+      "ours": true
+    },
+    {
+      "rank": "2",
+      "team": "Delco Phantoms",
+      "gp": "1",
+      "w": "0",
+      "l": "1",
+      "t": "0",
+      "otl": "0",
+      "pts": "0",
+      "gf": "1",
+      "ga": "7",
+      "diff": "-6",
+      "streak": "Lost 1",
+      "ours": false
+    },
+    {
+      "rank": "3",
       "team": "Genesis Hockey Club",
       "gp": "0",
       "w": "0",
@@ -22,7 +52,7 @@
       "ours": false
     },
     {
-      "rank": "2",
+      "rank": "4",
       "team": "Long Island Gulls",
       "gp": "0",
       "w": "0",
@@ -37,7 +67,7 @@
       "ours": false
     },
     {
-      "rank": "3",
+      "rank": "5",
       "team": "The St. James",
       "gp": "0",
       "w": "0",
@@ -52,22 +82,7 @@
       "ours": false
     },
     {
-      "rank": "4",
-      "team": "Delco Phantoms",
-      "gp": "0",
-      "w": "0",
-      "l": "0",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "0",
-      "ga": "0",
-      "diff": "0",
-      "streak": "-",
-      "ours": false
-    },
-    {
-      "rank": "5",
+      "rank": "6",
       "team": "Central Penn Panthers",
       "gp": "0",
       "w": "0",
@@ -80,21 +95,6 @@
       "diff": "0",
       "streak": "-",
       "ours": false
-    },
-    {
-      "rank": "6",
-      "team": "Rinx",
-      "gp": "0",
-      "w": "0",
-      "l": "0",
-      "t": "0",
-      "otl": "0",
-      "pts": "0",
-      "gf": "0",
-      "ga": "0",
-      "diff": "0",
-      "streak": "-",
-      "ours": true
     }
   ]
 }

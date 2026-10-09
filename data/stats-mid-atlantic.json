@@ -2,6 +2,191 @@
   "type": "stats",
   "season": "16150",
   "team": "RINX",
-  "blocked_by_cloudflare": true,
-  "last_page_title": "Rinx - Team Stats | 2026 Mid-Atlantic Fall Showcase \u00bb USAH - Atlantic District"
+  "blocked_by_cloudflare": false,
+  "last_page_title": "Rinx - Team Stats | 2026 Mid-Atlantic Fall Showcase \u00bb USAH - Atlantic District",
+  "players": [
+    {
+      "rank": "",
+      "name": "SEAN FOX",
+      "number": "18",
+      "pos": "",
+      "gp": "1",
+      "g": "2",
+      "a": "1",
+      "pts": "3",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "AIDEN BROWN",
+      "number": "98",
+      "pos": "",
+      "gp": "1",
+      "g": "2",
+      "a": "0",
+      "pts": "2",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "EDWARD CARBONE",
+      "number": "10",
+      "pos": "",
+      "gp": "1",
+      "g": "1",
+      "a": "0",
+      "pts": "1",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "MATTHEW GROSSKURTH",
+      "number": "75",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "1",
+      "pts": "1",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "STEPHEN KULL",
+      "number": "28",
+      "pos": "",
+      "gp": "1",
+      "g": "1",
+      "a": "0",
+      "pts": "1",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "JORGE LEONARDO",
+      "number": "20",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "1",
+      "pts": "1",
+      "plusminus": "0",
+      "pim": "1.5"
+    },
+    {
+      "rank": "",
+      "name": "ARI MAZZARONE",
+      "number": "19",
+      "pos": "",
+      "gp": "1",
+      "g": "1",
+      "a": "0",
+      "pts": "1",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "DECLAN NIMMO",
+      "number": "5",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "1",
+      "pts": "1",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "NICHOLAS CAPOZZOLI",
+      "number": "90",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "0",
+      "pts": "0",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "RYAN CHRISTMAN",
+      "number": "3",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "0",
+      "pts": "0",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "CONNOR HASSETT",
+      "number": "95",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "0",
+      "pts": "0",
+      "plusminus": "0",
+      "pim": "1.5"
+    },
+    {
+      "rank": "",
+      "name": "EVAN MARTIN",
+      "number": "93",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "0",
+      "pts": "0",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "TRISTEN PAJAK",
+      "number": "21",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "0",
+      "pts": "0",
+      "plusminus": "0",
+      "pim": "0"
+    },
+    {
+      "rank": "",
+      "name": "CONOR WILKENS",
+      "number": "23",
+      "pos": "",
+      "gp": "1",
+      "g": "0",
+      "a": "0",
+      "pts": "0",
+      "plusminus": "0",
+      "pim": "0"
+    }
+  ],
+  "goalies": [
+    {
+      "rank": "",
+      "name": "CONNOR DALY",
+      "number": "1",
+      "gp": "1",
+      "ga": "1",
+      "gaa": "1.25",
+      "sv": "14",
+      "svpct": ".933",
+      "w": "1",
+      "l": "0",
+      "so": "0"
+    }
+  ]
 }
