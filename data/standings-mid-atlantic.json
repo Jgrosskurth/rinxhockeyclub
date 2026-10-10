@@ -8,6 +8,21 @@
   "teams": [
     {
       "rank": "1",
+      "team": "Rinx",
+      "gp": "2",
+      "w": "2",
+      "l": "0",
+      "t": "0",
+      "otl": "0",
+      "pts": "4",
+      "gf": "15",
+      "ga": "1",
+      "diff": "+14",
+      "streak": "Won 2",
+      "ours": true
+    },
+    {
+      "rank": "2",
       "team": "Long Island Gulls",
       "gp": "1",
       "w": "1",
@@ -20,21 +35,6 @@
       "diff": "+8",
       "streak": "Won 1",
       "ours": false
-    },
-    {
-      "rank": "2",
-      "team": "Rinx",
-      "gp": "1",
-      "w": "1",
-      "l": "0",
-      "t": "0",
-      "otl": "0",
-      "pts": "2",
-      "gf": "7",
-      "ga": "1",
-      "diff": "+6",
-      "streak": "Won 1",
-      "ours": true
     },
     {
       "rank": "3",
@@ -84,16 +84,16 @@
     {
       "rank": "6",
       "team": "Central Penn Panthers",
-      "gp": "1",
+      "gp": "2",
       "w": "0",
-      "l": "1",
+      "l": "2",
       "t": "0",
       "otl": "0",
       "pts": "0",
       "gf": "0",
-      "ga": "8",
-      "diff": "-8",
-      "streak": "Lost 1",
+      "ga": "16",
+      "diff": "-16",
+      "streak": "Lost 2",
       "ours": false
     }
   ]
