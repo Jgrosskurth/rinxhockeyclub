@@ -104,6 +104,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2990046"
+    },
+    {
+      "date": "Oct 10, 2026",
+      "visitor": "NYH0093-008 Dix Hills Selects 14U Flanagan",
+      "home": "NYH0036-007 Aviator Hockey Club 14U Leonard",
+      "visitorScore": 8,
+      "homeScore": 3,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2992405"
     }
   ]
 }
