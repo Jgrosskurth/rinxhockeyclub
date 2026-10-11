@@ -120,7 +120,9 @@ footer .footer:not([data-block-status="loaded"]) {
 }
 
 /* Announcement strip under the header (built in scripts.js before first
-   paint): pennant, headline, and one call to action. */
+   paint): pennant, headline, and one call to action. Fixed height, with the
+   headline capped (2 lines under 360px, 1 line from there up), so it can't
+   grow or shrink while web fonts load. */
 .promo-banner {
   background: var(--color-navy-light);
   color: var(--color-white);
@@ -128,11 +130,14 @@ footer .footer:not([data-block-status="loaded"]) {
 }
 
 .promo-banner-inner {
+  box-sizing: border-box;
+  height: 76px;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 8px 16px;
   display: grid;
   grid-template-columns: auto 1fr;
+  align-content: center;
   align-items: center;
   gap: 2px 12px;
 }
@@ -145,11 +150,15 @@ footer .footer:not([data-block-status="loaded"]) {
 }
 
 .promo-banner-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
   margin: 0;
   font-family: var(--heading-font-family);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.1;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-white);
@@ -164,7 +173,7 @@ footer .footer:not([data-block-status="loaded"]) {
   justify-self: start;
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
+  min-height: 24px;
   font-family: var(--heading-font-family);
   font-size: 0.85rem;
   font-weight: 800;
@@ -184,8 +193,21 @@ footer .footer:not([data-block-status="loaded"]) {
   outline-offset: 2px;
 }
 
+@media (min-width: 360px) {
+  .promo-banner-inner {
+    height: 64px;
+  }
+
+  .promo-banner-title {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
 @media (min-width: 600px) {
   .promo-banner-inner {
+    height: 76px;
     grid-template-columns: auto 1fr auto;
     padding: 8px 24px;
     gap: 16px;
