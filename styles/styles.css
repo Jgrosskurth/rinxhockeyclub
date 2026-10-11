@@ -120,9 +120,10 @@ footer .footer:not([data-block-status="loaded"]) {
 }
 
 /* Announcement strip under the header (built in scripts.js before first
-   paint): pennant, headline, and one call to action. Fixed height, with the
-   headline capped (2 lines under 360px, 1 line from there up), so it can't
-   grow or shrink while web fonts load. */
+   paint): pennant, headline, and one button, in a single row. Fixed height,
+   with the headline capped (2 lines below 768px, 1 line from there), so it
+   can't grow or shrink while web fonts load. The button reads "Details"
+   until there's room for the full link text. */
 .promo-banner {
   background: var(--color-navy-light);
   color: var(--color-white);
@@ -131,19 +132,17 @@ footer .footer:not([data-block-status="loaded"]) {
 
 .promo-banner-inner {
   box-sizing: border-box;
-  height: 76px;
+  height: 64px;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 8px 16px;
   display: grid;
-  grid-template-columns: auto 1fr;
-  align-content: center;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 2px 12px;
+  gap: 12px;
 }
 
 .promo-banner picture {
-  grid-row: span 2;
   display: block;
 }
 
@@ -176,22 +175,26 @@ footer .footer:not([data-block-status="loaded"]) {
 }
 
 .promo-banner-cta {
-  justify-self: start;
   display: inline-flex;
   align-items: center;
-  min-height: 24px;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 4px;
+  background: var(--color-red);
+  color: var(--color-white);
   font-family: var(--heading-font-family);
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-white);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease;
 }
 
 .promo-banner-cta:hover {
-  color: var(--color-gold);
+  background: var(--color-red-dark);
+  color: var(--color-white);
 }
 
 .promo-banner-cta:focus-visible {
@@ -199,28 +202,15 @@ footer .footer:not([data-block-status="loaded"]) {
   outline-offset: 2px;
 }
 
-@media (min-width: 360px) {
-  .promo-banner-inner {
-    height: 64px;
-  }
-
-  .promo-banner-title {
-    display: block;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+.promo-banner-cta-long {
+  display: none;
 }
 
 @media (min-width: 600px) {
   .promo-banner-inner {
     height: 76px;
-    grid-template-columns: auto 1fr auto;
     padding: 8px 24px;
     gap: 16px;
-  }
-
-  .promo-banner picture {
-    grid-row: auto;
   }
 
   .promo-banner img {
@@ -229,24 +219,30 @@ footer .footer:not([data-block-status="loaded"]) {
   }
 
   .promo-banner-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .promo-banner-cta {
-    display: inline-flex;
-    align-items: center;
     min-height: 40px;
     padding: 0 18px;
-    border-radius: 4px;
-    background: var(--color-red);
     font-size: 0.95rem;
-    text-decoration: none;
-    transition: background-color 150ms ease;
+  }
+}
+
+@media (min-width: 768px) {
+  .promo-banner-title {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.2rem;
   }
 
-  .promo-banner-cta:hover {
-    background: var(--color-red-dark);
-    color: var(--color-white);
+  .promo-banner-cta-long {
+    display: inline;
+  }
+
+  .promo-banner-cta-short {
+    display: none;
   }
 }
 
