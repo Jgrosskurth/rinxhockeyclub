@@ -1,3 +1,7 @@
+// eslint-disable-next-line import/no-cycle
+import { loadSiteFragment } from './scripts.js';
+import { buildBlock, decorateBlock, loadBlock } from './aem.js';
+
 // Google Analytics (gtag.js, G-T5CF6Q1J6Q). Loaded here, in the delayed
 // phase (~3s after the page has rendered), so the 180 KB library doesn't
 // compete with the page for bandwidth or main-thread time. The 404 page
@@ -22,25 +26,21 @@ if ('serviceWorker' in navigator) {
 }
 
 // Install-to-home-screen prompt (blocks/install-prompt). Off by default; it
-// shows on every page while the DA page /fragments/install-prompt is
-// published, using that page's lines as title / message / button label.
+// shows on every page while the DA page /fragments/banner contains an
+// Install Prompt block (its rows: title / message / button label). That page
+// is already fetched for the announcement strip, so this costs no request.
 // A page can also carry its own Install Prompt block.
 (async function installPrompt() {
   if (document.querySelector('.install-prompt')) return;
-  try {
-    const resp = await fetch('/fragments/install-prompt.plain.html');
-    if (!resp.ok) return;
-    const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
-    const lines = [...doc.querySelectorAll('h1, h2, h3, h4, p')]
-      .map((el) => el.textContent.trim()).filter(Boolean).slice(0, 3);
-    const { buildBlock, decorateBlock, loadBlock } = await import('./aem.js');
-    const block = buildBlock('install-prompt', lines.map((l) => [l]));
-    document.body.append(block);
-    decorateBlock(block);
-    await loadBlock(block);
-  } catch {
-    // No prompt if the page can't be read.
-  }
+  const doc = await loadSiteFragment();
+  const source = doc?.querySelector('div.install-prompt');
+  if (!source) return;
+  const lines = [...source.children].map((row) => row.textContent.trim())
+    .filter(Boolean).slice(0, 3);
+  const block = buildBlock('install-prompt', lines.map((l) => [l]));
+  document.body.append(block);
+  decorateBlock(block);
+  await loadBlock(block);
 }());
 
 // delayed.js — homepage content builder
