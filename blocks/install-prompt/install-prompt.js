@@ -1,9 +1,9 @@
 /*
  * Install Prompt Block
  * "Add to your home screen" bar pinned to the bottom of the screen on phones
- * and tablets. Off by default. Turn it on for every page by publishing the DA
- * page /fragments/install-prompt (see delayed.js), or for one page by adding
- * an Install Prompt block to it. Optional rows, in order: title, message,
+ * and tablets. Off by default. Turn it on for every page by adding an Install
+ * Prompt block to the DA page /fragments/banner (see delayed.js), or for one
+ * page by adding the block to that page. Optional rows, in order: title, message,
  * button label. Hidden once the site runs as an installed app, or after the
  * visitor installs or closes it.
  */

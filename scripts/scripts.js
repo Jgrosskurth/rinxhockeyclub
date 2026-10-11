@@ -12,22 +12,44 @@ import {
   createOptimizedPicture,
 } from './aem.js';
 
-// Site-wide announcement strip under the header, authored in DA at
-// /fragments/banner: an image, a headline (bold words are highlighted) and a
-// link for the button. Delete or unpublish that page to remove the banner.
-// It is fetched at the start of the eager phase and placed just before the
-// first section is shown, so it never pushes the page down; if it isn't back
-// within a second it is skipped for that page view.
+// Site-wide extras, authored in DA at /fragments/banner and fetched once per
+// page view:
+// - Announcement strip under the header: an image, a headline (bold words are
+//   highlighted) and a link for the button, as plain content. Delete those
+//   lines (and publish) to remove it.
+// - Install Prompt block: shows the add-to-home-screen bar on every page
+//   (picked up in delayed.js).
+// Keep the page published even when it's empty, so pages don't log a 404.
+// The strip is placed just before the first section is shown, so it never
+// pushes the page down; if the page isn't back within a second the strip is
+// skipped for that view.
 const BANNER_PATH = '/fragments/banner';
 const BANNER_WAIT = 1000;
 
+let siteFragment;
+
+/**
+ * The parsed /fragments/banner page, or null. Fetched once and shared.
+ * @returns {Promise<Document|null>}
+ */
+export function loadSiteFragment() {
+  if (!siteFragment) {
+    siteFragment = fetch(`${BANNER_PATH}.plain.html`)
+      .then((resp) => (resp.ok ? resp.text() : null))
+      .then((html) => (html ? new DOMParser().parseFromString(html, 'text/html') : null))
+      .catch(() => null);
+  }
+  return siteFragment;
+}
+
 async function fetchBanner() {
   try {
-    const resp = await fetch(`${BANNER_PATH}.plain.html`);
-    if (!resp.ok) return null;
-    const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
-    const link = doc.querySelector('a[href]');
-    const titleEl = [...doc.querySelectorAll('h1, h2, h3, h4, p')]
+    const doc = await loadSiteFragment();
+    if (!doc) return null;
+    // Plain content only: blocks in the page (div[class]) are for other uses.
+    const outside = (sel) => [...doc.querySelectorAll(sel)].filter((el) => !el.closest('div[class]'));
+    const link = outside('a[href]')[0];
+    const titleEl = outside('h1, h2, h3, h4, p')
       .find((el) => el.textContent.trim() && !el.querySelector('a, picture, img'));
     if (!link || !titleEl) return null;
     const href = new URL(link.getAttribute('href'), window.location.href);
@@ -41,7 +63,7 @@ async function fetchBanner() {
     const inner = document.createElement('div');
     inner.className = 'promo-banner-inner';
 
-    const img = doc.querySelector('img');
+    const img = outside('img')[0];
     if (img) {
       const src = new URL(img.getAttribute('src'), new URL(BANNER_PATH, window.location.href)).href;
       const pic = createOptimizedPicture(src, '', true, [{ width: '120' }]);
@@ -222,6 +244,8 @@ async function loadLazy(doc) {
 }
 
 function loadDelayed() {
+  // delayed.js imports loadSiteFragment back from this module.
+  // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js').catch(() => {}), 3000);
 }
 
