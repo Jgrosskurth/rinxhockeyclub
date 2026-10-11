@@ -88,7 +88,12 @@ async function fetchBanner() {
     const cta = document.createElement('a');
     cta.className = 'promo-banner-cta';
     cta.href = href.origin === window.location.origin ? `${href.pathname}${href.search}${href.hash}` : href.href;
-    cta.textContent = link.textContent.trim();
+    // Phones show a short "Details" button; the full link text shows from
+    // 600px up and is always the accessible name.
+    const label = link.textContent.trim();
+    cta.setAttribute('aria-label', label);
+    cta.innerHTML = '<span class="promo-banner-cta-long"></span><span class="promo-banner-cta-short" aria-hidden="true">Details</span>';
+    cta.querySelector('.promo-banner-cta-long').textContent = label;
     inner.append(cta);
 
     banner.append(inner);

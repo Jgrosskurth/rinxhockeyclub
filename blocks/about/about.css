@@ -12,6 +12,7 @@
 
 .about .about-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
 }
 
@@ -104,13 +105,13 @@
 /* Call + directions: one row of matching buttons */
 .about .facility-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 6px;
 }
 
 .about .facility-btn {
-  flex: 1 1 0;
-  min-width: 0;
+  flex: 1 1 140px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
