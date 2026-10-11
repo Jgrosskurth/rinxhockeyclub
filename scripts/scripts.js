@@ -9,33 +9,71 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  createOptimizedPicture,
 } from './aem.js';
 
-// Site-wide announcement strip under the header. Built in the eager phase,
-// before first paint, so it never pushes the page down. Not shown on the page
-// it links to. To retire it, set PROMO to null.
-const PROMO = {
-  href: '/mid-atlantic-fall-classic-schedule',
-  image: '/images/2026midatlanticchamps-banner.webp',
-  lead: '10U Mid-Atlantic Fall Showcase',
-  highlight: 'Champions',
-  cta: 'View Tournament Details',
-};
+// Site-wide announcement strip under the header, authored in DA at
+// /fragments/banner: an image, a headline (bold words are highlighted) and a
+// link for the button. Delete or unpublish that page to remove the banner.
+// It is fetched at the start of the eager phase and placed just before the
+// first section is shown, so it never pushes the page down; if it isn't back
+// within a second it is skipped for that page view.
+const BANNER_PATH = '/fragments/banner';
+const BANNER_WAIT = 1000;
 
-function buildPromoBanner(doc) {
-  const header = doc.querySelector('header');
-  if (!PROMO || !header || doc.querySelector('.promo-banner')) return;
-  if (window.location.pathname.replace(/\/$/, '') === PROMO.href) return;
-  const banner = doc.createElement('aside');
-  banner.className = 'promo-banner';
-  banner.setAttribute('aria-label', 'Club news');
-  banner.innerHTML = `
-    <div class="promo-banner-inner">
-      <img src="${PROMO.image}" alt="" width="40" height="60" fetchpriority="low">
-      <p class="promo-banner-title">${PROMO.lead} <strong>${PROMO.highlight}</strong></p>
-      <a class="promo-banner-cta" href="${PROMO.href}">${PROMO.cta}</a>
-    </div>`;
-  header.after(banner);
+async function fetchBanner() {
+  try {
+    const resp = await fetch(`${BANNER_PATH}.plain.html`);
+    if (!resp.ok) return null;
+    const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+    const link = doc.querySelector('a[href]');
+    const titleEl = [...doc.querySelectorAll('h1, h2, h3, h4, p')]
+      .find((el) => el.textContent.trim() && !el.querySelector('a, picture, img'));
+    if (!link || !titleEl) return null;
+    const href = new URL(link.getAttribute('href'), window.location.href);
+    // Not on the page the banner points to.
+    if (href.origin === window.location.origin
+      && href.pathname.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '')) return null;
+
+    const banner = document.createElement('aside');
+    banner.className = 'promo-banner';
+    banner.setAttribute('aria-label', 'Club news');
+    const inner = document.createElement('div');
+    inner.className = 'promo-banner-inner';
+
+    const img = doc.querySelector('img');
+    if (img) {
+      const src = new URL(img.getAttribute('src'), new URL(BANNER_PATH, window.location.href)).href;
+      const pic = createOptimizedPicture(src, '', true, [{ width: '120' }]);
+      pic.querySelector('img').setAttribute('width', '40');
+      pic.querySelector('img').setAttribute('height', '60');
+      inner.append(pic);
+    }
+
+    // Headline: keep only text and bold/italic emphasis.
+    const title = document.createElement('p');
+    title.className = 'promo-banner-title';
+    titleEl.childNodes.forEach((n) => {
+      if (n.nodeType === Node.TEXT_NODE) title.append(n.textContent);
+      else if (/^(STRONG|B|EM|I)$/.test(n.nodeName)) {
+        const em = document.createElement(/^(STRONG|B)$/.test(n.nodeName) ? 'strong' : 'em');
+        em.textContent = n.textContent;
+        title.append(em);
+      } else title.append(n.textContent);
+    });
+    inner.append(title);
+
+    const cta = document.createElement('a');
+    cta.className = 'promo-banner-cta';
+    cta.href = href.origin === window.location.origin ? `${href.pathname}${href.search}${href.hash}` : href.href;
+    cta.textContent = link.textContent.trim();
+    inner.append(cta);
+
+    banner.append(inner);
+    return banner;
+  } catch {
+    return null;
+  }
 }
 
 async function loadFonts() {
@@ -157,12 +195,20 @@ async function loadEager(doc) {
   } else if (!document.title) {
     document.title = 'Rinx Hockey Club';
   }
-  buildPromoBanner(doc);
+  const banner = Promise.race([
+    fetchBanner(),
+    new Promise((resolve) => { setTimeout(() => resolve(null), BANNER_WAIT); }),
+  ]);
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
-    await loadSection(main.querySelector('.section'), waitForFirstImage);
+    await loadSection(main.querySelector('.section'), async (section) => {
+      await waitForFirstImage(section);
+      // Placed before the first section is revealed, so nothing shifts.
+      const el = await banner;
+      if (el && !doc.querySelector('.promo-banner')) doc.querySelector('header')?.after(el);
+    });
   }
 }
 

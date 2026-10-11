@@ -142,10 +142,16 @@ footer .footer:not([data-block-status="loaded"]) {
   gap: 2px 12px;
 }
 
-.promo-banner img {
+.promo-banner picture {
   grid-row: span 2;
+  display: block;
+}
+
+.promo-banner img {
+  display: block;
   width: 32px;
   height: 48px;
+  object-fit: contain;
   filter: drop-shadow(0 2px 6px rgb(0 0 0 / 40%));
 }
 
@@ -213,8 +219,11 @@ footer .footer:not([data-block-status="loaded"]) {
     gap: 16px;
   }
 
-  .promo-banner img {
+  .promo-banner picture {
     grid-row: auto;
+  }
+
+  .promo-banner img {
     width: 40px;
     height: 60px;
   }
