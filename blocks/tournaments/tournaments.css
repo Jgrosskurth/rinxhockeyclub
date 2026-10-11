@@ -158,6 +158,11 @@
   color: var(--color-navy);
 }
 
+.ts-champions {
+  background: gold;
+  color: #000000;
+}
+
 .t-link {
   display: inline-block;
   margin-top: 16px;
