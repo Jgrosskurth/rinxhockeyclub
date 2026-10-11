@@ -21,53 +21,26 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
 }
 
-// PWA Install Banner
-(function pwaInstallBanner() {
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-    || window.navigator.standalone;
-  if (isStandalone) {
-    document.body.classList.add('pwa-standalone');
-    return;
+// Install-to-home-screen prompt (blocks/install-prompt). Off by default; it
+// shows on every page while the DA page /fragments/install-prompt is
+// published, using that page's lines as title / message / button label.
+// A page can also carry its own Install Prompt block.
+(async function installPrompt() {
+  if (document.querySelector('.install-prompt')) return;
+  try {
+    const resp = await fetch('/fragments/install-prompt.plain.html');
+    if (!resp.ok) return;
+    const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+    const lines = [...doc.querySelectorAll('h1, h2, h3, h4, p')]
+      .map((el) => el.textContent.trim()).filter(Boolean).slice(0, 3);
+    const { buildBlock, decorateBlock, loadBlock } = await import('./aem.js');
+    const block = buildBlock('install-prompt', lines.map((l) => [l]));
+    document.body.append(block);
+    decorateBlock(block);
+    await loadBlock(block);
+  } catch {
+    // No prompt if the page can't be read.
   }
-  if (localStorage.getItem('pwa-banner-dismissed')) return;
-
-  const banner = document.createElement('div');
-  banner.className = 'pwa-install-banner';
-  banner.innerHTML = `
-    <img src="/icons/rinx-header-128.webp" alt="Rinx HC" width="36" height="36">
-    <div class="pwa-install-banner-text">
-      <strong>Rinx Hockey Club</strong>
-      Add to your home screen for quick access
-    </div>
-    <button class="pwa-install-btn" id="pwa-install-btn">Install</button>
-    <button class="pwa-install-close" id="pwa-close-btn" aria-label="Close">&times;</button>
-  `;
-  document.body.prepend(banner);
-
-  let deferredPrompt = null;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
-
-  banner.querySelector('#pwa-install-btn').addEventListener('click', () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
-        banner.remove();
-        localStorage.setItem('pwa-banner-dismissed', '1');
-      });
-    } else {
-      alert('Tap the Share button in your browser, then "Add to Home Screen".');
-      banner.remove();
-      localStorage.setItem('pwa-banner-dismissed', '1');
-    }
-  });
-
-  banner.querySelector('#pwa-close-btn').addEventListener('click', () => {
-    banner.remove();
-    localStorage.setItem('pwa-banner-dismissed', '1');
-  });
 }());
 
 // delayed.js — homepage content builder

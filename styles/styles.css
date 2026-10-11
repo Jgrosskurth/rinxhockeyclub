@@ -119,6 +119,137 @@ footer .footer:not([data-block-status="loaded"]) {
   display: none;
 }
 
+/* Announcement strip under the header (built in scripts.js before first
+   paint): pennant, headline, and one call to action. Fixed height, with the
+   headline capped (2 lines under 360px, 1 line from there up), so it can't
+   grow or shrink while web fonts load. */
+.promo-banner {
+  background: var(--color-navy-light);
+  color: var(--color-white);
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+}
+
+.promo-banner-inner {
+  box-sizing: border-box;
+  height: 76px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  align-items: center;
+  gap: 2px 12px;
+}
+
+.promo-banner picture {
+  grid-row: span 2;
+  display: block;
+}
+
+.promo-banner img {
+  display: block;
+  width: 32px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 40%));
+}
+
+.promo-banner-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.promo-banner-title strong {
+  font-weight: 900;
+  color: var(--color-gold);
+}
+
+.promo-banner-cta {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-family: var(--heading-font-family);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.promo-banner-cta:hover {
+  color: var(--color-gold);
+}
+
+.promo-banner-cta:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@media (min-width: 360px) {
+  .promo-banner-inner {
+    height: 64px;
+  }
+
+  .promo-banner-title {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (min-width: 600px) {
+  .promo-banner-inner {
+    height: 76px;
+    grid-template-columns: auto 1fr auto;
+    padding: 8px 24px;
+    gap: 16px;
+  }
+
+  .promo-banner picture {
+    grid-row: auto;
+  }
+
+  .promo-banner img {
+    width: 40px;
+    height: 60px;
+  }
+
+  .promo-banner-title {
+    font-size: 1.2rem;
+  }
+
+  .promo-banner-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 4px;
+    background: var(--color-red);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 150ms ease;
+  }
+
+  .promo-banner-cta:hover {
+    background: var(--color-red-dark);
+    color: var(--color-white);
+  }
+}
+
 /* Utility: section wrapper */
 .section {
   padding: var(--section-padding);
