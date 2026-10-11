@@ -119,6 +119,106 @@ footer .footer:not([data-block-status="loaded"]) {
   display: none;
 }
 
+/* Announcement strip under the header (built in scripts.js before first
+   paint): pennant, headline, and one call to action. */
+.promo-banner {
+  background: var(--color-navy-light);
+  color: var(--color-white);
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+}
+
+.promo-banner-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2px 12px;
+}
+
+.promo-banner img {
+  grid-row: span 2;
+  width: 32px;
+  height: 48px;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 40%));
+}
+
+.promo-banner-title {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.promo-banner-title strong {
+  font-weight: 900;
+  color: var(--color-gold);
+}
+
+.promo-banner-cta {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  font-family: var(--heading-font-family);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.promo-banner-cta:hover {
+  color: var(--color-gold);
+}
+
+.promo-banner-cta:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@media (min-width: 600px) {
+  .promo-banner-inner {
+    grid-template-columns: auto 1fr auto;
+    padding: 8px 24px;
+    gap: 16px;
+  }
+
+  .promo-banner img {
+    grid-row: auto;
+    width: 40px;
+    height: 60px;
+  }
+
+  .promo-banner-title {
+    font-size: 1.2rem;
+  }
+
+  .promo-banner-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 4px;
+    background: var(--color-red);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 150ms ease;
+  }
+
+  .promo-banner-cta:hover {
+    background: var(--color-red-dark);
+    color: var(--color-white);
+  }
+}
+
 /* Utility: section wrapper */
 .section {
   padding: var(--section-padding);

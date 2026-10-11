@@ -11,6 +11,33 @@ import {
   loadCSS,
 } from './aem.js';
 
+// Site-wide announcement strip under the header. Built in the eager phase,
+// before first paint, so it never pushes the page down. Not shown on the page
+// it links to. To retire it, set PROMO to null.
+const PROMO = {
+  href: '/mid-atlantic-fall-classic-schedule',
+  image: '/images/2026midatlanticchamps-banner.webp',
+  lead: '10U Mid-Atlantic Fall Showcase',
+  highlight: 'Champions',
+  cta: 'View Tournament Details',
+};
+
+function buildPromoBanner(doc) {
+  const header = doc.querySelector('header');
+  if (!PROMO || !header || doc.querySelector('.promo-banner')) return;
+  if (window.location.pathname.replace(/\/$/, '') === PROMO.href) return;
+  const banner = doc.createElement('aside');
+  banner.className = 'promo-banner';
+  banner.setAttribute('aria-label', 'Club news');
+  banner.innerHTML = `
+    <div class="promo-banner-inner">
+      <img src="${PROMO.image}" alt="" width="40" height="60" fetchpriority="low">
+      <p class="promo-banner-title">${PROMO.lead} <strong>${PROMO.highlight}</strong></p>
+      <a class="promo-banner-cta" href="${PROMO.href}">${PROMO.cta}</a>
+    </div>`;
+  header.after(banner);
+}
+
 async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
 }
@@ -130,6 +157,7 @@ async function loadEager(doc) {
   } else if (!document.title) {
     document.title = 'Rinx Hockey Club';
   }
+  buildPromoBanner(doc);
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
