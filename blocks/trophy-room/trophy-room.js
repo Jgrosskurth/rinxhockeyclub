@@ -96,14 +96,58 @@ function bannerList(list, label) {
   }).join('')}</ul>`;
 }
 
+// Desktop shows 5 photos a row; past 3 rows the gallery becomes a carousel of
+// 3-row pages. Phones and tablets keep one continuous grid (see the CSS).
+const PAGE_SIZE = 15;
+
 function galleryList(photos, label) {
   if (!photos?.length) return `<p class="tr-empty">${label} photos are on the way.</p>`;
-  return `<ul class="tr-gallery">${photos.map((p, i) => `
+  const items = photos.map((p, i) => `
     <li>
       <button type="button" class="tr-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}: ${attr(p.alt)}">
         <img src="${p.thumb}" alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
       </button>
-    </li>`).join('')}</ul>`;
+    </li>`);
+  if (items.length <= PAGE_SIZE) return `<ul class="tr-gallery">${items.join('')}</ul>`;
+  const pages = [];
+  for (let i = 0; i < items.length; i += PAGE_SIZE) pages.push(items.slice(i, i + PAGE_SIZE));
+  return `<div class="tr-pages" tabindex="0" role="region" aria-label="${label} photos">
+    ${pages.map((page, i) => `<ul class="tr-gallery tr-page" aria-label="Page ${i + 1} of ${pages.length}">${page.join('')}</ul>`).join('')}
+  </div>`;
+}
+
+const ARROW = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+function pageControls(photos, key) {
+  if ((photos?.length || 0) <= PAGE_SIZE) return '';
+  return `<div class="tr-page-ctrl" hidden>
+    <button type="button" class="tr-page-btn" data-dir="-1" aria-controls="tr-panel-${key}" aria-label="Previous page of photos">${ARROW('M15 5l-7 7 7 7')}</button>
+    <span class="tr-page-count" aria-live="polite"></span>
+    <button type="button" class="tr-page-btn" data-dir="1" aria-controls="tr-panel-${key}" aria-label="Next page of photos">${ARROW('M9 5l7 7-7 7')}</button>
+  </div>`;
+}
+
+function initCarousel(panel) {
+  const track = panel.querySelector('.tr-pages');
+  const ctrl = panel.querySelector('.tr-page-ctrl');
+  if (!track || !ctrl) return;
+  const [prev, next] = ctrl.querySelectorAll('.tr-page-btn');
+  const count = ctrl.querySelector('.tr-page-count');
+  const total = track.children.length;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sync = () => {
+    const page = track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) + 1 : 1;
+    count.textContent = `${page} / ${total}`;
+    prev.disabled = page <= 1;
+    next.disabled = page >= total;
+  };
+  [prev, next].forEach((btn) => btn.addEventListener('click', () => {
+    track.scrollBy({ left: track.clientWidth * Number(btn.dataset.dir), behavior: reduce ? 'auto' : 'smooth' });
+  }));
+  track.addEventListener('scroll', sync, { passive: true });
+  new ResizeObserver(sync).observe(track);
+  ctrl.hidden = false;
+  sync();
 }
 
 // One shared viewer: a modal <dialog> that closes on Esc or a backdrop tap.
@@ -227,7 +271,10 @@ export default async function decorate(block) {
             ${bannerList(banners[t.key], t.label)}
           </div>
           <div class="tr-photos">
-            <h2>${attr(settings[t.key].headings.gallery || DEFAULT_HEADINGS.gallery)}</h2>
+            <div class="tr-photos-head">
+              <h2>${attr(settings[t.key].headings.gallery || DEFAULT_HEADINGS.gallery)}</h2>
+              ${pageControls(gallery[t.key], t.key)}
+            </div>
             ${galleryList(gallery[t.key], t.label)}
           </div>
         </section>`).join('')}
@@ -265,6 +312,8 @@ export default async function decorate(block) {
       select(next.id.replace('tr-tab-', ''), true);
     });
   });
+
+  block.querySelectorAll('.tr-panel').forEach(initCarousel);
 
   // Gallery viewer.
   let viewer;
