@@ -96,11 +96,18 @@ function bannerList(list, label) {
   }).join('')}</ul>`;
 }
 
-// Desktop shows 5 photos a row; past 3 rows the gallery becomes a carousel of
-// 3-row pages. Phones and tablets keep one continuous grid (see the CSS).
-const PAGE_SIZE = 15;
+// The gallery shows 2 photos a row on phones, 3 on tablets and 5 on desktop.
+// Past 3 rows it becomes a carousel of 3-row pages, regrouped whenever the
+// screen crosses a breakpoint (rotating a tablet, resizing a window).
+const TABLET = window.matchMedia('(min-width: 600px)');
+const DESKTOP = window.matchMedia('(min-width: 900px)');
 
-function galleryList(photos, label) {
+function pageSize() {
+  if (DESKTOP.matches) return 15;
+  return TABLET.matches ? 9 : 6;
+}
+
+function galleryList(photos, label, size) {
   if (!photos?.length) return `<p class="tr-empty">${label} photos are on the way.</p>`;
   const items = photos.map((p, i) => `
     <li>
@@ -108,9 +115,9 @@ function galleryList(photos, label) {
         <img src="${p.thumb}" alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
       </button>
     </li>`);
-  if (items.length <= PAGE_SIZE) return `<ul class="tr-gallery">${items.join('')}</ul>`;
+  if (items.length <= size) return `<ul class="tr-gallery">${items.join('')}</ul>`;
   const pages = [];
-  for (let i = 0; i < items.length; i += PAGE_SIZE) pages.push(items.slice(i, i + PAGE_SIZE));
+  for (let i = 0; i < items.length; i += size) pages.push(items.slice(i, i + size));
   return `<div class="tr-pages" tabindex="0" role="region" aria-label="${label} photos">
     ${pages.map((page, i) => `<ul class="tr-gallery tr-page" aria-label="Page ${i + 1} of ${pages.length}">${page.join('')}</ul>`).join('')}
   </div>`;
@@ -118,8 +125,7 @@ function galleryList(photos, label) {
 
 const ARROW = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-function pageControls(photos, key) {
-  if ((photos?.length || 0) <= PAGE_SIZE) return '';
+function pageControls(key) {
   return `<div class="tr-page-ctrl" hidden>
     <button type="button" class="tr-page-btn" data-dir="-1" aria-controls="tr-panel-${key}" aria-label="Previous page of photos">${ARROW('M15 5l-7 7 7 7')}</button>
     <span class="tr-page-count" aria-live="polite"></span>
@@ -127,27 +133,39 @@ function pageControls(photos, key) {
   </div>`;
 }
 
-function initCarousel(panel) {
-  const track = panel.querySelector('.tr-pages');
+const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// (Re)build one panel's gallery for the current page size.
+function renderGallery(panel, photos, label) {
+  const body = panel.querySelector('.tr-photos-body');
   const ctrl = panel.querySelector('.tr-page-ctrl');
-  if (!track || !ctrl) return;
+  panel.trObserver?.disconnect();
+  body.innerHTML = galleryList(photos, label, pageSize());
+  const track = body.querySelector('.tr-pages');
+  ctrl.hidden = !track;
+  if (!track) return;
   const [prev, next] = ctrl.querySelectorAll('.tr-page-btn');
   const count = ctrl.querySelector('.tr-page-count');
   const total = track.children.length;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const sync = () => {
     const page = track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) + 1 : 1;
     count.textContent = `${page} / ${total}`;
     prev.disabled = page <= 1;
     next.disabled = page >= total;
   };
-  [prev, next].forEach((btn) => btn.addEventListener('click', () => {
-    track.scrollBy({ left: track.clientWidth * Number(btn.dataset.dir), behavior: reduce ? 'auto' : 'smooth' });
-  }));
   track.addEventListener('scroll', sync, { passive: true });
-  new ResizeObserver(sync).observe(track);
-  ctrl.hidden = false;
+  panel.trObserver = new ResizeObserver(sync);
+  panel.trObserver.observe(track);
   sync();
+}
+
+// Arrow buttons page whichever track the panel currently holds.
+function wireControls(panel) {
+  panel.querySelectorAll('.tr-page-btn').forEach((btn) => btn.addEventListener('click', () => {
+    const track = panel.querySelector('.tr-pages');
+    if (!track) return;
+    track.scrollBy({ left: track.clientWidth * Number(btn.dataset.dir), behavior: reduceMotion() ? 'auto' : 'smooth' });
+  }));
 }
 
 // One shared viewer: a modal <dialog> that closes on Esc or a backdrop tap.
@@ -273,9 +291,9 @@ export default async function decorate(block) {
           <div class="tr-photos">
             <div class="tr-photos-head">
               <h2>${attr(settings[t.key].headings.gallery || DEFAULT_HEADINGS.gallery)}</h2>
-              ${pageControls(gallery[t.key], t.key)}
+              ${pageControls(t.key)}
             </div>
-            ${galleryList(gallery[t.key], t.label)}
+            <div class="tr-photos-body"></div>
           </div>
         </section>`).join('')}
     </div>`;
@@ -313,17 +331,23 @@ export default async function decorate(block) {
     });
   });
 
-  block.querySelectorAll('.tr-panel').forEach(initCarousel);
+  // Galleries: built now, regrouped into pages when a breakpoint is crossed.
+  const panels = teams.map((t) => ({ t, panel: block.querySelector(`#tr-panel-${t.key}`) }));
+  const renderAll = () => panels.forEach(({ t, panel }) => {
+    renderGallery(panel, gallery[t.key], t.label);
+  });
+  panels.forEach(({ panel }) => wireControls(panel));
+  renderAll();
+  [TABLET, DESKTOP].forEach((mq) => mq.addEventListener('change', renderAll));
 
-  // Gallery viewer.
+  // Gallery viewer (delegated, so it survives a regroup).
   let viewer;
-  block.querySelectorAll('.tr-gallery').forEach((list) => {
-    const key = list.closest('.tr-panel').id.replace('tr-panel-', '');
-    list.addEventListener('click', (e) => {
+  panels.forEach(({ t, panel }) => {
+    panel.querySelector('.tr-photos-body').addEventListener('click', (e) => {
       const thumb = e.target.closest('.tr-thumb');
       if (!thumb) return;
       viewer ||= buildViewer();
-      openViewer(viewer, gallery[key], Number(thumb.dataset.index));
+      openViewer(viewer, gallery[t.key], Number(thumb.dataset.index));
     });
   });
 }
