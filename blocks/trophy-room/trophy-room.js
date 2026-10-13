@@ -1,14 +1,15 @@
 /*
  * Trophy Room Block
- * Tabs per team (10U first). Each tab shows the team's championship banners,
- * then its photo gallery.
+ * Tabs per team (10U first). Each tab shows the team's championship banners
+ * in one horizontal line, then its photo gallery.
  *
- * Authoring: one row per championship --
- *   | team (e.g. "10U Squirts") | banner image | title (e.g. "2025 LIAHL Tier 3 Champions") |
+ * Banners and photos come from GitHub, listed in /data/trophy-room.json by
+ * .github/workflows/trophy-gallery.yml:
+ *   images/trophyroom-<team>/          banners, in upload order (file name = caption)
+ *   images/trophyroom-<team>/gallery/  gallery photos, newest first
+ * Optional extra banners can be authored as block rows:
+ *   | team (e.g. "10U Squirts") | banner image | title |
  * The page's h1 (and an intro paragraph after it) becomes the title band.
- *
- * Gallery photos come from the trophy-room/<team>/ folders in GitHub, listed in
- * /data/trophy-room.json by .github/workflows/trophy-gallery.yml.
  * Link straight to a team with #14u.
  */
 import { createOptimizedPicture } from '../../scripts/aem.js';
@@ -34,13 +35,17 @@ function readBanners(block) {
   return banners;
 }
 
+const attr = (text) => (text || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
 function bannerList(list, label) {
   if (!list?.length) return `<p class="tr-empty">${label} championship banners will hang here.</p>`;
-  return `<ul class="tr-rafters">${list.map((b, i) => `
+  return `<ul class="tr-rafters" tabindex="0" aria-label="${label} championship banners">${list.map((b, i) => `
     <li class="tr-banner" style="--i: ${i}">
       <figure>
-        <span class="tr-banner-art" data-src="${b.src}" data-alt="${(b.alt || b.title).replace(/"/g, '&quot;')}"></span>
-        ${b.title ? `<figcaption>${b.title}</figcaption>` : ''}
+        ${b.full
+    ? `<img src="${b.full}" alt="${attr(b.alt)}" width="${b.width}" height="${b.height}" loading="lazy" decoding="async">`
+    : `<span class="tr-banner-art" data-src="${attr(b.src)}" data-alt="${attr(b.alt || b.title)}"></span>`}
+        ${b.title ? `<figcaption>${attr(b.title)}</figcaption>` : ''}
       </figure>
     </li>`).join('')}</ul>`;
 }
@@ -49,8 +54,8 @@ function galleryList(photos, label) {
   if (!photos?.length) return `<p class="tr-empty">${label} photos are on the way.</p>`;
   return `<ul class="tr-gallery">${photos.map((p, i) => `
     <li>
-      <button type="button" class="tr-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}: ${p.alt}">
-        <img src="${p.thumb}" alt="${p.alt}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
+      <button type="button" class="tr-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}: ${attr(p.alt)}">
+        <img src="${p.thumb}" alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
       </button>
     </li>`).join('')}</ul>`;
 }
@@ -115,7 +120,7 @@ function openViewer(dialog, photos, start) {
  * @param {Element} block The block element
  */
 export default async function decorate(block) {
-  const banners = readBanners(block);
+  const authored = readBanners(block);
   const teams = Object.values(TEAMS);
 
   // Title band from the page heading that precedes the block.
@@ -131,13 +136,20 @@ export default async function decorate(block) {
     if (wrapper && !wrapper.children.length) wrapper.remove();
   }
 
-  let gallery = {};
+  let manifest = {};
   try {
     const resp = await fetch(MANIFEST);
-    if (resp.ok) gallery = await resp.json();
+    if (resp.ok) manifest = await resp.json();
   } catch {
-    // Galleries show their empty state.
+    // Banners and galleries show their empty state.
   }
+  // GitHub banners first (in upload order), then any authored in the block.
+  const banners = {};
+  const gallery = {};
+  teams.forEach(({ key }) => {
+    banners[key] = [...(manifest[key]?.banners || []), ...(authored[key] || [])];
+    gallery[key] = manifest[key]?.gallery || [];
+  });
 
   const fromHash = teamKey(window.location.hash.slice(1));
   let current = fromHash || DEFAULT_TEAM;

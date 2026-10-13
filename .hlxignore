@@ -10,4 +10,5 @@ stardust/
 DESIGN-*.json
 DESIGN.json
 # Trophy Room originals; the site serves the web copies in images/trophy-room
-/trophy-room/
+/images/trophyroom-10u/
+/images/trophyroom-14u/

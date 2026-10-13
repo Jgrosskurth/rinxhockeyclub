@@ -1,13 +1,14 @@
 name: Trophy Room gallery
 
-# Drop photos into trophy-room/10u/ or trophy-room/14u/ on main and this builds
-# their web copies and the gallery list (data/trophy-room.json).
+# Upload banners to images/trophyroom-10u/ or images/trophyroom-14u/, and
+# photos to their gallery/ subfolders, on main; this builds the web copies and
+# the list the Trophy Room page reads (data/trophy-room.json).
 
 on:
   push:
     branches: [main]
     paths:
-      - 'trophy-room/**'
+      - 'images/trophyroom-*/**'
       - '.github/scripts/trophy_gallery.py'
   workflow_dispatch:
 

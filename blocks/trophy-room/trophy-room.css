@@ -107,25 +107,43 @@
   color: var(--color-white);
 }
 
-/* The rafter, with each banner hung from it on two cords */
+/* The rafter, with every banner hung from it on two cords in one line. More
+   banners than fit scroll sideways; a few sit centred (auto side margins). */
 .trophy-room .tr-rafters {
   list-style: none;
   max-width: var(--max-width);
   margin: 20px auto 0;
-  padding: 0;
+  padding: 0 0 12px;
   border-top: 6px solid var(--color-navy-light);
   box-shadow: 0 -1px 0 rgb(255 255 255 / 12%);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px 28px;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 30%) transparent;
+}
+
+.trophy-room .tr-rafters:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 4px;
 }
 
 .trophy-room .tr-banner {
   position: relative;
+  flex: none;
   width: clamp(140px, 40vw, 220px);
   padding-top: 28px;
   transform-origin: 50% 0;
+  scroll-snap-align: center;
+}
+
+.trophy-room .tr-banner:first-child {
+  margin-left: auto;
+}
+
+.trophy-room .tr-banner:last-child {
+  margin-right: auto;
 }
 
 .trophy-room .tr-banner::before,
