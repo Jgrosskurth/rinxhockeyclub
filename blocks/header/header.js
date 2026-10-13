@@ -45,6 +45,7 @@ export default function decorate(block) {
           </div>
         </div>
         <a href="/tournaments">Tournaments</a>
+        <a href="/trophy-room">Trophy Room</a>
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
         <a href="/contact">Contact</a>

@@ -10,6 +10,7 @@ export default function decorate(block) {
         <a href="/schedule">Schedule</a>
         <a href="/stats">Stats</a>
         <a href="/tournaments">Tournaments</a>
+        <a href="/trophy-room">Trophy Room</a>
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
         <a href="https://rinxspring2026.itemorder.com/shop/home/" target="_blank">Shop Gear</a>

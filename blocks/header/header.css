@@ -63,11 +63,24 @@
   gap: 4px;
 }
 
-/* Where the full nav fits on one line, keep it there, so the header can't
-   grow while web fonts load (narrower screens wrap the labels as before). */
-@media (min-width: 1320px) {
+/* The full nav needs ~1400px on one line; narrower screens use the menu
+   button (see the max-width: 1419px block below). Kept on one line so the
+   header can't grow while web fonts load. */
+@media (min-width: 1420px) {
   .header-nav {
     white-space: nowrap;
+  }
+
+  .header-nav a,
+  .header-nav .nav-dropdown-toggle {
+    padding-left: 10px;
+    padding-right: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  .header-inner {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 
@@ -193,7 +206,7 @@
   border-radius: 2px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1419px) {
   .header-inner { padding: 12px 20px; }
 
   .hamburger { display: flex; }
@@ -242,6 +255,16 @@
 
   .nav-dropdown.open .nav-dropdown-menu {
     display: block;
+  }
+}
+
+/* Tablets and small laptops: the menu opens as a panel on the right */
+@media (min-width: 601px) and (max-width: 1419px) {
+  .header-nav {
+    left: auto;
+    width: 340px;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
   }
 }
 
