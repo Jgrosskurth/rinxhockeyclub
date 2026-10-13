@@ -31,7 +31,7 @@ UID:gamesheet-2990043@rinxhockeyclub.com
 DTSTAMP:20260912T000000Z
 DTSTART;VALUE=DATE:20260912
 DTEND;VALUE=DATE:20260913
-SUMMARY:Rinx 14U at Peconic Wildcats (W 8-3)
+SUMMARY:Rinx 14U at Peconic Wildcats (Diaz) (W 8-3)
 LOCATION:Peconic Ice Rink\, Riverhead\, NY
 DESCRIPTION:LIAHL · 12- 14U Silver\nFinal: W 8-3\nSchedule: https://www.ri
  nxhockeyclub.com/schedule-14u
@@ -42,10 +42,22 @@ UID:gamesheet-2998286@rinxhockeyclub.com
 DTSTAMP:20260913T000000Z
 DTSTART;VALUE=DATE:20260913
 DTEND;VALUE=DATE:20260914
-SUMMARY:Rinx 14U vs Great Neck Bruins (W 7-0)
+SUMMARY:Rinx 14U vs Great Neck Bruins (Bowden) (W 7-0)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 12- 14U Silver\nFinal: W 7-0\nSchedule: https://www.ri
  nxhockeyclub.com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-sheet-14u-20260920-greater-new-york-stars-14u-a@rinxhockeyclu
+ b.com
+DTSTAMP:20260920T090000Z
+DTSTART;TZID=America/New_York:20260920T090000
+DTEND;TZID=America/New_York:20260920T103000
+SUMMARY:Rinx 14U at Greater New York Stars · Exhibition (T 4-4)
+LOCATION:Abe Stark Rink
+DESCRIPTION:Exhibition\nFinal: T 4-4\nSchedule: https://www.rinxhockeyclub.
+ com/schedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
@@ -53,10 +65,21 @@ UID:gamesheet-2990036@rinxhockeyclub.com
 DTSTAMP:20260926T000000Z
 DTSTART;VALUE=DATE:20260926
 DTEND;VALUE=DATE:20260927
-SUMMARY:Rinx 14U vs North Park (W 5-1)
+SUMMARY:Rinx 14U vs North Park (Pala) (W 5-1)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 12- 14U Silver\nFinal: W 5-1\nSchedule: https://www.ri
  nxhockeyclub.com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-sheet-14u-20260927-darien-youth-14u-a@rinxhockeyclub.com
+DTSTAMP:20260927T165000Z
+DTSTART;TZID=America/New_York:20260927T165000
+DTEND;TZID=America/New_York:20260927T182000
+SUMMARY:Rinx 14U at Darien Youth · Exhibition (W 5-0)
+LOCATION:Stamford Twin Rinks
+DESCRIPTION:Exhibition\nFinal: W 5-0\nSchedule: https://www.rinxhockeyclub.
+ com/schedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
@@ -64,10 +87,22 @@ UID:gamesheet-2990034@rinxhockeyclub.com
 DTSTAMP:20261003T000000Z
 DTSTART;VALUE=DATE:20261003
 DTEND;VALUE=DATE:20261004
-SUMMARY:Rinx 14U vs Peconic Wildcats (W 7-1)
+SUMMARY:Rinx 14U vs Peconic Wildcats (Diaz) (W 7-1)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 12- 14U Silver\nFinal: W 7-1\nSchedule: https://www.ri
  nxhockeyclub.com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-sheet-14u-20261011-new-york-aviators-14u-aa@rinxhockeyclub.co
+ m
+DTSTAMP:20261011T140000Z
+DTSTART;TZID=America/New_York:20261011T140000
+DTEND;TZID=America/New_York:20261011T153000
+SUMMARY:Rinx 14U at New York Aviators · Exhibition (L 0-4)
+LOCATION:Aviator Sports and Events Center
+DESCRIPTION:Exhibition\nFinal: L 0-4\nSchedule: https://www.rinxhockeyclub.
+ com/schedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
@@ -75,7 +110,7 @@ UID:gamesheet-2990035@rinxhockeyclub.com
 DTSTAMP:20261018T114000Z
 DTSTART;TZID=America/New_York:20261018T114000
 DTEND;TZID=America/New_York:20261018T131000
-SUMMARY:Rinx 14U vs Long Island Sharks
+SUMMARY:Rinx 14U vs Long Island Sharks (Manno)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -86,7 +121,7 @@ UID:gamesheet-2990058@rinxhockeyclub.com
 DTSTAMP:20261024T183000Z
 DTSTART;TZID=America/New_York:20261024T183000
 DTEND;TZID=America/New_York:20261024T200000
-SUMMARY:Rinx 14U at Great Neck Bruins
+SUMMARY:Rinx 14U at Great Neck Bruins (Bowden)
 LOCATION:Parkwood Ice Rink\, Great Neck\, NY
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -97,7 +132,7 @@ UID:gamesheet-2990053@rinxhockeyclub.com
 DTSTAMP:20261108T191000Z
 DTSTART;TZID=America/New_York:20261108T191000
 DTEND;TZID=America/New_York:20261108T204000
-SUMMARY:Rinx 14U at North Park
+SUMMARY:Rinx 14U at North Park (Pala)
 LOCATION:City Ice Pavilion\, Long Island City\, NY
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -108,7 +143,7 @@ UID:gamesheet-2990048@rinxhockeyclub.com
 DTSTAMP:20270109T140000Z
 DTSTART;TZID=America/New_York:20270109T140000
 DTEND;TZID=America/New_York:20270109T153000
-SUMMARY:Rinx 14U at Long Island Sharks
+SUMMARY:Rinx 14U at Long Island Sharks (Manno)
 LOCATION:Iceland\, New Hyde Park\, NY
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -119,7 +154,7 @@ UID:gamesheet-2992411@rinxhockeyclub.com
 DTSTAMP:20270110T150000Z
 DTSTART;TZID=America/New_York:20270110T150000
 DTEND;TZID=America/New_York:20270110T163000
-SUMMARY:Rinx 14U at Dix Hills Selects
+SUMMARY:Rinx 14U at Dix Hills Selects (Flanagan)
 LOCATION:Dix Hills Ice Rink\, Dix Hills\, NY
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -130,7 +165,7 @@ UID:gamesheet-2990038@rinxhockeyclub.com
 DTSTAMP:20270123T181500Z
 DTSTART;TZID=America/New_York:20270123T181500
 DTEND;TZID=America/New_York:20270123T194500
-SUMMARY:Rinx 14U at Aviator Hockey Club
+SUMMARY:Rinx 14U at Aviator Hockey Club (Leonard)
 LOCATION:Aviator Sports and Events Center\, Brooklyn\, NY
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -141,7 +176,7 @@ UID:gamesheet-2990037@rinxhockeyclub.com
 DTSTAMP:20270124T114000Z
 DTSTART;TZID=America/New_York:20270124T114000
 DTEND;TZID=America/New_York:20270124T131000
-SUMMARY:Rinx 14U vs Great Neck Bruins
+SUMMARY:Rinx 14U vs Great Neck Bruins (Bowden)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -152,7 +187,7 @@ UID:gamesheet-2990033@rinxhockeyclub.com
 DTSTAMP:20270130T140500Z
 DTSTART;TZID=America/New_York:20270130T140500
 DTEND;TZID=America/New_York:20270130T153500
-SUMMARY:Rinx 14U vs Aviator Hockey Club
+SUMMARY:Rinx 14U vs Aviator Hockey Club (Leonard)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u
@@ -163,7 +198,7 @@ UID:gamesheet-2992410@rinxhockeyclub.com
 DTSTAMP:20270206T164000Z
 DTSTART;TZID=America/New_York:20270206T164000
 DTEND;TZID=America/New_York:20270206T181000
-SUMMARY:Rinx 14U vs Dix Hills Selects
+SUMMARY:Rinx 14U vs Dix Hills Selects (Flanagan)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 12- 14U Silver\nSchedule: https://www.rinxhockeyclub.c
  om/schedule-14u

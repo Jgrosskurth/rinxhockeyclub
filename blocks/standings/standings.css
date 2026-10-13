@@ -489,9 +489,60 @@
 }
 
 .standings .st-tbl.st-games tbody td.st-gopp {
+  min-width: 150px;
   white-space: normal;
   font-weight: 600;
   text-align: left;
+}
+
+.standings .st-matchup {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+}
+
+.standings .st-matchup .st-logo {
+  width: 22px;
+  height: 22px;
+}
+
+/* Phones: logos on one line, the opponent's name below. */
+.standings .st-matchup .st-opp-name {
+  flex-basis: 100%;
+  line-height: 1.25;
+}
+
+/* One game type per tab: the Type column only repeats it. */
+.standings .st-tbl.st-games.st-games-one-type tr > :nth-child(2) {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .standings .st-matchup {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .standings .st-matchup .st-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .standings .st-matchup .st-opp-name {
+    flex-basis: auto;
+  }
+
+  .standings .st-tbl.st-games.st-games-one-type tr > :nth-child(2) {
+    display: table-cell;
+  }
+}
+
+.standings .st-matchup .st-vs {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-gray);
 }
 
 .standings .st-type {

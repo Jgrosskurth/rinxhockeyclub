@@ -10,7 +10,7 @@
  * scripts/team-feeds.js); Tournament also shows GameSheet tournament standings.
  */
 
-import { gameSheetLogo, RINX_LOGO } from '../../scripts/team-logos.js';
+import { gameSheetLogo, RINX_LOGO, teamLogo } from '../../scripts/team-logos.js';
 import { loadTeamGames, tidyTeam } from '../../scripts/team-feeds.js';
 import { buildRace, renderPointsRace } from './points-race.js';
 
@@ -91,6 +91,25 @@ const TABS = [
 const typeTag = (type) => `<span class="st-type st-type-${type.toLowerCase()}">${type}</span>`;
 
 // Record tiles + a results list for one game type (or all games).
+// A small logo with an initials fallback (same pattern as teamCell).
+function logoMark(src, name) {
+  const ini = name.split(' ').slice(0, 2).map((w) => w[0])
+    .join('')
+    .toUpperCase();
+  const img = src
+    ? `<img class="st-logo" src="${src}" alt="" width="28" height="28" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">`
+    : '';
+  return `${img}<span class="st-logo st-logo-fb" aria-hidden="true"${src ? ' style="display:none"' : ''}>${ini}</span>`;
+}
+
+// "Rinx [logo] vs [logo] Opponent" for the games list.
+function matchup(g) {
+  return `<span class="st-matchup">
+      ${logoMark(RINX_LOGO, 'Rinx')}<span class="st-vs">${g.prefix}</span>
+      ${logoMark(g.oppLogo || teamLogo(g.opp), g.opp)}<span class="st-opp-name">${g.opp}</span>
+    </span>`;
+}
+
 function recordHtml(games, type) {
   const label = type === 'All' ? 'games' : `${type.toLowerCase()} games`;
   if (!games.length) return `<p class="st-empty">No ${label} yet.</p>`;
@@ -107,7 +126,7 @@ function recordHtml(games, type) {
     <tr>
       <td class="st-gdate">${g.shortDate}</td>
       <td>${typeTag(g.type)}</td>
-      <td class="st-gopp">${g.prefix} ${g.opp}</td>
+      <td class="st-gopp">${matchup(g)}</td>
       <td class="st-gres">${g.result ? `<span class="st-res st-res-${g.result.toLowerCase()}">${g.result}</span>` : '<span class="st-upcoming">Upcoming</span>'}</td>
       <td class="st-gscore">${g.result ? g.score : g.time || ''}</td>
     </tr>`).join('');
@@ -116,7 +135,7 @@ function recordHtml(games, type) {
       ${tiles.map(([k, v]) => `<div class="st-rec-tile" role="listitem"><span class="st-rec-num">${v}</span><span class="st-rec-lbl">${k}</span></div>`).join('')}
     </div>
     <div class="st-table-wrap">
-      <table class="st-tbl st-games">
+      <table class="st-tbl st-games${type === 'All' ? '' : ' st-games-one-type'}">
         <thead><tr><th>Date</th><th>Type</th><th class="st-team">Opponent</th><th>Result</th><th>Score</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>

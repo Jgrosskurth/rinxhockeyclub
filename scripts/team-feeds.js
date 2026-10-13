@@ -88,7 +88,11 @@ export function tidyTeam(name) {
   if (age) {
     // After the age group: the coach, then (in schedules) the division.
     coach = age[1].replace(/\s*\d{1,2}\s*-\s*\d{1,2}U\b.*$/i, '')
-      .replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ');
+      .replace(/^[-–\s]+|[-–\s]+$/g, '')
+      // A level ("14U A", "14U AA", "Tier II") is not a coach.
+      .replace(/^(?:AAA|AA|A|BB|B|Tier\s+[IV\d]+)(?=\s|$)/i, '')
+      .trim()
+      .replace(/\s+/g, ' ');
     s = s.slice(0, age.index);
   }
   s = titleCase(s.replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ').trim());
@@ -155,6 +159,21 @@ export function sameGame(a, b) {
   return dayKey(a.date) === dayKey(b.date) && sameOpponent(a.opponent, b.opponent);
 }
 
+// Sheet times as typed ("9:00am", "4:50 pm") -> GameSheet's "9:00 AM".
+function sheetTime(text) {
+  const m = (text || '').trim().match(/^(\d{1,2}):(\d{2})\s*([AP])\.?M\.?$/i);
+  return m ? `${+m[1]}:${m[2]} ${m[3].toUpperCase()}M` : (text || '').trim();
+}
+
+// A sheet's Logo cell: our own GitHub images are served from the site
+// ("/images/darien.png"); other https URLs are used as they are.
+function sheetLogo(text) {
+  const url = (text || '').trim();
+  const own = url.match(/^https:\/\/raw\.githubusercontent\.com\/Jgrosskurth\/rinxhockeyclub\/(?:refs\/heads\/)?main\/(images\/[^?#]+)$/i);
+  if (own) return `/${own[1]}`;
+  return /^(?:https:\/\/|\/)[^\s"'<>]+$/.test(url) ? url : '';
+}
+
 let otherSheet;
 function loadOtherSheet() {
   if (!otherSheet) {
@@ -169,7 +188,8 @@ function loadOtherSheet() {
 /**
  * A team's rows from the DA sheet /other-games, in GameSheet's feed shape
  * ({ date, time, opponent, venue, location, score, result, gameId }) plus
- * a `type`. Example rows and rows without a date or opponent are skipped.
+ * a `type` and the opponent's `logo`. Example rows and rows without a date or
+ * opponent are skipped.
  * @param {string} key '10u' | '14u'
  */
 export async function loadOtherGames(key) {
@@ -185,7 +205,7 @@ export async function loadOtherGames(key) {
     const result = ((r.Result || '').trim().match(/^[WLT]/i) || [''])[0].toUpperCase();
     return {
       date,
-      time: (r.Time || '').trim(),
+      time: sheetTime(r.Time),
       opponent,
       venue: /\brinx\b/i.test(rink) ? 'Home' : 'Away',
       location: rink,
@@ -193,6 +213,7 @@ export async function loadOtherGames(key) {
       result: score ? result : '',
       gameId: `sheet-${key}-${dayKey(date)}-${opponent.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
       type: gameType(r.Type),
+      logo: sheetLogo(r.Logo),
     };
   }).filter(Boolean);
 }
@@ -259,7 +280,7 @@ function normalizeGame(g, feed, team) {
     shortDate: `${MONTHS[when.month]} ${when.day}`,
     time: when.timed ? g.time.trim().toUpperCase() : '',
     opp,
-    oppLogo: teamLogo(opp),
+    oppLogo: g.logo || teamLogo(opp),
     // Tournament "Home"/"Away" is a bench designation, not a rink.
     prefix: !tournament && !home ? 'at' : 'vs',
     type,
