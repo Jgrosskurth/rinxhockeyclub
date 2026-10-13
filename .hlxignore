@@ -6,3 +6,8 @@ package.json
 package-lock.json
 test/*
 drafts/*
+stardust/
+DESIGN-*.json
+DESIGN.json
+# Trophy Room originals; the site serves the web copies in images/trophy-room
+/trophy-room/
