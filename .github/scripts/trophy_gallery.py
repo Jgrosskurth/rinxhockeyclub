@@ -10,7 +10,9 @@ Per team (10U, 14U), from images uploaded to GitHub:
 Each image gets WebP web copies under images/trophy-room/<team>/ (banners:
 600px wide; photos: 800px grid thumbnail + 1600px full view), listed in
 data/trophy-room.json for the trophy-room block. Copies whose original was
-deleted are removed. Run by .github/workflows/trophy-gallery.yml.
+deleted are removed. Images uploaded into images/trophy-room/<team>/ by
+mistake (it's the generated folder) are moved to the matching upload folder
+first. Run by .github/workflows/trophy-gallery.yml.
 """
 
 import hashlib
@@ -96,6 +98,35 @@ def make_copies(src, files, sizes):
     return dims
 
 
+# Web copies this script writes: "<slug>-<10-char hash>-<width>.webp".
+GENERATED = re.compile(r'-[0-9a-f]{10}-\d+\.webp$')
+
+
+def rescue_misplaced():
+    """Move uploads that landed in a generated folder into the upload folder."""
+    for team in TEAMS:
+        for kind, (folder, _, _) in KINDS.items():
+            out_dir = OUTPUT / team / kind
+            if not out_dir.is_dir():
+                continue
+            dest = ROOT / 'images' / f'trophyroom-{team}' / folder
+            for f in sorted(out_dir.iterdir()):
+                if not f.is_file() or f.suffix.lower() not in EXTENSIONS or GENERATED.search(f.name):
+                    continue
+                dest.mkdir(parents=True, exist_ok=True)
+                target = dest / f.name
+                n = 2
+                while target.exists():
+                    target = dest / f'{f.stem}-{n}{f.suffix}'
+                    n += 1
+                # git mv keeps the upload's history, so its date still sorts it.
+                moved = subprocess.run(['git', 'mv', str(f), str(target)], cwd=ROOT,
+                                       capture_output=True, check=False).returncode == 0
+                if not moved:
+                    f.rename(target)
+                print(f'moved {f.relative_to(ROOT)} to {target.relative_to(ROOT)}')
+
+
 def build(team, label, kind, previous):
     folder, sizes, newest_first = KINDS[kind]
     src_dir = ROOT / 'images' / f'trophyroom-{team}' / folder
@@ -139,6 +170,7 @@ def build(team, label, kind, previous):
 
 
 def main():
+    rescue_misplaced()
     previous = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
     manifest = {}
     for team, label in TEAMS.items():

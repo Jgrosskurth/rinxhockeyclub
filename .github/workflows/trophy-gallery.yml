@@ -2,13 +2,15 @@ name: Trophy Room gallery
 
 # Upload banners to images/trophyroom-10u/ or images/trophyroom-14u/, and
 # photos to their gallery/ subfolders, on main; this builds the web copies and
-# the list the Trophy Room page reads (data/trophy-room.json).
+# the list the Trophy Room page reads (data/trophy-room.json). Uploads made to
+# the generated images/trophy-room/ folders by mistake are picked up too.
 
 on:
   push:
     branches: [main]
     paths:
       - 'images/trophyroom-*/**'
+      - 'images/trophy-room/**'
       - '.github/scripts/trophy_gallery.py'
   workflow_dispatch:
 
@@ -41,7 +43,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A images/trophy-room data/trophy-room.json
+          git add -A images/trophy-room images/trophyroom-10u images/trophyroom-14u data/trophy-room.json
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git commit -m "Update Trophy Room gallery [skip ci]"
           # The schedule job may have pushed in the meantime.
