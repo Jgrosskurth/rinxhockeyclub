@@ -219,13 +219,22 @@ const RINKS = {
 };
 
 /**
+ * Full address for a rink named in the feeds ("Hatfield Ice Arena (Blue)"),
+ * or '' if it isn't in the list.
+ * @param {string} name
+ */
+export function rinkAddress(name) {
+  const key = (name || '').replace(/\s*\([^)]*\)\s*$/, '').trim().toLowerCase();
+  return RINKS[key] || '';
+}
+
+/**
  * Google Maps directions link to a game's rink.
  * @param {object} game from loadTeamGames
  */
 export function directionsUrl(game) {
   const name = game.home ? 'The Rinx' : game.location;
-  const key = name.replace(/\s*\([^)]*\)\s*$/, '').trim().toLowerCase();
-  const dest = RINKS[key] || (/rink|arena|ice|center|pavilion/i.test(name) ? name : `${name} ice rink`);
+  const dest = rinkAddress(name) || (/rink|arena|ice|center|pavilion/i.test(name) ? name : `${name} ice rink`);
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
 }
 

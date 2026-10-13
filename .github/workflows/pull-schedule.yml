@@ -2,16 +2,28 @@ name: Pull GameSheet Data
 
 # Pulls schedule, stats, and standings for 10U and 14U (plus tournament
 # schedules) from GameSheet into data/*.json, which the native blocks on the
-# site fetch directly. Runs twice
-# daily (10:00 and 22:00 ET) plus on-demand from the Actions tab.
+# site fetch directly, and rebuilds the subscribable team calendars
+# (data/calendar-*.ics). Runs twice daily (10:00 and 22:00 ET), every 30
+# minutes during game hours on Friday evenings and weekends, and on demand
+# from the Actions tab. (GitHub may start scheduled runs a few minutes late.)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 14 * * *'   # 10:00 ET (14:00 UTC)
-    - cron: '0 2 * * *'    # 22:00 ET (02:00 UTC)
+    - cron: '0 14 * * *'           # 10:00 ET (14:00 UTC)
+    - cron: '0 2 * * *'            # 22:00 ET (02:00 UTC)
+    # Game days, every 30 min (UTC; ~7:00-23:00 ET on Sat/Sun, 17:00-23:00 ET Fri)
+    - cron: '*/30 11-23 * * 0,6'   # Sat & Sun daytime
+    - cron: '*/30 0-3 * * 0,1'     # Sat & Sun evenings (past midnight UTC)
+    - cron: '*/30 21-23 * * 5'     # Fri late afternoon
+    - cron: '*/30 0-3 * * 6'       # Fri evening (past midnight UTC)
 
 permissions:
   contents: write
+
+# One pull at a time; a run that starts while another is going waits for it.
+concurrency:
+  group: gamesheet-pull
+  cancel-in-progress: false
 
 jobs:
   pull:
@@ -48,10 +60,16 @@ jobs:
           python pull_gamesheet.py --type stats      --season 16150 --team 573565 --out data/stats-mid-atlantic.json
           python pull_gamesheet.py --type standings  --season 16150 --team 573565 --out data/standings-mid-atlantic.json
 
+      - name: Build team calendars
+        run: python .github/scripts/build_calendars.py
+
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/*.json
-          git commit -m "Update GameSheet data [skip ci]" || echo "No changes to commit"
+          git add data/*.json data/*.ics
+          if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
+          git commit -m "Update GameSheet data [skip ci]"
+          # The Trophy Room job (or a manual edit) may have pushed meanwhile.
+          git pull --rebase origin main
           git push

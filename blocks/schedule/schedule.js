@@ -1,6 +1,7 @@
 import {
   gameSheetLogo, findLogoId, findLocalLogo, MHR_CDN,
 } from '../../scripts/team-logos.js';
+import { rinkAddress } from '../../scripts/team-feeds.js';
 
 // Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
 // Tournament feeds come from their own GameSheet season (see pull-schedule.yml).
@@ -37,6 +38,37 @@ const FEEDS = [
 function feedConfig() {
   const path = window.location.pathname;
   return FEEDS.find((f) => path.includes(f.match));
+}
+
+// Subscribable team calendars (data/calendar-*.ics, rebuilt with the feeds by
+// .github/scripts/build_calendars.py). The tournament page offers 10U's,
+// which includes its tournament games.
+function subscribeBar() {
+  const key = feedConfig().key === '14u' ? '14u' : '10u';
+  const team = key === '14u' ? '14U Bantam' : '10U Squirts';
+  const url = `${window.location.origin}/data/calendar-${key}.ics`;
+  const webcal = url.replace(/^https?:/, 'webcal:');
+  const google = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`;
+  return `<div class="sub-bar">
+      <p class="sub-text"><strong>Never miss a game.</strong> Subscribe to the ${team} calendar and every game, time change and final score updates on your phone automatically.</p>
+      <div class="sub-actions">
+        <a class="sub-btn" href="${webcal}">Apple / iPhone</a>
+        <a class="sub-btn" href="${google}" target="_blank" rel="noopener">Google Calendar</a>
+        <button type="button" class="sub-btn sub-copy" data-url="${url}">Copy link</button>
+      </div>
+    </div>`;
+}
+
+function wireSubscribe(block) {
+  const copy = block.querySelector('.sub-copy');
+  copy?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copy.dataset.url);
+      copy.textContent = 'Link copied';
+    } catch {
+      window.prompt('Copy this calendar link:', copy.dataset.url); // eslint-disable-line no-alert
+    }
+  });
 }
 
 function oppCell(g) {
@@ -277,6 +309,43 @@ function fromFeed(g, season) {
   };
 }
 
+// Upcoming games as schema.org SportsEvents, so search engines can list them.
+function addEventData(games) {
+  const cfg = feedConfig();
+  const tournament = cfg.key === 'mid-atlantic';
+  const rinx = { '@type': 'SportsTeam', name: cfg.label, sport: 'Ice Hockey' };
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const z = (n) => String(n).padStart(2, '0');
+  const events = games.filter((g) => !g.result).map((g) => {
+    const p = parseGameDateTime(g.rawDate, g.time);
+    if (!p || !p.hasTime || new Date(p.year, p.month, p.day) < today) return null;
+    const home = g.venue === 'Home' && !tournament;
+    const place = home ? 'The Rinx' : (g.location || 'The Rinx');
+    const opp = { '@type': 'SportsTeam', name: g.opp, sport: 'Ice Hockey' };
+    return {
+      '@type': 'SportsEvent',
+      name: `${cfg.label} ${!home && !tournament ? 'at' : 'vs'} ${g.opp}`,
+      sport: 'Ice Hockey',
+      startDate: `${p.year}-${z(p.month + 1)}-${z(p.day)}T${z(p.hour)}:${z(p.min)}:00-0${easternOffsetHours(p.year, p.month, p.day)}:00`,
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      location: { '@type': 'Place', name: place, address: rinkAddress(place) || place },
+      homeTeam: home || tournament ? rinx : opp,
+      awayTeam: home || tournament ? opp : rinx,
+      organizer: { '@type': 'SportsOrganization', name: 'Rinx Hockey Club', url: 'https://www.rinxhockeyclub.com/' },
+      url: `${window.location.origin}${window.location.pathname}`,
+    };
+  }).filter(Boolean);
+  document.head.querySelector('script[data-schedule-events]')?.remove();
+  if (!events.length) return;
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.dataset.scheduleEvents = '';
+  script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': events });
+  document.head.append(script);
+}
+
 async function loadFeedGames() {
   const url = `${FEED_BASE}/schedule-${feedConfig().key}.json`;
   const resp = await fetch(url);
@@ -310,6 +379,7 @@ function renderSchedule(block, games) {
     block.classList.add('schedule-upcoming');
     block.innerHTML = `
     ${printHeader()}
+    ${subscribeBar()}
     <div class="schedule-controls">
       <p class="schedule-note">${games.length} games &bull; scores posted after each game</p>
       <button type="button" class="print-btn">🖨 Print Schedule</button>
@@ -329,6 +399,7 @@ function renderSchedule(block, games) {
   `;
     wirePrint(block);
     wireCalendars(block);
+    wireSubscribe(block);
     return;
   }
 
@@ -347,6 +418,8 @@ function renderSchedule(block, games) {
       <div class="sum-tile red"><span class="sum-num">${gf}</span><span class="sum-lbl">Goals For</span></div>
       <div class="sum-tile navy-light"><span class="sum-num">${ga}</span><span class="sum-lbl">Goals Against</span></div>
     </div>
+
+    ${subscribeBar()}
 
     <div class="schedule-controls">
       <div class="filter-buttons">
@@ -384,6 +457,7 @@ function renderSchedule(block, games) {
 
   wirePrint(block);
   wireCalendars(block);
+  wireSubscribe(block);
 }
 
 export default function decorate(block) {
@@ -408,6 +482,7 @@ export default function decorate(block) {
     .then((games) => {
       if (!games.length) throw new Error('empty feed');
       renderSchedule(block, games);
+      addEventData(games);
     })
     .catch(() => {
       if (authored.length) {

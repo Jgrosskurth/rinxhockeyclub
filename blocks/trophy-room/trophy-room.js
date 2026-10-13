@@ -112,7 +112,7 @@ function galleryList(photos, label, size) {
   const items = photos.map((p, i) => `
     <li>
       <button type="button" class="tr-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}: ${attr(p.alt)}">
-        <img src="${p.thumb}" alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
+        <img src="${p.thumb}"${p.small ? ` srcset="${p.small} 400w, ${p.thumb} 800w" sizes="(min-width: 900px) 20vw, (min-width: 600px) 33vw, 50vw"` : ''} alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
       </button>
     </li>`);
   if (items.length <= size) return `<ul class="tr-gallery">${items.join('')}</ul>`;

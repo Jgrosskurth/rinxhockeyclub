@@ -17,31 +17,21 @@ export default function decorate(block) {
       <nav class="header-nav" id="header-nav">
         <a href="/">Home</a>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle">Roster <span class="nav-plus">+</span></button>
+          <button class="nav-dropdown-toggle">10U Squirts <span class="nav-plus">+</span></button>
           <div class="nav-dropdown-menu">
-            <a href="/roster">10U Squirts</a>
-            <a href="/roster-14u">14U Bantam</a>
+            <a href="/roster">Roster</a>
+            <a href="/schedule">Schedule</a>
+            <a href="/stats">Stats</a>
+            <a href="/standings">Standings</a>
           </div>
         </div>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle">Schedule <span class="nav-plus">+</span></button>
+          <button class="nav-dropdown-toggle">14U Bantam <span class="nav-plus">+</span></button>
           <div class="nav-dropdown-menu">
-            <a href="/schedule">10U Squirts</a>
-            <a href="/schedule-14u">14U Bantam</a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle">Stats <span class="nav-plus">+</span></button>
-          <div class="nav-dropdown-menu">
-            <a href="/stats">10U Squirts</a>
-            <a href="/stats-14u">14U Bantam</a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle">Standings <span class="nav-plus">+</span></button>
-          <div class="nav-dropdown-menu">
-            <a href="/standings">10U Squirts</a>
-            <a href="/standings-14u">14U Bantam</a>
+            <a href="/roster-14u">Roster</a>
+            <a href="/schedule-14u">Schedule</a>
+            <a href="/stats-14u">Stats</a>
+            <a href="/standings-14u">Standings</a>
           </div>
         </div>
         <a href="/tournaments">Tournaments</a>
@@ -62,6 +52,10 @@ export default function decorate(block) {
   block.querySelectorAll('nav a').forEach((a) => {
     const href = a.getAttribute('href');
     if (href === path || (path === '' && href === '/')) a.classList.add('active');
+  });
+  // A team menu is highlighted while you're on one of its pages.
+  block.querySelectorAll('.nav-dropdown').forEach((d) => {
+    if (d.querySelector('a.active')) d.querySelector('.nav-dropdown-toggle').classList.add('active');
   });
 
   // Dropdown toggles

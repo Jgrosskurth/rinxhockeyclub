@@ -8,7 +8,7 @@ Per team (10U, 14U), from images uploaded to GitHub:
 - images/trophyroom-<team>/gallery/*  -> gallery photos, newest first.
 
 Each image gets WebP web copies under images/trophy-room/<team>/ (banners:
-600px wide; photos: 800px grid thumbnail + 1600px full view), listed in
+600px wide; photos: 400px and 800px grid thumbnails + 1600px full view), listed in
 data/trophy-room.json for the trophy-room block. Copies whose original was
 deleted are removed. Images uploaded into images/trophy-room/<team>/ by
 mistake (it's the generated folder) are moved to the matching upload folder
@@ -39,7 +39,7 @@ TEAMS = {'10u': '10U Squirts', '14u': '14U Bantam'}
 KINDS = {
     # kind: (folder under images/trophyroom-<team>/, sizes, newest first?)
     'banners': ('', {'full': 600}, False),
-    'gallery': ('gallery', {'thumb': 800, 'full': 1600}, True),
+    'gallery': ('gallery', {'small': 400, 'thumb': 800, 'full': 1600}, True),
 }
 EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp', '.heic', '.heif'}
 # Names that say nothing: camera files ("IMG_1234 2"), numbers ("10"),
