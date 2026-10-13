@@ -75,7 +75,7 @@ function oppCell(g) {
   const ini = g.opp.split(' ').slice(0, 2).map((w) => w[0])
     .join('')
     .toUpperCase();
-  const gsLogo = gameSheetLogo(g.opp);
+  const gsLogo = g.logo || gameSheetLogo(g.opp);
   const useLogos = feedConfig().logos !== false;
   const localLogo = useLogos ? findLocalLogo(g.opp) : '';
   const logoId = (localLogo || !useLogos) ? '' : findLogoId(g.opp);
@@ -289,6 +289,8 @@ function fromFeed(g, season) {
     location: g.location || '',
     venue: g.venue || '',
     gameId: g.gameId || '',
+    // Logo from the DA sheet, if the club added one.
+    logo: g.logo || '',
     season,
   };
 }

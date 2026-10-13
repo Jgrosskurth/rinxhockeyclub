@@ -165,7 +165,10 @@ def tidy_team(name):
     age = re.search(r'[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b(.*)$', s, flags=re.I)
     if age:
         coach = re.sub(r'\s*\d{1,2}\s*-\s*\d{1,2}U\b.*$', '', age[1], flags=re.I)
-        coach = re.sub(r'\s+', ' ', coach.strip(' -–'))
+        coach = coach.strip(' -–')
+        # A level ('14U A', '14U AA', 'Tier II') is not a coach.
+        coach = re.sub(r'^(?:AAA|AA|A|BB|B|Tier\s+[IV\d]+)(?=\s|$)', '', coach, flags=re.I)
+        coach = re.sub(r'\s+', ' ', coach.strip())
         s = s[:age.start()]
     s = title_case(re.sub(r'\s+', ' ', s.strip(' -–')).strip())
     if not s:
@@ -207,9 +210,10 @@ def fold(line):
 
 def parse_when(date, time):
     day = datetime.strptime(date.strip(), '%b %d, %Y')
-    if time and re.match(r'\d{1,2}:\d{2}\s*[AP]M', time.strip(), re.I):
-        t = datetime.strptime(time.strip().upper(), '%I:%M %p')
-        return day.replace(hour=t.hour, minute=t.minute), True
+    m = re.match(r'(\d{1,2}):(\d{2})\s*([AP])\.?M', (time or '').strip(), re.I)
+    if m:
+        hour = int(m[1]) % 12 + (12 if m[3].upper() == 'P' else 0)
+        return day.replace(hour=hour, minute=int(m[2])), True
     return day, False
 
 

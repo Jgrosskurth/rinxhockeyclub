@@ -31,7 +31,7 @@ UID:gamesheet-2989476@rinxhockeyclub.com
 DTSTAMP:20260913T000000Z
 DTSTART;VALUE=DATE:20260913
 DTEND;VALUE=DATE:20260914
-SUMMARY:Rinx 10U at Peconic Wildcats (W 8-2)
+SUMMARY:Rinx 10U at Peconic Wildcats (McCarthy) (W 8-2)
 LOCATION:Peconic Ice Rink\, Riverhead\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nFinal: W 8-2\nSchedule: https://www.r
  inxhockeyclub.com/schedule
@@ -42,7 +42,7 @@ UID:gamesheet-2989524@rinxhockeyclub.com
 DTSTAMP:20260920T000000Z
 DTSTART;VALUE=DATE:20260920
 DTEND;VALUE=DATE:20260921
-SUMMARY:Rinx 10U vs North Park (W 13-0)
+SUMMARY:Rinx 10U vs North Park (Mauro) (W 13-0)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nFinal: W 13-0\nSchedule: https://www.
  rinxhockeyclub.com/schedule
@@ -53,7 +53,7 @@ UID:gamesheet-2989517@rinxhockeyclub.com
 DTSTAMP:20260927T000000Z
 DTSTART;VALUE=DATE:20260927
 DTEND;VALUE=DATE:20260928
-SUMMARY:Rinx 10U vs Long Beach Lightning (W 10-2)
+SUMMARY:Rinx 10U vs Long Beach Lightning (Ponte) (W 10-2)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nFinal: W 10-2\nSchedule: https://www.
  rinxhockeyclub.com/schedule
@@ -108,7 +108,7 @@ UID:gamesheet-2989473@rinxhockeyclub.com
 DTSTAMP:20261017T083000Z
 DTSTART;TZID=America/New_York:20261017T083000
 DTEND;TZID=America/New_York:20261017T100000
-SUMMARY:Rinx 10U at Long Beach Lightning
+SUMMARY:Rinx 10U at Long Beach Lightning (Ponte)
 LOCATION:Long Beach Ice Arena\, Long Beach\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -119,7 +119,7 @@ UID:gamesheet-2989472@rinxhockeyclub.com
 DTSTAMP:20261018T081500Z
 DTSTART;TZID=America/New_York:20261018T081500
 DTEND;TZID=America/New_York:20261018T094500
-SUMMARY:Rinx 10U at Long Island Sharks
+SUMMARY:Rinx 10U at Long Island Sharks (Davis)
 LOCATION:Iceland\, New Hyde Park\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -130,7 +130,7 @@ UID:gamesheet-2989474@rinxhockeyclub.com
 DTSTAMP:20261024T160000Z
 DTSTART;TZID=America/New_York:20261024T160000
 DTEND;TZID=America/New_York:20261024T173000
-SUMMARY:Rinx 10U at North Park
+SUMMARY:Rinx 10U at North Park (Mauro)
 LOCATION:Port Washington Skating Center\, Port Washington\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -141,7 +141,7 @@ UID:gamesheet-2989497@rinxhockeyclub.com
 DTSTAMP:20261115T100000Z
 DTSTART;TZID=America/New_York:20261115T100000
 DTEND;TZID=America/New_York:20261115T113000
-SUMMARY:Rinx 10U vs Peconic Wildcats
+SUMMARY:Rinx 10U vs Peconic Wildcats (McCarthy)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -152,7 +152,7 @@ UID:gamesheet-3085750@rinxhockeyclub.com
 DTSTAMP:20261121T140500Z
 DTSTART;TZID=America/New_York:20261121T140500
 DTEND;TZID=America/New_York:20261121T153500
-SUMMARY:Rinx 10U vs North Park
+SUMMARY:Rinx 10U vs North Park (Lewis)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -163,7 +163,7 @@ UID:gamesheet-2989475@rinxhockeyclub.com
 DTSTAMP:20261129T151500Z
 DTSTART;TZID=America/New_York:20261129T151500
 DTEND;TZID=America/New_York:20261129T164500
-SUMMARY:Rinx 10U at Iceworks Islanders
+SUMMARY:Rinx 10U at Iceworks Islanders (Fortunato)
 LOCATION:Northwell Twin Rinks\, East Meadow\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -174,7 +174,7 @@ UID:gamesheet-2989510@rinxhockeyclub.com
 DTSTAMP:20261205T140500Z
 DTSTART;TZID=America/New_York:20261205T140500
 DTEND;TZID=America/New_York:20261205T153500
-SUMMARY:Rinx 10U vs Iceworks Islanders
+SUMMARY:Rinx 10U vs Iceworks Islanders (Fortunato)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -185,7 +185,7 @@ UID:gamesheet-2989471@rinxhockeyclub.com
 DTSTAMP:20261206T073000Z
 DTSTART;TZID=America/New_York:20261206T073000
 DTEND;TZID=America/New_York:20261206T090000
-SUMMARY:Rinx 10U at Great Neck Bruins
+SUMMARY:Rinx 10U at Great Neck Bruins (Marsella)
 LOCATION:Parkwood Ice Rink\, Great Neck\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -196,7 +196,7 @@ UID:gamesheet-2989504@rinxhockeyclub.com
 DTSTAMP:20261212T140500Z
 DTSTART;TZID=America/New_York:20261212T140500
 DTEND;TZID=America/New_York:20261212T153500
-SUMMARY:Rinx 10U vs Long Island Sharks
+SUMMARY:Rinx 10U vs Long Island Sharks (Davis)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -207,7 +207,7 @@ UID:gamesheet-2989483@rinxhockeyclub.com
 DTSTAMP:20261219T164000Z
 DTSTART;TZID=America/New_York:20261219T164000
 DTEND;TZID=America/New_York:20261219T181000
-SUMMARY:Rinx 10U vs Aviator Hockey Club
+SUMMARY:Rinx 10U vs Aviator Hockey Club (Janss)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -218,7 +218,7 @@ UID:gamesheet-2989470@rinxhockeyclub.com
 DTSTAMP:20261220T154500Z
 DTSTART;TZID=America/New_York:20261220T154500
 DTEND;TZID=America/New_York:20261220T171500
-SUMMARY:Rinx 10U at Aviator Hockey Club
+SUMMARY:Rinx 10U at Aviator Hockey Club (Janss)
 LOCATION:Aviator Sports and Events Center\, Brooklyn\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -229,7 +229,7 @@ UID:gamesheet-2992376@rinxhockeyclub.com
 DTSTAMP:20270102T164000Z
 DTSTART;TZID=America/New_York:20270102T164000
 DTEND;TZID=America/New_York:20270102T181000
-SUMMARY:Rinx 10U vs Dix Hills Selects
+SUMMARY:Rinx 10U vs Dix Hills Selects (Goldfine)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
@@ -240,7 +240,7 @@ UID:gamesheet-2989490@rinxhockeyclub.com
 DTSTAMP:20270123T151000Z
 DTSTART;TZID=America/New_York:20270123T151000
 DTEND;TZID=America/New_York:20270123T164000
-SUMMARY:Rinx 10U vs Great Neck Bruins
+SUMMARY:Rinx 10U vs Great Neck Bruins (Marsella)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
