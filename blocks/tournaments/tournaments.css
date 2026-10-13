@@ -1,5 +1,9 @@
 .tournaments-block { padding: 0; }
 
+.t-section-upcoming {
+  margin-top: 60px;
+}
+
 .t-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
