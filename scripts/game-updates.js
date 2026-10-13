@@ -2,6 +2,8 @@
 // by the pull-schedule workflow, so each completed game gets a short write-up
 // without anyone having to author it. Used by the news-slider block.
 
+import { tidyTeam } from './team-feeds.js';
+
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
 const TEAMS = [
@@ -27,20 +29,6 @@ export function parseNewsDate(str) {
 }
 
 const formatDate = (d) => `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
-
-// Same clean-up as the schedule block: "NYH4033-002-North Park-10U Mauro"
-// -> "North Park", ALL CAPS -> Title Case.
-function tidyTeamName(name) {
-  let s = (name || '').trim();
-  s = s.replace(/^TB\s+/i, '');
-  s = s.replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
-  s = s.replace(/[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b.*$/i, '');
-  s = s.replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ').trim();
-  if (s && s === s.toUpperCase()) {
-    s = s.toLowerCase().replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
-  }
-  return s || name;
-}
 
 // Copy variants per outcome, rotated by the team's game number so back-to-back
 // results don't read the same (and a game's card stays the same on reload).
@@ -98,7 +86,7 @@ function buildCard(game, team, n) {
   const fill = (s, html) => s
     .replace(/\{age\}/g, team.age)
     .replace(/\{label\}/g, team.label)
-    .replace(/\{opp\}/g, tidyTeamName(game.opponent))
+    .replace(/\{opp\}/g, tidyTeam(game.opponent))
     .replace(/\{where\}/g, where(game, team))
     .replace(/\{score\}/g, html ? `<span class="news-score">${score}</span>` : score);
   let body = fill(copy.body, true);

@@ -63,21 +63,37 @@ function loadFeed(name) {
   return cache[name];
 }
 
+// ALL CAPS -> Title Case ("MCCARTHY" -> "McCarthy"); mixed case is kept.
+function titleCase(text) {
+  if (!text || text !== text.toUpperCase()) return text;
+  return text.toLowerCase()
+    .replace(/\b([a-z])/g, (m, c) => c.toUpperCase())
+    .replace(/\bMc([a-z])/g, (m, c) => `Mc${c.toUpperCase()}`);
+}
+
 /**
- * Clean up GameSheet's coded team names: "NYH4033-002-North Park-10U Mauro"
- * -> "North Park", ALL CAPS -> Title Case.
+ * Clean up GameSheet's coded team names, keeping the coach's last name so two
+ * teams from one club stay apart: "NYH4033-002-North Park-10U Mauro 04 - 10U
+ * SILVER" -> "North Park (Mauro)", "PECONIC WILDCATS-10U-MCCARTHY" ->
+ * "Peconic Wildcats (McCarthy)". Tournament names ("Delco Phantoms 10A") have
+ * no coach. Used everywhere team names are shown.
  * @param {string} name
  */
 export function tidyTeam(name) {
   let s = (name || '').trim();
   s = s.replace(/^TB\s+/i, '');
   s = s.replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
-  s = s.replace(/[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b.*$/i, '');
-  s = s.replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ').trim();
-  if (s && s === s.toUpperCase()) {
-    s = s.toLowerCase().replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
+  let coach = '';
+  const age = s.match(/[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b(.*)$/i);
+  if (age) {
+    // After the age group: the coach, then (in schedules) the division.
+    coach = age[1].replace(/\s*\d{1,2}\s*-\s*\d{1,2}U\b.*$/i, '')
+      .replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ');
+    s = s.slice(0, age.index);
   }
-  return s || name;
+  s = titleCase(s.replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ').trim());
+  if (!s) return name;
+  return coach ? `${s} (${titleCase(coach)})` : s;
 }
 
 // Game types, in the order the schedule and standings filters show them.

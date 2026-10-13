@@ -126,17 +126,79 @@
   color: var(--color-white);
 }
 
+/* Controls row: game-type filter, Game Result dropdown, Print */
+.schedule .schedule-body > .schedule-controls {
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.schedule .schedule-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.schedule .result-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--heading-font-family);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+
+.schedule .result-select {
+  width: auto;
+  min-height: 38px;
+  padding: 0 32px 0 12px;
+  border: 2px solid var(--color-navy);
+  border-radius: 4px;
+  background-color: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--body-font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.schedule .result-select:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
 /* Game-type filter: League (default), Tournament, Exhibition, All Games */
 .schedule .type-filter {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin: 0 0 20px;
+  margin: 0;
   padding: 4px;
   border-radius: 999px;
   background: var(--color-navy);
   width: fit-content;
   max-width: 100%;
+}
+
+/* Phones: the four type buttons as an even 2 x 2 grid */
+@media (max-width: 599px) {
+  .schedule .type-filter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .schedule .type-filter .type-btn {
+    justify-content: center;
+    border-radius: 8px;
+  }
 }
 
 .schedule .type-btn {
@@ -746,6 +808,7 @@
   .schedule .print-btn,
   .schedule .filter-buttons,
   .schedule .type-filter,
+  .schedule .schedule-actions,
   .schedule .sg-result,
   .schedule .sg-cal,
   .schedule .sg-cal-wrap,

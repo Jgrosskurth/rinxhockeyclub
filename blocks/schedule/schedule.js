@@ -1,7 +1,7 @@
 import {
   gameSheetLogo, findLogoId, findLocalLogo, MHR_CDN,
 } from '../../scripts/team-logos.js';
-import { rinkAddress, extraGames } from '../../scripts/team-feeds.js';
+import { rinkAddress, extraGames, tidyTeam } from '../../scripts/team-feeds.js';
 
 // Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
 // Tournament feeds come from their own GameSheet season (see pull-schedule.yml).
@@ -273,29 +273,9 @@ function wireCalendars(block) {
 // GitHub-hosted JSON feed produced by the pull-schedule workflow.
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
-// Clean up GameSheet's verbose team names for display, e.g.
-// "NYH4033-002-North Park-10U Mauro" -> "North Park"
-// "TB NYH0041-005 Great Neck Bruins 14U Bowden" -> "Great Neck Bruins".
-function tidyOpponent(name) {
-  let s = (name || '').trim();
-  s = s.replace(/^TB\s+/i, ''); // drop "TB " (to be determined) prefix
-  // Drop the registration code block, e.g. "NYH4033-002-" or "NYH0041-005 ".
-  s = s.replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
-  // Cut everything from the age group / tournament division onward
-  // ("10U ... coach", "14U-Pala", "Delco Phantoms 10A").
-  s = s.replace(/[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b.*$/i, '');
-  s = s.replace(/^[-–\s]+|[-–\s]+$/g, ''); // stray leading/trailing dashes
-  s = s.replace(/\s+/g, ' ').trim();
-  // GameSheet often stores names in ALL CAPS — make them Title Case.
-  if (s && s === s.toUpperCase()) {
-    s = s.toLowerCase().replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
-  }
-  return s || name;
-}
-
 // Map a feed game to the block's internal shape.
 function fromFeed(g, season) {
-  const opp = tidyOpponent(g.opponent);
+  const opp = tidyTeam(g.opponent);
   const parts = [g.location, g.time].filter(Boolean);
   return {
     date: g.date || '',
@@ -405,10 +385,28 @@ function printHeader() {
   </div>`;
 }
 
-function scheduleBody(games, type) {
+const RESULT_OPTIONS = [['all', 'All Results'], ['W', 'Wins'], ['L', 'Losses'], ['T', 'Ties']];
+
+// One controls row: game-type buttons (team pages), the Game Result
+// dropdown (once there are results), and Print.
+function controlsRow(typeButtons, hasResults) {
+  return `
+    <div class="schedule-controls">
+      ${typeButtons}
+      <div class="schedule-actions">
+        ${hasResults ? `<label class="result-filter"><span>Game Result</span>
+          <select class="result-select">${RESULT_OPTIONS.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}</select>
+        </label>` : ''}
+        <button type="button" class="print-btn">🖨 Print</button>
+      </div>
+    </div>`;
+}
+
+function scheduleBody(games, type, typeButtons) {
   const label = type === 'All' ? 'games' : `${type.toLowerCase()} games`;
   if (!games.length) {
-    return `<p class="schedule-empty">No ${label} ${type === 'All' ? 'posted' : 'on the schedule'} yet.</p>`;
+    return `${controlsRow(typeButtons, false)}
+    <p class="schedule-empty">No ${label} ${type === 'All' ? 'posted' : 'on the schedule'} yet.</p>`;
   }
   const hasResults = games.some((g) => ['W', 'L', 'T'].includes(g.result));
   const table = `
@@ -421,13 +419,10 @@ function scheduleBody(games, type) {
       </div>
       <div class="sg-rows">${renderRows(games)}</div>
     </div>`;
-  // Upcoming only: the same table, without the win/loss summary and filters.
+  // Upcoming only: the same table, without the win/loss summary.
   if (!hasResults) {
-    return `
-    <div class="schedule-controls">
-      <p class="schedule-note">${games.length} ${label} &bull; scores posted after each game</p>
-      <button type="button" class="print-btn">🖨 Print Schedule</button>
-    </div>
+    return `${controlsRow(typeButtons, false)}
+    <p class="schedule-note">${games.length} ${label} &bull; scores posted after each game</p>
     ${table}
     <p class="schedule-src">${feedConfig().note} &bull; times and locations subject to change &bull; 🗓️ = add game to your calendar</p>`;
   }
@@ -436,7 +431,7 @@ function scheduleBody(games, type) {
   const t = games.filter((g) => g.result === 'T').length;
   const gf = games.reduce((n, g) => n + (parseInt(g.score?.split(/[-–]/)[0], 10) || 0), 0);
   const ga = games.reduce((n, g) => n + (parseInt(g.score?.split(/[-–]/)[1], 10) || 0), 0);
-  return `
+  return `${controlsRow(typeButtons, true)}
     <div class="schedule-summary">
       <div class="sum-tile navy"><span class="sum-num">${w}</span><span class="sum-lbl">Wins</span></div>
       <div class="sum-tile navy"><span class="sum-num">${l}</span><span class="sum-lbl">Losses</span></div>
@@ -444,29 +439,16 @@ function scheduleBody(games, type) {
       <div class="sum-tile red"><span class="sum-num">${gf}</span><span class="sum-lbl">Goals For</span></div>
       <div class="sum-tile navy-light"><span class="sum-num">${ga}</span><span class="sum-lbl">Goals Against</span></div>
     </div>
-
-    <div class="schedule-controls">
-      <div class="filter-buttons" role="group" aria-label="Results">
-        <button class="filter-btn active" data-filter="all">All Results</button>
-        <button class="filter-btn" data-filter="W">Wins</button>
-        <button class="filter-btn" data-filter="L">Losses</button>
-        <button class="filter-btn" data-filter="T">Ties</button>
-      </div>
-      <button type="button" class="print-btn">🖨 Print Schedule</button>
-    </div>
     ${table}
     <p class="schedule-src">${feedConfig().season} &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>${games.some((g) => g.sheet) ? ' and the club' : ''}</p>`;
 }
 
 function wireResultFilter(block) {
-  block.querySelectorAll('.filter-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      block.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      block.querySelectorAll('.sg-row').forEach((row) => {
-        row.style.display = (f === 'all' || row.dataset.result === f) ? 'grid' : 'none';
-      });
+  const select = block.querySelector('.result-select');
+  select?.addEventListener('change', () => {
+    const f = select.value;
+    block.querySelectorAll('.sg-row').forEach((row) => {
+      row.style.display = (f === 'all' || row.dataset.result === f) ? 'grid' : 'none';
     });
   });
 }
@@ -477,25 +459,25 @@ function renderSchedule(block, games) {
   // All Games ("Other" games show under All Games).
   const types = tournamentPage ? [] : ['League', 'Tournament', 'Exhibition', 'All'];
   const count = (type) => (type === 'All' ? games.length : games.filter((g) => (g.type || 'League') === type).length);
+  const typeButtons = (current) => (types.length ? `<div class="type-filter" role="group" aria-label="Game type">
+      ${types.map((type) => `<button type="button" class="type-btn" data-type="${type}" aria-pressed="${type === current}">${type === 'All' ? 'All Games' : type}<span class="type-count">${count(type)}</span></button>`).join('')}
+    </div>` : '');
   block.innerHTML = `
     ${printHeader()}
     ${subscribeBar()}
-    ${types.length ? `<div class="type-filter" role="group" aria-label="Game type">
-      ${types.map((type) => `<button type="button" class="type-btn" data-type="${type}" aria-pressed="${type === 'League'}">${type === 'All' ? 'All Games' : type}<span class="type-count">${count(type)}</span></button>`).join('')}
-    </div>` : ''}
     <div class="schedule-body"></div>`;
   wireSubscribe(block);
   const body = block.querySelector('.schedule-body');
-  const show = (type) => {
+  const show = (type, focus) => {
     const list = tournamentPage || type === 'All' ? games : games.filter((g) => (g.type || 'League') === type);
-    body.innerHTML = scheduleBody(list, tournamentPage ? 'All' : type);
+    body.innerHTML = scheduleBody(list, tournamentPage ? 'All' : type, typeButtons(type));
     block.classList.toggle('schedule-upcoming', !list.some((g) => ['W', 'L', 'T'].includes(g.result)));
-    block.querySelectorAll('.type-btn').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.type === type)));
+    body.querySelectorAll('.type-btn').forEach((b) => b.addEventListener('click', () => show(b.dataset.type, true)));
+    if (focus) body.querySelector(`.type-btn[data-type="${type}"]`)?.focus();
     wireResultFilter(body);
     wirePrint(body);
     wireCalendars(body);
   };
-  block.querySelectorAll('.type-btn').forEach((b) => b.addEventListener('click', () => show(b.dataset.type)));
   show(tournamentPage ? 'All' : 'League');
 }
 
