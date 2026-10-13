@@ -34,6 +34,62 @@
   letter-spacing: 0.1em;
 }
 
+/* Subscribe to the team calendar */
+.schedule .sub-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin: 0 0 20px;
+  padding: 16px 18px;
+  border-radius: 8px;
+  background: var(--color-ice);
+  border: 1px solid rgb(4 30 66 / 10%);
+}
+
+.schedule .sub-text {
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  color: var(--color-navy);
+}
+
+.schedule .sub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.schedule .sub-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 2px solid var(--color-navy);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--heading-font-family);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.schedule .sub-btn:hover {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.schedule .sub-btn:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
 .schedule-controls {
   display: flex;
   align-items: center;
@@ -580,6 +636,7 @@
   }
 
   /* Hide everything except the print header and the games. */
+  .schedule .sub-bar,
   .schedule .schedule-controls,
   .schedule .schedule-summary,
   .schedule .sg-header,

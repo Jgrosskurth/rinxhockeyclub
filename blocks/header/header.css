@@ -63,10 +63,10 @@
   gap: 4px;
 }
 
-/* The full nav needs ~1400px on one line; narrower screens use the menu
-   button (see the max-width: 1419px block below). Kept on one line so the
-   header can't grow while web fonts load. */
-@media (min-width: 1420px) {
+/* The full nav (team menus) needs ~1240px on one line; narrower screens use
+   the menu button (see the max-width: 1279px block below). Kept on one line
+   so the header can't grow while web fonts load. */
+@media (min-width: 1280px) {
   .header-nav {
     white-space: nowrap;
   }
@@ -140,7 +140,8 @@
   gap: 6px;
 }
 
-.nav-dropdown-toggle:hover {
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle.active {
   color: var(--color-white);
   background: rgb(255 255 255 / 10%);
 }
@@ -206,7 +207,7 @@
   border-radius: 2px;
 }
 
-@media (max-width: 1419px) {
+@media (max-width: 1279px) {
   .header-inner { padding: 12px 20px; }
 
   .hamburger { display: flex; }
@@ -259,7 +260,7 @@
 }
 
 /* Tablets and small laptops: the menu opens as a panel on the right */
-@media (min-width: 601px) and (max-width: 1419px) {
+@media (min-width: 601px) and (max-width: 1279px) {
   .header-nav {
     left: auto;
     width: 340px;
