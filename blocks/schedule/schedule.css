@@ -126,6 +126,106 @@
   color: var(--color-white);
 }
 
+/* Game-type filter: League (default), Tournament, Exhibition, All Games */
+.schedule .type-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 20px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--color-navy);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.schedule .type-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: rgb(255 255 255 / 85%);
+  font-family: var(--heading-font-family);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.schedule .type-btn:hover {
+  color: var(--color-white);
+}
+
+.schedule .type-btn[aria-pressed="true"] {
+  background: var(--color-white);
+  color: var(--color-navy);
+}
+
+.schedule .type-btn:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+.schedule .type-count {
+  min-width: 1.6em;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 16%);
+  font-size: 0.75rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.schedule .type-btn[aria-pressed="true"] .type-count {
+  background: var(--color-ice);
+}
+
+/* Per-game type label */
+.schedule .sg-type {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+  white-space: nowrap;
+  background: var(--color-ice);
+  color: var(--color-navy);
+}
+
+.schedule .sg-type-tournament {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.schedule .sg-type-exhibition {
+  background: var(--color-navy-light);
+  color: var(--color-white);
+}
+
+.schedule .sg-type-other {
+  background: var(--color-gray-light);
+  color: var(--color-navy);
+}
+
+.schedule .schedule-empty {
+  padding: 28px 16px;
+  border-radius: 8px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  color: var(--color-gray);
+}
+
 .mhr-link {
   font-size: 0.8rem;
   color: var(--color-gray);
@@ -645,6 +745,7 @@
   .schedule .schedule-src,
   .schedule .print-btn,
   .schedule .filter-buttons,
+  .schedule .type-filter,
   .schedule .sg-result,
   .schedule .sg-cal,
   .schedule .sg-cal-wrap,

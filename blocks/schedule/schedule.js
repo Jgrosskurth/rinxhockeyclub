@@ -1,7 +1,7 @@
 import {
   gameSheetLogo, findLogoId, findLocalLogo, MHR_CDN,
 } from '../../scripts/team-logos.js';
-import { rinkAddress } from '../../scripts/team-feeds.js';
+import { rinkAddress, extraGames } from '../../scripts/team-feeds.js';
 
 // Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
 // Tournament feeds come from their own GameSheet season (see pull-schedule.yml).
@@ -188,8 +188,12 @@ function teamLabel() {
 
 // Link to a game's GameSheet box score, if we have its id.
 function boxScoreUrl(g) {
-  return g.gameId ? `https://gamesheetstats.com/seasons/${g.season || '15381'}/games/${g.gameId}` : '';
+  if (!g.gameId || g.sheet) return '';
+  return `https://gamesheetstats.com/seasons/${g.season || '15381'}/games/${g.gameId}`;
 }
+
+// Small label for a game's type (League, Tournament, Exhibition, Other).
+const typeTag = (type) => `<span class="sg-type sg-type-${(type || 'League').toLowerCase()}">${type || 'League'}</span>`;
 
 function renderRows(games) {
   const label = teamLabel();
@@ -220,7 +224,7 @@ function renderRows(games) {
     return `
     <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}">
       ${boxLink}
-      <div class="sg-date">${g.date}</div>
+      <div class="sg-date">${g.date}${typeTag(g.type)}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
       <div class="sg-result">${resultCell}</div>
@@ -346,12 +350,43 @@ function addEventData(games) {
   document.head.append(script);
 }
 
-async function loadFeedGames() {
-  const url = `${FEED_BASE}/schedule-${feedConfig().key}.json`;
-  const resp = await fetch(url);
+// A team page shows its league feed, its tournament feeds and its rows in the
+// DA sheet /other-games (GameSheet wins when a game is in both). A
+// tournament's own page shows just that tournament.
+const TEAM_TOURNAMENTS = { '10u': ['mid-atlantic'] };
+
+async function fetchFeed(key) {
+  const resp = await fetch(`${FEED_BASE}/schedule-${key}.json`);
   if (!resp.ok) throw new Error(`feed ${resp.status}`);
-  const data = await resp.json();
-  return (data.games || []).map((g) => fromFeed(g, data.season)).filter((g) => g.opp);
+  return resp.json();
+}
+
+function gameOrder(g) {
+  const p = parseGameDateTime(g.rawDate, g.time);
+  return p ? Date.UTC(p.year, p.month, p.day, p.hour, p.min) : 0;
+}
+
+async function loadFeedGames() {
+  const cfg = feedConfig();
+  const tournamentPage = cfg.key === 'mid-atlantic';
+  const sources = [{ key: cfg.key, type: tournamentPage ? 'Tournament' : 'League' },
+    ...(TEAM_TOURNAMENTS[cfg.key] || []).map((key) => ({ key, type: 'Tournament' }))];
+  const results = await Promise.allSettled(sources.map((src) => fetchFeed(src.key)));
+  if (results[0].status === 'rejected') throw results[0].reason;
+  const raw = [];
+  const games = [];
+  results.forEach((r, i) => {
+    if (r.status !== 'fulfilled') return;
+    (r.value.games || []).forEach((g) => {
+      raw.push(g);
+      games.push({ ...fromFeed(g, r.value.season), type: sources[i].type });
+    });
+  });
+  if (!tournamentPage) {
+    const extra = await extraGames(cfg.key, raw);
+    extra.forEach((g) => games.push({ ...fromFeed(g, ''), type: g.type, sheet: true }));
+  }
+  return games.filter((g) => g.opp).sort((a, b) => gameOrder(a) - gameOrder(b));
 }
 
 // Wire the Print Schedule button to the browser's print dialog. A print
@@ -370,21 +405,13 @@ function printHeader() {
   </div>`;
 }
 
-function renderSchedule(block, games) {
-  // Upcoming schedule — no games have results yet. Keep the same table
-  // layout (Date | Opponent | Score | Result) but drop the win/loss summary
-  // and filters, and leave the score/result columns blank.
+function scheduleBody(games, type) {
+  const label = type === 'All' ? 'games' : `${type.toLowerCase()} games`;
+  if (!games.length) {
+    return `<p class="schedule-empty">No ${label} ${type === 'All' ? 'posted' : 'on the schedule'} yet.</p>`;
+  }
   const hasResults = games.some((g) => ['W', 'L', 'T'].includes(g.result));
-  if (!hasResults) {
-    block.classList.add('schedule-upcoming');
-    block.innerHTML = `
-    ${printHeader()}
-    ${subscribeBar()}
-    <div class="schedule-controls">
-      <p class="schedule-note">${games.length} games &bull; scores posted after each game</p>
-      <button type="button" class="print-btn">🖨 Print Schedule</button>
-    </div>
-
+  const table = `
     <div class="schedule-table">
       <div class="sg-header">
         <span>Date</span>
@@ -393,24 +420,23 @@ function renderSchedule(block, games) {
         <span>Result</span>
       </div>
       <div class="sg-rows">${renderRows(games)}</div>
+    </div>`;
+  // Upcoming only: the same table, without the win/loss summary and filters.
+  if (!hasResults) {
+    return `
+    <div class="schedule-controls">
+      <p class="schedule-note">${games.length} ${label} &bull; scores posted after each game</p>
+      <button type="button" class="print-btn">🖨 Print Schedule</button>
     </div>
-
-    <p class="schedule-src">${feedConfig().note} &bull; times and locations subject to change &bull; 🗓️ = add game to your calendar</p>
-  `;
-    wirePrint(block);
-    wireCalendars(block);
-    wireSubscribe(block);
-    return;
+    ${table}
+    <p class="schedule-src">${feedConfig().note} &bull; times and locations subject to change &bull; 🗓️ = add game to your calendar</p>`;
   }
-
   const w = games.filter((g) => g.result === 'W').length;
   const l = games.filter((g) => g.result === 'L').length;
   const t = games.filter((g) => g.result === 'T').length;
-  const gf = games.reduce((s, g) => s + (parseInt(g.score?.split(/[-–]/)[0], 10) || 0), 0);
-  const ga = games.reduce((s, g) => s + (parseInt(g.score?.split(/[-–]/)[1], 10) || 0), 0);
-
-  block.innerHTML = `
-    ${printHeader()}
+  const gf = games.reduce((n, g) => n + (parseInt(g.score?.split(/[-–]/)[0], 10) || 0), 0);
+  const ga = games.reduce((n, g) => n + (parseInt(g.score?.split(/[-–]/)[1], 10) || 0), 0);
+  return `
     <div class="schedule-summary">
       <div class="sum-tile navy"><span class="sum-num">${w}</span><span class="sum-lbl">Wins</span></div>
       <div class="sum-tile navy"><span class="sum-num">${l}</span><span class="sum-lbl">Losses</span></div>
@@ -419,31 +445,20 @@ function renderSchedule(block, games) {
       <div class="sum-tile navy-light"><span class="sum-num">${ga}</span><span class="sum-lbl">Goals Against</span></div>
     </div>
 
-    ${subscribeBar()}
-
     <div class="schedule-controls">
-      <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all">All Games</button>
+      <div class="filter-buttons" role="group" aria-label="Results">
+        <button class="filter-btn active" data-filter="all">All Results</button>
         <button class="filter-btn" data-filter="W">Wins</button>
         <button class="filter-btn" data-filter="L">Losses</button>
         <button class="filter-btn" data-filter="T">Ties</button>
       </div>
       <button type="button" class="print-btn">🖨 Print Schedule</button>
     </div>
+    ${table}
+    <p class="schedule-src">${feedConfig().season} &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>${games.some((g) => g.sheet) ? ' and the club' : ''}</p>`;
+}
 
-    <div class="schedule-table">
-      <div class="sg-header">
-        <span>Date</span>
-        <span>Opponent</span>
-        <span>Score</span>
-        <span>Result</span>
-      </div>
-      <div class="sg-rows">${renderRows(games)}</div>
-    </div>
-
-    <p class="schedule-src">${feedConfig().season} &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a></p>
-  `;
-
+function wireResultFilter(block) {
   block.querySelectorAll('.filter-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       block.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
@@ -454,10 +469,34 @@ function renderSchedule(block, games) {
       });
     });
   });
+}
 
-  wirePrint(block);
-  wireCalendars(block);
+function renderSchedule(block, games) {
+  const tournamentPage = feedConfig().key === 'mid-atlantic';
+  // Team pages filter by game type: League (default), Tournament, Exhibition,
+  // All Games ("Other" games show under All Games).
+  const types = tournamentPage ? [] : ['League', 'Tournament', 'Exhibition', 'All'];
+  const count = (type) => (type === 'All' ? games.length : games.filter((g) => (g.type || 'League') === type).length);
+  block.innerHTML = `
+    ${printHeader()}
+    ${subscribeBar()}
+    ${types.length ? `<div class="type-filter" role="group" aria-label="Game type">
+      ${types.map((type) => `<button type="button" class="type-btn" data-type="${type}" aria-pressed="${type === 'League'}">${type === 'All' ? 'All Games' : type}<span class="type-count">${count(type)}</span></button>`).join('')}
+    </div>` : ''}
+    <div class="schedule-body"></div>`;
   wireSubscribe(block);
+  const body = block.querySelector('.schedule-body');
+  const show = (type) => {
+    const list = tournamentPage || type === 'All' ? games : games.filter((g) => (g.type || 'League') === type);
+    body.innerHTML = scheduleBody(list, tournamentPage ? 'All' : type);
+    block.classList.toggle('schedule-upcoming', !list.some((g) => ['W', 'L', 'T'].includes(g.result)));
+    block.querySelectorAll('.type-btn').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.type === type)));
+    wireResultFilter(body);
+    wirePrint(body);
+    wireCalendars(body);
+  };
+  block.querySelectorAll('.type-btn').forEach((b) => b.addEventListener('click', () => show(b.dataset.type)));
+  show(tournamentPage ? 'All' : 'League');
 }
 
 export default function decorate(block) {

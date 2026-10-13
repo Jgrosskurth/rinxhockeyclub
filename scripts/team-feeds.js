@@ -1,6 +1,8 @@
-// Shared loaders for the GameSheet feeds written by the pull-schedule workflow.
-// Used by the homepage hero ("Next up"), the results rail and the standings
-// summary. Each feed is fetched once per page view and shared between blocks.
+// Shared loaders for the GameSheet feeds written by the pull-schedule workflow,
+// plus the DA sheet /other-games for exhibition and other non-GameSheet games.
+// Used by the homepage hero ("Next up"), the results rail, the standings
+// summary and the schedule/standings pages. Each source is fetched once per
+// page view and shared between blocks.
 import { teamLogo, RINX_LOGO } from './team-logos.js';
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
@@ -78,6 +80,117 @@ export function tidyTeam(name) {
   return s || name;
 }
 
+// Game types, in the order the schedule and standings filters show them.
+// League and Tournament come from GameSheet; Exhibition and Other (and any
+// tournament GameSheet doesn't cover) come from the DA sheet.
+export const GAME_TYPES = ['League', 'Tournament', 'Exhibition', 'Other'];
+
+/**
+ * Game type for a sheet's Type cell ("Exhibition", "tournament", ...).
+ * @param {string} text
+ */
+export function gameType(text) {
+  if (/tourn/i.test(text || '')) return 'Tournament';
+  if (/exhib|scrimmage|friendly/i.test(text || '')) return 'Exhibition';
+  if (/league/i.test(text || '')) return 'League';
+  return 'Other';
+}
+
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// Sheet dates as typed ("Oct 25, 2026", "October 25 2026", "10/25/2026",
+// "2026-10-25") -> GameSheet's "Oct 25, 2026"; '' if unreadable.
+function sheetDate(text) {
+  const t = (text || '').trim();
+  let m = t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (m) return `${MONTH_NAMES[+m[2] - 1]} ${+m[3]}, ${m[1]}`;
+  m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+  if (m) return `${MONTH_NAMES[+m[1] - 1]} ${+m[2]}, ${m[3].length === 2 ? `20${m[3]}` : m[3]}`;
+  m = t.match(/([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2}),?\s+(\d{4})/);
+  if (m && MONTH_NAMES.some((n) => n.toLowerCase() === m[1].toLowerCase())) {
+    return `${m[1][0].toUpperCase()}${m[1].slice(1, 3).toLowerCase()} ${+m[2]}, ${m[3]}`;
+  }
+  return '';
+}
+
+// "Oct 9, 2026" -> "2026-10-09", for matching games across sources.
+function dayKey(date) {
+  const m = (date || '').match(/([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2}),?\s+(\d{4})/);
+  if (!m) return '';
+  const month = MONTH_NAMES.findIndex((n) => n.toLowerCase() === m[1].toLowerCase()) + 1;
+  return `${m[3]}-${String(month).padStart(2, '0')}-${m[2].padStart(2, '0')}`;
+}
+
+function sameOpponent(a, b) {
+  const norm = (x) => tidyTeam(x).toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
+  const [x, y] = [norm(a), norm(b)];
+  if (!x || !y) return false;
+  if (x === y || x.includes(y) || y.includes(x)) return true;
+  const word = (z) => z.split(' ').find((w) => w.length > 3) || z;
+  return word(x) === word(y);
+}
+
+/**
+ * True when two feed-shaped games are the same game (same day, same opponent).
+ * @param {object} a { date, opponent }
+ * @param {object} b { date, opponent }
+ */
+export function sameGame(a, b) {
+  return dayKey(a.date) === dayKey(b.date) && sameOpponent(a.opponent, b.opponent);
+}
+
+let otherSheet;
+function loadOtherSheet() {
+  if (!otherSheet) {
+    otherSheet = fetch('/other-games.json')
+      .then((resp) => (resp.ok ? resp.json() : { data: [] }))
+      .then((json) => json.data || [])
+      .catch(() => []);
+  }
+  return otherSheet;
+}
+
+/**
+ * A team's rows from the DA sheet /other-games, in GameSheet's feed shape
+ * ({ date, time, opponent, venue, location, score, result, gameId }) plus
+ * a `type`. Example rows and rows without a date or opponent are skipped.
+ * @param {string} key '10u' | '14u'
+ */
+export async function loadOtherGames(key) {
+  const rows = await loadOtherSheet();
+  return rows.map((r) => {
+    const teams = Object.keys(TEAMS).filter((k) => new RegExp(`\\b${k}\\b`, 'i').test(r.Team || ''));
+    if (teams.length !== 1 || teams[0] !== key || /example/i.test(r.Team || '')) return null;
+    const date = sheetDate(r.Date);
+    const opponent = (r.Opponent || '').trim();
+    if (!date || !opponent) return null;
+    const rink = (r.Rink || '').trim();
+    const score = ((r.Score || '').match(/(\d+)\s*[-–]\s*(\d+)/) || []).slice(1, 3).join('-');
+    const result = ((r.Result || '').trim().match(/^[WLT]/i) || [''])[0].toUpperCase();
+    return {
+      date,
+      time: (r.Time || '').trim(),
+      opponent,
+      venue: /\brinx\b/i.test(rink) ? 'Home' : 'Away',
+      location: rink,
+      score: result ? score : '',
+      result: score ? result : '',
+      gameId: `sheet-${key}-${dayKey(date)}-${opponent.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+      type: gameType(r.Type),
+    };
+  }).filter(Boolean);
+}
+
+/**
+ * Sheet games for a team that GameSheet doesn't already have (GameSheet wins).
+ * @param {string} key '10u' | '14u'
+ * @param {object[]} gamesheet feed-shaped GameSheet games
+ */
+export async function extraGames(key, gamesheet) {
+  const other = await loadOtherGames(key);
+  return other.filter((o) => !gamesheet.some((g) => sameGame(g, o)));
+}
+
 // "04 - 10U SILVER" -> "04 - 10U Silver"
 const tidyDivision = (div) => (div || '').trim()
   .replace(/\b([A-Z])([A-Z]{2,})\b/g, (m, a, b) => a + b.toLowerCase());
@@ -104,6 +217,9 @@ function normalizeGame(g, feed, team) {
   if (!when) return null;
   const event = TOURNAMENTS[feed];
   const tournament = event?.name || null;
+  // Games from the DA sheet carry their own type and no standings.
+  const sheet = !!g.type;
+  const type = g.type || (tournament ? 'Tournament' : 'League');
   const opponent = g.opponent || '';
   // League opponents end "04 - 10U SILVER"; tournament ones "10A".
   const division = tournament
@@ -112,6 +228,14 @@ function normalizeGame(g, feed, team) {
   const opp = tidyTeam(opponent);
   const home = g.venue === 'Home';
   const local = new Date(when.year, when.month, when.day);
+  let standingsFeed = null;
+  let competition = type;
+  if (!sheet) {
+    standingsFeed = event ? event.standings : team.standings;
+    competition = tournament
+      ? [tournament, division].filter(Boolean).join(' · ')
+      : ['LIAHL', tidyDivision(division)].filter(Boolean).join(' · ');
+  }
   return {
     when,
     day: local,
@@ -122,16 +246,16 @@ function normalizeGame(g, feed, team) {
     oppLogo: teamLogo(opp),
     // Tournament "Home"/"Away" is a bench designation, not a rink.
     prefix: !tournament && !home ? 'at' : 'vs',
+    type,
+    gameId: g.gameId || '',
     location: g.location || '',
     home: home && !tournament,
     score: g.score || '',
     result: g.result || '',
     tournament,
     // Records on the "Next up" card come from the game's own competition.
-    standingsFeed: event ? event.standings : team.standings,
-    competition: tournament
-      ? [tournament, division].filter(Boolean).join(' · ')
-      : ['LIAHL', tidyDivision(division)].filter(Boolean).join(' · '),
+    standingsFeed,
+    competition,
   };
 }
 
@@ -145,9 +269,14 @@ export async function loadTeamGames(key) {
   const team = TEAMS[key];
   const results = await Promise.allSettled(team.feeds.map(loadFeed));
   if (results.every((r) => r.status === 'rejected')) throw new Error('feeds unavailable');
-  const games = results.flatMap((r, i) => (r.status === 'fulfilled'
-    ? (r.value.games || []).map((g) => normalizeGame(g, team.feeds[i], team)).filter(Boolean)
-    : []));
+  const raw = results.flatMap((r) => (r.status === 'fulfilled' ? r.value.games || [] : []));
+  const extra = await extraGames(key, raw);
+  const games = [
+    ...results.flatMap((r, i) => (r.status === 'fulfilled'
+      ? (r.value.games || []).map((g) => normalizeGame(g, team.feeds[i], team)).filter(Boolean)
+      : [])),
+    ...extra.map((g) => normalizeGame(g, null, team)).filter(Boolean),
+  ];
   const order = (g) => Date.UTC(g.when.year, g.when.month, g.when.day, g.when.hour, g.when.minute);
   games.sort((a, b) => order(a) - order(b));
   const today = new Date();
@@ -188,6 +317,7 @@ export async function loadStandings(key) {
  * @returns {Promise<{us?: string, them?: string}>}
  */
 export async function loadRecords(game) {
+  if (!game.standingsFeed) return {};
   try {
     const data = await loadFeed(game.standingsFeed);
     const rec = (t) => `${t.w}-${t.l}-${t.t}`;

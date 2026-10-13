@@ -4,12 +4,15 @@ Writes data/calendar-10u.ics and data/calendar-14u.ics, which families add to
 their phone calendars once ("Subscribe" on the schedule pages); calendar apps
 re-check them, so new games, time changes and final scores show up on their
 own. Each game keeps its GameSheet id as its UID, so a change updates the
-existing event instead of adding a duplicate. Run after the schedule pulls in
-.github/workflows/pull-schedule.yml.
+existing event instead of adding a duplicate. Exhibition and other games come
+from the published DA sheet /other-games (GameSheet wins when a game is in
+both, as on the site; see scripts/team-feeds.js). Run after the schedule pulls
+in .github/workflows/pull-schedule.yml.
 """
 
 import json
 import re
+import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -62,6 +65,87 @@ DTSTART:19701101T020000
 RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE"""
+
+
+OTHER_GAMES_URL = f'{SITE}/other-games.json'
+MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+
+def load_other_rows():
+    """Rows of the published DA sheet, or [] if it can't be read."""
+    try:
+        req = urllib.request.Request(OTHER_GAMES_URL, headers={'User-Agent': 'rinx-calendars'})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            return json.loads(resp.read().decode()).get('data', [])
+    except Exception as err:  # the calendars still build from GameSheet
+        print(f'other-games sheet unavailable: {err}')
+        return []
+
+
+def sheet_date(text):
+    """'Oct 25, 2026' / '10/25/2026' / '2026-10-25' -> 'Oct 25, 2026' ('' if unreadable)."""
+    t = (text or '').strip()
+    m = re.match(r'^(\d{4})-(\d{1,2})-(\d{1,2})', t)
+    if m:
+        return f'{MONTHS[int(m[2]) - 1]} {int(m[3])}, {m[1]}'
+    m = re.match(r'^(\d{1,2})/(\d{1,2})/(\d{2,4})', t)
+    if m:
+        year = m[3] if len(m[3]) == 4 else f'20{m[3]}'
+        return f'{MONTHS[int(m[1]) - 1]} {int(m[2])}, {year}'
+    m = re.search(r'([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2}),?\s+(\d{4})', t)
+    if m and m[1].title() in MONTHS:
+        return f'{m[1].title()} {int(m[2])}, {m[3]}'
+    return ''
+
+
+def game_type(text):
+    t = (text or '').lower()
+    if 'tourn' in t:
+        return 'Tournament'
+    if re.search(r'exhib|scrimmage|friendly', t):
+        return 'Exhibition'
+    if 'league' in t:
+        return 'League'
+    return 'Other'
+
+
+def other_games(key, rows):
+    """A team's sheet rows in GameSheet's feed shape, plus a 'type'."""
+    games = []
+    for r in rows:
+        team = r.get('Team') or ''
+        hits = [k for k in TEAMS if re.search(rf'\b{k}\b', team, re.I)]
+        if hits != [key] or re.search('example', team, re.I):
+            continue
+        date, opp = sheet_date(r.get('Date')), (r.get('Opponent') or '').strip()
+        if not date or not opp:
+            continue
+        rink = (r.get('Rink') or '').strip()
+        sm = re.search(r'(\d+)\s*[-–]\s*(\d+)', r.get('Score') or '')
+        rm = re.match(r'[WLT]', (r.get('Result') or '').strip(), re.I)
+        result = rm[0].upper() if rm and sm else ''
+        day = datetime.strptime(date, '%b %d, %Y').strftime('%Y%m%d')
+        games.append({
+            'date': date, 'time': (r.get('Time') or '').strip(), 'opponent': opp,
+            'venue': 'Home' if re.search(r'\brinx\b', rink, re.I) else 'Away',
+            'location': rink, 'score': f'{sm[1]}-{sm[2]}' if result else '', 'result': result,
+            'gameId': f"sheet-{key}-{day}-{re.sub(r'[^a-z0-9]+', '-', opp.lower())}",
+            'type': game_type(r.get('Type')),
+        })
+    return games
+
+
+def same_game(a, b):
+    """Same day and (loosely) the same opponent."""
+    def norm(x):
+        return re.sub(r'[^a-z0-9 ]', '', tidy_team(x).lower()).strip()
+
+    def word(z):
+        return next((w for w in z.split() if len(w) > 3), z)
+    if sheet_date(a['date']) != sheet_date(b['date']):
+        return False
+    x, y = norm(a['opponent']), norm(b['opponent'])
+    return bool(x and y) and (x == y or x in y or y in x or word(x) == word(y))
 
 
 def tidy_team(name):
@@ -118,13 +202,16 @@ def parse_when(date, time):
 
 def event(game, team, tournament):
     when, timed = parse_when(game['date'], game.get('time', ''))
+    sheet_type = game.get('type')
     home = game.get('venue') == 'Home' and not tournament
     prefix = 'at' if game.get('venue') != 'Home' and not tournament else 'vs'
     opp = tidy_team(game.get('opponent', ''))
     summary = f"{team['short']} {prefix} {opp}"
+    if sheet_type and sheet_type != 'League':
+        summary += f' · {sheet_type}'
     if game.get('result') and game.get('score'):
         summary += f" ({game['result']} {game['score']})"
-    details = [division(game.get('opponent', ''), tournament)]
+    details = [sheet_type or division(game.get('opponent', ''), tournament)]
     if game.get('result'):
         details.append(f"Final: {game['result']} {game.get('score', '')}".strip())
     details.append(f"Schedule: {SITE}{team['page']}")
@@ -156,8 +243,9 @@ def slug(text):
     return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
 
 
-def build(key, team):
+def build(key, team, sheet_rows):
     events = []
+    gamesheet = []
     for feed, tournament in team['feeds']:
         path = DATA / feed
         if not path.exists():
@@ -165,8 +253,16 @@ def build(key, team):
         for game in json.loads(path.read_text()).get('games', []):
             try:
                 events.append((parse_when(game['date'], game.get('time', ''))[0], event(game, team, tournament)))
+                gamesheet.append(game)
             except (KeyError, ValueError):
                 continue
+    for game in other_games(key, sheet_rows):
+        if any(same_game(game, g) for g in gamesheet):
+            continue  # GameSheet already has it
+        try:
+            events.append((parse_when(game['date'], game.get('time', ''))[0], event(game, team, None)))
+        except (KeyError, ValueError):
+            continue
     events.sort(key=lambda e: e[0])
     lines = [
         'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Rinx Hockey Club//Team schedule//EN',
@@ -185,5 +281,6 @@ def build(key, team):
 
 
 if __name__ == '__main__':
+    rows = load_other_rows()
     for k, t in TEAMS.items():
-        build(k, t)
+        build(k, t, rows)

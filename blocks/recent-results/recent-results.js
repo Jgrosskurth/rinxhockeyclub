@@ -31,7 +31,7 @@ function card(g, isNext) {
     <p class="fx-top">${top}</p>
     <p class="fx-opp">${logo}<span>${g.prefix} ${g.opp}</span></p>
     ${res}
-    <p class="fx-meta">${g.home ? 'The Rinx' : g.location}</p>
+    <p class="fx-meta">${g.type && g.type !== 'League' ? `${g.type} · ` : ''}${g.home ? 'The Rinx' : g.location}</p>
   </li>`;
 }
 
