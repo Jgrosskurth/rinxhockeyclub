@@ -151,7 +151,7 @@ export default async function decorate(block) {
       ${teams.map((t) => `
         <section class="tr-panel" id="tr-panel-${t.key}" role="tabpanel" aria-labelledby="tr-tab-${t.key}"${t.key === current ? '' : ' hidden'}>
           <div class="tr-hall">
-            <h2>Championship Banners</h2>
+            <h2>Awards & Accolades</h2>
             ${bannerList(banners[t.key], t.label)}
           </div>
           <div class="tr-photos">
