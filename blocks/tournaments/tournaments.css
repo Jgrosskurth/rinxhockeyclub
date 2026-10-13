@@ -211,6 +211,7 @@
     padding: 40px 20px;
   }
 }
+
 .t-section {
   margin-bottom: 60px;
 }
@@ -234,3 +235,4 @@
 
 .t-section-completed .t-section-title {
   color: var(--color-gray);
+}
