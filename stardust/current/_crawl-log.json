@@ -1,0 +1,32 @@
+{
+  "discovery": {
+    "fetchTechnique": "headless",
+    "count": 1,
+    "concurrency": 4
+  },
+  "consent": {
+    "method": "auto"
+  },
+  "favicon": {
+    "url": "https://www.rinxhockeyclub.com/icons/rinxlogo.png",
+    "file": "assets/favicon.png"
+  },
+  "crawl": {
+    "failures": []
+  },
+  "visionCheck": [
+    {
+      "slug": "index",
+      "verdict": "ok",
+      "notes": "Screenshot matches record: navy rink-SVG hero with crest, news slider, recent results, about (3 photos), coaching staff, facility, Instagram feed, footer. cssBackgrounds:[] is correct \u2014 hero art is an inline SVG, not a CSS background. Logo captured. Not a consent wall/SPA shell. Mobile pass: Instagram widget area rendered blank at capture time."
+    }
+  ],
+  "siblingCandidates": [
+    {
+      "origin": "https://rinxspring2026.itemorder.com",
+      "confidence": "low",
+      "evidence": "'Shop Gear' nav link \u2014 third-party team-store vendor, not a same-brand site",
+      "decision": "excluded"
+    }
+  ]
+}

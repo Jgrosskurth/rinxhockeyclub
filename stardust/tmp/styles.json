@@ -1,0 +1,323 @@
+{
+ "bg": [
+  [
+   "rgb(255, 255, 255)",
+   2078687.1928710938
+  ],
+  [
+   "rgb(4, 30, 66)",
+   1786271.953125
+  ],
+  [
+   "rgb(232, 240, 249)",
+   605317.5
+  ],
+  [
+   "rgb(200, 16, 46)",
+   40088.27197265625
+  ],
+  [
+   "rgba(255, 255, 255, 0.1)",
+   2494.3359375
+  ],
+  [
+   "rgb(22, 163, 74)",
+   2352
+  ],
+  [
+   "rgb(229, 231, 235)",
+   192
+  ]
+ ],
+ "fg": [
+  [
+   "rgb(4, 30, 66)",
+   22
+  ],
+  [
+   "rgb(107, 114, 128)",
+   22
+  ],
+  [
+   "rgb(255, 255, 255)",
+   21
+  ],
+  [
+   "rgba(255, 255, 255, 0.85)",
+   12
+  ],
+  [
+   "rgba(255, 255, 255, 0.5)",
+   9
+  ],
+  [
+   "rgb(200, 16, 46)",
+   5
+  ],
+  [
+   "rgba(255, 255, 255, 0.65)",
+   4
+  ],
+  [
+   "rgba(255, 255, 255, 0.8)",
+   1
+  ],
+  [
+   "rgba(255, 255, 255, 0.55)",
+   1
+  ],
+  [
+   "rgba(255, 255, 255, 0.4)",
+   1
+  ]
+ ],
+ "radii": [
+  [
+   "50%",
+   16
+  ],
+  [
+   "8px",
+   15
+  ],
+  [
+   "4px",
+   12
+  ],
+  [
+   "10px",
+   9
+  ],
+  [
+   "6px",
+   4
+  ],
+  [
+   "2px",
+   1
+  ]
+ ],
+ "shadows": [
+  [
+   "rgba(4, 30, 66, 0.08) 0px 2px 12px 0px",
+   12
+  ],
+  [
+   "rgba(0, 0, 0, 0.4) 0px 2px 20px 0px",
+   1
+  ],
+  [
+   "rgba(4, 30, 66, 0.15) 0px 4px 16px 0px",
+   1
+  ]
+ ],
+ "fonts": [
+  [
+   "Barlow|400",
+   30
+  ],
+  [
+   "Barlow Condensed|900",
+   14
+  ],
+  [
+   "Barlow Condensed|700",
+   14
+  ],
+  [
+   "Barlow Condensed|800",
+   12
+  ],
+  [
+   "Barlow|700",
+   11
+  ],
+  [
+   "Barlow|500",
+   7
+  ],
+  [
+   "Barlow Condensed|400",
+   4
+  ],
+  [
+   "Barlow|600",
+   3
+  ],
+  [
+   "Arial|400",
+   2
+  ],
+  [
+   "Barlow Condensed|600",
+   1
+  ]
+ ],
+ "sizes": [
+  [
+   "Barlow|11.2px|17.92px",
+   9
+  ],
+  [
+   "Barlow|16px|25.6px",
+   9
+  ],
+  [
+   "Barlow|14.4px|23.04px",
+   7
+  ],
+  [
+   "Barlow Condensed|15.2px|24.32px",
+   6
+  ],
+  [
+   "Barlow Condensed|20px|24px",
+   6
+  ],
+  [
+   "Barlow|12px|19.2px",
+   6
+  ],
+  [
+   "Barlow|15.2px|25.84px",
+   5
+  ],
+  [
+   "Barlow|13.6px|23.12px",
+   5
+  ],
+  [
+   "Barlow Condensed|15.2px|normal",
+   4
+  ],
+  [
+   "Barlow Condensed|16px|normal",
+   4
+  ],
+  [
+   "Barlow Condensed|12px|19.2px",
+   4
+  ],
+  [
+   "Barlow Condensed|22.4px|22.4px",
+   4
+  ],
+  [
+   "Barlow Condensed|16.8px|16.8px",
+   4
+  ],
+  [
+   "Barlow Condensed|35.2px|35.2px",
+   3
+  ],
+  [
+   "Barlow|11.52px|18.432px",
+   3
+  ],
+  [
+   "Barlow|13.6px|16.32px",
+   3
+  ],
+  [
+   "Barlow Condensed|72px|68.4px",
+   2
+  ],
+  [
+   "Arial|17.6px|normal",
+   2
+  ]
+ ],
+ "sections": [
+  {
+   "sel": "header.header-wrapper header-wrapper",
+   "h": 79,
+   "bg": "rgb(4, 30, 66)",
+   "pad": "0px",
+   "blocks": [
+    "header"
+   ]
+  },
+  {
+   "sel": "div.section section.hero-container",
+   "h": 560,
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "blocks": [
+    "hero"
+   ]
+  },
+  {
+   "sel": "div.hero-followup hero-followup.section.news-slider-container.recent-results-container",
+   "h": 1959,
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "blocks": [
+    "news-slider",
+    "recent-results",
+    "about",
+    "columns"
+   ]
+  },
+  {
+   "sel": "div.instagram instagram.section.instagram-container",
+   "h": 583,
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "20px 0px 40px",
+   "blocks": [
+    "instagram"
+   ]
+  },
+  {
+   "sel": "div.section section",
+   "h": 80,
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "40px",
+   "blocks": []
+  },
+  {
+   "sel": "footer.footer-wrapper footer-wrapper",
+   "h": 289,
+   "bg": "rgba(0, 0, 0, 0)",
+   "pad": "0px",
+   "blocks": [
+    "footer"
+   ]
+  }
+ ],
+ "navItems": [
+  "Home",
+  "Roster +",
+  "10U Squirts",
+  "14U Bantam",
+  "Schedule +",
+  "10U Squirts",
+  "14U Bantam",
+  "Stats +",
+  "10U Squirts",
+  "14U Bantam",
+  "Standings +",
+  "10U Squirts",
+  "14U Bantam",
+  "Tournaments",
+  "Sponsors",
+  "Clinics",
+  "Contact",
+  "Shop Gear"
+ ],
+ "docH": 3610,
+ "mobile": {
+  "docH": 4375,
+  "heroH": 360,
+  "firstFold": [
+   "Rinx HockeyClub",
+   "14U Remains Undefeated",
+   "10U Pours on the Goals",
+   "14U Keep Rolling",
+   "10U Landslide Victory",
+   "Comeback Tie",
+   "Clean Sweep",
+   "Recent Results"
+  ],
+  "burger": true
+ }
+}

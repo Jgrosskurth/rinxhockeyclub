@@ -1,0 +1,141 @@
+{
+ "_provenance": {
+  "writtenBy": "stardust:migrate (manual, agent)",
+  "writtenAt": "2026-10-07T14:20:44Z",
+  "stardustVersion": "0.10.0"
+ },
+ "site": {
+  "originUrl": "https://www.rinxhockeyclub.com",
+  "deployUrl": null,
+  "extractedAt": "2026-10-07T12:18:21Z",
+  "pageCap": 1,
+  "totalDiscovered": 15,
+  "crawled": 1
+ },
+ "direction": {
+  "resolvedAt": "2026-10-07T12:25:58Z",
+  "phrase": "uplift rinxhockeyclub.com \u2014 visual design refresh, homepage experience, navigation & mobile UX",
+  "directionFile": "stardust/direction.md",
+  "iaFidelity": "reimagined",
+  "variantMode": "role-differentiated",
+  "variants": [
+   "A",
+   "B",
+   "C"
+  ]
+ },
+ "pages": [
+  {
+   "slug": "index",
+   "url": "https://www.rinxhockeyclub.com/",
+   "title": "Rinx Hockey Club | Long Island - Tier III Travel Hockey",
+   "type": null,
+   "status": "migrated",
+   "history": [
+    {
+     "status": "extracted",
+     "at": "2026-10-07T12:18:21Z"
+    },
+    {
+     "status": "directed",
+     "at": "2026-10-07T12:25:58Z"
+    },
+    {
+     "status": "prototyped",
+     "at": "2026-10-07T13:19:10Z"
+    },
+    {
+     "status": "approved",
+     "at": "2026-10-07T14:20:44Z",
+     "note": "user approved variant B (\"ok let's build B into the live homepage\")"
+    },
+    {
+     "status": "migrated",
+     "at": "2026-10-07T14:20:44Z"
+    }
+   ],
+   "stale": false,
+   "staleReason": null,
+   "currentStatePath": "stardust/current/pages/index.json",
+   "prototypePath": "stardust/prototypes/index-A-proposed.html",
+   "migratedPath": "https://www.rinxhockeyclub.com/",
+   "prototypes": {
+    "A": {
+     "proposed": "stardust/prototypes/index-A-proposed.html",
+     "shape": "stardust/prototypes/index-A-shape.md"
+    },
+    "B": {
+     "proposed": "stardust/prototypes/index-B-proposed.html",
+     "shape": "stardust/prototypes/index-B-shape.md"
+    },
+    "C": {
+     "proposed": "stardust/prototypes/index-C-proposed.html",
+     "cinematic": "stardust/prototypes/index-C-cinematic.html",
+     "shape": "stardust/prototypes/index-C-shape.md",
+     "motionRegister": "kinetic-display",
+     "registerSource": "heuristic"
+    }
+   },
+   "_provenance": {
+    "critique": {
+     "by": "impeccable-finish-reviewer x3",
+     "rounds": 2,
+     "finalBatch": "2026-10-07T13:19:10Z",
+     "openP0": 0,
+     "openP1": 0,
+     "note": "Final-verdict P1s (Next-game pill wrap; Instagram post tiles not in shape brief) fixed per reviewer-specified remedy and verified by probe; no further review round (two-round ceiling)."
+    },
+    "audit": {
+     "overflow360": false,
+     "h1Count": 1,
+     "sectionsMissingAttrs": 0,
+     "brokenImages": 0,
+     "pageErrors": 0,
+     "contrastExceptions": [
+      "wordmark \"Hockey\" #C8102E on navy 2.81:1 \u2014 WCAG 1.4.3 logotype exemption, matches live site"
+     ]
+    },
+    "adapt": {
+     "viewports": [
+      1440,
+      390,
+      360
+     ],
+     "horizontalOverflow": false
+    },
+    "motionValidation": {
+     "variant": "C",
+     "register": "kinetic-display",
+     "lenis": true,
+     "reducedMotionNeutralised": true,
+     "noJsVisible": true,
+     "marquee": "pause control present; detector marquee note accepted as register-canonical"
+    },
+    "detector": {
+     "A": 0,
+     "B": 0,
+     "C-proposed": 0,
+     "C-cinematic": 1
+    },
+    "designMdDocumenter": "deferred to approval \u2014 DESIGN-A/B/C remain the per-variant specs until a variant is chosen"
+   },
+   "approvedVariant": "B",
+   "migration": {
+    "commit": "199a03c (merge of homepage-b 60e9ffc)",
+    "blocks": [
+     "hero",
+     "recent-results",
+     "standings-summary (new)",
+     "news-slider",
+     "about",
+     "columns"
+    ],
+    "contentChange": "DA index.html: recent-results moved under hero, standings-summary added; original saved at stardust/tmp/da-index.orig.html",
+    "notCarried": [
+     "header/footer kept site-wide as live",
+     "Instagram keeps the live Elfsight feed"
+    ]
+   }
+  }
+ ]
+}

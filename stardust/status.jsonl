@@ -1,0 +1,7 @@
+{"at": "2026-10-07T12:18:21Z", "skill": "stardust:extract", "phase": "extract", "event": "start", "note": "--single via uplift; 1/1 captured, vision ok"}
+{"at": "2026-10-07T12:18:21Z", "skill": "stardust:extract", "phase": "extract", "event": "end", "note": "--single via uplift; 1/1 captured, vision ok"}
+{"at": "2026-10-07T12:18:21Z", "skill": "stardust:uplift", "phase": "2-tensions", "event": "start"}
+{"at":"2026-10-07T12:22:22Z","skill":"stardust:uplift","phase":"2-3","event":"end","note":"7 improvements, 8 candidates (2 disqualified), B=#3 live-data, C=#4 rink gesture @ kinetic-display"}
+{"at": "2026-10-07T12:25:58Z", "skill": "stardust:direct", "phase": "all", "event": "end", "note": "PRODUCT.md + DESIGN-A/B/C written; index \u2192 directed"}
+{"at": "2026-10-07T13:19:10Z", "skill": "stardust:prototype", "phase": "2-2.8", "event": "end", "note": "A/B/C proposed + C cinematic; gates passed; index -> prototyped"}
+{"at": "2026-10-07T14:20:44Z", "skill": "stardust:migrate", "event": "end", "note": "variant B built into live homepage; index -> migrated"}

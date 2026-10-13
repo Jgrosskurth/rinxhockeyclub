@@ -1,0 +1,366 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:direct",
+    "writtenAt": "2026-10-07T12:25:58Z",
+    "againstInput": "stardust/direction.md",
+    "variant": "A"
+  },
+  "schemaVersion": 2,
+  "name": "Rinx Hockey Club",
+  "variant": "A",
+  "colors": {
+    "rink-navy": "#041E42",
+    "rink-navy-light": "#0a2d5e",
+    "goal-red": "#C8102E",
+    "goal-red-deep": "#a00d24",
+    "ice": "#e8f0f9",
+    "boards": "#F5F6F8",
+    "sheet-white": "#FDFDFE",
+    "slate": "#5b6472",
+    "line": "#e5e7eb",
+    "win-green": "#16a34a"
+  },
+  "typography": {
+    "display": {
+      "fontFamily": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+      "fontSize": "clamp(2.75rem, 7vw, 4.75rem)",
+      "fontWeight": 900,
+      "lineHeight": 0.92,
+      "letterSpacing": "0.01em"
+    },
+    "h2": {
+      "fontFamily": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+      "fontSize": "clamp(2rem, 4vw, 2.44rem)",
+      "fontWeight": 900,
+      "lineHeight": 1,
+      "letterSpacing": "0.02em"
+    },
+    "h3": {
+      "fontFamily": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+      "fontSize": "1.563rem",
+      "fontWeight": 800,
+      "lineHeight": 1.05
+    },
+    "h4": {
+      "fontFamily": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+      "fontSize": "1.25rem",
+      "fontWeight": 800,
+      "lineHeight": 1.15
+    },
+    "body": {
+      "fontFamily": "'Barlow', -apple-system, 'Segoe UI', sans-serif",
+      "fontSize": "1rem",
+      "fontWeight": 400,
+      "lineHeight": 1.6
+    },
+    "body-sm": {
+      "fontFamily": "'Barlow', -apple-system, 'Segoe UI', sans-serif",
+      "fontSize": "0.875rem",
+      "fontWeight": 500,
+      "lineHeight": 1.5
+    },
+    "label": {
+      "fontFamily": "'Barlow', sans-serif",
+      "fontSize": "0.75rem",
+      "fontWeight": 700,
+      "letterSpacing": "0.12em"
+    },
+    "numeral": {
+      "fontFamily": "'Barlow Condensed', sans-serif",
+      "fontSize": "2.44rem",
+      "fontWeight": 900,
+      "lineHeight": 1,
+      "fontFeature": "tabular-nums"
+    }
+  },
+  "rounded": {
+    "sm": "4px",
+    "md": "8px",
+    "pill": "999px",
+    "circle": "50%"
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "section-desktop": "64px",
+    "section-tablet": "48px",
+    "section-mobile": "32px",
+    "container": "1200px"
+  },
+  "components": {
+    "button-primary": {
+      "backgroundColor": "{colors.goal-red}",
+      "textColor": "{colors.sheet-white}",
+      "rounded": "{rounded.sm}",
+      "padding": "12px 22px"
+    },
+    "button-primary-hover": {
+      "backgroundColor": "{colors.goal-red-deep}"
+    },
+    "button-secondary": {
+      "backgroundColor": "{colors.sheet-white}",
+      "textColor": "{colors.rink-navy}",
+      "rounded": "{rounded.sm}",
+      "padding": "12px 22px"
+    },
+    "card": {
+      "backgroundColor": "{colors.sheet-white}",
+      "textColor": "{colors.rink-navy}",
+      "rounded": "{rounded.md}",
+      "padding": "20px"
+    },
+    "badge": {
+      "backgroundColor": "{colors.goal-red}",
+      "textColor": "{colors.sheet-white}",
+      "rounded": "{rounded.pill}",
+      "padding": "3px 10px"
+    },
+    "link": {
+      "textColor": "{colors.goal-red}"
+    }
+  },
+  "extensions": {
+    "variant": {
+      "id": "A",
+      "title": "Faithful + improvements",
+      "role": "risk-averse green-light \u2014 'yes, that's us, with the obvious fixes'",
+      "trait": null,
+      "sectionOrder": [
+        "header (team-first nav)",
+        "hero: rink diagram + crest + wordmark + game-day strip (next game / last result per team)",
+        "news (contained slider)",
+        "recent results (equal row / mobile rail)",
+        "about (photo-led band)",
+        "coaches + facility",
+        "instagram (compact band)",
+        "footer"
+      ],
+      "improvementsApplied": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "colorMeta": {
+      "rink-navy": {
+        "hex": "#041E42",
+        "oklch": "oklch(24.0% 0.076 257.2)"
+      },
+      "rink-navy-light": {
+        "hex": "#0a2d5e",
+        "oklch": "oklch(30.4% 0.096 258.0)"
+      },
+      "goal-red": {
+        "hex": "#C8102E",
+        "oklch": "oklch(53.0% 0.207 22.3)"
+      },
+      "goal-red-deep": {
+        "hex": "#a00d24",
+        "oklch": "oklch(45.1% 0.175 22.1)"
+      },
+      "ice": {
+        "hex": "#e8f0f9",
+        "oklch": "oklch(95.2% 0.015 251.2)"
+      },
+      "boards": {
+        "hex": "#F5F6F8",
+        "oklch": "oklch(97.3% 0.003 264.5)"
+      },
+      "sheet-white": {
+        "hex": "#FDFDFE",
+        "oklch": "oklch(99.4% 0.001 286.4)"
+      },
+      "slate": {
+        "hex": "#5b6472",
+        "oklch": "oklch(50.1% 0.025 259.2)"
+      },
+      "line": {
+        "hex": "#e5e7eb",
+        "oklch": "oklch(92.8% 0.006 264.5)"
+      },
+      "win-green": {
+        "hex": "#16a34a",
+        "oklch": "oklch(62.7% 0.170 149.2)"
+      }
+    },
+    "typographyMeta": {
+      "scale": "modular 1.25 from 16px",
+      "labelFloorPx": 12,
+      "source": "brand-inherited (Barlow Condensed + Barlow)"
+    },
+    "shadows": {
+      "card": "0 2px 12px rgb(4 30 66 / 8%)",
+      "cardHover": "0 6px 20px rgb(4 30 66 / 14%)",
+      "header": "0 2px 16px rgb(4 30 66 / 30%)"
+    },
+    "breakpoints": {
+      "tablet": 600,
+      "desktop": 900,
+      "wide": 1200
+    },
+    "iaPriorities": [
+      {
+        "signal": "audience-routing",
+        "evidence": "T-nav-dup (Roster/Schedule/Stats/Standings \u00d7 10U|14U) + Recent Results 10U/14U toggle",
+        "preserveAs": "both teams reachable from the first viewport and the primary nav",
+        "scope": "site-wide",
+        "mutability": "movable"
+      },
+      {
+        "signal": "commercial-conversion",
+        "evidence": "header 'Shop Gear' red button (rinxspring2026.itemorder.com)",
+        "preserveAs": "persistent header CTA",
+        "scope": "site-wide",
+        "mutability": "movable"
+      },
+      {
+        "signal": "live-data",
+        "evidence": "Recent Results + auto Game Update cards fed by data/*.json",
+        "preserveAs": "above the club/about content",
+        "scope": "home",
+        "mutability": "movable"
+      }
+    ],
+    "divergence": {
+      "mode": "A (brand-faithful)",
+      "signal": "signal-strong",
+      "seed": {
+        "decade": {
+          "value": "2025-now",
+          "picked_by": "reasoned: nhl.com/islanders + nycfc.com matchday-first club sites"
+        },
+        "craft": {
+          "value": "arena signage / scoreboard",
+          "picked_by": "reasoned: captured rink-diagram motif + numeric scores"
+        },
+        "register": {
+          "value": "matchday sports-desk",
+          "picked_by": "reasoned: captured news headline voice"
+        },
+        "ground_family": {
+          "value": "cool off-white (boards)",
+          "picked_by": "inherited",
+          "override": "brand-faithful"
+        }
+      },
+      "font_deck": {
+        "name": "brand-inherited",
+        "picked_by": "user-constraint"
+      },
+      "palette": {
+        "source": "inherited from _brand-extraction.json",
+        "picked_by": "user-constraint",
+        "dropped": [
+          "#FFD700 gold (T-color-imbalance: defined, never used)"
+        ]
+      },
+      "brand_faithful_inversions": [
+        {
+          "what": "pure white #FFFFFF card ground",
+          "resolution": "nudged to sheet-white #FDFDFE (impeccable no-pure-white rule; visually identical)"
+        },
+        {
+          "what": "hex palette",
+          "resolution": "kept as normative hex with OKLCH mirrors in colorMeta"
+        },
+        {
+          "what": "gray #6b7280 body text",
+          "resolution": "darkened to slate #5b6472 for \u2265 5.5:1 on boards (contrast improvement 6)"
+        }
+      ],
+      "references_used": [
+        {
+          "site": "https://www.nhl.com/islanders",
+          "tier": 2,
+          "use": "dated-pattern counter-example (scoreboard rail first)"
+        },
+        {
+          "site": "https://www.nhl.com/kraken",
+          "tier": 2,
+          "use": "corroboration"
+        },
+        {
+          "site": "https://www.nycfc.com/",
+          "tier": 2,
+          "use": "variant B composition anchor (next-match hero + fixture rail)"
+        }
+      ],
+      "anti_toolbox_audit": [
+        {
+          "hit": "centered stacked hero",
+          "variant": "A, C",
+          "justification": "captured signature (crest + stacked wordmark over rink diagram) \u2014 brand-faithful"
+        },
+        {
+          "hit": "all-caps display everywhere",
+          "justification": "captured display-typography signature (Barlow Condensed uppercase)"
+        },
+        {
+          "hit": "card grid",
+          "justification": "captured news/results cards; kept contained (fixes T-bleed)"
+        },
+        {
+          "hit": "colored top borders on cards",
+          "justification": "captured motif; top edge only (no side stripes)"
+        },
+        {
+          "hit": "glassmorphism / backdrop blur",
+          "resolution": "removed from prototypes (impeccable hard rule)"
+        },
+        {
+          "hit": "gradient text",
+          "resolution": "not used; red\u2192transparent rule kept as a rule, not text fill"
+        },
+        {
+          "hit": "generic-2026-SaaS silhouette (big rounded cards + soft pastel)",
+          "resolution": "guarded: hard edges, arena navy, scoreboard numerals"
+        }
+      ]
+    },
+    "componentStyle": {
+      "buttons": "4px radius, Condensed 800 uppercase 0.06em tracking, 44px min height",
+      "cards": "sheet-white, 8px, captured 4px top edge, card shadow",
+      "badges": "pill, 12px label type"
+    },
+    "systemComponentRoles": {
+      "header": {
+        "purpose": "brand + team-first navigation + Shop CTA",
+        "position": "sticky top"
+      },
+      "footer": {
+        "purpose": "club identity, sitemap, address/phone",
+        "position": "page end"
+      },
+      "install-banner": {
+        "purpose": "PWA install prompt",
+        "position": "pinned bottom (mobile), never pushes layout"
+      }
+    },
+    "voice": {
+      "dos": [
+        "Sports-desk headlines from the captured news cards (\"14U Remains Undefeated\")",
+        "Plain, specific labels (\"Next game\", \"Last result\", \"Standings\")"
+      ],
+      "donts": [
+        "Editorial vocabulary (atelier, journal)",
+        "Invented superlatives or stats"
+      ]
+    }
+  },
+  "narrative": {
+    "northStar": "Game day first, two teams, one club.",
+    "keyCharacteristics": [
+      "arena navy + goal red",
+      "condensed uppercase display",
+      "rink-diagram signature",
+      "live scores as content"
+    ]
+  }
+}

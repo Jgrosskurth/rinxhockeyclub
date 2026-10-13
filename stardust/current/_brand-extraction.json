@@ -1,0 +1,374 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:extract",
+    "writtenAt": "2026-10-07T12:13:54Z",
+    "againstInput": "https://www.rinxhockeyclub.com/",
+    "readArtifacts": [
+      "stardust/current/pages/index.json",
+      "stardust/current/assets/screenshots/index.png",
+      "live computed-style probe (desktop 1440 + mobile 390)"
+    ],
+    "notes": "Single-page extract (--single, via stardust:uplift). Cross-page aggregation scope = 1 page (home); palette/radius/type are home-only by construction."
+  },
+  "site": {
+    "name": "Rinx Hockey Club",
+    "tagline": "Travel Hockey \u2022 Long Island, New York",
+    "ogDescription": "The Rinx Hockey Club is a premier Tier III Long Island travel hockey program dedicated to developing young athletes through competitive hockey, professional coaching, and a commitment to teamwork and sportsmanship."
+  },
+  "origins": [
+    {
+      "origin": "https://www.rinxhockeyclub.com",
+      "role": "primary",
+      "pages": [
+        "index"
+      ]
+    }
+  ],
+  "logo": {
+    "source": "img",
+    "sourceSelector": "header .header-logo img",
+    "path": "stardust/current/assets/logo.webp",
+    "format": "webp",
+    "intrinsic": "128x128",
+    "synthesized": false,
+    "alt": "Rinx Hockey Club",
+    "variantsCaptured": [
+      "full-color crest on white tile"
+    ],
+    "variantsMissing": [
+      "monochrome",
+      "inverted",
+      "svg"
+    ]
+  },
+  "favicon": {
+    "path": "stardust/current/assets/favicon.png",
+    "source": "https://www.rinxhockeyclub.com/icons/rinxlogo.png"
+  },
+  "palette": [
+    {
+      "role": "background",
+      "value": "#ffffff",
+      "occurrences": 2078687,
+      "usedAs": [
+        "background"
+      ],
+      "sources": [
+        "index"
+      ],
+      "selector": "cards (.slide-card, .rr-card, .about-card)"
+    },
+    {
+      "role": "primary",
+      "value": "#041e42",
+      "token": "--color-navy",
+      "occurrences": 1786272,
+      "usedAs": [
+        "background",
+        "text"
+      ],
+      "sources": [
+        "index"
+      ],
+      "selector": "header, hero, coach cards, footer, headings"
+    },
+    {
+      "role": "surface",
+      "value": "#e8f0f9",
+      "token": "--color-ice",
+      "occurrences": 605318,
+      "usedAs": [
+        "background"
+      ],
+      "sources": [
+        "index"
+      ],
+      "selector": ".recent-results band"
+    },
+    {
+      "role": "page",
+      "value": "#f5f6f8",
+      "token": "--color-off-white",
+      "usedAs": [
+        "background"
+      ],
+      "sources": [
+        "index"
+      ],
+      "selector": "body"
+    },
+    {
+      "role": "accent",
+      "value": "#c8102e",
+      "token": "--color-red",
+      "occurrences": 40088,
+      "usedAs": [
+        "background",
+        "text",
+        "border"
+      ],
+      "sources": [
+        "index"
+      ],
+      "selector": "Shop Gear CTA, season badge, news tags, title underlines, 'Hockey' in hero h1"
+    },
+    {
+      "role": "text-secondary",
+      "value": "#6b7280",
+      "token": "--color-gray",
+      "usedAs": [
+        "text"
+      ],
+      "sources": [
+        "index"
+      ]
+    },
+    {
+      "role": "border",
+      "value": "#e5e7eb",
+      "token": "--color-gray-light",
+      "usedAs": [
+        "border",
+        "background"
+      ],
+      "sources": [
+        "index"
+      ]
+    },
+    {
+      "role": "status-win",
+      "value": "#16a34a",
+      "occurrences": 2352,
+      "usedAs": [
+        "background"
+      ],
+      "sources": [
+        "index"
+      ],
+      "selector": ".rr-badge W"
+    },
+    {
+      "role": "token-unused",
+      "value": "#ffd700",
+      "token": "--color-gold",
+      "occurrences": 0,
+      "usedAs": [],
+      "sources": []
+    }
+  ],
+  "type": {
+    "heading": {
+      "name": "Barlow Condensed",
+      "stack": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+      "weights": [
+        700,
+        800,
+        900
+      ],
+      "sizes": [
+        "72px (hero h1, clamp(2.5rem,6vw,4.5rem))",
+        "35.2px (h2 section titles)",
+        "22.4px",
+        "20px",
+        "16.8px",
+        "15.2px",
+        "12px"
+      ],
+      "transform": "uppercase",
+      "letterSpacing": "0.02\u20130.08em"
+    },
+    "body": {
+      "name": "Barlow",
+      "stack": "'Barlow', -apple-system, blinkmacsystemfont, 'Segoe UI', sans-serif",
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ],
+      "sizes": [
+        "16px",
+        "15.2px",
+        "14.4px",
+        "13.6px",
+        "12px",
+        "11.2px"
+      ],
+      "lineHeight": "1.6\u20131.7"
+    },
+    "scaleAudit": {
+      "kind": "ad-hoc",
+      "sizes": [
+        11.2,
+        12,
+        13.6,
+        14.4,
+        15.2,
+        16,
+        16.8,
+        20,
+        22.4,
+        35.2,
+        72
+      ],
+      "note": "11 distinct sizes, steps of 0.8\u20131.6px at the small end; no consistent ratio"
+    },
+    "files": [
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400",
+        "host": "Google Fonts",
+        "license": "OFL (open)"
+      }
+    ]
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "sectionPadding": "40px 40px (desktop) / 24px 16px (mobile)",
+    "maxWidth": "1200px",
+    "navHeight": "79px",
+    "observed": [
+      4,
+      8,
+      10,
+      12,
+      16,
+      20,
+      24,
+      32,
+      40,
+      60
+    ]
+  },
+  "motifs": {
+    "borderRadius": {
+      "primary": "8px",
+      "secondary": "4px",
+      "pill": "20px",
+      "circle": "50%",
+      "occurrences": {
+        "50%": 16,
+        "8px": 15,
+        "4px": 12,
+        "10px": 9,
+        "6px": 4,
+        "2px": 1
+      }
+    },
+    "shadows": [
+      {
+        "value": "0 2px 12px rgba(4,30,66,0.08)",
+        "uses": "cards (12)"
+      },
+      {
+        "value": "0 4px 16px rgba(4,30,66,0.15)",
+        "uses": "card hover"
+      },
+      {
+        "value": "0 2px 20px rgba(0,0,0,0.4)",
+        "uses": "sticky header"
+      }
+    ],
+    "gradients": [
+      {
+        "value": "linear-gradient(135deg, #041e42 0%, #0a2d5e 100%)",
+        "uses": "page banners / tournament card heads"
+      },
+      {
+        "value": "linear-gradient(90deg, #c8102e 0%, transparent 100%)",
+        "uses": "section-title underline rule"
+      }
+    ],
+    "patterns": [
+      {
+        "name": "rink-diagram hero",
+        "evidence": "inline SVG ice rink (center/blue lines, faceoff circles) under a 88% navy wash, crest + season pill + stacked condensed uppercase wordmark"
+      },
+      {
+        "name": "section-title rule",
+        "evidence": "uppercase condensed H2 followed by a red\u2192transparent 3px rule (Recent Results, About Our Team)"
+      },
+      {
+        "name": "top-border cards",
+        "evidence": "news cards carry a 4px red top border; result cards a 4px green top border"
+      },
+      {
+        "name": "pill tags",
+        "evidence": "red uppercase pill labels ('GAME UPDATE', '2026\u20132027 SEASON')"
+      },
+      {
+        "name": "navy tile list",
+        "evidence": "coaching staff as stacked navy tiles with circular headshots"
+      },
+      {
+        "name": "team toggle",
+        "evidence": "10U Squirts / 14U Bantam segmented toggle on Recent Results"
+      }
+    ]
+  },
+  "voice": {
+    "heroHeadline": "Rinx Hockey Club",
+    "heroLede": "Travel Hockey \u2022 Long Island, New York",
+    "seasonBadge": "2026\u20132027 Season",
+    "firstParagraph": "The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.",
+    "ctaSamples": [
+      "Shop Gear",
+      "View Full Schedule \u2192",
+      "Get Directions / Open in Maps \u2192"
+    ],
+    "newsHeadlines": [
+      "14U Remains Undefeated",
+      "10U Pours on the Goals",
+      "14U Keep Rolling",
+      "10U Landslide Victory",
+      "Comeback Tie",
+      "Clean Sweep"
+    ],
+    "tone": "proud, punchy sports-desk headlines; plain informational body; ALL-CAPS condensed display",
+    "heroImage": null,
+    "heroMedium": null,
+    "notes": "Hero has no photograph \u2014 the rink SVG diagram is the signature visual. Strong real photography (team photos, facility, Instagram game-day graphics) lives below the fold at thumbnail scale."
+  },
+  "photography": {
+    "assets": [
+      "/images/r1-720.webp (goalie in action)",
+      "/images/4D0F41DF-...-720.webp (team huddle, B&W)",
+      "/images/14u-720.webp (14U team photo with trophy)",
+      "facility panorama (media_1a149b\u2026)",
+      "4 coach headshots",
+      "Instagram feed: game-day graphics + team photos"
+    ],
+    "quality": "authentic, candid team photography; shown at ~340\u00d7220 thumbnails"
+  },
+  "liveData": {
+    "feeds": [
+      "data/schedule-10u.json",
+      "data/schedule-14u.json",
+      "data/standings-*.json",
+      "data/games-*.json"
+    ],
+    "surfaces": [
+      "Recent Results cards (scores, opponent logos, W/L badges)",
+      "auto-generated Game Update news cards"
+    ],
+    "note": "Live GameSheet data refreshed twice daily \u2014 results, standings, schedule, next games all available client-side"
+  },
+  "systemComponents": [
+    {
+      "kind": "header",
+      "fingerprint": "crest + 'RINX HOCKEY CLUB' + 'TIER III/A \u2022 TRAVEL HOCKEY \u2022 LIAHL' + 9 nav items (4 dropdowns: Roster/Schedule/Stats/Standings each \u2192 10U Squirts | 14U Bantam) + red 'Shop Gear' button",
+      "occurrences": 1
+    },
+    {
+      "kind": "footer",
+      "fingerprint": "crest + 'RINX HOCKEY CLUB \u2022 LONG ISLAND, NY' + 9 links + address/phone + copyright",
+      "occurrences": 1
+    },
+    {
+      "kind": "install-banner",
+      "fingerprint": "mobile PWA 'Add to your home screen' bar, pinned bottom",
+      "occurrences": 1
+    }
+  ],
+  "iconFont": null,
+  "register": "brand"
+}
