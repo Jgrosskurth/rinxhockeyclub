@@ -79,7 +79,8 @@ function buildViewer() {
 function openViewer(dialog, photos, start) {
   let index = start;
   const caption = dialog.querySelector('figcaption');
-  // The photo element is created on first open, so there's never an empty <img>.
+  // The photo element is created on first open and given its source straight
+  // away, so the viewer never holds an image without one.
   let img = dialog.querySelector('.tr-viewer-img');
   if (!img) {
     img = document.createElement('img');
