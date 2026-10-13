@@ -76,6 +76,16 @@
       "gameId": "2989497"
     },
     {
+      "date": "Nov 21, 2026",
+      "opponent": "NYH4033-005-North Park 10U Lewis 04 - 10U SILVER",
+      "venue": "Home",
+      "location": "The Rinx",
+      "time": "2:05 PM",
+      "score": "",
+      "result": "",
+      "gameId": "3085750"
+    },
+    {
       "date": "Nov 29, 2026",
       "opponent": "NYH0124-002 Iceworks Islanders 10U Fortunato 04 - 10U SILVER",
       "venue": "Away",
@@ -154,16 +164,6 @@
       "score": "",
       "result": "",
       "gameId": "2989490"
-    },
-    {
-      "date": "Jan 31, 2027",
-      "opponent": "NYH0093-006 Dix Hills Selects 10U Goldfine 04 - 10U SILVER",
-      "venue": "Away",
-      "location": "Dix Hills Ice Rink",
-      "time": "7:35 AM",
-      "score": "",
-      "result": "",
-      "gameId": "2992368"
     }
   ]
 }

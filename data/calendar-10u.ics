@@ -148,6 +148,17 @@ DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-3085750@rinxhockeyclub.com
+DTSTAMP:20261121T140500Z
+DTSTART;TZID=America/New_York:20261121T140500
+DTEND;TZID=America/New_York:20261121T153500
+SUMMARY:Rinx 10U vs North Park
+LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
+DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
+ com/schedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-2989475@rinxhockeyclub.com
 DTSTAMP:20261129T151500Z
 DTSTART;TZID=America/New_York:20261129T151500
@@ -231,17 +242,6 @@ DTSTART;TZID=America/New_York:20270123T151000
 DTEND;TZID=America/New_York:20270123T164000
 SUMMARY:Rinx 10U vs Great Neck Bruins
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
-URL:https://www.rinxhockeyclub.com/schedule
-END:VEVENT
-BEGIN:VEVENT
-UID:gamesheet-2992368@rinxhockeyclub.com
-DTSTAMP:20270131T073500Z
-DTSTART;TZID=America/New_York:20270131T073500
-DTEND;TZID=America/New_York:20270131T090500
-SUMMARY:Rinx 10U at Dix Hills Selects
-LOCATION:Dix Hills Ice Rink\, Dix Hills\, NY
 DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
  com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
