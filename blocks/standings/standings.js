@@ -11,23 +11,10 @@
  */
 
 import { gameSheetLogo, RINX_LOGO } from '../../scripts/team-logos.js';
-import { loadTeamGames } from '../../scripts/team-feeds.js';
+import { loadTeamGames, tidyTeam } from '../../scripts/team-feeds.js';
 import { buildRace, renderPointsRace } from './points-race.js';
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
-
-// Tidy GameSheet's verbose ALL-CAPS / coded team names for display.
-function tidyTeam(name) {
-  let s = (name || '').trim();
-  s = s.replace(/^TB\s+/i, '');
-  s = s.replace(/^NYH?\d+(?:[-\s]\d+)?[-\s]*/i, '');
-  s = s.replace(/[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b.*$/i, '');
-  s = s.replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ').trim();
-  if (s && s === s.toUpperCase()) {
-    s = s.toLowerCase().replace(/\b([a-z])/g, (m, c) => c.toUpperCase());
-  }
-  return s || name;
-}
 
 // Tournament pages read their own feed (see pull-schedule.yml).
 function isTournament() {

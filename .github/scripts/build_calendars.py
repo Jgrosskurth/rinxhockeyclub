@@ -148,16 +148,29 @@ def same_game(a, b):
     return bool(x and y) and (x == y or x in y or y in x or word(x) == word(y))
 
 
+def title_case(text):
+    """ALL CAPS -> Title Case ('MCCARTHY' -> 'McCarthy'); mixed case is kept."""
+    if not text or text != text.upper():
+        return text
+    return re.sub(r'\bMc([a-z])', lambda m: 'Mc' + m[1].upper(), text.title())
+
+
 def tidy_team(name):
-    """'NYH4033-002-North Park-10U Mauro' -> 'North Park' (as team-feeds.js)."""
+    """'NYH4033-002-North Park-10U Mauro 04 - 10U SILVER' -> 'North Park (Mauro)'
+    (as tidyTeam in scripts/team-feeds.js; tournament names have no coach)."""
     s = (name or '').strip()
     s = re.sub(r'^TB\s+', '', s, flags=re.I)
     s = re.sub(r'^NYH?\d+(?:[-\s]\d+)?[-\s]*', '', s, flags=re.I)
-    s = re.sub(r'[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b.*$', '', s, flags=re.I)
-    s = re.sub(r'\s+', ' ', s.strip(' -–')).strip()
-    if s and s == s.upper():
-        s = s.title()
-    return s or name
+    coach = ''
+    age = re.search(r'[-\s]*\b\d{1,2}(?:U|AAA|AA|A|B)\b(.*)$', s, flags=re.I)
+    if age:
+        coach = re.sub(r'\s*\d{1,2}\s*-\s*\d{1,2}U\b.*$', '', age[1], flags=re.I)
+        coach = re.sub(r'\s+', ' ', coach.strip(' -–'))
+        s = s[:age.start()]
+    s = title_case(re.sub(r'\s+', ' ', s.strip(' -–')).strip())
+    if not s:
+        return name
+    return f'{s} ({title_case(coach)})' if coach else s
 
 
 def division(opponent, tournament):
