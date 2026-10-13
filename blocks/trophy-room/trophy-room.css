@@ -305,6 +305,20 @@
   border-radius: 6px;
 }
 
+.tr-viewer .tr-viewer-caption {
+  display: block;
+  max-width: min(92vw, 720px);
+  margin: 0 auto 4px;
+  font-family: var(--body-font-family);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--color-white);
+}
+
+.tr-viewer .tr-viewer-caption:empty {
+  display: none;
+}
+
 .tr-viewer .tr-viewer-frame figcaption {
   margin-top: 10px;
   font-family: var(--heading-font-family);

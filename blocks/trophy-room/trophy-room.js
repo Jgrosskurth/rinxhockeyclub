@@ -3,12 +3,19 @@
  * Tabs per team (10U first). Each tab shows the team's championship banners
  * in one horizontal line, then its photo gallery.
  *
- * Banners and photos come from GitHub, listed in /data/trophy-room.json by
+ * Images come from GitHub, listed in /data/trophy-room.json by
  * .github/workflows/trophy-gallery.yml:
- *   images/trophyroom-<team>/          banners, in upload order (file name = caption)
+ *   images/trophyroom-<team>/          banners, in upload order
  *   images/trophyroom-<team>/gallery/  gallery photos, newest first
- * Optional extra banners can be authored as block rows:
- *   | team (e.g. "10U Squirts") | banner image | title |
+ *
+ * The words are authored in DA, one row per setting: | Team | Item | Text |
+ *   | 10U | Tab             | 10U Squirts |
+ *   | 10U | Banners heading | Awards & Accolades |
+ *   | 10U | Gallery heading | Photo Gallery |
+ *   | 10U | <file name, e.g. "3.jpeg"> | caption for that banner or photo |
+ * Anything left blank falls back to a default (a banner's caption comes from
+ * its file name). A row with an image in the Item cell adds an extra banner.
+ * A first row of "Team | Item | Text" is treated as column labels.
  * The page's h1 (and an intro paragraph after it) becomes the title band.
  * Link straight to a team with #14u.
  */
@@ -19,26 +26,49 @@ const MANIFEST = '/data/trophy-room.json';
 
 const teamKey = (text) => Object.keys(TEAMS).find((k) => new RegExp(`\\b${k}\\b`, 'i').test(text));
 
-function readBanners(block) {
-  const banners = {};
-  [...block.children].forEach((row) => {
-    const [teamCell, imageCell, titleCell] = row.children;
-    const key = teamKey(teamCell?.textContent || '');
-    const img = imageCell?.querySelector('img');
-    if (!key || !img) return;
-    (banners[key] ||= []).push({
-      src: img.src,
-      alt: img.alt,
-      title: titleCell?.textContent.trim() || '',
-    });
+const DEFAULT_HEADINGS = { banners: 'Awards & Accolades', gallery: 'Photo Gallery' };
+
+// File name as authored or as stored ("images/.../3.jpeg"), compared loosely.
+const fileKey = (name) => (name || '').split('/').pop().trim().toLowerCase();
+
+function readSettings(block) {
+  const settings = {};
+  Object.keys(TEAMS).forEach((key) => {
+    settings[key] = {
+      tab: '', headings: {}, captions: {}, banners: [],
+    };
   });
-  return banners;
+  [...block.children].forEach((row) => {
+    const [teamCell, itemCell, textCell] = row.children;
+    const key = teamKey(teamCell?.textContent || '');
+    if (!key) return;
+    const team = settings[key];
+    const text = textCell?.textContent.trim() || '';
+    const img = itemCell?.querySelector('img');
+    if (img) {
+      team.banners.push({ src: img.src, alt: img.alt || text, title: text });
+      return;
+    }
+    const item = itemCell?.textContent.trim() || '';
+    if (!item || !text) return;
+    if (/^tab\b/i.test(item)) team.tab = text;
+    else if (/^banners?\b.*heading|^awards?\b.*heading/i.test(item)) team.headings.banners = text;
+    else if (/^(gallery|photos?)\b.*heading/i.test(item)) team.headings.gallery = text;
+    else team.captions[fileKey(item)] = text;
+  });
+  return settings;
+}
+
+// A caption authored for an image file, matched with or without extension.
+function captionFor(team, source) {
+  const name = fileKey(source);
+  return team.captions[name] || team.captions[name.replace(/\.[a-z0-9]+$/, '')] || '';
 }
 
 const attr = (text) => (text || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 function bannerList(list, label) {
-  if (!list?.length) return `<p class="tr-empty">${label} championship banners will hang here.</p>`;
+  if (!list?.length) return `<p class="tr-empty">${label} banners will hang here.</p>`;
   return `<ul class="tr-rafters" tabindex="0" aria-label="${label} championship banners">${list.map((b, i) => `
     <li class="tr-banner" style="--i: ${i}">
       <figure>
@@ -67,7 +97,7 @@ function buildViewer() {
   dialog.setAttribute('closedby', 'any');
   dialog.setAttribute('aria-label', 'Photo viewer');
   dialog.innerHTML = `
-    <figure class="tr-viewer-frame"><figcaption></figcaption></figure>
+    <figure class="tr-viewer-frame"><figcaption><span class="tr-viewer-caption"></span><span class="tr-viewer-count"></span></figcaption></figure>
     <button type="button" class="tr-viewer-btn tr-viewer-prev" aria-label="Previous photo">‹</button>
     <button type="button" class="tr-viewer-btn tr-viewer-next" aria-label="Next photo">›</button>
     <button type="button" class="tr-viewer-close" aria-label="Close">&times;</button>`;
@@ -99,7 +129,8 @@ function openViewer(dialog, photos, start) {
     img.alt = p.alt;
     img.width = p.width;
     img.height = p.height;
-    caption.textContent = `${index + 1} / ${photos.length}`;
+    caption.querySelector('.tr-viewer-caption').textContent = p.caption || '';
+    caption.querySelector('.tr-viewer-count').textContent = `${index + 1} / ${photos.length}`;
   };
   const many = photos.length > 1;
   dialog.querySelectorAll('.tr-viewer-btn').forEach((b) => { b.hidden = !many; });
@@ -120,8 +151,8 @@ function openViewer(dialog, photos, start) {
  * @param {Element} block The block element
  */
 export default async function decorate(block) {
-  const authored = readBanners(block);
-  const teams = Object.values(TEAMS);
+  const settings = readSettings(block);
+  const teams = Object.values(TEAMS).map((t) => ({ ...t, label: settings[t.key].tab || t.label }));
 
   // Title band from the page heading that precedes the block.
   const section = block.closest('.section');
@@ -143,12 +174,23 @@ export default async function decorate(block) {
   } catch {
     // Banners and galleries show their empty state.
   }
-  // GitHub banners first (in upload order), then any authored in the block.
+  // GitHub banners first (in upload order), then any added in the block;
+  // captions authored in DA win over file-name captions.
   const banners = {};
   const gallery = {};
   teams.forEach(({ key }) => {
-    banners[key] = [...(manifest[key]?.banners || []), ...(authored[key] || [])];
-    gallery[key] = manifest[key]?.gallery || [];
+    const team = settings[key];
+    banners[key] = [
+      ...(manifest[key]?.banners || []).map((b) => {
+        const title = captionFor(team, b.source) || b.title;
+        return { ...b, title, alt: title ? `${title} banner` : b.alt };
+      }),
+      ...team.banners,
+    ];
+    gallery[key] = (manifest[key]?.gallery || []).map((p) => {
+      const caption = captionFor(team, p.source);
+      return { ...p, caption, alt: caption || p.alt };
+    });
   });
 
   const fromHash = teamKey(window.location.hash.slice(1));
@@ -163,11 +205,11 @@ export default async function decorate(block) {
       ${teams.map((t) => `
         <section class="tr-panel" id="tr-panel-${t.key}" role="tabpanel" aria-labelledby="tr-tab-${t.key}"${t.key === current ? '' : ' hidden'}>
           <div class="tr-hall">
-            <h2>Awards & Accolades</h2>
+            <h2>${attr(settings[t.key].headings.banners || DEFAULT_HEADINGS.banners)}</h2>
             ${bannerList(banners[t.key], t.label)}
           </div>
           <div class="tr-photos">
-            <h2>Photo Gallery</h2>
+            <h2>${attr(settings[t.key].headings.gallery || DEFAULT_HEADINGS.gallery)}</h2>
             ${galleryList(gallery[t.key], t.label)}
           </div>
         </section>`).join('')}
