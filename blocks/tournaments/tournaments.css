@@ -207,3 +207,26 @@
     padding: 40px 20px;
   }
 }
+.t-section {
+  margin-bottom: 60px;
+}
+
+.t-section-title {
+  font-family: var(--heading-font-family);
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-navy);
+  padding: 0 40px 16px;
+  border-bottom: 3px solid var(--color-gray-light);
+  margin-bottom: 0;
+}
+
+.t-section-live .t-section-title {
+  color: var(--color-red);
+  border-bottom-color: var(--color-red);
+}
+
+.t-section-completed .t-section-title {
+  color: var(--color-gray);
