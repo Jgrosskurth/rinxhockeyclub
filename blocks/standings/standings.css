@@ -402,3 +402,178 @@
     padding: 24px 28px 16px;
   }
 }
+
+/* Team pages: League / Tournament / Exhibition / All Games tabs */
+.standings .st-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 20px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--color-navy);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.standings .st-tabs [role="tab"] {
+  min-height: 38px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: rgb(255 255 255 / 85%);
+  font-family: var(--heading-font-family);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.standings .st-tabs [role="tab"]:hover {
+  color: var(--color-white);
+}
+
+.standings .st-tabs [role="tab"][aria-selected="true"] {
+  background: var(--color-white);
+  color: var(--color-navy);
+}
+
+.standings .st-tabs [role="tab"]:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* Record for a game type */
+.standings .st-record {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.standings .st-rec-tile {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  padding: 14px 8px;
+  border-radius: 8px;
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.standings .st-rec-num {
+  font-family: var(--heading-font-family);
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.standings .st-rec-lbl {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 75%);
+}
+
+.standings .st-tbl.st-games {
+  min-width: 0;
+}
+
+.standings .st-tbl.st-games tbody td {
+  white-space: nowrap;
+}
+
+.standings .st-tbl.st-games tbody td.st-gopp {
+  white-space: normal;
+  font-weight: 600;
+  text-align: left;
+}
+
+.standings .st-type {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-ice);
+  color: var(--color-navy);
+}
+
+.standings .st-type-tournament {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.standings .st-type-exhibition {
+  background: var(--color-navy-light);
+  color: var(--color-white);
+}
+
+.standings .st-type-other {
+  background: var(--color-gray-light);
+}
+
+.standings .st-res {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  font-size: 0.85rem;
+  background: var(--color-gray-light);
+  color: var(--color-navy);
+}
+
+.standings .st-res-w {
+  background: #16a34a;
+}
+
+.standings .st-res-l {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.standings .st-upcoming {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+}
+
+.standings .st-empty {
+  padding: 28px 16px;
+  border-radius: 8px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  color: var(--color-gray);
+}
+
+.standings .st-tournament {
+  margin-top: 28px;
+}
+
+.standings .st-subhead {
+  font-family: var(--heading-font-family);
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  margin: 0 0 6px;
+}
+
+@media (min-width: 600px) {
+  .standings .st-record {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
