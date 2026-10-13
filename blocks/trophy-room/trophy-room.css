@@ -226,6 +226,73 @@
   color: var(--color-navy);
 }
 
+.trophy-room .tr-photos-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Carousel pages (more than 3 desktop rows): one continuous grid until
+   900px, where the pages line up side by side and snap */
+.trophy-room .tr-pages {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.trophy-room .tr-page {
+  display: contents;
+}
+
+.trophy-room .tr-page-ctrl {
+  display: none;
+}
+
+.trophy-room .tr-page-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--color-navy);
+  background: var(--color-white);
+  color: var(--color-navy);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, opacity 150ms ease, transform 100ms ease;
+}
+
+.trophy-room .tr-page-btn:focus-visible,
+.trophy-room .tr-pages:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+.trophy-room .tr-page-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.trophy-room .tr-page-btn:hover:not(:disabled) {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.trophy-room .tr-page-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.trophy-room .tr-page-count {
+  min-width: 3.5em;
+  text-align: center;
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--color-navy);
+  font-variant-numeric: tabular-nums;
+}
+
 .trophy-room .tr-gallery {
   list-style: none;
   margin-top: 20px;
@@ -395,7 +462,8 @@
     padding: 48px 24px 64px;
   }
 
-  .trophy-room .tr-gallery {
+  .trophy-room .tr-gallery,
+  .trophy-room .tr-pages {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 14px;
   }
@@ -406,5 +474,41 @@
 
   .tr-viewer-next {
     right: 24px;
+  }
+}
+
+@media (min-width: 900px) {
+  /* 5 photos a row on desktop; 3 rows make one carousel page */
+  .trophy-room .tr-gallery {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .trophy-room .tr-pages {
+    display: flex;
+    gap: 0;
+    margin-top: 14px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .trophy-room .tr-pages::-webkit-scrollbar {
+    display: none;
+  }
+
+  .trophy-room .tr-page {
+    display: grid;
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 6px 0;
+    scroll-snap-align: start;
+  }
+
+  .trophy-room .tr-page-ctrl:not([hidden]) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 }
