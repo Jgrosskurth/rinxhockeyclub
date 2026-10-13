@@ -233,20 +233,37 @@
   gap: 16px;
 }
 
-/* Carousel pages (more than 3 desktop rows): one continuous grid until
-   900px, where the pages line up side by side and snap */
+/* More than 3 rows: 3-row pages side by side that snap, with arrows and a
+   page count beside the heading */
 .trophy-room .tr-pages {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
+  display: flex;
+  margin-top: 14px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.trophy-room .tr-pages::-webkit-scrollbar {
+  display: none;
 }
 
 .trophy-room .tr-page {
-  display: contents;
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 6px 0;
+  scroll-snap-align: start;
 }
 
 .trophy-room .tr-page-ctrl {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.trophy-room .tr-page-ctrl[hidden] {
   display: none;
 }
 
@@ -293,12 +310,13 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 2 photos a row on phones, 3 on tablets, 5 on desktop */
 .trophy-room .tr-gallery {
   list-style: none;
   margin-top: 20px;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -462,9 +480,8 @@
     padding: 48px 24px 64px;
   }
 
-  .trophy-room .tr-gallery,
-  .trophy-room .tr-pages {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  .trophy-room .tr-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
   }
 
@@ -478,37 +495,11 @@
 }
 
 @media (min-width: 900px) {
-  /* 5 photos a row on desktop; 3 rows make one carousel page */
   .trophy-room .tr-gallery {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
-  .trophy-room .tr-pages {
-    display: flex;
-    gap: 0;
-    margin-top: 14px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .trophy-room .tr-pages::-webkit-scrollbar {
-    display: none;
-  }
-
-  .trophy-room .tr-page {
-    display: grid;
-    flex: 0 0 100%;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 6px 0;
-    scroll-snap-align: start;
-  }
-
-  .trophy-room .tr-page-ctrl:not([hidden]) {
-    display: flex;
-    align-items: center;
+  .trophy-room .tr-page-ctrl {
     gap: 8px;
   }
 }
