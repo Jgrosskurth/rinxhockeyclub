@@ -23,7 +23,9 @@ import hashlib
 import io
 import json
 import re
+import subprocess
 import sys
+import tempfile
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -86,6 +88,34 @@ def submitted(text):
         return clean(text)
 
 
+def reencode(raw, opponent):
+    """A 128px WebP of an uploaded PNG/WebP/JPEG (Pillow on GitHub, else
+    ImageMagick), or b'' if it can't be read."""
+    try:
+        from PIL import Image  # installed by form-games.yml
+    except ImportError:
+        Image = None
+    if Image:
+        try:
+            with Image.open(io.BytesIO(raw)) as im:
+                if im.format not in ('PNG', 'WEBP', 'JPEG') or max(im.size) > 1024:
+                    return b''
+                im = im.convert('RGBA')
+                im.thumbnail((128, 128))
+                out = io.BytesIO()
+                im.save(out, 'WEBP', quality=85, method=6)
+                return out.getvalue()
+        except Exception as err:
+            print(f'Unreadable logo for {opponent}: {err}')
+            return b''
+    with tempfile.TemporaryDirectory() as tmp:
+        src, dst = Path(tmp) / 'in', Path(tmp) / 'out.webp'
+        src.write_bytes(raw)
+        done = subprocess.run(['convert', f'{src}[0]', '-resize', '128x128>', '-strip',
+                               '-quality', '85', str(dst)], capture_output=True, check=False)
+        return dst.read_bytes() if done.returncode == 0 and dst.exists() else b''
+
+
 def save_logo(text, opponent):
     """An uploaded logo (data: image) -> '/images/opponents/<name>-<hash>.webp',
     or '' if it isn't a real, small image."""
@@ -93,23 +123,11 @@ def save_logo(text, opponent):
     if not m or len(text) > 80000:
         return ''
     raw = base64.b64decode(m[2])
-    try:
-        from PIL import Image  # installed by form-games.yml
-    except ImportError:
-        print('Pillow missing; logo not saved')
+    if not raw.startswith((b'\x89PNG', b'RIFF', b'\xff\xd8')):
         return ''
-    try:
-        with Image.open(io.BytesIO(raw)) as im:
-            if im.format not in ('PNG', 'WEBP', 'JPEG') or max(im.size) > 1024:
-                return ''
-            im = im.convert('RGBA')
-            im.thumbnail((128, 128))
-            out = io.BytesIO()
-            im.save(out, 'WEBP', quality=85, method=6)
-    except Exception as err:
-        print(f'Unreadable logo for {opponent}: {err}')
+    data = reencode(raw, opponent)
+    if not data:
         return ''
-    data = out.getvalue()
     name = re.sub(r'[^a-z0-9]+', '-', opponent.lower()).strip('-')[:40] or 'opponent'
     path = LOGOS / f'{name}-{hashlib.sha1(data).hexdigest()[:8]}.webp'
     if not path.exists():
