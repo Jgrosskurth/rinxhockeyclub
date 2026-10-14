@@ -29,6 +29,89 @@
   z-index: -1;
 }
 
+/* Background video: fades in over the rink once it plays, under a navy wash
+   so the text and the Next up card stay readable. */
+.hero .hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+.hero.hero-video-on .hero-media {
+  opacity: 1;
+}
+
+.hero .hero-media video,
+.hero .hero-media canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Chrome: the canvas shows the frames; the video itself stays a hidden
+   1px element (Chrome sizes the LCP candidate by its box). */
+.hero .hero-media-canvas video {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.hero .hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(4 30 66 / 80%);
+}
+
+.hero .hero-video-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 50%;
+  background: rgb(4 30 66 / 55%);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.hero.hero-video-on .hero-video-toggle {
+  display: grid;
+}
+
+.hero .hero-video-toggle:hover {
+  background: rgb(4 30 66 / 85%);
+}
+
+.hero .hero-video-toggle:focus-visible {
+  outline: 3px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+@media (min-width: 900px) {
+  /* Wide: darker behind the club name on the left, lighter in the middle. */
+  .hero .hero-media::after {
+    background: linear-gradient(90deg, rgb(4 30 66 / 90%) 0%, rgb(4 30 66 / 70%) 50%, rgb(4 30 66 / 82%) 100%);
+  }
+
+  .hero .hero-video-toggle {
+    top: auto;
+    bottom: 14px;
+    right: 14px;
+  }
+}
+
 .hero .hero-grid {
   max-width: var(--max-width);
   margin: 0 auto;
