@@ -110,6 +110,25 @@ def event_of(src, src_dir):
     return re.sub(r'\s+', ' ', name).strip()
 
 
+MONTH_NAMES = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august',
+               'september', 'october', 'november', 'december']
+
+
+def event_date(event):
+    """Sort date from an event folder name: 'March 2026 ...' -> 2026-03,
+    '2026 NYSAHA Championship' -> 2026; '' without a year. Used to order the
+    gallery's event filters when photos carry no EXIF date."""
+    year = re.search(r'\b(19|20)\d{2}\b', event or '')
+    if not year:
+        return ''
+    # Whole month names or their usual short forms ("Mar", "Sept"), not words
+    # that merely start with them ("Marlins Classic").
+    month = next((i + 1 for i, m in enumerate(MONTH_NAMES)
+                  if re.search(rf'\b(?:{m}|{m[:3]}|sept)\b' if m == 'september'
+                               else rf'\b(?:{m}|{m[:3]})\b', event, re.I)), 1)
+    return f'{year[0]}-{month:02d}-01T00:00:00'
+
+
 def make_copies(src, files, sizes):
     """Write a WebP per size (never upscaled); returns {key: (width, height)}."""
     dims = {}
@@ -198,6 +217,7 @@ def build(team, label, kind, previous):
             item['alt'] = title or f'Rinx {label} photo'
             item['event'] = event_of(src, src_dir)
             item['taken'] = taken_at(src)
+            item['eventDate'] = event_date(item['event'])
         item['added'] = added_at(src)
         items.append(item)
     for stale in out_dir.glob('*.webp'):

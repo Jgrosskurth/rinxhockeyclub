@@ -119,12 +119,13 @@ function monthYear(iso) {
 
 const tagOf = (p) => p.event || monthYear(p.taken);
 
-// The tags in a gallery, newest first (by each tag's latest photo).
+// The tags in a gallery, newest first (by each tag's latest photo: its EXIF
+// date, else the year/month in its event folder's name, else its upload).
 function tagList(photos) {
   const latest = new Map();
   photos.forEach((p) => {
     if (!p.tag) return;
-    const when = p.taken || p.added || '';
+    const when = p.taken || p.eventDate || p.added || '';
     if (!latest.has(p.tag) || when > latest.get(p.tag)) latest.set(p.tag, when);
   });
   return [...latest.keys()].sort((a, b) => latest.get(b).localeCompare(latest.get(a)));
