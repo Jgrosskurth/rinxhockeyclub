@@ -118,6 +118,8 @@ function monthYear(iso) {
 }
 
 const tagOf = (p) => p.event || monthYear(p.taken);
+// The month a photo was taken: its EXIF date, else its event's month.
+const dateOf = (p) => monthYear(p.taken) || monthYear(p.eventDate);
 
 // The tags in a gallery, newest first (by each tag's latest photo: its EXIF
 // date, else the year/month in its event folder's name, else its upload).
@@ -131,13 +133,13 @@ function tagList(photos) {
   return [...latest.keys()].sort((a, b) => latest.get(b).localeCompare(latest.get(a)));
 }
 
-function galleryList(photos, label, size, showTags) {
+function galleryList(photos, label, size) {
   if (!photos?.length) return `<p class="tr-empty">${label} photos are on the way.</p>`;
   const items = photos.map((p, i) => `
     <li>
       <button type="button" class="tr-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}: ${attr(p.alt)}">
         <img src="${p.thumb}"${p.small ? ` srcset="${p.small} 400w, ${p.thumb} 800w" sizes="(min-width: 900px) 20vw, (min-width: 600px) 33vw, 50vw"` : ''} alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
-        ${showTags && p.tag ? `<span class="tr-tag" aria-hidden="true">${attr(p.tag)}</span>` : ''}
+        ${p.date ? `<span class="tr-tag" aria-hidden="true">${attr(p.date)}</span>` : ''}
       </button>
     </li>`);
   if (items.length <= size) return `<ul class="tr-gallery">${items.join('')}</ul>`;
@@ -182,10 +184,7 @@ function renderGallery(panel, allPhotos, label) {
   const ctrl = panel.querySelector('.tr-page-ctrl');
   const photos = visiblePhotos(panel, allPhotos);
   panel.trObserver?.disconnect();
-  // Corner tags only help when photos differ (the filter buttons are shown)
-  // and no filter is picked; a single shared tag is in the viewer caption.
-  const showTags = !panel.trTag && !!panel.querySelector('.tr-filter');
-  body.innerHTML = galleryList(photos, label, pageSize(), showTags);
+  body.innerHTML = galleryList(photos, label, pageSize());
   const track = body.querySelector('.tr-pages');
   ctrl.hidden = !track;
   if (!track) return;
@@ -250,7 +249,7 @@ function openViewer(dialog, photos, start) {
     img.alt = p.alt;
     img.width = p.width;
     img.height = p.height;
-    caption.querySelector('.tr-viewer-caption').textContent = [p.caption, p.tag].filter(Boolean).join(' · ');
+    caption.querySelector('.tr-viewer-caption').textContent = [p.caption, p.event, p.date].filter(Boolean).join(' · ');
     caption.querySelector('.tr-viewer-count').textContent = `${index + 1} / ${photos.length}`;
   };
   const many = photos.length > 1;
@@ -315,8 +314,9 @@ export default async function decorate(block) {
     gallery[key] = (manifest[key]?.gallery || []).map((p) => {
       const caption = captionFor(team, p.source);
       const tag = tagOf(p);
+      const date = dateOf(p);
       return {
-        ...p, caption, tag, alt: [caption || p.alt, tag].filter(Boolean).join(', '),
+        ...p, caption, tag, date, alt: [caption || p.alt, p.event, date].filter(Boolean).join(', '),
       };
     });
   });

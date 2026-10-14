@@ -114,19 +114,33 @@ MONTH_NAMES = ['january', 'february', 'march', 'april', 'may', 'june', 'july', '
                'september', 'october', 'november', 'december']
 
 
+# When events happened, for photos that carry no EXIF date (saved from texts or
+# social apps). Keyed by event folder name; a folder named with its month
+# ("March 2026 States") needs no entry.
+EVENT_MONTHS = {
+    '2026 Mid-Atlantic Fall Showcase': '2026-10',  # GameSheet games Oct 9-11, 2026
+    '2026 NYSAHA Championship': '2026-03',         # per the club
+}
+
+
 def event_date(event):
-    """Sort date from an event folder name: 'March 2026 ...' -> 2026-03,
-    '2026 NYSAHA Championship' -> 2026; '' without a year. Used to order the
-    gallery's event filters when photos carry no EXIF date."""
-    year = re.search(r'\b(19|20)\d{2}\b', event or '')
+    """When an event happened: 'YYYY-MM' from EVENT_MONTHS or a month named in
+    the folder ('March 2026 States'), 'YYYY' from a year alone ('2026 Cup'),
+    '' otherwise. Dates photos with no EXIF date and orders the filters."""
+    if not event:
+        return ''
+    known = next((v for k, v in EVENT_MONTHS.items() if k.lower() == event.lower()), '')
+    if known:
+        return known
+    year = re.search(r'\b(19|20)\d{2}\b', event)
     if not year:
         return ''
     # Whole month names or their usual short forms ("Mar", "Sept"), not words
     # that merely start with them ("Marlins Classic").
     month = next((i + 1 for i, m in enumerate(MONTH_NAMES)
                   if re.search(rf'\b(?:{m}|{m[:3]}|sept)\b' if m == 'september'
-                               else rf'\b(?:{m}|{m[:3]})\b', event, re.I)), 1)
-    return f'{year[0]}-{month:02d}-01T00:00:00'
+                               else rf'\b(?:{m}|{m[:3]})\b', event, re.I)), 0)
+    return f'{year[0]}-{month:02d}' if month else year[0]
 
 
 def make_copies(src, files, sizes):
