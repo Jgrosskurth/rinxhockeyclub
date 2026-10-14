@@ -118,7 +118,7 @@ MONTH_NAMES = ['january', 'february', 'march', 'april', 'may', 'june', 'july', '
 # social apps). Keyed by event folder name; a folder named with its month
 # ("March 2026 States") needs no entry.
 EVENT_MONTHS = {
-    '2026 Mid-Atlantic Fall Showcase': '2026-10',  # GameSheet games Oct 9-11, 2026
+    '2026 Mid-Atlantic Fall Classic': '2026-10',  # GameSheet games Oct 9-11, 2026
     '2026 NYSAHA Championship': '2026-03',         # per the club
 }
 
