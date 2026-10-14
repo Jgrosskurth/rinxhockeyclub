@@ -10,8 +10,8 @@ const FEEDS = [
     match: 'mid-atlantic',
     key: 'mid-atlantic',
     label: 'Rinx 10U Squirts',
-    title: 'Mid-Atlantic Fall Showcase',
-    season: '2026 Mid-Atlantic Fall Showcase',
+    title: 'Mid-Atlantic Fall Classic',
+    season: '2026 Mid-Atlantic Fall Classic',
     note: 'Tournament games at Hatfield Ice Arena, Colmar, PA',
     // Out-of-area opponents: mascot-name logo matching would pick wrong
     // logos, so only GameSheet's own team logos are used (scripts/team-logos.js).

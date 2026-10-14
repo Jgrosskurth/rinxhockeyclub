@@ -24,7 +24,7 @@ GAME_MINUTES = 90
 TEAMS = {
     '10u': {
         'name': 'Rinx 10U Squirts', 'short': 'Rinx 10U', 'page': '/schedule',
-        'feeds': [('schedule-10u.json', None), ('schedule-mid-atlantic.json', 'Mid-Atlantic Fall Showcase')],
+        'feeds': [('schedule-10u.json', None), ('schedule-mid-atlantic.json', 'Mid-Atlantic Fall Classic')],
     },
     '14u': {
         'name': 'Rinx 14U Bantam', 'short': 'Rinx 14U', 'page': '/schedule-14u',

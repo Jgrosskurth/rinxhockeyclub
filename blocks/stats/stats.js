@@ -214,7 +214,7 @@ const TYPES = [
 const BUILT_IN = {
   '10u': [
     { type: 'League', name: 'LIAHL 2026–2027', file: 'stats-10u.json' },
-    { type: 'Tournament', name: '2026 Mid-Atlantic Fall Showcase', file: 'stats-mid-atlantic.json' },
+    { type: 'Tournament', name: '2026 Mid-Atlantic Fall Classic', file: 'stats-mid-atlantic.json' },
   ],
   '14u': [
     { type: 'League', name: 'LIAHL 2026–2027', file: 'stats-14u.json' },
