@@ -181,7 +181,10 @@ function renderGallery(panel, allPhotos, label) {
   const ctrl = panel.querySelector('.tr-page-ctrl');
   const photos = visiblePhotos(panel, allPhotos);
   panel.trObserver?.disconnect();
-  body.innerHTML = galleryList(photos, label, pageSize(), !panel.trTag);
+  // Corner tags only help when photos differ (the filter buttons are shown)
+  // and no filter is picked; a single shared tag is in the viewer caption.
+  const showTags = !panel.trTag && !!panel.querySelector('.tr-filter');
+  body.innerHTML = galleryList(photos, label, pageSize(), showTags);
   const track = body.querySelector('.tr-pages');
   ctrl.hidden = !track;
   if (!track) return;
