@@ -79,7 +79,7 @@ function oppCell(g) {
   const useLogos = feedConfig().logos !== false;
   const localLogo = useLogos ? findLocalLogo(g.opp) : '';
   const logoId = (localLogo || !useLogos) ? '' : findLogoId(g.opp);
-  const logoSrc = gsLogo || localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '');
+  const logoSrc = gsLogo || localLogo || (logoId ? `${MHR_CDN}${logoId}_a.png` : '') || g.logoFallback || '';
   const logoImg = logoSrc
     ? `<img class="sg-logo" src="${logoSrc}" alt="${g.opp}" width="36" height="36" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : '';
@@ -291,6 +291,7 @@ function fromFeed(g, season) {
     gameId: g.gameId || '',
     // Logo from the DA sheet, if the club added one.
     logo: g.logo || '',
+    logoFallback: g.logoFallback || '',
     season,
   };
 }

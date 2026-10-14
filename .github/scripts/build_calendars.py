@@ -170,7 +170,7 @@ def merge_rows(club, submitted):
 
         def fill(k):
             return bool(s.get(k)) and (not hit.get('fromClub') or not hit.get(k))
-        for k in ('Time', 'Rink', 'Logo'):
+        for k in ('Time', 'Rink'):
             if fill(k):
                 hit[k] = s[k]
         if fill('Score') and (not hit.get('fromClub') or not hit.get('Result')):

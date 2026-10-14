@@ -159,6 +159,46 @@ main .game-submission-container > .default-content-wrapper {
   color: var(--color-gray);
 }
 
+.game-submission .gs-field input[type="file"] {
+  min-height: 0;
+  padding: 10px;
+  font-size: 0.95rem;
+}
+
+.game-submission .gs-logo-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.game-submission .gs-logo-preview[hidden] {
+  display: none;
+}
+
+.game-submission .gs-logo-preview img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border: 1px solid var(--color-gray-light);
+  border-radius: 6px;
+  background: var(--color-off-white);
+}
+
+.game-submission .gs-logo-remove {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 2px solid var(--color-navy);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 .game-submission .gs-hint {
   margin: 6px 0 0;
   font-size: 0.85rem;
