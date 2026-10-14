@@ -287,7 +287,7 @@ export default async function decorate(block) {
     box.innerHTML = `
       <h2>Thanks!</h2>
       <p class="gs-done-what">${what}</p>
-      <p>It will show on the ${esc(t.label)} schedule${data.action === 'score' ? ' and standings' : ''} within about half an hour.${picked || data.action === 'upcoming' ? '' : ' If it duplicates a listed game, the club will tidy it up.'}</p>
+      <p>It will show on the ${esc(t.label)} schedule${data.action === 'score' ? ' and standings' : ''} within a few minutes.${picked || data.action === 'upcoming' ? '' : ' If it duplicates a listed game, the club will tidy it up.'}</p>
       <div class="gs-done-actions">
         <a class="gs-btn gs-btn-navy" href="${t.schedulePath}">View the schedule</a>
         <button type="button" class="gs-btn gs-btn-outline gs-again">Send another</button>
