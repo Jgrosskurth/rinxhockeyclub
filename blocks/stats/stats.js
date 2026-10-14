@@ -201,28 +201,102 @@ function feedKey() {
   return window.location.pathname.includes('14u') ? '14u' : '10u';
 }
 
-async function loadFeedStats(block, container) {
-  const url = `${FEED_BASE}/stats-${feedKey()}.json`;
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error(`feed ${resp.status}`);
-  const data = await resp.json();
-  const rows = (data.players || []).map((p) => ({
-    '#': p.number || '',
-    Name: overrideName(p.name || ''),
-    Pos: p.pos || '',
-    GP: p.gp || '',
-    G: p.g || '',
-    A: p.a || '',
-    PTS: p.pts || '',
-    '+/-': p.plusminus || '',
-    PIM: p.pim || '',
+// Current season, by game type. League stats are LIAHL's GameSheet team
+// page; tournament stats come from tournament team pages (built-in below,
+// plus any the club links in the other-games sheet, see
+// .github/scripts/pull_sheet_stats.py); exhibition stats only from links.
+const TYPES = [
+  { type: 'All', label: 'All Stats' },
+  { type: 'League', label: 'League Stats' },
+  { type: 'Tournament', label: 'Tournament Stats' },
+  { type: 'Exhibition', label: 'Exhibition Stats' },
+];
+const BUILT_IN = {
+  '10u': [
+    { type: 'League', name: 'LIAHL 2026–2027', file: 'stats-10u.json' },
+    { type: 'Tournament', name: '2026 Mid-Atlantic Fall Showcase', file: 'stats-mid-atlantic.json' },
+  ],
+  '14u': [
+    { type: 'League', name: 'LIAHL 2026–2027', file: 'stats-14u.json' },
+  ],
+};
+
+const fetchJson = (file) => fetch(`${FEED_BASE}/${file}`)
+  .then((r) => (r.ok ? r.json() : null))
+  .catch(() => null);
+
+let sourcesCache;
+// Every stats source for the team, each with its players (possibly none).
+function loadSources(key) {
+  if (!sourcesCache) {
+    sourcesCache = fetchJson('stats-sources.json').then(async (manifest) => {
+      const linked = (manifest?.sources || [])
+        .filter((src) => src.team === key && src.file)
+        .map((src) => ({ type: src.type, name: src.name || 'GameSheet', file: src.file }));
+      const all = [...(BUILT_IN[key] || []), ...linked];
+      const data = await Promise.all(all.map((src) => fetchJson(src.file)));
+      return all.map((src, i) => ({ ...src, players: data[i]?.players || [] }));
+    });
+  }
+  return sourcesCache;
+}
+
+const num = (v) => parseFloat(v) || 0;
+const nameKey = (name) => (name || '').toLowerCase().replace(/[^a-z]/g, '');
+
+// One row per player across sources: games, goals, assists, points,
+// +/- and PIM added up.
+function mergePlayers(sources) {
+  const byPlayer = new Map();
+  sources.forEach((src) => src.players.forEach((p) => {
+    const key = `${p.number || ''}|${nameKey(p.name)}`;
+    const row = byPlayer.get(key) || {
+      number: p.number || '', name: p.name || '', pos: '', gp: 0, g: 0, a: 0, pts: 0, plusminus: 0, pim: 0,
+    };
+    row.pos = row.pos || p.pos || '';
+    ['gp', 'g', 'a', 'pts', 'plusminus', 'pim'].forEach((k) => { row[k] += num(p[k]); });
+    byPlayer.set(key, row);
   }));
+  return [...byPlayer.values()].map((p) => ({
+    '#': p.number,
+    Name: overrideName(p.name),
+    Pos: p.pos,
+    GP: String(p.gp),
+    G: String(p.g),
+    A: String(p.a),
+    PTS: String(p.pts),
+    '+/-': String(p.plusminus),
+    PIM: String(Math.round(p.pim * 10) / 10),
+  }));
+}
+
+const EMPTY = {
+  All: 'No player stats have been posted on GameSheet yet this season.',
+  League: 'LIAHL hasn’t published player stats on GameSheet yet. They’ll show here automatically once it does.',
+  Tournament: 'No tournament stats yet. Tournament stats show here once the tournament posts them on GameSheet.',
+  Exhibition: 'No exhibition stats yet. To add a game’s stats, paste the Rinx team page link from GameSheet into the GameSheet column of the other-games sheet.',
+};
+
+async function showTypeStats(block, container, key, type) {
+  const sources = (await loadSources(key))
+    .filter((src) => type === 'All' || src.type === type);
+  const withStats = sources.filter((src) => src.players.length);
+  if (!withStats.length) {
+    block.querySelector('#stats-summary').style.display = 'none';
+    container.innerHTML = `<div class="err-box"><p>${EMPTY[type]}</p></div>`;
+    return;
+  }
+  const list = withStats.map((src) => (type === 'All' ? `${src.type}: ${src.name}` : src.name)).join(' &bull; ');
+  renderTable(block, container, mergePlayers(withStats), `${list} &bull; Stats from <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>`);
+}
+
+async function loadFeedStats(block, container) {
+  const data = await fetchJson(`stats-${feedKey()}.json`);
+  if (!data) throw new Error('feed unavailable');
+  const rows = mergePlayers([{ players: data.players || [] }]);
   if (!rows.length) {
-    if (isTournament()) {
-      container.innerHTML = '<div class="err-box"><p>Tournament stats will be posted here once games begin.</p></div>';
-      return;
-    }
-    throw new Error('empty feed');
+    container.innerHTML = '<div class="err-box"><p>Tournament stats will be posted here once games begin.</p></div>';
+    return;
   }
   renderTable(block, container, rows);
 }
@@ -230,14 +304,15 @@ async function loadFeedStats(block, container) {
 export default function decorate(block) {
   const is14u = window.location.pathname.includes('14u');
   const archiveUrl = is14u ? '/rinxstats-14u-2025-2026.csv' : '/rinxstats-2025-2026.csv';
+  const tournament = isTournament();
 
   // Available seasons, newest first. The first entry is the default view.
-  // Current season comes from the live GameSheet JSON feed; past seasons are
-  // archived CSVs committed to the repo.
-  const seasons = isTournament()
+  // Current season comes from the GameSheet JSON feeds (by game type); past
+  // seasons are archived CSVs committed to the repo.
+  const seasons = tournament
     ? [{ label: 'Tournament', type: 'feed' }]
     : [
-      { label: 'Current Season', type: 'feed' },
+      { label: 'Current Season', type: 'types' },
       { label: '2025–2026', type: 'csv', url: archiveUrl },
     ];
 
@@ -250,8 +325,12 @@ export default function decorate(block) {
       <div class="season-toggle">${buttons}</div>
       <p class="season-hint">&#128197; Current season is live from GameSheet &bull; switch to view past seasons</p>
     </div>` : '';
+  const typeTabs = tournament ? '' : `
+    <div class="stats-types" role="group" aria-label="Game type">
+      ${TYPES.map((t, i) => `<button type="button" class="stats-type-btn" data-type="${t.type}" aria-pressed="${i === 0}">${t.label}</button>`).join('')}
+    </div>`;
 
-  block.innerHTML = `${controls}
+  block.innerHTML = `${controls}${typeTabs}
     <div class="stats-summary" id="stats-summary" style="display:none">
       <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>
       <div class="stat-tile"><span class="stat-num red" id="s-tg">--</span><span class="stat-lbl">Team Goals</span></div>
@@ -262,16 +341,34 @@ export default function decorate(block) {
   `;
 
   const container = block.querySelector('#stats-container');
+  const types = block.querySelector('.stats-types');
+  let [{ type }] = TYPES;
+  let current = 0;
+  const loading = () => {
+    container.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div>';
+  };
+  const unavailable = () => {
+    container.innerHTML = '<div class="err-box"><p>Stats are temporarily unavailable. '
+      + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
+  };
+
   const showSeason = async (idx) => {
+    current = idx;
     const season = seasons[idx];
     block.querySelectorAll('.season-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
-    container.innerHTML = '<div class="loading-box"><div class="spinner"></div><p>Loading stats&hellip;</p></div>';
-    if (season.type === 'feed') {
+    if (types) types.hidden = season.type !== 'types';
+    loading();
+    if (season.type === 'types') {
+      try {
+        await showTypeStats(block, container, feedKey(), type);
+      } catch {
+        unavailable();
+      }
+    } else if (season.type === 'feed') {
       try {
         await loadFeedStats(block, container);
       } catch {
-        container.innerHTML = '<div class="err-box"><p>Stats are temporarily unavailable. '
-          + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
+        unavailable();
       }
     } else {
       loadStats(block, season.url);
@@ -280,6 +377,13 @@ export default function decorate(block) {
 
   block.querySelectorAll('.season-btn').forEach((btn) => {
     btn.addEventListener('click', () => showSeason(Number(btn.dataset.idx)));
+  });
+  types?.querySelectorAll('.stats-type-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      type = btn.dataset.type;
+      types.querySelectorAll('.stats-type-btn').forEach((b) => b.setAttribute('aria-pressed', b === btn));
+      showSeason(current);
+    });
   });
 
   showSeason(0);

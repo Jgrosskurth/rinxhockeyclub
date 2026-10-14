@@ -44,6 +44,61 @@
   font-weight: 600;
 }
 
+/* Game type: All / League / Tournament / Exhibition Stats, one button each
+   (as on the standings and schedule pages): 2x2 on phones, a row from 600px. */
+.stats .stats-types {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 24px;
+}
+
+.stats .stats-types[hidden] {
+  display: none;
+}
+
+.stats .stats-type-btn {
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 2px solid var(--color-navy);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--heading-font-family);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.stats .stats-type-btn:hover {
+  background: var(--color-ice);
+}
+
+.stats .stats-type-btn[aria-pressed="true"] {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.stats .stats-type-btn:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+@media (min-width: 600px) {
+  .stats .stats-types {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .stats .stats-type-btn {
+    padding: 0 20px;
+  }
+}
+
 .stats-summary {
   background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
   border-radius: 12px;
@@ -193,4 +248,10 @@
   }
 
   .stats-tbl tbody tr:nth-child(even) td:nth-child(2) { background: #f5f6f8 !important; }
+
+  /* The pinned Player heading keeps the navy header colours. */
+  .stats-tbl thead th:nth-child(2) {
+    background: #041e42 !important;
+    color: #fff !important;
+  }
 }
