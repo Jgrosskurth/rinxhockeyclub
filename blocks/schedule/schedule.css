@@ -535,8 +535,16 @@
 .schedule.block .sg-header {
   display: grid !important;
   grid-template-columns: 80px 1fr 80px 70px !important;
-  padding: 12px 20px !important;
+  /* Same right padding as the rows (room for the calendar button), so the
+     Score and Result headings sit over their columns. */
+  padding: 12px 60px 12px 20px !important;
   gap: 12px !important;
+}
+
+/* Score and Result: headings centered over the centered values. */
+.schedule .sg-header span:nth-child(3),
+.schedule .sg-header span:nth-child(4) {
+  text-align: center;
 }
 
 .schedule-block .sg-opp,
