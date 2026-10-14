@@ -4,6 +4,12 @@
   margin: 0 auto;
 }
 
+/* The page heading and intro line up with the form. */
+main .game-submission-container > .default-content-wrapper {
+  max-width: 720px;
+  margin: 0 auto 20px;
+}
+
 .game-submission .gs-form,
 .game-submission .gs-done {
   padding: 20px 16px 24px;
