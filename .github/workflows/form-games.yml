@@ -1,0 +1,41 @@
+name: Google Form games
+
+# Copies games sent in through the club's Google Form (its responses sheet,
+# published to the web as CSV) into data/form-games.json, which the schedule,
+# standings and homepage read. Every 15 minutes and on demand from the
+# Actions tab. The team calendars pick the games up on the next GameSheet pull.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: form-games
+  cancel-in-progress: false
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the form responses
+        run: python3 .github/scripts/pull_form_games.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/form-games.json
+          if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
+          git commit -m "Update Google Form games [skip ci]"
+          # The GameSheet or Trophy Room job may have pushed meanwhile.
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1

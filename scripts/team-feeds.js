@@ -174,8 +174,8 @@ function sheetLogo(text) {
   return /^(?:https:\/\/|\/)[^\s"'<>]+$/.test(url) ? url : '';
 }
 
-function fetchRows(url, init) {
-  return fetch(url, init)
+function fetchRows(url) {
+  return fetch(url)
     .then((resp) => (resp.ok ? resp.json() : { data: [] }))
     .then((json) => json.data || [])
     .catch(() => []);
@@ -200,7 +200,7 @@ function rowTeam(r) {
  * opponent only fills cells the club left empty (a reported score for a
  * listed game, say). A later submission updates an earlier one.
  * @param {object[]} club rows of /other-games
- * @param {object[]} submitted rows of /game-submissions, oldest first
+ * @param {object[]} submitted rows of data/form-games.json, oldest first
  */
 export function mergeSheetRows(club, submitted) {
   const rows = club.map((r) => ({ ...r, fromClub: true }));
@@ -225,15 +225,15 @@ export function mergeSheetRows(club, submitted) {
 
 let submittedRows;
 /**
- * Games sent in through /submit-game: the DA sheet /game-submissions, oldest
- * first, without rows the club marked Hide (or Reject / Delete / Spam).
- * @param {{ fresh?: boolean }} [opts] fresh: skip the browser cache
+ * Games sent in through the club's Google Form (data/form-games.json, written
+ * by the form-games workflow), oldest first, without rows the club marked
+ * Hide (or Reject / Delete / Spam) in the responses sheet.
  */
-export function loadSubmittedRows({ fresh = false } = {}) {
-  const load = () => fetchRows('/game-submissions.json', fresh ? { cache: 'no-cache' } : undefined)
-    .then((rows) => rows.filter((r) => !/hide|reject|delete|spam/i.test(r.Status || '')));
-  if (fresh) return load();
-  if (!submittedRows) submittedRows = load();
+export function loadSubmittedRows() {
+  if (!submittedRows) {
+    submittedRows = fetchRows(`${FEED_BASE}/form-games.json`)
+      .then((rows) => rows.filter((r) => !/hide|reject|delete|spam/i.test(r.Status || '')));
+  }
   return submittedRows;
 }
 

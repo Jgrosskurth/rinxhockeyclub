@@ -134,14 +134,11 @@ def other_games(key, rows):
 
 
 def load_submitted_rows():
-    """Games sent in through /submit-game (the published DA sheet
-    /game-submissions), oldest first, without rows marked Hide; [] if none."""
+    """Games sent in through the Google Form (data/form-games.json, written by
+    the form-games workflow), oldest first, without rows marked Hide."""
     try:
-        req = urllib.request.Request(f'{SITE}/game-submissions.json', headers={'User-Agent': 'rinx-calendars'})
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            rows = json.loads(resp.read().decode()).get('data', [])
-    except Exception as err:  # the calendars still build without them
-        print(f'game-submissions sheet unavailable: {err}')
+        rows = json.loads((DATA / 'form-games.json').read_text()).get('data', [])
+    except (OSError, ValueError):
         return []
     return [r for r in rows if not re.search('hide|reject|delete|spam', r.get('Status') or '', re.I)]
 
