@@ -8,8 +8,22 @@
    "Date": "Jan 1, 2027",
    "Time": "10:00 AM",
    "Opponent": "Savana Bananas",
-   "Logo": "",
+   "Logo": "/images/opponents/savana-bananas-59c0c34b.webp",
    "Rink": "Savana Banana Stadium",
+   "Score": "",
+   "Result": "",
+   "Status": ""
+  },
+  {
+   "Submitted": "2026-10-14 19:56:21",
+   "Action": "Upcoming",
+   "Team": "14U",
+   "Type": "Exhibition",
+   "Date": "Dec 31, 2026",
+   "Time": "12:00 PM",
+   "Opponent": "TEST Logo Team (delete me)",
+   "Logo": "/images/opponents/test-logo-team-delete-me-5856d86c.webp",
+   "Rink": "Test Rink",
    "Score": "",
    "Result": "",
    "Status": ""
