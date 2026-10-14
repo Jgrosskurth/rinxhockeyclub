@@ -223,15 +223,110 @@ export function mergeSheetRows(club, submitted) {
   return rows;
 }
 
+// The club's Google Form responses sheet, published to the web as CSV. The
+// site reads it live, so a game shows within a minute or two of being sent;
+// data/form-games.json (form-games workflow, same conversion in
+// .github/scripts/pull_form_games.py) is the fallback and feeds the calendars.
+const FORM_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1L6GS5p1DQ3Yay33qav5OwHrNXRk9Po8W39i1PoTBi_f9UnSp44HoVvqHzq76UOr8TNFxuGz7pTEB/pub?gid=382502038&single=true&output=csv';
+const FORM_WAIT = 4000;
+
+// Minimal CSV reader: quoted fields, doubled quotes, commas/newlines in quotes.
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let quoted = false;
+  for (let i = 0; i < text.length; i += 1) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') { cell += '"'; i += 1; } else if (c === '"') quoted = false;
+      else cell += c;
+    } else if (c === '"') quoted = true;
+    else if (c === ',') { row.push(cell); cell = ''; } else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i += 1;
+      row.push(cell); rows.push(row); row = []; cell = '';
+    } else cell += c;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  const [head = [], ...body] = rows;
+  return body.filter((r) => r.some(Boolean))
+    .map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] || ''])));
+}
+
+const clip = (v, max = 80) => String(v || '').replace(/[<>]/g, ' ').replace(/\s+/g, ' ').trim()
+  .slice(0, max);
+
+// A form answer in the other-games sheet's shape (as pull_form_games.py).
+function formGame(rec) {
+  const keys = Object.keys(rec).map((k) => [k.toLowerCase().replace(/[^a-z]/g, ''), k]);
+  const col = (...names) => {
+    const hit = names.map((n) => keys.find(([k]) => k.includes(n))).find(Boolean);
+    return hit ? rec[hit[1]] : '';
+  };
+  const team = (col('team').match(/\b(10|14)\s*u\b/i) || [])[1];
+  const d = col('date').trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$|^(\d{4})-(\d{2})-(\d{2})$/);
+  const date = d ? `${MONTH_NAMES[+(d[1] || d[5]) - 1]} ${+(d[2] || d[6])}, ${d[3] || d[4]}` : '';
+  const oppKey = keys.find(([k]) => k.includes('opponent') && !k.includes('score') && !k.includes('goal'));
+  const opponent = clip(oppKey ? rec[oppKey[1]] : '');
+  if (!team || !date || !opponent) return null;
+  const t = col('starttime', 'gametime').trim().toUpperCase()
+    .match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*([AP])?\.?M?$/);
+  let time = '';
+  if (t) {
+    let hour = +t[1];
+    if (t[3]) hour = (hour % 12) + (t[3] === 'P' ? 12 : 0);
+    if (hour < 24) time = `${hour % 12 || 12}:${t[2]} ${hour < 12 ? 'AM' : 'PM'}`;
+  }
+  const us = col('rinxscore', 'rinxgoals').replace(/\D/g, '').slice(0, 2);
+  const themKey = keys.find(([k]) => k.includes('opponent') && (k.includes('score') || k.includes('goal')));
+  const them = (themKey ? rec[themKey[1]] : '').replace(/\D/g, '').slice(0, 2);
+  let score = '';
+  let result = '';
+  if (us !== '' && them !== '') {
+    score = `${+us}-${+them}`;
+    if (+us !== +them) result = +us > +them ? 'W' : 'L';
+    else result = 'T';
+  }
+  const ts = col('timestamp').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4}) (\d{1,2}):(\d{2}):(\d{2})$/);
+  const pad = (n) => String(n).padStart(2, '0');
+  return {
+    Submitted: ts ? `${ts[3]}-${pad(ts[1])}-${pad(ts[2])} ${pad(ts[4])}:${ts[5]}:${ts[6]}` : '',
+    Action: /score/i.test(col('upcoming', 'scorereport', 'type')) || score ? 'Score' : 'Upcoming',
+    Team: `${team}U`,
+    Type: 'Exhibition',
+    Date: date,
+    Time: time,
+    Opponent: opponent,
+    Logo: '',
+    Rink: clip(col('rink')),
+    Score: score,
+    Result: result,
+    Status: clip(col('status'), 20),
+  };
+}
+
+function loadFormCsv() {
+  const timeout = new Promise((resolve, reject) => { setTimeout(() => reject(new Error('slow')), FORM_WAIT); });
+  const read = fetch(FORM_CSV)
+    .then((resp) => (resp.ok ? resp.text() : Promise.reject(new Error(`csv ${resp.status}`))))
+    .then((text) => {
+      if (!/^\uFEFF?timestamp/i.test(text)) throw new Error('not the responses sheet');
+      return parseCsv(text).map(formGame).filter(Boolean)
+        .sort((a, b) => a.Submitted.localeCompare(b.Submitted));
+    });
+  return Promise.race([read, timeout]);
+}
+
 let submittedRows;
 /**
- * Games sent in through the club's Google Form (data/form-games.json, written
- * by the form-games workflow), oldest first, without rows the club marked
- * Hide (or Reject / Delete / Spam) in the responses sheet.
+ * Games sent in through the club's Google Form, oldest first, without rows
+ * the club marked Hide (or Reject / Delete / Spam) in the responses sheet:
+ * read live from the published sheet, else data/form-games.json.
  */
 export function loadSubmittedRows() {
   if (!submittedRows) {
-    submittedRows = fetchRows(`${FEED_BASE}/form-games.json`)
+    submittedRows = loadFormCsv()
+      .catch(() => fetchRows(`${FEED_BASE}/form-games.json`))
       .then((rows) => rows.filter((r) => !/hide|reject|delete|spam/i.test(r.Status || '')));
   }
   return submittedRows;

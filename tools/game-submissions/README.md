@@ -14,10 +14,15 @@ and **Restrict to users in your organization** off, or submissions from the
 site are rejected.
 
 - The form's responses sheet is published to the web as CSV.
-- Every 15 minutes, `.github/workflows/form-games.yml` runs
-  `.github/scripts/pull_form_games.py`, which turns the responses into
-  `data/form-games.json`.
-- The schedule, standings, homepage and team calendars read that file. Your
+- The schedule, standings and homepage read that published sheet directly
+  (`scripts/team-feeds.js`), so a game shows within a minute or two of being
+  sent. If Google doesn't answer within 4 seconds they use
+  `data/form-games.json` instead.
+- `.github/workflows/form-games.yml` (every 15 minutes, or **Run workflow** in the
+  Actions tab) runs `.github/scripts/pull_form_games.py`, which saves the
+  responses to `data/form-games.json`: the fallback copy, and what the team
+  calendars use.
+- Your
   **other-games** sheet in Document Authoring always wins: a form score only fills
   in a game that has no score there yet.
 
