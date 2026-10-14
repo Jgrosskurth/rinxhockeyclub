@@ -173,47 +173,32 @@
   outline-offset: 2px;
 }
 
-/* Game-type filter: League (default), Tournament, Exhibition, All Games */
+/* Game-type filter: League (default), Tournament, Exhibition, All Games —
+   one button each, as on the standings pages (2x2 on phones, one row from
+   600px). */
 .schedule .type-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
   margin: 0;
-  padding: 4px;
-  border-radius: 999px;
-  background: var(--color-navy);
-  width: fit-content;
-  max-width: 100%;
-}
-
-/* Phones: the four type buttons as an even 2 x 2 grid */
-@media (max-width: 599px) {
-  .schedule .type-filter {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    border-radius: 12px;
-  }
-
-  .schedule .type-filter .type-btn {
-    justify-content: center;
-    border-radius: 8px;
-  }
 }
 
 .schedule .type-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  min-height: 38px;
-  padding: 0 14px;
-  border: 0;
-  border-radius: 999px;
-  background: none;
-  color: rgb(255 255 255 / 85%);
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 2px solid var(--color-navy);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-navy);
   font-family: var(--heading-font-family);
   font-size: 0.9rem;
   font-weight: 800;
+  line-height: 1.15;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
@@ -221,12 +206,12 @@
 }
 
 .schedule .type-btn:hover {
-  color: var(--color-white);
+  background: var(--color-ice);
 }
 
 .schedule .type-btn[aria-pressed="true"] {
-  background: var(--color-white);
-  color: var(--color-navy);
+  background: var(--color-navy);
+  color: var(--color-white);
 }
 
 .schedule .type-btn:focus-visible {
@@ -238,14 +223,26 @@
   min-width: 1.6em;
   padding: 0 5px;
   border-radius: 999px;
-  background: rgb(255 255 255 / 16%);
+  background: var(--color-ice);
   font-size: 0.75rem;
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
 
 .schedule .type-btn[aria-pressed="true"] .type-count {
-  background: var(--color-ice);
+  background: rgb(255 255 255 / 18%);
+}
+
+@media (min-width: 600px) {
+  .schedule .type-filter {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+  }
+
+  .schedule .type-btn {
+    padding: 0 18px;
+  }
 }
 
 /* Per-game type label */
