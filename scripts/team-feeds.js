@@ -167,8 +167,13 @@ function sheetTime(text) {
 
 // A sheet's Logo cell: our own GitHub images are served from the site
 // ("/images/darien.png"); other https URLs are used as they are.
+// Logos uploaded on /submit-game travel as small data: images until the
+// form-games workflow saves them to /images/opponents/.
+const DATA_LOGO = /^data:image\/(?:png|webp|jpeg);base64,[A-Za-z0-9+/]+=*$/;
+
 function sheetLogo(text) {
   const url = (text || '').trim();
+  if (url.startsWith('data:')) return url.length < 80000 && DATA_LOGO.test(url) ? url : '';
   const own = url.match(/^https:\/\/raw\.githubusercontent\.com\/Jgrosskurth\/rinxhockeyclub\/(?:refs\/heads\/)?main\/(images\/[^?#]+)$/i);
   if (own) return `/${own[1]}`;
   return /^(?:https:\/\/|\/)[^\s"'<>]+$/.test(url) ? url : '';
@@ -213,7 +218,9 @@ export function mergeSheetRows(club, submitted) {
       return;
     }
     const fill = (k) => s[k] && (!hit.fromClub || !hit[k]);
-    ['Time', 'Rink', 'Logo'].forEach((k) => { if (fill(k)) hit[k] = s[k]; });
+    ['Time', 'Rink'].forEach((k) => { if (fill(k)) hit[k] = s[k]; });
+    // A submitted logo stays the submission's (a fallback, see sheetGames).
+    if (s.Logo && !hit.fromClub) hit.Logo = s.Logo;
     // Score and result travel together.
     if (fill('Score') && (!hit.fromClub || !hit.Result)) {
       hit.Score = s.Score;
@@ -266,7 +273,8 @@ function formGame(rec) {
   const team = (col('team').match(/\b(10|14)\s*u\b/i) || [])[1];
   const d = col('date').trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$|^(\d{4})-(\d{2})-(\d{2})$/);
   const date = d ? `${MONTH_NAMES[+(d[1] || d[5]) - 1]} ${+(d[2] || d[6])}, ${d[3] || d[4]}` : '';
-  const oppKey = keys.find(([k]) => k.includes('opponent') && !k.includes('score') && !k.includes('goal'));
+  // "Opponent", not "Opponent Score" or "Opponent Logo".
+  const oppKey = keys.find(([k]) => k.includes('opponent') && !/score|goal|logo/.test(k));
   const opponent = clip(oppKey ? rec[oppKey[1]] : '');
   if (!team || !date || !opponent) return null;
   const t = col('starttime', 'gametime').trim().toUpperCase()
@@ -297,11 +305,11 @@ function formGame(rec) {
     Date: date,
     Time: time,
     Opponent: opponent,
-    Logo: '',
     Rink: clip(col('rink')),
     Score: score,
     Result: result,
     Status: clip(col('status'), 20),
+    Logo: sheetLogo(col('logo')),
   };
 }
 
@@ -325,8 +333,17 @@ let submittedRows;
  */
 export function loadSubmittedRows() {
   if (!submittedRows) {
+    const saved = fetchRows(`${FEED_BASE}/form-games.json`);
     submittedRows = loadFormCsv()
-      .catch(() => fetchRows(`${FEED_BASE}/form-games.json`))
+      .then(async (rows) => {
+        // Use the logo the workflow saved on the site instead of the upload.
+        const stored = new Map((await saved).map((r) => [`${r.Submitted}|${r.Opponent}`, r.Logo]));
+        return rows.map((r) => {
+          const path = stored.get(`${r.Submitted}|${r.Opponent}`);
+          return path && path.startsWith('/images/') ? { ...r, Logo: path } : r;
+        });
+      })
+      .catch(() => saved)
       .then((rows) => rows.filter((r) => !/hide|reject|delete|spam/i.test(r.Status || '')));
   }
   return submittedRows;
@@ -349,6 +366,18 @@ function loadOtherSheet() {
  * @param {string} key '10u' | '14u'
  */
 export function sheetGames(rows, key) {
+  // The logos on file per opponent, so one sent once is reused for that
+  // team's other games: the club's (other-games) and the uploaded ones.
+  const oppKey = (name) => tidyTeam(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const clubLogos = new Map();
+  const sentLogos = new Map();
+  rows.forEach((r) => {
+    const logo = sheetLogo(r.Logo);
+    if (!logo || !r.Opponent) return;
+    if (r.fromClub) {
+      if (!clubLogos.has(oppKey(r.Opponent))) clubLogos.set(oppKey(r.Opponent), logo);
+    } else sentLogos.set(oppKey(r.Opponent), logo);
+  });
   return rows.map((r) => {
     if (rowTeam(r) !== key) return null;
     const date = sheetDate(r.Date);
@@ -367,7 +396,10 @@ export function sheetGames(rows, key) {
       result: score ? result : '',
       gameId: `sheet-${key}-${dayKey(date)}-${opponent.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
       type: gameType(r.Type),
-      logo: sheetLogo(r.Logo),
+      // The club's logo wins over everything; an uploaded one is only used
+      // when the site has no logo for the team (see normalizeGame).
+      logo: (r.fromClub && sheetLogo(r.Logo)) || clubLogos.get(oppKey(opponent)) || '',
+      logoFallback: (!r.fromClub && sheetLogo(r.Logo)) || sentLogos.get(oppKey(opponent)) || '',
     };
   }).filter(Boolean);
 }
@@ -442,7 +474,7 @@ function normalizeGame(g, feed, team) {
     shortDate: `${MONTHS[when.month]} ${when.day}`,
     time: when.timed ? g.time.trim().toUpperCase() : '',
     opp,
-    oppLogo: g.logo || teamLogo(opp),
+    oppLogo: g.logo || teamLogo(opp) || g.logoFallback || '',
     // Tournament "Home"/"Away" is a bench designation, not a rink.
     prefix: !tournament && !home ? 'at' : 'vs',
     type,

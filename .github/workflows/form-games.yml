@@ -23,6 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Pillow (opponent logos)
+        run: pip install pillow
+
       - name: Read the form responses
         run: python3 .github/scripts/pull_form_games.py
 
@@ -31,6 +34,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/form-games.json
+          [ -d images/opponents ] && git add images/opponents
           if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
           git commit -m "Update Google Form games [skip ci]"
           # The GameSheet or Trophy Room job may have pushed meanwhile.

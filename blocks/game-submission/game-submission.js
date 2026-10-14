@@ -20,6 +20,9 @@ const ENTRY = {
   rink: 'entry.36291720',
   rinxGoals: 'entry.693898124',
   oppGoals: 'entry.1292415246',
+  // Paragraph question "Opponent Logo": the picked image, shrunk to a small
+  // data: image. Empty = no logo field on the page.
+  logo: '',
 };
 const ACTION_VALUE = { upcoming: 'Upcoming Game', score: 'Score Report' };
 const FORM_LINK = /^https:\/\/docs\.google\.com\/forms\/d\/e\/([A-Za-z0-9_-]+)\//;
@@ -81,6 +84,7 @@ function formFields(data) {
     body.set(`${ENTRY.time}_minute`, minute);
   }
   body.set(ENTRY.opponent, data.opponent);
+  if (ENTRY.logo && data.logo) body.set(ENTRY.logo, data.logo);
   body.set(ENTRY.rink, data.rink || '');
   if (data.action === 'score') {
     body.set(ENTRY.rinxGoals, String(+data.rinxGoals));
@@ -121,6 +125,8 @@ function formHtml() {
           ${field('time', 'Start time <span class="gs-req gs-time-req" aria-hidden="true">*</span>', `<input type="time" id="gs-time" name="time" step="300" ${describe('time')}>`)}
         </div>
         ${field('opponent', 'Opponent <span class="gs-req" aria-hidden="true">*</span>', `<input type="text" id="gs-opponent" name="opponent" list="gs-opponents" maxlength="80" autocomplete="off" ${describe('opponent', true)}><datalist id="gs-opponents"></datalist>`, 'Their full team name, e.g. Darien Youth 14U A.')}
+        ${ENTRY.logo ? field('logo', 'Opponent logo <span class="gs-opt">(optional)</span>', `<input type="file" id="gs-logo" name="logoFile" accept="image/png,image/jpeg,image/webp,image/gif" ${describe('logo', true)}>
+          <div class="gs-logo-preview" hidden><img alt="" width="64" height="64"><button type="button" class="gs-logo-remove">Remove</button></div>`, 'Only needed if their logo isn’t on our site yet.') : ''}
         ${field('rink', 'Rink <span class="gs-req" aria-hidden="true">*</span>', `<input type="text" id="gs-rink" name="rink" list="gs-rinks" maxlength="80" autocomplete="off" ${describe('rink', true)}><datalist id="gs-rinks"></datalist>`, 'Use “The Rinx” for home games.')}
       </div>
 
@@ -232,6 +238,46 @@ export default async function decorate(block) {
     });
   }
 
+  // Opponent logo: shrunk to fit 128px (keeping transparency) and sent as a
+  // small data: image; the form-games workflow saves it to the site.
+  let logoData = '';
+  const logoInput = $('#gs-logo');
+  const preview = $('.gs-logo-preview');
+  function clearLogo() {
+    logoData = '';
+    if (logoInput) logoInput.value = '';
+    if (preview) preview.hidden = true;
+    setError('logo', '');
+  }
+  async function shrink(file) {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, 128 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    // WebP where the browser can make it, else PNG.
+    const webp = canvas.toDataURL('image/webp', 0.85);
+    return webp.startsWith('data:image/webp') ? webp : canvas.toDataURL('image/png');
+  }
+  logoInput?.addEventListener('change', async () => {
+    const file = logoInput.files[0];
+    if (!file) { clearLogo(); return; }
+    try {
+      if (file.size > 15 * 1024 * 1024) throw new Error('too big');
+      const data = await shrink(file);
+      if (data.length > 60000) throw new Error('too big');
+      logoData = data;
+      preview.querySelector('img').src = data;
+      preview.hidden = false;
+      setError('logo', '');
+    } catch {
+      clearLogo();
+      setError('logo', 'That image couldn’t be used. Try a PNG or JPG of the logo.');
+    }
+  });
+  preview?.querySelector('.gs-logo-remove').addEventListener('click', clearLogo);
+
   function collect() {
     const v = (name) => (form.elements[name]?.value || '').trim();
     const score = mode() === 'score';
@@ -243,6 +289,7 @@ export default async function decorate(block) {
       time: picked ? isoTime(picked.time) : v('time'),
       opponent: picked ? picked.opponent : v('opponent'),
       rink: picked ? picked.location : v('rink'),
+      logo: picked ? '' : logoData,
       rinxGoals: v('rinxGoals'),
       oppGoals: v('oppGoals'),
       website: v('website'),
@@ -267,7 +314,7 @@ export default async function decorate(block) {
   }
 
   function showErrors(errors) {
-    ['team', 'game', 'date', 'time', 'opponent', 'rink', 'score']
+    ['team', 'game', 'date', 'time', 'opponent', 'rink', 'logo', 'score']
       .forEach((name) => setError(name, errors[name]));
     const list = Object.values(errors);
     const summary = $('.gs-summary');
@@ -297,6 +344,7 @@ export default async function decorate(block) {
     box.focus();
     box.querySelector('.gs-again').addEventListener('click', () => {
       form.reset();
+      clearLogo();
       form.querySelector(`input[name="team"][value="${data.team}"]`).checked = true;
       box.hidden = true;
       form.hidden = false;
