@@ -107,12 +107,36 @@ function pageSize() {
   return TABLET.matches ? 9 : 6;
 }
 
-function galleryList(photos, label, size) {
+// Photo tags: the event (from the photo's gallery sub-folder on GitHub), else
+// the month and year it was taken (from its EXIF date). See trophy_gallery.py.
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+  'September', 'October', 'November', 'December'];
+
+function monthYear(iso) {
+  const m = (iso || '').match(/^(\d{4})-(\d{2})/);
+  return m ? `${MONTHS[+m[2] - 1]} ${m[1]}` : '';
+}
+
+const tagOf = (p) => p.event || monthYear(p.taken);
+
+// The tags in a gallery, newest first (by each tag's latest photo).
+function tagList(photos) {
+  const latest = new Map();
+  photos.forEach((p) => {
+    if (!p.tag) return;
+    const when = p.taken || p.added || '';
+    if (!latest.has(p.tag) || when > latest.get(p.tag)) latest.set(p.tag, when);
+  });
+  return [...latest.keys()].sort((a, b) => latest.get(b).localeCompare(latest.get(a)));
+}
+
+function galleryList(photos, label, size, showTags) {
   if (!photos?.length) return `<p class="tr-empty">${label} photos are on the way.</p>`;
   const items = photos.map((p, i) => `
     <li>
       <button type="button" class="tr-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}: ${attr(p.alt)}">
         <img src="${p.thumb}"${p.small ? ` srcset="${p.small} 400w, ${p.thumb} 800w" sizes="(min-width: 900px) 20vw, (min-width: 600px) 33vw, 50vw"` : ''} alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
+        ${showTags && p.tag ? `<span class="tr-tag" aria-hidden="true">${attr(p.tag)}</span>` : ''}
       </button>
     </li>`);
   if (items.length <= size) return `<ul class="tr-gallery">${items.join('')}</ul>`;
@@ -135,12 +159,29 @@ function pageControls(key) {
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// (Re)build one panel's gallery for the current page size.
-function renderGallery(panel, photos, label) {
+// The photos a panel shows under its current tag filter.
+const visiblePhotos = (panel, photos) => (panel.trTag
+  ? photos.filter((p) => p.tag === panel.trTag)
+  : photos);
+
+// Tag filter buttons: All photos, then each event / month. Only worth showing
+// when there is more than one way to slice the gallery.
+function filterBar(key, photos) {
+  const tags = tagList(photos);
+  const untagged = photos.some((p) => !p.tag);
+  if (!tags.length || (tags.length === 1 && !untagged)) return '';
+  return `<div class="tr-filters" role="group" aria-label="Show photos from">
+      ${['', ...tags].map((t) => `<button type="button" class="tr-filter" data-tag="${attr(t)}" aria-pressed="${!t}" aria-controls="tr-panel-${key}">${t ? attr(t) : 'All photos'}</button>`).join('')}
+    </div>`;
+}
+
+// (Re)build one panel's gallery for the current page size and filter.
+function renderGallery(panel, allPhotos, label) {
   const body = panel.querySelector('.tr-photos-body');
   const ctrl = panel.querySelector('.tr-page-ctrl');
+  const photos = visiblePhotos(panel, allPhotos);
   panel.trObserver?.disconnect();
-  body.innerHTML = galleryList(photos, label, pageSize());
+  body.innerHTML = galleryList(photos, label, pageSize(), !panel.trTag);
   const track = body.querySelector('.tr-pages');
   ctrl.hidden = !track;
   if (!track) return;
@@ -205,7 +246,7 @@ function openViewer(dialog, photos, start) {
     img.alt = p.alt;
     img.width = p.width;
     img.height = p.height;
-    caption.querySelector('.tr-viewer-caption').textContent = p.caption || '';
+    caption.querySelector('.tr-viewer-caption').textContent = [p.caption, p.tag].filter(Boolean).join(' · ');
     caption.querySelector('.tr-viewer-count').textContent = `${index + 1} / ${photos.length}`;
   };
   const many = photos.length > 1;
@@ -269,7 +310,10 @@ export default async function decorate(block) {
     ];
     gallery[key] = (manifest[key]?.gallery || []).map((p) => {
       const caption = captionFor(team, p.source);
-      return { ...p, caption, alt: caption || p.alt };
+      const tag = tagOf(p);
+      return {
+        ...p, caption, tag, alt: [caption || p.alt, tag].filter(Boolean).join(', '),
+      };
     });
   });
 
@@ -293,6 +337,7 @@ export default async function decorate(block) {
               <h2>${attr(settings[t.key].headings.gallery || DEFAULT_HEADINGS.gallery)}</h2>
               ${pageControls(t.key)}
             </div>
+            ${filterBar(t.key, gallery[t.key])}
             <div class="tr-photos-body"></div>
           </div>
         </section>`).join('')}
@@ -337,6 +382,13 @@ export default async function decorate(block) {
     renderGallery(panel, gallery[t.key], t.label);
   });
   panels.forEach(({ panel }) => wireControls(panel));
+  panels.forEach(({ t, panel }) => panel.querySelectorAll('.tr-filter').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      panel.trTag = btn.dataset.tag;
+      panel.querySelectorAll('.tr-filter').forEach((b) => b.setAttribute('aria-pressed', b === btn));
+      renderGallery(panel, gallery[t.key], t.label);
+    });
+  }));
   renderAll();
   [TABLET, DESKTOP].forEach((mq) => mq.addEventListener('change', renderAll));
 
@@ -347,7 +399,7 @@ export default async function decorate(block) {
       const thumb = e.target.closest('.tr-thumb');
       if (!thumb) return;
       viewer ||= buildViewer();
-      openViewer(viewer, gallery[t.key], Number(thumb.dataset.index));
+      openViewer(viewer, visiblePhotos(panel, gallery[t.key]), Number(thumb.dataset.index));
     });
   });
 }
