@@ -176,6 +176,23 @@ def to_game(row):
     }
 
 
+def read_rows(text):
+    """CSV rows as dicts. Two columns can share a name (a deleted question's
+    old column stays in the sheet): keep whichever has an answer."""
+    reader = csv.reader(io.StringIO(text))
+    head = next(reader, [])
+    rows = []
+    for values in reader:
+        if not any(values):
+            continue
+        row = {}
+        for name, value in zip(head, values):
+            if value or name not in row:
+                row[name] = value
+        rows.append(row)
+    return rows
+
+
 def main():
     try:
         req = urllib.request.Request(CSV_URL, headers={'User-Agent': 'rinx-form-games'})
@@ -187,7 +204,7 @@ def main():
     if not text.lower().startswith('timestamp'):
         print('Unexpected reply (is the sheet still published as CSV?), keeping the current file.')
         return 0
-    games = [g for g in (to_game(r) for r in csv.DictReader(io.StringIO(text))) if g]
+    games = [g for g in (to_game(r) for r in read_rows(text)) if g]
     games.sort(key=lambda g: g['Submitted'])
     body = json.dumps({'data': games}, indent=1, ensure_ascii=False) + '\n'
     if OUT.exists() and OUT.read_text() == body:

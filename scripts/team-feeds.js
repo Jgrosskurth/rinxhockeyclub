@@ -256,8 +256,12 @@ function parseCsv(text) {
   }
   if (cell || row.length) { row.push(cell); rows.push(row); }
   const [head = [], ...body] = rows;
-  return body.filter((r) => r.some(Boolean))
-    .map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] || ''])));
+  // Two columns can share a name (a deleted question's old column stays in
+  // the sheet): keep whichever has an answer.
+  return body.filter((r) => r.some(Boolean)).map((r) => head.reduce((rec, h, i) => {
+    if (r[i] || !(h in rec)) rec[h] = r[i] || '';
+    return rec;
+  }, {}));
 }
 
 const clip = (v, max = 80) => String(v || '').replace(/[<>]/g, ' ').replace(/\s+/g, ' ').trim()
