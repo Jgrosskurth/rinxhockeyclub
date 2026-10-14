@@ -22,7 +22,7 @@ const ENTRY = {
   oppGoals: 'entry.1292415246',
   // Paragraph question "Opponent Logo": the picked image, shrunk to a small
   // data: image. Empty = no logo field on the page.
-  logo: '',
+  logo: 'entry.1442778975',
 };
 const ACTION_VALUE = { upcoming: 'Upcoming Game', score: 'Score Report' };
 const FORM_LINK = /^https:\/\/docs\.google\.com\/forms\/d\/e\/([A-Za-z0-9_-]+)\//;
