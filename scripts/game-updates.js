@@ -10,7 +10,7 @@ const TEAMS = [
   { feed: 'schedule-10u.json', age: '10U', label: '10U Squirts' },
   { feed: 'schedule-14u.json', age: '14U', label: '14U Bantams' },
   {
-    feed: 'schedule-mid-atlantic.json', age: '10U', label: '10U Squirts', event: 'the Mid-Atlantic Fall Showcase',
+    feed: 'schedule-mid-atlantic.json', age: '10U', label: '10U Squirts', event: 'the Mid-Atlantic Fall Classic',
   },
 ];
 

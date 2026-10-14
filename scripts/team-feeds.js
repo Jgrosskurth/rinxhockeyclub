@@ -10,7 +10,7 @@ const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/
 // Tournament feeds: the name shown on the "Next up" card and the feed with
 // that tournament's standings.
 const TOURNAMENTS = {
-  'schedule-mid-atlantic.json': { name: 'Mid-Atlantic Fall Showcase', standings: 'standings-mid-atlantic.json' },
+  'schedule-mid-atlantic.json': { name: 'Mid-Atlantic Fall Classic', standings: 'standings-mid-atlantic.json' },
 };
 
 export const TEAMS = {

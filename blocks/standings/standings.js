@@ -51,7 +51,7 @@ const COLS = [
 
 function renderStandings(block, data, opts = {}) {
   const tournament = opts.tournament ?? isTournament();
-  const source = opts.source || (tournament ? '2026 Mid-Atlantic Fall Showcase' : '2026&ndash;2027 season');
+  const source = opts.source || (tournament ? '2026 Mid-Atlantic Fall Classic' : '2026&ndash;2027 season');
   const teams = data.teams || [];
   const headCells = COLS.map((c) => `<th>${c.label}</th>`).join('');
   const rows = teams.map((tm) => {
@@ -78,7 +78,7 @@ function renderStandings(block, data, opts = {}) {
 
 // GameSheet tournaments with their own standings, per team page.
 const TEAM_TOURNAMENTS = {
-  '10u': [{ feed: 'mid-atlantic', title: 'Mid-Atlantic Fall Showcase' }],
+  '10u': [{ feed: 'mid-atlantic', title: 'Mid-Atlantic Fall Classic' }],
 };
 
 const TABS = [
