@@ -6,6 +6,10 @@ Per team (10U, 14U), from images uploaded to GitHub:
   file name is the caption: "RINX 2025 LIAHL Champions Banner.png" reads
   "RINX 2025 LIAHL Champions".
 - images/trophyroom-<team>/gallery/*  -> gallery photos, newest first.
+  Each photo is tagged for the gallery's filters: by event when it sits in a
+  sub-folder named after it ("gallery/2026 Mid-Atlantic Fall Showcase/x.jpg"),
+  otherwise by the month and year it was taken (from the photo's EXIF date;
+  photos saved from Instagram or texts often have none, and stay untagged).
 
 Each image gets WebP web copies under images/trophy-room/<team>/ (banners:
 600px wide; photos: 400px and 800px grid thumbnails + 1600px full view), listed in
@@ -75,6 +79,37 @@ def added_at(path):
     return out[-1] if out else ''
 
 
+def taken_at(src):
+    """'2026-10-11T14:06:32' from the photo's EXIF capture date, or ''."""
+    raw = ''
+    if Image:
+        try:
+            with Image.open(src) as im:
+                exif = im.getexif()
+                sub = exif.get_ifd(0x8769)  # Exif IFD: DateTimeOriginal / DateTimeDigitized
+                raw = sub.get(36867) or sub.get(36868) or exif.get(306) or ''
+        except Exception:
+            raw = ''
+    else:
+        raw = subprocess.run(['identify', '-format', '%[EXIF:DateTimeOriginal]|%[EXIF:DateTime]', f'{src}[0]'],
+                             capture_output=True, text=True, check=False).stdout
+        raw = next((part for part in raw.split('|') if part.strip()), '')
+    m = re.match(r'\s*(\d{4})[:-](\d{2})[:-](\d{2})[ T](\d{2}):(\d{2}):(\d{2})', str(raw))
+    if not m or not 1990 <= int(m[1]) <= 2100 or not 1 <= int(m[2]) <= 12:
+        return ''
+    return f'{m[1]}-{m[2]}-{m[3]}T{m[4]}:{m[5]}:{m[6]}'
+
+
+def event_of(src, src_dir):
+    """Event name from the gallery sub-folder a photo sits in, or ''."""
+    parts = src.relative_to(src_dir).parts
+    if len(parts) < 2:
+        return ''
+    name = parts[0].strip()
+    name = name.replace('_', ' ') if ' ' in name else re.sub(r'[-_]+', ' ', name)
+    return re.sub(r'\s+', ' ', name).strip()
+
+
 def make_copies(src, files, sizes):
     """Write a WebP per size (never upscaled); returns {key: (width, height)}."""
     dims = {}
@@ -134,7 +169,9 @@ def build(team, label, kind, previous):
     out_dir.mkdir(parents=True, exist_ok=True)
     known = {p['source']: p for p in previous}
     items, keep = [], set()
-    sources = sorted(p for p in src_dir.glob('*') if p.is_file() and p.suffix.lower() in EXTENSIONS)
+    # Gallery photos may sit in event sub-folders; banners are top level only.
+    pattern = '**/*' if kind == 'gallery' else '*'
+    sources = sorted(p for p in src_dir.glob(pattern) if p.is_file() and p.suffix.lower() in EXTENSIONS)
     for src in sources:
         rel = src.relative_to(ROOT).as_posix()
         digest = hashlib.sha1(src.read_bytes()).hexdigest()[:10]
@@ -159,6 +196,8 @@ def build(team, label, kind, previous):
             item['alt'] = f'{title} banner' if title else f'Rinx {label} championship banner'
         else:
             item['alt'] = title or f'Rinx {label} photo'
+            item['event'] = event_of(src, src_dir)
+            item['taken'] = taken_at(src)
         item['added'] = added_at(src)
         items.append(item)
     for stale in out_dir.glob('*.webp'):

@@ -321,6 +321,7 @@
 }
 
 .trophy-room .tr-thumb {
+  position: relative;
   display: block;
   width: 100%;
   aspect-ratio: 1;
@@ -331,6 +332,77 @@
   background: var(--color-gray-light);
   cursor: zoom-in;
   box-shadow: var(--shadow-card);
+}
+
+/* Tag filters (All photos / event / month): a row that scrolls sideways on
+   phones rather than wrapping into a tall block. */
+.trophy-room .tr-filters {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  padding-bottom: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.trophy-room .tr-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.trophy-room .tr-filter {
+  flex: none;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 2px solid var(--color-navy);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--heading-font-family);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.trophy-room .tr-filter:hover {
+  background: var(--color-ice);
+}
+
+.trophy-room .tr-filter[aria-pressed="true"] {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.trophy-room .tr-filter:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+.trophy-room .tr-filters + .tr-photos-body .tr-gallery {
+  margin-top: 14px;
+}
+
+.trophy-room .tr-tag {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  max-width: calc(100% - 12px);
+  padding: 3px 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgb(4 30 66 / 82%);
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .trophy-room .tr-thumb img {
