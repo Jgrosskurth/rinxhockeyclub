@@ -1,15 +1,16 @@
 import {
-  TEAMS, loadTeamGames, loadClubRows, mergeSheetRows, sheetGames,
+  TEAMS, loadTeamGames, loadClubRows, loadSubmittedRows, mergeSheetRows, sheetGames,
 } from '../../scripts/team-feeds.js';
 
 // Families send in exhibition games: an upcoming game, or the score of one.
-// Submissions go to the club's Google Sheet (tools/game-submissions/Code.gs)
-// and reach the schedule, standings and homepage through
-// data/submitted-games.json (exhibition-submissions.yml).
+// The form posts to the Cloudflare relay at /api/submit-game
+// (tools/game-submissions/worker.js), which adds the game to the DA sheet
+// /game-submissions and publishes it; the schedule, standings and homepage
+// read that sheet (scripts/team-feeds.js).
 //
-// Authoring: one row, "Submit to" | <the Apps Script web app URL>.
+// Authoring: optional row "Submit to" | <another relay URL>.
 
-const ENDPOINT = /^https:\/\/script\.google\.com\/(?:a\/[^/\s"<>]+\/)?macros\/s\/[A-Za-z0-9_-]+\/exec$/;
+const ENDPOINT = '/api/submit-game';
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const pad = (n) => String(n).padStart(2, '0');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -124,26 +125,29 @@ function formHtml() {
 
 export default async function decorate(block) {
   const config = readConfig(block);
-  const endpoint = ENDPOINT.test(config['submit to'] || '') ? config['submit to'] : '';
+  const endpoint = config['submit to'] || ENDPOINT;
   block.innerHTML = formHtml();
   const form = block.querySelector('.gs-form');
   const $ = (sel) => form.querySelector(sel);
   const status = $('.gs-status');
   const submit = $('.gs-submit');
 
-  if (!endpoint) {
-    status.textContent = 'Game submissions aren’t switched on yet. Please check back soon.';
-    submit.disabled = true;
-  }
+  // The relay says whether it is set up and whether a team code is needed.
+  let ready = false;
+  fetch(endpoint, { cache: 'no-store' })
+    .then((r) => (r.ok ? r.json() : {}))
+    .catch(() => ({}))
+    .then((info) => {
+      ready = !!info.ready;
+      $('.gs-code').hidden = !info.codeRequired;
+      if (!ready) {
+        status.textContent = 'Game submissions aren’t switched on yet. Please check back soon.';
+        submit.disabled = true;
+      }
+    });
 
-  // Fresh submissions from the sheet (so a game sent a minute ago can get its
-  // score), and whether a team code is needed.
-  const live = endpoint
-    ? fetch(endpoint).then((r) => r.json()).catch(() => ({ data: [] }))
-    : Promise.resolve({ data: [] });
-  live.then((body) => {
-    if (body.codeRequired) $('.gs-code').hidden = false;
-  });
+  // Fresh submissions (so a game sent a minute ago can get its score).
+  const live = loadSubmittedRows({ fresh: true });
 
   const mode = () => form.elements.action.value;
   const team = () => form.elements.team.value;
@@ -176,7 +180,7 @@ export default async function decorate(block) {
     const [club, body, feeds] = await Promise.all([
       loadClubRows(), live, loadTeamGames(key).catch(() => ({ finals: [], upcoming: [] })),
     ]);
-    const all = sheetGames(mergeSheetRows(club, body.data || []), key);
+    const all = sheetGames(mergeSheetRows(club, body), key);
     const today = todayIso();
     games = all.filter((g) => g.type === 'Exhibition' && !g.result && isoDate(g.date) <= today)
       .sort((a, b) => isoDate(b.date).localeCompare(isoDate(a.date)));
@@ -280,7 +284,7 @@ export default async function decorate(block) {
     box.innerHTML = `
       <h2>Thanks, ${esc(data.name.split(' ')[0])}!</h2>
       <p class="gs-done-what">${what}</p>
-      <p>It will show on the ${esc(t.label)} schedule${data.action === 'score' ? ' and standings' : ''} within about 15 minutes.${picked || data.action === 'upcoming' ? '' : ' If it duplicates a listed game, the club will tidy it up.'}</p>
+      <p>It will show on the ${esc(t.label)} schedule${data.action === 'score' ? ' and standings' : ''} within a few minutes.${picked || data.action === 'upcoming' ? '' : ' If it duplicates a listed game, the club will tidy it up.'}</p>
       <div class="gs-done-actions">
         <a class="gs-btn gs-btn-navy" href="${t.schedulePath}">View the schedule</a>
         <button type="button" class="gs-btn gs-btn-outline gs-again">Send another</button>
@@ -320,17 +324,16 @@ export default async function decorate(block) {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!endpoint || submit.disabled) return;
+    if (!ready || submit.disabled) return;
     const { data, errors, picked } = collect();
     showErrors(errors);
     if (Object.keys(errors).length) return;
     submit.disabled = true;
     status.textContent = 'Sending…';
     try {
-      // text/plain keeps this a simple request (Apps Script can't answer CORS preflights).
       const resp = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
       const body = await resp.json();

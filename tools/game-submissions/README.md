@@ -1,58 +1,72 @@
-# Exhibition game submissions: Google Sheet setup
+# Exhibition game submissions: setup
 
-The form at **/submit-game** sends each game to a Google Sheet you own. The
-website then picks the games up automatically (every 15 minutes, or within a
-couple of minutes with step 6).
+The form at **/submit-game** sends each game to a small relay on Cloudflare
+(`worker.js` in this folder). The relay adds it as a row to the Document
+Authoring sheet **game-submissions** and publishes that sheet, so the game shows
+on the schedule, standings and homepage within a few minutes. The family's name,
+contact and notes go to **game-submissions-contacts**, which is never published.
 
-## 1. Create the sheet
+Until steps 1–3 are done, the form says "Game submissions aren't switched on
+yet."
 
-1. Go to [sheets.new](https://sheets.new) and name it **Rinx exhibition submissions**.
-2. **Extensions → Apps Script.**
-3. Delete what is in `Code.gs`, paste the whole of [`Code.gs`](./Code.gs) from this
-   folder, and click **Save**.
-4. Pick **setup** in the function menu at the top and click **Run**. Approve the
-   permissions Google asks for. A **Submissions** tab with the column headings
-   appears in the sheet.
+## 1. Adobe service account (Adobe Developer Console)
 
-## 2. Settings (optional)
+1. Go to <https://developer.adobe.com/console> and sign in with the Adobe ID you
+   use for Document Authoring.
+2. **Create new project** → **Add API** → **Edge Delivery Services** → choose
+   **OAuth Server-to-Server** → **Save configured API**.
+3. Open the new credential. Note down:
+   - **Client ID**
+   - **Client secret** (click *Retrieve client secret*)
+   - **Scopes** (the list shown on the credential page)
+   - **Technical account email** (ends in `@techacct.adobe.com`)
 
-In Apps Script, **Project Settings (gear) → Script properties → Add script property**:
+Keep the client secret private: it goes only into Cloudflare in step 3, never
+into the website, an email, or a chat.
 
-| Property | Value |
-|---|---|
-| `TEAM_CODE` | A code families must type in to submit, e.g. `rinx26`. Leave it out to allow anyone with the link. |
-| `NOTIFY_EMAIL` | Who gets an email for each submission, e.g. `info@therinx.com` (comma-separate several). |
+## 2. Let the service account edit the two sheets
 
-## 3. Publish the script
+Send the **technical account email** (not the secret) to whoever manages the
+site and they can add it, or add it yourself in
+<https://da.live/config#/jgrosskurth/> on the **permissions** sheet:
 
-1. **Deploy → New deployment.** Click the gear next to "Select type", choose **Web app**.
-2. Description: `Game submissions`. **Execute as: Me.** **Who has access: Anyone.**
-3. Click **Deploy**, then copy the **Web app URL** (it ends in `/exec`).
+| path | groups | actions |
+|---|---|---|
+| /game-submissions | *technical account email* | write |
+| /game-submissions-contacts | *technical account email* | write |
 
-## 4. Connect the website
+## 3. Cloudflare Worker
 
-1. Open the **submit-game** page in Document Authoring.
-2. In the **Game Submission** block, paste the Web app URL next to **Submit to**.
-3. Preview and publish the page.
+1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Create Worker**.
+   Name it `rinx-game-submissions` → **Deploy**.
+2. **Edit code**, replace everything with the contents of `worker.js`, **Deploy**.
+3. **Settings → Variables and Secrets** → add:
 
-## 5. Day to day
+   | Name | Type | Value |
+   |---|---|---|
+   | `ADOBE_CLIENT_ID` | Secret | Client ID from step 1 |
+   | `ADOBE_CLIENT_SECRET` | Secret | Client secret from step 1 |
+   | `ADOBE_SCOPES` | Text | Scopes from step 1, comma separated |
+   | `TEAM_CODE` | Secret | Optional: a code families must type in, e.g. `rinx26` |
 
-- Every submission is a new row: upcoming games, and score reports (Action `Score`).
-- Fix a typo by editing the cell. To take a row off the website, type **Hide** in
-  its **Status** cell.
+4. **Settings → Domains & Routes → Add → Route**: zone `rinxhockeyclub.com`,
+   route `www.rinxhockeyclub.com/api/submit-game`.
+
+## 4. Check it
+
+- Open <https://www.rinxhockeyclub.com/api/submit-game>. It should show
+  `"ready":true`.
+- Submit a test game on /submit-game. It appears as a row in the
+  **game-submissions** sheet in DA, and on the team schedule within a few minutes.
+- Remove the test: type **Hide** in its **Status** cell and **Publish** the sheet.
+
+## Day to day
+
 - Your **other-games** sheet always wins. A submitted score only fills in a game
   that has no score yet in other-games.
-- If you change `Code.gs` later: **Deploy → Manage deployments → Edit → Version:
-  New version → Deploy**. The URL stays the same.
-
-## 6. Faster updates (optional)
-
-Without this, games appear within about 15 minutes. To make it about 2 minutes:
-
-1. On GitHub: **Settings → Developer settings → Fine-grained tokens → Generate new
-   token**. Repository access: only **Jgrosskurth/rinxhockeyclub**. Permissions:
-   **Contents: Read and write**. Copy the token.
-2. Add it in Apps Script as a script property named `GITHUB_TOKEN`.
-
-Keep the token only in the script properties. Don't put it on the website or
-send it to anyone.
+- To fix a typo, edit the cell in **game-submissions** and **Publish** the sheet.
+  To take a game off the site, type **Hide** in its Status cell and Publish.
+- Avoid editing game-submissions at the exact moment a family submits; the
+  later save wins.
+- Names and contact details are in **game-submissions-contacts**. Don't publish
+  that sheet.
