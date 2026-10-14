@@ -63,24 +63,34 @@
   gap: 4px;
 }
 
-/* The full nav (team menus) needs ~1240px on one line; narrower screens use
-   the menu button (see the max-width: 1279px block below). Kept on one line
-   so the header can't grow while web fonts load. */
-@media (min-width: 1280px) {
+/* The full nav (Roster / Schedule / Stats / Standings menus) needs ~1360px
+   on one line; narrower screens use the menu button (see the max-width:
+   1365px block below). Kept on one line so the header can't grow while web
+   fonts load. */
+@media (min-width: 1366px) {
   .header-nav {
     white-space: nowrap;
   }
 
   .header-nav a,
   .header-nav .nav-dropdown-toggle {
-    padding-left: 10px;
-    padding-right: 10px;
-    letter-spacing: 0.06em;
+    padding-left: 8px;
+    padding-right: 8px;
+    letter-spacing: 0.05em;
   }
 
   .header-inner {
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .header-nav a,
+  .header-nav .nav-dropdown-toggle {
+    padding-left: 10px;
+    padding-right: 10px;
+    letter-spacing: 0.06em;
   }
 }
 
@@ -207,7 +217,7 @@
   border-radius: 2px;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1365px) {
   .header-inner { padding: 12px 20px; }
 
   .hamburger { display: flex; }
@@ -260,7 +270,7 @@
 }
 
 /* Tablets and small laptops: the menu opens as a panel on the right */
-@media (min-width: 601px) and (max-width: 1279px) {
+@media (min-width: 601px) and (max-width: 1365px) {
   .header-nav {
     left: auto;
     width: 340px;

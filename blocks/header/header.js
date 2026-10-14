@@ -1,3 +1,23 @@
+// Roster / Schedule / Stats / Standings, each opening to the two teams.
+const SECTIONS = [
+  { label: 'Roster', path: '/roster' },
+  { label: 'Schedule', path: '/schedule' },
+  { label: 'Stats', path: '/stats' },
+  { label: 'Standings', path: '/standings' },
+];
+const TEAM_PAGES = [
+  { label: '10U Squirts', suffix: '' },
+  { label: '14U Bantam', suffix: '-14u' },
+];
+
+const sectionMenu = ({ label, path }) => `
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">${label} <span class="nav-plus">+</span></button>
+          <div class="nav-dropdown-menu">
+            ${TEAM_PAGES.map((t) => `<a href="${path}${t.suffix}">${t.label}</a>`).join('')}
+          </div>
+        </div>`;
+
 export default function decorate(block) {
   block.innerHTML = `
     <div class="header-inner">
@@ -16,24 +36,7 @@ export default function decorate(block) {
 
       <nav class="header-nav" id="header-nav">
         <a href="/">Home</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle">10U Squirts <span class="nav-plus">+</span></button>
-          <div class="nav-dropdown-menu">
-            <a href="/roster">Roster</a>
-            <a href="/schedule">Schedule</a>
-            <a href="/stats">Stats</a>
-            <a href="/standings">Standings</a>
-          </div>
-        </div>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-toggle">14U Bantam <span class="nav-plus">+</span></button>
-          <div class="nav-dropdown-menu">
-            <a href="/roster-14u">Roster</a>
-            <a href="/schedule-14u">Schedule</a>
-            <a href="/stats-14u">Stats</a>
-            <a href="/standings-14u">Standings</a>
-          </div>
-        </div>
+        ${SECTIONS.map(sectionMenu).join('')}
         <a href="/tournaments">Tournaments</a>
         <a href="/trophy-room">Awards</a>
         <a href="/sponsors">Sponsors</a>
@@ -53,7 +56,7 @@ export default function decorate(block) {
     const href = a.getAttribute('href');
     if (href === path || (path === '' && href === '/')) a.classList.add('active');
   });
-  // A team menu is highlighted while you're on one of its pages.
+  // A menu is highlighted while you're on one of its pages.
   block.querySelectorAll('.nav-dropdown').forEach((d) => {
     if (d.querySelector('a.active')) d.querySelector('.nav-dropdown-toggle').classList.add('active');
   });
