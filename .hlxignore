@@ -12,3 +12,5 @@ DESIGN.json
 # Trophy Room originals; the site serves the web copies in images/trophy-room
 /images/trophyroom-10u/
 /images/trophyroom-14u/
+# Apps Script for the game submissions sheet (pasted into Google, not served)
+/tools/game-submissions/

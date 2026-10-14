@@ -174,29 +174,74 @@ function sheetLogo(text) {
   return /^(?:https:\/\/|\/)[^\s"'<>]+$/.test(url) ? url : '';
 }
 
+function fetchRows(url) {
+  return fetch(url)
+    .then((resp) => (resp.ok ? resp.json() : { data: [] }))
+    .then((json) => json.data || [])
+    .catch(() => []);
+}
+
+let clubRows;
+/** Rows of the club's DA sheet /other-games (raw, cached). */
+export function loadClubRows() {
+  if (!clubRows) clubRows = fetchRows('/other-games.json');
+  return clubRows;
+}
+
+// The one team a sheet row is for ('10u' / '14u'), or '' (none, both, EXAMPLE).
+function rowTeam(r) {
+  const teams = Object.keys(TEAMS).filter((k) => new RegExp(`\\b${k}\\b`, 'i').test(r.Team || ''));
+  return teams.length === 1 && !/example/i.test(r.Team || '') ? teams[0] : '';
+}
+
+/**
+ * The club's sheet rows plus games sent in through /submit-game (same
+ * columns). The club's rows win: a submission for the same team, day and
+ * opponent only fills cells the club left empty (a reported score for a
+ * listed game, say). A later submission updates an earlier one.
+ * @param {object[]} club rows of /other-games
+ * @param {object[]} submitted rows of data/submitted-games.json, oldest first
+ */
+export function mergeSheetRows(club, submitted) {
+  const rows = club.map((r) => ({ ...r, fromClub: true }));
+  const asGame = (r) => ({ date: sheetDate(r.Date), opponent: r.Opponent || '' });
+  const same = (a, b) => rowTeam(a) && rowTeam(a) === rowTeam(b) && sameGame(asGame(a), asGame(b));
+  submitted.forEach((s) => {
+    const hit = rows.find((r) => same(r, s));
+    if (!hit) {
+      rows.push({ ...s });
+      return;
+    }
+    const fill = (k) => s[k] && (!hit.fromClub || !hit[k]);
+    ['Time', 'Rink', 'Logo'].forEach((k) => { if (fill(k)) hit[k] = s[k]; });
+    // Score and result travel together.
+    if (fill('Score') && (!hit.fromClub || !hit.Result)) {
+      hit.Score = s.Score;
+      hit.Result = s.Result;
+    }
+  });
+  return rows;
+}
+
 let otherSheet;
 function loadOtherSheet() {
   if (!otherSheet) {
-    otherSheet = fetch('/other-games.json')
-      .then((resp) => (resp.ok ? resp.json() : { data: [] }))
-      .then((json) => json.data || [])
-      .catch(() => []);
+    otherSheet = Promise.all([loadClubRows(), fetchRows(`${FEED_BASE}/submitted-games.json`)])
+      .then(([club, submitted]) => mergeSheetRows(club, submitted));
   }
   return otherSheet;
 }
 
 /**
- * A team's rows from the DA sheet /other-games, in GameSheet's feed shape
- * ({ date, time, opponent, venue, location, score, result, gameId }) plus
- * a `type` and the opponent's `logo`. Example rows and rows without a date or
- * opponent are skipped.
+ * A team's sheet rows in GameSheet's feed shape ({ date, time, opponent,
+ * venue, location, score, result, gameId }) plus a `type` and the opponent's
+ * `logo`. Example rows and rows without a date or opponent are skipped.
+ * @param {object[]} rows sheet rows (see mergeSheetRows)
  * @param {string} key '10u' | '14u'
  */
-export async function loadOtherGames(key) {
-  const rows = await loadOtherSheet();
+export function sheetGames(rows, key) {
   return rows.map((r) => {
-    const teams = Object.keys(TEAMS).filter((k) => new RegExp(`\\b${k}\\b`, 'i').test(r.Team || ''));
-    if (teams.length !== 1 || teams[0] !== key || /example/i.test(r.Team || '')) return null;
+    if (rowTeam(r) !== key) return null;
     const date = sheetDate(r.Date);
     const opponent = (r.Opponent || '').trim();
     if (!date || !opponent) return null;
@@ -216,6 +261,14 @@ export async function loadOtherGames(key) {
       logo: sheetLogo(r.Logo),
     };
   }).filter(Boolean);
+}
+
+/**
+ * A team's games from the club's sheet and /submit-game (see sheetGames).
+ * @param {string} key '10u' | '14u'
+ */
+export async function loadOtherGames(key) {
+  return sheetGames(await loadOtherSheet(), key);
 }
 
 /**
