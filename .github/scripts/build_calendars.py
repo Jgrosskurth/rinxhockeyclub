@@ -113,9 +113,7 @@ def other_games(key, rows):
     """A team's sheet rows in GameSheet's feed shape, plus a 'type'."""
     games = []
     for r in rows:
-        team = r.get('Team') or ''
-        hits = [k for k in TEAMS if re.search(rf'\b{k}\b', team, re.I)]
-        if hits != [key] or re.search('example', team, re.I):
+        if row_team(r) != key:
             continue
         date, opp = sheet_date(r.get('Date')), (r.get('Opponent') or '').strip()
         if not date or not opp:
@@ -133,6 +131,51 @@ def other_games(key, rows):
             'type': game_type(r.get('Type')),
         })
     return games
+
+
+def load_submitted_rows():
+    """Games sent in through /submit-game (data/submitted-games.json, written by
+    the exhibition-submissions workflow), oldest first; [] if there are none."""
+    path = DATA / 'submitted-games.json'
+    try:
+        return json.loads(path.read_text()).get('data', [])
+    except (OSError, ValueError):
+        return []
+
+
+def row_team(r):
+    """The one team a sheet row is for ('10u' / '14u'), or ''."""
+    team = r.get('Team') or ''
+    hits = [k for k in TEAMS if re.search(rf'\b{k}\b', team, re.I)]
+    return hits[0] if len(hits) == 1 and not re.search('example', team, re.I) else ''
+
+
+def merge_rows(club, submitted):
+    """The club's rows plus submitted ones (as mergeSheetRows in team-feeds.js):
+    a submission for the same team, day and opponent only fills cells the club
+    left empty; a later submission updates an earlier one."""
+    rows = [{**r, 'fromClub': True} for r in club]
+
+    def as_game(r):
+        return {'date': r.get('Date') or '', 'opponent': r.get('Opponent') or ''}
+
+    def same(a, b):
+        return bool(row_team(a)) and row_team(a) == row_team(b) and same_game(as_game(a), as_game(b))
+
+    for s in submitted:
+        hit = next((r for r in rows if same(r, s)), None)
+        if not hit:
+            rows.append(dict(s))
+            continue
+
+        def fill(k):
+            return bool(s.get(k)) and (not hit.get('fromClub') or not hit.get(k))
+        for k in ('Time', 'Rink', 'Logo'):
+            if fill(k):
+                hit[k] = s[k]
+        if fill('Score') and (not hit.get('fromClub') or not hit.get('Result')):
+            hit['Score'], hit['Result'] = s['Score'], s.get('Result', '')
+    return rows
 
 
 def same_game(a, b):
@@ -298,6 +341,6 @@ def build(key, team, sheet_rows):
 
 
 if __name__ == '__main__':
-    rows = load_other_rows()
+    rows = merge_rows(load_other_rows(), load_submitted_rows())
     for k, t in TEAMS.items():
         build(k, t, rows)
