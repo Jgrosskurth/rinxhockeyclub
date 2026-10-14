@@ -1,72 +1,384 @@
-/* "Submit a game" (/submit-game): a card with a button to the Google Form */
+/* Exhibition game submission form (/submit-game) */
 .game-submission {
   max-width: 720px;
   margin: 0 auto;
 }
 
-/* The page heading and intro line up with the card. */
+/* The page heading and intro line up with the form. */
 main .game-submission-container > .default-content-wrapper {
   max-width: 720px;
   margin: 0 auto 20px;
 }
 
-.game-submission .gs-card {
-  padding: 22px 18px 24px;
+.game-submission .gs-form,
+.game-submission .gs-done {
+  padding: 20px 16px 24px;
   border: 1px solid var(--color-gray-light);
   border-radius: 8px;
   background: var(--color-white);
 }
 
-.game-submission .gs-steps {
+.game-submission .gs-set {
+  min-width: 0;
   margin: 0 0 22px;
-  padding-left: 20px;
+  padding: 0;
+  border: 0;
+}
+
+.game-submission legend,
+.game-submission .gs-field > label {
+  display: block;
+  margin: 0 0 8px;
+  padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--color-navy);
-  line-height: 1.5;
 }
 
-.game-submission .gs-steps li + li {
-  margin-top: 8px;
+.game-submission .gs-you > legend {
+  width: 100%;
+  margin-bottom: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-gray-light);
+  font-size: 1rem;
 }
 
-.game-submission .gs-btn {
+.game-submission .gs-req {
+  color: var(--color-red);
+}
+
+.game-submission .gs-opt {
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-gray);
+}
+
+/* Choice buttons (what / team): the same buttons as the schedule filters */
+.game-submission .gs-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.game-submission .gs-choice {
+  position: relative;
+  display: block;
+}
+
+.game-submission .gs-choice input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.game-submission .gs-choice span {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 48px;
+  padding: 6px 10px;
+  border: 2px solid var(--color-navy);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--heading-font-family);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.game-submission .gs-choice:hover span {
+  background: var(--color-ice);
+}
+
+.game-submission .gs-choice input:checked + span {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.game-submission .gs-choice input:focus-visible + span {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* Fields */
+.game-submission .gs-row {
+  display: grid;
+  gap: 0 16px;
+}
+
+.game-submission .gs-field {
+  margin-bottom: 18px;
+}
+
+.game-submission .gs-field input,
+.game-submission .gs-field select,
+.game-submission .gs-field textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 2px solid var(--color-gray-light);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  transition: border-color 150ms ease;
+}
+
+.game-submission .gs-field textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.game-submission .gs-field input:focus,
+.game-submission .gs-field select:focus,
+.game-submission .gs-field textarea:focus {
+  border-color: var(--color-navy);
+  outline: 2px solid var(--color-ice);
+  outline-offset: 0;
+}
+
+.game-submission .gs-field select:disabled {
+  background: var(--color-off-white);
+  color: var(--color-gray);
+}
+
+.game-submission .gs-hint {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--color-gray);
+}
+
+.game-submission .gs-error {
+  margin: 6px 0 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-red-dark);
+}
+
+.game-submission .gs-field.gs-invalid input,
+.game-submission .gs-field.gs-invalid select {
+  border-color: var(--color-red);
+}
+
+.game-submission .gs-set.gs-invalid .gs-choice span {
+  border-color: var(--color-red);
+}
+
+.game-submission .gs-summary {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--color-red);
+  border-radius: 4px;
+  background: #fdf0f1;
+  color: var(--color-navy);
+  font-size: 0.9rem;
+}
+
+.game-submission .gs-summary p {
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.game-submission .gs-summary ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Score */
+.game-submission .gs-goals {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 0 10px;
+}
+
+.game-submission .gs-goals .gs-field {
+  margin-bottom: 0;
+}
+
+.game-submission .gs-goals .gs-field > label {
+  overflow: hidden;
+  font-family: var(--body-font-family);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.game-submission .gs-goals .gs-field input {
+  font-family: var(--heading-font-family);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.game-submission .gs-dash {
+  padding-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-gray);
+}
+
+.game-submission .gs-result {
+  min-height: 1.4em;
+  margin: 10px 0 0;
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+
+.game-submission .gs-result[data-result="win"] {
+  color: #15803d;
+}
+
+.game-submission .gs-result[data-result="loss"] {
+  color: var(--color-red-dark);
+}
+
+/* Spam trap: off-screen for people, still in the form for bots. */
+.game-submission .gs-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Submit, status, thank-you */
+.game-submission .gs-submit,
+.game-submission .gs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   min-height: 50px;
   padding: 0 28px;
+  border: 2px solid transparent;
   border-radius: 4px;
-  background: var(--color-red);
-  color: var(--color-white);
   font-family: var(--heading-font-family);
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
   transition: background-color 150ms ease;
 }
 
-.game-submission .gs-btn:hover {
+.game-submission .gs-submit {
+  width: 100%;
+  background: var(--color-red);
+  color: var(--color-white);
+}
+
+.game-submission .gs-submit:hover {
   background: var(--color-red-dark);
 }
 
+.game-submission .gs-submit:disabled {
+  background: var(--color-gray);
+  cursor: not-allowed;
+}
+
+.game-submission .gs-submit:focus-visible,
 .game-submission .gs-btn:focus-visible {
   outline: 3px solid var(--color-navy);
   outline-offset: 2px;
 }
 
-.game-submission .gs-note {
+.game-submission .gs-status {
+  min-height: 1.4em;
   margin: 12px 0 0;
   font-size: 0.9rem;
+  text-align: center;
   color: var(--color-gray);
 }
 
+.game-submission .gs-done {
+  text-align: center;
+}
+
+.game-submission .gs-done h2 {
+  margin: 0 0 8px;
+  color: var(--color-navy);
+}
+
+.game-submission .gs-done-what {
+  margin: 0 0 8px;
+  font-family: var(--heading-font-family);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.game-submission .gs-done-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.game-submission .gs-btn-navy {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.game-submission .gs-btn-outline {
+  border-color: var(--color-navy);
+  background: var(--color-white);
+  color: var(--color-navy);
+}
+
+.game-submission .gs-btn-outline:hover {
+  background: var(--color-ice);
+}
+
 @media (min-width: 600px) {
-  .game-submission .gs-card {
+  .game-submission .gs-form,
+  .game-submission .gs-done {
     padding: 28px 32px 32px;
   }
 
-  .game-submission .gs-btn {
-    display: inline-flex;
+  .game-submission .gs-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .game-submission .gs-goals {
+    grid-template-columns: 140px auto 140px;
+    justify-content: start;
+  }
+
+  .game-submission .gs-submit {
+    width: auto;
+  }
+
+  .game-submission .gs-status {
+    text-align: left;
+  }
+
+  .game-submission .gs-done-actions {
+    display: flex;
+    justify-content: center;
   }
 }
