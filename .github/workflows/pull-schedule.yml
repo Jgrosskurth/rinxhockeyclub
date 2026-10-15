@@ -63,6 +63,9 @@ jobs:
       - name: League player stats from LIHockey.com box scores
         run: python .github/scripts/pull_lihockey.py
 
+      - name: Fill in league games GameSheet doesn't list, from LIHockey.com
+        run: python .github/scripts/fill_league_games.py
+
       - name: Pull stats for GameSheet team pages linked in the other-games sheet
         run: python .github/scripts/pull_sheet_stats.py
 

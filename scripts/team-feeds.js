@@ -478,7 +478,9 @@ function normalizeGame(g, feed, team) {
   // League opponents end "04 - 10U SILVER"; tournament ones "10A".
   const division = tournament
     ? (opponent.match(/\b(\d{1,2}(?:U|AAA|AA|A|B))\s*$/i) || [])[1]
-    : (opponent.match(/(\d{1,2}\s*-\s*\d{1,2}U\s+[A-Z]+)\s*$/i) || [])[1];
+    : (opponent.match(/(\d{1,2}\s*-\s*\d{1,2}U\s+[A-Z]+)\s*$/i) || [])[1]
+      // Games filled in from LI Hockey carry the division separately.
+      || g.division;
   const opp = tidyTeam(opponent);
   const home = g.venue === 'Home';
   const local = new Date(when.year, when.month, when.day);

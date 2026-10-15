@@ -220,12 +220,15 @@ def tidy_team(name):
     return f'{s} ({title_case(coach)})' if coach else s
 
 
-def division(opponent, tournament):
+def division(opponent, tournament, fallback=''):
+    """fallback: the division of a league game filled in from LI Hockey
+    (fill_league_games.py), whose opponent name doesn't end with one."""
     if tournament:
         m = re.search(r'\b(\d{1,2}(?:U|AAA|AA|A|B))\s*$', opponent, re.I)
         return ' · '.join(x for x in (tournament, m and m.group(1)) if x)
     m = re.search(r'(\d{1,2}\s*-\s*\d{1,2}U\s+[A-Z]+)\s*$', opponent, re.I)
-    div = re.sub(r'\b([A-Z])([A-Z]{2,})\b', lambda x: x.group(1) + x.group(2).lower(), m.group(1)) if m else ''
+    div = m.group(1) if m else fallback
+    div = re.sub(r'\b([A-Z])([A-Z]{2,})\b', lambda x: x.group(1) + x.group(2).lower(), div)
     return ' · '.join(x for x in ('LIAHL', div) if x)
 
 
@@ -272,7 +275,7 @@ def event(game, team, tournament):
         summary += f' · {sheet_type}'
     if game.get('result') and game.get('score'):
         summary += f" ({game['result']} {game['score']})"
-    details = [sheet_type or division(game.get('opponent', ''), tournament)]
+    details = [sheet_type or division(game.get('opponent', ''), tournament, game.get('division', ''))]
     if game.get('result'):
         details.append(f"Final: {game['result']} {game.get('score', '')}".strip())
     details.append(f"Schedule: {SITE}{team['page']}")
