@@ -27,6 +27,18 @@ RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
+UID:gamesheet-sheet-10u-20260912-great-neck-bruins-marsella-@rinxhockeyclub
+ .com
+DTSTAMP:20260912T070000Z
+DTSTART;TZID=America/New_York:20260912T070000
+DTEND;TZID=America/New_York:20260912T083000
+SUMMARY:Rinx 10U at Great Neck Bruins (Marsella) · Exhibition (W 14-0)
+LOCATION:Andrew Stergiopoulos Ice Rink
+DESCRIPTION:Exhibition\nFinal: W 14-0\nSchedule: https://www.rinxhockeyclub
+ .com/schedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-2989476@rinxhockeyclub.com
 DTSTAMP:20260913T000000Z
 DTSTART;VALUE=DATE:20260913
