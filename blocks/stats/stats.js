@@ -383,12 +383,11 @@ function feedKey() {
 // Current season, by game type. League stats are LIAHL's GameSheet team
 // page; tournament stats come from tournament team pages (built-in below,
 // plus any the club links in the other-games sheet, see
-// .github/scripts/pull_sheet_stats.py); exhibition stats only from links.
+// .github/scripts/pull_sheet_stats.py). No exhibition tab: those games have no stats source.
 const TYPES = [
   { type: 'All', label: 'All Stats' },
   { type: 'League', label: 'League Stats' },
   { type: 'Tournament', label: 'Tournament Stats' },
-  { type: 'Exhibition', label: 'Exhibition Stats' },
 ];
 // League stats come from LIHockey.com box scores (pull_lihockey.py), since
 // GameSheet isn't recording LIAHL player stats; sources sharing a "group" are
@@ -481,7 +480,6 @@ const EMPTY = {
   All: 'No player stats have been posted yet this season.',
   League: 'No league stats yet. They’ll show here once the first box scores are posted.',
   Tournament: 'No tournament stats yet. Tournament stats show here once the tournament posts them on GameSheet.',
-  Exhibition: 'No exhibition stats yet. To add a game’s stats, paste the Rinx team page link from GameSheet into the GameSheet column of the other-games sheet.',
 };
 
 async function showTypeStats(block, container, key, type) {
