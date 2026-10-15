@@ -3,7 +3,7 @@
  "source": "lihockey.com",
  "team": "10u",
  "teamPage": "https://lihockey.com/teams/1162/",
- "updated": "2026-10-15T02:12:51+00:00",
+ "updated": "2026-10-15T02:25:16+00:00",
  "players": [
   {
    "name": "Matthew Grosskurth",
@@ -340,7 +340,332 @@
       "wl": "W"
      }
     ]
-   }
+   },
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "Long Beach Lightning 10U Silver - Ponte",
+      "record": "3-0-0-0",
+      "abbr": "LBL",
+      "periods": [
+       "0",
+       "1",
+       "1"
+      ],
+      "total": "2",
+      "skaters": [
+       {
+        "name": "Jackson Barnett",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ethan Miller",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luke Demille",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Leo McAllister",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Anthony Ponte",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Peter Broughal",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Sullivan Pearsall",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "29",
+        "ga": "10",
+        "sv": "19",
+        "svpct": "0.655",
+        "wl": "L"
+       }
+      ],
+      "totals": {
+       "g": "2",
+       "a": "0",
+       "pts": "2",
+       "pim": "5"
+      }
+     },
+     {
+      "side": "home",
+      "name": "Rinx Hockey 10U Silver - O'Donoghue",
+      "record": "2-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "2",
+       "3",
+       "5"
+      ],
+      "total": "10",
+      "skaters": [
+       {
+        "name": "Matthew Grosskurth",
+        "number": "",
+        "badge": "Hat trick",
+        "g": "3",
+        "a": "0",
+        "pts": "3",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Donald Pierre Canel",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Conor Wilkens",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Evan Martin",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Sean Fox",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jorge Leonardo",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Tristen Pajak",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Nicholas Capozzoli",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Bachert",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "8",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Stephen Kull",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aiden Brown",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Connor Daly",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "10",
+        "ga": "2",
+        "sv": "8",
+        "svpct": "0.800",
+        "wl": "-"
+       },
+       {
+        "name": "Louie Savola",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "5",
+        "ga": "0",
+        "sv": "5",
+        "svpct": "1.000",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "10",
+       "a": "0",
+       "pts": "10",
+       "pim": "13"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Matthew Grosskurth",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "3G"
+     },
+     {
+      "rank": "2",
+      "name": "Donald Pierre Canel",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     },
+     {
+      "rank": "3",
+      "name": "Conor Wilkens",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "1G"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Matthew Grosskurth",
+      "val": "3"
+     },
+     {
+      "cat": "Points",
+      "name": "Matthew Grosskurth",
+      "val": "3"
+     },
+     {
+      "cat": "Saves",
+      "name": "Sullivan Pearsall",
+      "val": "19"
+     }
+    ],
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Sunday, September 27 · 10:00 AM"
+    ],
+    "dateLong": "Sunday, September 27, 2026",
+    "venue": "The Rinx",
+    "isoDate": "2026-09-27",
+    "recap": {
+     "url": "https://lihockey.com/grosskurths-hat-trick-powers-rinx-hockey-to-10-2-rout-of-long-beach/",
+     "title": "Grosskurth's Hat Trick Powers Rinx Past Long Beach, 10-2"
+    }
+   },
+   "url": "https://lihockey.com/games/5731/"
   },
   {
    "id": "5671",
@@ -453,7 +778,216 @@
       "wl": "W"
      }
     ]
-   }
+   },
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "North Park Hockey 10U Silver - Mauro",
+      "record": "0-2-0-0",
+      "abbr": "NPH",
+      "periods": [
+       "0",
+       "0",
+       "0"
+      ],
+      "total": "0",
+      "skaters": [],
+      "goalies": [
+       {
+        "name": "Fisher Kaplowitz",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "20",
+        "ga": "13",
+        "sv": "7",
+        "svpct": "0.350",
+        "wl": "L"
+       }
+      ],
+      "totals": {}
+     },
+     {
+      "side": "home",
+      "name": "Rinx Hockey 10U Silver - O'Donoghue",
+      "record": "1-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "1",
+       "7",
+       "5"
+      ],
+      "total": "13",
+      "skaters": [
+       {
+        "name": "Jorge Leonardo",
+        "number": "",
+        "badge": "Hat trick",
+        "g": "3",
+        "a": "0",
+        "pts": "3",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Matthew Grosskurth",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Lupia",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aiden Brown",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Sean Fox",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Bachert",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Nicholas Capozzoli",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Donald Pierre Canel",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Connor Daly",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "2",
+        "ga": "0",
+        "sv": "2",
+        "svpct": "1.000",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "13",
+       "a": "0",
+       "pts": "13",
+       "pim": "0"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Jorge Leonardo",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "3G"
+     },
+     {
+      "rank": "2",
+      "name": "Matthew Grosskurth",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     },
+     {
+      "rank": "3",
+      "name": "Ryan Lupia",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Jorge Leonardo",
+      "val": "3"
+     },
+     {
+      "cat": "Points",
+      "name": "Jorge Leonardo",
+      "val": "3"
+     },
+     {
+      "cat": "Saves",
+      "name": "Fisher Kaplowitz",
+      "val": "7"
+     }
+    ],
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Sunday, September 20 · 11:40 AM"
+    ],
+    "dateLong": "Sunday, September 20, 2026",
+    "venue": "The Rinx",
+    "isoDate": "2026-09-20",
+    "recap": {
+     "url": "https://lihockey.com/leonardos-hat-trick-leads-rinx-to-lopsided-13-0-win-over-north-park/",
+     "title": "Leonardo's Hat Trick Leads Rinx 10U Silver to 13-0 Win Over North Park"
+    }
+   },
+   "url": "https://lihockey.com/games/5671/"
   },
   {
    "id": "5594",
@@ -521,7 +1055,159 @@
      }
     ],
     "goalies": []
-   }
+   },
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "status": "Final",
+    "periodLabels": [],
+    "teams": [
+     {
+      "side": "away",
+      "name": "Rinx Hockey 10U Silver - O'Donoghue",
+      "record": "",
+      "abbr": "",
+      "periods": [],
+      "total": "8",
+      "skaters": [
+       {
+        "name": "Sean Fox",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Matthew Grosskurth",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jorge Leonardo",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Lupia",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Tristen Pajak",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [],
+      "totals": {
+       "g": "8",
+       "a": "0",
+       "pts": "8",
+       "pim": "0"
+      }
+     },
+     {
+      "side": "home",
+      "name": "Peconic Wildcats 10U Silver - McCarthy",
+      "record": "",
+      "abbr": "",
+      "periods": [],
+      "total": "2",
+      "skaters": [
+       {
+        "name": "Ace Briguglio",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [],
+      "totals": {
+       "g": "2",
+       "a": "0",
+       "pts": "2",
+       "pim": "0"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Sean Fox",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     },
+     {
+      "rank": "2",
+      "name": "Matthew Grosskurth",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     },
+     {
+      "rank": "3",
+      "name": "Jorge Leonardo",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Sean Fox",
+      "val": "2"
+     },
+     {
+      "cat": "Points",
+      "name": "Sean Fox",
+      "val": "2"
+     }
+    ],
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Sunday, September 13 · 8:00 AM"
+    ],
+    "dateLong": "Sunday, September 13, 2026",
+    "venue": "Peconic Ice Rink",
+    "isoDate": "2026-09-13",
+    "recap": {
+     "url": "https://lihockey.com/rinx-hockeys-odonoghue-squad-overwhelms-peconic-wildcats-in-8-2-rout/",
+     "title": "Rinx Hockey O'Donoghue Opens Season With 8-2 Win at Peconic"
+    }
+   },
+   "url": "https://lihockey.com/games/5594/"
   }
  ]
 }

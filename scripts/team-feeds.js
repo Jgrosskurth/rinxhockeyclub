@@ -71,6 +71,23 @@ function titleCase(text) {
     .replace(/\bMc([a-z])/g, (m, c) => `Mc${c.toUpperCase()}`);
 }
 
+// Display names for players whose GameSheet / LI Hockey name differs from how
+// the club wants them shown, matched by a lowercased part of the name (feeds
+// may send ALL CAPS, e.g. "DONALD PIERRE CANEL").
+const NAME_OVERRIDES = [
+  { match: 'donald pierre can', display: 'DJ Pierre Canal' },
+];
+
+/**
+ * A player's name as the club shows it.
+ * @param {string} name
+ */
+export function playerName(name) {
+  const lower = (name || '').toLowerCase();
+  const hit = NAME_OVERRIDES.find((o) => lower.includes(o.match));
+  return hit ? hit.display : name;
+}
+
 /**
  * Clean up GameSheet's coded team names, keeping the coach's last name so two
  * teams from one club stay apart: "NYH4033-002-North Park-10U Mauro 04 - 10U
@@ -91,6 +108,8 @@ export function tidyTeam(name) {
       .replace(/^[-–\s]+|[-–\s]+$/g, '')
       // A level ("14U A", "14U AA", "Tier II") is not a coach.
       .replace(/^(?:AAA|AA|A|BB|B|Tier\s+[IV\d]+)(?=\s|$)/i, '')
+      // A division colour ("10U Silver - Ponte", as LI Hockey writes it).
+      .replace(/^(?:Silver|Gold|Bronze|Platinum|Black|White|Red|Blue|Green)\s*(?:-\s*|$)/i, '')
       .trim()
       .replace(/\s+/g, ' ');
     s = s.slice(0, age.index);

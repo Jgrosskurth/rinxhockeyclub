@@ -1,7 +1,9 @@
 import {
   gameSheetLogo, findLogoId, findLocalLogo, MHR_CDN,
 } from '../../scripts/team-logos.js';
-import { rinkAddress, extraGames, tidyTeam } from '../../scripts/team-feeds.js';
+import {
+  rinkAddress, extraGames, tidyTeam, sameGame,
+} from '../../scripts/team-feeds.js';
 
 // Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
 // Tournament feeds come from their own GameSheet season (see pull-schedule.yml).
@@ -203,6 +205,10 @@ function renderRows(games) {
     if (g.result === 'W') badge = 'win';
     else if (g.result === 'L') badge = 'loss';
     const resultCell = hasResult ? `<span class="badge badge-${badge}">${g.result}</span>` : '';
+    // Our own box score page, when LI Hockey has posted this game's box score.
+    const boxLinkOwn = g.boxScore
+      ? `<a class="sg-box" href="${g.boxScore}" aria-label="Box score: ${label} vs ${g.opp}">Box Score</a>`
+      : '';
     const ev = hasResult ? null : calEvent(g, label);
     // Upcoming games get a calendar button with a Google / Apple(.ics) menu.
     const evAttr = ev ? ` data-event="${encodeURIComponent(JSON.stringify(ev))}"` : '';
@@ -227,7 +233,7 @@ function renderRows(games) {
       <div class="sg-date">${g.date}${typeTag(g.type)}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
-      <div class="sg-result">${resultCell}</div>
+      <div class="sg-result">${resultCell}${boxLinkOwn}</div>
       ${cal}
     </div>`;
   }).join('');
@@ -349,6 +355,26 @@ function gameOrder(g) {
   return p ? Date.UTC(p.year, p.month, p.day, p.hour, p.min) : 0;
 }
 
+const MONTH_ABBR = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// League games LI Hockey has a box score for get a link to /box-score
+// (data/stats-lihockey-<team>.json, matched by day and opponent).
+async function addBoxScores(key, games) {
+  const feed = await fetch(`${FEED_BASE}/stats-lihockey-${key}.json`)
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const posted = (feed?.games || [])
+    .filter((x) => x.detail?.isoDate && x.detail.teams?.length === 2)
+    .map((x) => {
+      const [y, m, d] = x.detail.isoDate.split('-');
+      return { id: x.id, date: `${MONTH_ABBR[+m - 1]} ${+d}, ${y}`, opponent: x.opponent };
+    });
+  games.forEach((g) => {
+    if ((g.type || 'League') !== 'League' || !g.result) return;
+    const hit = posted.find((x) => sameGame({ date: g.rawDate, opponent: g.opp }, x));
+    if (hit) g.boxScore = `/box-score?team=${key}&game=${hit.id}`;
+  });
+}
+
 async function loadFeedGames() {
   const cfg = feedConfig();
   const tournamentPage = cfg.key === 'mid-atlantic';
@@ -368,6 +394,7 @@ async function loadFeedGames() {
   if (!tournamentPage) {
     const extra = await extraGames(cfg.key, raw);
     extra.forEach((g) => games.push({ ...fromFeed(g, ''), type: g.type, sheet: true }));
+    await addBoxScores(cfg.key, games);
   }
   return games.filter((g) => g.opp).sort((a, b) => gameOrder(a) - gameOrder(b));
 }

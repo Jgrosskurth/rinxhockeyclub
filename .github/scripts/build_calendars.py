@@ -211,6 +211,7 @@ def tidy_team(name):
         coach = coach.strip(' -–')
         # A level ('14U A', '14U AA', 'Tier II') is not a coach.
         coach = re.sub(r'^(?:AAA|AA|A|BB|B|Tier\s+[IV\d]+)(?=\s|$)', '', coach, flags=re.I)
+        coach = re.sub(r'^(?:Silver|Gold|Bronze|Platinum|Black|White|Red|Blue|Green)\s*(?:-\s*|$)', '', coach, flags=re.I)
         coach = re.sub(r'\s+', ' ', coach.strip())
         s = s[:age.start()]
     s = title_case(re.sub(r'\s+', ' ', s.strip(' -–')).strip())

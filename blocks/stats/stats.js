@@ -1,3 +1,5 @@
+import { playerName } from '../../scripts/team-feeds.js';
+
 function toProperCase(str) {
   if (!str || str !== str.toUpperCase()) return str;
   return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
@@ -177,19 +179,6 @@ async function loadStats(block, statsUrl) {
 // header keys renderTable/findKey expect, so the existing table renders them.
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
 
-// Display-name overrides for players whose GameSheet feed name differs from
-// how the club wants them shown. Keyed by a lowercased substring of the feed
-// name (which may arrive ALL CAPS, e.g. "DONALD PIERRE CANEL").
-const NAME_OVERRIDES = [
-  { match: 'donald pierre can', display: 'DJ Pierre Canal' },
-];
-
-function overrideName(name) {
-  const lower = (name || '').toLowerCase();
-  const hit = NAME_OVERRIDES.find((o) => lower.includes(o.match));
-  return hit ? hit.display : name;
-}
-
 // Tournament pages read their own feed (see pull-schedule.yml) and have no
 // archived seasons to switch to.
 function isTournament() {
@@ -280,7 +269,7 @@ function mergePlayers(sources) {
   }));
   return [...byPlayer.values()].map((p) => ({
     '#': p.number,
-    Name: overrideName(p.name),
+    Name: playerName(p.name),
     Pos: p.pos,
     GP: String(p.gp),
     G: String(p.g),

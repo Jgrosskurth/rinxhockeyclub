@@ -718,6 +718,44 @@
   pointer-events: none;
 }
 
+/* "Box Score" link (our /box-score page): clickable above the row link. */
+.schedule .sg-row .sg-result .sg-box {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 8px;
+  border: 1px solid var(--color-navy);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-navy);
+  font-family: var(--heading-font-family);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  pointer-events: auto;
+}
+
+.schedule .sg-row .sg-result .sg-box:hover {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.schedule .sg-row .sg-result .sg-box:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+@media print {
+  .schedule .sg-row .sg-result .sg-box {
+    display: none;
+  }
+}
+
 /* Per-game "add to calendar" button, pinned to the far right of the row. */
 .schedule .sg-cal-wrap {
   position: absolute;
