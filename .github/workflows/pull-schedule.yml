@@ -60,6 +60,9 @@ jobs:
           python pull_gamesheet.py --type stats      --season 16150 --team 573565 --out data/stats-mid-atlantic.json
           python pull_gamesheet.py --type standings  --season 16150 --team 573565 --out data/standings-mid-atlantic.json
 
+      - name: League player stats from LIHockey.com box scores
+        run: python .github/scripts/pull_lihockey.py
+
       - name: Pull stats for GameSheet team pages linked in the other-games sheet
         run: python .github/scripts/pull_sheet_stats.py
 

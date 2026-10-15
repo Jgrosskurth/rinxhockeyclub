@@ -1,0 +1,527 @@
+{
+ "type": "stats",
+ "source": "lihockey.com",
+ "team": "10u",
+ "teamPage": "https://lihockey.com/teams/1162/",
+ "updated": "2026-10-15T02:12:51+00:00",
+ "players": [
+  {
+   "name": "Matthew Grosskurth",
+   "number": "",
+   "pos": "",
+   "gp": "3",
+   "g": "7",
+   "a": "0",
+   "pts": "7",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Jorge Leonardo",
+   "number": "",
+   "pos": "",
+   "gp": "3",
+   "g": "6",
+   "a": "0",
+   "pts": "6",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Sean Fox",
+   "number": "",
+   "pos": "",
+   "gp": "3",
+   "g": "4",
+   "a": "0",
+   "pts": "4",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Donald Pierre Canel",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Ryan Lupia",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Aiden Brown",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
+   "name": "Tristen Pajak",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
+   "name": "Conor Wilkens",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Evan Martin",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Nicholas Capozzoli",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
+   "name": "Ryan Bachert",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "8"
+  },
+  {
+   "name": "Connor Daly",
+   "number": "",
+   "pos": "G",
+   "gp": "2",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Louie Savola",
+   "number": "",
+   "pos": "G",
+   "gp": "1",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Stephen Kull",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "1"
+  }
+ ],
+ "goalies": [
+  {
+   "name": "Connor Daly",
+   "number": "",
+   "gp": 2,
+   "sa": 12,
+   "ga": 2,
+   "sv": 10,
+   "w": 1,
+   "l": 0,
+   "svpct": "0.833"
+  },
+  {
+   "name": "Louie Savola",
+   "number": "",
+   "gp": 1,
+   "sa": 5,
+   "ga": 0,
+   "sv": 5,
+   "w": 1,
+   "l": 0,
+   "svpct": "1.000"
+  }
+ ],
+ "games": [
+  {
+   "id": "5731",
+   "date": "Sep 27",
+   "home": true,
+   "opponent": "Long Beach Lightning 10U Silver - Ponte",
+   "result": "W",
+   "score": "10-2",
+   "box": {
+    "skaters": [
+     {
+      "id": "7088",
+      "name": "Matthew Grosskurth",
+      "number": "",
+      "g": 3,
+      "a": 0,
+      "pts": 3,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8371",
+      "name": "Donald Pierre Canel",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9074",
+      "name": "Conor Wilkens",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9066",
+      "name": "Evan Martin",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7087",
+      "name": "Sean Fox",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7089",
+      "name": "Jorge Leonardo",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7091",
+      "name": "Tristen Pajak",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8369",
+      "name": "Nicholas Capozzoli",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8368",
+      "name": "Ryan Bachert",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 8,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9068",
+      "name": "Stephen Kull",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8370",
+      "name": "Aiden Brown",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9071",
+      "name": "Connor Daly",
+      "number": "",
+      "min": "—",
+      "sa": "10",
+      "ga": "2",
+      "sv": "8",
+      "svpct": "0.800",
+      "wl": "-"
+     },
+     {
+      "id": "9076",
+      "name": "Louie Savola",
+      "number": "",
+      "min": "—",
+      "sa": "5",
+      "ga": "0",
+      "sv": "5",
+      "svpct": "1.000",
+      "wl": "W"
+     }
+    ]
+   }
+  },
+  {
+   "id": "5671",
+   "date": "Sep 20",
+   "home": true,
+   "opponent": "North Park Hockey 10U Silver - Mauro",
+   "result": "W",
+   "score": "13-0",
+   "box": {
+    "skaters": [
+     {
+      "id": "7089",
+      "name": "Jorge Leonardo",
+      "number": "",
+      "g": 3,
+      "a": 0,
+      "pts": 3,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7088",
+      "name": "Matthew Grosskurth",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7090",
+      "name": "Ryan Lupia",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8370",
+      "name": "Aiden Brown",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7087",
+      "name": "Sean Fox",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8368",
+      "name": "Ryan Bachert",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8369",
+      "name": "Nicholas Capozzoli",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8371",
+      "name": "Donald Pierre Canel",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9071",
+      "name": "Connor Daly",
+      "number": "",
+      "min": "—",
+      "sa": "2",
+      "ga": "0",
+      "sv": "2",
+      "svpct": "1.000",
+      "wl": "W"
+     }
+    ]
+   }
+  },
+  {
+   "id": "5594",
+   "date": "Sep 13",
+   "home": false,
+   "opponent": "Peconic Wildcats 10U Silver - McCarthy",
+   "result": "W",
+   "score": "8-2",
+   "box": {
+    "skaters": [
+     {
+      "id": "7087",
+      "name": "Sean Fox",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7088",
+      "name": "Matthew Grosskurth",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7089",
+      "name": "Jorge Leonardo",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7090",
+      "name": "Ryan Lupia",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7091",
+      "name": "Tristen Pajak",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": []
+   }
+  }
+ ]
+}
