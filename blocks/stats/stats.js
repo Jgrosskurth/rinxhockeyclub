@@ -194,7 +194,10 @@ function mergeGoalies(rows) {
   });
 }
 
-function renderTable(block, container, rows, source, goalieList = []) {
+// opts.hideGp: no skater GP column (league box scores only list players who
+// recorded a stat, so it undercounts); opts.teamGames: the team's games, for
+// the Games Played tile.
+function renderTable(block, container, rows, source, goalieList = [], opts = {}) {
   const fmt = (v) => ((v === '' || v == null) ? '—' : v);
   const n = (v) => parseFloat(v) || 0;
 
@@ -217,7 +220,7 @@ function renderTable(block, container, rows, source, goalieList = []) {
   });
   const sum = block.querySelector('#stats-summary');
   sum.style.display = 'grid';
-  block.querySelector('#s-gp').textContent = maxGP || '--';
+  block.querySelector('#s-gp').textContent = opts.teamGames || maxGP || '--';
   block.querySelector('#s-tg').textContent = tg;
   block.querySelector('#s-ta').textContent = ta;
   block.querySelector('#s-tp').textContent = tp;
@@ -259,7 +262,7 @@ function renderTable(block, container, rows, source, goalieList = []) {
     { key: 'pts', label: 'PTS', numeric: true },
     { key: 'pm', label: '+/−', numeric: true },
     { key: 'pim', label: 'PIM', numeric: true },
-  ];
+  ].filter((c) => !(opts.hideGp && c.key === 'gp'));
 
   let sortCol = 'pts';
   let sortAsc = false;
@@ -295,7 +298,7 @@ function renderTable(block, container, rows, source, goalieList = []) {
         <td>${p.num}</td>
         <td class="player-name">${p.name}</td>
         <td><span class="pos-chip ${chip(p.pos)}">${posVal}</span></td>
-        <td>${p.gp}</td>
+        ${opts.hideGp ? '' : `<td>${p.gp}</td>`}
         <td>${p.g}</td>
         <td>${p.a}</td>
         <td><strong>${p.pts}</strong></td>
@@ -431,7 +434,11 @@ function loadSources(key) {
       const all = [...(BUILT_IN[key] || []), ...linked];
       const data = await Promise.all(all.map((src) => fetchJson(src.file)));
       return all.map((src, i) => ({
-        ...src, players: data[i]?.players || [], goalies: data[i]?.goalies || [],
+        ...src,
+        players: data[i]?.players || [],
+        goalies: data[i]?.goalies || [],
+        // LI Hockey feeds list the team's games (each with a box score).
+        games: data[i]?.games?.length || 0,
       }));
     });
   }
@@ -494,16 +501,20 @@ async function showTypeStats(block, container, key, type) {
   const list = withStats.map((src) => (type === 'All' ? `${src.type}: ${src.name}` : src.name)).join(' &bull; ');
   const vias = [...new Set(withStats.map((src) => src.via || GAMESHEET))];
   const from = vias.map((v) => `<a href="${v.url}" target="_blank" rel="noopener">${v.label}</a>`).join(' and ');
-  const gpNote = vias.includes(LIHOCKEY)
-    ? ' &bull; League GP counts the games a skater recorded a goal, assist or penalty in, and league GAA is goals against per game'
-    : '';
+  const gpNote = vias.includes(LIHOCKEY) ? ' &bull; League GAA is goals against per game' : '';
+  // The team's games: every league game with a box score, and each
+  // tournament's games (its players' most GP).
+  const teamGames = withStats.reduce((sum, src) => sum + (src.games
+    || Math.max(0, ...src.players.map((pl) => parseFloat(pl.gp) || 0))), 0);
   const roster = await loadRoster(key);
   const { skaterRows, goalieList } = withRoster(
     mergePlayers(withStats),
     withStats.flatMap((src) => goalieRows(src.goalies)),
     roster,
   );
-  renderTable(block, container, skaterRows, `${list} &bull; Stats from ${from}${gpNote}`, goalieList);
+  renderTable(block, container, skaterRows, `${list} &bull; Stats from ${from}${gpNote}`, goalieList, {
+    hideGp: true, teamGames,
+  });
 }
 
 async function loadFeedStats(block, container) {
