@@ -211,13 +211,30 @@ const TYPES = [
   { type: 'Tournament', label: 'Tournament Stats' },
   { type: 'Exhibition', label: 'Exhibition Stats' },
 ];
+// League stats come from LIHockey.com box scores (pull_lihockey.py), since
+// GameSheet isn't recording LIAHL player stats; sources sharing a "group" are
+// alternatives, and only the first one with players is used (no double count).
+const LIHOCKEY = { label: 'LI Hockey', url: 'https://lihockey.com' };
+const GAMESHEET = { label: 'GameSheet', url: 'https://gamesheetstats.com' };
 const BUILT_IN = {
   '10u': [
-    { type: 'League', name: 'LIAHL 2026–2027', file: 'stats-10u.json' },
-    { type: 'Tournament', name: '2026 Mid-Atlantic Fall Classic', file: 'stats-mid-atlantic.json' },
+    {
+      type: 'League', name: 'LIAHL 2026–2027', file: 'stats-lihockey-10u.json', group: 'league', via: LIHOCKEY,
+    },
+    {
+      type: 'League', name: 'LIAHL 2026–2027', file: 'stats-10u.json', group: 'league', via: GAMESHEET,
+    },
+    {
+      type: 'Tournament', name: '2026 Mid-Atlantic Fall Classic', file: 'stats-mid-atlantic.json', via: GAMESHEET,
+    },
   ],
   '14u': [
-    { type: 'League', name: 'LIAHL 2026–2027', file: 'stats-14u.json' },
+    {
+      type: 'League', name: 'LIAHL 2026–2027', file: 'stats-lihockey-14u.json', group: 'league', via: LIHOCKEY,
+    },
+    {
+      type: 'League', name: 'LIAHL 2026–2027', file: 'stats-14u.json', group: 'league', via: GAMESHEET,
+    },
   ],
 };
 
@@ -232,7 +249,9 @@ function loadSources(key) {
     sourcesCache = fetchJson('stats-sources.json').then(async (manifest) => {
       const linked = (manifest?.sources || [])
         .filter((src) => src.team === key && src.file)
-        .map((src) => ({ type: src.type, name: src.name || 'GameSheet', file: src.file }));
+        .map((src) => ({
+          type: src.type, name: src.name || 'GameSheet', file: src.file, via: GAMESHEET,
+        }));
       const all = [...(BUILT_IN[key] || []), ...linked];
       const data = await Promise.all(all.map((src) => fetchJson(src.file)));
       return all.map((src, i) => ({ ...src, players: data[i]?.players || [] }));
@@ -249,11 +268,13 @@ const nameKey = (name) => (name || '').toLowerCase().replace(/[^a-z]/g, '');
 function mergePlayers(sources) {
   const byPlayer = new Map();
   sources.forEach((src) => src.players.forEach((p) => {
-    const key = `${p.number || ''}|${nameKey(p.name)}`;
+    // By name: LI Hockey box scores have no jersey numbers.
+    const key = nameKey(p.name);
     const row = byPlayer.get(key) || {
       number: p.number || '', name: p.name || '', pos: '', gp: 0, g: 0, a: 0, pts: 0, plusminus: 0, pim: 0,
     };
     row.pos = row.pos || p.pos || '';
+    row.number = row.number || p.number || '';
     ['gp', 'g', 'a', 'pts', 'plusminus', 'pim'].forEach((k) => { row[k] += num(p[k]); });
     byPlayer.set(key, row);
   }));
@@ -271,8 +292,8 @@ function mergePlayers(sources) {
 }
 
 const EMPTY = {
-  All: 'No player stats have been posted on GameSheet yet this season.',
-  League: 'LIAHL hasn’t published player stats on GameSheet yet. They’ll show here automatically once it does.',
+  All: 'No player stats have been posted yet this season.',
+  League: 'No league stats yet. They’ll show here once the first box scores are posted.',
   Tournament: 'No tournament stats yet. Tournament stats show here once the tournament posts them on GameSheet.',
   Exhibition: 'No exhibition stats yet. To add a game’s stats, paste the Rinx team page link from GameSheet into the GameSheet column of the other-games sheet.',
 };
@@ -280,14 +301,24 @@ const EMPTY = {
 async function showTypeStats(block, container, key, type) {
   const sources = (await loadSources(key))
     .filter((src) => type === 'All' || src.type === type);
-  const withStats = sources.filter((src) => src.players.length);
+  const used = new Set();
+  const withStats = sources.filter((src) => {
+    if (!src.players.length || used.has(src.group)) return false;
+    if (src.group) used.add(src.group);
+    return true;
+  });
   if (!withStats.length) {
     block.querySelector('#stats-summary').style.display = 'none';
     container.innerHTML = `<div class="err-box"><p>${EMPTY[type]}</p></div>`;
     return;
   }
   const list = withStats.map((src) => (type === 'All' ? `${src.type}: ${src.name}` : src.name)).join(' &bull; ');
-  renderTable(block, container, mergePlayers(withStats), `${list} &bull; Stats from <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>`);
+  const vias = [...new Set(withStats.map((src) => src.via || GAMESHEET))];
+  const from = vias.map((v) => `<a href="${v.url}" target="_blank" rel="noopener">${v.label}</a>`).join(' and ');
+  const gpNote = vias.includes(LIHOCKEY)
+    ? ' &bull; League GP counts the games a player recorded a goal, assist or penalty in'
+    : '';
+  renderTable(block, container, mergePlayers(withStats), `${list} &bull; Stats from ${from}${gpNote}`);
 }
 
 async function loadFeedStats(block, container) {

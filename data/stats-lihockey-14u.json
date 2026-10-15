@@ -1,0 +1,783 @@
+{
+ "type": "stats",
+ "source": "lihockey.com",
+ "team": "14u",
+ "teamPage": "https://lihockey.com/teams/1182/",
+ "updated": "2026-10-15T02:16:52+00:00",
+ "players": [
+  {
+   "name": "Luka Mazzarone",
+   "number": "94",
+   "pos": "",
+   "gp": "4",
+   "g": "4",
+   "a": "0",
+   "pts": "4",
+   "plusminus": "0",
+   "pim": "20"
+  },
+  {
+   "name": "Brody Meyer",
+   "number": "87",
+   "pos": "",
+   "gp": "3",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "4"
+  },
+  {
+   "name": "Jake Totans",
+   "number": "27",
+   "pos": "",
+   "gp": "2",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Brody Arthur",
+   "number": "77",
+   "pos": "",
+   "gp": "2",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Camden Collins",
+   "number": "57",
+   "pos": "",
+   "gp": "3",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
+   "name": "Cameron Fine",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Konstantinos Krokidis",
+   "number": "93",
+   "pos": "",
+   "gp": "2",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
+   "name": "Ryan Ohliger",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Thomas Klingensmith",
+   "number": "53",
+   "pos": "",
+   "gp": "2",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
+   "name": "Aedan Dowling",
+   "number": "70",
+   "pos": "",
+   "gp": "4",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "8"
+  },
+  {
+   "name": "Daniel Cesa",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Dylan Lashuk",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
+   "name": "Luke Ventura",
+   "number": "88",
+   "pos": "",
+   "gp": "1",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Nicholas Pulice",
+   "number": "11",
+   "pos": "",
+   "gp": "4",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "14"
+  },
+  {
+   "name": "Bradley Skillman",
+   "number": "",
+   "pos": "G",
+   "gp": "2",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Connor Scully",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "4"
+  },
+  {
+   "name": "Joseph Azar",
+   "number": "27",
+   "pos": "G",
+   "gp": "2",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Samuel Meyer",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "2"
+  }
+ ],
+ "goalies": [
+  {
+   "name": "Joseph Azar",
+   "number": "27",
+   "gp": 2,
+   "sa": 29,
+   "ga": 1,
+   "sv": 28,
+   "w": 2,
+   "l": 0,
+   "svpct": "0.966"
+  },
+  {
+   "name": "Bradley Skillman",
+   "number": "",
+   "gp": 2,
+   "sa": 23,
+   "ga": 1,
+   "sv": 22,
+   "w": 1,
+   "l": 0,
+   "svpct": "0.957"
+  }
+ ],
+ "games": [
+  {
+   "id": "5776",
+   "date": "Oct 3",
+   "home": true,
+   "opponent": "Peconic Wildcats 14U Silver - Diaz",
+   "result": "W",
+   "score": "7-1",
+   "box": {
+    "skaters": [
+     {
+      "id": "6853",
+      "name": "Cameron Fine",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "92",
+      "name": "Jake Totans",
+      "number": "27",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9088",
+      "name": "Daniel Cesa",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "1508",
+      "name": "Brody Arthur",
+      "number": "77",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 6,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11032",
+      "name": "Brody Arthur",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "262",
+      "name": "Nicholas Pulice",
+      "number": "11",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "1666",
+      "name": "Joseph Azar",
+      "number": "27",
+      "min": "—",
+      "sa": "8",
+      "ga": "1",
+      "sv": "7",
+      "svpct": "0.875",
+      "wl": "W"
+     },
+     {
+      "id": "9094",
+      "name": "Bradley Skillman",
+      "number": "",
+      "min": "—",
+      "sa": "9",
+      "ga": "0",
+      "sv": "9",
+      "svpct": "1.000",
+      "wl": "-"
+     }
+    ]
+   }
+  },
+  {
+   "id": "5713",
+   "date": "Sep 26",
+   "home": true,
+   "opponent": "North Park Hockey 14U Silver - Pala",
+   "result": "W",
+   "score": "5-1",
+   "box": {
+    "skaters": [
+     {
+      "id": "160",
+      "name": "Luke Ventura",
+      "number": "88",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11038",
+      "name": "Brody Meyer",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "936",
+      "name": "Brody Meyer",
+      "number": "87",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "602",
+      "name": "Konstantinos Krokidis",
+      "number": "93",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "262",
+      "name": "Nicholas Pulice",
+      "number": "11",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 8,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "257",
+      "name": "Camden Collins",
+      "number": "57",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11042",
+      "name": "Camden Collins",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9094",
+      "name": "Bradley Skillman",
+      "number": "",
+      "min": "—",
+      "sa": "14",
+      "ga": "1",
+      "sv": "13",
+      "svpct": "0.929",
+      "wl": "W"
+     }
+    ]
+   }
+  },
+  {
+   "id": "6864",
+   "date": "Sep 13",
+   "home": true,
+   "opponent": "Great Neck Bruins 14U Silver - Bowden",
+   "result": "W",
+   "score": "7-0",
+   "box": {
+    "skaters": [
+     {
+      "id": "7351",
+      "name": "Ryan Ohliger",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11038",
+      "name": "Brody Meyer",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 4,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11032",
+      "name": "Brody Arthur",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "257",
+      "name": "Camden Collins",
+      "number": "57",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6928",
+      "name": "Dylan Lashuk",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "1508",
+      "name": "Brody Arthur",
+      "number": "77",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "936",
+      "name": "Brody Meyer",
+      "number": "87",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 4,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11042",
+      "name": "Camden Collins",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9090",
+      "name": "Samuel Meyer",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 12,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "262",
+      "name": "Nicholas Pulice",
+      "number": "11",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "1666",
+      "name": "Joseph Azar",
+      "number": "27",
+      "min": "—",
+      "sa": "21",
+      "ga": "0",
+      "sv": "21",
+      "svpct": "1.000",
+      "wl": "W"
+     }
+    ]
+   }
+  },
+  {
+   "id": "5590",
+   "date": "Sep 12",
+   "home": false,
+   "opponent": "Peconic Wildcats 14U Silver - Diaz",
+   "result": "W",
+   "score": "8-3",
+   "box": {
+    "skaters": [
+     {
+      "id": "92",
+      "name": "Jake Totans",
+      "number": "27",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11038",
+      "name": "Brody Meyer",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "936",
+      "name": "Brody Meyer",
+      "number": "87",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11042",
+      "name": "Camden Collins",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "602",
+      "name": "Konstantinos Krokidis",
+      "number": "93",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "262",
+      "name": "Nicholas Pulice",
+      "number": "11",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "257",
+      "name": "Camden Collins",
+      "number": "57",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9095",
+      "name": "Connor Scully",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 4,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 4,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": []
+   }
+  }
+ ]
+}
