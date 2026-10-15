@@ -233,7 +233,8 @@ function renderRows(games) {
       <div class="sg-date">${g.date}${typeTag(g.type)}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
-      <div class="sg-result">${resultCell}${boxLinkOwn}</div>
+      <div class="sg-result">${resultCell}</div>
+      <div class="sg-actions">${boxLinkOwn}</div>
       ${cal}
     </div>`;
   }).join('');
@@ -446,6 +447,7 @@ function scheduleBody(games, type, typeButtons) {
         <span>Opponent</span>
         <span>Score</span>
         <span>Result</span>
+        <span class="sg-h-actions"><span class="sr-only">Box score</span></span>
       </div>
       <div class="sg-rows">${renderRows(games)}</div>
     </div>`;
