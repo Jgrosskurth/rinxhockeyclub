@@ -206,6 +206,12 @@ def main():
         return 0
     games = [g for g in (to_game(r) for r in read_rows(text)) if g]
     games.sort(key=lambda g: g['Submitted'])
+    # Logos no game uses any more (row deleted, or saved again as a new file).
+    used = {g['Logo'].rsplit('/', 1)[-1] for g in games if g['Logo']}
+    for old in LOGOS.glob('*.webp') if LOGOS.is_dir() else []:
+        if old.name not in used:
+            old.unlink()
+            print(f'removed {old.relative_to(ROOT)}')
     body = json.dumps({'data': games}, indent=1, ensure_ascii=False) + '\n'
     if OUT.exists() and OUT.read_text() == body:
         print(f'No new form games ({len(games)} total).')
