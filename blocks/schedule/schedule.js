@@ -188,8 +188,10 @@ function teamLabel() {
   return feedConfig().label;
 }
 
-// Link to a game's GameSheet box score, if we have its id.
+// Link to a game's GameSheet box score, if we have its id (or to LI Hockey's
+// game page, for league games GameSheet doesn't list).
 function boxScoreUrl(g) {
+  if (g.source === 'lihockey') return g.url || '';
   if (!g.gameId || g.sheet) return '';
   return `https://gamesheetstats.com/seasons/${g.season || '15381'}/games/${g.gameId}`;
 }
@@ -296,6 +298,9 @@ function fromFeed(g, season) {
     location: g.location || '',
     venue: g.venue || '',
     gameId: g.gameId || '',
+    // "lihockey" for a league game filled in from LI Hockey (fill_league_games.py).
+    source: g.source || '',
+    url: g.url || '',
     // Logo from the DA sheet, if the club added one.
     logo: g.logo || '',
     logoFallback: g.logoFallback || '',
@@ -433,6 +438,14 @@ function controlsRow(typeButtons, hasResults) {
     </div>`;
 }
 
+// "GameSheet", "GameSheet, LI Hockey and the club", ... for the rows shown.
+function sourceCredit(games) {
+  const names = ['<a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>'];
+  if (games.some((g) => g.source === 'lihockey')) names.push('<a href="https://lihockey.com" target="_blank" rel="noopener">LI Hockey</a>');
+  if (games.some((g) => g.sheet)) names.push('the club');
+  return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : names[0];
+}
+
 function scheduleBody(games, type, typeButtons) {
   const label = type === 'All' ? 'games' : `${type.toLowerCase()} games`;
   if (!games.length) {
@@ -472,7 +485,7 @@ function scheduleBody(games, type, typeButtons) {
       <div class="sum-tile navy-light"><span class="sum-num">${ga}</span><span class="sum-lbl">Goals Against</span></div>
     </div>
     ${table}
-    <p class="schedule-src">${feedConfig().season} &bull; Source: <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>${games.some((g) => g.sheet) ? ' and the club' : ''}</p>`;
+    <p class="schedule-src">${feedConfig().season} &bull; Source: ${sourceCredit(games)}</p>`;
 }
 
 function wireResultFilter(block) {
