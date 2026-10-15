@@ -27,7 +27,69 @@ function findKey(obj, ...candidates) {
   return '';
 }
 
-const nameKey = (name) => (name || '').toLowerCase().replace(/[^a-z]/g, '');
+// One player across the roster and the stats sources, which spell first
+// names differently ("Joe" / "Joseph Azar", "DJ" / "Donald Pierre Canel") and
+// may be ALL CAPS: first initial + last name.
+const nameKey = (name) => {
+  const words = (name || '').toLowerCase().replace(/[^a-z\s]/g, '').split(/\s+/)
+    .filter((w) => w && !/^(jr|sr|ii|iii|iv)$/.test(w));
+  return words.length ? `${words[0][0]}${words[words.length - 1]}` : '';
+};
+
+const POSITIONS = {
+  goalie: 'G', defense: 'D', defence: 'D', offense: 'F', forward: 'F',
+};
+let rosterCache;
+// The team's roster page (Roster block: name | position or note | photo |
+// number), so every rostered player is listed, with the club's number and
+// position, even before they have a stat.
+function loadRoster(key) {
+  if (!rosterCache) {
+    rosterCache = fetch(key === '14u' ? '/roster-14u.plain.html' : '/roster.plain.html')
+      .then((r) => (r.ok ? r.text() : ''))
+      .then((html) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return [...doc.querySelectorAll('.roster > div')].map((row) => {
+          const cells = [...row.children].map((c) => c.textContent.trim());
+          const note = (cells[1] || '').toLowerCase();
+          const pos = Object.entries(POSITIONS).find(([word]) => note.includes(word))?.[1] || '';
+          return { name: cells[0] || '', pos, number: cells[3] || '' };
+        }).filter((p) => p.name);
+      })
+      .catch(() => []);
+  }
+  return rosterCache;
+}
+
+// Adds every rostered player (zeros when they have no stats yet) and uses the
+// roster's number and position.
+function withRoster(players, goalies, roster) {
+  const skaterRows = players.map((p) => ({ ...p }));
+  const goalieList = goalies.map((g) => ({ ...g }));
+  roster.forEach((r) => {
+    const key = nameKey(r.name);
+    const goalie = goalieList.find((g) => nameKey(g.name) === key);
+    const skater = skaterRows.find((p) => (p.key || nameKey(p.Name)) === key);
+    if (goalie) {
+      goalie.num = r.number || goalie.num;
+      if (skater) skater.Pos = 'G';
+      return;
+    }
+    if (skater) {
+      skater['#'] = r.number || skater['#'];
+      skater.Pos = r.pos || skater.Pos;
+    } else if (r.pos === 'G') {
+      goalieList.push({
+        num: r.number, name: r.name, gp: 0, w: 0, l: 0, sa: 0, ga: 0, sv: 0, so: '',
+      });
+    } else {
+      skaterRows.push({
+        '#': r.number, Name: r.name, Pos: r.pos, GP: '0', G: '0', A: '0', PTS: '0', '+/-': '0', PIM: '0',
+      });
+    }
+  });
+  return { skaterRows, goalieList };
+}
 const isGoaliePos = (pos) => /^(g|goalie|goaltender)$/i.test((pos || '').trim());
 
 // Goalie table: GP, W, L, SA, GA, SV, SV%, GAA, SO (dashes where a source
@@ -394,6 +456,8 @@ function mergePlayers(sources) {
     byPlayer.set(key, row);
   }));
   return [...byPlayer.values()].map((p) => ({
+    // Matching key from the source's own spelling (before playerName()).
+    key: nameKey(p.name),
     '#': p.number,
     Name: playerName(p.name),
     Pos: p.pos,
@@ -433,8 +497,13 @@ async function showTypeStats(block, container, key, type) {
   const gpNote = vias.includes(LIHOCKEY)
     ? ' &bull; League GP counts the games a skater recorded a goal, assist or penalty in, and league GAA is goals against per game'
     : '';
-  const goalies = withStats.flatMap((src) => goalieRows(src.goalies));
-  renderTable(block, container, mergePlayers(withStats), `${list} &bull; Stats from ${from}${gpNote}`, goalies);
+  const roster = await loadRoster(key);
+  const { skaterRows, goalieList } = withRoster(
+    mergePlayers(withStats),
+    withStats.flatMap((src) => goalieRows(src.goalies)),
+    roster,
+  );
+  renderTable(block, container, skaterRows, `${list} &bull; Stats from ${from}${gpNote}`, goalieList);
 }
 
 async function loadFeedStats(block, container) {
