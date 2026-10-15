@@ -27,7 +27,112 @@ function findKey(obj, ...candidates) {
   return '';
 }
 
-function renderTable(block, container, rows, source) {
+const nameKey = (name) => (name || '').toLowerCase().replace(/[^a-z]/g, '');
+const isGoaliePos = (pos) => /^(g|goalie|goaltender)$/i.test((pos || '').trim());
+
+// Goalie table: GP, W, L, SA, GA, SV, SV%, GAA, SO (dashes where a source
+// doesn't record a stat). GAA is goals against per game played: box scores
+// don't record minutes.
+function renderGoalies(container, goalies) {
+  const fmt = (v) => ((v === '' || v == null) ? '—' : v);
+  const n = (v) => parseFloat(v) || 0;
+  const cols = [
+    { key: 'num', label: '#' }, { key: 'name', label: 'Goalie' },
+    { key: 'gp', label: 'GP', numeric: true }, { key: 'w', label: 'W', numeric: true },
+    { key: 'l', label: 'L', numeric: true }, { key: 'sa', label: 'SA', numeric: true },
+    { key: 'ga', label: 'GA', numeric: true }, { key: 'sv', label: 'SV', numeric: true },
+    { key: 'svpct', label: 'SV%', numeric: true }, { key: 'gaa', label: 'GAA', numeric: true },
+    { key: 'so', label: 'SO', numeric: true },
+  ];
+  let sortCol = 'gp';
+  let sortAsc = false;
+  const sorted = () => [...goalies].sort((a, b) => {
+    const col = cols.find((c) => c.key === sortCol);
+    // Lower is better for GA and GAA.
+    const low = ['ga', 'gaa'].includes(sortCol);
+    let r = col.numeric
+      ? n(b[sortCol]) - n(a[sortCol])
+      : String(a[sortCol]).localeCompare(String(b[sortCol]));
+    if (low) r = -r;
+    return sortAsc ? -r : r;
+  });
+  const render = () => {
+    container.querySelector('thead tr').innerHTML = cols.map((c) => {
+      const active = c.key === sortCol;
+      let arrow = ' ⇅';
+      if (active) arrow = sortAsc ? ' ▲' : ' ▼';
+      return `<th class="sortable${active ? ' sort-active' : ''}" data-col="${c.key}">${c.label}<span class="sort-arrow">${arrow}</span></th>`;
+    }).join('');
+    container.querySelector('tbody').innerHTML = sorted().map((g) => `<tr>
+        <td>${fmt(g.num)}</td>
+        <td class="player-name">${g.name}</td>
+        ${cols.slice(2).map((c) => `<td>${c.key === 'svpct' ? `<strong>${fmt(g[c.key])}</strong>` : fmt(g[c.key])}</td>`).join('')}
+      </tr>`).join('');
+    container.querySelectorAll('th.sortable').forEach((th) => {
+      th.onclick = () => {
+        if (sortCol === th.dataset.col) sortAsc = !sortAsc;
+        else { sortCol = th.dataset.col; sortAsc = false; }
+        render();
+      };
+    });
+  };
+  container.innerHTML = `
+    <div class="stats-table-wrap">
+      <table class="stats-tbl stats-goalie-tbl">
+        <thead><tr></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>`;
+  render();
+}
+
+// Goalie rows from a source's goalies list, whatever stats it records.
+function goalieRows(list) {
+  return (list || []).map((g) => {
+    const sv = g.sv === '' || g.sv == null ? '' : parseFloat(g.sv) || 0;
+    const ga = g.ga === '' || g.ga == null ? '' : parseFloat(g.ga) || 0;
+    let sa = g.sa === '' || g.sa == null ? '' : parseFloat(g.sa) || 0;
+    if (sa === '' && sv !== '' && ga !== '') sa = sv + ga;
+    return {
+      num: g.number || '',
+      name: playerName(toProperCase(g.name || '')),
+      gp: parseFloat(g.gp) || 0,
+      w: g.w === undefined ? '' : parseFloat(g.w) || 0,
+      l: g.l === undefined ? '' : parseFloat(g.l) || 0,
+      sa,
+      ga,
+      sv,
+      so: g.so === undefined ? '' : parseFloat(g.so) || 0,
+      gaa: g.gaa || '',
+    };
+  });
+}
+
+// Adds up goalie rows per goalie (All Stats) and works out SV% and GAA.
+function mergeGoalies(rows) {
+  const by = new Map();
+  rows.forEach((g) => {
+    const key = nameKey(g.name);
+    const row = by.get(key) || {
+      num: '', name: g.name, gp: 0, w: '', l: '', sa: '', ga: '', sv: '', so: '', parts: [],
+    };
+    row.num = row.num || g.num;
+    row.parts.push(g);
+    ['gp', 'w', 'l', 'sa', 'ga', 'sv', 'so'].forEach((k) => {
+      if (g[k] !== '') row[k] = (row[k] === '' ? 0 : row[k]) + g[k];
+    });
+    by.set(key, row);
+  });
+  return [...by.values()].map(({ parts, ...g }) => {
+    // The source's own GAA (minutes-based) when it's the only one; else
+    // goals against per game played.
+    let gaa = g.ga !== '' && g.gp ? (g.ga / g.gp).toFixed(2) : '';
+    if (parts.length === 1 && parts[0].gaa) gaa = parts[0].gaa;
+    return { ...g, svpct: g.sa ? (g.sv / g.sa).toFixed(3).replace(/^0/, '') : '', gaa };
+  });
+}
+
+function renderTable(block, container, rows, source, goalieList = []) {
   const fmt = (v) => ((v === '' || v == null) ? '—' : v);
   const n = (v) => parseFloat(v) || 0;
 
@@ -55,7 +160,7 @@ function renderTable(block, container, rows, source) {
   block.querySelector('#s-ta').textContent = ta;
   block.querySelector('#s-tp').textContent = tp;
 
-  const players = rows.map((p) => {
+  const all = rows.map((p) => {
     const fn = findKey(p, 'first name', 'first_name', 'firstname');
     const ln = findKey(p, 'last name', 'last_name', 'lastname');
     return {
@@ -70,6 +175,17 @@ function renderTable(block, container, rows, source) {
       pim: fmt(findKey(p, 'pim', 'penalty minutes')),
     };
   });
+  // Goalies get their own section: anyone a source lists as a goalie, or
+  // whose position is G / Goalie.
+  const goalieKeys = new Set(goalieList.map((g) => nameKey(g.name)));
+  const goalies = mergeGoalies([
+    ...goalieList,
+    ...all.filter((p) => isGoaliePos(p.pos) && !goalieKeys.has(nameKey(p.name)))
+      .map((p) => ({
+        num: p.num === '—' ? '' : p.num, name: p.name, gp: parseFloat(p.gp) || 0, w: '', l: '', sa: '', ga: '', sv: '', so: '',
+      })),
+  ]);
+  const players = all.filter((p) => !isGoaliePos(p.pos) && !goalieKeys.has(nameKey(p.name)));
 
   const cols = [
     { key: 'num', label: '#', numeric: false },
@@ -128,11 +244,12 @@ function renderTable(block, container, rows, source) {
   }
 
   function render() {
-    const thead = container.querySelector('thead tr');
-    const tbody = container.querySelector('#stats-tbody');
+    const table = container.querySelector('#stats-tbody')?.closest('table');
+    const thead = table?.querySelector('thead tr');
+    const tbody = table?.querySelector('#stats-tbody');
     if (thead) thead.innerHTML = buildHeaders();
     if (tbody) tbody.innerHTML = buildRows();
-    container.querySelectorAll('th.sortable').forEach((th) => {
+    table?.querySelectorAll('th.sortable').forEach((th) => {
       th.onclick = function onClick() {
         const { col } = this.dataset;
         if (sortCol === col) {
@@ -147,16 +264,24 @@ function renderTable(block, container, rows, source) {
   }
 
   container.innerHTML = `
-    <div class="stats-table-wrap">
-      <table class="stats-tbl">
-        <thead><tr></tr></thead>
-        <tbody id="stats-tbody"></tbody>
-      </table>
-    </div>
+    <section class="stats-section" aria-labelledby="stats-skaters-h">
+      <h2 class="stats-h" id="stats-skaters-h">Skaters</h2>
+      <div class="stats-table-wrap">
+        <table class="stats-tbl">
+          <thead><tr></tr></thead>
+          <tbody id="stats-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+    ${goalies.length ? `<section class="stats-section" aria-labelledby="stats-goalies-h">
+      <h2 class="stats-h" id="stats-goalies-h">Goalies</h2>
+      <div class="stats-goalies"></div>
+    </section>` : ''}
     <p class="stats-src">${source || 'Stats sourced from <a href="https://gamesheetstats.com" target="_blank" rel="noopener">GameSheet</a>'}</p>
   `;
 
   render();
+  if (goalies.length) renderGoalies(container.querySelector('.stats-goalies'), goalies);
 }
 
 async function loadStats(block, statsUrl) {
@@ -243,14 +368,15 @@ function loadSources(key) {
         }));
       const all = [...(BUILT_IN[key] || []), ...linked];
       const data = await Promise.all(all.map((src) => fetchJson(src.file)));
-      return all.map((src, i) => ({ ...src, players: data[i]?.players || [] }));
+      return all.map((src, i) => ({
+        ...src, players: data[i]?.players || [], goalies: data[i]?.goalies || [],
+      }));
     });
   }
   return sourcesCache;
 }
 
 const num = (v) => parseFloat(v) || 0;
-const nameKey = (name) => (name || '').toLowerCase().replace(/[^a-z]/g, '');
 
 // One row per player across sources: games, goals, assists, points,
 // +/- and PIM added up.
@@ -305,9 +431,10 @@ async function showTypeStats(block, container, key, type) {
   const vias = [...new Set(withStats.map((src) => src.via || GAMESHEET))];
   const from = vias.map((v) => `<a href="${v.url}" target="_blank" rel="noopener">${v.label}</a>`).join(' and ');
   const gpNote = vias.includes(LIHOCKEY)
-    ? ' &bull; League GP counts the games a player recorded a goal, assist or penalty in'
+    ? ' &bull; League GP counts the games a skater recorded a goal, assist or penalty in, and league GAA is goals against per game'
     : '';
-  renderTable(block, container, mergePlayers(withStats), `${list} &bull; Stats from ${from}${gpNote}`);
+  const goalies = withStats.flatMap((src) => goalieRows(src.goalies));
+  renderTable(block, container, mergePlayers(withStats), `${list} &bull; Stats from ${from}${gpNote}`, goalies);
 }
 
 async function loadFeedStats(block, container) {
@@ -318,7 +445,7 @@ async function loadFeedStats(block, container) {
     container.innerHTML = '<div class="err-box"><p>Tournament stats will be posted here once games begin.</p></div>';
     return;
   }
-  renderTable(block, container, rows);
+  renderTable(block, container, rows, undefined, goalieRows(data.goalies));
 }
 
 export default function decorate(block) {
