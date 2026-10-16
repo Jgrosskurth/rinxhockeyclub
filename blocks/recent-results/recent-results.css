@@ -183,7 +183,7 @@
   margin: -6px 0 -6px 1px;
   vertical-align: middle;
   border-radius: 50%;
-  color: var(--color-white);
+  color: var(--color-ice);
 }
 
 .recent-results .fx-map:hover {
@@ -196,11 +196,12 @@
 }
 
 .recent-results .fx-next .fx-map {
-  color: var(--color-red);
+  background: var(--color-ice);
+  color: var(--color-navy-light);
 }
 
 .recent-results .fx-next .fx-map:hover {
-  background: var(--color-ice);
+  color: var(--color-navy);
 }
 
 .recent-results .result-badge {

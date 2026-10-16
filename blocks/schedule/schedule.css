@@ -386,15 +386,16 @@
   place-items: center;
   width: 24px;
   height: 24px;
-  margin: -6px 0 -6px 1px;
+  margin: -6px 0 -6px 4px;
   vertical-align: middle;
   border-radius: 50%;
-  color: var(--color-red);
+  background: var(--color-ice);
+  color: var(--color-navy-light);
   pointer-events: auto;
 }
 
 .schedule .sg-map:hover {
-  background: var(--color-ice);
+  color: var(--color-navy);
 }
 
 .schedule .sg-map:focus-visible {
