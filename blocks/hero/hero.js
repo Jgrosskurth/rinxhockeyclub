@@ -61,14 +61,15 @@ function renderNext(panel, key, { upcoming }, records = {}) {
  * loads and decorates the block
  * @param {Element} block The block element
  */
-// Background videos (images/hero/, made from images/hero-video.mp4 and
-// images/video-hero-10u.mp4): a landscape strip for wide screens, portrait
-// below 900px. Each visit shows the next one in turn. It is added after the
-// page has loaded so it never delays the first paint; the rink diagram shows
-// until it plays. Skipped for reduced motion and data saver.
+// Background videos (images/hero/, made from images/hero-video.mp4, and
+// images/video-hero-10u.mp4 with its phone cut video-hero-10u-mobile.mp4): a
+// landscape strip for wide screens, portrait below 900px. Each visit shows the
+// next one in turn. It is added after the page has loaded so it never delays
+// the first paint; the rink diagram shows until it plays. Skipped for reduced
+// motion and data saver.
 const VIDEOS = [
   { wide: '/images/hero/hero-wide.mp4', tall: '/images/hero/hero-portrait.mp4' },
-  { wide: '/images/hero/hero-10u-2-wide.mp4', tall: '/images/hero/hero-10u-2-portrait.mp4' },
+  { wide: '/images/hero/hero-10u-2-wide.mp4', tall: '/images/hero/hero-10u-mobile.mp4' },
 ];
 
 // The video after the one shown last time (random if storage is blocked).
