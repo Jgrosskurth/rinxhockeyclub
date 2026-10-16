@@ -5,8 +5,10 @@
  * "Next up" card. Data comes from the GameSheet feeds (see team-feeds.js).
  */
 import {
-  TEAMS, DEFAULT_TEAM, loadTeamGames, resultBadge, selectTeam, onTeamChange,
+  TEAMS, DEFAULT_TEAM, loadTeamGames, resultBadge, selectTeam, onTeamChange, directionsUrl,
 } from '../../scripts/team-feeds.js';
+
+const PIN = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>';
 
 const FINALS = 3;
 const UPCOMING = 5;
@@ -27,11 +29,16 @@ function card(g, isNext) {
   const res = g.result
     ? `<p class="fx-res">${resultBadge(g.result)}<span>${g.score}</span></p>`
     : `<p class="fx-res"><span>${g.time || 'TBA'}</span></p>`;
+  const rink = g.home ? 'The Rinx' : g.location;
+  // The pin opens Google Maps directions to the rink.
+  const pin = rink
+    ? `<a class="fx-map" href="${directionsUrl(g)}" target="_blank" rel="noopener" title="Directions" aria-label="Directions to ${rink.replace(/"/g, '&quot;')} (opens Google Maps)">${PIN}</a>`
+    : '';
   return `<li class="${cls}">
     <p class="fx-top">${top}</p>
     <p class="fx-opp">${logo}<span>${g.prefix} ${g.opp}</span></p>
     ${res}
-    <p class="fx-meta">${g.type && g.type !== 'League' ? `${g.type} · ` : ''}${g.home ? 'The Rinx' : g.location}</p>
+    <p class="fx-meta">${g.type && g.type !== 'League' ? `${g.type} · ` : ''}${rink || ''}${pin}</p>
   </li>`;
 }
 
