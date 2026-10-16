@@ -378,7 +378,8 @@
   color: var(--color-gray);
 }
 
-/* Map pin after the rink: Google Maps directions, clickable above the row link. */
+/* Map pin (icon only) after the rink: Google Maps directions, clickable above
+   the row link. */
 .schedule .sg-map {
   position: relative;
   z-index: 3;
@@ -386,10 +387,9 @@
   place-items: center;
   width: 24px;
   height: 24px;
-  margin: -6px 0 -6px 4px;
+  margin: -6px 0 -6px -2px;
   vertical-align: middle;
   border-radius: 50%;
-  background: var(--color-ice);
   color: var(--color-navy-light);
   pointer-events: auto;
 }
