@@ -13,9 +13,9 @@ function locLine(g) {
   const pin = g.location
     ? `<a class="sg-map" href="${attr(directionsUrl({ location: g.location }))}" target="_blank" rel="noopener" title="Directions" aria-label="Directions to ${attr(g.location)} (opens Google Maps)">${PIN}</a>`
     : '';
-  // Phones show the time in the score column instead (.sg-time).
+  // Phones show the time under the date instead (.sg-dtime).
   const time = g.time ? `<span class="sg-loc-time">${g.location ? ' · ' : ''}${g.time}</span>` : '';
-  return `${g.location ? `${g.location}${pin}` : ''}${time}`;
+  return `${g.location ? `<span class="sg-rink">${g.location}</span>${pin}` : ''}${time}`;
 }
 
 // Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
@@ -251,9 +251,9 @@ function renderRows(games) {
     return `
     <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}">
       ${boxLink}
-      <div class="sg-date">${dateHtml(g.date)}${typeTag(g.type)}</div>
+      <div class="sg-date">${dateHtml(g.date)}${g.time ? `<span class="sg-dtime">${g.time}</span>` : ''}${typeTag(g.type)}</div>
       ${oppCell(g)}
-      <div class="sg-score">${g.score || (!hasResult && g.time ? `<span class="sg-time">${g.time}</span>` : '')}</div>
+      <div class="sg-score">${g.score}</div>
       <div class="sg-result">${resultCell}</div>
       <div class="sg-actions">${boxLinkOwn}</div>
       ${cal}
