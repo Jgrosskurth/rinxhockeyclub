@@ -26,6 +26,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -195,7 +196,12 @@ def read_rows(text):
 
 def main():
     try:
-        req = urllib.request.Request(CSV_URL, headers={'User-Agent': 'rinx-form-games'})
+        # A unique query string, so a run is never handed an older cached copy
+        # of the published sheet (seen on 2026-10-16: a run missed a game
+        # that had been in the sheet for 3 hours).
+        url = f'{CSV_URL}&_={int(time.time())}'
+        req = urllib.request.Request(url, headers={'User-Agent': 'rinx-form-games',
+                                                   'Cache-Control': 'no-cache'})
         with urllib.request.urlopen(req, timeout=30) as resp:
             text = resp.read().decode('utf-8-sig')
     except Exception as err:
