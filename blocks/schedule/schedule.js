@@ -6,13 +6,17 @@ import {
 } from '../../scripts/team-feeds.js';
 
 const PIN = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>';
+const CAL_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 2v3M16 2v3M3.5 9h17M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v13a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V6A1.5 1.5 0 0 1 5 4.5ZM12 12.5v5M9.5 15h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 const attr = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+// Small label for a game's type (League, Tournament, Exhibition, Other).
+const typeTag = (type) => `<span class="sg-type sg-type-${(type || 'League').toLowerCase()}">${type || 'League'}</span>`;
+const pinLink = (location, cls = 'sg-map') => (location
+  ? `<a class="${cls}" href="${attr(directionsUrl({ location }))}" target="_blank" rel="noopener" title="Directions" aria-label="Directions to ${attr(location)} (opens Google Maps)">${PIN}</a>`
+  : '');
 
 // "Rink [pin] · 2:05 PM"; the pin opens Google Maps directions to the rink.
 function locLine(g) {
-  const pin = g.location
-    ? `<a class="sg-map" href="${attr(directionsUrl({ location: g.location }))}" target="_blank" rel="noopener" title="Directions" aria-label="Directions to ${attr(g.location)} (opens Google Maps)">${PIN}</a>`
-    : '';
+  const pin = pinLink(g.location);
   // Phones show the time under the date instead (.sg-dtime).
   const time = g.time ? `<span class="sg-loc-time">${g.location ? ' · ' : ''}${g.time}</span>` : '';
   return `${g.location ? `<span class="sg-rink">${g.location}</span>${pin}` : ''}${time}`;
@@ -65,6 +69,7 @@ function subscribeBar() {
   const webcal = url.replace(/^https?:/, 'webcal:');
   const google = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`;
   return `<div class="sub-bar">
+      <button type="button" class="sub-toggle" aria-expanded="false">${CAL_ICON}<span>Subscribe to calendar</span></button>
       <p class="sub-text"><strong>Never miss a game.</strong> Subscribe to the ${team} calendar and every game, time change and final score updates on your phone automatically.</p>
       <div class="sub-actions">
         <a class="sub-btn" href="${webcal}">Apple / iPhone</a>
@@ -75,6 +80,13 @@ function subscribeBar() {
 }
 
 function wireSubscribe(block) {
+  // Phones fold the subscribe options behind one button.
+  const toggle = block.querySelector('.sub-toggle');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.closest('.sub-bar').classList.toggle('is-open', open);
+  });
   const copy = block.querySelector('.sub-copy');
   copy?.addEventListener('click', async () => {
     try {
@@ -84,6 +96,25 @@ function wireSubscribe(block) {
       window.prompt('Copy this calendar link:', copy.dataset.url); // eslint-disable-line no-alert
     }
   });
+}
+
+// The rink's last word and its map pin never part across a line break.
+function keepWithPin(text, pin) {
+  const m = text.match(/^(.*\s)?(\S+)$/);
+  return m ? `${m[1] || ''}<span class="sg-nowrap">${m[2]}${pin}</span>` : `${text}${pin}`;
+}
+
+// "North Park (Mauro)" -> team + the coach in a lighter span.
+function nameHtml(opp) {
+  const m = (opp || '').match(/^(.*?)\s*(\([^)]*\))$/);
+  return m ? `${m[1]} <span class="sg-coach">${m[2]}</span>` : opp;
+}
+
+// Phones: "TYPE · time · rink [pin]" under the name (the type and time
+// columns are hidden there). Upcoming games show their time on the right.
+function phoneMeta(g) {
+  const final = ['W', 'L', 'T'].includes(g.result);
+  return `<div class="sg-mmeta">${typeTag(g.type)}${final && g.time ? `<span class="sg-mtime">${g.time}</span>` : ''}${g.location ? `<span class="sg-mrink">${keepWithPin(g.location, pinLink(g.location, 'sg-map sg-mpin'))}</span>` : ''}</div>`;
 }
 
 function oppCell(g) {
@@ -102,9 +133,10 @@ function oppCell(g) {
       <div class="sg-opp">
         ${logoImg}
         <div class="sg-logo-fb"${logoSrc ? ' style="display:none"' : ''}>${ini}</div>
-        <div>
-          <div class="sg-name">${g.opp}</div>
+        <div class="sg-text">
+          <div class="sg-name">${nameHtml(g.opp)}</div>
           <div class="sg-loc">${locLine(g)}</div>
+          ${phoneMeta(g)}
         </div>
       </div>`;
 }
@@ -209,16 +241,37 @@ function boxScoreUrl(g) {
   return `https://gamesheetstats.com/seasons/${g.season || '15381'}/games/${g.gameId}`;
 }
 
-// Small label for a game's type (League, Tournament, Exhibition, Other).
-const typeTag = (type) => `<span class="sg-type sg-type-${(type || 'League').toLowerCase()}">${type || 'League'}</span>`;
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+  'August', 'September', 'October', 'November', 'December'];
 
-// "Sep 12, 2026" -> "Sep 12" + ", 2026" (phones hide the year).
+// "Sep 12, 2026" -> "Sep 12" + ", 2026", plus the phones' "SAT" over "12".
 function dateHtml(date) {
   const m = (date || '').match(/^(.*?)(,\s*\d{4})$/);
-  return m ? `<span class="sg-day">${m[1]}</span><span class="sg-year">${m[2]}</span>` : date;
+  const p = parseGameDateTime(date, '');
+  const phone = p
+    ? `<span class="sg-dow">${WEEKDAYS[new Date(p.year, p.month, p.day).getDay()]}</span><span class="sg-dnum">${p.day}</span>`
+    : '';
+  return (m ? `<span class="sg-day">${m[1]}</span><span class="sg-year">${m[2]}</span>` : date) + phone;
 }
 
-function renderRows(games) {
+const isFinal = (g) => ['W', 'L', 'T'].includes(g.result);
+const monthKey = (g) => {
+  const p = parseGameDateTime(g.rawDate || g.date, '');
+  return p ? `${p.year}-${String(p.month + 1).padStart(2, '0')}` : '';
+};
+
+// The next game: the first one without a result, today or later.
+function nextGame(games) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return games.find((g) => {
+    const p = parseGameDateTime(g.rawDate || g.date, g.time);
+    return !isFinal(g) && p && new Date(p.year, p.month, p.day) >= today;
+  });
+}
+
+function renderRows(games, next) {
   const label = teamLabel();
   return games.map((g) => {
     const hasResult = ['W', 'L', 'T'].includes(g.result);
@@ -235,7 +288,7 @@ function renderRows(games) {
     const evAttr = ev ? ` data-event="${encodeURIComponent(JSON.stringify(ev))}"` : '';
     const cal = ev
       ? `<div class="sg-cal-wrap"${evAttr}>
-          <button type="button" class="sg-cal" aria-haspopup="true" aria-expanded="false" aria-label="Add ${g.opp} game to calendar" title="Add to calendar">📅</button>
+          <button type="button" class="sg-cal" aria-haspopup="true" aria-expanded="false" aria-label="Add ${g.opp} game to calendar" title="Add to calendar">${CAL_ICON}</button>
           <div class="sg-cal-menu" hidden>
             <a href="${googleCalUrl(ev)}" target="_blank" rel="noopener" data-cal="google">Google Calendar</a>
             <a href="#" data-cal="ics" data-file="${label.replace(/\s+/g, '-')}-vs-${(g.opp || 'game').replace(/\s+/g, '-')}.ics">Apple / Outlook</a>
@@ -249,12 +302,12 @@ function renderRows(games) {
       ? `<a class="sg-rowlink" href="${box}" target="_blank" rel="noopener" aria-label="View box score: ${label} vs ${g.opp}"></a>`
       : '';
     return `
-    <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}">
+    <div class="sg-row${box ? ' sg-clickable' : ''}${g === next ? ' sg-next' : ''}${g.boxScore ? ' sg-has-box' : ''}" data-result="${g.result}" data-state="${hasResult ? 'final' : 'upcoming'}" data-month="${monthKey(g)}">
       ${boxLink}
       <div class="sg-typecell">${typeTag(g.type)}</div>
       <div class="sg-date">${dateHtml(g.date)}${g.time ? `<span class="sg-dtime">${g.time}</span>` : ''}</div>
       ${oppCell(g)}
-      <div class="sg-score">${g.score}</div>
+      <div class="sg-score">${g.score || (g.time ? `<span class="sg-mbig">${g.time}</span>` : '')}</div>
       <div class="sg-result">${resultCell}</div>
       <div class="sg-actions">${boxLinkOwn}</div>
       ${cal}
@@ -464,7 +517,36 @@ function sourceCredit(games) {
   return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : names[0];
 }
 
-function scheduleBody(games, type, typeButtons) {
+// W-L-T of a set of finals ("4-0-0"), or '' when none were played.
+function record(games) {
+  const finals = games.filter(isFinal);
+  if (!finals.length) return '';
+  const n = (r) => finals.filter((g) => g.result === r).length;
+  return `${n('W')}-${n('L')}-${n('T')}`;
+}
+
+// Rows grouped by month. Phones show each month's heading (sticky) with its
+// record; wider screens ignore the groups (display: contents).
+function monthGroups(games, next) {
+  const firstYear = parseGameDateTime(games[0]?.rawDate || games[0]?.date, '')?.year;
+  const groups = [];
+  games.forEach((g) => {
+    const key = monthKey(g);
+    if (!groups.length || groups[groups.length - 1].key !== key) groups.push({ key, games: [] });
+    groups[groups.length - 1].games.push(g);
+  });
+  return groups.map(({ key, games: list }) => {
+    const [y, m] = key.split('-').map(Number);
+    const name = key ? `${MONTH_NAMES[m - 1]}${y !== firstYear ? ` <span class="sg-m-year">${y}</span>` : ''}` : 'Date to be set';
+    const rec = record(list);
+    return `<section class="sg-month" data-month="${key}" aria-label="${key ? `${MONTH_NAMES[m - 1]} ${y}` : 'Date to be set'}">
+        <div class="sg-month-head"><h2>${name}<span class="sg-m-rec"${rec ? '' : ' hidden'}> · ${rec}</span></h2><span class="sg-m-count">${list.length} ${list.length === 1 ? 'game' : 'games'}</span></div>
+        ${renderRows(list, next)}
+      </section>`;
+  }).join('');
+}
+
+function scheduleBody(games, type, typeButtons, next) {
   const label = type === 'All' ? 'games' : `${type.toLowerCase()} games`;
   if (!games.length) {
     return `${controlsRow(typeButtons, false)}
@@ -481,7 +563,7 @@ function scheduleBody(games, type, typeButtons) {
         <span>Result</span>
         <span class="sg-h-actions"><span class="sr-only">Box score</span></span>
       </div>
-      <div class="sg-rows">${renderRows(games)}</div>
+      <div class="sg-rows">${monthGroups(games, next)}</div>
     </div>`;
   // Upcoming only: the same table, without the win/loss summary.
   if (!hasResults) {
@@ -507,14 +589,75 @@ function scheduleBody(games, type, typeButtons) {
     <p class="schedule-src">${feedConfig().season} &bull; Source: ${sourceCredit(games)}</p>`;
 }
 
+// After any filter: hide months left empty, refresh their counts and records,
+// and the phones' Results / Upcoming jump counts.
+function refreshGroups(block) {
+  block.querySelectorAll('.sg-month').forEach((month) => {
+    const rows = [...month.querySelectorAll('.sg-row:not(.sg-hide)')];
+    month.hidden = !rows.length;
+    const count = month.querySelector('.sg-m-count');
+    if (count) count.textContent = `${rows.length} ${rows.length === 1 ? 'game' : 'games'}`;
+    const rec = month.querySelector('.sg-m-rec');
+    const finals = rows.filter((r) => r.dataset.state === 'final');
+    if (rec) {
+      const n = (x) => finals.filter((r) => r.dataset.result === x).length;
+      rec.hidden = !finals.length;
+      rec.textContent = ` · ${n('W')}-${n('L')}-${n('T')}`;
+    }
+  });
+  block.querySelectorAll('.sg-jump').forEach((btn) => {
+    const n = block.querySelectorAll(`.sg-row[data-state="${btn.dataset.jump}"]:not(.sg-hide)`).length;
+    btn.querySelector('.sg-jump-count').textContent = n;
+    btn.disabled = !n;
+  });
+}
+
 function wireResultFilter(block) {
   const select = block.querySelector('.result-select');
   select?.addEventListener('change', () => {
     const f = select.value;
     block.querySelectorAll('.sg-row').forEach((row) => {
-      row.style.display = (f === 'all' || row.dataset.result === f) ? 'grid' : 'none';
+      row.classList.toggle('sg-hide', !(f === 'all' || row.dataset.result === f));
     });
+    refreshGroups(block.closest('.schedule') || block);
   });
+}
+
+// Phones: the next game at full size, then one-tap jumps to the latest result
+// and to the next game. Hidden on wider screens.
+function spotlight(g) {
+  if (!g) return '';
+  const p = parseGameDateTime(g.rawDate, g.time);
+  const day = p ? `${WEEKDAYS[new Date(p.year, p.month, p.day).getDay()]} ${MONTH_ABBR[p.month]} ${p.day}` : g.date;
+  const ev = calEvent(g, teamLabel());
+  return `<div class="sg-nextup">
+      <div class="sg-np-head"><h2>Next up</h2>${typeTag(g.type)}</div>
+      <p class="sg-np-when"><span class="sg-np-date">${day}</span>${g.time ? `<span class="sg-np-time">${g.time}</span>` : ''}</p>
+      <div class="sg-np-match">${oppCell(g)}</div>
+      ${g.location ? `<p class="sg-np-where"><span>${g.location}</span>${pinLink(g.location, 'sg-np-pin')}</p>` : ''}
+      ${ev ? `<div class="sg-cal-wrap sg-np-cal" data-event="${encodeURIComponent(JSON.stringify(ev))}">
+          <button type="button" class="sg-cal" aria-haspopup="true" aria-expanded="false">${CAL_ICON}<span>Add to calendar</span></button>
+          <div class="sg-cal-menu" hidden>
+            <a href="${googleCalUrl(ev)}" target="_blank" rel="noopener" data-cal="google">Google Calendar</a>
+            <a href="#" data-cal="ics" data-file="${teamLabel().replace(/\s+/g, '-')}-vs-${(g.opp || 'game').replace(/\s+/g, '-')}.ics">Apple / Outlook</a>
+          </div>
+        </div>` : ''}
+    </div>`;
+}
+
+const jumpPair = () => `<div class="sg-jumps">
+    <button type="button" class="sg-jump" data-jump="final">Results <span class="sg-jump-count"></span></button>
+    <button type="button" class="sg-jump" data-jump="upcoming">Upcoming <span class="sg-jump-count"></span></button>
+  </div>`;
+
+function wireJumps(block) {
+  block.querySelectorAll('.sg-jump').forEach((btn) => btn.addEventListener('click', () => {
+    const rows = [...block.querySelectorAll(`.sg-row[data-state="${btn.dataset.jump}"]:not(.sg-hide)`)];
+    const target = btn.dataset.jump === 'final' ? rows[rows.length - 1] : rows[0];
+    if (!target) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }));
 }
 
 function renderSchedule(block, games) {
@@ -526,21 +669,26 @@ function renderSchedule(block, games) {
   const typeButtons = (current) => (types.length ? `<div class="type-filter" role="group" aria-label="Game type">
       ${types.map((type) => `<button type="button" class="type-btn" data-type="${type}" aria-pressed="${type === current}">${type === 'All' ? 'All Games' : type}<span class="type-count">${count(type)}</span></button>`).join('')}
     </div>` : '');
+  const next = nextGame(games);
   block.innerHTML = `
     ${printHeader()}
+    <div class="sg-top">${spotlight(next)}${jumpPair()}</div>
     ${subscribeBar()}
     <div class="schedule-body"></div>`;
   wireSubscribe(block);
+  wireJumps(block);
+  wireCalendars(block.querySelector('.sg-top'));
   const body = block.querySelector('.schedule-body');
   const show = (type, focus) => {
     const list = tournamentPage || type === 'All' ? games : games.filter((g) => (g.type || 'League') === type);
-    body.innerHTML = scheduleBody(list, tournamentPage ? 'All' : type, typeButtons(type));
+    body.innerHTML = scheduleBody(list, tournamentPage ? 'All' : type, typeButtons(type), next);
     block.classList.toggle('schedule-upcoming', !list.some((g) => ['W', 'L', 'T'].includes(g.result)));
     body.querySelectorAll('.type-btn').forEach((b) => b.addEventListener('click', () => show(b.dataset.type, true)));
     if (focus) body.querySelector(`.type-btn[data-type="${type}"]`)?.focus();
     wireResultFilter(body);
     wirePrint(body);
     wireCalendars(body);
+    refreshGroups(block);
   };
   show('All');
 }
