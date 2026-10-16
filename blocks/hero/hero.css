@@ -394,16 +394,22 @@
   flex: none;
   display: inline-grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  margin: -6px 0 -6px -7px;
+  width: 24px;
+  height: 24px;
+  margin: -2px 2px -2px 0;
   border-radius: 50%;
-  color: var(--color-red);
-  transition: background-color 150ms ease, transform 100ms ease;
+  background: var(--color-ice);
+  color: var(--color-navy-light);
+  transition: color 150ms ease, transform 100ms ease;
+}
+
+.hero .np-pin svg {
+  width: 14px;
+  height: 14px;
 }
 
 .hero .np-pin:hover {
-  background: var(--color-ice);
+  color: var(--color-navy);
 }
 
 .hero .np-pin:active {
