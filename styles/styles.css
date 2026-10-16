@@ -1,5 +1,68 @@
 /* Rinx Hockey Club — Global Styles */
 
+/* Fallback faces sized to the web fonts, so text keeps its line breaks and
+   line heights when they swap in. size-adjust = Barlow width / system width
+   (measured: Barlow Condensed 900 caps vs Arial Bold 69.68%, vs Roboto Black
+   75.27%; Barlow 400 vs Arial 94.08%, vs Roboto 95.43%; Linux: Liberation Sans
+   shares Arial's metrics, DejaVu Sans Bold 62.77%, DejaVu Sans 83.35%). Overrides give
+   Barlow's ascent 1.0 / descent 0.2, divided by size-adjust. */
+@font-face {
+  font-family: barlow-condensed-fallback;
+  font-weight: 700 900;
+  size-adjust: 69.68%;
+  ascent-override: 143.51%;
+  descent-override: 28.70%;
+  line-gap-override: 0%;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+}
+
+@font-face {
+  font-family: barlow-condensed-fallback-roboto;
+  font-weight: 700 900;
+  size-adjust: 75.27%;
+  ascent-override: 132.86%;
+  descent-override: 26.57%;
+  line-gap-override: 0%;
+  src: local('Roboto Black'), local('Roboto-Black'), local('Roboto Bold'), local('Roboto-Bold');
+}
+
+@font-face {
+  font-family: barlow-fallback;
+  size-adjust: 94.08%;
+  ascent-override: 106.29%;
+  descent-override: 21.26%;
+  line-gap-override: 0%;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+}
+
+@font-face {
+  font-family: barlow-fallback-roboto;
+  size-adjust: 95.43%;
+  ascent-override: 104.79%;
+  descent-override: 20.96%;
+  line-gap-override: 0%;
+  src: local('Roboto'), local('Roboto-Regular');
+}
+
+@font-face {
+  font-family: barlow-condensed-fallback-dejavu;
+  font-weight: 700 900;
+  size-adjust: 62.77%;
+  ascent-override: 159.31%;
+  descent-override: 31.86%;
+  line-gap-override: 0%;
+  src: local('DejaVu Sans Bold'), local('DejaVuSans-Bold');
+}
+
+@font-face {
+  font-family: barlow-fallback-dejavu;
+  size-adjust: 83.35%;
+  ascent-override: 119.98%;
+  descent-override: 24.00%;
+  line-gap-override: 0%;
+  src: local('DejaVu Sans'), local('DejaVuSans');
+}
+
 :root {
   /* Brand colors */
   --color-red: #C8102E;
@@ -13,9 +76,10 @@
   --color-gray-light: #e5e7eb;
   --color-gold: #FFD700;
 
-  /* Typography — system fallbacks sized to reduce CLS on font swap */
-  --body-font-family: 'Barlow', -apple-system, blinkmacsystemfont, 'Segoe UI', sans-serif;
-  --heading-font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  /* Typography — size-matched local fallbacks (below) so text keeps its
+     line breaks when the web fonts swap in */
+  --body-font-family: 'Barlow', barlow-fallback, barlow-fallback-roboto, barlow-fallback-dejavu, sans-serif;
+  --heading-font-family: 'Barlow Condensed', barlow-condensed-fallback, barlow-condensed-fallback-roboto, barlow-condensed-fallback-dejavu, sans-serif;
   --body-font-size-l: 1.1rem;
   --body-font-size-m: 1rem;
   --body-font-size-s: 0.875rem;

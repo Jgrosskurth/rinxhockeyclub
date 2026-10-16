@@ -556,7 +556,7 @@ export default function decorate(block) {
     </div>`;
 
   block.innerHTML = `${controls}${typeTabs}
-    <div class="stats-summary" id="stats-summary" style="display:none">
+    <div class="stats-summary" id="stats-summary">
       <div class="stat-tile"><span class="stat-num" id="s-gp">--</span><span class="stat-lbl">Games Played</span></div>
       <div class="stat-tile"><span class="stat-num red" id="s-tg">--</span><span class="stat-lbl">Team Goals</span></div>
       <div class="stat-tile"><span class="stat-num" id="s-ta">--</span><span class="stat-lbl">Team Assists</span></div>
