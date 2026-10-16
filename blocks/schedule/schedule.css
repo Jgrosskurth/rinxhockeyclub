@@ -459,25 +459,6 @@
 }
 
 @media (max-width: 600px) {
-  /* One row of five small tiles instead of three rows of two. */
-  .schedule-summary {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 6px;
-  }
-
-  .sum-tile {
-    padding: 8px 4px;
-  }
-
-  .sum-num {
-    font-size: 1.35rem;
-  }
-
-  .sum-lbl {
-    font-size: 0.6rem;
-    letter-spacing: 0.04em;
-  }
-
   .sg-header {
     display: none;
   }
@@ -593,22 +574,430 @@
   .schedule.block .sg-score { font-size: 0.9rem !important; }
 }
 
-/* Phones: one compact two-line row per game.
-   type tab | date / time | logo + opponent / rink | score, result / Box Score
-   The game type is a full-height tab down the left edge. */
+/* Phone-only parts (prototype C, 2026-10-16): the Next up card and jumps,
+   the subscribe toggle, month headings, the weekday/day date, the meta line
+   and the big upcoming time. Wider screens hide them; the month groups
+   don't box their rows there. */
+.schedule .sg-top,
+.schedule .sub-toggle,
+.schedule .sg-month-head,
+.schedule .sg-dow,
+.schedule .sg-dnum,
+.schedule .sg-mmeta,
+.schedule .sg-mbig {
+  display: none;
+}
+
+.schedule .sg-month {
+  display: contents;
+}
+
+.schedule .sg-row.sg-hide,
+.schedule .sg-month[hidden] {
+  display: none !important;
+}
+
+.schedule .sg-cal svg {
+  display: block;
+  color: var(--color-navy);
+}
+
+/* Phones: prototype C — the next game first, Results / Upcoming jumps, then
+   the controls, and the season grouped by month under sticky headings. Each
+   game reads day | logo, opponent, type · time · rink | score or time. */
 @media (max-width: 600px) {
-  .schedule-block .sg-row,
-  .schedule.block .sg-row {
-    grid-template-columns: 58px minmax(0, 1fr) auto auto !important;
-    grid-template-rows: auto auto;
-    gap: 4px 10px !important;
-    min-height: 66px;
-    padding: 10px 12px 10px 28px !important;
+  /* Subscribe: one button; the options open under it */
+  .schedule .sub-bar {
+    display: block;
+    margin: 0 0 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
   }
 
-  /* Upcoming games: room for the calendar button on the right. */
-  .schedule .sg-row:has(.sg-cal-wrap) {
-    padding-right: 56px !important;
+  .schedule .sub-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 52px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    color: var(--color-navy);
+    font-family: var(--heading-font-family);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .schedule .sub-toggle::after {
+    content: "";
+    width: 9px;
+    height: 9px;
+    margin: 0 4px 0 auto;
+    border-right: 2.5px solid currentcolor;
+    border-bottom: 2.5px solid currentcolor;
+    transform: rotate(-45deg);
+    transition: transform 200ms ease;
+  }
+
+  .schedule .sub-toggle[aria-expanded="true"]::after {
+    transform: rotate(45deg);
+  }
+
+  .schedule .sub-toggle:focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: -3px;
+  }
+
+  .schedule .sub-bar:not(.is-open) .sub-text,
+  .schedule .sub-bar:not(.is-open) .sub-actions {
+    display: none;
+  }
+
+  .schedule .sub-bar.is-open .sub-text {
+    padding: 0 16px 12px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .schedule .sub-bar.is-open .sub-actions {
+    padding: 0 16px 16px;
+  }
+
+  .schedule .sub-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  /* Controls: type chips in one scrolling row (All Games first), then the
+     result filter and Print on one line */
+  .schedule .schedule-body > .schedule-controls {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .schedule .type-filter {
+    display: flex;
+    gap: 8px;
+    width: auto;
+    margin: 0 -16px;
+    padding: 0 16px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .schedule .type-filter::-webkit-scrollbar {
+    display: none;
+  }
+
+  .schedule .type-btn {
+    flex: none;
+    gap: 8px;
+    padding: 0 12px 0 16px;
+    border: 1px solid var(--color-gray-light);
+    border-radius: 6px;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .schedule .type-btn[data-type="All"] {
+    order: -1;
+  }
+
+  .schedule .type-btn[aria-pressed="true"] {
+    border-color: var(--color-navy);
+  }
+
+  .schedule .type-count {
+    min-width: 26px;
+    padding: 3px 7px;
+    font-size: 14px;
+  }
+
+  .schedule .type-btn[aria-pressed="true"] .type-count {
+    background: var(--color-white);
+    color: var(--color-navy);
+  }
+
+  .schedule .schedule-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-left: 0;
+  }
+
+  .schedule .result-filter {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .schedule .result-filter > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .schedule .result-select {
+    width: 100%;
+    min-height: 44px;
+    border-width: 1px;
+    border-color: var(--color-gray-light);
+    font-size: 16px;
+  }
+
+  .schedule .print-btn {
+    flex: none;
+    min-height: 44px;
+  }
+
+  /* Season totals: one navy bar, Goals For in red */
+  .schedule-summary {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    margin-bottom: 18px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--color-navy);
+  }
+
+  .sum-tile {
+    gap: 3px;
+    padding: 10px 2px;
+    border-radius: 0;
+  }
+
+  .sum-tile + .sum-tile {
+    box-shadow: inset 1px 0 rgb(255 255 255 / 12%);
+  }
+
+  .sum-num {
+    font-size: 26px;
+  }
+
+  .sum-lbl {
+    font-family: var(--heading-font-family);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    color: var(--color-ice);
+  }
+
+  .sum-tile.red .sum-lbl {
+    color: var(--color-white);
+  }
+
+  /* Months: a sticky heading with the month's record and game count */
+  .schedule .schedule-table {
+    overflow: visible;
+    border-radius: 0;
+    margin: 0 -16px;
+    box-shadow: none;
+    background: none;
+  }
+
+  .schedule .sg-month {
+    display: block;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-light);
+  }
+
+  .schedule .sg-month + .sg-month {
+    margin-top: 16px;
+  }
+
+  .schedule .sg-month-head {
+    position: sticky;
+    top: 0;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+    padding: 8px 16px;
+    background: var(--color-ice);
+    color: var(--color-navy);
+    box-shadow: 0 1px 0 #d3deec;
+  }
+
+  .schedule .sg-month-head h2 {
+    margin: 0;
+    font-family: var(--heading-font-family);
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .schedule .sg-m-year {
+    font-weight: 700;
+    color: var(--color-navy-light);
+  }
+
+  .schedule .sg-m-rec {
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .schedule .sg-m-count {
+    flex: none;
+    font-family: var(--heading-font-family);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-navy-light);
+  }
+
+  /* A game: day | logo + opponent over type · time · rink | result */
+  .schedule-block .sg-row,
+  .schedule.block .sg-row {
+    grid-template-columns: 48px minmax(0, 1fr) auto auto !important;
+    grid-template-rows: auto auto;
+    align-items: start !important;
+    gap: 4px 12px !important;
+    min-height: 0;
+    padding: 14px 16px !important;
+    border-bottom: 0 !important;
+    scroll-margin-top: 64px;
+  }
+
+  .schedule .sg-row + .sg-row {
+    box-shadow: inset 0 1px 0 var(--color-gray-light) !important;
+  }
+
+  /* no hover tint on phones: after a tap it sticks and hides League tags */
+  .schedule-block .sg-row:hover,
+  .schedule.block .sg-row:hover,
+  .schedule .sg-row.sg-clickable:hover {
+    background: var(--color-white) !important;
+  }
+
+  .schedule .sg-typecell,
+  .schedule .sg-date .sg-day,
+  .schedule .sg-date .sg-year,
+  .schedule .sg-date .sg-dtime,
+  .schedule .sg-loc {
+    display: none !important;
+  }
+
+  .schedule .sg-row .sg-date {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    display: grid;
+    justify-items: center;
+    gap: 3px;
+    padding-top: 2px;
+    font-family: var(--heading-font-family);
+    line-height: 1;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .schedule .sg-dow {
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--color-navy-light);
+  }
+
+  .schedule .sg-dnum {
+    display: block;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--color-navy);
+  }
+
+  .schedule-block .sg-opp,
+  .schedule.block .sg-opp {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .schedule .sg-row .sg-logo,
+  .schedule .sg-row .sg-logo-fb {
+    width: 28px;
+    height: 28px;
+    margin-top: 1px;
+    font-size: 11px;
+  }
+
+  .schedule .sg-text {
+    min-width: 0;
+  }
+
+  .schedule-block .sg-name,
+  .schedule.block .sg-name {
+    overflow: visible !important;
+    font-size: 16px !important;
+    font-weight: 700;
+    line-height: 1.25;
+    text-overflow: clip !important;
+    white-space: normal !important;
+  }
+
+  .schedule .sg-coach {
+    font-weight: 500;
+    color: var(--color-gray);
+  }
+
+  .schedule .sg-mmeta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    margin-top: 6px;
+    font-size: 15px;
+    line-height: 1.3;
+    color: var(--color-gray);
+  }
+
+  .schedule .sg-mmeta .sg-type {
+    margin: 0;
+    padding: 4px 7px 3px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .schedule .sg-mtime {
+    font-family: var(--heading-font-family);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-light);
+  }
+
+  .schedule .sg-mrink {
+    min-width: 0;
+    font-weight: 500;
+  }
+
+  .schedule .sg-mpin {
+    width: 44px;
+    height: 44px;
+    margin: -12px -12px -12px -8px;
+  }
+
+  .schedule .sg-nowrap {
+    white-space: nowrap;
   }
 
   .schedule-block .sg-header,
@@ -616,180 +1005,393 @@
     display: none !important;
   }
 
-  /* Static, so the type tab below sizes to the whole row. */
-  .schedule .sg-row .sg-date {
-    position: static !important;
-    grid-column: 1;
-    grid-row: 1 / 3;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 3px;
-    font-size: 0.8rem !important;
-    line-height: 1.1;
-    text-transform: uppercase;
-  }
-
-  .schedule .sg-date .sg-year {
-    display: none;
-  }
-
-  .schedule .sg-dtime {
-    display: block;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--color-gray);
-    white-space: nowrap;
-  }
-
-  /* Game type: a vertical tab down the row's left edge, reading upwards. */
-  .schedule .sg-typecell {
-    display: contents;
-  }
-
-  .schedule .sg-typecell .sg-type {
-    position: absolute;
-    inset: 0 auto 0 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .schedule .sg-mpin svg {
     width: 18px;
-    margin: 0;
-    padding: 0;
-    border-radius: 0;
-    font-size: 0.5rem;
-    letter-spacing: 0.08em;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    pointer-events: none;
+    height: 18px;
   }
 
-  .schedule .sg-opp {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    gap: 8px !important;
-  }
-
-  .schedule .sg-opp > div:last-child {
-    min-width: 0;
-  }
-
-  .schedule .sg-logo,
-  .schedule .sg-logo-fb {
-    width: 28px;
-    height: 28px;
-  }
-
-  /* Names wrap (two lines at most) rather than lose the coach. */
-  .schedule-block .sg-name,
-  .schedule.block .sg-name {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    font-size: 0.85rem !important;
-    line-height: 1.2;
-    white-space: normal !important;
-  }
-
-  /* A long rink name shortens; its map pin stays. */
-  .schedule .sg-loc {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    white-space: nowrap;
-  }
-
-  .schedule .sg-rink {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .schedule .sg-loc .sg-map {
-    flex: none;
-  }
-
-  .schedule .sg-loc-time {
-    display: none;
-  }
-
+  /* Result: score + badge, Box Score under them; with no Box Score the
+     score centres on the row */
   .schedule-block .sg-score,
   .schedule.block .sg-score {
     grid-column: 3;
     grid-row: 1;
-    font-size: 1rem !important;
+    align-self: center;
+    font-size: 26px !important;
+    line-height: 1;
     text-align: right !important;
   }
 
   .schedule .sg-result {
     grid-column: 4;
     grid-row: 1;
+    align-self: center;
   }
 
-  /* No Box Score: score and result centre on the row. */
-  .schedule .sg-row:not(:has(.sg-box)) .sg-score,
-  .schedule .sg-row:not(:has(.sg-box)) .sg-result {
+  /* Upcoming: the start time big on the right, the calendar button under it */
+  .schedule .sg-row[data-state="upcoming"] .sg-score {
+    grid-column: 3 / 5;
+  }
+
+  .schedule .sg-row[data-state="final"]:not(.sg-has-box) .sg-score,
+  .schedule .sg-row[data-state="final"]:not(.sg-has-box) .sg-result {
     grid-row: 1 / 3;
   }
 
   .schedule .sg-result .badge {
-    min-width: 24px;
-    padding: 2px 6px;
-    font-size: 0.7rem;
+    width: 26px;
+    height: 26px;
+    font-size: 15px;
   }
 
   .schedule .sg-actions {
     grid-column: 3 / 5;
     grid-row: 2;
     justify-self: end;
-    line-height: 1;
   }
 
   .schedule .sg-row .sg-actions .sg-box {
-    padding: 2px 6px;
-    font-size: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin: -10px -4px -12px 0;
+    padding: 0 4px 0 8px;
+    border: 0;
+    background: none;
+    font-size: 14px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgb(4 30 66 / 25%);
+    text-underline-offset: 3px;
   }
 
-  .schedule .sg-cal-wrap {
-    right: 8px;
+  .schedule .sg-row .sg-actions .sg-box:hover {
+    background: none;
+    color: var(--color-navy);
+    text-decoration-color: var(--color-red);
+  }
+
+  .schedule .sg-mbig {
+    display: inline;
+    font-size: 21px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .schedule .sg-row .sg-cal-wrap {
+    position: relative;
+    top: auto;
+    right: auto;
+    grid-column: 3 / 5;
+    grid-row: 2;
+    justify-self: end;
+    transform: none;
+  }
+
+  .schedule .sg-row .sg-cal {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--color-navy);
+    border-radius: 6px;
+  }
+
+  .schedule .sg-row .sg-cal:hover {
+    background: var(--color-navy);
+  }
+
+  .schedule .sg-row .sg-cal:hover svg {
+    color: var(--color-white);
+  }
+
+  /* the next game, also marked in its month */
+  .schedule .sg-row.sg-next {
+    box-shadow: inset 0 0 0 2px var(--color-navy) !important;
+  }
+
+  .schedule .sg-row.sg-next + .sg-row {
+    box-shadow: none !important;
+  }
+
+  .schedule .sg-row.sg-next .sg-dow,
+  .schedule .sg-row.sg-next .sg-dnum {
+    color: var(--color-red);
+  }
+
+  .schedule .sg-row.sg-next .sg-cal {
+    background: var(--color-navy);
+  }
+
+  .schedule .sg-row.sg-next .sg-cal svg {
+    color: var(--color-white);
   }
 }
 
-/* The narrowest phones (iPhone SE 1st gen): squeeze the fixed columns. */
+/* Phones: the Next up card and the Results / Upcoming jumps (after the rows,
+   whose selectors they refine). */
+@media (max-width: 600px) {
+  .schedule .sg-top {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  /* Next up: the homepage card's language at hero scale */
+  .schedule .sg-nextup {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-navy);
+    color: var(--color-white);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* the red line under the site header, carried onto the card */
+  .schedule .sg-nextup::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: var(--color-red);
+  }
+
+  .schedule .sg-np-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .schedule .sg-np-head h2 {
+    margin: 0;
+    padding: 5px 12px 4px;
+    border-radius: 999px;
+    background: var(--color-red);
+    color: var(--color-white);
+    font-family: var(--heading-font-family);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .schedule .sg-np-when {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 14px;
+    margin: 0;
+    font-family: var(--heading-font-family);
+    line-height: 1;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .schedule .sg-np-date {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--color-white);
+  }
+
+  .schedule .sg-np-time {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--color-ice);
+  }
+
+  .schedule .sg-np-match {
+    padding: 12px 0;
+    border-block: 1px solid rgb(232 240 249 / 16%);
+  }
+
+  .schedule .sg-np-match .sg-opp {
+    gap: 12px !important;
+  }
+
+  .schedule .sg-np-match .sg-logo,
+  .schedule .sg-np-match .sg-logo-fb {
+    width: 48px;
+    height: 48px;
+    padding: 3px;
+    border-radius: 50%;
+    background: var(--color-white);
+  }
+
+  .schedule .sg-np-match .sg-name {
+    color: var(--color-white);
+    font-family: var(--heading-font-family);
+    font-size: 21px !important;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .schedule .sg-np-match .sg-coach {
+    display: block;
+    margin-top: 2px;
+    font-family: var(--body-font-family);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgb(232 240 249 / 85%);
+  }
+
+  .schedule .sg-np-match .sg-loc,
+  .schedule .sg-np-match .sg-mmeta {
+    display: none !important;
+  }
+
+  .schedule .sg-np-where {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-white);
+  }
+
+  .schedule .sg-np-head .sg-type {
+    margin: 0;
+    padding: 4px 8px 3px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .schedule .sg-np-pin {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgb(232 240 249 / 12%);
+    color: var(--color-white);
+  }
+
+  .schedule .sg-np-pin svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .schedule .sg-np-pin:hover {
+    background: rgb(232 240 249 / 22%);
+  }
+
+  .schedule .sg-top .sg-np-cal {
+    position: relative;
+    inset: auto;
+    transform: none;
+  }
+
+  .schedule .sg-np-cal .sg-cal {
+    gap: 10px;
+    width: 100%;
+    height: 48px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--color-red);
+    color: var(--color-white);
+    font-family: var(--heading-font-family);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .schedule .sg-np-cal .sg-cal svg {
+    color: var(--color-white);
+  }
+
+  .schedule .sg-np-cal .sg-cal:hover {
+    background: var(--color-red-dark);
+  }
+
+  .schedule .sg-np-cal .sg-cal-menu {
+    right: 0;
+    left: 0;
+  }
+
+  .schedule .sg-nextup :focus-visible {
+    outline: 3px solid var(--color-white);
+    outline-offset: 2px;
+  }
+
+  /* Results / Upcoming: one tap to the latest result or the next game */
+  .schedule .sg-jumps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .schedule .sg-jump {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 52px;
+    padding: 0 14px;
+    border: 2px solid var(--color-navy);
+    border-radius: 6px;
+    background: var(--color-white);
+    color: var(--color-navy);
+    font-family: var(--heading-font-family);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .schedule .sg-jump-count {
+    font-size: 26px;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .schedule .sg-jump:hover {
+    background: var(--color-navy);
+    color: var(--color-white);
+  }
+
+  .schedule .sg-jump:disabled {
+    border-color: var(--color-gray-light);
+    background: var(--color-white);
+    color: var(--color-gray);
+    cursor: default;
+  }
+
+  .schedule .sg-jump:focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: 2px;
+  }
+}
+
+/* The narrowest phones: a little less room around each game */
 @media (max-width: 380px) {
   .schedule-block .sg-row,
   .schedule.block .sg-row {
-    grid-template-columns: 52px minmax(0, 1fr) auto auto !important;
-    gap: 4px 8px !important;
-    padding-left: 24px !important;
+    grid-template-columns: 42px minmax(0, 1fr) auto auto !important;
+    gap: 4px 10px !important;
+    padding: 12px 14px !important;
   }
 
-  .schedule .sg-row:has(.sg-cal-wrap) {
-    padding-right: 44px !important;
+  .schedule .sg-dnum {
+    font-size: 26px;
   }
 
-  .schedule .sg-logo,
-  .schedule .sg-logo-fb {
-    width: 22px;
-    height: 22px;
+  .schedule .sg-np-date {
+    font-size: 30px;
   }
 
-  .schedule .sg-opp {
-    gap: 6px !important;
-  }
-
-  .schedule .sg-dtime {
-    font-size: 0.66rem;
-  }
-
-  .schedule .sg-cal {
-    width: 34px;
-    height: 34px;
-    font-size: 1.1rem;
-  }
-
-  .schedule .sg-cal-wrap {
-    right: 6px;
+  .sum-num {
+    font-size: 22px;
   }
 }
 
