@@ -61,11 +61,27 @@ function renderNext(panel, key, { upcoming }, records = {}) {
  * loads and decorates the block
  * @param {Element} block The block element
  */
-// Background video (images/hero/, made from images/hero-video.mp4): a
-// landscape strip for wide screens, portrait below 900px. It is added after
-// the page has loaded so it never delays the first paint; the rink diagram
-// shows until it plays. Skipped for reduced motion and data saver.
-const VIDEO = { wide: '/images/hero/hero-wide.mp4', tall: '/images/hero/hero-portrait.mp4' };
+// Background videos (images/hero/, made from images/hero-video.mp4 and
+// images/video-hero-10u.mp4): a landscape strip for wide screens, portrait
+// below 900px. Each visit shows the next one in turn. It is added after the
+// page has loaded so it never delays the first paint; the rink diagram shows
+// until it plays. Skipped for reduced motion and data saver.
+const VIDEOS = [
+  { wide: '/images/hero/hero-wide.mp4', tall: '/images/hero/hero-portrait.mp4' },
+  { wide: '/images/hero/hero-10u-wide.mp4', tall: '/images/hero/hero-10u-portrait.mp4' },
+];
+
+// The video after the one shown last time (random if storage is blocked).
+function pickVideo() {
+  try {
+    const last = parseInt(localStorage.getItem('rinx-hero-video'), 10);
+    const next = last >= 0 ? (last + 1) % VIDEOS.length : 0;
+    localStorage.setItem('rinx-hero-video', String(next));
+    return VIDEOS[next];
+  } catch {
+    return VIDEOS[Math.floor(Math.random() * VIDEOS.length)];
+  }
+}
 const ICON_PAUSE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>';
 const ICON_PLAY = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
 
@@ -75,6 +91,7 @@ function addVideo(block) {
     || conn?.saveData || /2g$/.test(conn?.effectiveType || '')) return;
 
   const wide = window.matchMedia('(min-width: 900px)');
+  const VIDEO = pickVideo();
   const media = document.createElement('div');
   media.className = 'hero-media';
   media.setAttribute('aria-hidden', 'true');
