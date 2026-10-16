@@ -45,8 +45,8 @@ DTSTART;VALUE=DATE:20260913
 DTEND;VALUE=DATE:20260914
 SUMMARY:Rinx 10U at Peconic Wildcats (McCarthy) (W 8-2)
 LOCATION:Peconic Ice Rink\, Riverhead\, NY
-DESCRIPTION:LIAHL · 04 - 10U Silver\nFinal: W 8-2\nSchedule: https://www.r
- inxhockeyclub.com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nFinal: W 8-2\nSchedule: https://www.rinxho
+ ckeyclub.com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -56,8 +56,8 @@ DTSTART;VALUE=DATE:20260920
 DTEND;VALUE=DATE:20260921
 SUMMARY:Rinx 10U vs North Park (Mauro) (W 13-0)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nFinal: W 13-0\nSchedule: https://www.
- rinxhockeyclub.com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nFinal: W 13-0\nSchedule: https://www.rinxh
+ ockeyclub.com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -67,8 +67,8 @@ DTSTART;VALUE=DATE:20260927
 DTEND;VALUE=DATE:20260928
 SUMMARY:Rinx 10U vs Long Beach Lightning (Ponte) (W 10-2)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nFinal: W 10-2\nSchedule: https://www.
- rinxhockeyclub.com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nFinal: W 10-2\nSchedule: https://www.rinxh
+ ockeyclub.com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -122,8 +122,8 @@ DTSTART;TZID=America/New_York:20261017T083000
 DTEND;TZID=America/New_York:20261017T100000
 SUMMARY:Rinx 10U at Long Beach Lightning (Ponte)
 LOCATION:Long Beach Ice Arena\, Long Beach\, NY
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -133,8 +133,8 @@ DTSTART;TZID=America/New_York:20261018T081500
 DTEND;TZID=America/New_York:20261018T094500
 SUMMARY:Rinx 10U at Long Island Sharks (Davis)
 LOCATION:Iceland\, New Hyde Park\, NY
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -144,8 +144,18 @@ DTSTART;TZID=America/New_York:20261024T160000
 DTEND;TZID=America/New_York:20261024T173000
 SUMMARY:Rinx 10U at North Park (Mauro)
 LOCATION:Port Washington Skating Center\, Port Washington\, NY
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-sheet-10u-20261025-prestige-stars@rinxhockeyclub.com
+DTSTAMP:20261025T073000Z
+DTSTART;TZID=America/New_York:20261025T073000
+DTEND;TZID=America/New_York:20261025T090000
+SUMMARY:Rinx 10U at Prestige Stars · Exhibition
+LOCATION:Abe Stark Rink\, Coney Island Beach
+DESCRIPTION:Exhibition\nSchedule: https://www.rinxhockeyclub.com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -155,8 +165,8 @@ DTSTART;TZID=America/New_York:20261115T100000
 DTEND;TZID=America/New_York:20261115T113000
 SUMMARY:Rinx 10U vs Peconic Wildcats (McCarthy)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -166,8 +176,8 @@ DTSTART;TZID=America/New_York:20261121T140500
 DTEND;TZID=America/New_York:20261121T153500
 SUMMARY:Rinx 10U vs North Park (Lewis)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -177,8 +187,8 @@ DTSTART;TZID=America/New_York:20261129T151500
 DTEND;TZID=America/New_York:20261129T164500
 SUMMARY:Rinx 10U at Iceworks Islanders (Fortunato)
 LOCATION:Northwell Twin Rinks\, East Meadow\, NY
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -188,8 +198,8 @@ DTSTART;TZID=America/New_York:20261205T140500
 DTEND;TZID=America/New_York:20261205T153500
 SUMMARY:Rinx 10U vs Iceworks Islanders (Fortunato)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -199,8 +209,8 @@ DTSTART;TZID=America/New_York:20261206T073000
 DTEND;TZID=America/New_York:20261206T090000
 SUMMARY:Rinx 10U at Great Neck Bruins (Marsella)
 LOCATION:Parkwood Ice Rink\, Great Neck\, NY
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -210,8 +220,8 @@ DTSTART;TZID=America/New_York:20261212T140500
 DTEND;TZID=America/New_York:20261212T153500
 SUMMARY:Rinx 10U vs Long Island Sharks (Davis)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -221,8 +231,8 @@ DTSTART;TZID=America/New_York:20261219T164000
 DTEND;TZID=America/New_York:20261219T181000
 SUMMARY:Rinx 10U vs Aviator Hockey Club (Janss)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -232,8 +242,8 @@ DTSTART;TZID=America/New_York:20261220T154500
 DTEND;TZID=America/New_York:20261220T171500
 SUMMARY:Rinx 10U at Aviator Hockey Club (Janss)
 LOCATION:Aviator Sports and Events Center\, Brooklyn\, NY
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -243,8 +253,8 @@ DTSTART;TZID=America/New_York:20270102T164000
 DTEND;TZID=America/New_York:20270102T181000
 SUMMARY:Rinx 10U vs Dix Hills Selects (Goldfine)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -254,8 +264,18 @@ DTSTART;TZID=America/New_York:20270123T151000
 DTEND;TZID=America/New_York:20270123T164000
 SUMMARY:Rinx 10U vs Great Neck Bruins (Marsella)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 04 - 10U Silver\nSchedule: https://www.rinxhockeyclub.
- com/schedule
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-sheet-10u-20270124-north-park-10u-lewis@rinxhockeyclub.com
+DTSTAMP:20270124T133000Z
+DTSTART;TZID=America/New_York:20270124T133000
+DTEND;TZID=America/New_York:20270124T150000
+SUMMARY:Rinx 10U at North Park (Lewis)
+LOCATION:Aviator Sports and Events Center\, Brooklyn\, NY
+DESCRIPTION:League\nSchedule: https://www.rinxhockeyclub.com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 END:VCALENDAR

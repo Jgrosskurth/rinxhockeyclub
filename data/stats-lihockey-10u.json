@@ -3,7 +3,7 @@
  "source": "lihockey.com",
  "team": "10u",
  "teamPage": "https://lihockey.com/teams/1162/",
- "updated": "2026-10-15T02:25:16+00:00",
+ "updated": "2026-10-16T06:42:29+00:00",
  "players": [
   {
    "name": "Matthew Grosskurth",
@@ -1059,14 +1059,22 @@
    "detail": {
     "league": "LIAHL · 10U Silver",
     "status": "Final",
-    "periodLabels": [],
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
     "teams": [
      {
       "side": "away",
       "name": "Rinx Hockey 10U Silver - O'Donoghue",
       "record": "",
-      "abbr": "",
-      "periods": [],
+      "abbr": "RINX",
+      "periods": [
+       "4",
+       "2",
+       "2"
+      ],
       "total": "8",
       "skaters": [
        {
@@ -1137,8 +1145,12 @@
       "side": "home",
       "name": "Peconic Wildcats 10U Silver - McCarthy",
       "record": "",
-      "abbr": "",
-      "periods": [],
+      "abbr": "PWC",
+      "periods": [
+       "0",
+       "2",
+       "0"
+      ],
       "total": "2",
       "skaters": [
        {
