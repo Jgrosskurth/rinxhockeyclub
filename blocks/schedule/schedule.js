@@ -13,7 +13,9 @@ function locLine(g) {
   const pin = g.location
     ? `<a class="sg-map" href="${attr(directionsUrl({ location: g.location }))}" target="_blank" rel="noopener" title="Directions" aria-label="Directions to ${attr(g.location)} (opens Google Maps)">${PIN}</a>`
     : '';
-  return [g.location ? `${g.location}${pin}` : '', g.time].filter(Boolean).join(' · ');
+  // Phones show the time in the score column instead (.sg-time).
+  const time = g.time ? `<span class="sg-loc-time">${g.location ? ' · ' : ''}${g.time}</span>` : '';
+  return `${g.location ? `${g.location}${pin}` : ''}${time}`;
 }
 
 // Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
@@ -210,6 +212,12 @@ function boxScoreUrl(g) {
 // Small label for a game's type (League, Tournament, Exhibition, Other).
 const typeTag = (type) => `<span class="sg-type sg-type-${(type || 'League').toLowerCase()}">${type || 'League'}</span>`;
 
+// "Sep 12, 2026" -> "Sep 12" + ", 2026" (phones hide the year).
+function dateHtml(date) {
+  const m = (date || '').match(/^(.*?)(,\s*\d{4})$/);
+  return m ? `<span class="sg-day">${m[1]}</span><span class="sg-year">${m[2]}</span>` : date;
+}
+
 function renderRows(games) {
   const label = teamLabel();
   return games.map((g) => {
@@ -243,9 +251,9 @@ function renderRows(games) {
     return `
     <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}">
       ${boxLink}
-      <div class="sg-date">${g.date}${typeTag(g.type)}</div>
+      <div class="sg-date">${dateHtml(g.date)}${typeTag(g.type)}</div>
       ${oppCell(g)}
-      <div class="sg-score">${g.score}</div>
+      <div class="sg-score">${g.score || (!hasResult && g.time ? `<span class="sg-time">${g.time}</span>` : '')}</div>
       <div class="sg-result">${resultCell}</div>
       <div class="sg-actions">${boxLinkOwn}</div>
       ${cal}
@@ -509,8 +517,8 @@ function wireResultFilter(block) {
 
 function renderSchedule(block, games) {
   const tournamentPage = feedConfig().key === 'mid-atlantic';
-  // Team pages filter by game type: League (default), Tournament, Exhibition,
-  // All Games ("Other" games show under All Games).
+  // Team pages filter by game type: League, Tournament, Exhibition, All Games
+  // (the default; "Other" games show only there).
   const types = tournamentPage ? [] : ['League', 'Tournament', 'Exhibition', 'All'];
   const count = (type) => (type === 'All' ? games.length : games.filter((g) => (g.type || 'League') === type).length);
   const typeButtons = (current) => (types.length ? `<div class="type-filter" role="group" aria-label="Game type">
@@ -532,7 +540,7 @@ function renderSchedule(block, games) {
     wirePrint(body);
     wireCalendars(body);
   };
-  show(tournamentPage ? 'All' : 'League');
+  show('All');
 }
 
 export default function decorate(block) {
