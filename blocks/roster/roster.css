@@ -1,184 +1,270 @@
-.roster-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
+/* Roster: players grouped by position and sorted by number, as row cards
+   (small 4:5 photo, the jersey number as the card's headline, name, position). */
+.roster {
+  --roster-green: #15803d;
+  --roster-slate: #4b5563;
+}
+
+.roster .roster-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.roster .roster-stats-link {
+  margin: 0 0 24px;
+}
+
+.roster .roster-stats-link a {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: var(--body-font-size-s);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-red-dark);
+  text-decoration: none;
+}
+
+.roster .roster-stats-link a:hover {
+  text-decoration: underline;
+}
+
+.roster .roster-group {
   margin-bottom: 48px;
 }
 
-.player-card {
+.roster .section-title {
+  margin-bottom: 24px;
+}
+
+.roster .roster-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: var(--color-navy);
+  color: var(--color-ice);
+  font-size: 0.875rem;
+  letter-spacing: 0;
+}
+
+.roster .roster-cards,
+.roster .roster-coach-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.roster .roster-card {
+  display: flex;
   background: var(--color-white);
   border-radius: 8px;
-  padding: 20px 16px;
-  text-align: center;
   box-shadow: var(--shadow-card);
-  border-top: 3px solid var(--color-navy);
-  transition: transform 0.2s, border-color 0.2s;
+  overflow: hidden;
 }
 
-.player-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-red);
+.roster .roster-photo {
+  flex: 0 0 96px;
+  aspect-ratio: 4 / 5;
+  background: var(--color-ice);
 }
 
-.player-photo {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 12px;
+.roster .roster-photo img {
   display: block;
-  border: 3px solid var(--color-navy);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
 }
 
 /* placeholder is a full-body illustration on transparency: show all of it */
-.player-photo.player-photo-placeholder {
+.roster .roster-photo img.roster-photo-placeholder {
   object-fit: contain;
-  padding: 4px;
+  object-position: center;
+  padding: 6px;
   background: var(--color-white);
 }
 
-.player-icon {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, var(--color-navy), var(--color-navy-light));
-  border-radius: 50%;
+.roster .roster-card-body {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px;
-  font-family: var(--heading-font-family);
-  font-weight: 900;
-  font-size: 1.4rem;
-  color: var(--color-white);
+  gap: 14px;
+  min-width: 0;
+  padding: 10px 14px;
 }
 
-.player-num {
+.roster .roster-num {
+  flex: none;
+  width: 1.1em;
   font-family: var(--heading-font-family);
   font-weight: 900;
-  font-size: 0.7rem;
-  color: var(--color-gray);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 2px;
-  display: block;
+  font-size: 3.375rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-navy);
 }
 
-.player-card h3 {
+.roster .roster-card[data-pos='defense'] .roster-num {
+  color: var(--color-red);
+}
+
+.roster .roster-card[data-pos='goalie'] .roster-num {
+  color: var(--roster-green);
+}
+
+.roster .roster-id {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.roster .roster-card h3 {
   font-family: var(--heading-font-family);
-  font-weight: 800;
-  font-size: 1rem;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--color-navy);
-  line-height: 1.2;
+  overflow-wrap: break-word;
 }
 
-.player-pos {
+.roster .roster-pos {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
   font-size: 0.75rem;
-  color: var(--color-gray);
-  text-transform: uppercase;
+  line-height: 1;
   letter-spacing: 0.1em;
-  margin-top: 4px;
-}
-
-.pp-badge {
-  display: inline-block;
-  margin-top: 8px;
-  background: var(--color-gold);
-  color: var(--color-navy);
-  font-size: 0.6rem;
-  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 2px 8px;
-  border-radius: 20px;
-}
-
-.pos-badge {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 2px 8px;
-  border-radius: 20px;
-}
-
-.pos-badge-goalie {
-  background: #16a34a;
-  color: var(--color-white);
-}
-
-.pos-badge-offense {
   background: var(--color-navy);
   color: var(--color-white);
 }
 
-.pos-badge-defense {
+.roster .roster-pos-defense {
   background: var(--color-red);
-  color: var(--color-white);
 }
 
-.roster-coaches {
-  margin-top: 48px;
+.roster .roster-pos-goalie {
+  background: var(--roster-green);
 }
 
-.coaches-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+.roster .roster-pos-reserve,
+.roster .roster-pos-other {
+  background: var(--color-ice);
+  color: var(--color-navy);
+  box-shadow: inset 0 0 0 1px rgb(4 30 66 / 30%);
 }
 
-.coach-card {
+/* coaching staff: compact cards in the same family */
+.roster .roster-coaches {
+  margin-top: 8px;
+}
+
+.roster .roster-coach {
   display: flex;
   align-items: center;
-  gap: 20px;
-  background: var(--color-navy);
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--color-white);
   border-radius: 8px;
-  padding: 24px;
-  color: var(--color-white);
+  box-shadow: var(--shadow-card);
 }
 
-.coach-av {
+.roster .roster-coach .coach-photo,
+.roster .roster-coach .coach-initials {
+  flex: none;
   width: 72px;
   height: 72px;
-  background: var(--color-red);
   border-radius: 50%;
+}
+
+.roster .roster-coach .coach-photo {
+  object-fit: cover;
+}
+
+.roster .roster-coach .coach-initials {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--color-navy);
+  color: var(--color-white);
   font-family: var(--heading-font-family);
   font-weight: 900;
   font-size: 1.5rem;
-  flex-shrink: 0;
 }
 
-.coach-info h4 {
+.roster .roster-coach h3 {
   font-family: var(--heading-font-family);
-  font-weight: 800;
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.375rem;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
+  color: var(--color-navy);
 }
 
-.coach-info p {
-  font-size: 0.85rem;
-  color: rgb(255 255 255 / 65%);
+.roster .roster-coach p {
+  margin-top: 2px;
+  font-size: 0.9375rem;
+  color: var(--roster-slate);
 }
 
-@media (max-width: 900px) {
-  .coaches-grid { grid-template-columns: 1fr; }
+@media (min-width: 600px) {
+  .roster .roster-stats-link {
+    text-align: right;
+    margin-top: -12px;
+  }
+
+  .roster .roster-cards,
+  .roster .roster-coach-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
 }
 
-/* Coaching staff — navy fill, white text */
-.roster-coaches .coach-card {
-  border: 2px solid #041E42 !important;
-  background: #041E42 !important;
+@media (min-width: 900px) {
+  /* 3-4 columns: a tighter numeral leaves the name room for long surnames */
+  .roster .roster-card-body {
+    gap: 12px;
+    padding: 10px 12px;
+  }
+
+  .roster .roster-num {
+    font-size: var(--heading-font-size-xl);
+  }
+
+  .roster .roster-cards,
+  .roster .roster-coach-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-.roster-coaches .coach-info h4 {
-  color: #fff !important;
-}
+@media (min-width: 1200px) {
+  .roster .roster-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
 
-.roster-coaches .coach-info p {
-  color: rgb(255 255 255 / 70%) !important;
+  /* Goalies + Reserves (2 players each) share one row */
+  .roster .roster-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .roster .roster-pair .roster-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
