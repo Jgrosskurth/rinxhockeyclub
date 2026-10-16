@@ -1,5 +1,9 @@
 import { optimizedMediaUrl, headshotAttrs, HEADSHOT_ONERROR } from '../../scripts/media.js';
 
+// Shown for players with no authored photo, or whose photo fails to load
+const PLACEHOLDER = '/images/headshots/placeholder.png';
+const PLACEHOLDER_ONERROR = `if(this.dataset.orig){this.src=this.dataset.orig;this.removeAttribute('data-orig')}else if(!this.dataset.ph){this.dataset.ph=1;this.classList.add('player-photo-placeholder');this.src='${PLACEHOLDER.replace(/\.png$/, '.webp')}'}else{this.style.display='none';this.nextElementSibling.style.display='flex'}`;
+
 function getInitials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0])
     .join('')
@@ -94,9 +98,9 @@ export default function decorate(block) {
       ${players.map((p) => `
         <div class="player-card">
           ${p.img
-    ? `<img src="${p.img}" alt="${p.name}" class="player-photo" width="70" height="70" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-    : ''}
-          <div class="player-icon"${p.img ? ' style="display:none"' : ''}>${p.num || getInitials(p.name)}</div>
+    ? `<img src="${p.img}" alt="${p.name}" class="player-photo" width="70" height="70" onerror="${PLACEHOLDER_ONERROR}">`
+    : `<img ${headshotAttrs(PLACEHOLDER)} alt="" class="player-photo player-photo-placeholder" width="70" height="70" loading="lazy" data-ph="1" onerror="${HEADSHOT_ONERROR}">`}
+          <div class="player-icon" style="display:none">${p.num || getInitials(p.name)}</div>
           <h3>${p.name}</h3>
           ${p.num ? `<span class="player-num">#${p.num}</span>` : ''}
           ${getBadge(p.note)}
