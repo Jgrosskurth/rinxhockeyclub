@@ -228,6 +228,7 @@ def division(opponent, tournament, fallback=''):
         return ' · '.join(x for x in (tournament, m and m.group(1)) if x)
     m = re.search(r'(\d{1,2}\s*-\s*\d{1,2}U\s+[A-Z]+)\s*$', opponent, re.I)
     div = m.group(1) if m else fallback
+    div = re.sub(r'^\d{1,2}\s*-\s*(?=\d{1,2}U\b)', '', div.strip(), flags=re.I)  # '04 - 10U' -> '10U'
     div = re.sub(r'\b([A-Z])([A-Z]{2,})\b', lambda x: x.group(1) + x.group(2).lower(), div)
     return ' · '.join(x for x in ('LIAHL', div) if x)
 

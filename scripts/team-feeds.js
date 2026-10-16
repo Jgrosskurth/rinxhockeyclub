@@ -445,8 +445,10 @@ export async function extraGames(key, gamesheet) {
   return other.filter((o) => !gamesheet.some((g) => sameGame(g, o)));
 }
 
-// "04 - 10U SILVER" -> "04 - 10U Silver"
-const tidyDivision = (div) => (div || '').trim()
+// "04 - 10U SILVER" -> "10U Silver" (GameSheet's leading division number
+// means nothing to families).
+export const tidyDivision = (div) => (div || '').trim()
+  .replace(/^\d{1,2}\s*-\s*(?=\d{1,2}U\b)/i, '')
   .replace(/\b([A-Z])([A-Z]{2,})\b/g, (m, a, b) => a + b.toLowerCase());
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

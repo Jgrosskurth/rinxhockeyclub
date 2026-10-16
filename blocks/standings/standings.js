@@ -11,7 +11,7 @@
  */
 
 import { gameSheetLogo, RINX_LOGO, teamLogo } from '../../scripts/team-logos.js';
-import { loadTeamGames, tidyTeam } from '../../scripts/team-feeds.js';
+import { loadTeamGames, tidyTeam, tidyDivision } from '../../scripts/team-feeds.js';
 import { buildRace, renderPointsRace } from './points-race.js';
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
@@ -65,7 +65,7 @@ function renderStandings(block, data, opts = {}) {
 
   block.innerHTML = `
     ${opts.title ? `<h3 class="st-subhead">${opts.title}</h3>` : ''}
-    ${data.division ? `<p class="st-division">${data.division}</p>` : ''}
+    ${data.division ? `<p class="st-division">${tidyDivision(data.division)}</p>` : ''}
     <div class="st-table-wrap">
       <table class="st-tbl">
         <thead><tr><th class="st-rank">#</th><th class="st-team">Team</th>${headCells}</tr></thead>
