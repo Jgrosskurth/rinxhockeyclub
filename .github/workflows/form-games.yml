@@ -2,9 +2,15 @@ name: Google Form games
 
 # Copies games sent in through the club's Google Form (its responses sheet,
 # published to the web as CSV) into data/form-games.json, which the schedule,
-# standings and homepage read. Every 15 minutes and on demand from the
-# Actions tab. The team calendars pick the games up on the next GameSheet pull.
+# standings and homepage read, and rebuilds the team calendars from it.
+#
+# Runs right away when the responses sheet pings GitHub (repository_dispatch
+# "form-games", sent by tools/game-submissions/notify-github.gs on each
+# submission or sheet edit). The 15-minute schedule is only a backup: GitHub
+# delays busy scheduled jobs, in practice to every 4-5 hours.
 on:
+  repository_dispatch:
+    types: [form-games]
   workflow_dispatch:
   schedule:
     - cron: '*/15 * * * *'
@@ -29,11 +35,18 @@ jobs:
       - name: Read the form responses
         run: python3 .github/scripts/pull_form_games.py
 
+      # Form games are in the calendars too, so rebuild them now instead of
+      # waiting up to 12 hours for the next GameSheet pull (pull-schedule.yml).
+      # Reads only files already in the repo plus the published other-games
+      # sheet, so it's quick.
+      - name: Rebuild team calendars
+        run: python3 .github/scripts/build_calendars.py
+
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/form-games.json
+          git add data/form-games.json data/*.ics
           git add -A images/opponents 2>/dev/null || true
           if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
           git commit -m "Update Google Form games [skip ci]"
