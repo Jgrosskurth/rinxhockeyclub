@@ -93,6 +93,56 @@ function formFields(data) {
   return body;
 }
 
+// Send the answers by posting a real (hidden) form into a hidden frame, the
+// way a browser sends any form. A cross-site fetch() works on desktop but
+// was not reaching Google from phones. Google doesn't let other sites read
+// its reply either way, so this resolves once the frame loads (or after a
+// few seconds).
+function sendToForm(action, fields) {
+  return new Promise((resolve) => {
+    const name = `gs-send-${Date.now()}`;
+    const frame = document.createElement('iframe');
+    frame.name = name;
+    frame.title = 'Game submission';
+    frame.hidden = true;
+    const post = document.createElement('form');
+    post.method = 'POST';
+    post.action = action;
+    post.target = name;
+    post.hidden = true;
+    fields.forEach((value, key) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      post.append(input);
+    });
+    document.body.append(frame, post);
+    post.submit();
+    // Listen only now: a new frame "loads" its blank page as soon as it's added.
+    // The frame stays until Google replies (or 30s), so a slow phone
+    // connection doesn't cut the request short.
+    const cleanUp = () => { frame.remove(); post.remove(); };
+    const timer = setTimeout(cleanUp, 30000);
+    frame.addEventListener('load', () => { clearTimeout(timer); resolve(); setTimeout(cleanUp, 1000); }, { once: true });
+    setTimeout(resolve, 6000);
+  });
+}
+
+// The Google Form itself, filled in with these answers (all but the logo), for
+// when a game doesn't show up.
+function prefilled(formId, data) {
+  const url = new URL(`https://docs.google.com/forms/d/e/${formId}/viewform`);
+  url.searchParams.set('usp', 'pp_url');
+  formFields({ ...data, logo: '' }).forEach((value, key) => {
+    const part = key.match(/^(entry\.\d+)_(year|month|day|hour|minute)$/);
+    if (!part) url.searchParams.set(key, value);
+  });
+  url.searchParams.set(ENTRY.date, data.date);
+  if (data.time) url.searchParams.set(ENTRY.time, data.time);
+  return url.href;
+}
+
 const describe = (id, hint) => `aria-describedby="${hint ? `gs-${id}-hint ` : ''}gs-${id}-error"`;
 
 function formHtml() {
@@ -143,7 +193,7 @@ function formHtml() {
         </fieldset>
       </div>
 
-      <div class="gs-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="gs-hp" aria-hidden="true"><label>Leave empty <input type="text" name="gs_trap" tabindex="-1" autocomplete="off"></label></div>
 
       <button type="submit" class="gs-submit">Submit game</button>
       <p class="gs-status" role="status"></p>
@@ -292,7 +342,9 @@ export default async function decorate(block) {
       logo: picked ? '' : logoData,
       rinxGoals: v('rinxGoals'),
       oppGoals: v('oppGoals'),
-      website: v('website'),
+      // Hidden from people; only bots fill it. (It isn't called "website" any
+      // more: phones' AutoFill filled that, so real games were dropped.)
+      trap: v('gs_trap'),
     };
     const errors = {};
     if (!data.team) errors.team = 'Choose 10U or 14U.';
@@ -335,6 +387,7 @@ export default async function decorate(block) {
       <h2>Thanks!</h2>
       <p class="gs-done-what">${what}</p>
       <p>It will show on the ${esc(t.label)} schedule${data.action === 'score' ? ' and standings' : ''} within a few minutes.${picked || data.action === 'upcoming' ? '' : ' If it duplicates a listed game, the club will tidy it up.'}</p>
+      <p class="gs-done-alt">Not showing up after 10 minutes? <a href="${esc(prefilled(formId, data))}" target="_blank" rel="noopener">Send it on the Google Form</a> instead (it’s already filled in).</p>
       <div class="gs-done-actions">
         <a class="gs-btn gs-btn-navy" href="${t.schedulePath}">View the schedule</a>
         <button type="button" class="gs-btn gs-btn-outline gs-again">Send another</button>
@@ -378,12 +431,8 @@ export default async function decorate(block) {
     submit.disabled = true;
     status.textContent = 'Sending…';
     try {
-      // Bots fill the hidden "website" field; pretend it worked.
-      if (!data.website) {
-        // Google doesn't let other sites read its reply ("no-cors"), so a
-        // network error is the only failure we can see.
-        await fetch(action, { method: 'POST', mode: 'no-cors', body: formFields(data) });
-      }
+      // Bots fill the hidden trap field; pretend it worked.
+      if (!data.trap) await sendToForm(action, formFields(data));
       status.textContent = '';
       done(data, picked);
     } catch (err) {
