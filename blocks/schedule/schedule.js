@@ -251,7 +251,8 @@ function renderRows(games) {
     return `
     <div class="sg-row${box ? ' sg-clickable' : ''}" data-result="${g.result}">
       ${boxLink}
-      <div class="sg-date">${dateHtml(g.date)}${g.time ? `<span class="sg-dtime">${g.time}</span>` : ''}${typeTag(g.type)}</div>
+      <div class="sg-typecell">${typeTag(g.type)}</div>
+      <div class="sg-date">${dateHtml(g.date)}${g.time ? `<span class="sg-dtime">${g.time}</span>` : ''}</div>
       ${oppCell(g)}
       <div class="sg-score">${g.score}</div>
       <div class="sg-result">${resultCell}</div>
@@ -473,6 +474,7 @@ function scheduleBody(games, type, typeButtons) {
   const table = `
     <div class="schedule-table">
       <div class="sg-header">
+        <span>Type</span>
         <span>Date</span>
         <span>Opponent</span>
         <span>Score</span>

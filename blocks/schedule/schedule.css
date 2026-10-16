@@ -251,10 +251,10 @@
   display: none;
 }
 
-/* Per-game type label */
+/* Per-game type label (its own column on wider screens) */
 .schedule .sg-type {
   display: inline-block;
-  margin-left: 8px;
+  margin-left: 0;
   padding: 1px 7px;
   border-radius: 999px;
   font-size: 0.65rem;
@@ -495,7 +495,7 @@
   flex-direction: unset !important;
   flex: unset !important;
   flex-wrap: unset !important;
-  grid-template-columns: 110px minmax(0, 1fr) 110px 90px 130px !important;
+  grid-template-columns: 104px 110px minmax(0, 1fr) 110px 90px 130px !important;
   padding: 14px 20px !important;
   gap: 12px !important;
   align-items: center !important;
@@ -527,14 +527,14 @@
 .schedule-block .sg-header,
 .schedule.block .sg-header {
   display: grid !important;
-  grid-template-columns: 110px minmax(0, 1fr) 110px 90px 130px !important;
+  grid-template-columns: 104px 110px minmax(0, 1fr) 110px 90px 130px !important;
   padding: 12px 20px !important;
   gap: 12px !important;
 }
 
 /* Score and Result: headings centered over the centered values. */
-.schedule .sg-header span:nth-child(3),
-.schedule .sg-header span:nth-child(4) {
+.schedule .sg-header span:nth-child(4),
+.schedule .sg-header span:nth-child(5) {
   text-align: center;
 }
 
@@ -581,7 +581,7 @@
   .schedule.block .sg-header,
   .schedule-block .sg-row,
   .schedule.block .sg-row {
-    grid-template-columns: 65px minmax(0, 1fr) 64px 56px 104px !important;
+    grid-template-columns: 84px 65px minmax(0, 1fr) 64px 56px 104px !important;
     padding: 10px !important;
     gap: 8px !important;
   }
@@ -643,7 +643,11 @@
   }
 
   /* Game type: a vertical tab down the row's left edge, reading upwards. */
-  .schedule .sg-date .sg-type {
+  .schedule .sg-typecell {
+    display: contents;
+  }
+
+  .schedule .sg-typecell .sg-type {
     position: absolute;
     inset: 0 auto 0 0;
     z-index: 2;
@@ -859,6 +863,7 @@
 
 /* Keep the game content above the stretched link so text stays selectable
    and the score/opponent render normally; the link still covers gaps. */
+.schedule .sg-row.sg-clickable > .sg-typecell,
 .schedule .sg-row.sg-clickable > .sg-date,
 .schedule .sg-row.sg-clickable > .sg-opp,
 .schedule .sg-row.sg-clickable > .sg-score,
@@ -1048,6 +1053,11 @@
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 10px !important;
+  }
+
+  /* The type label heads each printed card. */
+  .schedule .sg-typecell {
+    grid-column: 1 / -1;
   }
 
   .schedule .sg-row,
