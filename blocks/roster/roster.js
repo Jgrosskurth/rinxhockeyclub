@@ -2,7 +2,21 @@ import { optimizedMediaUrl, headshotAttrs, HEADSHOT_ONERROR } from '../../script
 
 // Shown for players with no authored photo, or whose photo fails to load
 const PLACEHOLDER = '/images/headshots/placeholder.png';
-const PLACEHOLDER_ONERROR = `if(this.dataset.orig){this.src=this.dataset.orig;this.removeAttribute('data-orig')}else if(!this.dataset.ph){this.dataset.ph=1;this.classList.add('player-photo-placeholder');this.src='${PLACEHOLDER.replace(/\.png$/, '.webp')}'}else{this.style.display='none';this.nextElementSibling.style.display='flex'}`;
+const PLACEHOLDER_ONERROR = `if(this.dataset.orig){this.src=this.dataset.orig;this.removeAttribute('data-orig')}else if(!this.dataset.ph){this.dataset.ph=1;this.classList.add('roster-photo-placeholder');this.src='${PLACEHOLDER.replace(/\.png$/, '.webp')}'}else{this.style.visibility='hidden'}`;
+
+// Position groups, in page order. The card keeps the authored label ("Offense");
+// the group heading uses the hockey term.
+const GROUPS = [
+  { key: 'forwards', title: 'Forwards' },
+  { key: 'defense', title: 'Defense' },
+  { key: 'goalies', title: 'Goalies' },
+  { key: 'reserves', title: 'Reserves' },
+  { key: 'players', title: 'Players' },
+];
+
+const escapeHtml = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+}[c]));
 
 function getInitials(name) {
   return name.split(' ').slice(0, 2).map((w) => w[0])
@@ -10,30 +24,68 @@ function getInitials(name) {
     .toUpperCase();
 }
 
-function getBadge(note) {
-  const lower = (note || '').toLowerCase();
-  if (lower.includes('practice')) return '<span class="pp-badge">Practice Player</span>';
-  if (lower.includes('reserve')) return '<span class="pp-badge">Reserve</span>';
-  if (lower.includes('goalie')) return '<span class="pos-badge pos-badge-goalie">Goalie</span>';
-  if (lower.includes('offense')) return '<span class="pos-badge pos-badge-offense">Offense</span>';
-  if (lower.includes('defense')) return '<span class="pos-badge pos-badge-defense">Defense</span>';
-  return '';
+function classify(note) {
+  const n = (note || '').toLowerCase();
+  if (n.includes('reserve') || n.includes('practice')) return { group: 'reserves', pos: 'reserve' };
+  if (n.includes('goalie')) return { group: 'goalies', pos: 'goalie' };
+  if (n.includes('defense')) return { group: 'defense', pos: 'defense' };
+  if (n.includes('offense') || n.includes('forward')) return { group: 'forwards', pos: 'offense' };
+  return { group: 'players', pos: 'other' };
+}
+
+// by jersey number; players without a number go last, by name
+function byNumber(a, b) {
+  const na = parseInt(a.num, 10);
+  const nb = parseInt(b.num, 10);
+  if (Number.isNaN(na) !== Number.isNaN(nb)) return Number.isNaN(na) ? 1 : -1;
+  if (!Number.isNaN(na) && na !== nb) return na - nb;
+  return a.name.localeCompare(b.name);
+}
+
+function buildCard(p, index) {
+  let loading = 'loading="lazy"';
+  if (index === 0) loading = 'loading="eager" fetchpriority="high"';
+  else if (index < 8) loading = 'loading="eager"';
+  const photo = p.img
+    ? `<img src="${escapeHtml(p.img)}" alt="" width="120" height="150" ${loading} onerror="${PLACEHOLDER_ONERROR}">`
+    : `<img ${headshotAttrs(PLACEHOLDER)} alt="" class="roster-photo-placeholder" width="120" height="150" ${loading} data-ph="1" onerror="${PLACEHOLDER_ONERROR}">`;
+  const label = p.num ? `<span class="roster-visually-hidden">Number ${escapeHtml(p.num)}, </span>` : '';
+  return `
+    <li class="roster-card" data-pos="${p.pos}">
+      <div class="roster-photo">${photo}</div>
+      <div class="roster-card-body">
+        <span class="roster-num" aria-hidden="true">${escapeHtml(p.num)}</span>
+        <div class="roster-id">
+          <h3>${label}${escapeHtml(p.name)}</h3>
+          ${p.note ? `<span class="roster-pos roster-pos-${p.pos}">${escapeHtml(p.note)}</span>` : ''}
+        </div>
+      </div>
+    </li>`;
+}
+
+function buildGroup(g, players, startIndex) {
+  return `
+    <section class="roster-group" aria-labelledby="roster-${g.key}">
+      <h2 class="section-title" id="roster-${g.key}">${g.title}<span class="roster-count">${players.length}<span class="roster-visually-hidden"> players</span></span></h2>
+      <ul class="roster-cards">${players.map((p, i) => buildCard(p, startIndex + i)).join('')}
+      </ul>
+    </section>`;
 }
 
 function buildCoaches(coaches) {
   return coaches.map((c) => {
     const imgHtml = c.img
-      ? `<img ${headshotAttrs(c.img)} alt="${c.name}" class="coach-av coach-photo" width="72" height="72" loading="lazy" onerror="${HEADSHOT_ONERROR}">`
+      ? `<img ${headshotAttrs(c.img)} alt="" class="coach-photo" width="72" height="72" loading="lazy" onerror="${HEADSHOT_ONERROR}">`
       : '';
     return `
-      <div class="coach-card">
+      <li class="roster-coach">
         ${imgHtml}
-        <div class="coach-av"${c.img ? ' style="display:none"' : ''}>${c.initials}</div>
-        <div class="coach-info">
-          <h4>${c.name}</h4>
-          <p>${c.role}</p>
+        <div class="coach-initials" aria-hidden="true"${c.img ? ' style="display:none"' : ''}>${escapeHtml(c.initials || getInitials(c.name || ''))}</div>
+        <div>
+          <h3>${escapeHtml(c.name)}</h3>
+          <p>${escapeHtml(c.role)}</p>
         </div>
-      </div>`;
+      </li>`;
   }).join('');
 }
 
@@ -44,11 +96,11 @@ export default function decorate(block) {
     const name = cells[0]?.textContent?.trim() || '';
     const note = cells[1]?.textContent?.trim() || '';
     const imgEl = cells[2]?.querySelector('img');
-    let imgSrc = optimizedMediaUrl(imgEl?.src || '', 160);
+    let imgSrc = optimizedMediaUrl(imgEl?.src || '', 240);
     if (imgSrc.includes('about:error') || imgSrc.includes('about:blank')) imgSrc = '';
     const num = cells[3]?.textContent?.trim() || '';
     return {
-      name, note, img: imgSrc, num,
+      name, note, img: imgSrc, num, ...classify(note),
     };
   }).filter((p) => p.name);
 
@@ -93,26 +145,31 @@ export default function decorate(block) {
 
   const coaches = coachData.length ? coachData : defaultCoaches;
 
-  block.innerHTML = `
-    <div class="roster-grid">
-      ${players.map((p) => `
-        <div class="player-card">
-          ${p.img
-    ? `<img src="${p.img}" alt="${p.name}" class="player-photo" width="70" height="70" onerror="${PLACEHOLDER_ONERROR}">`
-    : `<img ${headshotAttrs(PLACEHOLDER)} alt="" class="player-photo player-photo-placeholder" width="70" height="70" loading="lazy" data-ph="1" onerror="${HEADSHOT_ONERROR}">`}
-          <div class="player-icon" style="display:none">${p.num || getInitials(p.name)}</div>
-          <h3>${p.name}</h3>
-          ${p.num ? `<span class="player-num">#${p.num}</span>` : ''}
-          ${getBadge(p.note)}
-        </div>
-      `).join('')}
-    </div>
+  let index = 0;
+  const groups = GROUPS
+    .map((g) => ({ g, list: players.filter((p) => p.group === g.key).sort(byNumber) }))
+    .filter(({ list }) => list.length)
+    .map(({ g, list }) => {
+      const html = buildGroup(g, list, index);
+      index += list.length;
+      return { key: g.key, html };
+    });
+  // Goalies and Reserves are small groups: they share one row on wide screens
+  const small = groups.filter((x) => x.key === 'goalies' || x.key === 'reserves');
+  const pairSmall = small.length === 2 && small.every((x) => (x.html.match(/class="roster-card"/g) || []).length <= 2);
+  const groupsHtml = groups.map((x) => {
+    if (!pairSmall || (x.key !== 'goalies' && x.key !== 'reserves')) return x.html;
+    if (x.key === 'goalies') return `<div class="roster-pair">${x.html}`;
+    return `${x.html}</div>`;
+  }).join('');
 
-    <div class="roster-coaches">
-      <h2 class="section-title">Coaching Staff</h2>
-      <div class="coaches-grid">
-        ${buildCoaches(coaches)}
-      </div>
-    </div>
+  block.innerHTML = `
+    <p class="roster-stats-link"><a href="${is14u ? '/stats-14u' : '/stats'}">Season stats →</a></p>
+    ${groupsHtml}
+    <section class="roster-coaches" aria-labelledby="roster-coaches">
+      <h2 class="section-title" id="roster-coaches">Coaching Staff</h2>
+      <ul class="roster-coach-list">${buildCoaches(coaches)}
+      </ul>
+    </section>
   `;
 }
