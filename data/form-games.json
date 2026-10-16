@@ -13,6 +13,48 @@
    "Score": "14-0",
    "Result": "W",
    "Status": ""
+  },
+  {
+   "Submitted": "2026-10-15 20:47:01",
+   "Action": "Upcoming",
+   "Team": "10U",
+   "Type": "Exhibition",
+   "Date": "Oct 25, 2026",
+   "Time": "7:30 AM",
+   "Opponent": "Prestige Stars",
+   "Logo": "/images/opponents/prestige-stars-f925ede3.webp",
+   "Rink": "Abe Stark Rink, Coney Island Beach",
+   "Score": "",
+   "Result": "",
+   "Status": ""
+  },
+  {
+   "Submitted": "2026-10-15 20:48:34",
+   "Action": "Upcoming",
+   "Team": "10U",
+   "Type": "Exhibition",
+   "Date": "Nov 21, 2026",
+   "Time": "2:05 PM",
+   "Opponent": "North Park (Lewis)",
+   "Logo": "",
+   "Rink": "The Rinx",
+   "Score": "",
+   "Result": "",
+   "Status": ""
+  },
+  {
+   "Submitted": "2026-10-15 20:49:36",
+   "Action": "Upcoming",
+   "Team": "10U",
+   "Type": "Exhibition",
+   "Date": "Jan 24, 2027",
+   "Time": "1:30 PM",
+   "Opponent": "North Park (Lewis)",
+   "Logo": "",
+   "Rink": "Aviator Sports Center",
+   "Score": "",
+   "Result": "",
+   "Status": ""
   }
  ]
 }
