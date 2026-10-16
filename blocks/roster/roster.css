@@ -30,6 +30,13 @@
   border: 3px solid var(--color-navy);
 }
 
+/* placeholder is a full-body illustration on transparency: show all of it */
+.player-photo.player-photo-placeholder {
+  object-fit: contain;
+  padding: 4px;
+  background: var(--color-white);
+}
+
 .player-icon {
   width: 60px;
   height: 60px;
