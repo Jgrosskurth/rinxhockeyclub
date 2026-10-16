@@ -68,7 +68,7 @@ function renderNext(panel, key, { upcoming }, records = {}) {
 // until it plays. Skipped for reduced motion and data saver.
 const VIDEOS = [
   { wide: '/images/hero/hero-wide.mp4', tall: '/images/hero/hero-portrait.mp4' },
-  { wide: '/images/hero/hero-10u-wide.mp4', tall: '/images/hero/hero-10u-portrait.mp4' },
+  { wide: '/images/hero/hero-10u-2-wide.mp4', tall: '/images/hero/hero-10u-2-portrait.mp4' },
 ];
 
 // The video after the one shown last time (random if storage is blocked).
