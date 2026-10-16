@@ -2,8 +2,19 @@ import {
   gameSheetLogo, findLogoId, findLocalLogo, MHR_CDN,
 } from '../../scripts/team-logos.js';
 import {
-  rinkAddress, extraGames, tidyTeam, sameGame,
+  rinkAddress, extraGames, tidyTeam, sameGame, directionsUrl,
 } from '../../scripts/team-feeds.js';
+
+const PIN = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>';
+const attr = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+// "Rink [pin] · 2:05 PM"; the pin opens Google Maps directions to the rink.
+function locLine(g) {
+  const pin = g.location
+    ? `<a class="sg-map" href="${attr(directionsUrl({ location: g.location }))}" target="_blank" rel="noopener" title="Directions" aria-label="Directions to ${attr(g.location)} (opens Google Maps)">${PIN}</a>`
+    : '';
+  return [g.location ? `${g.location}${pin}` : '', g.time].filter(Boolean).join(' · ');
+}
 
 // Which feed (data/schedule-{key}.json) a page shows, matched by URL path.
 // Tournament feeds come from their own GameSheet season (see pull-schedule.yml).
@@ -91,7 +102,7 @@ function oppCell(g) {
         <div class="sg-logo-fb"${logoSrc ? ' style="display:none"' : ''}>${ini}</div>
         <div>
           <div class="sg-name">${g.opp}</div>
-          <div class="sg-loc">${g.loc}</div>
+          <div class="sg-loc">${locLine(g)}</div>
         </div>
       </div>`;
 }
@@ -285,11 +296,9 @@ const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/
 // Map a feed game to the block's internal shape.
 function fromFeed(g, season) {
   const opp = tidyTeam(g.opponent);
-  const parts = [g.location, g.time].filter(Boolean);
   return {
     date: g.date || '',
     opp,
-    loc: parts.join(' · '),
     score: g.score || '',
     result: g.result || '',
     // Raw fields kept for the "add to calendar" (.ics) feature.
