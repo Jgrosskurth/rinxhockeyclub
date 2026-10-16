@@ -373,6 +373,13 @@ main .game-submission-container > .default-content-wrapper {
   color: var(--color-navy);
 }
 
+.game-submission .gs-done-alt {
+  margin: 8px 0 0;
+  font-size: var(--body-font-size-xs, 0.875rem);
+  color: var(--color-gray);
+  letter-spacing: normal;
+}
+
 .game-submission .gs-done-actions {
   display: grid;
   gap: 10px;
