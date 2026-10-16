@@ -203,6 +203,51 @@ function splitHeroSection(main) {
   first.after(rest);
 }
 
+// Shared modules each block imports. Blocks in a section load one after
+// another, and a block's imports are only discovered once its script runs,
+// so the first section would otherwise wait on a chain of round trips.
+const BLOCK_DEPS = {
+  'box-score': ['team-feeds', 'team-logos'],
+  columns: ['media'],
+  'game-submission': ['team-feeds', 'team-logos'],
+  hero: ['team-feeds', 'team-logos'],
+  'news-slider': ['game-updates', 'team-feeds', 'team-logos'],
+  'recent-results': ['team-feeds', 'team-logos'],
+  roster: ['media'],
+  schedule: ['team-feeds', 'team-logos'],
+  sponsors: ['media'],
+  standings: ['team-feeds', 'team-logos'],
+  'standings-summary': ['team-feeds', 'team-logos'],
+  stats: ['team-feeds', 'team-logos'],
+  tournaments: ['media'],
+  'trophy-room': ['team-feeds', 'team-logos'],
+};
+
+/**
+ * Starts downloading the first section's block scripts and their shared
+ * modules in parallel, ahead of the sequential block loading. (Block CSS is
+ * not hinted: loadCSS skips any href already linked in the head.)
+ * @param {Element} section the first section
+ */
+function preloadSection(section) {
+  if (!section) return;
+  const base = window.hlx.codeBasePath;
+  const urls = new Set();
+  section.querySelectorAll('div.block').forEach((block) => {
+    const name = block.dataset.blockName;
+    if (!name) return;
+    urls.add(`${base}/blocks/${name}/${name}.js`);
+    if (name === 'standings') urls.add(`${base}/blocks/standings/points-race.js`);
+    (BLOCK_DEPS[name] || []).forEach((dep) => urls.add(`${base}/scripts/${dep}.js`));
+  });
+  urls.forEach((href) => {
+    const link = document.createElement('link');
+    link.rel = 'modulepreload';
+    link.href = href;
+    document.head.append(link);
+  });
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   splitHeroSection(main);
@@ -229,6 +274,7 @@ async function loadEager(doc) {
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    preloadSection(main.querySelector('.section'));
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), async (section) => {
       await waitForFirstImage(section);
