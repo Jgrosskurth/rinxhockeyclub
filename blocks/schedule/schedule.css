@@ -336,7 +336,6 @@
 }
 
 .sg-row:hover { background: var(--color-ice); }
-.sg-row:last-child { border-bottom: none; }
 
 .sg-date {
   font-family: var(--heading-font-family);
@@ -499,8 +498,13 @@
   background: var(--color-ice) !important;
 }
 
-.schedule-block .sg-row:last-child,
-.schedule.block .sg-row:last-child {
+/* Only the very last row drops its divider. Rows sit in per-month .sg-month
+   groups (display: contents on wider screens), so a bare .sg-row:last-child
+   also matched each month's last game and removed the line between months. */
+.schedule-block .sg-month:last-child > .sg-row:last-child,
+.schedule-block .sg-rows > .sg-row:last-child,
+.schedule.block .sg-month:last-child > .sg-row:last-child,
+.schedule.block .sg-rows > .sg-row:last-child {
   border-bottom: none !important;
 }
 /* stylelint-enable no-descending-specificity */
