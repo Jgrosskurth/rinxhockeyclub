@@ -174,6 +174,35 @@
   color: var(--color-gray);
 }
 
+/* Map pin after the rink: Google Maps directions. */
+.recent-results .fx-map {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: -6px 0 -6px 1px;
+  vertical-align: middle;
+  border-radius: 50%;
+  color: var(--color-white);
+}
+
+.recent-results .fx-map:hover {
+  background: rgb(255 255 255 / 14%);
+}
+
+.recent-results .fx-map:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 1px;
+}
+
+.recent-results .fx-next .fx-map {
+  color: var(--color-red);
+}
+
+.recent-results .fx-next .fx-map:hover {
+  background: var(--color-ice);
+}
+
 .recent-results .result-badge {
   display: inline-grid;
   place-items: center;
