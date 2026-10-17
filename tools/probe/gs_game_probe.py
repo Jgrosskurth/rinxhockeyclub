@@ -30,6 +30,8 @@ with sync_playwright() as p:
     print("schedule cleared:", first, page.title(), file=sys.stderr)
     links = page.evaluate("() => [...document.querySelectorAll('a[href*=\"/games/\"]')].map((a) => a.href).slice(0, 10)")
     print("game links:", links, file=sys.stderr)
+    sched_calls = list(calls)
+    sched_html = page.content()
     calls.clear()
     gid = url.rstrip("/").split("/")[-1]
     page.click(f'a[href*="/games/{gid}"]')
@@ -48,6 +50,10 @@ with sync_playwright() as p:
         }))"""),
         "headings": page.evaluate("() => [...document.querySelectorAll('h1,h2,h3,h4,h5')].map((h) => h.tagName + ': ' + h.innerText.trim()).slice(0, 60)"),
         "calls": calls,
+        "sched_calls": sched_calls,
+        "sched_scripts": [m for m in __import__("re").findall(r'(?:src|href)="([^"]+)"', sched_html) if "_next" in m or "api" in m][:60],
+        "sched_html_head": sched_html[:4000],
+        "sched_next_data": (sched_html.split('id="__NEXT_DATA__"')[1][:6000] if '__NEXT_DATA__' in sched_html else ''),
     }
     b.close()
 print(json.dumps(out, indent=1))
