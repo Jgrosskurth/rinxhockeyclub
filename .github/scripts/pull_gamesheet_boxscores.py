@@ -112,13 +112,13 @@ def build_detail(box, lineups, game):
         for row in t["rows"]:
             name, number = col(t, row, "GOALIE"), col(t, row, "#")
             b = played.get((name.lower(), number))
-            sa = num(col(t, row, "SA"))
-            if not b and not int(sa or 0):
+            sa, ga = num(col(t, row, "SA")), num(col(t, row, "GA"))
+            if not b and not int(sa or 0) and not int(ga or 0):
                 continue  # dressed but didn't play
             svpct = col(t, row, "SV%")
             team["goalies"].append({
                 "number": number, "name": title_case(name),
-                "min": (b or {}).get("min", ""), "sa": sa, "ga": num(col(t, row, "GA")),
+                "min": (b or {}).get("min", ""), "sa": sa, "ga": ga,
                 "sv": num(col(t, row, "SV")), "svpct": "" if svpct in ("—", "-") else svpct,
                 "wl": (b or {}).get("decision", ""),
             })
@@ -129,6 +129,13 @@ def build_detail(box, lineups, game):
             if team:
                 team["goalies"].append({"number": g["number"], "name": title_case(g["name"]), "min": g.get("min", ""),
                                         "sa": "", "ga": "", "sv": "", "svpct": "", "wl": g.get("decision", "")})
+    # Some scoresheets record no shots at all (every period 0 for both teams):
+    # leave shots and saves blank rather than show zeros.
+    if all(not int(t["shots"] or 0) for t in teams) and any(int(t["total"] or 0) for t in teams):
+        for team in teams:
+            team["shots"], team["shotsByPeriod"] = "", []
+            for g in team["goalies"]:
+                g["sa"] = g["sv"] = g["svpct"] = ""
     for team in teams:
         sk = team["skaters"]
         if sk:

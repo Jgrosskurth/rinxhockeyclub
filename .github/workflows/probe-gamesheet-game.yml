@@ -12,7 +12,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install playwright && playwright install --with-deps chromium
-      - run: REAL_CHROME=1 xvfb-run -a python .github/scripts/pull_gamesheet_boxscores.py --season 16150 --schedule data/schedule-mid-atlantic.json --out data/boxscores-mid-atlantic.json
+      - run: REAL_CHROME=1 xvfb-run -a python .github/scripts/pull_gamesheet_boxscores.py --season 16150 --schedule data/schedule-mid-atlantic.json --out data/boxscores-mid-atlantic.json --refresh
       - uses: actions/upload-artifact@v4
         with:
           name: boxscores
