@@ -20,3 +20,5 @@ jobs:
           path: |
             probe.json
             probe.err
+            *.html
+            *.txt

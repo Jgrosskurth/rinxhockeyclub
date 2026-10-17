@@ -62,6 +62,16 @@ with sync_playwright() as p:
             break
     page.wait_for_timeout(8000)
     print("after click:", page.url, page.title(), file=sys.stderr)
+    open("box.html", "w").write(page.content())
+    for tab in ["LINEUPS", "PLAY-BY-PLAY"]:
+        try:
+            page.get_by_text(tab, exact=True).first.click()
+            page.wait_for_timeout(5000)
+            open(f"{tab.lower()}.html", "w").write(page.content())
+            open(f"{tab.lower()}.txt", "w").write(page.evaluate("() => document.body.innerText"))
+            print("saved tab", tab, page.url, file=sys.stderr)
+        except Exception as e:
+            print("tab fail", tab, e, file=sys.stderr)
     out = {
         "title": page.title(),
         "text": page.evaluate("() => document.body.innerText")[:12000],
