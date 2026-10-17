@@ -32,11 +32,24 @@ with sync_playwright() as p:
     print("game links:", links, file=sys.stderr)
     sched_calls = list(calls)
     sched_html = page.content()
+    path = url.split("gamesheetstats.com")[1]
+    fetched = page.evaluate("""async (path) => {
+      const out = {};
+      for (const [k, h] of [['rsc', { RSC: '1', 'Next-Router-State-Tree': '' }], ['html', {}]]) {
+        try {
+          const r = await fetch(path, { headers: h, credentials: 'include' });
+          const t = await r.text();
+          out[k] = { status: r.status, type: r.headers.get('content-type'), len: t.length, body: t.slice(0, 60000) };
+        } catch (e) { out[k] = { error: String(e) }; }
+      }
+      return out;
+    }""", path)
+    print("in-page fetch:", {k: (v.get('status'), v.get('type'), v.get('len')) for k, v in fetched.items()}, file=sys.stderr)
     calls.clear()
     gid = url.rstrip("/").split("/")[-1]
     page.click(f'a[href*="/games/{gid}"]')
-    for _ in range(20):
-        page.wait_for_timeout(1500)
+    for _ in range(90):
+        page.wait_for_timeout(2000)
         if f"/games/{gid}" in page.url and "Just a moment" not in page.title():
             break
     page.wait_for_timeout(8000)
@@ -50,6 +63,7 @@ with sync_playwright() as p:
         }))"""),
         "headings": page.evaluate("() => [...document.querySelectorAll('h1,h2,h3,h4,h5')].map((h) => h.tagName + ': ' + h.innerText.trim()).slice(0, 60)"),
         "calls": calls,
+        "fetched": fetched,
         "sched_calls": sched_calls,
         "sched_scripts": [m for m in __import__("re").findall(r'(?:src|href)="([^"]+)"', sched_html) if "_next" in m or "api" in m][:60],
         "sched_html_head": sched_html[:4000],
