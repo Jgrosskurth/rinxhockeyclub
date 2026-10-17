@@ -452,6 +452,25 @@ async function addBoxScores(key, games) {
   });
 }
 
+// Tournament games GameSheet has a box score for (data/boxscores-<event>.json,
+// matched by game id) get a link to /box-score too.
+const TOURNAMENT_BOX_SCORES = { 'mid-atlantic': 'boxscores-mid-atlantic' };
+
+async function addTournamentBoxScores(games) {
+  const events = Object.entries(TOURNAMENT_BOX_SCORES);
+  const feeds = await Promise.all(events.map(([, feed]) => fetch(`${FEED_BASE}/${feed}.json`)
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null)));
+  events.forEach(([event], i) => {
+    const posted = new Set((feeds[i]?.games || [])
+      .filter((x) => x.detail?.teams?.length === 2).map((x) => String(x.id)));
+    games.forEach((g) => {
+      if (g.type === 'Tournament' && g.gameId && posted.has(String(g.gameId))) {
+        g.boxScore = `/box-score?event=${event}&game=${g.gameId}`;
+      }
+    });
+  });
+}
+
 async function loadFeedGames() {
   const cfg = feedConfig();
   const tournamentPage = cfg.key === 'mid-atlantic';
@@ -471,7 +490,9 @@ async function loadFeedGames() {
   if (!tournamentPage) {
     const extra = await extraGames(cfg.key, raw);
     extra.forEach((g) => games.push({ ...fromFeed(g, ''), type: g.type, sheet: true }));
-    await addBoxScores(cfg.key, games);
+    await Promise.all([addBoxScores(cfg.key, games), addTournamentBoxScores(games)]);
+  } else {
+    await addTournamentBoxScores(games);
   }
   return games.filter((g) => g.opp).sort((a, b) => gameOrder(a) - gameOrder(b));
 }
