@@ -31,9 +31,14 @@ with sync_playwright() as p:
     links = page.evaluate("() => [...document.querySelectorAll('a[href*=\"/games/\"]')].map((a) => a.href).slice(0, 10)")
     print("game links:", links, file=sys.stderr)
     calls.clear()
-    ok = settle(url)
-    print("game cleared:", ok, page.title(), file=sys.stderr)
-    page.wait_for_timeout(10000)
+    gid = url.rstrip("/").split("/")[-1]
+    page.click(f'a[href*="/games/{gid}"]')
+    for _ in range(20):
+        page.wait_for_timeout(1500)
+        if f"/games/{gid}" in page.url and "Just a moment" not in page.title():
+            break
+    page.wait_for_timeout(8000)
+    print("after click:", page.url, page.title(), file=sys.stderr)
     out = {
         "title": page.title(),
         "text": page.evaluate("() => document.body.innerText")[:12000],
