@@ -13,8 +13,10 @@ jobs:
           python-version: '3.12'
       - run: pip install playwright && playwright install --with-deps chromium
       - run: google-chrome --version
-      - run: REAL_CHROME=1 xvfb-run -a python tools/probe/gs_game_probe.py https://gamesheetstats.com/seasons/16150/games/3060517 > probe.json
+      - run: REAL_CHROME=1 xvfb-run -a python tools/probe/gs_game_probe.py https://gamesheetstats.com/seasons/16150/games/3060517 > probe.json 2> probe.err; echo exit=$?; cat probe.err; ls -la probe.json
       - uses: actions/upload-artifact@v4
         with:
           name: probe
-          path: probe.json
+          path: |
+            probe.json
+            probe.err
