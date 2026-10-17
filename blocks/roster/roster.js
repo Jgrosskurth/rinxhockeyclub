@@ -141,6 +141,9 @@ export default function decorate(block) {
       {
         name: 'Joe Capozzoli', initials: 'JC', role: 'Assistant Coach • 10U Squirts', img: '/images/headshots/joecap.png',
       },
+        {
+        name: 'Chris Daly', initials: 'CD', role: 'Assistant Coach • 10U Squirts', img: '/images/headshots/coachdaly.png',
+      },
     ];
 
   const coaches = coachData.length ? coachData : defaultCoaches;
