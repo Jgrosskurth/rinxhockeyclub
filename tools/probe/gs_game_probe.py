@@ -19,12 +19,21 @@ with sync_playwright() as p:
                 body = ""
             calls.append({"url": r.url, "status": r.status, "body": body[:6000]})
     page.on("response", on_resp)
-    page.goto(url, wait_until="domcontentloaded", timeout=60000)
-    for _ in range(30):
-        page.wait_for_timeout(2000)
-        if "Just a moment" not in page.title():
-            break
-    page.wait_for_timeout(8000)
+    def settle(u):
+        page.goto(u, wait_until="domcontentloaded", timeout=90000)
+        for _ in range(60):
+            page.wait_for_timeout(2000)
+            if "Just a moment" not in page.title():
+                return True
+        return False
+    first = settle("https://gamesheetstats.com/seasons/16150/teams/573565/schedule")
+    print("schedule cleared:", first, page.title(), file=sys.stderr)
+    links = page.evaluate("() => [...document.querySelectorAll('a[href*=\"/games/\"]')].map((a) => a.href).slice(0, 10)")
+    print("game links:", links, file=sys.stderr)
+    calls.clear()
+    ok = settle(url)
+    print("game cleared:", ok, page.title(), file=sys.stderr)
+    page.wait_for_timeout(10000)
     out = {
         "title": page.title(),
         "text": page.evaluate("() => document.body.innerText")[:12000],
