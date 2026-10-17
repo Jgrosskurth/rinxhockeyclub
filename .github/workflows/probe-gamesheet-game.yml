@@ -12,7 +12,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install playwright && playwright install --with-deps chromium
-      - run: python tools/probe/gs_game_probe.py https://gamesheetstats.com/seasons/16150/games/3060517 > probe.json
+      - run: google-chrome --version
+      - run: REAL_CHROME=1 xvfb-run -a python tools/probe/gs_game_probe.py https://gamesheetstats.com/seasons/16150/games/3060517 > probe.json
       - uses: actions/upload-artifact@v4
         with:
           name: probe

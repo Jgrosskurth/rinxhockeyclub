@@ -5,10 +5,18 @@ from playwright.sync_api import sync_playwright
 url = sys.argv[1]
 calls = []
 with sync_playwright() as p:
-    b = p.chromium.launch(headless=True)
-    ctx = b.new_context(user_agent=("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                                    "(KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"),
-                        viewport={"width": 1366, "height": 900}, locale="en-US")
+    import os
+    real = os.environ.get("REAL_CHROME") == "1"
+    if real:
+        b = p.chromium.launch(channel="chrome", headless=False,
+                              args=["--disable-blink-features=AutomationControlled", "--no-first-run"])
+        ctx = b.new_context(viewport={"width": 1366, "height": 900}, locale="en-US")
+        ctx.add_init_script("Object.defineProperty(navigator, 'webdriver', { get: () => undefined })")
+    else:
+        b = p.chromium.launch(headless=True)
+        ctx = b.new_context(user_agent=("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                        "(KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"),
+                            viewport={"width": 1366, "height": 900}, locale="en-US")
     page = ctx.new_page()
     def on_resp(r):
         ct = r.headers.get("content-type", "")
