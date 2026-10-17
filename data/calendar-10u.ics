@@ -117,13 +117,13 @@ URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2989473@rinxhockeyclub.com
-DTSTAMP:20261017T083000Z
-DTSTART;TZID=America/New_York:20261017T083000
-DTEND;TZID=America/New_York:20261017T100000
-SUMMARY:Rinx 10U at Long Beach Lightning (Ponte)
+DTSTAMP:20261017T000000Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261018
+SUMMARY:Rinx 10U at Long Beach Lightning (Ponte) (W 9-0)
 LOCATION:Long Beach Ice Arena\, Long Beach\, NY
-DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
- chedule
+DESCRIPTION:LIAHL · 10U Silver\nFinal: W 9-0\nSchedule: https://www.rinxho
+ ckeyclub.com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
@@ -276,6 +276,17 @@ DTEND;TZID=America/New_York:20270124T150000
 SUMMARY:Rinx 10U at North Park (Lewis)
 LOCATION:Aviator Sports and Events Center\, Brooklyn\, NY
 DESCRIPTION:League\nSchedule: https://www.rinxhockeyclub.com/schedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-2992368@rinxhockeyclub.com
+DTSTAMP:20270131T073500Z
+DTSTART;TZID=America/New_York:20270131T073500
+DTEND;TZID=America/New_York:20270131T090500
+SUMMARY:Rinx 10U at Dix Hills Selects (Goldfine)
+LOCATION:Dix Hills Ice Rink\, Dix Hills\, NY
+DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 END:VCALENDAR

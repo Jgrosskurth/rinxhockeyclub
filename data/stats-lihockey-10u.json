@@ -3,13 +3,24 @@
  "source": "lihockey.com",
  "team": "10u",
  "teamPage": "https://lihockey.com/teams/1162/",
- "updated": "2026-10-16T06:42:29+00:00",
+ "updated": "2026-10-17T14:08:03+00:00",
  "players": [
   {
    "name": "Matthew Grosskurth",
    "number": "",
    "pos": "",
-   "gp": "3",
+   "gp": "4",
+   "g": "8",
+   "a": "0",
+   "pts": "8",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
+   "name": "Jorge Leonardo",
+   "number": "",
+   "pos": "",
+   "gp": "4",
    "g": "7",
    "a": "0",
    "pts": "7",
@@ -17,10 +28,10 @@
    "pim": "0"
   },
   {
-   "name": "Jorge Leonardo",
+   "name": "Sean Fox",
    "number": "",
    "pos": "",
-   "gp": "3",
+   "gp": "4",
    "g": "6",
    "a": "0",
    "pts": "6",
@@ -28,26 +39,37 @@
    "pim": "0"
   },
   {
-   "name": "Sean Fox",
+   "name": "Donald Pierre Canel",
    "number": "",
    "pos": "",
    "gp": "3",
-   "g": "4",
+   "g": "5",
    "a": "0",
-   "pts": "4",
+   "pts": "5",
    "plusminus": "0",
    "pim": "0"
   },
   {
-   "name": "Donald Pierre Canel",
+   "name": "Aiden Brown",
    "number": "",
    "pos": "",
-   "gp": "2",
+   "gp": "3",
    "g": "3",
    "a": "0",
    "pts": "3",
    "plusminus": "0",
-   "pim": "0"
+   "pim": "2"
+  },
+  {
+   "name": "Ryan Bachert",
+   "number": "",
+   "pos": "",
+   "gp": "3",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "8"
   },
   {
    "name": "Ryan Lupia",
@@ -59,17 +81,6 @@
    "pts": "3",
    "plusminus": "0",
    "pim": "0"
-  },
-  {
-   "name": "Aiden Brown",
-   "number": "",
-   "pos": "",
-   "gp": "2",
-   "g": "2",
-   "a": "0",
-   "pts": "2",
-   "plusminus": "0",
-   "pim": "2"
   },
   {
    "name": "Tristen Pajak",
@@ -116,21 +127,10 @@
    "pim": "1"
   },
   {
-   "name": "Ryan Bachert",
-   "number": "",
-   "pos": "",
-   "gp": "2",
-   "g": "1",
-   "a": "0",
-   "pts": "1",
-   "plusminus": "0",
-   "pim": "8"
-  },
-  {
    "name": "Connor Daly",
    "number": "",
    "pos": "G",
-   "gp": "2",
+   "gp": "3",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -141,7 +141,7 @@
    "name": "Louie Savola",
    "number": "",
    "pos": "G",
-   "gp": "1",
+   "gp": "2",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -164,27 +164,377 @@
   {
    "name": "Connor Daly",
    "number": "",
-   "gp": 2,
-   "sa": 12,
+   "gp": 3,
+   "sa": 14,
    "ga": 2,
-   "sv": 10,
-   "w": 1,
+   "sv": 12,
+   "w": 2,
    "l": 0,
-   "svpct": "0.833"
+   "svpct": "0.857"
   },
   {
    "name": "Louie Savola",
    "number": "",
-   "gp": 1,
-   "sa": 5,
+   "gp": 2,
+   "sa": 8,
    "ga": 0,
-   "sv": 5,
+   "sv": 8,
    "w": 1,
    "l": 0,
    "svpct": "1.000"
   }
  ],
  "games": [
+  {
+   "id": "5862",
+   "date": "Oct 17",
+   "home": false,
+   "opponent": "Long Beach Lightning 10U Silver - Ponte",
+   "result": "W",
+   "score": "9-0",
+   "box": {
+    "skaters": [
+     {
+      "id": "7087",
+      "name": "Sean Fox",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8368",
+      "name": "Ryan Bachert",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8371",
+      "name": "Donald Pierre Canel",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7088",
+      "name": "Matthew Grosskurth",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7089",
+      "name": "Jorge Leonardo",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8370",
+      "name": "Aiden Brown",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9071",
+      "name": "Connor Daly",
+      "number": "",
+      "min": "—",
+      "sa": "2",
+      "ga": "0",
+      "sv": "2",
+      "svpct": "1.000",
+      "wl": "W"
+     },
+     {
+      "id": "9076",
+      "name": "Louie Savola",
+      "number": "",
+      "min": "—",
+      "sa": "3",
+      "ga": "0",
+      "sv": "3",
+      "svpct": "1.000",
+      "wl": "-"
+     }
+    ]
+   },
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "Rinx Hockey 10U Silver - O'Donoghue",
+      "record": "3-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "4",
+       "3",
+       "2"
+      ],
+      "total": "9",
+      "skaters": [
+       {
+        "name": "Sean Fox",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Bachert",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Donald Pierre Canel",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Matthew Grosskurth",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jorge Leonardo",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aiden Brown",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Connor Daly",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "2",
+        "ga": "0",
+        "sv": "2",
+        "svpct": "1.000",
+        "wl": "W"
+       },
+       {
+        "name": "Louie Savola",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "3",
+        "ga": "0",
+        "sv": "3",
+        "svpct": "1.000",
+        "wl": "-"
+       }
+      ],
+      "totals": {
+       "g": "9",
+       "a": "0",
+       "pts": "9",
+       "pim": "1"
+      }
+     },
+     {
+      "side": "home",
+      "name": "Long Beach Lightning 10U Silver - Ponte",
+      "record": "3-1-0-0",
+      "abbr": "LBL",
+      "periods": [
+       "0",
+       "0",
+       "0"
+      ],
+      "total": "0",
+      "skaters": [
+       {
+        "name": "Gavin McConnon",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Leo McAllister",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Lincoln Shiels",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Dominic Grosso",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "35",
+        "ga": "7",
+        "sv": "28",
+        "svpct": "0.800",
+        "wl": "L"
+       },
+       {
+        "name": "Sullivan Pearsall",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "9",
+        "ga": "2",
+        "sv": "7",
+        "svpct": "0.778",
+        "wl": "-"
+       }
+      ],
+      "totals": {
+       "g": "0",
+       "a": "0",
+       "pts": "0",
+       "pim": "5"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Sean Fox",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     },
+     {
+      "rank": "2",
+      "name": "Ryan Bachert",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     },
+     {
+      "rank": "3",
+      "name": "Donald Pierre Canel",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Sean Fox",
+      "val": "2"
+     },
+     {
+      "cat": "Points",
+      "name": "Sean Fox",
+      "val": "2"
+     },
+     {
+      "cat": "Saves",
+      "name": "Dominic Grosso",
+      "val": "28"
+     }
+    ],
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Saturday, October 17 · 8:30 AM"
+    ],
+    "dateLong": "Saturday, October 17, 2026",
+    "venue": "Long Beach Municipal Ice Arena",
+    "isoDate": "2026-10-17",
+    "recap": {
+     "url": "https://lihockey.com/rinx-hockey-10u-silver-odonoghue-stays-unbeaten-with-9-0-shutout-of-long-beach/",
+     "title": "Rinx Hockey 10U Silver - O'Donoghue Stays Unbeaten With 9-0 Shutout of Long Beach"
+    }
+   },
+   "url": "https://lihockey.com/games/5862/"
+  },
   {
    "id": "5731",
    "date": "Sep 27",

@@ -40,9 +40,9 @@
       "opponent": "NYH0149-006 Long Beach Lightning 10U Ponte 04 - 10U SILVER",
       "venue": "Away",
       "location": "Long Beach Arena",
-      "time": "8:30 AM",
-      "score": "",
-      "result": "",
+      "time": "",
+      "score": "9-0",
+      "result": "W",
       "gameId": "2989473"
     },
     {
@@ -164,6 +164,16 @@
       "score": "",
       "result": "",
       "gameId": "2989490"
+    },
+    {
+      "date": "Jan 31, 2027",
+      "opponent": "NYH0093-006 Dix Hills Selects 10U Goldfine 04 - 10U SILVER",
+      "venue": "Away",
+      "location": "Dix Hills Ice Rink",
+      "time": "7:35 AM",
+      "score": "",
+      "result": "",
+      "gameId": "2992368"
     }
   ]
 }
