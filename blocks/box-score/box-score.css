@@ -681,6 +681,82 @@
   font-weight: 800;
 }
 
+/* Scoring summary and penalties (tournament games, from GameSheet) */
+.box-score .bx-period {
+  margin: 14px 0 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--color-navy);
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.box-score .bx-period:first-of-type {
+  margin-top: 0;
+}
+
+.box-score .bx-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.box-score .bx-event {
+  display: grid;
+  grid-template-columns: 48px 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--bx-line);
+}
+
+.box-score .bx-event-rinx {
+  box-shadow: inset 3px 0 0 var(--color-red);
+}
+
+.box-score .bx-ev-time {
+  font-family: var(--heading-font-family);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--color-navy);
+}
+
+.box-score .bx-ev-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.box-score .bx-ev-main {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.box-score .bx-ev-main .bx-badge {
+  background: var(--color-navy);
+}
+
+.box-score .bx-ev-sub {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.box-score .bx-ev-num {
+  color: var(--bx-muted);
+  font-weight: 600;
+}
+
+.box-score .bx-ev-count {
+  color: var(--bx-muted);
+  font-weight: 400;
+}
+
 @media (min-width: 600px) {
   .box-score .bx-hero {
     padding: 26px 24px 30px;

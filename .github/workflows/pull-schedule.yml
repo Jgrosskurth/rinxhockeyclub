@@ -60,6 +60,18 @@ jobs:
           python pull_gamesheet.py --type stats      --season 16150 --team 573565 --out data/stats-mid-atlantic.json
           python pull_gamesheet.py --type standings  --season 16150 --team 573565 --out data/standings-mid-atlantic.json
 
+      # Box scores for the /box-score page. GameSheet's game pages need real
+      # Chrome (preinstalled on the runner) under a virtual display to clear
+      # Cloudflare. Games already saved are skipped, so this opens a browser
+      # only when a new tournament game is final. A failure leaves the saved
+      # box scores as they are and doesn't stop the rest of the pull.
+      - name: Mid-Atlantic box scores (GameSheet game pages)
+        continue-on-error: true
+        env:
+          REAL_CHROME: '1'
+        run: |
+          xvfb-run -a python .github/scripts/pull_gamesheet_boxscores.py --season 16150 --schedule data/schedule-mid-atlantic.json --out data/boxscores-mid-atlantic.json
+
       - name: League player stats from LIHockey.com box scores
         run: python .github/scripts/pull_lihockey.py
 

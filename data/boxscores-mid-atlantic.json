@@ -1,0 +1,2132 @@
+{
+ "type": "boxscores",
+ "season": "16150",
+ "team": "RINX",
+ "event": "2026 Mid-Atlantic Fall Showcase",
+ "games": [
+  {
+   "id": "3060517",
+   "url": "https://gamesheetstats.com/seasons/16150/games/3060517",
+   "date": "Oct 9, 2026",
+   "opponent": "Delco Phantoms 10A",
+   "detail": {
+    "league": "2026 Mid-Atlantic Fall Showcase",
+    "info": [
+     "Game #6",
+     "Tournament",
+     "Oct 9, 2026, 5:05 PM",
+     "Hatfield Ice Arena (Blue)"
+    ],
+    "status": "Final",
+    "dateLong": "Friday, October 9, 2026",
+    "isoDate": "2026-10-09",
+    "time": "5:05 PM",
+    "venue": "Hatfield Ice Arena (Blue)",
+    "periodLabels": [
+     "1st",
+     "2nd",
+     "3rd"
+    ],
+    "teams": [
+     {
+      "name": "Rinx",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/8f14b1f6-8ea1-499b-861a-677db45cde00/256",
+      "total": "7",
+      "periods": [
+       "1",
+       "3",
+       "3"
+      ],
+      "shots": "25",
+      "shotsByPeriod": [
+       "7",
+       "9",
+       "9"
+      ],
+      "skaters": [
+       {
+        "number": "3",
+        "name": "Ryan Christman",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "10",
+        "name": "Edward Carbone",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "pos": "",
+        "g": "2",
+        "a": "1",
+        "pts": "3",
+        "pim": "0"
+       },
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "2"
+       },
+       {
+        "number": "21",
+        "name": "Tristen Pajak",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "23",
+        "name": "Conor Wilkens",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "28",
+        "name": "Stephen Kull",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "90",
+        "name": "Nicholas Capozzoli",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "93",
+        "name": "Evan Martin",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "95",
+        "name": "Connor Hassett",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "pos": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "number": "1",
+        "name": "Connor Daly",
+        "min": "36:00",
+        "sa": "15",
+        "ga": "1",
+        "sv": "14",
+        "svpct": ".933",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "7",
+       "a": "4",
+       "pts": "11",
+       "pim": "4"
+      }
+     },
+     {
+      "name": "Delco Phantoms",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/547984bb-9b2f-44b0-2a7a-a011a7a21d00/256",
+      "total": "1",
+      "periods": [
+       "0",
+       "0",
+       "1"
+      ],
+      "shots": "15",
+      "shotsByPeriod": [
+       "5",
+       "5",
+       "5"
+      ],
+      "skaters": [
+       {
+        "number": "0",
+        "name": "Jesse Duke",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "3"
+       },
+       {
+        "number": "5",
+        "name": "Willem Van Elsland",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "8",
+        "name": "Ozzie Cardinal",
+        "pos": "D",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "10",
+        "name": "Jacob Dolan",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "16",
+        "name": "Samuel Penoza",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "24",
+        "name": "Anthony Modesti",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "27",
+        "name": "Dominic Ventura",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "44",
+        "name": "Jordan Yarnell",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "72",
+        "name": "Landon Ryan",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "87",
+        "name": "Henry Tabinowski",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "91",
+        "name": "Easton Edwards",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "97",
+        "name": "Zachary Reinfeld",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "98",
+        "name": "Tom Loy",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "99",
+        "name": "Charles Penoza",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "number": "30",
+        "name": "Theodore Dolaway-Muir",
+        "min": "36:00",
+        "sa": "25",
+        "ga": "7",
+        "sv": "18",
+        "svpct": ".720",
+        "wl": "L"
+       }
+      ],
+      "totals": {
+       "g": "1",
+       "a": "0",
+       "pts": "1",
+       "pim": "7"
+      }
+     }
+    ],
+    "goals": [
+     {
+      "period": "1st",
+      "time": "09:47",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "18",
+       "name": "Sean Fox",
+       "count": "1"
+      },
+      "assists": []
+     },
+     {
+      "period": "2nd",
+      "time": "07:45",
+      "tags": [
+       "GWG"
+      ],
+      "team": "Rinx",
+      "scorer": {
+       "number": "10",
+       "name": "Edward Carbone",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "06:21",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "98",
+       "name": "Aiden Brown",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "01:29",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "98",
+       "name": "Aiden Brown",
+       "count": "2"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "09:51",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "19",
+       "name": "Ari Mazzarone",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "3rd",
+      "time": "06:23",
+      "tags": [],
+      "team": "Delco Phantoms",
+      "scorer": {
+       "number": "8",
+       "name": "Ozzie Cardinal",
+       "count": "1"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "03:10",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "28",
+       "name": "Stephen Kull",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "3rd",
+      "time": "01:49",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "18",
+       "name": "Sean Fox",
+       "count": "2"
+      },
+      "assists": []
+     }
+    ],
+    "penalties": [
+     {
+      "period": "1st",
+      "time": "01:55",
+      "team": "Delco Phantoms",
+      "number": "00",
+      "name": "Jesse Duke",
+      "infraction": "Tripping/Clipping/Leg Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "04:16",
+      "team": "Delco Phantoms",
+      "number": "87",
+      "name": "Henry Tabinowski",
+      "infraction": "Slashing - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "04:16",
+      "team": "Rinx",
+      "number": "95",
+      "name": "Connor Hassett",
+      "infraction": "Hooking - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "04:00",
+      "team": "Delco Phantoms",
+      "number": "00",
+      "name": "Jesse Duke",
+      "infraction": "Tripping/Clipping/Leg Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "09:34",
+      "team": "Rinx",
+      "number": "20",
+      "name": "Jorge Leonardo",
+      "infraction": "Unsportsmanlike Conduct - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "09:34",
+      "team": "Delco Phantoms",
+      "number": "44",
+      "name": "Jordan Yarnell",
+      "infraction": "Roughing - Minor, 1.5 min"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Sean Fox, Aiden Brown",
+      "val": "2"
+     },
+     {
+      "cat": "Assists",
+      "name": "Declan Nimmo, Sean Fox +2",
+      "val": "1"
+     },
+     {
+      "cat": "Points",
+      "name": "Sean Fox",
+      "val": "3"
+     },
+     {
+      "cat": "Saves",
+      "name": "Theodore Dolaway-Muir",
+      "val": "18"
+     }
+    ],
+    "stars": []
+   }
+  },
+  {
+   "id": "3060526",
+   "url": "https://gamesheetstats.com/seasons/16150/games/3060526",
+   "date": "Oct 10, 2026",
+   "opponent": "Central Penn Panthers 10A",
+   "detail": {
+    "league": "2026 Mid-Atlantic Fall Showcase",
+    "info": [
+     "Game #15",
+     "Tournament",
+     "Oct 10, 2026, 7:52 AM",
+     "Hatfield Ice Arena (Blue)"
+    ],
+    "status": "Final",
+    "dateLong": "Saturday, October 10, 2026",
+    "isoDate": "2026-10-10",
+    "time": "7:52 AM",
+    "venue": "Hatfield Ice Arena (Blue)",
+    "periodLabels": [
+     "1st",
+     "2nd",
+     "3rd"
+    ],
+    "teams": [
+     {
+      "name": "Central Penn Panthers",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/4195975c-860c-4caa-37da-4197a76a3000/256",
+      "total": "0",
+      "periods": [
+       "0",
+       "0",
+       "0"
+      ],
+      "shots": "",
+      "shotsByPeriod": [],
+      "skaters": [
+       {
+        "number": "0",
+        "name": "Jase Hicks",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "1",
+        "name": "Kazimir Osborn",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "8",
+        "name": "Konstantinos Maillis",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "11",
+        "name": "Bennett Reidenbach",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "38",
+        "name": "Sam Winters",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "46",
+        "name": "Wren Weitzel",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "50",
+        "name": "Alfred Rebert",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "53",
+        "name": "William Michener",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "81",
+        "name": "Jonathan Duffee",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "86",
+        "name": "Jayce English",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "3"
+       },
+       {
+        "number": "91",
+        "name": "Evan Marin",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       }
+      ],
+      "goalies": [],
+      "totals": {
+       "g": "0",
+       "a": "0",
+       "pts": "0",
+       "pim": "5"
+      }
+     },
+     {
+      "name": "Rinx",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/8f14b1f6-8ea1-499b-861a-677db45cde00/256",
+      "total": "8",
+      "periods": [
+       "1",
+       "6",
+       "1"
+      ],
+      "shots": "",
+      "shotsByPeriod": [],
+      "skaters": [
+       {
+        "number": "3",
+        "name": "Ryan Christman",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "4",
+        "name": "Ryan Bachert",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "3"
+       },
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "pos": "",
+        "g": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "0"
+       },
+       {
+        "number": "10",
+        "name": "Edward Carbone",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "pos": "",
+        "g": "2",
+        "a": "1",
+        "pts": "3",
+        "pim": "0"
+       },
+       {
+        "number": "21",
+        "name": "Tristen Pajak",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "23",
+        "name": "Conor Wilkens",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "28",
+        "name": "Stephen Kull",
+        "pos": "",
+        "g": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "0"
+       },
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "pos": "",
+        "g": "2",
+        "a": "1",
+        "pts": "3",
+        "pim": "0"
+       },
+       {
+        "number": "90",
+        "name": "Nicholas Capozzoli",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "93",
+        "name": "Evan Martin",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "95",
+        "name": "Connor Hassett",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "2"
+       }
+      ],
+      "goalies": [
+       {
+        "number": "35",
+        "name": "Louie Savola",
+        "min": "36:00",
+        "sa": "",
+        "ga": "0",
+        "sv": "",
+        "svpct": "",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "9",
+       "a": "5",
+       "pts": "14",
+       "pim": "9"
+      }
+     }
+    ],
+    "goals": [
+     {
+      "period": "1st",
+      "time": "01:11",
+      "tags": [
+       "GWG"
+      ],
+      "team": "Rinx",
+      "scorer": {
+       "number": "5",
+       "name": "Declan Nimmo",
+       "count": "1"
+      },
+      "assists": []
+     },
+     {
+      "period": "2nd",
+      "time": "10:23",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "4",
+       "name": "Ryan Bachert",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "10",
+        "name": "Edward Carbone",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "09:23",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "count": "2"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "06:22",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "20",
+       "name": "Jorge Leonardo",
+       "count": "1"
+      },
+      "assists": []
+     },
+     {
+      "period": "2nd",
+      "time": "05:35",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "2"
+      },
+      "assists": [
+       {
+        "number": "28",
+        "name": "Stephen Kull",
+        "count": "1"
+       },
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "count": "2"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "05:10",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "98",
+       "name": "Aiden Brown",
+       "count": "3"
+      },
+      "assists": []
+     },
+     {
+      "period": "2nd",
+      "time": "01:30",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "20",
+       "name": "Jorge Leonardo",
+       "count": "2"
+      },
+      "assists": [
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "count": "2"
+       }
+      ]
+     },
+     {
+      "period": "3rd",
+      "time": "08:21",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "28",
+       "name": "Stephen Kull",
+       "count": "2"
+      },
+      "assists": []
+     }
+    ],
+    "penalties": [
+     {
+      "period": "1st",
+      "time": "02:19",
+      "team": "Rinx",
+      "number": "19",
+      "name": "Ari Mazzarone",
+      "infraction": "Hooking - Minor, 1.5 min"
+     },
+     {
+      "period": "1st",
+      "time": "01:47",
+      "team": "Rinx",
+      "number": "4",
+      "name": "Ryan Bachert",
+      "infraction": "Body Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "08:27",
+      "team": "Central Penn Panthers",
+      "number": "86",
+      "name": "Jayce English",
+      "infraction": "Tripping/Clipping/Leg Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "07:36",
+      "team": "Rinx",
+      "number": "4",
+      "name": "Ryan Bachert",
+      "infraction": "Roughing - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "07:36",
+      "team": "Central Penn Panthers",
+      "number": "53",
+      "name": "William Michener",
+      "infraction": "Roughing - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "01:18",
+      "team": "Rinx",
+      "number": "98",
+      "name": "Aiden Brown",
+      "infraction": "Body Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "08:56",
+      "team": "Rinx",
+      "number": "3",
+      "name": "Ryan Christman",
+      "infraction": "Slashing - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "05:55",
+      "team": "Central Penn Panthers",
+      "number": "86",
+      "name": "Jayce English",
+      "infraction": "Tripping/Clipping/Leg Checking - Minor, 1.5 min"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Jorge Leonardo, Matthew Grosskurth",
+      "val": "2"
+     },
+     {
+      "cat": "Assists",
+      "name": "Declan Nimmo, Edward Carbone +3",
+      "val": "1"
+     },
+     {
+      "cat": "Points",
+      "name": "Jorge Leonardo, Matthew Grosskurth",
+      "val": "3"
+     }
+    ],
+    "stars": []
+   }
+  },
+  {
+   "id": "3060542",
+   "url": "https://gamesheetstats.com/seasons/16150/games/3060542",
+   "date": "Oct 10, 2026",
+   "opponent": "Genesis Hockey Club 10A",
+   "detail": {
+    "league": "2026 Mid-Atlantic Fall Showcase",
+    "info": [
+     "Game #31",
+     "Tournament",
+     "Oct 10, 2026, 6:30 PM",
+     "Hatfield Ice Arena (Green)"
+    ],
+    "status": "Final",
+    "dateLong": "Saturday, October 10, 2026",
+    "isoDate": "2026-10-10",
+    "time": "6:30 PM",
+    "venue": "Hatfield Ice Arena (Green)",
+    "periodLabels": [
+     "1st",
+     "2nd",
+     "3rd"
+    ],
+    "teams": [
+     {
+      "name": "Genesis Hockey Club",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/3f442c23-a1f5-485d-8c69-6bdeebbd5000/256",
+      "total": "2",
+      "periods": [
+       "1",
+       "1",
+       "0"
+      ],
+      "shots": "16",
+      "shotsByPeriod": [
+       "9",
+       "4",
+       "3"
+      ],
+      "skaters": [
+       {
+        "number": "4",
+        "name": "Michael Hickey",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "6",
+        "name": "Savannah Kozicki",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "9",
+        "name": "Jake Smyth",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "12",
+        "name": "Benjamin Mcclellan",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "15",
+        "name": "Jason Melniczek",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "17",
+        "name": "Conor Weisser",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "18",
+        "name": "Blaine Earley",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "21",
+        "name": "James Goldman",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "30",
+        "name": "Micah Jeong",
+        "pos": "D",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "47",
+        "name": "Peter Hadgimallis",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "48",
+        "name": "Cameron Frazier",
+        "pos": "F",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "55",
+        "name": "Trevor Dickinson",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "60",
+        "name": "Jack Tucker",
+        "pos": "F",
+        "g": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "0"
+       },
+       {
+        "number": "66",
+        "name": "Teagan Moore",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "number": "29",
+        "name": "Colin Earley",
+        "min": "36:00",
+        "sa": "28",
+        "ga": "5",
+        "sv": "23",
+        "svpct": ".821",
+        "wl": "L"
+       }
+      ],
+      "totals": {
+       "g": "2",
+       "a": "2",
+       "pts": "4",
+       "pim": "0"
+      }
+     },
+     {
+      "name": "Rinx",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/8f14b1f6-8ea1-499b-861a-677db45cde00/256",
+      "total": "5",
+      "periods": [
+       "2",
+       "0",
+       "3"
+      ],
+      "shots": "28",
+      "shotsByPeriod": [
+       "9",
+       "3",
+       "16"
+      ],
+      "skaters": [
+       {
+        "number": "3",
+        "name": "Ryan Christman",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "4",
+        "name": "Ryan Bachert",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "10",
+        "name": "Edward Carbone",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "21",
+        "name": "Tristen Pajak",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "23",
+        "name": "Conor Wilkens",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "28",
+        "name": "Stephen Kull",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "pos": "",
+        "g": "4",
+        "a": "0",
+        "pts": "4",
+        "pim": "0"
+       },
+       {
+        "number": "90",
+        "name": "Nicholas Capozzoli",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "93",
+        "name": "Evan Martin",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "95",
+        "name": "Connor Hassett",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "number": "1",
+        "name": "Connor Daly",
+        "min": "36:00",
+        "sa": "16",
+        "ga": "2",
+        "sv": "14",
+        "svpct": ".875",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "5",
+       "a": "0",
+       "pts": "5",
+       "pim": "4"
+      }
+     }
+    ],
+    "goals": [
+     {
+      "period": "1st",
+      "time": "04:06",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "3"
+      },
+      "assists": []
+     },
+     {
+      "period": "1st",
+      "time": "01:02",
+      "tags": [],
+      "team": "Genesis Hockey Club",
+      "scorer": {
+       "number": "30",
+       "name": "Micah Jeong",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "60",
+        "name": "Jack Tucker",
+        "count": "3"
+       },
+       {
+        "number": "48",
+        "name": "Cameron Frazier",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "1st",
+      "time": "00:54",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "4"
+      },
+      "assists": []
+     },
+     {
+      "period": "2nd",
+      "time": "03:44",
+      "tags": [],
+      "team": "Genesis Hockey Club",
+      "scorer": {
+       "number": "60",
+       "name": "Jack Tucker",
+       "count": "2"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "11:35",
+      "tags": [
+       "GWG"
+      ],
+      "team": "Rinx",
+      "scorer": {
+       "number": "20",
+       "name": "Jorge Leonardo",
+       "count": "3"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "02:11",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "5"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "01:35",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "6"
+      },
+      "assists": []
+     }
+    ],
+    "penalties": [
+     {
+      "period": "2nd",
+      "time": "05:07",
+      "team": "Rinx",
+      "number": "23",
+      "name": "Conor Wilkens",
+      "infraction": "Tripping/Clipping/Leg Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "07:28",
+      "team": "Rinx",
+      "number": "5",
+      "name": "Declan Nimmo",
+      "infraction": "Slashing - Minor, 1.5 min"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Matthew Grosskurth",
+      "val": "4"
+     },
+     {
+      "cat": "Assists",
+      "name": "Cameron Frazier, Jack Tucker",
+      "val": "1"
+     },
+     {
+      "cat": "Points",
+      "name": "Matthew Grosskurth",
+      "val": "4"
+     },
+     {
+      "cat": "Saves",
+      "name": "Colin Earley",
+      "val": "23"
+     }
+    ],
+    "stars": []
+   }
+  },
+  {
+   "id": "3060552",
+   "url": "https://gamesheetstats.com/seasons/16150/games/3060552",
+   "date": "Oct 11, 2026",
+   "opponent": "Long Island Gulls 10A",
+   "detail": {
+    "league": "2026 Mid-Atlantic Fall Showcase",
+    "info": [
+     "Game #41-Champ1v2",
+     "Playoff",
+     "Oct 11, 2026, 10:31 AM",
+     "Hatfield Ice Arena (Gray)"
+    ],
+    "status": "Final",
+    "dateLong": "Sunday, October 11, 2026",
+    "isoDate": "2026-10-11",
+    "time": "10:31 AM",
+    "venue": "Hatfield Ice Arena (Gray)",
+    "periodLabels": [
+     "1st",
+     "2nd",
+     "3rd"
+    ],
+    "teams": [
+     {
+      "name": "Long Island Gulls",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/a9befe24-9496-499b-e5ce-aab9fba97c00/256",
+      "total": "2",
+      "periods": [
+       "0",
+       "1",
+       "1"
+      ],
+      "shots": "19",
+      "shotsByPeriod": [
+       "3",
+       "7",
+       "9"
+      ],
+      "skaters": [
+       {
+        "number": "2",
+        "name": "Ethan Hughes",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "7",
+        "name": "Jerry Lisner",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "9",
+        "name": "Roland Austin",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "2"
+       },
+       {
+        "number": "10",
+        "name": "Cole Bergin",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "11",
+        "name": "Brandon Buzy",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "13",
+        "name": "Ryan Lipschitz",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "15",
+        "name": "Jeremiah Dalton",
+        "pos": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "20",
+        "name": "Nicholas Derosa",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "27",
+        "name": "Brady Baxter",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "42",
+        "name": "Landry Johnson",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "68",
+        "name": "Jayden Chang",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "77",
+        "name": "Matthew La Natra",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "93",
+        "name": "Emma Peace",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "number": "31",
+        "name": "Ethan May",
+        "min": "18:34",
+        "sa": "15",
+        "ga": "3",
+        "sv": "12",
+        "svpct": ".800",
+        "wl": "L"
+       },
+       {
+        "number": "36",
+        "name": "Bryce Behonick",
+        "min": "17:26",
+        "sa": "8",
+        "ga": "1",
+        "sv": "7",
+        "svpct": ".875",
+        "wl": ""
+       }
+      ],
+      "totals": {
+       "g": "2",
+       "a": "2",
+       "pts": "4",
+       "pim": "6"
+      }
+     },
+     {
+      "name": "Rinx",
+      "logo": "https://imagedelivery.net/ErrQpIaCOWR-Tz51PhN1zA/8f14b1f6-8ea1-499b-861a-677db45cde00/256",
+      "total": "4",
+      "periods": [
+       "1",
+       "0",
+       "3"
+      ],
+      "shots": "23",
+      "shotsByPeriod": [
+       "8",
+       "7",
+       "8"
+      ],
+      "skaters": [
+       {
+        "number": "3",
+        "name": "Ryan Christman",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "4",
+        "name": "Ryan Bachert",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2"
+       },
+       {
+        "number": "10",
+        "name": "Edward Carbone",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "pos": "",
+        "g": "2",
+        "a": "1",
+        "pts": "3",
+        "pim": "0"
+       },
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "21",
+        "name": "Tristen Pajak",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "23",
+        "name": "Conor Wilkens",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "28",
+        "name": "Stephen Kull",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "pos": "",
+        "g": "2",
+        "a": "1",
+        "pts": "3",
+        "pim": "0"
+       },
+       {
+        "number": "90",
+        "name": "Nicholas Capozzoli",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "93",
+        "name": "Evan Martin",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "95",
+        "name": "Connor Hassett",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "96",
+        "name": "Ryan Lupia",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "number": "1",
+        "name": "Connor Daly",
+        "min": "18:34",
+        "sa": "16",
+        "ga": "2",
+        "sv": "14",
+        "svpct": ".875",
+        "wl": "W"
+       },
+       {
+        "number": "35",
+        "name": "Louie Savola",
+        "min": "17:26",
+        "sa": "3",
+        "ga": "0",
+        "sv": "3",
+        "svpct": "1.000",
+        "wl": ""
+       }
+      ],
+      "totals": {
+       "g": "4",
+       "a": "2",
+       "pts": "6",
+       "pim": "2"
+      }
+     }
+    ],
+    "goals": [
+     {
+      "period": "1st",
+      "time": "04:08",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "18",
+       "name": "Sean Fox",
+       "count": "3"
+      },
+      "assists": [
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "count": "3"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "04:47",
+      "tags": [
+       "PP"
+      ],
+      "team": "Long Island Gulls",
+      "scorer": {
+       "number": "15",
+       "name": "Jeremiah Dalton",
+       "count": "3"
+      },
+      "assists": [
+       {
+        "number": "2",
+        "name": "Ethan Hughes",
+        "count": "1"
+       },
+       {
+        "number": "9",
+        "name": "Roland Austin",
+        "count": "3"
+       }
+      ]
+     },
+     {
+      "period": "3rd",
+      "time": "09:38",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "7"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "08:54",
+      "tags": [
+       "PP",
+       "GWG"
+      ],
+      "team": "Rinx",
+      "scorer": {
+       "number": "18",
+       "name": "Sean Fox",
+       "count": "4"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "04:48",
+      "tags": [
+       "PP"
+      ],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "8"
+      },
+      "assists": [
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "count": "2"
+       }
+      ]
+     },
+     {
+      "period": "3rd",
+      "time": "04:41",
+      "tags": [],
+      "team": "Long Island Gulls",
+      "scorer": {
+       "number": "10",
+       "name": "Cole Bergin",
+       "count": "6"
+      },
+      "assists": []
+     }
+    ],
+    "penalties": [
+     {
+      "period": "2nd",
+      "time": "05:26",
+      "team": "Rinx",
+      "number": "5",
+      "name": "Declan Nimmo",
+      "infraction": "Tripping/Clipping/Leg Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "2nd",
+      "time": "02:35",
+      "team": "Long Island Gulls",
+      "number": "",
+      "name": "",
+      "infraction": "LONG ISLAND GULLS · Too Many Players on the Ice - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "09:10",
+      "team": "Long Island Gulls",
+      "number": "9",
+      "name": "Roland Austin",
+      "infraction": "Tripping/Clipping/Leg Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "05:24",
+      "team": "Long Island Gulls",
+      "number": "42",
+      "name": "Landry Johnson",
+      "infraction": "Interference - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "00:45",
+      "team": "Long Island Gulls",
+      "number": "20",
+      "name": "Nicholas Derosa",
+      "infraction": "Roughing - Minor, 1.5 min"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Sean Fox, Matthew Grosskurth",
+      "val": "2"
+     },
+     {
+      "cat": "Assists",
+      "name": "Ethan Hughes, Roland Austin +2",
+      "val": "1"
+     },
+     {
+      "cat": "Points",
+      "name": "Sean Fox, Matthew Grosskurth",
+      "val": "3"
+     },
+     {
+      "cat": "Saves",
+      "name": "Connor Daly",
+      "val": "14"
+     }
+    ],
+    "stars": []
+   }
+  }
+ ]
+}
