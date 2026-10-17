@@ -63,9 +63,9 @@ with sync_playwright() as p:
     page.wait_for_timeout(8000)
     print("after click:", page.url, page.title(), file=sys.stderr)
     open("box.html", "w").write(page.content())
-    for tab in ["LINEUPS", "PLAY-BY-PLAY"]:
+    for tab in ["Lineups", "Play-By-Play"]:
         try:
-            page.get_by_text(tab, exact=True).first.click()
+            page.get_by_role("button", name=tab, exact=True).first.click()
             page.wait_for_timeout(5000)
             open(f"{tab.lower()}.html", "w").write(page.content())
             open(f"{tab.lower()}.txt", "w").write(page.evaluate("() => document.body.innerText"))
