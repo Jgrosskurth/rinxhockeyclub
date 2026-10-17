@@ -6,16 +6,6 @@
   "last_page_title": "Games | Long Island Amateur Hockey League - 2026/2027 \u00bb USAH - New York District",
   "games": [
     {
-      "date": "Oct 17, 2026",
-      "visitor": "NYH0041-009 Great Neck Bruins 10U Marsella",
-      "home": "NYH0124-002 Iceworks Islanders 10U Fortunato",
-      "visitorScore": 1,
-      "homeScore": 0,
-      "ot": false,
-      "type": "Regular Season",
-      "gameId": "2989488"
-    },
-    {
       "date": "Sep 12, 2026",
       "visitor": "NYH0036-010 Aviator Hockey Club 10U Janss",
       "home": "NYH4033-002-North Park-10U Mauro",
@@ -194,6 +184,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989473"
+    },
+    {
+      "date": "Oct 17, 2026",
+      "visitor": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "home": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "visitorScore": 1,
+      "homeScore": 3,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989488"
     }
   ]
 }

@@ -98,6 +98,21 @@
     },
     {
       "rank": "7",
+      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "gp": "6",
+      "w": "1",
+      "l": "4",
+      "t": "1",
+      "otl": "0",
+      "pts": "3",
+      "gf": "6",
+      "ga": "38",
+      "diff": "-32",
+      "streak": "Won 1",
+      "ours": false
+    },
+    {
+      "rank": "8",
       "team": "NYH0093-006 Dix Hills Selects 10U Goldfine",
       "gp": "2",
       "w": "0",
@@ -112,23 +127,8 @@
       "ours": false
     },
     {
-      "rank": "8",
-      "team": "NYH0124-002 Iceworks Islanders 10U Fortunato",
-      "gp": "5",
-      "w": "0",
-      "l": "4",
-      "t": "1",
-      "otl": "0",
-      "pts": "1",
-      "gf": "3",
-      "ga": "37",
-      "diff": "-34",
-      "streak": "Lost 1",
-      "ours": false
-    },
-    {
       "rank": "9",
-      "team": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "team": "NYH4033-005-North Park 10U Lewis",
       "gp": "0",
       "w": "0",
       "l": "0",
@@ -143,17 +143,17 @@
     },
     {
       "rank": "10",
-      "team": "NYH4033-005-North Park 10U Lewis",
-      "gp": "0",
+      "team": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "gp": "1",
       "w": "0",
-      "l": "0",
+      "l": "1",
       "t": "0",
       "otl": "0",
       "pts": "0",
-      "gf": "0",
-      "ga": "0",
-      "diff": "0",
-      "streak": "-",
+      "gf": "1",
+      "ga": "3",
+      "diff": "-2",
+      "streak": "Lost 1",
       "ours": false
     }
   ]
