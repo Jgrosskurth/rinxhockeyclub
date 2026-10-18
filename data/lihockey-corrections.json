@@ -1,0 +1,12 @@
+{
+ "_about": "Fixes for LIHockey.com box scores that are wrong. .github/scripts/pull_lihockey.py applies these on every pull, to the game's box score and to the season totals. Key: team, then LIHockey game id (lihockey.com/games/<id>/). Per player, give the correct goals (g), assists (a) and/or penalty minutes (pim); points are worked out. Remove an entry once LIHockey fixes the game.",
+ "10u": {
+  "5862": {
+   "note": "Corrected by the team: Matthew Grosskurth scored 2 goals and Jorge Leonardo none (LIHockey had 1 each).",
+   "skaters": {
+    "Matthew Grosskurth": { "g": 2 },
+    "Jorge Leonardo": { "g": 0 }
+   }
+  }
+ }
+}
