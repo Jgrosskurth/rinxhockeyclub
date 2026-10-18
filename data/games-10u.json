@@ -194,6 +194,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989488"
+    },
+    {
+      "date": "Oct 18, 2026",
+      "visitor": "NYH0017-010 Rinx Travel 10U O'Donoghue",
+      "home": "NYH0007-001 Long Island Sharks 10u Davis",
+      "visitorScore": 9,
+      "homeScore": 0,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989472"
     }
   ]
 }

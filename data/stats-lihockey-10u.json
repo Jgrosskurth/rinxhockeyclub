@@ -3,18 +3,40 @@
  "source": "lihockey.com",
  "team": "10u",
  "teamPage": "https://lihockey.com/teams/1162/",
- "updated": "2026-10-17T14:08:03+00:00",
+ "updated": "2026-10-18T13:23:08+00:00",
  "players": [
   {
    "name": "Matthew Grosskurth",
    "number": "",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
+   "g": "10",
+   "a": "0",
+   "pts": "10",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
+   "name": "Sean Fox",
+   "number": "",
+   "pos": "",
+   "gp": "5",
    "g": "9",
    "a": "0",
    "pts": "9",
    "plusminus": "0",
-   "pim": "1"
+   "pim": "0"
+  },
+  {
+   "name": "Donald Pierre Canel",
+   "number": "",
+   "pos": "",
+   "gp": "4",
+   "g": "8",
+   "a": "0",
+   "pts": "8",
+   "plusminus": "0",
+   "pim": "0"
   },
   {
    "name": "Jorge Leonardo",
@@ -28,35 +50,13 @@
    "pim": "0"
   },
   {
-   "name": "Sean Fox",
-   "number": "",
-   "pos": "",
-   "gp": "4",
-   "g": "6",
-   "a": "0",
-   "pts": "6",
-   "plusminus": "0",
-   "pim": "0"
-  },
-  {
-   "name": "Donald Pierre Canel",
-   "number": "",
-   "pos": "",
-   "gp": "3",
-   "g": "5",
-   "a": "0",
-   "pts": "5",
-   "plusminus": "0",
-   "pim": "0"
-  },
-  {
    "name": "Aiden Brown",
    "number": "",
    "pos": "",
-   "gp": "3",
-   "g": "3",
+   "gp": "4",
+   "g": "4",
    "a": "0",
-   "pts": "3",
+   "pts": "4",
    "plusminus": "0",
    "pim": "2"
   },
@@ -64,12 +64,12 @@
    "name": "Ryan Bachert",
    "number": "",
    "pos": "",
-   "gp": "3",
+   "gp": "4",
    "g": "3",
    "a": "0",
    "pts": "3",
    "plusminus": "0",
-   "pim": "8"
+   "pim": "9"
   },
   {
    "name": "Ryan Lupia",
@@ -105,6 +105,17 @@
    "pim": "0"
   },
   {
+   "name": "Declan Nimmo",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
    "name": "Evan Martin",
    "number": "",
    "pos": "",
@@ -130,7 +141,7 @@
    "name": "Connor Daly",
    "number": "",
    "pos": "G",
-   "gp": "3",
+   "gp": "4",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -141,7 +152,7 @@
    "name": "Louie Savola",
    "number": "",
    "pos": "G",
-   "gp": "2",
+   "gp": "3",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -164,27 +175,352 @@
   {
    "name": "Connor Daly",
    "number": "",
-   "gp": 3,
-   "sa": 14,
+   "gp": 4,
+   "sa": 20,
    "ga": 2,
-   "sv": 12,
+   "sv": 18,
    "w": 2,
    "l": 0,
-   "svpct": "0.857"
+   "svpct": "0.900"
   },
   {
    "name": "Louie Savola",
    "number": "",
-   "gp": 2,
-   "sa": 8,
+   "gp": 3,
+   "sa": 16,
    "ga": 0,
-   "sv": 8,
-   "w": 1,
+   "sv": 16,
+   "w": 2,
    "l": 0,
    "svpct": "1.000"
   }
  ],
  "games": [
+  {
+   "id": "5896",
+   "date": "Oct 18",
+   "home": false,
+   "opponent": "LI Sharks 10U Silver - Davis",
+   "result": "W",
+   "score": "9-0",
+   "box": {
+    "skaters": [
+     {
+      "id": "7087",
+      "name": "Sean Fox",
+      "number": "",
+      "g": 3,
+      "a": 0,
+      "pts": 3,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8371",
+      "name": "Donald Pierre Canel",
+      "number": "",
+      "g": 3,
+      "a": 0,
+      "pts": 3,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7088",
+      "name": "Matthew Grosskurth",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8370",
+      "name": "Aiden Brown",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9067",
+      "name": "Declan Nimmo",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8368",
+      "name": "Ryan Bachert",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9071",
+      "name": "Connor Daly",
+      "number": "",
+      "min": "—",
+      "sa": "6",
+      "ga": "0",
+      "sv": "6",
+      "svpct": "1.000",
+      "wl": "-"
+     },
+     {
+      "id": "9076",
+      "name": "Louie Savola",
+      "number": "",
+      "min": "—",
+      "sa": "8",
+      "ga": "0",
+      "sv": "8",
+      "svpct": "1.000",
+      "wl": "W"
+     }
+    ]
+   },
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "Rinx Hockey 10U Silver - O'Donoghue",
+      "record": "4-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "4",
+       "3",
+       "2"
+      ],
+      "total": "9",
+      "skaters": [
+       {
+        "name": "Sean Fox",
+        "number": "",
+        "badge": "Hat trick",
+        "g": "3",
+        "a": "0",
+        "pts": "3",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Donald Pierre Canel",
+        "number": "",
+        "badge": "Hat trick",
+        "g": "3",
+        "a": "0",
+        "pts": "3",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Matthew Grosskurth",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aiden Brown",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Declan Nimmo",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Bachert",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Connor Daly",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "6",
+        "ga": "0",
+        "sv": "6",
+        "svpct": "1.000",
+        "wl": "-"
+       },
+       {
+        "name": "Louie Savola",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "8",
+        "ga": "0",
+        "sv": "8",
+        "svpct": "1.000",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "9",
+       "a": "0",
+       "pts": "9",
+       "pim": "1"
+      }
+     },
+     {
+      "side": "home",
+      "name": "LI Sharks 10U Silver - Davis",
+      "record": "1-1-2-0",
+      "abbr": "SEHC",
+      "periods": [
+       "0",
+       "0",
+       "0"
+      ],
+      "total": "0",
+      "skaters": [
+       {
+        "name": "Lukas McDonald",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Paul Megerian Jr",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "11",
+        "ga": "2",
+        "sv": "9",
+        "svpct": "0.818",
+        "wl": "-"
+       },
+       {
+        "name": "Luca Petrocelli",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "15",
+        "ga": "7",
+        "sv": "8",
+        "svpct": "0.533",
+        "wl": "L"
+       }
+      ],
+      "totals": {
+       "g": "0",
+       "a": "0",
+       "pts": "0",
+       "pim": "2"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Sean Fox",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "3G"
+     },
+     {
+      "rank": "2",
+      "name": "Donald Pierre Canel",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "3G"
+     },
+     {
+      "rank": "3",
+      "name": "Matthew Grosskurth",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "1G"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Sean Fox",
+      "val": "3"
+     },
+     {
+      "cat": "Points",
+      "name": "Sean Fox",
+      "val": "3"
+     },
+     {
+      "cat": "Saves",
+      "name": "Paul Megerian Jr",
+      "val": "9"
+     }
+    ],
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Sunday, October 18 · 8:15 AM"
+    ],
+    "dateLong": "Sunday, October 18, 2026",
+    "venue": "Iceland",
+    "isoDate": "2026-10-18",
+    "recap": null
+   },
+   "url": "https://lihockey.com/games/5896/"
+  },
   {
    "id": "5862",
    "date": "Oct 17",
