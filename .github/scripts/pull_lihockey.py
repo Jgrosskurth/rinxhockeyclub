@@ -230,6 +230,47 @@ def totals(games):
             sorted(goalies.values(), key=lambda g: -g['gp']))
 
 
+def corrections(key):
+    """data/lihockey-corrections.json: {team: {game id: {note, skaters: {name: {g, a, pim}}}}}."""
+    try:
+        return json.loads((DATA / 'lihockey-corrections.json').read_text()).get(key, {})
+    except (OSError, ValueError):
+        return {}
+
+
+def fix_line(line, change, as_text):
+    """Apply one player's corrected stats to a box score row; points follow."""
+    for k in ('g', 'a', 'pim'):
+        if k in change:
+            line[k] = str(change[k]) if as_text else int(change[k])
+    pts = num(str(line.get('g', 0))) + num(str(line.get('a', 0)))
+    line['pts'] = str(pts) if as_text else pts
+
+
+def apply_corrections(game, fixes):
+    """Correct a game LIHockey got wrong, in both its box score (season totals)
+    and its details (the Box Score page). Players not listed are added."""
+    fix = fixes.get(str(game.get('id')))
+    if not fix:
+        return
+    rinx = next((t for t in (game.get('detail') or {}).get('teams', []) if 'rinx' in t.get('name', '').lower()), None)
+    for name, change in fix.get('skaters', {}).items():
+        for rows, as_text in (((game.get('box') or {}).get('skaters'), False), ((rinx or {}).get('skaters'), True)):
+            if rows is None:
+                continue
+            line = next((r for r in rows if who(r['name']) == who(name)), None)
+            if not line:
+                zero = '0' if as_text else 0
+                line = {'name': name, 'number': '', 'g': zero, 'a': zero, 'pts': zero, 'pim': zero,
+                        'plusminus': zero, 'sog': zero}
+                rows.append(line)
+            fix_line(line, change, as_text)
+    if rinx:
+        rinx['skaters'].sort(key=lambda r: (-num(str(r.get('pts'))), -num(str(r.get('g')))))
+    if game.get('detail') is not None:
+        game['detail']['correction'] = fix.get('note', 'Corrected by the team.')
+
+
 def pull(key, team_id):
     out = DATA / f'stats-lihockey-{key}.json'
     try:
@@ -257,6 +298,9 @@ def pull(key, team_id):
         game['box'] = box if box is not None else old.get('box')
         game['detail'] = info if info is not None else old.get('detail')
         game['url'] = f"{SITE}/games/{game['id']}/"
+    fixes = corrections(key)
+    for game in games:
+        apply_corrections(game, fixes)
     players, goalies = totals(games)
     body = {
         'type': 'stats', 'source': 'lihockey.com', 'team': key,

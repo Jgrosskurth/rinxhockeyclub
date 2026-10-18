@@ -10,9 +10,9 @@
    "number": "",
    "pos": "",
    "gp": "4",
-   "g": "8",
+   "g": "9",
    "a": "0",
-   "pts": "8",
+   "pts": "9",
    "plusminus": "0",
    "pim": "1"
   },
@@ -21,9 +21,9 @@
    "number": "",
    "pos": "",
    "gp": "4",
-   "g": "7",
+   "g": "6",
    "a": "0",
-   "pts": "7",
+   "pts": "6",
    "plusminus": "0",
    "pim": "0"
   },
@@ -231,9 +231,9 @@
       "id": "7088",
       "name": "Matthew Grosskurth",
       "number": "",
-      "g": 1,
+      "g": 2,
       "a": 0,
-      "pts": 1,
+      "pts": 2,
       "pim": 1,
       "plusminus": 0,
       "sog": 0
@@ -242,9 +242,9 @@
       "id": "7089",
       "name": "Jorge Leonardo",
       "number": "",
-      "g": 1,
+      "g": 0,
       "a": 0,
-      "pts": 1,
+      "pts": 0,
       "pim": 0,
       "plusminus": 0,
       "sog": 0
@@ -344,21 +344,10 @@
         "name": "Matthew Grosskurth",
         "number": "",
         "badge": "",
-        "g": "1",
+        "g": "2",
         "a": "0",
-        "pts": "1",
+        "pts": "2",
         "pim": "1",
-        "plusminus": "0",
-        "sog": "0"
-       },
-       {
-        "name": "Jorge Leonardo",
-        "number": "",
-        "badge": "",
-        "g": "1",
-        "a": "0",
-        "pts": "1",
-        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -369,6 +358,17 @@
         "g": "1",
         "a": "0",
         "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jorge Leonardo",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
@@ -531,7 +531,8 @@
     "recap": {
      "url": "https://lihockey.com/rinx-hockey-10u-silver-odonoghue-stays-unbeaten-with-9-0-shutout-of-long-beach/",
      "title": "Rinx Hockey 10U Silver - O'Donoghue Stays Unbeaten With 9-0 Shutout of Long Beach"
-    }
+    },
+    "correction": "Corrected by the team: Matthew Grosskurth scored 2 goals and Jorge Leonardo none (LIHockey had 1 each)."
    },
    "url": "https://lihockey.com/games/5862/"
   },

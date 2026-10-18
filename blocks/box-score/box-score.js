@@ -258,6 +258,7 @@ function sidebar(d, game, src) {
         <p class="bx-info"><strong>${esc(d.info[2] || d.dateLong)}</strong>${d.venue ? `<br>${esc(d.venue)}` : ''}</p>
       </div>
       <p class="bx-source">Box score from <a href="${esc(game.url)}" target="_blank" rel="noopener">${esc(src.noteLink)}</a>${esc(src.note)}</p>
+      ${d.correction ? `<p class="bx-source"><strong>Note:</strong> ${esc(d.correction)}</p>` : ''}
     </aside>`;
 }
 
