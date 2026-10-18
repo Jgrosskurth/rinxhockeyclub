@@ -118,13 +118,24 @@ URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2990035@rinxhockeyclub.com
+DTSTAMP:20261018T000000Z
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261019
+SUMMARY:Rinx 14U vs Long Island Sharks (Manno) (W 9-3)
+LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
+DESCRIPTION:LIAHL · 14U Silver\nFinal: W 9-3\nSchedule: https://www.rinxho
+ ckeyclub.com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-lih-5907@rinxhockeyclub.com
 DTSTAMP:20261018T114000Z
 DTSTART;TZID=America/New_York:20261018T114000
 DTEND;TZID=America/New_York:20261018T131000
-SUMMARY:Rinx 14U vs Long Island Sharks (Manno)
+SUMMARY:Rinx 14U vs LI Sharks (Manno) (W 9-3)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 14U Silver\nSchedule: https://www.rinxhockeyclub.com/s
- chedule-14u
+DESCRIPTION:LIAHL · 14U Silver\nFinal: W 9-3\nSchedule: https://www.rinxho
+ ckeyclub.com/schedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT

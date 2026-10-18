@@ -124,6 +124,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2990040"
+    },
+    {
+      "date": "Oct 18, 2026",
+      "visitor": "NYH0007-004 Long Island Sharks 14u Manno",
+      "home": "NYH0017-015 Rinx Travel 14u South Skillman",
+      "visitorScore": 3,
+      "homeScore": 9,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990035"
     }
   ]
 }

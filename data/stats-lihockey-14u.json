@@ -3,16 +3,16 @@
  "source": "lihockey.com",
  "team": "14u",
  "teamPage": "https://lihockey.com/teams/1182/",
- "updated": "2026-10-15T02:25:19+00:00",
+ "updated": "2026-10-18T17:10:27+00:00",
  "players": [
   {
    "name": "Luka Mazzarone",
    "number": "94",
    "pos": "",
-   "gp": "4",
-   "g": "4",
+   "gp": "5",
+   "g": "6",
    "a": "0",
-   "pts": "4",
+   "pts": "6",
    "plusminus": "0",
    "pim": "20"
   },
@@ -20,16 +20,60 @@
    "name": "Brody Meyer",
    "number": "87",
    "pos": "",
-   "gp": "3",
-   "g": "3",
+   "gp": "4",
+   "g": "4",
    "a": "0",
-   "pts": "3",
+   "pts": "4",
    "plusminus": "0",
    "pim": "4"
   },
   {
+   "name": "Konstantinos Krokidis",
+   "number": "93",
+   "pos": "",
+   "gp": "3",
+   "g": "4",
+   "a": "0",
+   "pts": "4",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
+   "name": "Cameron Fine",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "10"
+  },
+  {
+   "name": "Dylan Lashuk",
+   "number": "",
+   "pos": "",
+   "gp": "2",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
    "name": "Jake Totans",
    "number": "27",
+   "pos": "",
+   "gp": "2",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Ryan Ohliger",
+   "number": "",
    "pos": "",
    "gp": "2",
    "g": "3",
@@ -61,48 +105,15 @@
    "pim": "2"
   },
   {
-   "name": "Cameron Fine",
-   "number": "",
-   "pos": "",
-   "gp": "1",
-   "g": "2",
-   "a": "0",
-   "pts": "2",
-   "plusminus": "0",
-   "pim": "0"
-  },
-  {
-   "name": "Konstantinos Krokidis",
-   "number": "93",
-   "pos": "",
-   "gp": "2",
-   "g": "2",
-   "a": "0",
-   "pts": "2",
-   "plusminus": "0",
-   "pim": "2"
-  },
-  {
-   "name": "Ryan Ohliger",
-   "number": "",
-   "pos": "",
-   "gp": "1",
-   "g": "2",
-   "a": "0",
-   "pts": "2",
-   "plusminus": "0",
-   "pim": "0"
-  },
-  {
    "name": "Thomas Klingensmith",
    "number": "53",
    "pos": "",
-   "gp": "2",
+   "gp": "3",
    "g": "2",
    "a": "0",
    "pts": "2",
    "plusminus": "0",
-   "pim": "2"
+   "pim": "4"
   },
   {
    "name": "Aedan Dowling",
@@ -127,17 +138,6 @@
    "pim": "0"
   },
   {
-   "name": "Dylan Lashuk",
-   "number": "",
-   "pos": "",
-   "gp": "1",
-   "g": "1",
-   "a": "0",
-   "pts": "1",
-   "plusminus": "0",
-   "pim": "2"
-  },
-  {
    "name": "Luke Ventura",
    "number": "88",
    "pos": "",
@@ -152,18 +152,18 @@
    "name": "Nicholas Pulice",
    "number": "11",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
    "g": "1",
    "a": "0",
    "pts": "1",
    "plusminus": "0",
-   "pim": "14"
+   "pim": "16"
   },
   {
    "name": "Bradley Skillman",
    "number": "",
    "pos": "G",
-   "gp": "2",
+   "gp": "3",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -206,6 +206,17 @@
  ],
  "goalies": [
   {
+   "name": "Bradley Skillman",
+   "number": "",
+   "gp": 3,
+   "sa": 39,
+   "ga": 4,
+   "sv": 35,
+   "w": 2,
+   "l": 0,
+   "svpct": "0.897"
+  },
+  {
    "name": "Joseph Azar",
    "number": "27",
    "gp": 2,
@@ -215,20 +226,378 @@
    "w": 2,
    "l": 0,
    "svpct": "0.966"
-  },
-  {
-   "name": "Bradley Skillman",
-   "number": "",
-   "gp": 2,
-   "sa": 23,
-   "ga": 1,
-   "sv": 22,
-   "w": 1,
-   "l": 0,
-   "svpct": "0.957"
   }
  ],
  "games": [
+  {
+   "id": "5907",
+   "date": "Oct 18",
+   "home": true,
+   "opponent": "LI Sharks 14U Silver - Manno",
+   "result": "W",
+   "score": "9-3",
+   "box": {
+    "skaters": [
+     {
+      "id": "602",
+      "name": "Konstantinos Krokidis",
+      "number": "93",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6928",
+      "name": "Dylan Lashuk",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11038",
+      "name": "Brody Meyer",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7351",
+      "name": "Ryan Ohliger",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6853",
+      "name": "Cameron Fine",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 10,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "262",
+      "name": "Nicholas Pulice",
+      "number": "11",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 2,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9094",
+      "name": "Bradley Skillman",
+      "number": "",
+      "min": "—",
+      "sa": "16",
+      "ga": "3",
+      "sv": "13",
+      "svpct": "0.813",
+      "wl": "W"
+     }
+    ]
+   },
+   "detail": {
+    "league": "LIAHL · 14U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "LI Sharks 14U Silver - Manno",
+      "record": "2-2-1-0",
+      "abbr": "SEHC",
+      "periods": [
+       "1",
+       "2",
+       "0"
+      ],
+      "total": "3",
+      "skaters": [
+       {
+        "name": "Jeremy Kabinoff",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jordan Daley",
+        "number": "10",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "8",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Stephen Laton",
+        "number": "58",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "10",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Carmine Montesano",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Liam Parris",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "51",
+        "ga": "9",
+        "sv": "42",
+        "svpct": "0.824",
+        "wl": "L"
+       }
+      ],
+      "totals": {
+       "g": "3",
+       "a": "0",
+       "pts": "3",
+       "pim": "20"
+      }
+     },
+     {
+      "side": "home",
+      "name": "Rinx Hockey 14U Silver - Skillman",
+      "record": "4-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "4",
+       "1",
+       "4"
+      ],
+      "total": "9",
+      "skaters": [
+       {
+        "name": "Konstantinos Krokidis",
+        "number": "93",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luka Mazzarone",
+        "number": "94",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Dylan Lashuk",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brody Meyer",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Ohliger",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Cameron Fine",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "10",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Nicholas Pulice",
+        "number": "11",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Thomas Klingensmith",
+        "number": "53",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Bradley Skillman",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "16",
+        "ga": "3",
+        "sv": "13",
+        "svpct": "0.813",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "9",
+       "a": "0",
+       "pts": "9",
+       "pim": "14"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Konstantinos Krokidis",
+      "team": "Rinx Hockey 14U Silver - Skillman · #93",
+      "line": "2G"
+     },
+     {
+      "rank": "2",
+      "name": "Luka Mazzarone",
+      "team": "Rinx Hockey 14U Silver - Skillman · #94",
+      "line": "2G"
+     },
+     {
+      "rank": "3",
+      "name": "Dylan Lashuk",
+      "team": "Rinx Hockey 14U Silver - Skillman",
+      "line": "2G"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "#93 Konstantinos Krokidis",
+      "val": "2"
+     },
+     {
+      "cat": "Points",
+      "name": "#93 Konstantinos Krokidis",
+      "val": "2"
+     },
+     {
+      "cat": "Saves",
+      "name": "Liam Parris",
+      "val": "42"
+     }
+    ],
+    "info": [
+     "LIAHL · 14U Silver",
+     "Regular Season",
+     "Sunday, October 18 · 11:40 AM"
+    ],
+    "dateLong": "Sunday, October 18, 2026",
+    "venue": "The Rinx",
+    "isoDate": "2026-10-18",
+    "recap": null
+   },
+   "url": "https://lihockey.com/games/5907/"
+  },
   {
    "id": "5776",
    "date": "Oct 3",
