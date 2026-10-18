@@ -3,7 +3,7 @@
  "source": "lihockey.com",
  "team": "14u",
  "teamPage": "https://lihockey.com/teams/1182/",
- "updated": "2026-10-18T17:10:27+00:00",
+ "updated": "2026-10-18T19:38:42+00:00",
  "players": [
   {
    "name": "Luka Mazzarone",
@@ -594,7 +594,10 @@
     "dateLong": "Sunday, October 18, 2026",
     "venue": "The Rinx",
     "isoDate": "2026-10-18",
-    "recap": null
+    "recap": {
+     "url": "https://lihockey.com/rinx-hockey-14u-silver-skillman-pulls-away-from-li-sharks-14u-silver-manno-9-3-to-stay-unbeaten/",
+     "title": "Rinx Hockey 14U Silver - Skillman Pulls Away From LI Sharks 14U Silver - Manno, 9-3, to Stay Unbeaten"
+    }
    },
    "url": "https://lihockey.com/games/5907/"
   },
