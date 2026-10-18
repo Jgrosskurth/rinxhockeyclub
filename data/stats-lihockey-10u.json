@@ -3,7 +3,7 @@
  "source": "lihockey.com",
  "team": "10u",
  "teamPage": "https://lihockey.com/teams/1162/",
- "updated": "2026-10-18T13:23:08+00:00",
+ "updated": "2026-10-18T14:23:10+00:00",
  "players": [
   {
    "name": "Matthew Grosskurth",
@@ -517,7 +517,10 @@
     "dateLong": "Sunday, October 18, 2026",
     "venue": "Iceland",
     "isoDate": "2026-10-18",
-    "recap": null
+    "recap": {
+     "url": "https://lihockey.com/fox-pierre-canel-each-score-three-as-rinx-blanks-li-sharks-9-0/",
+     "title": "Fox, Pierre Canel Each Score Three as Rinx Blanks LI Sharks 9-0"
+    }
    },
    "url": "https://lihockey.com/games/5896/"
   },
