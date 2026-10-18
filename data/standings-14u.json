@@ -23,6 +23,21 @@
     },
     {
       "rank": "2",
+      "team": "NYH0007-004 Long Island Sharks 14u Manno",
+      "gp": "5",
+      "w": "2",
+      "l": "2",
+      "t": "1",
+      "otl": "0",
+      "pts": "5",
+      "gf": "21",
+      "ga": "27",
+      "diff": "-6",
+      "streak": "Tied 1",
+      "ours": false
+    },
+    {
+      "rank": "3",
       "team": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
       "gp": "2",
       "w": "2",
@@ -37,7 +52,7 @@
       "ours": false
     },
     {
-      "rank": "3",
+      "rank": "4",
       "team": "NYH4033-014 North Park 14U -Pala",
       "gp": "4",
       "w": "2",
@@ -49,21 +64,6 @@
       "ga": "15",
       "diff": "0",
       "streak": "Won 1",
-      "ours": false
-    },
-    {
-      "rank": "4",
-      "team": "NYH0007-004 Long Island Sharks 14u Manno",
-      "gp": "4",
-      "w": "2",
-      "l": "2",
-      "t": "0",
-      "otl": "0",
-      "pts": "4",
-      "gf": "15",
-      "ga": "21",
-      "diff": "-6",
-      "streak": "Lost 1",
       "ours": false
     },
     {
@@ -84,16 +84,16 @@
     {
       "rank": "6",
       "team": "NYH0036-007 Aviator Hockey Club 14U Leonard",
-      "gp": "2",
+      "gp": "3",
       "w": "0",
       "l": "2",
-      "t": "0",
+      "t": "1",
       "otl": "0",
-      "pts": "0",
-      "gf": "3",
-      "ga": "17",
+      "pts": "1",
+      "gf": "9",
+      "ga": "23",
       "diff": "-14",
-      "streak": "Lost 2",
+      "streak": "Tied 1",
       "ours": false
     },
     {
