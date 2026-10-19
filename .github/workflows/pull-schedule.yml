@@ -94,6 +94,9 @@ jobs:
           git add data/*.json data/*.ics
           if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
           git commit -m "Update GameSheet data [skip ci]"
+          # Anything else a step touched is left out of the commit (listed here
+          # for the log) and set aside while syncing.
+          git status --short
           # The Trophy Room job (or a manual edit) may have pushed meanwhile.
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git push
