@@ -40,9 +40,9 @@ URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2989476@rinxhockeyclub.com
-DTSTAMP:20260913T000000Z
-DTSTART;VALUE=DATE:20260913
-DTEND;VALUE=DATE:20260914
+DTSTAMP:20260913T080000Z
+DTSTART;TZID=America/New_York:20260913T080000
+DTEND;TZID=America/New_York:20260913T093000
 SUMMARY:Rinx 10U at Peconic Wildcats (McCarthy) (W 8-2)
 LOCATION:Peconic Ice Rink\, Riverhead\, NY
 DESCRIPTION:LIAHL · 10U Silver\nFinal: W 8-2\nSchedule: https://www.rinxho
@@ -51,9 +51,9 @@ URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2989524@rinxhockeyclub.com
-DTSTAMP:20260920T000000Z
-DTSTART;VALUE=DATE:20260920
-DTEND;VALUE=DATE:20260921
+DTSTAMP:20260920T114000Z
+DTSTART;TZID=America/New_York:20260920T114000
+DTEND;TZID=America/New_York:20260920T131000
 SUMMARY:Rinx 10U vs North Park (Mauro) (W 13-0)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 10U Silver\nFinal: W 13-0\nSchedule: https://www.rinxh
@@ -62,9 +62,9 @@ URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2989517@rinxhockeyclub.com
-DTSTAMP:20260927T000000Z
-DTSTART;VALUE=DATE:20260927
-DTEND;VALUE=DATE:20260928
+DTSTAMP:20260927T100000Z
+DTSTART;TZID=America/New_York:20260927T100000
+DTEND;TZID=America/New_York:20260927T113000
 SUMMARY:Rinx 10U vs Long Beach Lightning (Ponte) (W 10-2)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
 DESCRIPTION:LIAHL · 10U Silver\nFinal: W 10-2\nSchedule: https://www.rinxh
@@ -117,9 +117,9 @@ URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2989473@rinxhockeyclub.com
-DTSTAMP:20261017T000000Z
-DTSTART;VALUE=DATE:20261017
-DTEND;VALUE=DATE:20261018
+DTSTAMP:20261017T083000Z
+DTSTART;TZID=America/New_York:20261017T083000
+DTEND;TZID=America/New_York:20261017T100000
 SUMMARY:Rinx 10U at Long Beach Lightning (Ponte) (W 9-0)
 LOCATION:Long Beach Ice Arena\, Long Beach\, NY
 DESCRIPTION:LIAHL · 10U Silver\nFinal: W 9-0\nSchedule: https://www.rinxho
@@ -128,21 +128,10 @@ URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2989472@rinxhockeyclub.com
-DTSTAMP:20261018T000000Z
-DTSTART;VALUE=DATE:20261018
-DTEND;VALUE=DATE:20261019
-SUMMARY:Rinx 10U at Long Island Sharks (Davis) (W 9-0)
-LOCATION:Iceland\, New Hyde Park\, NY
-DESCRIPTION:LIAHL · 10U Silver\nFinal: W 9-0\nSchedule: https://www.rinxho
- ckeyclub.com/schedule
-URL:https://www.rinxhockeyclub.com/schedule
-END:VEVENT
-BEGIN:VEVENT
-UID:gamesheet-lih-5896@rinxhockeyclub.com
 DTSTAMP:20261018T081500Z
 DTSTART;TZID=America/New_York:20261018T081500
 DTEND;TZID=America/New_York:20261018T094500
-SUMMARY:Rinx 10U at LI Sharks (Davis) (W 9-0)
+SUMMARY:Rinx 10U at Long Island Sharks (Davis) (W 9-0)
 LOCATION:Iceland\, New Hyde Park\, NY
 DESCRIPTION:LIAHL · 10U Silver\nFinal: W 9-0\nSchedule: https://www.rinxho
  ckeyclub.com/schedule
