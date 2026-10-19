@@ -44,7 +44,7 @@ function render(block, slides) {
       <div class="ns-rail" id="ns-rail" role="region" aria-labelledby="latest-updates" tabindex="0">
         ${slides.map((s) => `
           <article class="ns-card">
-            <h3>${s.title}</h3>
+            <h3>${s.link ? `<a href="${s.link}">${s.title}</a>` : s.title}</h3>
             <p>${s.body}</p>
             <p class="ns-meta"><span class="news-tag">${s.tag || 'News'}</span><span class="news-date">${s.date}</span></p>
           </article>`).join('')}

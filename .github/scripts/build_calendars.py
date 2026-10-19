@@ -183,12 +183,19 @@ def same_game(a, b):
     def norm(x):
         return re.sub(r'[^a-z0-9 ]', '', tidy_team(x).lower()).strip()
 
-    def word(z):
-        return next((w for w in z.split() if len(w) > 3), z)
+    def words(z):
+        # Any shared distinctive word: GameSheet's "Long Island Sharks (Davis)"
+        # is LI Hockey's "LI Sharks (Davis)"; place words alone don't count.
+        return {w for w in z.split() if len(w) > 3 and w not in GENERIC_WORDS}
     if sheet_date(a['date']) != sheet_date(b['date']):
         return False
     x, y = norm(a['opponent']), norm(b['opponent'])
-    return bool(x and y) and (x == y or x in y or y in x or word(x) == word(y))
+    return bool(x and y) and (x == y or x in y or y in x or bool(words(x) & words(y)))
+
+
+# As GENERIC_WORDS in scripts/team-feeds.js
+GENERIC_WORDS = {'long', 'island', 'north', 'south', 'east', 'west', 'hockey', 'club',
+                 'team', 'youth', 'junior', 'silver', 'gold', 'association'}
 
 
 def title_case(text):

@@ -1,18 +1,10 @@
-// Builds "Game Update" news cards from the GameSheet schedule feeds produced
-// by the pull-schedule workflow, so each completed game gets a short write-up
-// without anyone having to author it. Used by the news-slider block.
-
-import { tidyTeam } from './team-feeds.js';
+// "Game Update" news cards for the homepage's news-slider block, one per
+// completed game. The cards are written by .github/scripts/build_news.py
+// (run by the pull-schedule workflow) into data/game-news.json: league games
+// from LI Hockey's recap, tournament games from the GameSheet box score, in
+// order of when they were played.
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
-
-const TEAMS = [
-  { feed: 'schedule-10u.json', age: '10U', label: '10U Squirts' },
-  { feed: 'schedule-14u.json', age: '14U', label: '14U Bantams' },
-  {
-    feed: 'schedule-mid-atlantic.json', age: '10U', label: '10U Squirts', event: 'the Mid-Atlantic Fall Classic',
-  },
-];
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
@@ -28,96 +20,30 @@ export function parseNewsDate(str) {
   return month < 0 ? null : new Date(+m[3], month, +m[2]);
 }
 
-const formatDate = (d) => `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
-
-// Copy variants per outcome, rotated by the team's game number so back-to-back
-// results don't read the same (and a game's card stays the same on reload).
-const COPY = {
-  rout: [
-    { title: '{age} Pours It On vs {opp}', body: 'The {label} were firing on all cylinders {where}, rolling past {opp} {score}.' },
-    { title: '{age} Routs {opp}', body: 'The {label} took control early {where} and never let up in a {score} win over {opp}.' },
-    { title: '{age} Cruises Past {opp}', body: 'A dominant effort from the {label} {where}, beating {opp} {score}.' },
-  ],
-  solid: [
-    { title: '{age} Takes Care of {opp}', body: 'The {label} pulled away from {opp} {where} for a {score} win.' },
-    { title: '{age} Handles {opp}', body: 'Strong team play carried the {label} to a {score} victory over {opp} {where}.' },
-  ],
-  close: [
-    { title: '{age} Edges {opp}', body: 'In a tight one {where}, the {label} held on to beat {opp} {score}.' },
-    { title: '{age} Holds Off {opp}', body: 'The {label} battled to the final buzzer {where} and came away with a {score} win over {opp}.' },
-  ],
-  tie: [
-    { title: '{age} Battles {opp} to a Draw', body: 'The {label} and {opp} could not be separated {where}, skating to a {score} tie.' },
-  ],
-  closeLoss: [
-    { title: '{age} Falls Just Short vs {opp}', body: 'The {label} pushed to the end {where} but dropped a {score} decision to {opp}.' },
-  ],
-  loss: [
-    { title: '{age} Drops One to {opp}', body: '{opp} got the better of the {label} {where}, {score}. On to the next one.' },
-  ],
-};
-
-function outcome(result, us, them) {
-  const margin = us - them;
-  if (result === 'T') return 'tie';
-  if (result === 'L') return margin >= -2 ? 'closeLoss' : 'loss';
-  if (margin >= 5) return 'rout';
-  return margin >= 3 ? 'solid' : 'close';
-}
-
-function where(game, team) {
-  if (team.event) return `at ${team.event}`;
-  const loc = game.location || '';
-  if (game.venue === 'Home') return /rinx/i.test(loc) ? 'at home at The Rinx' : `at home at ${loc}`;
-  return loc ? `on the road at ${loc}` : 'on the road';
-}
-
-function buildCard(game, team, n) {
-  const date = parseNewsDate(game.date);
-  const m = (game.score || '').match(/(\d+)\s*-\s*(\d+)/);
-  if (!date || !m || !['W', 'L', 'T'].includes(game.result)) return null;
-  const us = +m[1];
-  const them = +m[2];
-  const kind = outcome(game.result, us, them);
-  const variants = COPY[kind];
-  const copy = variants[n % variants.length];
-  // Score reads winner-first: "beat X 7-1", "lost to X 4-2".
-  const score = game.result === 'L' ? `${them}-${us}` : `${us}-${them}`;
-  const fill = (s, html) => s
-    .replace(/\{age\}/g, team.age)
-    .replace(/\{label\}/g, team.label)
-    .replace(/\{opp\}/g, tidyTeam(game.opponent))
-    .replace(/\{where\}/g, where(game, team))
-    .replace(/\{score\}/g, html ? `<span class="news-score">${score}</span>` : score);
-  let body = fill(copy.body, true);
-  if (game.result === 'W' && them === 0) body += ' A shutout for the defense and goaltending!';
-  body = body.charAt(0).toUpperCase() + body.slice(1);
-  return {
-    tag: 'Game Update',
-    title: fill(copy.title),
-    body,
-    date: formatDate(date),
-    time: date.getTime(),
-    age: team.age,
-    auto: true,
-  };
-}
-
 /**
- * Game Update cards for every completed game in the 10U/14U feeds.
- * Feeds that fail to load are skipped.
+ * Game Update cards, newest game first. `time` is the game's start (local),
+ * so same-day games keep their real order. Empty if the feed can't load.
  */
 export async function loadGameUpdates() {
-  const results = await Promise.all(TEAMS.map(async (team) => {
-    try {
-      const resp = await fetch(`${FEED_BASE}/${team.feed}`);
-      if (!resp.ok) return [];
-      const data = await resp.json();
-      return (data.games || []).filter((g) => g.result)
-        .map((g, n) => buildCard(g, team, n)).filter(Boolean);
-    } catch {
-      return [];
-    }
-  }));
-  return results.flat();
+  try {
+    const resp = await fetch(`${FEED_BASE}/game-news.json`);
+    if (!resp.ok) return [];
+    const { cards = [] } = await resp.json();
+    return cards.map((c) => {
+      const [y, m, d] = c.iso.split('-').map(Number);
+      const [hh, mm] = (c.time || '00:00').split(':').map(Number);
+      return {
+        tag: 'Game Update',
+        title: c.title,
+        body: c.body,
+        date: c.date,
+        time: new Date(y, m - 1, d, hh, mm).getTime(),
+        age: c.age,
+        link: c.link || '',
+        auto: true,
+      };
+    });
+  } catch {
+    return [];
+  }
 }

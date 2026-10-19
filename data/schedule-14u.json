@@ -10,7 +10,7 @@
       "opponent": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ 12- 14U SILVER",
       "venue": "Away",
       "location": "Peconic Ice Rink",
-      "time": "",
+      "time": "5:00 PM",
       "score": "8-3",
       "result": "W",
       "gameId": "2990043"
@@ -20,7 +20,7 @@
       "opponent": "NYH4033-014 North Park 14U -Pala 12- 14U SILVER",
       "venue": "Home",
       "location": "The Rinx",
-      "time": "",
+      "time": "3:45 PM",
       "score": "5-1",
       "result": "W",
       "gameId": "2990036"
@@ -30,7 +30,7 @@
       "opponent": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ 12- 14U SILVER",
       "venue": "Home",
       "location": "The Rinx",
-      "time": "",
+      "time": "4:40 PM",
       "score": "7-1",
       "result": "W",
       "gameId": "2990034"
@@ -50,7 +50,7 @@
       "opponent": "NYH0007-004 Long Island Sharks 14u Manno 12- 14U SILVER",
       "venue": "Home",
       "location": "The Rinx",
-      "time": "",
+      "time": "11:40 AM",
       "score": "9-3",
       "result": "W",
       "gameId": "2990035"
@@ -134,19 +134,6 @@
       "score": "",
       "result": "",
       "gameId": "2992410"
-    },
-    {
-      "date": "Oct 18, 2026",
-      "opponent": "LI Sharks 14U Silver - Manno",
-      "venue": "Home",
-      "location": "The Rinx",
-      "time": "11:40 AM",
-      "score": "9-3",
-      "result": "W",
-      "gameId": "lih-5907",
-      "division": "12- 14U SILVER",
-      "source": "lihockey",
-      "url": "https://lihockey.com/games/5907/"
     },
     {
       "date": "Sep 13, 2026",
