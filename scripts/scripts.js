@@ -211,7 +211,7 @@ const BLOCK_DEPS = {
   columns: ['media'],
   'game-submission': ['team-feeds', 'team-logos'],
   hero: ['team-feeds', 'team-logos'],
-  'news-slider': ['game-updates', 'team-feeds', 'team-logos'],
+  'news-slider': ['game-updates'],
   'recent-results': ['team-feeds', 'team-logos'],
   roster: ['media'],
   schedule: ['team-feeds', 'team-logos'],

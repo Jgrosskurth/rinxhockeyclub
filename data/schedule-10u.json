@@ -10,7 +10,7 @@
       "opponent": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY 04 - 10U SILVER",
       "venue": "Away",
       "location": "Peconic Ice Rink",
-      "time": "",
+      "time": "8:00 AM",
       "score": "8-2",
       "result": "W",
       "gameId": "2989476"
@@ -20,7 +20,7 @@
       "opponent": "NYH4033-002-North Park-10U Mauro 04 - 10U SILVER",
       "venue": "Home",
       "location": "The Rinx",
-      "time": "",
+      "time": "11:40 AM",
       "score": "13-0",
       "result": "W",
       "gameId": "2989524"
@@ -30,7 +30,7 @@
       "opponent": "NYH0149-006 Long Beach Lightning 10U Ponte 04 - 10U SILVER",
       "venue": "Home",
       "location": "The Rinx",
-      "time": "",
+      "time": "10:00 AM",
       "score": "10-2",
       "result": "W",
       "gameId": "2989517"
@@ -40,7 +40,7 @@
       "opponent": "NYH0149-006 Long Beach Lightning 10U Ponte 04 - 10U SILVER",
       "venue": "Away",
       "location": "Long Beach Arena",
-      "time": "",
+      "time": "8:30 AM",
       "score": "9-0",
       "result": "W",
       "gameId": "2989473"
@@ -50,7 +50,7 @@
       "opponent": "NYH0007-001 Long Island Sharks 10u Davis 04 - 10U SILVER",
       "venue": "Away",
       "location": "Iceland",
-      "time": "",
+      "time": "8:15 AM",
       "score": "9-0",
       "result": "W",
       "gameId": "2989472"
@@ -174,19 +174,6 @@
       "score": "",
       "result": "",
       "gameId": "2992368"
-    },
-    {
-      "date": "Oct 18, 2026",
-      "opponent": "LI Sharks 10U Silver - Davis",
-      "venue": "Away",
-      "location": "Iceland",
-      "time": "8:15 AM",
-      "score": "9-0",
-      "result": "W",
-      "gameId": "lih-5896",
-      "division": "04 - 10U SILVER",
-      "source": "lihockey",
-      "url": "https://lihockey.com/games/5896/"
     }
   ]
 }

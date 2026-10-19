@@ -81,8 +81,14 @@ def fill(key):
         except (KeyError, TypeError, ValueError, AttributeError) as err:
             print(f"[{key}] skipped LI Hockey game {g.get('id')}: {err!r}", file=sys.stderr)
             continue
-        if game and not any(covers(s, game) for s in listed):
+        if not game:
+            continue
+        match = next((s for s in listed if covers(s, game)), None)
+        if match is None:
             added.append(game)
+        elif not match.get('time') and game['time']:
+            # GameSheet drops the start time once a game is final; LI Hockey keeps it.
+            match['time'] = game['time']
     schedule['games'] = listed + added
     path.write_text(json.dumps(schedule, indent=2))
     for game in added:

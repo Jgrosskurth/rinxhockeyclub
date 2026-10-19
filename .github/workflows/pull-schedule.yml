@@ -81,6 +81,9 @@ jobs:
       - name: Pull stats for GameSheet team pages linked in the other-games sheet
         run: python .github/scripts/pull_sheet_stats.py
 
+      - name: Homepage Game Update cards (LI Hockey recaps, GameSheet box scores)
+        run: python .github/scripts/build_news.py
+
       - name: Build team calendars
         run: python .github/scripts/build_calendars.py
 

@@ -115,6 +115,19 @@
   color: var(--color-navy);
 }
 
+/* Game Update headlines link to the game's box score */
+.news-slider .ns-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.news-slider .ns-card h3 a:hover,
+.news-slider .ns-card h3 a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--color-red);
+  text-underline-offset: 3px;
+}
+
 .news-slider .ns-card p {
   color: #3b4351;
 }

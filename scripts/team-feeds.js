@@ -160,13 +160,20 @@ function dayKey(date) {
   return `${m[3]}-${String(month).padStart(2, '0')}-${m[2].padStart(2, '0')}`;
 }
 
+const GENERIC_WORDS = new Set(['long', 'island', 'north', 'south', 'east', 'west', 'hockey', 'club',
+  'team', 'youth', 'junior', 'silver', 'gold', 'association']);
+
 function sameOpponent(a, b) {
   const norm = (x) => tidyTeam(x).toLowerCase().replace(/[^a-z0-9 ]/g, '').trim();
   const [x, y] = [norm(a), norm(b)];
   if (!x || !y) return false;
   if (x === y || x.includes(y) || y.includes(x)) return true;
-  const word = (z) => z.split(' ').find((w) => w.length > 3) || z;
-  return word(x) === word(y);
+  // Any shared distinctive word: GameSheet's "Long Island Sharks (Davis)" is
+  // LI Hockey's "LI Sharks (Davis)". Place words alone don't count (Long
+  // Beach vs Long Island).
+  const words = (z) => new Set(z.split(' ').filter((w) => w.length > 3 && !GENERIC_WORDS.has(w)));
+  const wx = words(x);
+  return [...words(y)].some((w) => wx.has(w));
 }
 
 /**

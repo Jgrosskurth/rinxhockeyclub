@@ -191,6 +191,35 @@ def detail(page):
     }
 
 
+def recap_lead(url):
+    """The recap article's opening paragraph (its summary of the game), for
+    the homepage news cards (.github/scripts/build_news.py)."""
+    page = fetch(url)
+    article = re.search(r'<article\b.*?</article>', page, re.S)
+    for para in re.findall(r'<p[^>]*>(.*?)</p>', article[0] if article else page, re.S):
+        lead = text(para)
+        if len(lead) > 60:
+            return lead
+    return ''
+
+
+def add_recap_leads(games, previous):
+    """Fetch each recap once: a game keeps its saved lead while the link is unchanged."""
+    for game in games:
+        recap = (game.get('detail') or {}).get('recap')
+        if not recap or not recap.get('url'):
+            continue
+        old = ((previous.get(game['id']) or {}).get('detail') or {}).get('recap') or {}
+        if old.get('url') == recap['url'] and old.get('lead'):
+            recap['lead'] = old['lead']
+            continue
+        try:
+            time.sleep(0.5)
+            recap['lead'] = recap_lead(recap['url'])
+        except Exception as err:
+            print(f"recap for game {game['id']} unavailable: {err}")
+
+
 def totals(games):
     players, goalies = {}, {}
     for game in games:
@@ -298,6 +327,7 @@ def pull(key, team_id):
         game['box'] = box if box is not None else old.get('box')
         game['detail'] = info if info is not None else old.get('detail')
         game['url'] = f"{SITE}/games/{game['id']}/"
+    add_recap_leads(games, previous)
     fixes = corrections(key)
     for game in games:
         apply_corrections(game, fixes)
