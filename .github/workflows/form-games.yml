@@ -52,7 +52,7 @@ jobs:
           git commit -m "Update Google Form games [skip ci]"
           # The GameSheet or Trophy Room job may have pushed meanwhile.
           for i in 1 2 3; do
-            git pull --rebase origin main && git push && exit 0
+            git pull --rebase --autostash origin main && git push && exit 0
             sleep 5
           done
           exit 1

@@ -11,3 +11,7 @@ helix-importer-ui
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
+
+# Python bytecode (the data workflows import the helper scripts)
+__pycache__/
+*.pyc
