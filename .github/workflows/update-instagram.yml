@@ -1,5 +1,5 @@
-# Save as .github/workflows/update-instagram.yml in your site repo.
-# Runs twice a day, refreshes ig/feed.json + thumbnails, commits if changed.
+# Runs twice a day: refreshes ig/feed.json + thumbnails (fetch-instagram.mjs,
+# via Apify) for the homepage Instagram block, and commits if they changed.
 name: Update Instagram feed
 on:
   schedule:
@@ -20,5 +20,9 @@ jobs:
       - run: |
           git config user.name "ig-feed-bot"
           git config user.email "ig-feed-bot@users.noreply.github.com"
-          git add ig
-          git diff --cached --quiet || (git commit -m "Update Instagram feed" && git push)
+          git add -A ig
+          if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
+          git commit -m "Update Instagram feed"
+          # The GameSheet pull may have pushed meanwhile.
+          git pull --rebase --autostash origin main
+          git push
