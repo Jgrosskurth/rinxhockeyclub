@@ -56,7 +56,6 @@ const TEAM_LOGOS = {
   wolfpack: '001570',
   phantoms: '00123e',
   piedmont: '001729',
-  'sound tigers': '001888',
   mustangs: '0010b0',
   wizards: '000032',
   bears: '000f91',
@@ -81,6 +80,7 @@ const LOCAL_LOGOS = {
   'beaver dam': '/images/beaverdam.png',
   'white plains': '/images/whiteplains.png',
   'isles elite': '/images/soundtigers.jpeg',
+  'sound tigers': '/images/sound-tigers.webp', // else "tigers" gives Mamaroneck's
   'iceworks islanders': '/images/iceworks-islanders.webp',
 };
 
