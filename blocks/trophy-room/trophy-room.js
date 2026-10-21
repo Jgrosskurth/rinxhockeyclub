@@ -1,7 +1,9 @@
 /*
- * Trophy Room Block
- * Tabs per team (10U first). Each tab shows the team's championship banners
- * in one horizontal line, then its photo gallery.
+ * Trophy Room Block ("The Banner Wall")
+ * Every championship banner on one wall (filter: All / 10U / 14U), each with its
+ * team, title and, where the site has the tournament's box scores, its record;
+ * then each team's photos, grouped by event or month in their own shapes, with
+ * a full-screen viewer.
  *
  * Images come from GitHub, listed in /data/trophy-room.json by
  * .github/workflows/trophy-gallery.yml:
@@ -10,23 +12,28 @@
  *
  * The words are authored in DA, one row per setting: | Team | Item | Text | Link |
  *   | 10U | Tab             | 10U Squirts |  |
- *   | 10U | Banners heading | Awards & Accolades |  |
- *   | 10U | Gallery heading | Photo Gallery |  |
  *   | 10U | <file name, e.g. "3.jpeg"> | caption | optional URL |
  * Anything left blank falls back to a default (a banner's caption comes from
  * its file name). A row with an image in the Item cell adds an extra banner.
  * A first row of "Team | Item | Text | Link" is treated as column labels.
+ * ("Banners heading" / "Gallery heading" rows are no longer used: the wall and
+ * the gallery are club-wide, headed "Championship Banners" / "From the Season".)
  * The page's h1 (and an intro paragraph after it) becomes the title band.
- * Link straight to a team with #14u.
+ * Link straight to a team's photos with #14u.
  */
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { TEAMS, DEFAULT_TEAM } from '../../scripts/team-feeds.js';
 
 const MANIFEST = '/data/trophy-room.json';
+const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
+
+// Banners that link to a tournament page the site keeps box scores for get
+// their record from that feed (see .github/scripts/pull_gamesheet_boxscores.py).
+const RESULTS = { '/mid-atlantic-fall-classic-schedule': 'boxscores-mid-atlantic' };
+
+const HEADINGS = { banners: 'Championship Banners', gallery: 'From the Season' };
 
 const teamKey = (text) => Object.keys(TEAMS).find((k) => new RegExp(`\\b${k}\\b`, 'i').test(text));
-
-const DEFAULT_HEADINGS = { banners: 'Awards & Accolades', gallery: 'Photo Gallery' };
 
 // File name as authored or as stored ("images/.../3.jpeg"), compared loosely.
 const fileKey = (name) => (name || '').split('/').pop().trim().toLowerCase();
@@ -35,7 +42,7 @@ function readSettings(block) {
   const settings = {};
   Object.keys(TEAMS).forEach((key) => {
     settings[key] = {
-      tab: '', headings: {}, captions: {}, links: {}, banners: [],
+      tab: '', captions: {}, links: {}, banners: [],
     };
   });
   [...block.children].forEach((row) => {
@@ -54,10 +61,9 @@ function readSettings(block) {
     }
     const item = itemCell?.textContent.trim() || '';
     if (!item || !text) return;
+    // (old "... heading" rows are ignored)
     if (/^tab\b/i.test(item)) team.tab = text;
-    else if (/^banners?\b.*heading|^awards?\b.*heading/i.test(item)) team.headings.banners = text;
-    else if (/^(gallery|photos?)\b.*heading/i.test(item)) team.headings.gallery = text;
-    else {
+    else if (!/heading/i.test(item)) {
       team.captions[fileKey(item)] = text;
       if (link) team.links[fileKey(item)] = link;
     }
@@ -65,50 +71,14 @@ function readSettings(block) {
   return settings;
 }
 
-// A caption authored for an image file, matched with or without extension.
-function captionFor(team, source) {
+// A caption / link authored for an image file, matched with or without extension.
+function authored(map, source) {
   const name = fileKey(source);
-  return team.captions[name] || team.captions[name.replace(/\.[a-z0-9]+$/, '')] || '';
-}
-
-// A link authored for an image file, matched with or without extension.
-function linkFor(team, source) {
-  const name = fileKey(source);
-  return team.links[name] || team.links[name.replace(/\.[a-z0-9]+$/, '')] || '';
+  return map[name] || map[name.replace(/\.[a-z0-9]+$/, '')] || '';
 }
 
 const attr = (text) => (text || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
-function bannerList(list, label) {
-  if (!list?.length) return `<p class="tr-empty">${label} banners will hang here.</p>`;
-  return `<ul class="tr-rafters" tabindex="0" aria-label="${label} championship banners">${list.map((b, i) => {
-    const imgMarkup = b.full
-      ? `<img src="${b.full}" alt="${attr(b.alt)}" width="${b.width}" height="${b.height}" loading="lazy" decoding="async">`
-      : `<span class="tr-banner-art" data-src="${attr(b.src)}" data-alt="${attr(b.alt || b.title)}"></span>`;
-    const inner = `
-      <figure>
-        ${b.link
-    ? `<a href="${attr(b.link)}" class="tr-banner-link" aria-label="${attr(b.title || b.alt)}">${imgMarkup}</a>`
-    : imgMarkup}
-        ${b.title ? `<figcaption>${attr(b.title)}</figcaption>` : ''}
-      </figure>`;
-    return `<li class="tr-banner" style="--i: ${i}">${inner}</li>`;
-  }).join('')}</ul>`;
-}
-
-// The gallery shows 2 photos a row on phones, 3 on tablets and 5 on desktop.
-// Past 3 rows it becomes a carousel of 3-row pages, regrouped whenever the
-// screen crosses a breakpoint (rotating a tablet, resizing a window).
-const TABLET = window.matchMedia('(min-width: 600px)');
-const DESKTOP = window.matchMedia('(min-width: 900px)');
-
-function pageSize() {
-  if (DESKTOP.matches) return 15;
-  return TABLET.matches ? 9 : 6;
-}
-
-// Photo tags: the event (from the photo's gallery sub-folder on GitHub), else
-// the month and year it was taken (from its EXIF date). See trophy_gallery.py.
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
   'September', 'October', 'November', 'December'];
 
@@ -117,99 +87,109 @@ function monthYear(iso) {
   return m ? `${MONTHS[+m[2] - 1]} ${m[1]}` : '';
 }
 
+// A photo's group: its event (gallery sub-folder on GitHub), else the month it
+// was taken (EXIF). Its month: EXIF date, else its event folder's year/month.
 const tagOf = (p) => p.event || monthYear(p.taken);
-// The month a photo was taken: its EXIF date, else its event's month.
 const dateOf = (p) => monthYear(p.taken) || monthYear(p.eventDate);
 
-// The tags in a gallery, newest first (by each tag's latest photo: its EXIF
-// date, else the year/month in its event folder's name, else its upload).
-function tagList(photos) {
+const pathOf = (link) => {
+  try {
+    return new URL(link, window.location.href).pathname.replace(/\/$/, '');
+  } catch {
+    return '';
+  }
+};
+
+// "4-0" and "October 2026" from a tournament's box scores, or null.
+async function tournamentResult(link) {
+  const feed = RESULTS[pathOf(link)];
+  if (!feed) return null;
+  try {
+    const resp = await fetch(`${FEED_BASE}/${feed}.json`);
+    if (!resp.ok) return null;
+    const games = ((await resp.json()).games || [])
+      .map((g) => g.detail).filter((d) => d?.teams?.length === 2);
+    if (!games.length) return null;
+    let w = 0;
+    let l = 0;
+    let t = 0;
+    games.forEach((d) => {
+      const us = d.teams.find((x) => /\brinx\b/i.test(x.name)) || d.teams[0];
+      const them = d.teams.find((x) => x !== us);
+      if (+us.total > +them.total) w += 1;
+      else if (+us.total < +them.total) l += 1;
+      else t += 1;
+    });
+    const months = [...new Set(games.map((d) => monthYear(d.isoDate)).filter(Boolean))];
+    return { record: `${w}-${l}${t ? `-${t}` : ''}`, when: months.length === 1 ? months[0] : '' };
+  } catch {
+    return null;
+  }
+}
+
+function bannerCard(b, eager) {
+  const art = b.full
+    ? `<img src="${b.full}" alt="${attr(b.alt)}" width="${b.width}" height="${b.height}" loading="${eager ? 'eager' : 'lazy'}" decoding="async">`
+    : `<span class="tr-banner-art" data-src="${attr(b.src)}" data-alt="${attr(b.alt || b.title)}"></span>`;
+  const results = b.link && RESULTS[pathOf(b.link)];
+  return `
+        <li class="tr-banner" data-team="${b.team}">
+          <div class="tr-hang"><span class="tr-hoist">${art}</span></div>
+          <span class="tr-team">${attr(b.teamLabel)}</span>
+          ${b.title ? `<h3 class="tr-banner-title">${attr(b.title)}</h3>` : ''}
+          <p class="tr-result" hidden></p>
+          ${b.link ? `<a class="tr-more" href="${attr(b.link)}">${results ? 'Tournament results' : 'Details'}</a>` : ''}
+        </li>`;
+}
+
+// Photos grouped by event / month, newest group first; untagged photos last.
+function groups(photos) {
   const latest = new Map();
+  const members = new Map();
   photos.forEach((p) => {
-    if (!p.tag) return;
+    const key = p.tag || '';
+    if (!members.has(key)) members.set(key, []);
+    members.get(key).push(p);
     const when = p.taken || p.eventDate || p.added || '';
-    if (!latest.has(p.tag) || when > latest.get(p.tag)) latest.set(p.tag, when);
+    if (!latest.has(key) || when > latest.get(key)) latest.set(key, when);
   });
-  return [...latest.keys()].sort((a, b) => latest.get(b).localeCompare(latest.get(a)));
+  return [...members.keys()]
+    .sort((a, b) => (!a) - (!b) || latest.get(b).localeCompare(latest.get(a)))
+    .map((key) => ({ key, photos: members.get(key) }));
 }
 
-function galleryList(photos, label, size) {
-  if (!photos?.length) return `<p class="tr-empty">${label} photos are on the way.</p>`;
-  const items = photos.map((p, i) => `
-    <li>
-      <button type="button" class="tr-thumb" data-index="${i}" aria-label="Open photo ${i + 1} of ${photos.length}: ${attr(p.alt)}">
-        <img src="${p.thumb}"${p.small ? ` srcset="${p.small} 400w, ${p.thumb} 800w" sizes="(min-width: 900px) 20vw, (min-width: 600px) 33vw, 50vw"` : ''} alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
-        ${p.date ? `<span class="tr-tag" aria-hidden="true">${attr(p.date)}</span>` : ''}
-      </button>
-    </li>`);
-  if (items.length <= size) return `<ul class="tr-gallery">${items.join('')}</ul>`;
-  const pages = [];
-  for (let i = 0; i < items.length; i += size) pages.push(items.slice(i, i + size));
-  return `<div class="tr-pages" tabindex="0" role="region" aria-label="${label} photos">
-    ${pages.map((page, i) => `<ul class="tr-gallery tr-page" aria-label="Page ${i + 1} of ${pages.length}">${page.join('')}</ul>`).join('')}
-  </div>`;
+const isLandscape = (p) => p.thumbWidth / p.thumbHeight > 1.2;
+
+function thumb(p, index, sizes) {
+  const ar = (p.thumbWidth / p.thumbHeight).toFixed(2);
+  return `<button type="button" class="tr-thumb" data-index="${index}" style="--ar: ${ar}" aria-label="Open photo: ${attr(p.alt)}">
+          <img src="${p.thumb}"${p.small ? ` srcset="${p.small} 400w, ${p.thumb} 800w${p.full ? `, ${p.full} 1600w` : ''}" sizes="${sizes}"` : ''} alt="${attr(p.alt)}" width="${p.thumbWidth}" height="${p.thumbHeight}" loading="lazy" decoding="async">
+        </button>`;
 }
 
-const ARROW = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-function pageControls(key) {
-  return `<div class="tr-page-ctrl" hidden>
-    <button type="button" class="tr-page-btn" data-dir="-1" aria-controls="tr-panel-${key}" aria-label="Previous page of photos">${ARROW('M15 5l-7 7 7 7')}</button>
-    <span class="tr-page-count" aria-live="polite"></span>
-    <button type="button" class="tr-page-btn" data-dir="1" aria-controls="tr-panel-${key}" aria-label="Next page of photos">${ARROW('M9 5l7 7-7 7')}</button>
-  </div>`;
-}
-
-const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-// The photos a panel shows under its current tag filter.
-const visiblePhotos = (panel, photos) => (panel.trTag
-  ? photos.filter((p) => p.tag === panel.trTag)
-  : photos);
-
-// Tag filter buttons: All photos, then each event / month. Only worth showing
-// when there is more than one way to slice the gallery.
-function filterBar(key, photos) {
-  const tags = tagList(photos);
-  const untagged = photos.some((p) => !p.tag);
-  if (!tags.length || (tags.length === 1 && !untagged)) return '';
-  return `<div class="tr-filters" role="group" aria-label="Show photos from">
-      ${['', ...tags].map((t) => `<button type="button" class="tr-filter" data-tag="${attr(t)}" aria-pressed="${!t}" aria-controls="tr-panel-${key}">${t ? attr(t) : 'All photos'}</button>`).join('')}
-    </div>`;
-}
-
-// (Re)build one panel's gallery for the current page size and filter.
-function renderGallery(panel, allPhotos, label) {
-  const body = panel.querySelector('.tr-photos-body');
-  const ctrl = panel.querySelector('.tr-page-ctrl');
-  const photos = visiblePhotos(panel, allPhotos);
-  panel.trObserver?.disconnect();
-  body.innerHTML = galleryList(photos, label, pageSize());
-  const track = body.querySelector('.tr-pages');
-  ctrl.hidden = !track;
-  if (!track) return;
-  const [prev, next] = ctrl.querySelectorAll('.tr-page-btn');
-  const count = ctrl.querySelector('.tr-page-count');
-  const total = track.children.length;
-  const sync = () => {
-    const page = track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) + 1 : 1;
-    count.textContent = `${page} / ${total}`;
-    prev.disabled = page <= 1;
-    next.disabled = page >= total;
-  };
-  track.addEventListener('scroll', sync, { passive: true });
-  panel.trObserver = new ResizeObserver(sync);
-  panel.trObserver.observe(track);
-  sync();
-}
-
-// Arrow buttons page whichever track the panel currently holds.
-function wireControls(panel) {
-  panel.querySelectorAll('.tr-page-btn').forEach((btn) => btn.addEventListener('click', () => {
-    const track = panel.querySelector('.tr-pages');
-    if (!track) return;
-    track.scrollBy({ left: track.clientWidth * Number(btn.dataset.dir), behavior: reduceMotion() ? 'auto' : 'smooth' });
-  }));
+// One team's photos: a heading per group; landscape shots in a mostly-portrait
+// group (team photos) get their own row, sized to their shape; the rest flow
+// in columns. Returns the markup and the photos in display order (for the viewer).
+function teamGallery(photos, label) {
+  if (!photos.length) return { html: `<p class="tr-empty">${attr(label)} photos are on the way.</p>`, order: [] };
+  const order = [];
+  const html = groups(photos).map(({ key, photos: list }) => {
+    const land = list.filter(isLandscape);
+    const split = land.length && land.length < list.length / 2;
+    const wides = split ? land : [];
+    const rest = split ? list.filter((p) => !isLandscape(p)) : list;
+    const event = key && list[0].event === key;
+    const month = event ? dateOf(list[0]) : '';
+    const count = `${list.length} photo${list.length === 1 ? '' : 's'}`;
+    const tiles = (items, sizes) => items.map((p) => { order.push(p); return thumb(p, order.length - 1, sizes); }).join('');
+    return `
+      <div class="tr-group">
+        <h3>${attr(key || 'More photos')} <small>${[month, count].filter(Boolean).map(attr).join(' · ')}</small></h3>
+        ${wides.length ? `<div class="tr-wides">${tiles(wides, '(min-width: 900px) 50vw, 100vw')}</div>` : ''}
+        ${rest.length ? `<div class="tr-columns">${tiles(rest, '(min-width: 600px) 33vw, 50vw')}</div>` : ''}
+      </div>`;
+  }).join('');
+  return { html, order };
 }
 
 // One shared viewer: a modal <dialog> that closes on Esc or a backdrop tap.
@@ -292,68 +272,90 @@ export default async function decorate(block) {
     const resp = await fetch(MANIFEST);
     if (resp.ok) manifest = await resp.json();
   } catch {
-    // Banners and galleries show their empty state.
+    // The wall and galleries show their empty state.
   }
 
   // GitHub banners first (in upload order), then any added in the block;
   // captions and links authored in DA win over file-name captions.
-  const banners = {};
-  const gallery = {};
-  teams.forEach(({ key }) => {
+  const banners = teams.flatMap(({ key, label }) => {
     const team = settings[key];
-    banners[key] = [
+    return [
       ...(manifest[key]?.banners || []).map((b) => {
-        const title = captionFor(team, b.source) || b.title;
-        const link = linkFor(team, b.source);
+        const title = authored(team.captions, b.source) || b.title;
         return {
-          ...b, title, alt: title ? `${title} banner` : b.alt, link,
+          ...b, title, alt: title ? `${title} banner` : b.alt, link: authored(team.links, b.source),
         };
       }),
       ...team.banners,
-    ];
-    gallery[key] = (manifest[key]?.gallery || []).map((p) => {
-      const caption = captionFor(team, p.source);
-      const tag = tagOf(p);
+    ].map((b) => ({ ...b, team: key, teamLabel: label }));
+  });
+  const galleries = Object.fromEntries(teams.map(({ key, label }) => {
+    const photos = (manifest[key]?.gallery || []).map((p) => {
+      const caption = authored(settings[key].captions, p.source);
       const date = dateOf(p);
       return {
-        ...p, caption, tag, date, alt: [caption || p.alt, p.event, date].filter(Boolean).join(', '),
+        ...p, caption, tag: tagOf(p), date, alt: [caption || p.alt, p.event, date].filter(Boolean).join(', '),
       };
     });
-  });
+    return [key, teamGallery(photos, label)];
+  }));
 
-  const fromHash = teamKey(window.location.hash.slice(1));
-  let current = fromHash || DEFAULT_TEAM;
+  let current = teamKey(window.location.hash.slice(1)) || DEFAULT_TEAM;
+  const showFilter = new Set(banners.map((b) => b.team)).size > 1;
 
   block.innerHTML = `
     ${head}
-    <div class="tr-inner">
+    <section class="tr-hall" aria-labelledby="tr-banners-h">
+      <div class="tr-hall-row">
+        <h2 class="section-title" id="tr-banners-h">${HEADINGS.banners}</h2>
+        ${showFilter ? `<div class="tr-filter" role="group" aria-label="Show banners for">
+          <button type="button" data-team="" aria-pressed="true">All teams</button>
+          ${teams.map((t) => `<button type="button" data-team="${t.key}" aria-pressed="false">${attr(t.label)}</button>`).join('')}
+        </div>` : ''}
+      </div>
+      ${banners.length
+    ? `<ul class="tr-wall" tabindex="0" aria-label="Championship banners">${banners.map((b, i) => bannerCard(b, i < 4)).join('')}
+      </ul>`
+    : '<p class="tr-empty">Championship banners will hang here.</p>'}
+    </section>
+    <section class="tr-photos" aria-labelledby="tr-photos-h"><div class="tr-photos-inner">
+      <h2 class="section-title" id="tr-photos-h">${HEADINGS.gallery}</h2>
       <div class="tr-tabs" role="tablist" aria-label="Team">
-        ${teams.map((t) => `<button type="button" role="tab" id="tr-tab-${t.key}" aria-controls="tr-panel-${t.key}" aria-selected="${t.key === current}" tabindex="${t.key === current ? 0 : -1}">${t.label}</button>`).join('')}
+        ${teams.map((t) => `<button type="button" role="tab" id="tr-tab-${t.key}" aria-controls="tr-panel-${t.key}" aria-selected="${t.key === current}" tabindex="${t.key === current ? 0 : -1}">${attr(t.label)}</button>`).join('')}
       </div>
       ${teams.map((t) => `
-        <section class="tr-panel" id="tr-panel-${t.key}" role="tabpanel" aria-labelledby="tr-tab-${t.key}"${t.key === current ? '' : ' hidden'}>
-          <div class="tr-hall">
-            <h2>${attr(settings[t.key].headings.banners || DEFAULT_HEADINGS.banners)}</h2>
-            ${bannerList(banners[t.key], t.label)}
-          </div>
-          <div class="tr-photos">
-            <div class="tr-photos-head">
-              <h2>${attr(settings[t.key].headings.gallery || DEFAULT_HEADINGS.gallery)}</h2>
-              ${pageControls(t.key)}
-            </div>
-            ${filterBar(t.key, gallery[t.key])}
-            <div class="tr-photos-body"></div>
-          </div>
-        </section>`).join('')}
-    </div>`;
+      <div class="tr-panel" id="tr-panel-${t.key}" role="tabpanel" aria-labelledby="tr-tab-${t.key}"${t.key === current ? '' : ' hidden'}>${galleries[t.key].html}
+      </div>`).join('')}
+    </div></section>`;
 
-  // Banner art: optimized pictures from the authored images.
+  // Banner art authored in the block: optimized pictures.
   block.querySelectorAll('.tr-banner-art').forEach((span) => {
     const pic = createOptimizedPicture(span.dataset.src, span.dataset.alt, false, [{ media: '(min-width: 600px)', width: '600' }, { width: '400' }]);
     span.replaceWith(pic);
   });
 
-  // Tabs: click, or arrow keys between tabs.
+  // Records for banners that link to a tournament with box scores.
+  block.querySelectorAll('.tr-banner').forEach((li, i) => {
+    const b = banners[i];
+    if (!b?.link || !RESULTS[pathOf(b.link)]) return;
+    tournamentResult(b.link).then((res) => {
+      if (!res) return;
+      const p = li.querySelector('.tr-result');
+      p.innerHTML = `<span class="tr-record">${attr(res.record)}</span><span class="tr-sr"> tournament record</span>${res.when && !b.title.includes(res.when) ? ` ${attr(res.when)}` : ''}`;
+      p.hidden = false;
+    });
+  });
+
+  // Wall filter: All / one team.
+  const filterBtns = [...block.querySelectorAll('.tr-filter button')];
+  filterBtns.forEach((btn) => btn.addEventListener('click', () => {
+    filterBtns.forEach((b) => b.setAttribute('aria-pressed', b === btn));
+    block.querySelectorAll('.tr-banner').forEach((li) => {
+      li.hidden = !!btn.dataset.team && li.dataset.team !== btn.dataset.team;
+    });
+  }));
+
+  // Gallery tabs: click, or arrow keys between tabs.
   const tabs = [...block.querySelectorAll('[role="tab"]')];
   const select = (key, focus) => {
     current = key;
@@ -380,30 +382,14 @@ export default async function decorate(block) {
     });
   });
 
-  // Galleries: built now, regrouped into pages when a breakpoint is crossed.
-  const panels = teams.map((t) => ({ t, panel: block.querySelector(`#tr-panel-${t.key}`) }));
-  const renderAll = () => panels.forEach(({ t, panel }) => {
-    renderGallery(panel, gallery[t.key], t.label);
-  });
-  panels.forEach(({ panel }) => wireControls(panel));
-  panels.forEach(({ t, panel }) => panel.querySelectorAll('.tr-filter').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      panel.trTag = btn.dataset.tag;
-      panel.querySelectorAll('.tr-filter').forEach((b) => b.setAttribute('aria-pressed', b === btn));
-      renderGallery(panel, gallery[t.key], t.label);
-    });
-  }));
-  renderAll();
-  [TABLET, DESKTOP].forEach((mq) => mq.addEventListener('change', renderAll));
-
-  // Gallery viewer (delegated, so it survives a regroup).
+  // Photo viewer, over the team's photos in display order.
   let viewer;
-  panels.forEach(({ t, panel }) => {
-    panel.querySelector('.tr-photos-body').addEventListener('click', (e) => {
-      const thumb = e.target.closest('.tr-thumb');
-      if (!thumb) return;
+  teams.forEach((t) => {
+    block.querySelector(`#tr-panel-${t.key}`).addEventListener('click', (e) => {
+      const btn = e.target.closest('.tr-thumb');
+      if (!btn) return;
       viewer ||= buildViewer();
-      openViewer(viewer, visiblePhotos(panel, gallery[t.key]), Number(thumb.dataset.index));
+      openViewer(viewer, galleries[t.key].order, Number(btn.dataset.index));
     });
   });
 }
