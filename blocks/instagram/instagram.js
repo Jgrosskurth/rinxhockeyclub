@@ -1,4 +1,4 @@
-// Instagram feed: the clubs' newest posts as a grid of thumbnails, each linking
+// Instagram feed: the clubs' 12 newest posts as a grid of thumbnails, each linking
 // to the post on Instagram. Replaces the Elfsight widget.
 //
 // The posts come from ig/feed.json, which .github/workflows/update-instagram.yml
@@ -9,7 +9,7 @@
 
 const FEED = '/ig/feed.json';
 const ACCOUNTS = ['rinx10usquirts', 'rinx14usouth'];
-const SHOW = 6;
+const SHOW = 12;
 
 const PLAY = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
 const STACK = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 3h11a3 3 0 0 1 3 3v11h-2V6a1 1 0 0 0-1-1H7z" fill="currentColor"/><rect x="3" y="7" width="14" height="14" rx="2" fill="currentColor"/></svg>';
