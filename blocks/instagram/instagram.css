@@ -253,6 +253,31 @@
   letter-spacing: 0.05em;
 }
 
+/* Follow buttons in Instagram's own colours */
+.instagram .instagram-follow-btn {
+  background: linear-gradient(45deg, #f09433, #dc2743 55%, #bc1888);
+  color: var(--color-white);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 30%);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.instagram .instagram-follow-btn:hover {
+  color: var(--color-white);
+  filter: brightness(1.08) saturate(1.05);
+  text-decoration: none;
+}
+
+.instagram .instagram-follow-btn:focus-visible {
+  outline: 3px solid #dc2743;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .instagram .instagram-follow-btn:hover {
+    transform: translateY(-1px);
+  }
+}
+
 @media (min-width: 600px) {
   .instagram .instagram-ctrl {
     display: flex;

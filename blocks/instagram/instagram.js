@@ -40,7 +40,7 @@ function externalLink(href, cls, text, label) {
 
 function followButtons() {
   const wrap = el('p', 'instagram-follow-links');
-  ACCOUNTS.forEach((h) => wrap.append(externalLink(`https://www.instagram.com/${h}/`, 'btn btn-navy', `@${h}`, `Follow @${h} on Instagram`)));
+  ACCOUNTS.forEach((h) => wrap.append(externalLink(`https://www.instagram.com/${h}/`, 'btn instagram-follow-btn', `@${h}`, `Follow @${h} on Instagram`)));
   return wrap;
 }
 
