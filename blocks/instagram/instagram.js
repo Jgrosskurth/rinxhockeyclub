@@ -1,38 +1,23 @@
-const ELFSIGHT_SRC = 'https://elfsightcdn.com/platform.js';
+// Instagram feed: the clubs' newest posts as a grid of thumbnails, each linking
+// to the post on Instagram. Replaces the Elfsight widget.
+//
+// The posts come from ig/feed.json, which .github/workflows/update-instagram.yml
+// refreshes twice a day (fetch-instagram.mjs, via Apify) together with a small
+// thumbnail per post in ig/ (Instagram's own image links expire and can't be
+// shown on other sites). Without the feed, the block still shows the follow
+// buttons for both accounts.
 
-// The club's accounts (the feed's own sources), linked when nothing is authored.
+const FEED = '/ig/feed.json';
 const ACCOUNTS = ['rinx10usquirts', 'rinx14usouth'];
+const SHOW = 6;
 
-// If no post shows within this long, the feed isn't coming: Elfsight's free
-// plan stops serving once the month's views run out (it was at 64% on Oct 16),
-// or the script is blocked. Show follow buttons instead of an empty box.
-const FEED_TIMEOUT = 8000;
+const PLAY = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
+const STACK = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 3h11a3 3 0 0 1 3 3v11h-2V6a1 1 0 0 0-1-1H7z" fill="currentColor"/><rect x="3" y="7" width="14" height="14" rx="2" fill="currentColor"/></svg>';
 
-// Load the Elfsight platform script once, on demand.
-function loadElfsightPlatform(onError) {
-  if (document.querySelector(`script[src="${ELFSIGHT_SRC}"]`)) return;
-  const script = document.createElement('script');
-  script.src = ELFSIGHT_SRC;
-  script.async = true;
-  script.addEventListener('error', onError);
-  document.head.append(script);
-}
-
-// True once the feed has drawn at least one post image.
-function hasPosts(app) {
-  const root = app.querySelector('.es-embed-root')?.shadowRoot;
-  return !!root && [...root.querySelectorAll('img')].some((img) => img.naturalWidth > 0);
-}
-
-function followLinks(handles) {
-  const wrap = document.createElement('div');
-  wrap.className = 'instagram-follow';
-  const note = document.createElement('p');
-  note.textContent = 'Game-day photos, highlights and team news.';
-  wrap.append(note);
-  const links = document.createElement('div');
-  links.className = 'instagram-follow-links';
-  handles.forEach((h) => {
+function followButtons() {
+  const wrap = document.createElement('p');
+  wrap.className = 'instagram-follow-links';
+  ACCOUNTS.forEach((h) => {
     const a = document.createElement('a');
     a.className = 'btn btn-navy';
     a.href = `https://www.instagram.com/${h}/`;
@@ -40,35 +25,62 @@ function followLinks(handles) {
     a.rel = 'noopener';
     a.textContent = `@${h}`;
     a.setAttribute('aria-label', `Follow @${h} on Instagram (opens in a new tab)`);
-    links.append(a);
+    wrap.append(a);
   });
-  wrap.append(links);
   return wrap;
 }
 
-// The feed renders inside its own shadow root and pins its "Free Instagram
-// Feed Widget" link visible with inline !important styles, so remove the link
-// instead, and keep removing it if the widget redraws it.
-const BADGE = 'a[href*="elfsight.com"]';
+// First line of the caption, without trailing hashtags, for the link label.
+function shortCaption(text) {
+  const line = (text || '').split('\n')[0].replace(/(\s+#\S+)+\s*$/, '').trim();
+  return line.length > 90 ? `${line.slice(0, 87).trimEnd()}…` : line;
+}
 
-function hideBadge(app) {
-  let tries = 0;
-  const watch = () => {
-    const root = app.querySelector('.es-embed-root')?.shadowRoot;
-    if (!root) {
-      tries += 1;
-      if (tries < 40) setTimeout(watch, 250);
-      return;
-    }
-    const strip = () => root.querySelectorAll(BADGE).forEach((a) => a.remove());
-    strip();
-    new MutationObserver(strip).observe(root, { childList: true, subtree: true });
-  };
-  new MutationObserver((list, obs) => {
-    if (!app.querySelector('.es-embed-root')) return;
-    obs.disconnect();
-    watch();
-  }).observe(app, { childList: true, subtree: true });
+function tile(post) {
+  const li = document.createElement('li');
+  li.className = 'instagram-post';
+  const a = document.createElement('a');
+  a.href = post.permalink;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  const caption = shortCaption(post.caption);
+  const kind = post.video ? 'video' : 'post';
+  a.setAttribute('aria-label', `Instagram ${kind} from @${post.account}${caption ? `: ${caption}` : ''} (opens in a new tab)`);
+
+  const img = document.createElement('img');
+  img.src = `/ig/${post.image}`;
+  img.alt = '';
+  img.width = 480;
+  img.height = 480;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  // A thumbnail that fails to load just hides its tile.
+  img.addEventListener('error', () => li.remove());
+  a.append(img);
+
+  if (post.video || post.carousel) {
+    const badge = document.createElement('span');
+    badge.className = 'instagram-badge';
+    badge.innerHTML = post.video ? PLAY : STACK;
+    a.append(badge);
+  }
+  const who = document.createElement('span');
+  who.className = 'instagram-account';
+  who.textContent = `@${post.account}`;
+  a.append(who);
+  li.append(a);
+  return li;
+}
+
+async function loadPosts() {
+  try {
+    const resp = await fetch(FEED);
+    if (!resp.ok) return [];
+    const { posts = [] } = await resp.json();
+    return posts.filter((p) => p.permalink && p.image && ACCOUNTS.includes(p.account));
+  } catch {
+    return [];
+  }
 }
 
 /**
@@ -76,78 +88,28 @@ function hideBadge(app) {
  * @param {Element} block The block element
  */
 export default function decorate(block) {
-  // The Elfsight app id can be authored anywhere in the block — as the full
-  // "elfsight-app-<uuid>" class or just the uuid.
-  const match = block.textContent.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i);
-  const appId = match ? match[0] : '';
-
-  // Preserve an authored heading and handle link if present.
-  const heading = block.querySelector('h1, h2, h3');
-  const handleLink = [...block.querySelectorAll('a')]
-    .find((a) => /instagram\.com/i.test(a.getAttribute('href') || ''));
-
+  const heading = block.querySelector('h1, h2, h3')?.textContent?.trim();
   block.textContent = '';
 
   const title = document.createElement('h2');
   title.className = 'instagram-title';
-  title.textContent = heading?.textContent?.trim() || 'Follow Us on Instagram';
-  block.append(title);
+  title.id = 'instagram-title';
+  title.textContent = heading || 'Follow Us on Instagram';
+  const note = document.createElement('p');
+  note.className = 'instagram-note';
+  note.textContent = 'Game-day photos, highlights and team news.';
+  block.append(title, note, followButtons());
 
-  if (handleLink) {
-    const handle = document.createElement('p');
-    handle.className = 'instagram-handle';
-    handleLink.target = '_blank';
-    handleLink.rel = 'noopener';
-    handle.append(handleLink);
-    block.append(handle);
-  }
+  const grid = document.createElement('ul');
+  grid.className = 'instagram-grid';
+  grid.setAttribute('aria-labelledby', 'instagram-title');
+  block.append(grid);
 
-  // Authored handle links win; otherwise link the club's accounts.
-  const handles = handleLink
-    ? [(handleLink.getAttribute('href').match(/instagram\.com\/([\w.]+)/i) || [])[1]].filter(Boolean)
-    : ACCOUNTS;
-  let fellBack = false;
-  const fallback = () => {
-    if (fellBack) return;
-    fellBack = true;
-    block.querySelector('[class^="elfsight-app-"]')?.remove();
-    block.classList.add('instagram-offline');
-    block.append(followLinks(handles.length ? handles : ACCOUNTS));
-  };
-
-  if (!appId) {
-    fallback();
-    return;
-  }
-
-  const app = document.createElement('div');
-  app.className = `elfsight-app-${appId}`;
-  app.setAttribute('data-elfsight-app-lazy', '');
-  block.append(app);
-  hideBadge(app);
-
-  const start = () => {
-    loadElfsightPlatform(fallback);
-    const started = Date.now();
-    const check = () => {
-      if (fellBack || hasPosts(app)) return;
-      if (Date.now() - started > FEED_TIMEOUT) fallback();
-      else setTimeout(check, 500);
-    };
-    check();
-  };
-
-  // Defer loading the third-party script until the feed scrolls into view,
-  // keeping it off the critical path for LCP/PageSpeed.
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries, obs) => {
-      if (entries.some((e) => e.isIntersecting)) {
-        start();
-        obs.disconnect();
-      }
-    }, { rootMargin: '200px' });
-    observer.observe(block);
-  } else {
-    start();
-  }
+  loadPosts().then((posts) => {
+    if (!posts.length) {
+      grid.remove();
+      return;
+    }
+    posts.slice(0, SHOW).forEach((p) => grid.append(tile(p)));
+  });
 }

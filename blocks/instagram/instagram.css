@@ -20,36 +20,9 @@
   margin-bottom: 8px;
 }
 
-.instagram .instagram-handle {
+.instagram .instagram-note {
+  margin: 0 0 16px;
   text-align: center;
-  margin: 0 0 28px;
-  font-weight: 700;
-}
-
-.instagram .instagram-handle a {
-  color: var(--color-red);
-  text-decoration: none;
-}
-
-.instagram .instagram-handle a:hover {
-  text-decoration: underline;
-}
-
-/* Reserve the feed's measured height so the deferred widget doesn't shift
-   the page or leave a gap: square tiles on phones (viewport width plus the
-   carousel's own chrome), then a fixed-height row. */
-.instagram [data-elfsight-app-lazy] {
-  min-height: calc(100vw + 98px);
-}
-
-/* Feed unavailable (monthly view limit reached, script blocked): follow
-   buttons for the club's accounts instead of the reserved empty space. */
-.instagram .instagram-follow {
-  text-align: center;
-}
-
-.instagram .instagram-follow p {
-  margin: 0 0 20px;
   color: var(--color-navy);
 }
 
@@ -58,16 +31,84 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
+  margin: 0 0 24px;
+}
+
+/* Newest posts: 2 across on phones, 3 on tablets, one row of 6 on desktop.
+   Square tiles hold their space before the thumbnails arrive. */
+.instagram .instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.instagram .instagram-post a {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--color-ice);
+}
+
+.instagram .instagram-post img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease-out;
+}
+
+.instagram .instagram-post a:hover img {
+  transform: scale(1.04);
+}
+
+.instagram .instagram-post a:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* Account name on a navy band at the bottom of each tile */
+.instagram .instagram-account {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 18px 8px 6px;
+  background: linear-gradient(to top, rgb(4 30 66 / 85%), transparent);
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Video / multi-photo marker, as on Instagram's own grid */
+.instagram .instagram-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  color: var(--color-white);
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 60%));
 }
 
 @media (min-width: 600px) {
-  .instagram [data-elfsight-app-lazy] {
-    min-height: 360px;
+  .instagram .instagram-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
   }
 }
 
 @media (min-width: 1200px) {
-  .instagram [data-elfsight-app-lazy] {
-    min-height: 326px;
+  .instagram .instagram-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .instagram .instagram-post img {
+    transition: none;
   }
 }
