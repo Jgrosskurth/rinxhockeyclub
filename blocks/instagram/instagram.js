@@ -1,5 +1,6 @@
 // Instagram feed: a carousel of the clubs' six newest posts, each a card with
-// the photo, account, date and caption, linking to the post on Instagram.
+// the photo, account, date, caption, likes / comments (and views for videos),
+// linking to the post on Instagram.
 // Built like the homepage's Latest Updates slider: swipe on phones, arrow
 // buttons on wider screens.
 //
@@ -16,6 +17,9 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 
 const PLAY = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
 const STACK = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 3h11a3 3 0 0 1 3 3v11h-2V6a1 1 0 0 0-1-1H7z" fill="currentColor"/><rect x="3" y="7" width="14" height="14" rx="2" fill="currentColor"/></svg>';
+const HEART = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3.1 4.5 6.9 4.5c2.1 0 3.6 1.2 5.1 3 1.5-1.8 3-3 5.1-3 3.8 0 6 3.9 4.5 7.3C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg>';
+const BUBBLE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" fill="currentColor"/></svg>';
+const EYE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5C6.5 5 2.7 9.4 1.5 12c1.2 2.6 5 7 10.5 7s9.3-4.4 10.5-7C21.3 9.4 17.5 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="currentColor"/></svg>';
 const ARROW = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 const el = (tag, cls, text) => {
@@ -45,6 +49,27 @@ function shortDate(iso) {
   if (Number.isNaN(d.getTime())) return '';
   const year = d.getFullYear() !== new Date().getFullYear() ? `, ${d.getFullYear()}` : '';
   return `${MONTHS[d.getMonth()]} ${d.getDate()}${year}`;
+}
+
+// 1234 -> "1.2K", 15300 -> "15K"
+function compact(n) {
+  if (n < 1000) return String(n);
+  const k = n / 1000;
+  return n < 1e6 ? `${k < 10 ? k.toFixed(1).replace(/\.0$/, '') : Math.round(k)}K` : `${(n / 1e6).toFixed(1).replace(/\.0$/, '')}M`;
+}
+
+// Likes, comments and (videos) views, as Instagram shows them.
+function stats(post) {
+  const row = el('p', 'instagram-stats');
+  [[post.likes, HEART, 'like'], [post.comments, BUBBLE, 'comment'], [post.views, EYE, 'view']]
+    .filter(([n]) => Number.isFinite(n))
+    .forEach(([n, icon, word]) => {
+      const item = el('span', 'instagram-stat');
+      item.innerHTML = icon;
+      item.append(el('span', '', compact(n)), el('span', 'instagram-sr', ` ${word}${n === 1 ? '' : 's'}`));
+      row.append(item);
+    });
+  return row;
 }
 
 function card(post) {
@@ -79,7 +104,9 @@ function card(post) {
     meta.append(time);
   }
   body.append(meta);
-  if (post.caption) body.append(el('p', 'instagram-caption', post.caption.replace(/\s*\n+\s*/g, ' ')));
+  // Always present (even empty) so every card has the same height.
+  body.append(el('p', 'instagram-caption', (post.caption || '').replace(/\s*\n+\s*/g, ' ')));
+  body.append(stats(post));
   body.append(externalLink(post.permalink, 'instagram-more', 'View on Instagram', `View this ${kind} on Instagram`));
 
   li.append(media, body);
