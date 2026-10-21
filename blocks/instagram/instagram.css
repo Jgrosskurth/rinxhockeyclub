@@ -238,13 +238,34 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   margin: 0;
+}
+
+/* Compact on phones (still a comfortable 40px tap target); the site's
+   standard button size from 600px */
+.instagram .instagram-follow-links .btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
 }
 
 @media (min-width: 600px) {
   .instagram .instagram-ctrl {
     display: flex;
+  }
+
+  .instagram .instagram-follow-links {
+    gap: 12px;
+  }
+
+  .instagram .instagram-follow-links .btn {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
   }
 
   .instagram .instagram-rail {
