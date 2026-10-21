@@ -65,6 +65,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 84%;
+  align-items: stretch;
   gap: 16px;
   margin: -6px 0 0;
   padding: 6px 0 12px;
@@ -84,6 +85,8 @@
 }
 
 .instagram .instagram-card {
+  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
@@ -162,10 +165,12 @@
   color: var(--color-gray);
 }
 
-/* Caption: up to four lines; the full post is a tap away */
+/* Caption: always four lines tall (clamped), so every card is the same
+   height whatever the caption; the full post is a tap away */
 .instagram .instagram-caption {
   display: -webkit-box;
   overflow: hidden;
+  height: calc(1.45em * 4);
   margin: 0;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
@@ -174,6 +179,38 @@
   font-size: var(--body-font-size-s);
   line-height: 1.45;
   overflow-wrap: anywhere;
+}
+
+/* Likes, comments, video views */
+.instagram .instagram-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--color-navy);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.instagram .instagram-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.instagram .instagram-stat svg {
+  color: var(--color-red);
+}
+
+.instagram .instagram-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .instagram .instagram-more {

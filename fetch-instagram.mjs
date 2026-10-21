@@ -31,6 +31,7 @@ const okImageHost = (u) => {
   } catch { return false; }
 };
 const exists = (f) => access(f).then(() => true, () => false);
+const count = (n) => (Number.isFinite(n) && n >= 0 ? n : null);
 // Captions for the homepage cards: up to ~300 characters, cut at a word.
 const CAPTION_MAX = 300;
 const clip = (text = '') => {
@@ -87,6 +88,10 @@ for (const m of candidates) {
       timestamp: m.timestamp,
       video: m.type === 'Video',
       carousel: m.type === 'Sidecar',
+      // Engagement as Apify reports it; hidden counts come back as -1 or null.
+      likes: count(m.likesCount),
+      comments: count(m.commentsCount),
+      views: m.type === 'Video' ? count(m.videoViewCount ?? m.videoPlayCount) : null,
     });
   } catch (e) {
     console.error(`Skipped ${m.shortCode}: ${e.message}`);
@@ -95,7 +100,8 @@ for (const m of candidates) {
 
 if (posts.length === 0) { console.error('No posts fetched, keeping previous feed.json'); process.exit(1); }
 
-// Only rewrite feed.json (and its "updated" time) when the posts changed.
+// Only rewrite feed.json (and its "updated" time) when the posts or their
+// counts changed.
 const previous = await readFile(`${OUT}/feed.json`, 'utf8').then(JSON.parse, () => ({}));
 if (JSON.stringify(previous.posts) !== JSON.stringify(posts)) {
   await writeFile(`${OUT}/feed.json`, `${JSON.stringify({ updated: new Date().toISOString(), posts }, null, 2)}\n`);
