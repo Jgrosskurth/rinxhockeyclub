@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21T01:37:56.985Z",
+  "updated": "2026-10-21T01:50:44.670Z",
   "posts": [
     {
       "account": "rinx14usouth",
@@ -8,7 +8,10 @@
       "caption": "Nice win boys!! 9-3 ! hard hat winner goes to Luke with the ice hustle ! Dylan with the game puck making his mamas birthday weekend a success 🏒",
       "timestamp": "2026-10-18T22:52:03.000Z",
       "video": false,
-      "carousel": true
+      "carousel": true,
+      "likes": 19,
+      "comments": 0,
+      "views": null
     },
     {
       "account": "rinx14usouth",
@@ -17,7 +20,10 @@
       "caption": "Let’s roll!!",
       "timestamp": "2026-10-17T18:25:51.000Z",
       "video": false,
-      "carousel": false
+      "carousel": false,
+      "likes": 8,
+      "comments": 0,
+      "views": null
     },
     {
       "account": "rinx10usquirts",
@@ -26,7 +32,10 @@
       "caption": "Tournament weekend dump🏆🥇",
       "timestamp": "2026-10-11T21:10:50.000Z",
       "video": false,
-      "carousel": true
+      "carousel": true,
+      "likes": 55,
+      "comments": 3,
+      "views": null
     },
     {
       "account": "rinx10usquirts",
@@ -35,7 +44,10 @@
       "caption": "Rinx 10u takes home the win in their tournament!!!🥇🏆🥇\n\nRecord was 4-0 this weekend #lgr #champions",
       "timestamp": "2026-10-11T15:45:29.000Z",
       "video": false,
-      "carousel": false
+      "carousel": false,
+      "likes": 36,
+      "comments": 0,
+      "views": null
     },
     {
       "account": "rinx10usquirts",
@@ -44,7 +56,10 @@
       "caption": "TOURNAMENT TIME🔥\n\nBring home some hardware this weekend🏆",
       "timestamp": "2026-10-09T00:53:27.000Z",
       "video": false,
-      "carousel": false
+      "carousel": false,
+      "likes": 25,
+      "comments": 1,
+      "views": null
     },
     {
       "account": "rinx14usouth",
@@ -53,7 +68,10 @@
       "caption": "Thank you Coach Skillman and Coach Capozzoli for your role model leadership and never ending dedication to our boys!! We are thankful to you not just on coach appreciation day, but every day ❤️🤍💙🏒🏒 LFGR",
       "timestamp": "2026-10-06T20:54:39.000Z",
       "video": false,
-      "carousel": false
+      "carousel": false,
+      "likes": 33,
+      "comments": 5,
+      "views": null
     },
     {
       "account": "rinx14usouth",
@@ -62,7 +80,10 @@
       "caption": "That’s another weekend wrap! 7-1 win! 🔥🏒❤️🤍💙 hard hat and game puck go to Scully and Fine! Awesome work boys! This brotherhood is thick 💪🏻",
       "timestamp": "2026-10-04T02:43:57.000Z",
       "video": false,
-      "carousel": true
+      "carousel": true,
+      "likes": 22,
+      "comments": 2,
+      "views": null
     },
     {
       "account": "rinx14usouth",
@@ -71,7 +92,10 @@
       "caption": "Who’s up next? Let’s go boys !! #LFGR",
       "timestamp": "2026-10-02T20:08:54.000Z",
       "video": false,
-      "carousel": false
+      "carousel": false,
+      "likes": 12,
+      "comments": 0,
+      "views": null
     },
     {
       "account": "rinx14usouth",
@@ -80,7 +104,10 @@
       "caption": "Another successful weekend !! 2 wins ! Onward we go , the train doesn’t stop moving 🚂❤️🤍💙🏒 14usouth",
       "timestamp": "2026-09-28T22:14:41.000Z",
       "video": false,
-      "carousel": true
+      "carousel": true,
+      "likes": 25,
+      "comments": 1,
+      "views": null
     },
     {
       "account": "rinx10usquirts",
@@ -89,7 +116,10 @@
       "caption": "And that’s another win for this team!!🔥 \n\n10-2 over Long Beach",
       "timestamp": "2026-09-27T19:10:23.000Z",
       "video": false,
-      "carousel": true
+      "carousel": true,
+      "likes": 36,
+      "comments": 1,
+      "views": null
     },
     {
       "account": "rinx14usouth",
@@ -98,7 +128,10 @@
       "caption": "Next up! Nor’easter? What nor’easter?!! Let’s go boys ! LFGR ❤️🤍💙🏒",
       "timestamp": "2026-09-27T12:39:58.000Z",
       "video": false,
-      "carousel": false
+      "carousel": false,
+      "likes": 11,
+      "comments": 0,
+      "views": null
     },
     {
       "account": "rinx10usquirts",
@@ -107,7 +140,10 @@
       "caption": "Game Day Tomorrow!!🔥🔥",
       "timestamp": "2026-09-26T15:29:52.000Z",
       "video": false,
-      "carousel": false
+      "carousel": false,
+      "likes": null,
+      "comments": 0,
+      "views": null
     }
   ]
 }
