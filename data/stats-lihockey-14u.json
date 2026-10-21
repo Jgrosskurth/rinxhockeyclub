@@ -3,7 +3,7 @@
  "source": "lihockey.com",
  "team": "14u",
  "teamPage": "https://lihockey.com/teams/1182/",
- "updated": "2026-10-19T20:26:12+00:00",
+ "updated": "2026-10-21T06:58:10+00:00",
  "players": [
   {
    "name": "Luka Mazzarone",
@@ -11,19 +11,19 @@
    "pos": "",
    "gp": "5",
    "g": "6",
-   "a": "0",
-   "pts": "6",
+   "a": "1",
+   "pts": "7",
    "plusminus": "0",
-   "pim": "20"
+   "pim": "16"
   },
   {
    "name": "Brody Meyer",
    "number": "87",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
    "g": "4",
-   "a": "0",
-   "pts": "4",
+   "a": "1",
+   "pts": "5",
    "plusminus": "0",
    "pim": "4"
   },
@@ -31,32 +31,21 @@
    "name": "Konstantinos Krokidis",
    "number": "93",
    "pos": "",
-   "gp": "3",
+   "gp": "4",
    "g": "4",
-   "a": "0",
-   "pts": "4",
+   "a": "1",
+   "pts": "5",
    "plusminus": "0",
-   "pim": "2"
-  },
-  {
-   "name": "Cameron Fine",
-   "number": "",
-   "pos": "",
-   "gp": "2",
-   "g": "3",
-   "a": "0",
-   "pts": "3",
-   "plusminus": "0",
-   "pim": "10"
+   "pim": "1"
   },
   {
    "name": "Dylan Lashuk",
    "number": "",
    "pos": "",
-   "gp": "2",
+   "gp": "5",
    "g": "3",
-   "a": "0",
-   "pts": "3",
+   "a": "1",
+   "pts": "4",
    "plusminus": "0",
    "pim": "2"
   },
@@ -64,10 +53,10 @@
    "name": "Jake Totans",
    "number": "27",
    "pos": "",
-   "gp": "2",
+   "gp": "4",
    "g": "3",
-   "a": "0",
-   "pts": "3",
+   "a": "1",
+   "pts": "4",
    "plusminus": "0",
    "pim": "0"
   },
@@ -75,21 +64,10 @@
    "name": "Ryan Ohliger",
    "number": "",
    "pos": "",
-   "gp": "2",
+   "gp": "4",
    "g": "3",
-   "a": "0",
-   "pts": "3",
-   "plusminus": "0",
-   "pim": "0"
-  },
-  {
-   "name": "Brody Arthur",
-   "number": "77",
-   "pos": "",
-   "gp": "2",
-   "g": "2",
-   "a": "0",
-   "pts": "2",
+   "a": "1",
+   "pts": "4",
    "plusminus": "0",
    "pim": "0"
   },
@@ -97,56 +75,67 @@
    "name": "Camden Collins",
    "number": "57",
    "pos": "",
-   "gp": "3",
+   "gp": "5",
    "g": "2",
-   "a": "0",
-   "pts": "2",
+   "a": "2",
+   "pts": "4",
    "plusminus": "0",
-   "pim": "2"
+   "pim": "1"
   },
   {
    "name": "Thomas Klingensmith",
    "number": "53",
    "pos": "",
-   "gp": "3",
+   "gp": "5",
    "g": "2",
-   "a": "0",
-   "pts": "2",
+   "a": "2",
+   "pts": "4",
    "plusminus": "0",
-   "pim": "4"
-  },
-  {
-   "name": "Aedan Dowling",
-   "number": "70",
-   "pos": "",
-   "gp": "4",
-   "g": "1",
-   "a": "0",
-   "pts": "1",
-   "plusminus": "0",
-   "pim": "8"
-  },
-  {
-   "name": "Daniel Cesa",
-   "number": "",
-   "pos": "",
-   "gp": "1",
-   "g": "1",
-   "a": "0",
-   "pts": "1",
-   "plusminus": "0",
-   "pim": "0"
+   "pim": "2"
   },
   {
    "name": "Luke Ventura",
    "number": "88",
    "pos": "",
-   "gp": "1",
+   "gp": "4",
    "g": "1",
-   "a": "0",
-   "pts": "1",
+   "a": "3",
+   "pts": "4",
    "plusminus": "0",
    "pim": "0"
+  },
+  {
+   "name": "Cameron Fine",
+   "number": "",
+   "pos": "",
+   "gp": "4",
+   "g": "3",
+   "a": "0",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "9"
+  },
+  {
+   "name": "Brody Arthur",
+   "number": "77",
+   "pos": "",
+   "gp": "5",
+   "g": "2",
+   "a": "1",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Aedan Dowling",
+   "number": "70",
+   "pos": "",
+   "gp": "5",
+   "g": "1",
+   "a": "2",
+   "pts": "3",
+   "plusminus": "0",
+   "pim": "7"
   },
   {
    "name": "Nicholas Pulice",
@@ -154,19 +143,41 @@
    "pos": "",
    "gp": "5",
    "g": "1",
-   "a": "0",
-   "pts": "1",
+   "a": "1",
+   "pts": "2",
    "plusminus": "0",
-   "pim": "16"
+   "pim": "14"
   },
   {
-   "name": "Bradley Skillman",
-   "number": "",
-   "pos": "G",
-   "gp": "3",
+   "name": "Charlie Remsen",
+   "number": "94",
+   "pos": "",
+   "gp": "4",
    "g": "0",
+   "a": "2",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Samuel Meyer",
+   "number": "",
+   "pos": "",
+   "gp": "5",
+   "g": "0",
+   "a": "2",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "2"
+  },
+  {
+   "name": "Daniel Cesa",
+   "number": "",
+   "pos": "",
+   "gp": "4",
+   "g": "1",
    "a": "0",
-   "pts": "0",
+   "pts": "1",
    "plusminus": "0",
    "pim": "0"
   },
@@ -174,12 +185,23 @@
    "name": "Connor Scully",
    "number": "",
    "pos": "",
-   "gp": "1",
+   "gp": "4",
+   "g": "0",
+   "a": "1",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "4"
+  },
+  {
+   "name": "Bradley Skillman",
+   "number": "",
+   "pos": "G",
+   "gp": "4",
    "g": "0",
    "a": "0",
    "pts": "0",
    "plusminus": "0",
-   "pim": "4"
+   "pim": "0"
   },
   {
    "name": "Joseph Azar",
@@ -193,39 +215,39 @@
    "pim": "0"
   },
   {
-   "name": "Samuel Meyer",
+   "name": "Joseph Capozzoli Jr",
    "number": "",
    "pos": "",
-   "gp": "1",
+   "gp": "4",
    "g": "0",
    "a": "0",
    "pts": "0",
    "plusminus": "0",
-   "pim": "2"
+   "pim": "0"
   }
  ],
  "goalies": [
   {
    "name": "Bradley Skillman",
    "number": "",
-   "gp": 3,
-   "sa": 39,
-   "ga": 4,
-   "sv": 35,
-   "w": 2,
+   "gp": 4,
+   "sa": 44,
+   "ga": 8,
+   "sv": 39,
+   "w": 4,
    "l": 0,
-   "svpct": "0.897"
+   "svpct": "0.886"
   },
   {
    "name": "Joseph Azar",
    "number": "27",
    "gp": 2,
    "sa": 29,
-   "ga": 1,
-   "sv": 28,
-   "w": 2,
+   "ga": 0,
+   "sv": 29,
+   "w": 1,
    "l": 0,
-   "svpct": "0.966"
+   "svpct": "1.000"
   }
  ],
  "games": [
@@ -239,6 +261,28 @@
    "box": {
     "skaters": [
      {
+      "id": "6928",
+      "name": "Dylan Lashuk",
+      "number": "",
+      "g": 2,
+      "a": 1,
+      "pts": 3,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 2,
+      "a": 1,
+      "pts": 3,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
       "id": "602",
       "name": "Konstantinos Krokidis",
       "number": "93",
@@ -250,23 +294,34 @@
       "sog": 0
      },
      {
-      "id": "605",
-      "name": "Luka Mazzarone",
-      "number": "94",
-      "g": 2,
-      "a": 0,
+      "id": "160",
+      "name": "Luke Ventura",
+      "number": "88",
+      "g": 0,
+      "a": 2,
       "pts": 2,
       "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
      {
-      "id": "6928",
-      "name": "Dylan Lashuk",
+      "id": "6853",
+      "name": "Cameron Fine",
       "number": "",
-      "g": 2,
+      "g": 1,
       "a": 0,
-      "pts": 2,
+      "pts": 1,
+      "pim": 9,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7351",
+      "name": "Ryan Ohliger",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
       "pim": 0,
       "plusminus": 0,
       "sog": 0
@@ -283,24 +338,35 @@
       "sog": 0
      },
      {
-      "id": "7351",
-      "name": "Ryan Ohliger",
-      "number": "",
-      "g": 1,
-      "a": 0,
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "92",
+      "name": "Jake Totans",
+      "number": "27",
+      "g": 0,
+      "a": 1,
       "pts": 1,
       "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
      {
-      "id": "6853",
-      "name": "Cameron Fine",
-      "number": "",
-      "g": 1,
-      "a": 0,
+      "id": "612",
+      "name": "Charlie Remsen",
+      "number": "94",
+      "g": 0,
+      "a": 1,
       "pts": 1,
-      "pim": 10,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
@@ -309,20 +375,86 @@
       "name": "Nicholas Pulice",
       "number": "11",
       "g": 0,
-      "a": 0,
-      "pts": 0,
-      "pim": 2,
+      "a": 1,
+      "pts": 1,
+      "pim": 1,
       "plusminus": 0,
       "sog": 0
      },
      {
-      "id": "930",
-      "name": "Thomas Klingensmith",
-      "number": "53",
+      "id": "11032",
+      "name": "Brody Arthur",
+      "number": "",
       "g": 0,
       "a": 0,
       "pts": 0,
-      "pim": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9091",
+      "name": "Joseph Capozzoli Jr",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9090",
+      "name": "Samuel Meyer",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9088",
+      "name": "Daniel Cesa",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9095",
+      "name": "Connor Scully",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11042",
+      "name": "Camden Collins",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      }
@@ -332,11 +464,11 @@
       "id": "9094",
       "name": "Bradley Skillman",
       "number": "",
-      "min": "—",
-      "sa": "16",
+      "min": "45:00",
+      "sa": "19",
       "ga": "3",
-      "sv": "13",
-      "svpct": "0.813",
+      "sv": "16",
+      "svpct": "0.842",
       "wl": "W"
      }
     ]
@@ -367,8 +499,8 @@
         "number": "",
         "badge": "",
         "g": "2",
-        "a": "0",
-        "pts": "2",
+        "a": "1",
+        "pts": "3",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
@@ -378,9 +510,42 @@
         "number": "10",
         "badge": "",
         "g": "1",
-        "a": "0",
-        "pts": "1",
+        "a": "2",
+        "pts": "3",
         "pim": "8",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jake Goldstein",
+        "number": "79",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Preston Malz",
+        "number": "13",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "August Orlando",
+        "number": "25",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -391,7 +556,40 @@
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "10",
+        "pim": "9",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Andrew Schnabel",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Axel Krosney",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Lucas Dipasquale",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -402,7 +600,51 @@
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Krishav Aggarwal",
+        "number": "46",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Cole Kasin",
+        "number": "37",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luca Daniti",
+        "number": "75",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Francesco Figueiredo",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        }
@@ -412,19 +654,19 @@
         "name": "Liam Parris",
         "number": "",
         "badge": "",
-        "min": "—",
-        "sa": "51",
+        "min": "45:00",
+        "sa": "60",
         "ga": "9",
-        "sv": "42",
-        "svpct": "0.824",
+        "sv": "51",
+        "svpct": "0.850",
         "wl": "L"
        }
       ],
       "totals": {
        "g": "3",
-       "a": "0",
-       "pts": "3",
-       "pim": "20"
+       "a": "4",
+       "pts": "7",
+       "pim": "18"
       }
      },
      {
@@ -440,6 +682,28 @@
       "total": "9",
       "skaters": [
        {
+        "name": "Dylan Lashuk",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "1",
+        "pts": "3",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luka Mazzarone",
+        "number": "94",
+        "badge": "",
+        "g": "2",
+        "a": "1",
+        "pts": "3",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
         "name": "Konstantinos Krokidis",
         "number": "93",
         "badge": "",
@@ -451,23 +715,34 @@
         "sog": "0"
        },
        {
-        "name": "Luka Mazzarone",
-        "number": "94",
+        "name": "Luke Ventura",
+        "number": "88",
         "badge": "",
-        "g": "2",
-        "a": "0",
+        "g": "0",
+        "a": "2",
         "pts": "2",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Dylan Lashuk",
+        "name": "Cameron Fine",
         "number": "",
         "badge": "",
-        "g": "2",
+        "g": "1",
         "a": "0",
-        "pts": "2",
+        "pts": "1",
+        "pim": "9",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Ohliger",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
@@ -484,24 +759,35 @@
         "sog": "0"
        },
        {
-        "name": "Ryan Ohliger",
-        "number": "",
+        "name": "Thomas Klingensmith",
+        "number": "53",
         "badge": "",
-        "g": "1",
-        "a": "0",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jake Totans",
+        "number": "27",
+        "badge": "",
+        "g": "0",
+        "a": "1",
         "pts": "1",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Cameron Fine",
-        "number": "",
+        "name": "Charlie Remsen",
+        "number": "94",
         "badge": "",
-        "g": "1",
-        "a": "0",
+        "g": "0",
+        "a": "1",
         "pts": "1",
-        "pim": "10",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -510,20 +796,86 @@
         "number": "11",
         "badge": "",
         "g": "0",
-        "a": "0",
-        "pts": "0",
-        "pim": "2",
+        "a": "1",
+        "pts": "1",
+        "pim": "1",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Thomas Klingensmith",
-        "number": "53",
+        "name": "Brody Arthur",
+        "number": "",
         "badge": "",
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Joseph Capozzoli Jr",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Samuel Meyer",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Daniel Cesa",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Connor Scully",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Camden Collins",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aedan Dowling",
+        "number": "70",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        }
@@ -533,57 +885,62 @@
         "name": "Bradley Skillman",
         "number": "",
         "badge": "",
-        "min": "—",
-        "sa": "16",
+        "min": "45:00",
+        "sa": "19",
         "ga": "3",
-        "sv": "13",
-        "svpct": "0.813",
+        "sv": "16",
+        "svpct": "0.842",
         "wl": "W"
        }
       ],
       "totals": {
        "g": "9",
-       "a": "0",
-       "pts": "9",
-       "pim": "14"
+       "a": "8",
+       "pts": "17",
+       "pim": "11"
       }
      }
     ],
     "stars": [
      {
       "rank": "1",
-      "name": "Konstantinos Krokidis",
-      "team": "Rinx Hockey 14U Silver - Skillman · #93",
-      "line": "2G"
+      "name": "Dylan Lashuk",
+      "team": "Rinx Hockey 14U Silver - Skillman",
+      "line": "2G 1A"
      },
      {
       "rank": "2",
       "name": "Luka Mazzarone",
       "team": "Rinx Hockey 14U Silver - Skillman · #94",
-      "line": "2G"
+      "line": "2G 1A"
      },
      {
       "rank": "3",
-      "name": "Dylan Lashuk",
-      "team": "Rinx Hockey 14U Silver - Skillman",
-      "line": "2G"
+      "name": "Jeremy Kabinoff",
+      "team": "LI Sharks 14U Silver - Manno",
+      "line": "2G 1A"
      }
     ],
     "leaders": [
      {
       "cat": "Goals",
-      "name": "#93 Konstantinos Krokidis",
+      "name": "Dylan Lashuk",
+      "val": "2"
+     },
+     {
+      "cat": "Assists",
+      "name": "#88 Luke Ventura",
       "val": "2"
      },
      {
       "cat": "Points",
-      "name": "#93 Konstantinos Krokidis",
-      "val": "2"
+      "name": "Dylan Lashuk",
+      "val": "3"
      },
      {
       "cat": "Saves",
       "name": "Liam Parris",
-      "val": "42"
+      "val": "51"
      }
     ],
     "info": [
@@ -623,12 +980,34 @@
       "sog": 0
      },
      {
-      "id": "92",
-      "name": "Jake Totans",
-      "number": "27",
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
       "g": 1,
-      "a": 0,
-      "pts": 1,
+      "a": 1,
+      "pts": 2,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 0,
+      "a": 2,
+      "pts": 2,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11042",
+      "name": "Camden Collins",
+      "number": "",
+      "g": 0,
+      "a": 2,
+      "pts": 2,
       "pim": 0,
       "plusminus": 0,
       "sog": 0
@@ -645,39 +1024,6 @@
       "sog": 0
      },
      {
-      "id": "1508",
-      "name": "Brody Arthur",
-      "number": "77",
-      "g": 1,
-      "a": 0,
-      "pts": 1,
-      "pim": 0,
-      "plusminus": 0,
-      "sog": 0
-     },
-     {
-      "id": "930",
-      "name": "Thomas Klingensmith",
-      "number": "53",
-      "g": 1,
-      "a": 0,
-      "pts": 1,
-      "pim": 2,
-      "plusminus": 0,
-      "sog": 0
-     },
-     {
-      "id": "605",
-      "name": "Luka Mazzarone",
-      "number": "94",
-      "g": 1,
-      "a": 0,
-      "pts": 1,
-      "pim": 6,
-      "plusminus": 0,
-      "sog": 0
-     },
-     {
       "id": "11032",
       "name": "Brody Arthur",
       "number": "",
@@ -689,13 +1035,90 @@
       "sog": 0
      },
      {
-      "id": "916",
-      "name": "Aedan Dowling",
-      "number": "70",
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 3,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "92",
+      "name": "Jake Totans",
+      "number": "27",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9095",
+      "name": "Connor Scully",
+      "number": "",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9090",
+      "name": "Samuel Meyer",
+      "number": "",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "612",
+      "name": "Charlie Remsen",
+      "number": "94",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6928",
+      "name": "Dylan Lashuk",
+      "number": "",
       "g": 0,
       "a": 0,
       "pts": 0,
-      "pim": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9091",
+      "name": "Joseph Capozzoli Jr",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "602",
+      "name": "Konstantinos Krokidis",
+      "number": "93",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
@@ -706,7 +1129,29 @@
       "g": 0,
       "a": 0,
       "pts": 0,
-      "pim": 2,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "160",
+      "name": "Luke Ventura",
+      "number": "88",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11038",
+      "name": "Brody Meyer",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      }
@@ -716,23 +1161,23 @@
       "id": "1666",
       "name": "Joseph Azar",
       "number": "27",
-      "min": "—",
+      "min": "15:00",
       "sa": "8",
-      "ga": "1",
-      "sv": "7",
-      "svpct": "0.875",
-      "wl": "W"
+      "ga": "0",
+      "sv": "8",
+      "svpct": "1.000",
+      "wl": "-"
      },
      {
       "id": "9094",
       "name": "Bradley Skillman",
       "number": "",
-      "min": "—",
-      "sa": "9",
-      "ga": "0",
+      "min": "30:00",
+      "sa": "10",
+      "ga": "1",
       "sv": "9",
-      "svpct": "1.000",
-      "wl": "-"
+      "svpct": "0.900",
+      "wl": "W"
      }
     ]
    },
@@ -764,18 +1209,172 @@
         "g": "1",
         "a": "0",
         "pts": "1",
-        "pim": "2",
+        "pim": "1",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Elijah Moran",
+        "name": "Scott Siemsen",
         "number": "",
         "badge": "",
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Mason Balistreri",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Darren Kenneally",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aj Munoz",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Clark Beltram",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Anthony Raguseo",
+        "number": "28",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Edwin Ramirez",
+        "number": "73",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Marley Magnotta",
+        "number": "12",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jonathan Kotsonis",
+        "number": "3",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Regan Bossert",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Lucas Veraldi",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luke Enzmann",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Adam Keller-Schwab",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Abraham Parthey",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Hayes Ferran",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -786,7 +1385,7 @@
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "1",
         "plusminus": "0",
         "sog": "0"
        }
@@ -796,11 +1395,11 @@
         "name": "Elijah Moran",
         "number": "",
         "badge": "",
-        "min": "—",
-        "sa": "52",
+        "min": "45:00",
+        "sa": "59",
         "ga": "7",
-        "sv": "45",
-        "svpct": "0.865",
+        "sv": "52",
+        "svpct": "0.881",
         "wl": "L"
        }
       ],
@@ -808,7 +1407,7 @@
        "g": "1",
        "a": "0",
        "pts": "1",
-       "pim": "6"
+       "pim": "2"
       }
      },
      {
@@ -835,12 +1434,34 @@
         "sog": "0"
        },
        {
-        "name": "Jake Totans",
-        "number": "27",
+        "name": "Thomas Klingensmith",
+        "number": "53",
         "badge": "",
         "g": "1",
-        "a": "0",
-        "pts": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aedan Dowling",
+        "number": "70",
+        "badge": "",
+        "g": "0",
+        "a": "2",
+        "pts": "2",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Camden Collins",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "2",
+        "pts": "2",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
@@ -858,23 +1479,12 @@
        },
        {
         "name": "Brody Arthur",
-        "number": "77",
+        "number": "",
         "badge": "",
         "g": "1",
         "a": "0",
         "pts": "1",
         "pim": "0",
-        "plusminus": "0",
-        "sog": "0"
-       },
-       {
-        "name": "Thomas Klingensmith",
-        "number": "53",
-        "badge": "",
-        "g": "1",
-        "a": "0",
-        "pts": "1",
-        "pim": "2",
         "plusminus": "0",
         "sog": "0"
        },
@@ -885,13 +1495,13 @@
         "g": "1",
         "a": "0",
         "pts": "1",
-        "pim": "6",
+        "pim": "3",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Brody Arthur",
-        "number": "",
+        "name": "Jake Totans",
+        "number": "27",
         "badge": "",
         "g": "1",
         "a": "0",
@@ -901,13 +1511,68 @@
         "sog": "0"
        },
        {
-        "name": "Aedan Dowling",
-        "number": "70",
+        "name": "Connor Scully",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Samuel Meyer",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Charlie Remsen",
+        "number": "94",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Dylan Lashuk",
+        "number": "",
         "badge": "",
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Joseph Capozzoli Jr",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Konstantinos Krokidis",
+        "number": "93",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -918,7 +1583,29 @@
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luke Ventura",
+        "number": "88",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brody Meyer",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        }
@@ -928,30 +1615,30 @@
         "name": "Joseph Azar",
         "number": "27",
         "badge": "",
-        "min": "—",
+        "min": "15:00",
         "sa": "8",
-        "ga": "1",
-        "sv": "7",
-        "svpct": "0.875",
-        "wl": "W"
+        "ga": "0",
+        "sv": "8",
+        "svpct": "1.000",
+        "wl": "-"
        },
        {
         "name": "Bradley Skillman",
         "number": "",
         "badge": "",
-        "min": "—",
-        "sa": "9",
-        "ga": "0",
+        "min": "30:00",
+        "sa": "10",
+        "ga": "1",
         "sv": "9",
-        "svpct": "1.000",
-        "wl": "-"
+        "svpct": "0.900",
+        "wl": "W"
        }
       ],
       "totals": {
-       "g": "8",
-       "a": "0",
-       "pts": "8",
-       "pim": "12"
+       "g": "7",
+       "a": "8",
+       "pts": "15",
+       "pim": "6"
       }
      }
     ],
@@ -964,9 +1651,9 @@
      },
      {
       "rank": "2",
-      "name": "Jake Totans",
-      "team": "Rinx Hockey 14U Silver - Skillman · #27",
-      "line": "1G"
+      "name": "Thomas Klingensmith",
+      "team": "Rinx Hockey 14U Silver - Skillman · #53",
+      "line": "1G 1A"
      },
      {
       "rank": "3",
@@ -982,6 +1669,11 @@
       "val": "2"
      },
      {
+      "cat": "Assists",
+      "name": "#70 Aedan Dowling",
+      "val": "2"
+     },
+     {
       "cat": "Points",
       "name": "Cameron Fine",
       "val": "2"
@@ -989,7 +1681,7 @@
      {
       "cat": "Saves",
       "name": "Elijah Moran",
-      "val": "45"
+      "val": "52"
      }
     ],
     "info": [
@@ -1018,6 +1710,28 @@
    "box": {
     "skaters": [
      {
+      "id": "602",
+      "name": "Konstantinos Krokidis",
+      "number": "93",
+      "g": 1,
+      "a": 1,
+      "pts": 2,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
       "id": "160",
       "name": "Luke Ventura",
       "number": "88",
@@ -1040,46 +1754,112 @@
       "sog": 0
      },
      {
-      "id": "936",
-      "name": "Brody Meyer",
-      "number": "87",
-      "g": 1,
-      "a": 0,
-      "pts": 1,
-      "pim": 0,
-      "plusminus": 0,
-      "sog": 0
-     },
-     {
-      "id": "916",
-      "name": "Aedan Dowling",
-      "number": "70",
-      "g": 1,
-      "a": 0,
-      "pts": 1,
-      "pim": 0,
-      "plusminus": 0,
-      "sog": 0
-     },
-     {
       "id": "605",
       "name": "Luka Mazzarone",
       "number": "94",
       "g": 1,
       "a": 0,
       "pts": 1,
-      "pim": 2,
+      "pim": 1,
       "plusminus": 0,
       "sog": 0
      },
      {
-      "id": "602",
-      "name": "Konstantinos Krokidis",
-      "number": "93",
-      "g": 1,
+      "id": "9088",
+      "name": "Daniel Cesa",
+      "number": "",
+      "g": 0,
       "a": 0,
-      "pts": 1,
-      "pim": 2,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9090",
+      "name": "Samuel Meyer",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9091",
+      "name": "Joseph Capozzoli Jr",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9095",
+      "name": "Connor Scully",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "92",
+      "name": "Jake Totans",
+      "number": "27",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11032",
+      "name": "Brody Arthur",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11042",
+      "name": "Camden Collins",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7351",
+      "name": "Ryan Ohliger",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6853",
+      "name": "Cameron Fine",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
@@ -1095,24 +1875,35 @@
       "sog": 0
      },
      {
-      "id": "257",
-      "name": "Camden Collins",
-      "number": "57",
+      "id": "612",
+      "name": "Charlie Remsen",
+      "number": "94",
       "g": 0,
       "a": 0,
       "pts": 0,
-      "pim": 2,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
      {
-      "id": "11042",
-      "name": "Camden Collins",
+      "id": "6928",
+      "name": "Dylan Lashuk",
       "number": "",
       "g": 0,
       "a": 0,
       "pts": 0,
-      "pim": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      }
@@ -1122,11 +1913,11 @@
       "id": "9094",
       "name": "Bradley Skillman",
       "number": "",
-      "min": "—",
-      "sa": "14",
+      "min": "45:00",
+      "sa": "15",
       "ga": "1",
-      "sv": "13",
-      "svpct": "0.929",
+      "sv": "14",
+      "svpct": "0.933",
       "wl": "W"
      }
     ]
@@ -1159,18 +1950,40 @@
         "g": "1",
         "a": "0",
         "pts": "1",
-        "pim": "2",
+        "pim": "1",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Theodore Beil",
+        "name": "Nicholas Rybacki",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jean Sanchez",
         "number": "",
         "badge": "",
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Peter McAndrew",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -1181,7 +1994,128 @@
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brian Li",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Devlin Oconnor",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Hugo Lin",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Lexington Baruch",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Sasha Igoshin",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Etienne Ramos-Esteban",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jacob Platt",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Loic Sarmazian",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Franklin Giordano",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Theodore Beil",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Graham Howard",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        }
@@ -1192,10 +2126,10 @@
         "number": "",
         "badge": "",
         "min": "—",
-        "sa": "19",
-        "ga": "3",
-        "sv": "16",
-        "svpct": "0.842",
+        "sa": "20",
+        "ga": "1",
+        "sv": "19",
+        "svpct": "0.950",
         "wl": "-"
        },
        {
@@ -1203,18 +2137,18 @@
         "number": "",
         "badge": "",
         "min": "—",
-        "sa": "12",
-        "ga": "2",
-        "sv": "10",
-        "svpct": "0.833",
+        "sa": "16",
+        "ga": "4",
+        "sv": "12",
+        "svpct": "0.750",
         "wl": "L"
        }
       ],
       "totals": {
        "g": "1",
-       "a": "0",
-       "pts": "1",
-       "pim": "6"
+       "a": "1",
+       "pts": "2",
+       "pim": "3"
       }
      },
      {
@@ -1229,6 +2163,28 @@
       ],
       "total": "5",
       "skaters": [
+       {
+        "name": "Konstantinos Krokidis",
+        "number": "93",
+        "badge": "",
+        "g": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aedan Dowling",
+        "number": "70",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
        {
         "name": "Luke Ventura",
         "number": "88",
@@ -1252,46 +2208,112 @@
         "sog": "0"
        },
        {
-        "name": "Brody Meyer",
-        "number": "87",
-        "badge": "",
-        "g": "1",
-        "a": "0",
-        "pts": "1",
-        "pim": "0",
-        "plusminus": "0",
-        "sog": "0"
-       },
-       {
-        "name": "Aedan Dowling",
-        "number": "70",
-        "badge": "",
-        "g": "1",
-        "a": "0",
-        "pts": "1",
-        "pim": "0",
-        "plusminus": "0",
-        "sog": "0"
-       },
-       {
         "name": "Luka Mazzarone",
         "number": "94",
         "badge": "",
         "g": "1",
         "a": "0",
         "pts": "1",
-        "pim": "2",
+        "pim": "1",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Konstantinos Krokidis",
-        "number": "93",
+        "name": "Daniel Cesa",
+        "number": "",
         "badge": "",
-        "g": "1",
+        "g": "0",
         "a": "0",
-        "pts": "1",
-        "pim": "2",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Samuel Meyer",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Joseph Capozzoli Jr",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Connor Scully",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jake Totans",
+        "number": "27",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brody Arthur",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Camden Collins",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Ohliger",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Cameron Fine",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -1307,24 +2329,35 @@
         "sog": "0"
        },
        {
-        "name": "Camden Collins",
-        "number": "57",
+        "name": "Charlie Remsen",
+        "number": "94",
         "badge": "",
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Camden Collins",
+        "name": "Dylan Lashuk",
         "number": "",
         "badge": "",
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Thomas Klingensmith",
+        "number": "53",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        }
@@ -1334,57 +2367,62 @@
         "name": "Bradley Skillman",
         "number": "",
         "badge": "",
-        "min": "—",
-        "sa": "14",
+        "min": "45:00",
+        "sa": "15",
         "ga": "1",
-        "sv": "13",
-        "svpct": "0.929",
+        "sv": "14",
+        "svpct": "0.933",
         "wl": "W"
        }
       ],
       "totals": {
-       "g": "6",
-       "a": "0",
+       "g": "5",
+       "a": "1",
        "pts": "6",
-       "pim": "16"
+       "pim": "11"
       }
      }
     ],
     "stars": [
      {
       "rank": "1",
-      "name": "Luke Ventura",
-      "team": "Rinx Hockey 14U Silver - Skillman · #88",
-      "line": "1G"
+      "name": "Konstantinos Krokidis",
+      "team": "Rinx Hockey 14U Silver - Skillman · #93",
+      "line": "1G 1A"
      },
      {
       "rank": "2",
-      "name": "Brody Meyer",
-      "team": "Rinx Hockey 14U Silver - Skillman",
+      "name": "Luka Mazzarone",
+      "team": "Rinx Hockey 14U Silver - Skillman · #94",
       "line": "1G"
      },
      {
       "rank": "3",
-      "name": "Brody Meyer",
-      "team": "Rinx Hockey 14U Silver - Skillman · #87",
-      "line": "1G"
+      "name": "Daniel Gonzalez",
+      "team": "North Park Hockey 14U Silver - Pala",
+      "line": "19 SV"
      }
     ],
     "leaders": [
      {
       "cat": "Goals",
-      "name": "#88 Luke Ventura",
+      "name": "#93 Konstantinos Krokidis",
+      "val": "1"
+     },
+     {
+      "cat": "Assists",
+      "name": "#93 Konstantinos Krokidis",
       "val": "1"
      },
      {
       "cat": "Points",
-      "name": "#88 Luke Ventura",
-      "val": "1"
+      "name": "#93 Konstantinos Krokidis",
+      "val": "2"
      },
      {
       "cat": "Saves",
       "name": "Daniel Gonzalez",
-      "val": "16"
+      "val": "19"
      }
     ],
     "info": [
@@ -1896,9 +2934,9 @@
    "box": {
     "skaters": [
      {
-      "id": "92",
-      "name": "Jake Totans",
-      "number": "27",
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
       "g": 2,
       "a": 0,
       "pts": 2,
@@ -1907,9 +2945,9 @@
       "sog": 0
      },
      {
-      "id": "605",
-      "name": "Luka Mazzarone",
-      "number": "94",
+      "id": "92",
+      "name": "Jake Totans",
+      "number": "27",
       "g": 2,
       "a": 0,
       "pts": 2,
@@ -1922,20 +2960,20 @@
       "name": "Brody Meyer",
       "number": "",
       "g": 1,
-      "a": 0,
-      "pts": 1,
+      "a": 1,
+      "pts": 2,
       "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
      {
-      "id": "936",
-      "name": "Brody Meyer",
-      "number": "87",
+      "id": "262",
+      "name": "Nicholas Pulice",
+      "number": "11",
       "g": 1,
       "a": 0,
       "pts": 1,
-      "pim": 0,
+      "pim": 2,
       "plusminus": 0,
       "sog": 0
      },
@@ -1962,23 +3000,100 @@
       "sog": 0
      },
      {
-      "id": "262",
-      "name": "Nicholas Pulice",
-      "number": "11",
-      "g": 1,
-      "a": 0,
+      "id": "9090",
+      "name": "Samuel Meyer",
+      "number": "",
+      "g": 0,
+      "a": 1,
       "pts": 1,
-      "pim": 2,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      },
      {
-      "id": "257",
-      "name": "Camden Collins",
-      "number": "57",
-      "g": 1,
-      "a": 0,
+      "id": "160",
+      "name": "Luke Ventura",
+      "number": "88",
+      "g": 0,
+      "a": 1,
       "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11032",
+      "name": "Brody Arthur",
+      "number": "",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7351",
+      "name": "Ryan Ohliger",
+      "number": "",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "612",
+      "name": "Charlie Remsen",
+      "number": "94",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 4,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6853",
+      "name": "Cameron Fine",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9088",
+      "name": "Daniel Cesa",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
       "pim": 0,
       "plusminus": 0,
       "sog": 0
@@ -1995,18 +3110,41 @@
       "sog": 0
      },
      {
-      "id": "916",
-      "name": "Aedan Dowling",
-      "number": "70",
+      "id": "9091",
+      "name": "Joseph Capozzoli Jr",
+      "number": "",
       "g": 0,
       "a": 0,
       "pts": 0,
-      "pim": 4,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6928",
+      "name": "Dylan Lashuk",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
       "plusminus": 0,
       "sog": 0
      }
     ],
-    "goalies": []
+    "goalies": [
+     {
+      "id": "9094",
+      "name": "Bradley Skillman",
+      "number": "",
+      "min": "45:00",
+      "sa": "-",
+      "ga": "3",
+      "sv": "-",
+      "svpct": "-",
+      "wl": "W"
+     }
+    ]
    },
    "detail": {
     "league": "LIAHL · 14U Silver",
@@ -2030,8 +3168,8 @@
       "total": "8",
       "skaters": [
        {
-        "name": "Jake Totans",
-        "number": "27",
+        "name": "Luka Mazzarone",
+        "number": "94",
         "badge": "",
         "g": "2",
         "a": "0",
@@ -2041,8 +3179,8 @@
         "sog": "0"
        },
        {
-        "name": "Luka Mazzarone",
-        "number": "94",
+        "name": "Jake Totans",
+        "number": "27",
         "badge": "",
         "g": "2",
         "a": "0",
@@ -2056,20 +3194,20 @@
         "number": "",
         "badge": "",
         "g": "1",
-        "a": "0",
-        "pts": "1",
+        "a": "1",
+        "pts": "2",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Brody Meyer",
-        "number": "87",
+        "name": "Nicholas Pulice",
+        "number": "11",
         "badge": "",
         "g": "1",
         "a": "0",
         "pts": "1",
-        "pim": "0",
+        "pim": "2",
         "plusminus": "0",
         "sog": "0"
        },
@@ -2096,23 +3234,100 @@
         "sog": "0"
        },
        {
-        "name": "Nicholas Pulice",
-        "number": "11",
+        "name": "Samuel Meyer",
+        "number": "",
         "badge": "",
-        "g": "1",
-        "a": "0",
+        "g": "0",
+        "a": "1",
         "pts": "1",
-        "pim": "2",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
        {
-        "name": "Camden Collins",
-        "number": "57",
+        "name": "Luke Ventura",
+        "number": "88",
         "badge": "",
-        "g": "1",
-        "a": "0",
+        "g": "0",
+        "a": "1",
         "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brody Arthur",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Ohliger",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Charlie Remsen",
+        "number": "94",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aedan Dowling",
+        "number": "70",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "4",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Thomas Klingensmith",
+        "number": "53",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Cameron Fine",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Daniel Cesa",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
         "pim": "0",
         "plusminus": "0",
         "sog": "0"
@@ -2129,22 +3344,45 @@
         "sog": "0"
        },
        {
-        "name": "Aedan Dowling",
-        "number": "70",
+        "name": "Joseph Capozzoli Jr",
+        "number": "",
         "badge": "",
         "g": "0",
         "a": "0",
         "pts": "0",
-        "pim": "4",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Dylan Lashuk",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        }
       ],
-      "goalies": [],
+      "goalies": [
+       {
+        "name": "Bradley Skillman",
+        "number": "",
+        "badge": "",
+        "min": "45:00",
+        "sa": "-",
+        "ga": "3",
+        "sv": "-",
+        "svpct": "-",
+        "wl": "W"
+       }
+      ],
       "totals": {
-       "g": "10",
-       "a": "0",
-       "pts": "10",
+       "g": "8",
+       "a": "5",
+       "pts": "13",
        "pim": "10"
       }
      },
@@ -2172,6 +3410,50 @@
         "sog": "0"
        },
        {
+        "name": "Scott Siemsen",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Owen Healy",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Anthony Raguseo",
+        "number": "28",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aj Munoz",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
         "name": "Regan Bossert",
         "number": "",
         "badge": "",
@@ -2179,6 +3461,94 @@
         "a": "0",
         "pts": "0",
         "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Darren Kenneally",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Mason Balistreri",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jake Rocco",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Edwin Ramirez",
+        "number": "73",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Marley Magnotta",
+        "number": "12",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jonathan Kotsonis",
+        "number": "3",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Lucas Veraldi",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luke Enzmann",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
         "plusminus": "0",
         "sog": "0"
        },
@@ -2192,13 +3562,58 @@
         "pim": "2",
         "plusminus": "0",
         "sog": "0"
+       },
+       {
+        "name": "Adam Keller-Schwab",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Hayes Ferran",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Abraham Parthey",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
        }
       ],
-      "goalies": [],
+      "goalies": [
+       {
+        "name": "Elijah Moran",
+        "number": "",
+        "badge": "",
+        "min": "45:00",
+        "sa": "-",
+        "ga": "8",
+        "sv": "-",
+        "svpct": "-",
+        "wl": "L"
+       }
+      ],
       "totals": {
        "g": "3",
-       "a": "0",
-       "pts": "3",
+       "a": "1",
+       "pts": "4",
        "pim": "4"
       }
      }
@@ -2212,14 +3627,14 @@
      },
      {
       "rank": "2",
-      "name": "Jake Totans",
-      "team": "Rinx Hockey 14U Silver - Skillman · #27",
+      "name": "Luka Mazzarone",
+      "team": "Rinx Hockey 14U Silver - Skillman · #94",
       "line": "2G"
      },
      {
       "rank": "3",
-      "name": "Luka Mazzarone",
-      "team": "Rinx Hockey 14U Silver - Skillman · #94",
+      "name": "Jake Totans",
+      "team": "Rinx Hockey 14U Silver - Skillman · #27",
       "line": "2G"
      }
     ],
@@ -2228,6 +3643,11 @@
       "cat": "Goals",
       "name": "Clark Beltram",
       "val": "3"
+     },
+     {
+      "cat": "Assists",
+      "name": "Scott Siemsen",
+      "val": "1"
      },
      {
       "cat": "Points",
