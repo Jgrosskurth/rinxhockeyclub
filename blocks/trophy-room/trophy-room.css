@@ -1,5 +1,5 @@
-/* Trophy Room: title band, team tabs, banners hanging from the rafters, then
-   the photo gallery. Runs full bleed. */
+/* Trophy Room ("The Banner Wall"): title band, every banner on one wall hanging
+   from a rafter, then each team's photos grouped by event. Runs full bleed. */
 .section.trophy-room-container {
   padding: 0;
   max-width: 100%;
@@ -7,15 +7,29 @@
 
 .trophy-room h1,
 .trophy-room h2,
+.trophy-room h3,
 .trophy-room p {
   margin: 0;
 }
 
-/* Title band */
-.trophy-room .tr-head {
-  background: var(--color-navy);
+.trophy-room .tr-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Title band and hall share the navy */
+.trophy-room .tr-head,
+.trophy-room .tr-hall {
+  background-color: var(--color-navy);
   color: var(--color-white);
-  padding: 36px 16px 8px;
+}
+
+.trophy-room .tr-head {
+  padding: 32px 16px 0;
 }
 
 .trophy-room .tr-head h1,
@@ -37,384 +51,338 @@
 }
 
 .trophy-room .tr-head p {
-  margin-top: 8px;
-  color: rgb(255 255 255 / 80%);
+  margin-top: 10px;
+  color: var(--color-ice);
 }
 
-/* Team tabs */
-.trophy-room .tr-tabs {
+/* Hall: the banner wall */
+.trophy-room .tr-hall {
+  background-image: radial-gradient(120% 80% at 50% 0%, var(--color-navy-light) 0%, var(--color-navy) 70%);
+  padding: 24px 16px 48px;
+}
+
+.trophy-room .tr-hall > * {
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trophy-room .tr-hall-row {
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 20px 16px 0;
-  background: var(--color-navy);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 20px;
 }
 
+.trophy-room .section-title {
+  flex: 1 1 320px;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.trophy-room .tr-hall .section-title {
+  color: var(--color-white);
+}
+
+/* Segmented buttons: the wall filter, and the gallery's team tabs */
+.trophy-room .tr-filter,
+.trophy-room .tr-tabs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  width: 100%;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.trophy-room .tr-filter {
+  background: rgb(232 240 249 / 8%);
+}
+
+.trophy-room .tr-tabs {
+  margin-bottom: 24px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+}
+
+.trophy-room .tr-filter button,
 .trophy-room .tr-tabs button {
-  flex: 1;
-  max-width: 220px;
   min-height: 44px;
-  padding: 0 20px;
-  border: 1px solid rgb(255 255 255 / 25%);
-  border-radius: 999px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 4px;
   background: none;
   font-family: var(--heading-font-family);
-  font-weight: 800;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 85%);
+  white-space: nowrap;
   cursor: pointer;
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
 }
 
-.trophy-room .tr-tabs button:hover {
-  color: var(--color-white);
-  border-color: rgb(255 255 255 / 60%);
+.trophy-room .tr-filter button {
+  color: var(--color-ice);
 }
 
-.trophy-room .tr-tabs button[aria-selected="true"] {
+.trophy-room .tr-filter button[aria-pressed="true"] {
   background: var(--color-white);
-  border-color: var(--color-white);
   color: var(--color-navy);
 }
 
+.trophy-room .tr-tabs button {
+  color: var(--color-navy);
+}
+
+.trophy-room .tr-tabs button[aria-selected="true"] {
+  background: var(--color-navy);
+  color: var(--color-white);
+}
+
+.trophy-room .tr-filter button:focus-visible,
 .trophy-room .tr-tabs button:focus-visible {
-  outline: 3px solid var(--color-gold);
+  outline: 3px solid var(--color-red);
   outline-offset: 2px;
 }
 
-/* The hall: an arena ceiling, lit from above */
-.trophy-room .tr-hall {
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 0%, rgb(255 255 255 / 9%), transparent 70%),
-    var(--color-navy);
-  color: var(--color-white);
-  padding: 28px 16px 44px;
-  text-align: center;
-}
-
-.trophy-room .tr-hall h2,
-.trophy-room .tr-photos h2 {
-  font-family: var(--heading-font-family);
-  font-size: 1.5rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.trophy-room .tr-hall h2 {
-  color: var(--color-white);
-}
-
-/* The rafter, with every banner hung from it on two cords in one line. More
-   banners than fit scroll sideways; a few sit centred (auto side margins). */
-.trophy-room .tr-rafters {
+/* The wall: one solid rafter line, painted on the row's content so it runs its
+   full length and scrolls with the banners on phones; every banner hangs from
+   it on two wires that land on the banner's top grommets. */
+.trophy-room .tr-wall {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(78%, 300px);
+  gap: 24px;
+  margin: 0 auto;
+  padding: 28px 0 0;
   list-style: none;
-  max-width: var(--max-width);
-  margin: 20px auto 0;
-  padding: 0 0 12px;
-  border-top: 6px solid var(--color-navy-light);
-  box-shadow: 0 -1px 0 rgb(255 255 255 / 12%);
-  display: flex;
-  gap: 28px;
   overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(255 255 255 / 30%) transparent;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: linear-gradient(rgb(232 240 249 / 60%), rgb(232 240 249 / 60%)) left top / 100% 3px no-repeat local;
 }
 
-.trophy-room .tr-rafters:focus-visible {
-  outline: 3px solid var(--color-gold);
+.trophy-room .tr-wall::-webkit-scrollbar {
+  display: none;
+}
+
+.trophy-room .tr-wall:focus-visible {
+  outline: 3px solid var(--color-red);
   outline-offset: 4px;
 }
 
 .trophy-room .tr-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-snap-align: start;
+}
+
+.trophy-room .tr-banner[hidden] {
+  display: none;
+}
+
+.trophy-room .tr-hang {
   position: relative;
-  flex: none;
-  width: clamp(140px, 40vw, 220px);
-  padding-top: 28px;
-  transform-origin: 50% 0;
-  scroll-snap-align: center;
+  padding-top: 34px;
+  filter: drop-shadow(0 14px 22px rgb(0 0 0 / 45%));
 }
 
-.trophy-room .tr-banner:first-child {
-  margin-left: auto;
-}
-
-.trophy-room .tr-banner:last-child {
-  margin-right: auto;
-}
-
-.trophy-room .tr-banner::before,
-.trophy-room .tr-banner::after {
+.trophy-room .tr-hang::before,
+.trophy-room .tr-hang::after {
   content: '';
   position: absolute;
-  top: 0;
+  z-index: 1;
+  top: -28px;
   width: 2px;
-  height: 30px;
-  background: rgb(255 255 255 / 35%);
+  height: 72px;
+  background: rgb(232 240 249 / 60%);
 }
 
-.trophy-room .tr-banner::before {
-  left: 8%;
+.trophy-room .tr-hang::before {
+  left: 7%;
 }
 
-.trophy-room .tr-banner::after {
-  right: 8%;
+.trophy-room .tr-hang::after {
+  right: 7%;
 }
 
-.trophy-room .tr-banner figure {
-  margin: 0;
+.trophy-room .tr-hoist {
+  display: block;
+  overflow: clip;
 }
 
-.trophy-room .tr-banner img {
+.trophy-room .tr-hoist img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 2 / 3;
   object-fit: contain;
-  filter: drop-shadow(0 14px 22px rgb(0 0 0 / 45%));
 }
 
-.trophy-room .tr-banner figcaption {
-  margin-top: 12px;
+.trophy-room .tr-team {
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--color-red);
+  color: var(--color-white);
   font-family: var(--heading-font-family);
-  font-size: 1rem;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.trophy-room .tr-banner-title {
+  font-family: var(--heading-font-family);
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--color-white);
 }
 
-/* Banners settle on their cords once, like they've just been raised */
-@media (prefers-reduced-motion: no-preference) {
-  .trophy-room .tr-panel:not([hidden]) .tr-banner {
-    animation: tr-sway 1400ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--i, 0) * 120ms);
-  }
+.trophy-room .tr-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  color: var(--color-ice);
+  font-size: var(--body-font-size-s);
 }
 
-@keyframes tr-sway {
-  0% {
-    transform: rotate(-3deg);
-  }
-
-  45% {
-    transform: rotate(1.5deg);
-  }
-
-  100% {
-    transform: none;
-  }
+.trophy-room .tr-result[hidden] {
+  display: none;
 }
 
-/* Photo gallery */
+.trophy-room .tr-record {
+  padding: 4px 8px 3px;
+  border-radius: 4px;
+  background: #15803d;
+  color: var(--color-white);
+  font-family: var(--heading-font-family);
+  font-size: 0.875rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.06em;
+}
+
+.trophy-room .tr-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  align-self: flex-start;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.trophy-room .tr-more::after {
+  content: ' \2192';
+}
+
+.trophy-room .tr-more:hover {
+  text-decoration: underline;
+}
+
+.trophy-room .tr-empty {
+  color: #4b5563;
+}
+
+.trophy-room .tr-hall .tr-empty {
+  color: rgb(255 255 255 / 70%);
+}
+
+/* Gallery: each team's photos by event / month, each photo in its own shape */
 .trophy-room .tr-photos {
   background: var(--color-off-white);
-  padding: 36px 16px 48px;
+  padding: 40px 16px 56px;
 }
 
-.trophy-room .tr-photos > * {
+/* one centred column, so the tabs line up with the heading and photos */
+.trophy-room .tr-photos-inner {
   max-width: var(--max-width);
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
-.trophy-room .tr-photos h2 {
-  color: var(--color-navy);
+.trophy-room .tr-photos .section-title {
+  margin-bottom: 20px;
 }
 
-.trophy-room .tr-photos-head {
+.trophy-room .tr-group + .tr-group {
+  margin-top: 32px;
+}
+
+.trophy-room .tr-group h3 {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-/* More than 3 rows: 3-row pages side by side that snap, with arrows and a
-   page count beside the heading */
-.trophy-room .tr-pages {
-  display: flex;
-  margin-top: 14px;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.trophy-room .tr-pages::-webkit-scrollbar {
-  display: none;
-}
-
-.trophy-room .tr-page {
-  flex: 0 0 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 6px 0;
-  scroll-snap-align: start;
-}
-
-.trophy-room .tr-page-ctrl {
-  display: flex;
-  flex: none;
-  align-items: center;
-  gap: 6px;
-}
-
-.trophy-room .tr-page-ctrl[hidden] {
-  display: none;
-}
-
-.trophy-room .tr-page-btn {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--color-navy);
-  background: var(--color-white);
-  color: var(--color-navy);
-  cursor: pointer;
-  transition: background-color 150ms ease, color 150ms ease, opacity 150ms ease, transform 100ms ease;
-}
-
-.trophy-room .tr-page-btn:focus-visible,
-.trophy-room .tr-pages:focus-visible {
-  outline: 3px solid var(--color-red);
-  outline-offset: 2px;
-}
-
-.trophy-room .tr-page-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.trophy-room .tr-page-btn:hover:not(:disabled) {
-  background: var(--color-navy);
-  color: var(--color-white);
-}
-
-.trophy-room .tr-page-btn:active:not(:disabled) {
-  transform: scale(0.94);
-}
-
-.trophy-room .tr-page-count {
-  min-width: 3.5em;
-  text-align: center;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-bottom: 14px;
   font-family: var(--heading-font-family);
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   color: var(--color-navy);
-  font-variant-numeric: tabular-nums;
 }
 
-/* 2 photos a row on phones, 3 on tablets, 5 on desktop */
-.trophy-room .tr-gallery {
-  list-style: none;
-  margin-top: 20px;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+.trophy-room .tr-group h3 small {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #4b5563;
+}
+
+.trophy-room .tr-columns {
+  columns: 2;
+  column-gap: 8px;
+}
+
+/* Landscape team photos: one row, widths in proportion to shape, one height */
+.trophy-room .tr-wides {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .trophy-room .tr-thumb {
-  position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  margin: 0 0 8px;
   padding: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
-  background: var(--color-gray-light);
-  cursor: zoom-in;
-  box-shadow: var(--shadow-card);
-}
-
-/* Tag filters (All photos / event / month): a row that scrolls sideways on
-   phones rather than wrapping into a tall block. */
-.trophy-room .tr-filters {
-  display: flex;
-  gap: 8px;
-  margin-top: 14px;
-  padding-bottom: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.trophy-room .tr-filters::-webkit-scrollbar {
-  display: none;
-}
-
-.trophy-room .tr-filter {
-  flex: none;
-  min-height: 38px;
-  padding: 0 14px;
-  border: 2px solid var(--color-navy);
-  border-radius: 999px;
-  background: var(--color-white);
-  color: var(--color-navy);
-  font-family: var(--heading-font-family);
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background-color 150ms ease, color 150ms ease;
-}
-
-.trophy-room .tr-filter:hover {
   background: var(--color-ice);
-}
-
-.trophy-room .tr-filter[aria-pressed="true"] {
-  background: var(--color-navy);
-  color: var(--color-white);
-}
-
-.trophy-room .tr-filter:focus-visible {
-  outline: 3px solid var(--color-red);
-  outline-offset: 2px;
-}
-
-.trophy-room .tr-filters + .tr-photos-body .tr-gallery {
-  margin-top: 14px;
-}
-
-.trophy-room .tr-tag {
-  position: absolute;
-  left: 6px;
-  bottom: 6px;
-  max-width: calc(100% - 12px);
-  padding: 3px 8px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgb(4 30 66 / 82%);
-  color: var(--color-white);
-  font-family: var(--heading-font-family);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1.3;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  white-space: nowrap;
+  break-inside: avoid;
+  cursor: zoom-in;
 }
 
 .trophy-room .tr-thumb img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  height: auto;
+  transition: transform 0.25s ease-out;
 }
 
 .trophy-room .tr-thumb:hover img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .trophy-room .tr-thumb:focus-visible {
@@ -422,13 +390,9 @@
   outline-offset: 2px;
 }
 
-.trophy-room .tr-empty {
-  margin-top: 16px;
-  color: var(--color-gray);
-}
-
-.trophy-room .tr-hall .tr-empty {
-  color: rgb(255 255 255 / 70%);
+.trophy-room .tr-wides .tr-thumb {
+  flex: var(--ar, 1.5) 1 calc(var(--ar, 1.5) * 160px);
+  margin: 0;
 }
 
 /* Photo viewer: the dialog is just the photo; controls are pinned to the
@@ -529,15 +493,31 @@
   right: 12px;
 }
 
+
 @media (prefers-reduced-motion: reduce) {
+  .trophy-room .tr-thumb img {
+    transition: none;
+  }
+
   .trophy-room .tr-thumb:hover img {
     transform: none;
   }
 }
 
+@media (max-width: 599px) {
+  .trophy-room .section-title {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .trophy-room .section-title::after {
+    flex: 1 0 100%;
+  }
+}
+
 @media (min-width: 600px) {
   .trophy-room .tr-head {
-    padding: 48px 24px 8px;
+    padding: 44px 24px 0;
   }
 
   .trophy-room .tr-head h1 {
@@ -545,16 +525,44 @@
   }
 
   .trophy-room .tr-hall {
-    padding: 36px 24px 56px;
+    padding: 28px 24px 64px;
+  }
+
+  .trophy-room .section-title {
+    font-size: var(--heading-font-size-l);
+  }
+
+  .trophy-room .tr-filter,
+  .trophy-room .tr-tabs {
+    display: inline-grid;
+    width: auto;
+  }
+
+  .trophy-room .tr-filter button,
+  .trophy-room .tr-tabs button {
+    padding: 0 16px;
   }
 
   .trophy-room .tr-photos {
     padding: 48px 24px 64px;
   }
 
-  .trophy-room .tr-gallery {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .trophy-room .tr-columns {
+    columns: 3;
+    column-gap: 14px;
+  }
+
+  .trophy-room .tr-thumb {
+    margin-bottom: 14px;
+  }
+
+  .trophy-room .tr-wides {
     gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .trophy-room .tr-wides .tr-thumb {
+    margin: 0;
   }
 
   .tr-viewer-prev {
@@ -567,11 +575,10 @@
 }
 
 @media (min-width: 900px) {
-  .trophy-room .tr-gallery {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .trophy-room .tr-page-ctrl {
-    gap: 8px;
+  .trophy-room .tr-wall {
+    grid-auto-columns: 300px;
+    justify-content: center;
+    gap: 40px;
+    overflow: visible;
   }
 }
