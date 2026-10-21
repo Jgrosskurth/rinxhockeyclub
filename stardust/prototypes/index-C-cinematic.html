@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:prototype (via impeccable craft) · writtenAt: 2026-10-07T04:40:00Z
+  page: index · variant: C (cinematic) · pageUrl: https://www.rinxhockeyclub.com/
+  againstDirection: stardust/direction.md (Active 2026-10-07T03:55:00Z) · brief: stardust/prototypes/index-C-shape.md
+  readArtifacts: [stardust/prototypes/index-A-proposed.html, DESIGN-C.md, DESIGN-C.json, PRODUCT.md]
+  canon: inherited from index-A-proposed.html (identical IA, tokens, chrome, copy)
+  fontDeck: brand-inherited (Barlow Condensed + Barlow) · paletteSource: inherited + 2 A+ refinements · fidelity: refined
+  reflexRejectAudit: { bypassed: "Mode A pinned families: Barlow Condensed, Barlow" }
+  unsourcedContent:
+    - { selector: "[data-section=hero] .rail-cell[data-team=14u] [data-placeholder]", type: other, reason: "14U next game not published in capture" }
+    - { selector: "[data-section=results] [data-team=14u] .result:nth-child(3) .score [data-placeholder]", type: other, reason: "Sep 21 comeback-tie score not in capture" }
+    - { selector: "[data-section=results] [data-team=14u] .result:nth-child(3) .opp [data-placeholder]", type: other, reason: "Sep 21 opponent not in capture" }
+  logoMappings: "14U Peconic + North Park logos use the live site TEAM_LOGOS mapping (blocks/schedule/schedule.js: peconic→00153e, north park→002ee8)"
+  critique:
+    - { source: impeccable-finish-reviewer, round: 1, findings: "8 material", verdict2: "5 resolved, 2 partial, 1 unresolved + R1 blocker (clip-pathed IO targets never revealed)", verdict3: "all resolved; remaining: clear" }
+  audit:
+    - { tool: "detect.mjs", findings: ["marquee (justified anti-toolbox hit: single-row results ribbon, DESIGN-C.json divergence; pause button + hover pause)"] }
+    - { tool: "computed WCAG contrast", fails: 0, acknowledged: ["h1 span Hockey 2.81:1 brand-name logotype (WCAG 1.4.3 exemption)"] }
+    - { check: "skip link, single h1, no skipped levels, img alt + dims", result: pass }
+  adapt:
+    - { viewports: [1440, 800, 390, 375, 360], overflowAt360: false, navCollapse: hamburger }
+  motion: { register: kinetic-display, registerSource: direct, runtimeVersion: "v1 + 2 documented patches (no measure() under reduced motion; count-up rootMargin -35%)", lenisAssets: { js: lenis.min.js, css: lenis.min.css }, attributesEmitted: [data-countup, ".marquee__track", ".kd reveal classes (own IO, one-shot clip-path)", ".sign-head .word"] }
+  motionValidation: { passedAt: "2026-10-07T04:22:00.093Z", probesRun: 8, viewportsTested: [1440x900, 390x844], findings: { hiddenInViewport: "2 at >=95%vh, classification by-design (inside the -12% entry margin)", sectionOverlaps: 0, clippedReveals: 0, rangeMismatches: 0 }, fixesApplied: ["runtime measure() gated by reduced motion", "IO observes unclipped hosts", "load safety-net reveal"], cinematic: { lenisBoot: ok, reducedMotionFallback: complete, noJs: "renders fully", scrollJackCheck: pass, registerMatchAudit: pass, cliffDetector: { animElementCount: 16, maxParallaxVh: 0, activeInfiniteLoops: 1, verdict: pass }, screenshots: { desktopTop: stardust/validation/index/cine-top.png, desktopDeep: stardust/validation/index/cine-deep.png, mobile: stardust/validation/index/cine-mobile.png } } }
+  visionCheck: { verdict: pass, observations: ["drawn rink + red/white wordmark first viewport", "IA identical to A", "score ribbon reads as an arena ribbon board"] }
+  stardustVersion: 0.10.0
+-->
+<meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-anim');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rinx Hockey Club | Long Island - Tier III Travel Hockey</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="lenis.min.css">
+<noscript>
+  <style>
+    [data-anim], [data-tile-anim], [data-split] span { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+    .word { clip-path: none !important; transform: none !important; }
+    [data-parallax] { transform: none !important; }
+    .marquee__track[aria-hidden] { display: none; }
+  </style>
+</noscript>
+<meta name="description" content="The Rinx Hockey Club is a premier Tier III Long Island travel hockey program dedicated to developing young athletes through competitive hockey, professional coaching, and a commitment to teamwork and sportsmanship.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400&display=swap">
+<style>
+:root {
+  /* typography: DESIGN-A.md typography.display / body */
+  --heading-font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body-font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* perfect-fourth ladder 72 / 54 / 40 / 30 / 22 / 17 */
+  --heading-xxl: 72px;
+  --heading-xl: 54px;
+  --heading-lg: 40px;
+  --heading-md: 30px;
+  --heading-sm: 22px;
+  --body: 17px;
+  --body-sm: 15px;
+  --label: 14px;
+  --line-height-heading: 0.95;
+  --line-height-body: 1.6;
+  /* arena-gray */
+  --color-bg: #F5F6F8;
+  /* rink-navy */
+  --color-fg: #041E42;
+  /* rinx-red */
+  --color-accent: #C8102E;
+  --rink-navy: #041E42;
+  --rink-navy-raised: #0A2D5E;
+  --rinx-red: #C8102E;
+  --rinx-red-deep: #A00D24;
+  --ice: #E8F0F9;
+  --boards-white: #FFFFFF;
+  --slate-text: #4B5563;
+  --line-gray: #E5E7EB;
+  --win-green: #15803D;
+  --surface-alt: #E8F0F9;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 64px;
+  --section-padding: 64px;
+  --max-width: 1200px;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow-card: 0 2px 12px rgb(4 30 66 / 8%);
+  --shadow-card-hover: 0 8px 24px rgb(4 30 66 / 15%);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* nav burger base rule sits above every @media (mobile-nav-collapse § Source order) */
+.ds-nav-burger { display: none; }
+.ds-nav-toggle { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; hanging-punctuation: first; }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font: var(--body)/var(--line-height-body) var(--body-font-family); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4 { font-family: var(--heading-font-family); text-transform: uppercase; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.wrap { width: min(100% - 2 * var(--spacing-lg), var(--max-width)); margin-inline: auto; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; background: var(--ice); color: var(--rink-navy); padding: 10px 16px; border-radius: var(--radius-sm); font: 700 var(--label)/1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .1em; }
+.skip:focus { top: 8px; }
+:focus-visible { outline: 3px solid var(--rinx-red); outline-offset: 3px; }
+.on-navy :focus-visible { outline-color: var(--ice); }
+.label { font: 700 var(--label)/1.2 var(--heading-font-family); text-transform: uppercase; letter-spacing: .12em; }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 14px 24px; border-radius: var(--radius-sm); font: 700 var(--label)/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background-color .18s var(--ease-out), color .18s var(--ease-out), transform .18s var(--ease-out); }
+.btn-primary { background: var(--rinx-red); color: var(--boards-white); }
+.btn-primary:hover { background: var(--rinx-red-deep); }
+.btn-ghost { background: transparent; color: var(--ice); box-shadow: inset 0 0 0 2px var(--ice); }
+.btn-ghost:hover { background: var(--ice); color: var(--rink-navy); }
+.btn-navy { background: var(--rink-navy); color: var(--ice); }
+.btn-navy:hover { background: var(--rink-navy-raised); }
+.btn:active { transform: translateY(1px); }
+.more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--rinx-red-deep); text-decoration: none; font: 700 var(--label)/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; }
+.more:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* section heads: captured section-title-with-rule */
+.sec-head { display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
+.sec-head h2 { font-size: clamp(36px, 4vw, var(--heading-xl)); font-weight: 900; line-height: var(--line-height-heading); letter-spacing: .02em; flex: none; }
+.sec-head::after { content: ""; flex: 1; height: 28px; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2028%2028%22%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2214%22%20r%3D%2211%22%20fill%3D%22none%22%20stroke%3D%22%23C8102E%22%20stroke-width%3D%222.5%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2214%22%20r%3D%223.5%22%20fill%3D%22%23C8102E%22%2F%3E%3C%2Fsvg%3E") left center / 28px 28px no-repeat, linear-gradient(90deg, var(--rinx-red), rgb(200 16 46 / 0)) 28px 50% / 100% 3px no-repeat; }
+
+/* ---------- header ---------- */
+.site-header { background: var(--rink-navy); color: var(--boards-white); border-bottom: 4px solid var(--rinx-red); position: relative; z-index: 20; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-lg); min-height: 80px; }
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand img { width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--boards-white); padding: 3px; }
+.brand-name { display: block; font: 900 22px/1 var(--heading-font-family); letter-spacing: .03em; text-transform: uppercase; }
+.brand-sub { display: block; margin-top: 4px; color: var(--ice); font: 700 12px/1 var(--heading-font-family); letter-spacing: .14em; text-transform: uppercase; }
+.ds-nav { display: flex; align-items: center; gap: 2px; }
+.ds-nav > a, .ds-nav summary { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 11px; border-radius: var(--radius-sm); color: var(--boards-white); text-decoration: none; font: 700 15px/1 var(--heading-font-family); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; list-style: none; }
+.ds-nav summary::-webkit-details-marker { display: none; }
+.ds-nav summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid var(--ice); border-bottom: 2px solid var(--ice); transform: translateY(-2px) rotate(45deg); transition: transform .18s var(--ease-out); }
+.ds-nav details[open] summary::after { transform: translateY(1px) rotate(-135deg); }
+.ds-nav > a:hover, .ds-nav summary:hover, .ds-nav > a[aria-current] { background: var(--rink-navy-raised); }
+.ds-nav details { position: relative; }
+.ds-nav details > div { position: absolute; top: calc(100% + 6px); left: 0; min-width: 180px; background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card-hover); padding: 6px; }
+.ds-nav details > div a { display: block; padding: 12px 14px; border-radius: var(--radius-sm); color: var(--rink-navy); text-decoration: none; font: 700 15px/1 var(--heading-font-family); letter-spacing: .06em; text-transform: uppercase; }
+.ds-nav details > div a:hover { background: var(--ice); }
+.ds-nav .nav-shop { margin-left: 10px; background: var(--rinx-red); }
+.ds-nav .nav-shop:hover { background: var(--rinx-red-deep); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; background: var(--rink-navy); color: var(--boards-white); overflow: hidden; }
+.hero-rink { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-body { position: relative; padding-block: clamp(56px, 9vw, 104px) clamp(40px, 6vw, 64px); }
+.season { display: inline-block; background: var(--rinx-red); color: var(--boards-white); padding: 7px 12px; border-radius: var(--radius-sm); }
+.hero h1 { margin-top: var(--spacing-lg); font-size: clamp(48px, 7.4vw, var(--heading-xxl)); font-weight: 900; line-height: .9; letter-spacing: .01em; }
+.hero h1 span { color: var(--rinx-red); }
+.hero-lede { margin-top: var(--spacing-md); font-size: clamp(17px, 2vw, 22px); color: var(--ice); max-width: 36ch; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--spacing-xl); }
+.rail { position: relative; background: var(--rink-navy-raised); border-top: 1px solid rgb(232 240 249 / 16%); }
+.rail .wrap { display: grid; grid-template-columns: 1fr; }
+.rail-cell { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: baseline; padding: 20px 0; }
+.rail-cell + .rail-cell { border-top: 1px solid rgb(232 240 249 / 16%); }
+.rail-team { grid-row: span 2; color: var(--ice); font: 900 var(--heading-md)/1 var(--heading-font-family); letter-spacing: .02em; }
+.rail-team small { display: block; margin-top: 6px; font: 700 12px/1 var(--heading-font-family); letter-spacing: .14em; }
+.rail-what { font: 700 var(--heading-sm)/1.1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .03em; }
+.rail-what .label { color: var(--ice); margin-right: 10px; font-size: 14px; }
+.rail-meta { color: var(--ice); font-size: var(--body-sm); }
+.rail-meta a { color: var(--boards-white); text-underline-offset: 3px; }
+.stripe { height: 8px; background: linear-gradient(90deg, var(--rinx-red) 33.33%, var(--boards-white) 33.33% 66.66%, var(--rinx-red) 66.66%); }
+
+/* placeholder signature (proposed-file-shell § PLACEHOLDER) */
+[data-placeholder] { display: inline-flex; flex-direction: column; gap: 3px; padding: 6px 10px; outline: 2px dashed var(--color-accent); outline-offset: 0; background: rgb(232 240 249 / 96%); color: var(--rink-navy); border-radius: var(--radius-sm); vertical-align: middle; }
+.placeholder-eyebrow { font: 700 12px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; color: var(--rinx-red-deep); }
+.placeholder-shape { font: 400 12px/1.2 var(--body-font-family); text-transform: none; letter-spacing: 0; }
+
+/* ---------- news ---------- */
+.news { padding-block: var(--section-padding); }
+.rail-head { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); margin-bottom: var(--spacing-lg); }
+.rail-head .sec-head { margin: 0; flex: 1; }
+.rail-btns { display: flex; gap: 10px; flex: none; }
+.rail-btns button { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--rink-navy); background: transparent; color: var(--rink-navy); font: 700 22px/1 var(--body-font-family); cursor: pointer; transition: background-color .18s var(--ease-out), color .18s var(--ease-out); }
+.rail-btns button:hover { background: var(--rink-navy); color: var(--boards-white); }
+.news-track { display: grid; grid-auto-flow: column; grid-auto-columns: 86%; gap: var(--spacing-lg); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: max(var(--spacing-lg), (100% - var(--max-width)) / 2); padding: 6px max(var(--spacing-lg), (100% - var(--max-width)) / 2) 20px; scrollbar-width: thin; }
+.news-card { scroll-snap-align: start; background: var(--boards-white); position: relative; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow-card); padding: calc(var(--spacing-lg) + 4px) var(--spacing-lg) var(--spacing-lg); display: flex; flex-direction: column; gap: 12px; transition: box-shadow .2s var(--ease-out), transform .2s var(--ease-out); }
+.news-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--rinx-red); }
+.news-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
+.badge { align-self: flex-start; display: inline-block; padding: 5px 10px; border-radius: var(--radius-sm); background: var(--rinx-red); color: var(--boards-white); font: 700 12px/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; }
+.news-card h3 { font-size: var(--heading-sm); font-weight: 700; line-height: 1.05; letter-spacing: .02em; }
+.news-card p { color: var(--slate-text); font-size: var(--body-sm); }
+.news-card time { margin-top: auto; color: var(--slate-text); }
+
+/* ---------- results ---------- */
+.results { background: var(--ice); padding-block: var(--section-padding); }
+.teams { display: grid; gap: var(--spacing-xl); }
+.team h3 { display: flex; align-items: baseline; gap: 12px; font-size: var(--heading-md); font-weight: 700; letter-spacing: .02em; padding-bottom: 12px; border-bottom: 3px solid var(--rink-navy); }
+.team h3 small { font: 700 var(--label)/1 var(--heading-font-family); letter-spacing: .12em; color: rgb(4 30 66 / 72%); }
+.result-list { list-style: none; margin: 0; padding: 0; }
+.result { display: grid; grid-template-columns: 40px 1fr auto; grid-template-areas: "logo opp score" "logo date score"; gap: 2px 14px; align-items: center; padding: 16px 0; border-bottom: 1px solid rgb(4 30 66 / 14%); }
+.result .logo { grid-area: logo; width: 36px; height: 36px; border-radius: 50%; object-fit: contain; background: var(--boards-white); }
+.result .logo.ini { display: grid; place-items: center; background: var(--rink-navy); color: var(--ice); font: 700 14px/1 var(--heading-font-family); }
+.result .opp { grid-area: opp; font: 700 22px/1.1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .02em; }
+.result .date { grid-area: date; font-size: 14px; color: rgb(4 30 66 / 72%); }
+.result .score { grid-area: score; display: flex; align-items: center; gap: 12px; font: 900 var(--heading-md)/1 var(--heading-font-family); }
+.badge-w, .badge-t { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: var(--radius-sm); font: 900 17px/1 var(--heading-font-family); }
+.badge-w { background: var(--win-green); color: var(--boards-white); }
+.badge-t { background: var(--boards-white); color: var(--rink-navy); box-shadow: inset 0 0 0 2px var(--rink-navy); }
+.team .more { margin-top: 12px; }
+.result .note { grid-column: 1 / -1; font-size: 14px; color: rgb(4 30 66 / 72%); }
+
+/* ---------- about ---------- */
+.about { padding-block: var(--section-padding); }
+.about-card { background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: clamp(20px, 4vw, 40px); }
+.photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.photos img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-sm); }
+.about-card h3 { margin-top: var(--spacing-xl); font-size: var(--heading-md); font-weight: 700; letter-spacing: .02em; padding-bottom: 14px; border-bottom: 3px solid var(--rinx-red); }
+.team-strip { display: grid; gap: 12px; margin: var(--spacing-lg) 0; padding: 0; list-style: none; }
+.team-strip li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 14px 18px; background: var(--ice); border-radius: var(--radius-sm); }
+.team-strip b { font: 700 var(--heading-sm)/1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .03em; }
+.team-strip span { color: var(--slate-text); font-size: var(--body-sm); }
+.about-copy { display: grid; gap: var(--spacing-md); color: var(--slate-text); max-width: 72ch; }
+
+/* ---------- staff + facility ---------- */
+.people { padding-bottom: var(--section-padding); }
+.people .wrap { display: grid; gap: var(--spacing-lg); }
+.panel { background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: clamp(20px, 3vw, 32px); }
+.panel h2 { font-size: var(--heading-md); font-weight: 700; letter-spacing: .02em; padding-bottom: 14px; border-bottom: 3px solid var(--rinx-red); margin-bottom: var(--spacing-md); }
+.staff { list-style: none; margin: 0; padding: 0; }
+.staff li { display: flex; align-items: center; gap: 16px; padding: 14px 18px; margin-bottom: 12px; background: var(--rink-navy); color: var(--boards-white); border-radius: var(--radius); }
+.staff li:last-child { margin-bottom: 0; }
+.staff img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.staff h3 { font-size: var(--heading-sm); font-weight: 700; letter-spacing: .03em; }
+.staff p { color: var(--ice); font-size: var(--body-sm); }
+.facility-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 3px solid var(--rinx-red); margin-bottom: var(--spacing-md); padding-bottom: 10px; }
+.facility-head h2 { border: 0; padding: 0; margin: 0; }
+.facility .seal { width: 72px; height: 72px; aspect-ratio: auto; border-radius: 50%; }
+.facility .shot { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); }
+.facility p { margin-top: var(--spacing-md); color: var(--slate-text); }
+.facility .phone { color: var(--rink-navy); }
+.facility .phone a { font-weight: 400; color: var(--rink-navy); text-underline-offset: 3px; }
+.facility .btn { margin-top: var(--spacing-lg); width: 100%; justify-content: space-between; }
+
+/* ---------- social ---------- */
+.social { background: var(--rink-navy); color: var(--boards-white); padding-block: var(--spacing-xl); }
+.ig-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: var(--spacing-lg); }
+.ig-strip img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius-sm); }
+.social .wrap.follow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-md) var(--spacing-xl); }
+.social h2 { font-size: clamp(30px, 3.4vw, var(--heading-lg)); font-weight: 900; letter-spacing: .02em; }
+.social p { color: var(--ice); margin-top: 6px; }
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--rink-navy); color: var(--ice); border-top: 4px solid var(--rinx-red); padding-block: var(--spacing-xl) var(--spacing-lg); text-align: center; }
+.site-footer img { width: 64px; height: 64px; margin: 0 auto; border-radius: var(--radius-sm); background: var(--boards-white); padding: 3px; }
+.site-footer .foot-name { margin-top: var(--spacing-md); font: 900 22px/1 var(--heading-font-family); letter-spacing: .08em; text-transform: uppercase; color: var(--boards-white); }
+.foot-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 6px; margin: var(--spacing-lg) 0; }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; color: var(--ice); text-decoration: none; font-size: var(--body-sm); }
+.foot-nav a:hover { color: var(--boards-white); text-decoration: underline; text-underline-offset: 4px; }
+.site-footer small { display: block; font-size: 14px; }
+.site-footer small + small { margin-top: 6px; }
+
+
+/* ---------- ticker (C) ---------- */
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ticker { position: relative; background: var(--rink-navy); color: var(--ice); border-bottom: 1px solid rgb(232 240 249 / 14%); }
+.marquee { display: flex; overflow: hidden; mask-image: linear-gradient(90deg, transparent, var(--rink-navy) 6%, var(--rink-navy) 94%, transparent); }
+.marquee__track { display: flex; flex: none; gap: 0; margin: 0; padding: 0; list-style: none; min-height: 48px; align-items: center; }
+.marquee__track li { display: flex; align-items: center; gap: 8px; padding: 0 22px; white-space: nowrap; font: 700 var(--body-sm)/1 var(--heading-font-family); letter-spacing: .08em; text-transform: uppercase; }
+.marquee__track li::after { content: ""; width: 7px; height: 7px; margin-left: 22px; border-radius: 50%; background: var(--rinx-red); }
+.marquee__track b { color: var(--boards-white); font-weight: 900; }
+.marquee__track .num { color: var(--boards-white); font-size: var(--heading-sm); font-weight: 900; }
+.marquee__track i { font-style: normal; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: var(--radius-sm); background: var(--win-green); color: var(--boards-white); font-size: 12px; }
+.spine { display: none; }
+
+/* ---------- kinetic-display motion layer (C cinematic) ---------- */
+:root { --ease-out-cubic: cubic-bezier(0.25, 0.46, 0.45, 0.94); --ease-expo: cubic-bezier(0.16, 1, 0.3, 1); --enter-duration: 800ms; --enter-stagger: 110ms; }
+.hero h1 .ln { display: block; color: var(--boards-white); }
+.hero h1 .ln span { color: var(--rinx-red); }
+.sign-head .word { display: inline-block; }
+.result .score-n [data-countup] { display: inline-block; min-width: 1.1ch; text-align: end; }
+.result .score-n [data-countup]:first-child { min-width: 2ch; }
+html.js-anim .kd { transition: clip-path .7s var(--ease-expo), transform .7s var(--ease-expo); transition-delay: calc(var(--i, 0) * 90ms); }
+html.js-anim .kd-wipe:not(.in) { clip-path: inset(0 100% 0 0); }
+html.js-anim .kd-down:not(.in) { clip-path: inset(0 0 100% 0); transform: translateY(12px); }
+html.js-anim .kd.in { clip-path: inset(0 0 0 0); transform: none; }
+html.js-anim .sec-head .word { transition: clip-path .6s var(--ease-expo); transition-delay: calc(var(--w, 0) * 110ms); }
+html.js-anim .sec-head:not(.in) .word { clip-path: inset(0 100% 0 0); }
+html.js-anim .sec-head.in .word { clip-path: inset(0 0 0 0); }
+html.js-anim .sec-head::after { transform-origin: left; transition: transform .7s var(--ease-expo) .45s, opacity .2s linear .45s; }
+html.js-anim .sec-head:not(.in)::after { transform: scaleX(0); opacity: 0; }
+@keyframes dotPop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
+@keyframes rinkDraw { to { stroke-dashoffset: 0; } }
+@keyframes unmaskUp { from { clip-path: inset(0 0 100% 0); transform: translateY(32%); } to { clip-path: inset(0 0 0 0); transform: none; } }
+@keyframes wipeIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes marqueeScroll { to { transform: translateX(-100%); } }
+@keyframes spineGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+html.js-anim .hero-rink [pathLength] { stroke-dasharray: 1; stroke-dashoffset: 1; animation: rinkDraw 1.4s var(--ease-expo) forwards; }
+html.js-anim .hero-rink [data-d] { animation-delay: var(--d); }
+html.js-anim .hero-rink > circle:not([pathLength]), html.js-anim .hero-rink g:not(:has([pathLength])) > circle { opacity: 0; transform-box: fill-box; transform-origin: center; animation: dotPop .35s var(--ease-expo) .95s forwards; }
+html.js-anim .hero .season { clip-path: inset(0 100% 0 0); animation: wipeIn .6s var(--ease-expo) .1s forwards; }
+html.js-anim .hero h1 .ln { clip-path: inset(0 0 100% 0); animation: unmaskUp .8s var(--ease-expo) forwards; }
+html.js-anim .hero h1 .ln:nth-child(1) { animation-delay: .22s; }
+html.js-anim .hero h1 .ln:nth-child(2) { animation-delay: .34s; }
+html.js-anim .hero-lede, html.js-anim .hero-ctas { opacity: 0; animation: riseIn .6s var(--ease-out-cubic) forwards; }
+html.js-anim .hero .rail-cell { clip-path: inset(0 100% 0 0); animation: wipeIn .7s var(--ease-expo) .78s forwards; }
+html.js-anim .hero .rail-cell + .rail-cell { animation-delay: .9s; }
+html.js-anim .hero-lede { animation-delay: .5s; }
+html.js-anim .hero-ctas { animation-delay: .6s; }
+.marquee__track { animation: marqueeScroll 30s linear infinite; }
+.ticker.paused .marquee__track, .marquee:hover .marquee__track { animation-play-state: paused; }
+.ticker .marquee { margin-right: 96px; }
+@media (max-width: 599px) { .ticker .marquee { margin-right: 72px; mask-image: linear-gradient(90deg, transparent, var(--rink-navy) 4%, var(--rink-navy) 97%, transparent); } }
+.tick-toggle { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); min-height: 32px; padding: 0 12px; border: 0; border-radius: var(--radius-sm); background: var(--rink-navy-raised); color: var(--ice); font: 700 12px/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+@supports (animation-timeline: scroll()) {
+  .spine { display: block; position: fixed; z-index: 30; left: 0; top: 0; bottom: 0; width: 3px; background: var(--rinx-red); transform-origin: top; animation: spineGrow linear both; animation-timeline: scroll(root); pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .hero-rink [pathLength], html.js-anim .hero .season, html.js-anim .hero h1 .ln, html.js-anim .hero-lede, html.js-anim .hero-ctas, html.js-anim .hero .rail, html.js-anim .hero-rink > circle, html.js-anim .hero-rink g { animation: none !important; opacity: 1 !important; clip-path: none !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  html.js-anim .kd, html.js-anim .sec-head .word, html.js-anim .hero .rail-cell, html.js-anim .hero-rink circle { clip-path: none !important; transform: none !important; opacity: 1 !important; transition: none !important; animation: none !important; }
+  html.js-anim .sec-head::after { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .marquee__track { animation: none !important; }
+  .marquee__track[aria-hidden] { display: none; }
+  .tick-toggle, .spine { display: none !important; }
+}
+
+/* ---------- breakpoints (mobile first) ---------- */
+@media (max-width: 899px) {
+  .site-header[data-nav-collapse="hamburger"] .wrap { min-height: 72px; }
+  .ds-nav-burger { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: var(--radius-sm); box-shadow: inset 0 0 0 2px var(--ice); color: var(--boards-white); font: 700 14px/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; user-select: none; }
+  .ds-nav-burger-icon { width: 18px; height: 12px; position: relative; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+  .ds-nav-burger-icon::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 2px; background: currentColor; }
+  .ds-nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--spacing-lg) var(--spacing-lg); background: var(--rink-navy); border-bottom: 4px solid var(--rinx-red); visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out), visibility 0s linear .18s; }
+  .ds-nav-toggle:checked ~ .ds-nav { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out), visibility 0s; }
+  .ds-nav > a, .ds-nav summary { min-height: 48px; padding: 0; font-size: 17px; border-bottom: 1px solid rgb(232 240 249 / 14%); border-radius: 0; }
+  .ds-nav > a:hover, .ds-nav summary:hover { background: transparent; color: var(--ice); }
+  .ds-nav details > div { position: static; background: transparent; box-shadow: none; padding: 0 0 8px 14px; }
+  .ds-nav details > div a { color: var(--ice); padding: 12px 0; }
+  .ds-nav details > div a:hover { background: transparent; color: var(--boards-white); }
+  .ds-nav .nav-shop { margin: var(--spacing-md) 0 0; justify-content: center; border-radius: var(--radius-sm); border: 0; }
+}
+@media (max-width: 599px) {
+  .brand img { width: 44px; height: 44px; }
+  .brand-name { font-size: 22px; }
+  .brand-sub { font-size: 12px; letter-spacing: .06em; }
+  .ds-nav-burger-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .hero-ctas .btn { flex: 1 1 140px; }
+  .hero-rink { inset: 0 -64px 0 auto; width: calc(100% + 64px); }
+  .rail-cell { grid-template-columns: 1fr; }
+  .rail-team { grid-row: auto; }
+  .photos { grid-template-columns: 1fr 1fr; }
+  .photos img:first-child { grid-column: span 2; }
+  .rail-btns { display: none; }
+  .result .score { font-size: 30px; }
+}
+@media (min-width: 600px) {
+  .news-track { grid-auto-columns: calc((100% - 2 * max(var(--spacing-lg), (100% - var(--max-width)) / 2) - var(--spacing-lg)) / 2.15); }
+  .rail .wrap { grid-template-columns: 1fr 1fr; }
+  .rail-cell + .rail-cell { border-top: 0; border-left: 1px solid rgb(232 240 249 / 16%); padding-left: 24px; }
+  .team-strip { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 900px) {
+  .news-track { grid-auto-columns: calc((min(100%, var(--max-width)) - 2 * var(--spacing-lg)) / 3.2); }
+  .teams { grid-template-columns: 1fr 1fr; gap: var(--spacing-2xl); }
+  .people .wrap { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+@media (min-width: 1200px) {
+  .hero-body { min-height: 440px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<!-- DIRECTION CONTRACT (variant C)
+THESIS: Fresh Sheet. The rink is drawn live: lines go down as the page loads, heads wipe in like dasher-board signs and their red rule draws after them, rows and cards are revealed by hard clip-path wipes, real scores count up and run on a ribbon board. It refuses the fade-up-everything entrance and the buried-texture rink.
+OWN-WORLD: variant A's world exactly (navy rink, Rinx red, ice, Barlow Condensed capitals) plus motion: stroke draw-on, clip-path unmask and wipe, a single-row score ribbon, a red center-line spine.
+STORY: as A. Motion carries the identity; no section, copy or priority changes.
+FIRST VIEWPORT: as A; on load the rink draws in narrative order (boards 0s, goal lines .12s, blue lines .24s, red line .36s, center circle .48s, faceoff circles .6s, dots pop .95s) while, overlapping it, the badge wipes, the wordmark unmasks line by line, the lede and CTAs rise and the next-game rail cells wipe in like signs.
+FORM: brief-pinned (user invoked "uplift"; direction.md Variant C, kinetic-display register auto-picked; signature-gesture candidate #4). Seed DESIGN-C.json extensions.divergence.seed.input "Rinx Hockey Club|2026-10-07": Tailor's pattern paper applied as the rink drawn as measured line geometry; Tabloid and 1990s carried from A's heads and numerals.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<div class="spine" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header on-navy" data-section="header" data-intent="navigate" data-layout="full-width-dark" data-nav-collapse="hamburger">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Rinx Hockey Club home">
+      <img src="https://www.rinxhockeyclub.com/icons/rinx-header-128.webp" alt="" width="52" height="52">
+      <span><span class="brand-name">Rinx Hockey Club</span><span class="brand-sub">Tier III/A • Travel Hockey • LIAHL</span></span>
+    </a>
+    <input type="checkbox" id="ds-nav-toggle" class="ds-nav-toggle">
+    <label class="ds-nav-burger" for="ds-nav-toggle" role="button" tabindex="0" aria-controls="ds-nav-list" aria-expanded="false"><span class="ds-nav-burger-icon" aria-hidden="true"></span><span class="ds-nav-burger-label">Menu</span></label>
+    <nav id="ds-nav-list" class="ds-nav" aria-label="Main">
+      <a href="/" aria-current="page">Home</a>
+      <details><summary>Roster</summary><div><a href="/roster">10U Squirts</a><a href="/roster-14u">14U Bantam</a></div></details>
+      <details><summary>Schedule</summary><div><a href="/schedule">10U Squirts</a><a href="/schedule-14u">14U Bantam</a></div></details>
+      <details><summary>Stats</summary><div><a href="/stats">10U Squirts</a><a href="/stats-14u">14U Bantam</a></div></details>
+      <details><summary>Standings</summary><div><a href="/standings">10U Squirts</a><a href="/standings-14u">14U Bantam</a></div></details>
+      <a href="/tournaments">Tournaments</a>
+      <a href="/sponsors">Sponsors</a>
+      <a href="/clinics">Clinics</a>
+      <a href="/contact">Contact</a>
+      <a class="nav-shop" href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero on-navy" data-section="hero" data-intent="emotional hook + next action" data-layout="full-bleed" data-media="image">
+    <svg class="hero-rink" viewBox="0 0 1200 560" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+      <rect pathLength="1" data-d style="--d:0s" x="18" y="18" width="1164" height="524" rx="150" fill="none" stroke="#E8F0F9" stroke-opacity=".38" stroke-width="6"/>
+      <line pathLength="1" data-d style="--d:0.12s" x1="80" y1="18" x2="80" y2="542" stroke="#C8102E" stroke-opacity=".45" stroke-width="3"/>
+      <line pathLength="1" data-d style="--d:0.12s" x1="1120" y1="18" x2="1120" y2="542" stroke="#C8102E" stroke-opacity=".45" stroke-width="3"/>
+      <line pathLength="1" data-d style="--d:0.24s" x1="380" y1="18" x2="380" y2="542" stroke="#E8F0F9" stroke-opacity=".45" stroke-width="10"/>
+      <line pathLength="1" data-d style="--d:0.24s" x1="820" y1="18" x2="820" y2="542" stroke="#E8F0F9" stroke-opacity=".45" stroke-width="10"/>
+      <line pathLength="1" data-d style="--d:0.36s" x1="600" y1="18" x2="600" y2="542" stroke="#C8102E" stroke-opacity=".7" stroke-width="10"/>
+      <circle pathLength="1" data-d style="--d:0.48s" cx="600" cy="280" r="120" fill="none" stroke="#C8102E" stroke-opacity=".55" stroke-width="4"/>
+      <circle cx="600" cy="280" r="7" fill="#E8F0F9" fill-opacity=".5"/>
+      <g fill="none" stroke="#C8102E" stroke-opacity=".45" stroke-width="3">
+        <circle pathLength="1" data-d style="--d:0.6s" cx="230" cy="160" r="70"/><circle pathLength="1" data-d style="--d:0.6s" cx="230" cy="400" r="70"/>
+        <circle pathLength="1" data-d style="--d:0.6s" cx="970" cy="160" r="70"/><circle pathLength="1" data-d style="--d:0.6s" cx="970" cy="400" r="70"/>
+      </g>
+      <g fill="#C8102E" fill-opacity=".55"><circle cx="230" cy="160" r="6"/><circle cx="230" cy="400" r="6"/><circle cx="970" cy="160" r="6"/><circle cx="970" cy="400" r="6"/></g>
+      <path pathLength="1" data-d style="--d:.6s" d="M80 240 a40 40 0 0 1 0 80" fill="#E8F0F9" fill-opacity=".1" stroke="#C8102E" stroke-opacity=".5" stroke-width="3"/>
+      <path pathLength="1" data-d style="--d:.6s" d="M1120 240 a40 40 0 0 0 0 80" fill="#E8F0F9" fill-opacity=".1" stroke="#C8102E" stroke-opacity=".5" stroke-width="3"/>
+    </svg>
+    <div class="hero-body wrap">
+      <span class="season label">2026–2027 Season</span>
+      <h1><span class="ln">Rinx <span>Hockey</span></span> <span class="ln">Club</span></h1>
+      <p class="hero-lede">Travel Hockey • Long Island, New York</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="/schedule">Schedule</a>
+        <a class="btn btn-ghost" href="/roster">Roster</a>
+      </div>
+    </div>
+    <div class="rail" aria-label="Next games">
+      <div class="wrap">
+        <div class="rail-cell" data-team="10u">
+          <p class="rail-team">10U<small>Squirts</small></p>
+          <p class="rail-what"><span class="label">Next game</span>vs Delco Phantoms</p>
+          <p class="rail-meta"><span class="num">Fri, Oct 9 · 5:05 PM</span> · Hatfield Ice Arena · Mid Atlantic Fall Classic · <a href="/mid-atlantic-fall-classic-schedule">Game schedule →</a></p>
+        </div>
+        <div class="rail-cell" data-team="14u">
+          <p class="rail-team">14U<small>Bantam</small></p>
+          <p class="rail-what"><span class="label">Next game</span></p>
+          <p class="rail-meta"><span data-placeholder="true" data-placeholder-type="other" data-placeholder-source="14U next game not in current/pages/index.json or GameSheet capture"><span class="placeholder-eyebrow">PLACEHOLDER · other</span><span class="placeholder-shape">e.g. vs Opponent · Sat, Oct 10 · 4:00 PM · venue</span></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="stripe" aria-hidden="true"></div>
+  </section>
+
+  <section class="ticker on-navy" data-section="ticker" data-intent="ambient scores" data-layout="full-bleed" data-interactive="none" aria-labelledby="ticker-h">
+    <h2 id="ticker-h" class="vh">Recent scores</h2>
+    <div class="marquee">
+      <ul class="marquee__track"><li><b>10U</b> <span class="num">10–2</span> <i>W</i> Long Beach Lightning</li><li><b>10U</b> <span class="num">13–0</span> <i>W</i> North Park</li><li><b>10U</b> <span class="num">8–2</span> <i>W</i> Peconic Wildcats</li><li><b>14U</b> <span class="num">7–1</span> <i>W</i> Peconic</li><li><b>14U</b> <span class="num">5–1</span> <i>W</i> North Park</li></ul><ul class="marquee__track" aria-hidden="true"><li><b>10U</b> <span class="num">10–2</span> <i>W</i> Long Beach Lightning</li><li><b>10U</b> <span class="num">13–0</span> <i>W</i> North Park</li><li><b>10U</b> <span class="num">8–2</span> <i>W</i> Peconic Wildcats</li><li><b>14U</b> <span class="num">7–1</span> <i>W</i> Peconic</li><li><b>14U</b> <span class="num">5–1</span> <i>W</i> North Park</li></ul>
+    </div>
+    <button class="tick-toggle" type="button" aria-pressed="false">Pause</button>
+  </section>
+
+
+  <section class="results" data-section="results" data-intent="prove form" data-layout="grid" data-items="2" aria-labelledby="results-h">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="results-h" class="sign-head"><span class="word">Recent</span> <span class="word">Results</span></h2></div>
+      <div class="teams">
+        <div class="team" data-team="10u">
+          <h3>10U <small>Squirts</small></h3>
+          <ol class="result-list">
+            <li class="result kd kd-wipe"><img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="36" height="36" loading="lazy"><span class="opp">Long Beach Lightning</span><span class="date">Sep 27, 2026 · The Rinx</span><span class="score num"><span class="score-n"><span data-countup="10">10</span>–<span data-countup="2">2</span></span> <span class="badge-w" aria-label="Win">W</span></span></li>
+            <li class="result kd kd-wipe"><img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="36" height="36" loading="lazy"><span class="opp">North Park</span><span class="date">Sep 20, 2026 · The Rinx</span><span class="score num"><span class="score-n"><span data-countup="13">13</span>–<span data-countup="0">0</span></span> <span class="badge-w" aria-label="Win">W</span></span></li>
+            <li class="result kd kd-wipe"><img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="36" height="36" loading="lazy"><span class="opp">Peconic Wildcats</span><span class="date">Sep 13, 2026 · @ Peconic Ice Rink</span><span class="score num"><span class="score-n"><span data-countup="8">8</span>–<span data-countup="2">2</span></span> <span class="badge-w" aria-label="Win">W</span></span></li>
+          </ol>
+          <a class="more" href="/schedule">View Full Schedule →</a>
+        </div>
+        <div class="team" data-team="14u">
+          <h3>14U <small>Bantam</small></h3>
+          <ol class="result-list">
+            <li class="result kd kd-wipe"><img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="36" height="36" loading="lazy"><span class="opp">Peconic</span><span class="date">Reported Oct 3, 2026 · at the Rinx</span><span class="score num"><span class="score-n"><span data-countup="7">7</span>–<span data-countup="1">1</span></span> <span class="badge-w" aria-label="Win">W</span></span></li>
+            <li class="result kd kd-wipe"><img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="36" height="36" loading="lazy"><span class="opp">North Park</span><span class="date">Reported Sep 26, 2026</span><span class="score num"><span class="score-n"><span data-countup="5">5</span>–<span data-countup="1">1</span></span> <span class="badge-w" aria-label="Win">W</span></span></li>
+            <li class="result kd kd-wipe" style="grid-template-areas: 'logo opp score' 'logo date score' 'note note note'"><span class="logo ini" aria-hidden="true">?</span><span class="opp"><span data-placeholder="true" data-placeholder-type="other" data-placeholder-source="Sep 21 opponent not in capture"><span class="placeholder-eyebrow">PLACEHOLDER · other</span><span class="placeholder-shape">e.g. opponent name</span></span></span><span class="date">Reported Sep 21, 2026</span><span class="score num"><span data-placeholder="true" data-placeholder-type="other" data-placeholder-source="Sep 21 tie score not in capture"><span class="placeholder-eyebrow">PLACEHOLDER</span><span class="placeholder-shape">e.g. 3–3</span></span> <span class="badge-t" aria-label="Tie">T</span></span><span class="note">Comeback tie in the 3rd</span></li>
+          </ol>
+          <a class="more" href="/schedule-14u">View Full Schedule →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news" data-section="news" data-intent="season momentum" data-layout="edge-to-edge" data-items="6" data-interactive="carousel" aria-labelledby="news-h">
+    <div class="wrap rail-head">
+      <div class="sec-head"><h2 id="news-h" class="sign-head"><span class="word">Game</span> <span class="word">Updates</span></h2></div>
+      <div class="rail-btns"><button type="button" data-dir="-1" aria-label="Previous updates" aria-controls="news-track">←</button><button type="button" data-dir="1" aria-label="Next updates" aria-controls="news-track">→</button></div>
+    </div>
+    <div class="news-track" id="news-track" tabindex="0" role="region" aria-label="Game updates, scroll horizontally">
+      <article class="news-card kd kd-down"><span class="badge">Game Update</span><h3>14U Remains Undefeated</h3><p>14U powers through Peconic, winning 7-1 at the Rinx</p><time class="label" datetime="2026-10-03">October 3, 2026</time></article>
+      <article class="news-card kd kd-down"><span class="badge">Game Update</span><h3>10U Pours on the Goals</h3><p>10U overwhelmed Long Beach flooding the back of the net in a 10-2 victory</p><time class="label" datetime="2026-09-27">September 27, 2026</time></article>
+      <article class="news-card kd kd-down"><span class="badge">Game Update</span><h3>14U Keep Rolling</h3><p>14U takes the early lead and holds off North Park 5-1</p><time class="label" datetime="2026-09-26">September 26, 2026</time></article>
+      <article class="news-card kd kd-down"><span class="badge">Game Update</span><h3>10U Landslide Victory</h3><p>10U dominates North Park 56 SOG to 2, winning 13-0</p><time class="label" datetime="2026-09-21">September 21, 2026</time></article>
+      <article class="news-card kd kd-down"><span class="badge">Game Update</span><h3>Comeback Tie</h3><p>14U come back from behind in the 3rd to tie</p><time class="label" datetime="2026-09-21">September 21, 2026</time></article>
+      <article class="news-card kd kd-down"><span class="badge">Game Update</span><h3>Clean Sweep</h3><p>10U and 14U sweep the weekend with 4 total wins</p><time class="label" datetime="2026-09-13">September 13, 2026</time></article>
+    </div>
+  </section>
+
+  <section class="about" data-section="about" data-intent="build trust" data-layout="contained" data-media="image" aria-labelledby="about-h">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="about-h" class="sign-head"><span class="word">About</span> <span class="word">Our</span> <span class="word">Team</span></h2></div>
+      <div class="about-card kd kd-down">
+        <div class="photos">
+          <img src="https://www.rinxhockeyclub.com/images/r1-720.webp" alt="Rinx Hockey Club" width="720" height="480" loading="lazy">
+          <img src="https://www.rinxhockeyclub.com/images/4D0F41DF-57C2-45F0-A459-86825254D41B-720.webp" alt="Rinx Hockey Club" width="640" height="800" loading="lazy">
+          <img src="https://www.rinxhockeyclub.com/images/14u-720.webp" alt="Rinx Hockey Club" width="720" height="548" loading="lazy">
+        </div>
+        <h3>2026–2027 Rinx Hockey Club</h3>
+        <ul class="team-strip">
+          <li><b>10U Squirts</b><span>Head Coach Dan O'Donoghue</span></li>
+          <li><b>14U Bantam</b><span>Head Coach Greg Skillman</span></li>
+        </ul>
+        <div class="about-copy">
+          <p>The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.</p>
+          <p>This season, our roster features dedicated players, led by an experienced coaching staff committed to skill development, teamwork, and competitive excellence. From the first whistle to the final buzzer, our Squirts play with heart, hustle, and Rinx pride.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="people" data-section="staff-facility" data-intent="people and place" data-layout="split-media" data-items="2">
+    <div class="wrap">
+      <div class="panel kd kd-down">
+        <h2>Coaching Staff</h2>
+        <ul class="staff">
+          <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachdan.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Dan O'Donoghue</h3><p>Head Coach • 10U Squirts</p></div></li>
+          <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachskillman.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Greg Skillman</h3><p>Head Coach • 14U Bantam</p></div></li>
+          <li><img src="https://www.rinxhockeyclub.com/images/headshots/joecap.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Joe Capozzoli</h3><p>Assistant Coach • 10U, 14U</p></div></li>
+          <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachmazz.webp" alt="" width="64" height="64" loading="lazy"><div><h3>Jon Mazzarone</h3><p>Assistant Coach • 14U Bantam</p></div></li>
+        </ul>
+      </div>
+      <div class="panel facility kd kd-down">
+        <div class="facility-head"><h2>Our Facility</h2><img class="seal" src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="The Rinx" width="72" height="72" loading="lazy"></div>
+        <img class="shot" src="https://www.rinxhockeyclub.com/media_1a149b94b09196c2bd3588a1d6303124591215985.webp?width=1200&amp;format=webply&amp;optimize=medium" alt="The Rinx — Hauppauge, NY" width="680" height="510" loading="lazy">
+        <p>Located at 660 Terry Road, Hauppauge, The Rinx features two full-size indoor NHL rinks, a pro shop, skate sharpening, and year-round programming on 97 acres of Hidden Pond Park.</p>
+        <p class="phone">Phone: <a href="tel:+16312323222">(631) 232-3222</a></p>
+        <a class="btn btn-navy" href="https://www.google.com/maps/search/The%20Rinx,%20660%20Terry%20Rd,%20Hauppauge,%20NY%2011788">Get Directions <span aria-hidden="true">Open in Maps →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="social on-navy" data-section="social" data-intent="follow" data-layout="contained" data-media="image" data-items="4" aria-labelledby="social-h">
+    <div class="wrap ig-strip kd kd-down">
+      <img src="https://www.rinxhockeyclub.com/images/r1-720.webp" alt="Rinx Hockey Club" width="720" height="480" loading="lazy">
+      <img src="https://www.rinxhockeyclub.com/images/4D0F41DF-57C2-45F0-A459-86825254D41B-720.webp" alt="Rinx Hockey Club" width="640" height="800" loading="lazy">
+      <img src="https://www.rinxhockeyclub.com/images/14u-720.webp" alt="Rinx Hockey Club" width="720" height="548" loading="lazy">
+      <img src="https://www.rinxhockeyclub.com/media_1a149b94b09196c2bd3588a1d6303124591215985.webp?width=750&amp;format=webply&amp;optimize=medium" alt="The Rinx — Hauppauge, NY" width="680" height="510" loading="lazy">
+    </div>
+    <div class="wrap follow">
+      <div><h2 id="social-h">Follow Us on Instagram</h2><p>@rinx10usquirts</p></div>
+      <a class="btn btn-primary" href="https://www.instagram.com/rinx10usquirts">Follow on Instagram</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer on-navy" data-section="footer" data-intent="navigate" data-layout="stack">
+  <div class="wrap">
+    <img src="https://www.rinxhockeyclub.com/icons/rinx-header-128.webp" alt="Rinx Hockey Club" width="64" height="64" loading="lazy">
+    <p class="foot-name">Rinx Hockey Club • Long Island, NY</p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="/">Home</a><a href="/roster">Roster</a><a href="/schedule">Schedule</a><a href="/stats">Stats</a><a href="/tournaments">Tournaments</a><a href="/sponsors">Sponsors</a><a href="/clinics">Clinics</a><a href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a><a href="/contact">Contact</a>
+    </nav>
+    <small>The Rinx • 660 Terry Road, Hauppauge, NY 11788 • (631) 232-3222</small>
+    <small>© 2026 Rinx Hockey Club. All rights reserved.</small>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const t = document.getElementById('ds-nav-toggle'), b = document.querySelector('.ds-nav-burger'), r = document.getElementById('news-track');
+  const sync = () => b.setAttribute('aria-expanded', t.checked);
+  t.addEventListener('change', sync); sync();
+  b.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); } });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && t.checked) { t.checked = false; sync(); b.focus(); } });
+  document.querySelectorAll('.rail-btns button').forEach((x) => x.addEventListener('click', () => r.scrollBy({ left: x.dataset.dir * r.querySelector('.news-card').offsetWidth, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
+})();
+</script>
+<script src="lenis.min.js"></script>
+<script>
+
+(function () {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Lenis bootstrap ────────────────────────────────────────────
+  const lenis = new Lenis({ lerp: 0.1, smoothWheel: !prefersReducedMotion });
+  window.__lenis = lenis;
+  (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
+
+  // ── Nav scrolled state ─────────────────────────────────────────
+  const nav = document.getElementById('nav');
+  if (nav) lenis.on('scroll', ({ scroll }) => {
+    nav.classList.toggle('scrolled', scroll > 40);
+  });
+
+  // ── Helpers ────────────────────────────────────────────────────
+  const clamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
+  const easeOut3 = t => 1 - Math.pow(1 - t, 3);
+  const getDocTop = el => el.getBoundingClientRect().top + (window.__lenis ? window.__lenis.scroll : window.scrollY);
+
+  // ── Register-specific configuration ────────────────────────────
+  // `prototype --cinematic` rewrites this block per the active register.
+  const animConfig = {
+    parallax:      { translate: 30, fade: 0.55, rangeStart: 0, range: 80 },
+    plansParallax: { translate: 16, rangeStart: 0, range: 80 },
+    cards:         { trigger: 0.92, range: 0.28, slide: 48, stagger: 0.1 },
+    wordmark:      { range: 0.6, clip: 80 },
+  };
+
+  // ── data-split: pre-process letter spans ───────────────────────
+  document.querySelectorAll('[data-split]').forEach((el) => {
+    const text = el.textContent;
+    el.textContent = '';
+    text.split('').forEach((ch) => {
+      const s = document.createElement('span');
+      s.textContent = ch === ' ' ? ' ' : ch;
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(60%)';
+      s.style.filter = 'blur(8px)';
+      el.appendChild(s);
+    });
+  });
+
+  // ── Register lists ─────────────────────────────────────────────
+  const animList = [];     // [data-anim] / [data-tile-anim]
+  const headWords = [];    // .display-head .word — clip-path reveals
+  const splitLetters = []; // [data-split] letters
+  let wordmarkEl = null, wordmarkTop = 0;
+
+  function measure() {
+    const postHeroEl = document.querySelector('.post-hero');
+    const savedTransform = postHeroEl ? postHeroEl.style.transform : '';
+    if (postHeroEl) postHeroEl.style.transform = '';
+
+    animList.forEach(({ el }) => { el.style.opacity = el.style.transform = el.style.willChange = ''; });
+    animList.length = 0;
+    headWords.length = 0;
+    splitLetters.length = 0;
+
+    document.querySelectorAll('[data-anim], [data-tile-anim]').forEach((el) => {
+      const parent = el.closest('.band, .ops-band, .alerts, .access, .news, .ops-section > div, .ops-tiles, .ops-alerts, .ops-mini, section');
+      let stagger = 0;
+      if (parent) {
+        const peers = parent.querySelectorAll('[data-anim], [data-tile-anim]');
+        const idx = Array.prototype.indexOf.call(peers, el);
+        stagger = (idx % 8) * animConfig.cards.stagger;
+      }
+      el.style.opacity = '0';
+      el.style.transform = el.hasAttribute('data-tile-anim')
+        ? `translateY(28px) rotateX(8deg)`
+        : `translateY(${animConfig.cards.slide}px)`;
+      el.style.willChange = 'opacity, transform';
+      animList.push({ el, triggerTop: getDocTop(el), staggerDelay: stagger });
+    });
+
+    // Display-head word clip-path reveals (kinetic-display register)
+    document.querySelectorAll('.display-head, .terminals-band__head h2').forEach((head) => {
+      const words = head.querySelectorAll('.word');
+      const top = getDocTop(head);
+      words.forEach((w, i) => {
+        w.style.clipPath = 'inset(0 100% 0 0)';
+        w.style.transform = 'translateY(110%)';
+        w.style.willChange = 'clip-path, transform';
+        headWords.push({ el: w, triggerTop: top, staggerDelay: i * 0.15 });
+      });
+    });
+
+    // [data-split] letter list
+    document.querySelectorAll('[data-split]').forEach((el) => {
+      const top = getDocTop(el);
+      el.querySelectorAll('span').forEach((s, i) => {
+        splitLetters.push({ el: s, triggerTop: top, staggerDelay: i * 0.05 });
+      });
+    });
+
+    // Footer wordmark wipe-up
+    wordmarkEl = document.querySelector('.site-footer__wordmark');
+    if (wordmarkEl) {
+      wordmarkTop = getDocTop(wordmarkEl);
+      wordmarkEl.style.clipPath = `inset(${animConfig.wordmark.clip}% 0 0 0)`;
+      wordmarkEl.style.willChange = 'clip-path';
+    }
+
+    if (postHeroEl) postHeroEl.style.transform = savedTransform;
+  }
+
+  // ── [data-countup]: IO-triggered numeric tween ─────────────────
+  const countSeen = new WeakSet();
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || countSeen.has(entry.target)) return;
+      countSeen.add(entry.target);
+      const target = +entry.target.getAttribute('data-countup');
+      const duration = target > 20 ? 1400 : target > 5 ? 900 : 600;
+      const start = performance.now();
+      (function step(now) {
+        const t = clamp((now - start) / duration, 0, 1);
+        entry.target.textContent = String(Math.round(easeOut3(t) * target));
+        if (t < 1) requestAnimationFrame(step);
+      })(performance.now());
+    });
+  }, { threshold: 0.4, rootMargin: '0px 0px -35% 0px' }); // stardust patch: count once the row is revealed
+  document.querySelectorAll('[data-countup]').forEach((el) => countObserver.observe(el));
+
+  // ── [data-flip]: IO-triggered split-flap digit randomization ───
+  const flipObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || entry.target.dataset.flipped === '1') return;
+      entry.target.dataset.flipped = '1';
+      const target = +entry.target.getAttribute('data-flip');
+      const total = 8 + Math.floor(Math.random() * 4);
+      let i = 0;
+      (function flap() {
+        if (i >= total) { entry.target.textContent = String(target); return; }
+        entry.target.textContent = String(Math.floor(Math.random() * 10));
+        i++;
+        setTimeout(flap, 60);
+      })();
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-flip]').forEach((el) => flipObserver.observe(el));
+
+  // ── [data-fill]: IO-triggered bar fill ─────────────────────────
+  const fillObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || entry.target.dataset.filled === '1') return;
+      entry.target.dataset.filled = '1';
+      const pct = +entry.target.getAttribute('data-fill');
+      setTimeout(() => { entry.target.style.width = pct + '%'; }, 120);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-fill]').forEach((el) => fillObserver.observe(el));
+
+  // ── Live refresh sweep (live-systems register) ─────────────────
+  const sweepEl = document.querySelector('.live-sweep');
+  if (sweepEl && !prefersReducedMotion) {
+    setInterval(() => {
+      sweepEl.classList.add('sweep');
+      setTimeout(() => sweepEl.classList.remove('sweep'), 1700);
+    }, 5400);
+  }
+
+  // ── rAF loop: scroll-progress reveals + parallax ───────────────
+  const heroMarqueeEl = document.querySelector('.hero-marquee');
+  const postHeroEl = document.querySelector('.post-hero');
+  let _lastMB = null;
+
+  (function tick() {
+    if (prefersReducedMotion) { requestAnimationFrame(tick); return; }
+    const sY = window.__lenis ? window.__lenis.scroll : window.scrollY;
+    const vh = window.innerHeight;
+    const isDesktop = window.innerWidth > 767;
+
+    // Hero parallax
+    if (heroMarqueeEl) {
+      const pp = animConfig.parallax;
+      if (isDesktop) {
+        const rs = pp.rangeStart / 100 * vh;
+        const re = pp.range / 100 * vh;
+        const p = easeOut3(clamp((sY - rs) / (re - rs), 0, 1));
+        heroMarqueeEl.style.transform = `translateY(${p * -pp.translate}vh)`;
+        document.documentElement.style.setProperty('--parallax-progress', p);
+      } else {
+        heroMarqueeEl.style.transform = '';
+        document.documentElement.style.setProperty('--parallax-progress', 0);
+      }
+    }
+
+    // Post-hero rises faster
+    let postHeroOffsetPx = 0;
+    if (postHeroEl) {
+      const pp2 = animConfig.plansParallax;
+      if (isDesktop) {
+        const rs = pp2.rangeStart / 100 * vh;
+        const re = pp2.range / 100 * vh;
+        const p = easeOut3(clamp((sY - rs) / (re - rs), 0, 1));
+        postHeroOffsetPx = p * -pp2.translate / 100 * vh;
+        postHeroEl.style.transform = `translateY(${p * -pp2.translate}vh)`;
+        const newMB = `${p * -pp2.translate}vh`;
+        if (newMB !== _lastMB) { postHeroEl.style.marginBottom = newMB; _lastMB = newMB; }
+      } else {
+        postHeroEl.style.transform = '';
+        if (_lastMB !== '') { postHeroEl.style.marginBottom = ''; _lastMB = ''; }
+      }
+    }
+
+    // Scroll-progress entrances
+    for (let i = 0; i < animList.length; i++) {
+      const item = animList[i];
+      const { trigger, range, slide } = animConfig.cards;
+      const raw = (sY + vh * trigger - (item.triggerTop + postHeroOffsetPx)) / (vh * range);
+      const p = easeOut3(clamp(raw - item.staggerDelay, 0, 1));
+      item.el.style.opacity = String(p);
+      if (item.el.hasAttribute('data-tile-anim')) {
+        item.el.style.transform = `translateY(${(1 - p) * 28}px) rotateX(${(1 - p) * 8}deg)`;
+      } else {
+        item.el.style.transform = `translateY(${(1 - p) * slide}px)`;
+      }
+    }
+
+    // Display-head clip-path word reveals
+    for (let i = 0; i < headWords.length; i++) {
+      const item = headWords[i];
+      const raw = (sY + vh * 0.85 - (item.triggerTop + postHeroOffsetPx)) / (vh * 0.30);
+      const p = easeOut3(clamp(raw - item.staggerDelay, 0, 1));
+      item.el.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
+      item.el.style.transform = `translateY(${(1 - p) * 110}%)`;
+    }
+
+    // [data-split] letter reveals
+    for (let i = 0; i < splitLetters.length; i++) {
+      const item = splitLetters[i];
+      const raw = (sY + vh * 0.85 - (item.triggerTop + postHeroOffsetPx)) / (vh * 0.35);
+      const p = easeOut3(clamp(raw - item.staggerDelay, 0, 1));
+      item.el.style.opacity = String(p);
+      item.el.style.transform = `translateY(${(1 - p) * 60}%)`;
+      item.el.style.filter = `blur(${(1 - p) * 8}px)`;
+    }
+
+    // Footer wordmark wipe-up
+    if (wordmarkEl) {
+      const adjustedTop = wordmarkTop + postHeroOffsetPx;
+      const wP = easeOut3(clamp((sY + vh - adjustedTop) / (vh * animConfig.wordmark.range), 0, 1));
+      wordmarkEl.style.clipPath = `inset(${(1 - wP) * animConfig.wordmark.clip}% 0 0 0)`;
+    }
+
+    requestAnimationFrame(tick);
+  })();
+
+  // stardust patch: measure() hides [data-anim]/.word; never run it under reduced motion
+  // (the canonical script re-hid elements on window.load after forcing final states)
+  if (!prefersReducedMotion) {
+    measure();
+    window.addEventListener('load',   () => requestAnimationFrame(measure), { once: true });
+    window.addEventListener('resize', measure, { passive: true });
+  }
+
+  // ── Reduced-motion: force final states ─────────────────────────
+  if (prefersReducedMotion) {
+    document.querySelectorAll('[data-anim], [data-tile-anim], [data-split] span').forEach((el) => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.filter = 'none';
+      el.style.clipPath = 'none';
+    });
+    document.querySelectorAll('.word').forEach((el) => {
+      el.style.clipPath = 'none';
+      el.style.transform = 'none';
+    });
+    document.querySelectorAll('[data-countup]').forEach((el) => { el.textContent = el.getAttribute('data-countup'); });
+    document.querySelectorAll('[data-flip]').forEach((el) => { el.textContent = el.getAttribute('data-flip'); });
+    document.querySelectorAll('[data-fill]').forEach((el) => { el.style.width = el.getAttribute('data-fill') + '%'; });
+  }
+})();
+</script>
+<script>
+(() => {
+  // kinetic-display hard reveals: one-shot clip-path wipes, never opacity fades
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.sec-head').forEach((h) => h.querySelectorAll('.word').forEach((w, i) => w.style.setProperty('--w', i)));
+  document.querySelectorAll('.kd').forEach((el) => { const sib = [...el.parentElement.children].filter((c) => c.classList.contains('kd')); el.style.setProperty('--i', Math.min(sib.indexOf(el), 5)); });
+  // observe the unclipped container: a fully clip-pathed .kd has zero visible area for IO
+  const reveal = (el) => { if (el.classList.contains('sec-head')) el.classList.add('in'); el.querySelectorAll(':scope > .kd').forEach((k) => k.classList.add('in')); if (el.classList.contains('kd-host')) el.classList.add('in'); };
+  const hosts = new Set([...document.querySelectorAll('.kd')].map((k) => k.parentElement));
+  hosts.forEach((h) => h.classList.add('kd-host'));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px', threshold: 0 });
+  document.querySelectorAll('.sec-head').forEach((el) => io.observe(el));
+  hosts.forEach((h) => io.observe(h));
+  // safety net: anything already scrolled past is revealed once the page has settled
+  addEventListener('load', () => setTimeout(() => { hosts.forEach((h) => { if (h.getBoundingClientRect().top < innerHeight) reveal(h); }); document.querySelectorAll('.sec-head').forEach((h) => { if (h.getBoundingClientRect().top < innerHeight) h.classList.add('in'); }); }, 2500));
+})();
+(() => {
+  const t = document.querySelector('.ticker'), b = t && t.querySelector('.tick-toggle');
+  if (!b) return;
+  b.addEventListener('click', () => { const p = t.classList.toggle('paused'); b.setAttribute('aria-pressed', p); b.textContent = p ? 'Play' : 'Pause'; });
+})();
+</script>
+</body>
+</html>

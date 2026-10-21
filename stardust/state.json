@@ -1,0 +1,125 @@
+{
+ "_provenance": {
+  "writtenBy": "stardust:prototype",
+  "writtenAt": "2026-10-16T20:41:33.000Z",
+  "stardustVersion": "0.10.0"
+ },
+ "site": {
+  "originUrl": "https://www.rinxhockeyclub.com",
+  "deployUrl": null,
+  "extractedAt": "2026-10-07T03:09:06.407Z",
+  "pageCap": 1,
+  "totalDiscovered": 1,
+  "crawled": 1
+ },
+ "direction": {
+  "resolvedAt": "2026-10-16T20:07:28.377Z",
+  "phrase": "uplift presales redesign \u2014 three variants per stardust/direction.md (roster)",
+  "directionFile": "stardust/direction.md",
+  "iaFidelity": "reimagined",
+  "variantMode": "role-differentiated",
+  "variants": [
+   "A",
+   "B",
+   "C"
+  ],
+  "activePage": "roster",
+  "previous": "stardust/proposal/index/direction.md"
+ },
+ "pages": [
+  {
+   "slug": "index",
+   "url": "https://www.rinxhockeyclub.com/",
+   "title": "Rinx Hockey Club | Long Island - Tier III Travel Hockey",
+   "type": null,
+   "status": "prototyped",
+   "history": [
+    {
+     "status": "extracted",
+     "at": "2026-10-07T03:16:29.742Z"
+    },
+    {
+     "status": "directed",
+     "at": "2026-10-07T03:24:42.495Z"
+    },
+    {
+     "status": "prototyped",
+     "at": "2026-10-07T04:22:00.093Z",
+     "note": "uplift: variants A, B, C (C cinematic) passed critique (finish reviewer), audit, adapt; C passed motion validation"
+    }
+   ],
+   "stale": false,
+   "staleReason": null,
+   "currentStatePath": "stardust/current/pages/index.json",
+   "prototypePath": "stardust/prototypes/index-A-proposed.html",
+   "migratedPath": null,
+   "variants": {
+    "A": {
+     "shape": "stardust/prototypes/index-A-shape.md",
+     "proposed": "stardust/prototypes/index-A-proposed.html",
+     "status": "prototyped"
+    },
+    "B": {
+     "shape": "stardust/prototypes/index-B-shape.md",
+     "proposed": "stardust/prototypes/index-B-proposed.html",
+     "status": "prototyped"
+    },
+    "C": {
+     "shape": "stardust/prototypes/index-C-shape.md",
+     "proposed": "stardust/prototypes/index-C-proposed.html",
+     "cinematic": "stardust/prototypes/index-C-cinematic.html",
+     "status": "prototyped",
+     "register": "kinetic-display"
+    }
+   }
+  },
+  {
+   "slug": "roster",
+   "url": "https://www.rinxhockeyclub.com/roster",
+   "title": "10U Squirts Roster",
+   "type": null,
+   "status": "prototyped",
+   "history": [
+    {
+     "status": "extracted",
+     "at": "2026-10-16T20:07:28.377Z"
+    },
+    {
+     "status": "directed",
+     "at": "2026-10-16T20:07:28.377Z"
+    },
+    {
+     "status": "prototyped",
+     "at": "2026-10-16T20:41:33.000Z",
+     "note": "uplift: A, B, C (C cinematic, kinetic-display) passed detector, audit (contrast/headings/overflow), adapt (1440/800/375/360), finish reviewer SHIP after 2 correction rounds; C passed motion validation (Pass 1, 4, 6a-6f)"
+    }
+   ],
+   "stale": false,
+   "staleReason": null,
+   "currentStatePath": "stardust/current/pages/roster.json",
+   "prototypePath": "stardust/prototypes/roster-A-proposed.html",
+   "migratedPath": null,
+   "variants": {
+    "A": {
+     "shape": "stardust/prototypes/roster-A-shape.md",
+     "proposed": "stardust/prototypes/roster-A-proposed.html",
+     "status": "prototyped"
+    },
+    "B": {
+     "shape": "stardust/prototypes/roster-B-shape.md",
+     "proposed": "stardust/prototypes/roster-B-proposed.html",
+     "status": "prototyped"
+    },
+    "C": {
+     "shape": "stardust/prototypes/roster-C-shape.md",
+     "proposed": "stardust/prototypes/roster-C-proposed.html",
+     "cinematic": "stardust/prototypes/roster-C-cinematic.html",
+     "status": "prototyped",
+     "register": "kinetic-display"
+    }
+   },
+   "designFiles": "stardust/proposal/roster/"
+  }
+ ],
+ "handsOff": true
+}

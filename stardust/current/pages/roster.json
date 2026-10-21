@@ -1,0 +1,432 @@
+{
+  "_provenance": {
+    "renderedBy": "playwright",
+    "fetchedAt": "2026-10-16T20:00:42.465Z",
+    "waitMode": "medium",
+    "waitMs": 2500,
+    "httpStatus": 200
+  },
+  "slug": "roster",
+  "url": "https://www.rinxhockeyclub.com/roster",
+  "renderedBy": "playwright",
+  "fetchedAt": "2026-10-16T20:00:42.465Z",
+  "finalUrl": "https://www.rinxhockeyclub.com/roster",
+  "title": "10U Squirts Roster | Rinx Hockey Club",
+  "description": "2026–2027 Season • Rinx Hockey Club • 10U Squirts • Tier III/A",
+  "og": {
+    "title": "10U Squirts Roster",
+    "description": "2026–2027 Season • Rinx Hockey Club • 10U Squirts • Tier III/A",
+    "image": "https://www.rinxhockeyclub.com/media_15f507a146184b4d529a4ff65089e2d9778e7a8d0.png?width=1200&format=pjpg&optimize=medium",
+    "type": null
+  },
+  "headings": [
+    {
+      "tag": "h1",
+      "text": "10U Squirts Roster"
+    },
+    {
+      "tag": "h3",
+      "text": "Ryan Bachert"
+    },
+    {
+      "tag": "h3",
+      "text": "Aiden Brown"
+    },
+    {
+      "tag": "h3",
+      "text": "DJ Pierre Canel"
+    },
+    {
+      "tag": "h3",
+      "text": "Nicholas Capozzoli"
+    },
+    {
+      "tag": "h3",
+      "text": "Ryan Christman"
+    },
+    {
+      "tag": "h3",
+      "text": "Connor Daly"
+    },
+    {
+      "tag": "h3",
+      "text": "Sean Fox"
+    },
+    {
+      "tag": "h3",
+      "text": "Matthew Grosskurth"
+    },
+    {
+      "tag": "h3",
+      "text": "Connor Hassett"
+    },
+    {
+      "tag": "h3",
+      "text": "Stevie Kull"
+    },
+    {
+      "tag": "h3",
+      "text": "Jorge Leonardo"
+    },
+    {
+      "tag": "h3",
+      "text": "Ryan Lupia"
+    },
+    {
+      "tag": "h3",
+      "text": "Evan Martin"
+    },
+    {
+      "tag": "h3",
+      "text": "Ari Mazzarone"
+    },
+    {
+      "tag": "h3",
+      "text": "Declan Nimmo"
+    },
+    {
+      "tag": "h3",
+      "text": "Tristen Pajak"
+    },
+    {
+      "tag": "h3",
+      "text": "Louie Savola"
+    },
+    {
+      "tag": "h3",
+      "text": "Conor Wilkens"
+    },
+    {
+      "tag": "h3",
+      "text": "Mikey Barral"
+    },
+    {
+      "tag": "h3",
+      "text": "Edward Carbone"
+    },
+    {
+      "tag": "h2",
+      "text": "Coaching Staff"
+    },
+    {
+      "tag": "h4",
+      "text": "Dan O'Donoghue"
+    },
+    {
+      "tag": "h4",
+      "text": "Joe Capozzoli"
+    }
+  ],
+  "body": [
+    "2026–2027 Season • Rinx Hockey Club • 10U Squirts • Tier III/A",
+    "Head Coach • 10U Squirts",
+    "Assistant Coach • 10U Squirts"
+  ],
+  "codeBlocks": [],
+  "ctas": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Roster +",
+      "href": null
+    },
+    {
+      "label": "Schedule +",
+      "href": null
+    },
+    {
+      "label": "Stats +",
+      "href": null
+    },
+    {
+      "label": "Standings +",
+      "href": null
+    },
+    {
+      "label": "Tournaments",
+      "href": "/tournaments"
+    },
+    {
+      "label": "Awards",
+      "href": "/trophy-room"
+    },
+    {
+      "label": "Sponsors",
+      "href": "/sponsors"
+    },
+    {
+      "label": "Clinics",
+      "href": "/clinics"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    },
+    {
+      "label": "Shop Gear",
+      "href": "https://rinxspring2026.itemorder.com/shop/home/"
+    },
+    {
+      "label": "View Tournament DetailsDetails",
+      "href": "/mid-atlantic-fall-classic-schedule"
+    },
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Roster",
+      "href": "/roster"
+    },
+    {
+      "label": "Schedule",
+      "href": "/schedule"
+    },
+    {
+      "label": "Stats",
+      "href": "/stats"
+    },
+    {
+      "label": "Tournaments",
+      "href": "/tournaments"
+    },
+    {
+      "label": "Trophy Room",
+      "href": "/trophy-room"
+    },
+    {
+      "label": "Sponsors",
+      "href": "/sponsors"
+    },
+    {
+      "label": "Clinics",
+      "href": "/clinics"
+    },
+    {
+      "label": "Shop Gear",
+      "href": "https://rinxspring2026.itemorder.com/shop/home/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "links": [
+    "https://www.rinxhockeyclub.com/",
+    "https://www.rinxhockeyclub.com/roster",
+    "https://www.rinxhockeyclub.com/roster-14u",
+    "https://www.rinxhockeyclub.com/schedule",
+    "https://www.rinxhockeyclub.com/schedule-14u",
+    "https://www.rinxhockeyclub.com/stats",
+    "https://www.rinxhockeyclub.com/stats-14u",
+    "https://www.rinxhockeyclub.com/standings",
+    "https://www.rinxhockeyclub.com/standings-14u",
+    "https://www.rinxhockeyclub.com/tournaments",
+    "https://www.rinxhockeyclub.com/trophy-room",
+    "https://www.rinxhockeyclub.com/sponsors",
+    "https://www.rinxhockeyclub.com/clinics",
+    "https://www.rinxhockeyclub.com/contact",
+    "https://rinxspring2026.itemorder.com/shop/home/",
+    "https://www.rinxhockeyclub.com/mid-atlantic-fall-classic-schedule"
+  ],
+  "media": {
+    "imgs": [
+      {
+        "src": "https://www.rinxhockeyclub.com/icons/rinx-header-128.webp",
+        "alt": "Rinx Hockey Club",
+        "w": 128,
+        "h": 128
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/fragments/media_1b11bc66d210d852b67f09fc46ccdd6762b2db20e.webp?width=120&format=webply&optimize=medium",
+        "alt": "",
+        "w": 120,
+        "h": 180
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_15f507a146184b4d529a4ff65089e2d9778e7a8d0.png?width=160&format=webply&optimize=medium",
+        "alt": "Ryan Bachert",
+        "w": 160,
+        "h": 194
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_18587035eea3ea92a958f6965c085047a62ee9267.png?width=160&format=webply&optimize=medium",
+        "alt": "Aiden Brown",
+        "w": 160,
+        "h": 119
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1388ab09f0dfd88d6176818659978d2258f4e8d40.png?width=160&format=webply&optimize=medium",
+        "alt": "DJ Pierre Canel",
+        "w": 160,
+        "h": 179
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1e2a207f03e8ad723a77d1052ba6ec9d4d701a60d.png?width=160&format=webply&optimize=medium",
+        "alt": "Nicholas Capozzoli",
+        "w": 160,
+        "h": 172
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_176783ff157f4dc23f4309ea7ef58029bd16738e0.png?width=160&format=webply&optimize=medium",
+        "alt": "Ryan Christman",
+        "w": 160,
+        "h": 167
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1b4a8b7d8684d8d1c2eace2aac6d9f5fb49c1b95e.png?width=160&format=webply&optimize=medium",
+        "alt": "Connor Daly",
+        "w": 160,
+        "h": 161
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1445e691099507eaff1e6e5c53f51c85b939f8bac.png?width=160&format=webply&optimize=medium",
+        "alt": "Sean Fox",
+        "w": 160,
+        "h": 162
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_16efc31c2c840f411d6f2c202aef2b090e9ae1798.png?width=160&format=webply&optimize=medium",
+        "alt": "Matthew Grosskurth",
+        "w": 160,
+        "h": 172
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1b82b16ca8f7be13fed42502b57114a63b2abd773.png?width=160&format=webply&optimize=medium",
+        "alt": "Connor Hassett",
+        "w": 160,
+        "h": 180
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1c403a806e6b59568e6d140ca88d7de4113043f6b.png?width=160&format=webply&optimize=medium",
+        "alt": "Stevie Kull",
+        "w": 160,
+        "h": 182
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_13030af021c19039a3032d9560273edb69dc5a97a.png?width=160&format=webply&optimize=medium",
+        "alt": "Jorge Leonardo",
+        "w": 160,
+        "h": 157
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1554ad4c86fff9eb895a7b68a03014d4e766b243a.png?width=160&format=webply&optimize=medium",
+        "alt": "Ryan Lupia",
+        "w": 160,
+        "h": 140
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1c80a7f1c2d73bbcfeaa6f482f15f0025e31085dd.png?width=160&format=webply&optimize=medium",
+        "alt": "Evan Martin",
+        "w": 160,
+        "h": 153
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1ccfd1953e1ffd4d62ed192e65fdaa70c5e489d26.png?width=160&format=webply&optimize=medium",
+        "alt": "Ari Mazzarone",
+        "w": 160,
+        "h": 171
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1c591b964a857472d2a9c706190b003400c06f24c.png?width=160&format=webply&optimize=medium",
+        "alt": "Declan Nimmo",
+        "w": 160,
+        "h": 167
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_14709384b766a7c3e21fa1af018019cc480cd2fef.png?width=160&format=webply&optimize=medium",
+        "alt": "Tristen Pajak",
+        "w": 160,
+        "h": 178
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1c54de1ac0d935bd3038cd063a183f4bc305181e2.png?width=160&format=webply&optimize=medium",
+        "alt": "Louie Savola",
+        "w": 160,
+        "h": 157
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_1ac0f0f2bb9faa13bce0d83ac3472beb5f7bf7e0b.png?width=160&format=webply&optimize=medium",
+        "alt": "Conor Wilkens",
+        "w": 160,
+        "h": 170
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_116b75d8e4bf6451d1e115c43d05514daa9ec73c6.png?width=160&format=webply&optimize=medium",
+        "alt": "Mikey Barral",
+        "w": 160,
+        "h": 182
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/media_13c1fb9dd5bb3c64711f3e9208eb2cf0fbff1af49.png?width=160&format=webply&optimize=medium",
+        "alt": "Edward Carbone",
+        "w": 160,
+        "h": 152
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/images/headshots/coachdan.webp",
+        "alt": "Dan O'Donoghue",
+        "w": 160,
+        "h": 160
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/images/headshots/joecap.webp",
+        "alt": "Joe Capozzoli",
+        "w": 160,
+        "h": 151
+      },
+      {
+        "src": "https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp",
+        "alt": "Rinx Hockey Club",
+        "w": 140,
+        "h": 138
+      }
+    ],
+    "allImgCount": 25,
+    "cssBackgrounds": [],
+    "modals": [],
+    "videos": [],
+    "iframes": []
+  },
+  "customProps": {
+    "--color-red": "#C8102E",
+    "--color-red-dark": "#a00d24",
+    "--color-navy": "#041E42",
+    "--color-navy-light": "#0a2d5e",
+    "--color-white": "#FFF",
+    "--color-off-white": "#F5F6F8",
+    "--color-ice": "#e8f0f9",
+    "--color-gray": "#6b7280",
+    "--color-gray-light": "#e5e7eb",
+    "--color-gold": "#FFD700",
+    "--body-font-family": "'Barlow', -apple-system, blinkmacsystemfont, 'Segoe UI', sans-serif",
+    "--heading-font-family": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+    "--body-font-size-l": "1.1rem",
+    "--body-font-size-m": "1rem",
+    "--body-font-size-s": "0.875rem",
+    "--body-font-size-xs": "0.75rem",
+    "--heading-font-size-xxl": "clamp(2.5rem, 6vw, 4.5rem)",
+    "--heading-font-size-xl": "2.8rem",
+    "--heading-font-size-l": "2.2rem",
+    "--heading-font-size-m": "1.6rem",
+    "--heading-font-size-s": "1.3rem",
+    "--section-padding": "40px 40px",
+    "--max-width": "1200px",
+    "--nav-height": "79px",
+    "--shadow-card": "0 2px 12px rgb(4 30 66 / 8%)",
+    "--shadow-card-hover": "0 8px 24px rgb(4 30 66 / 15%)"
+  },
+  "_signals": {
+    "filteredInterstitials": 0,
+    "distinctHeadings": 24,
+    "mainTextLen": 751,
+    "realImageCount": 25,
+    "trackingOnlyMedia": false,
+    "spaShellSuspect": false,
+    "screenshotMode": "fullPage"
+  },
+  "screenshot": "assets/screenshots/roster.png",
+  "renderedHtml": "pages/roster.html"
+}

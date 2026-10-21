@@ -1,0 +1,527 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:extract",
+    "writtenAt": "2026-10-07T03:13:07.606Z",
+    "readArtifacts": [
+      "https://www.rinxhockeyclub.com/",
+      "stardust/current/pages/index.json",
+      "stardust/.work/probe.json (computed-style probe, same render recipe)"
+    ],
+    "synthesizedInputs": [],
+    "stardustVersion": "0.10.0",
+    "notes": [
+      "Single-page extract (--single): every cross-page field is home-only.",
+      "Off-white #f5f6f8 is the body background (body element excluded from the element walk; added from computed body style).",
+      "--color-gold #FFD700 is defined as a token but never painted on the home page.",
+      "Google Fonts request loads Barlow Condensed 700/900 and Barlow 400 only; H3/H4 request weight 800, which the browser resolves to the 900 face."
+    ]
+  },
+  "site": {
+    "name": "Rinx Hockey Club",
+    "tagline": "Travel Hockey • Long Island, New York",
+    "originUrl": "https://www.rinxhockeyclub.com"
+  },
+  "origins": [
+    {
+      "origin": "https://www.rinxhockeyclub.com",
+      "role": "primary",
+      "pages": [
+        "index"
+      ]
+    }
+  ],
+  "logo": {
+    "source": "img.header-logo (header crest)",
+    "url": "https://www.rinxhockeyclub.com/icons/rinx-header-128.webp",
+    "localPath": "stardust/current/assets/logo.webp",
+    "format": "webp",
+    "intrinsic": "128x128",
+    "sourceSelector": "header img[alt=\"Rinx Hockey Club\"]",
+    "variantsCaptured": [
+      "header crest (shield, webp 128)",
+      "hero roundel \"The Rinx\" (round badge, webp 140) — stardust/current/assets/logo-hero-roundel.webp"
+    ],
+    "variantsNotCaptured": [
+      "SVG",
+      "monochrome",
+      "inverted"
+    ],
+    "notes": "Two different marks in use: shield crest in header/footer, round The Rinx badge in hero."
+  },
+  "favicon": {
+    "url": "https://www.rinxhockeyclub.com/icons/rinxlogo.png",
+    "localPath": "stardust/current/assets/favicon.png"
+  },
+  "palette": [
+    {
+      "role": "background",
+      "value": "#f5f6f8",
+      "occurrences": 4000,
+      "sourceSelectors": [
+        "body"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "background"
+      ]
+    },
+    {
+      "role": "surface",
+      "value": "#ffffff",
+      "occurrences": 2706,
+      "sourceSelectors": [
+        ".news-slider card",
+        ".about card",
+        ".columns card",
+        ".rr-card"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "background",
+        "text"
+      ]
+    },
+    {
+      "role": "primary",
+      "value": "#041e42",
+      "occurrences": 2095,
+      "sourceSelectors": [
+        "header.header-wrapper",
+        ".hero-inner",
+        "footer",
+        "h1-h4"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "background",
+        "text",
+        "border",
+        "fill",
+        "stroke"
+      ]
+    },
+    {
+      "role": "text-secondary",
+      "value": "#6b7280",
+      "occurrences": 1209,
+      "sourceSelectors": [
+        "p",
+        "span.news-date",
+        "div.rr-loc"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "text"
+      ]
+    },
+    {
+      "role": "surface-alt",
+      "value": "#e8f0f9",
+      "occurrences": 605,
+      "sourceSelectors": [
+        "div.recent-results"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "background"
+      ]
+    },
+    {
+      "role": "accent",
+      "value": "#c8102e",
+      "occurrences": 198,
+      "sourceSelectors": [
+        "a.nav-shop",
+        "span.header-subtitle",
+        ".hero-badge",
+        ".hero h1 span",
+        "card border-top",
+        "section-title rule"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "background",
+        "text",
+        "border",
+        "fill",
+        "stroke"
+      ]
+    },
+    {
+      "role": "success",
+      "value": "#16a34a",
+      "occurrences": 18,
+      "sourceSelectors": [
+        "div.rr-card border-top",
+        "div.rr-badge"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "background",
+        "border"
+      ]
+    },
+    {
+      "role": "border",
+      "value": "#e5e7eb",
+      "occurrences": 3,
+      "sourceSelectors": [
+        "button.sdot"
+      ],
+      "sources": [
+        "index"
+      ],
+      "usedAs": [
+        "background"
+      ]
+    }
+  ],
+  "type": {
+    "headingFamily": {
+      "name": "Barlow Condensed",
+      "stack": "\"Barlow Condensed\", \"Arial Narrow\", sans-serif",
+      "weights": [
+        900,
+        800
+      ],
+      "sizes": [
+        "72px",
+        "35.2px",
+        "22.4px",
+        "20.8px",
+        "20px",
+        "16.8px"
+      ],
+      "lineHeights": [
+        0.95,
+        1,
+        1.2
+      ],
+      "letterSpacing": [
+        "0.02em",
+        "0.03em",
+        "0.05em"
+      ],
+      "textTransform": "uppercase",
+      "sourceSelectors": [
+        "h1",
+        ".section h2",
+        "h3",
+        "h4"
+      ]
+    },
+    "bodyFamily": {
+      "name": "Barlow",
+      "stack": "\"Barlow\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "weights": [
+        400
+      ],
+      "sizes": [
+        "17.6px",
+        "16px",
+        "15.2px",
+        "14.4px",
+        "13.6px"
+      ],
+      "lineHeights": [
+        1.6,
+        1.7
+      ],
+      "letterSpacing": [
+        "normal"
+      ],
+      "sourceSelectors": [
+        "p",
+        ".news-date",
+        ".rr-loc"
+      ]
+    },
+    "monoFamily": null,
+    "scaleRatio": null,
+    "scaleAudit": {
+      "kind": "ad-hoc",
+      "sizesPx": [
+        72,
+        35.2,
+        22.4,
+        20.8,
+        16.8
+      ],
+      "ratios": [
+        2.045,
+        1.571,
+        1.077,
+        1.238
+      ],
+      "matchedScale": null
+    },
+    "loadStrategy": "swap",
+    "files": [
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400&display=swap",
+        "family": "Barlow Condensed / Barlow",
+        "weight": "700,900 / 400",
+        "localPath": null,
+        "licensingFlag": "open"
+      }
+    ]
+  },
+  "spacing": {
+    "baseUnit": 8,
+    "scale": [
+      8,
+      16,
+      18,
+      24,
+      32,
+      40
+    ],
+    "sectionPadding": "40px",
+    "containerMaxWidth": "1200px",
+    "gridGap": "24px"
+  },
+  "motifs": {
+    "borderRadius": {
+      "primary": "8px",
+      "secondary": "4px",
+      "pill": "50%",
+      "primarySources": [
+        "index"
+      ],
+      "occurrences": {
+        "50%": 16,
+        "8px": 15,
+        "4px": 12,
+        "10px": 9,
+        "6px": 4,
+        "2px": 1
+      }
+    },
+    "shadows": [
+      {
+        "value": "0 2px 12px rgb(4 30 66 / 8%)",
+        "uses": "cards (12×)"
+      },
+      {
+        "value": "0 4px 16px rgb(4 30 66 / 15%)",
+        "uses": "card hover"
+      },
+      {
+        "value": "0 2px 20px rgb(0 0 0 / 40%)",
+        "uses": "hero logo"
+      }
+    ],
+    "gradients": [
+      {
+        "value": "linear-gradient(90deg, #c8102e 33%, #fff 33% 66%, #c8102e 66%)",
+        "uses": "hero-stripe (red-white-red bar under hero)"
+      },
+      {
+        "value": "linear-gradient(90deg, #c8102e 0%, transparent 100%)",
+        "uses": "section-title rule"
+      },
+      {
+        "value": "radial ice gradient #e8f4fc→#bcd6f0 under 88% navy overlay",
+        "uses": "hero rink SVG"
+      }
+    ],
+    "patterns": [
+      {
+        "name": "rink-diagram-hero",
+        "evidence": "inline SVG rink (center red line, blue lines, faceoff circles, creases) under 88% navy overlay"
+      },
+      {
+        "name": "red-white-red-stripe",
+        "evidence": "hero-stripe bar under the hero"
+      },
+      {
+        "name": "card-top-rule",
+        "evidence": "4px red border-top on news cards, 4px green on result cards"
+      },
+      {
+        "name": "section-title-with-rule",
+        "evidence": "H2 + red-to-transparent gradient rule on Recent Results / About"
+      },
+      {
+        "name": "card-carousel",
+        "evidence": "news-slider 3-up with arrows + dots (6 slides)"
+      },
+      {
+        "name": "scoreline-cards",
+        "evidence": "recent-results 3 cards with opponent logo, score, W badge, 10U/14U tabs"
+      },
+      {
+        "name": "photo-strip-3up",
+        "evidence": "about: 3 team photos"
+      },
+      {
+        "name": "staff-list-bars",
+        "evidence": "4 navy bars with circular headshot"
+      },
+      {
+        "name": "embed-feed",
+        "evidence": "Elfsight Instagram widget, renders empty grey tiles"
+      }
+    ]
+  },
+  "componentStyle": {
+    "buttons": {
+      "primary": {
+        "background": "#c8102e",
+        "color": "#ffffff",
+        "borderRadius": "4px",
+        "padding": "8px 16px",
+        "fontWeight": 700,
+        "fontFamily": "Barlow Condensed",
+        "textTransform": "uppercase",
+        "letterSpacing": "0.08em",
+        "source": "a.nav-shop (Shop Gear)"
+      },
+      "secondary": {
+        "background": "#041e42",
+        "color": "#ffffff",
+        "border": "2px solid #041e42",
+        "borderRadius": "4px",
+        "padding": "7px 18px",
+        "source": ".recent-results tab (active)"
+      },
+      "ghost": {
+        "background": "transparent",
+        "color": "#041e42",
+        "border": "2px solid #041e42",
+        "borderRadius": "4px",
+        "source": ".recent-results tab (inactive)"
+      }
+    },
+    "dualCTAPattern": null,
+    "cards": {
+      "background": "#ffffff",
+      "borderRadius": "8px",
+      "padding": "32-40px",
+      "shadow": "0 2px 12px rgb(4 30 66 / 8%)",
+      "border": "none; 4px top rule on news/result cards"
+    },
+    "inputs": null
+  },
+  "systemComponents": [
+    {
+      "kind": "header",
+      "occurrences": 1,
+      "headingSequence": [],
+      "ctaLabels": [
+        "Home",
+        "Roster +",
+        "Schedule +",
+        "Stats +",
+        "Standings +",
+        "Tournaments",
+        "Sponsors",
+        "Clinics",
+        "Contact",
+        "Shop Gear"
+      ],
+      "notes": "navy bar, crest + RINX HOCKEY CLUB + red subtitle TIER III/A • TRAVEL HOCKEY • LIAHL, red Shop Gear pill"
+    },
+    {
+      "kind": "footer",
+      "occurrences": 1,
+      "headingSequence": [],
+      "ctaLabels": [
+        "Home",
+        "Roster",
+        "Schedule",
+        "Stats",
+        "Tournaments",
+        "Sponsors",
+        "Clinics",
+        "Shop Gear",
+        "Contact"
+      ],
+      "notes": "navy, centered roundel, address + phone, copyright"
+    }
+  ],
+  "iconFont": null,
+  "voice": {
+    "heroHeadline": "Rinx Hockey Club",
+    "heroLede": "Travel Hockey • Long Island, New York",
+    "heroImage": null,
+    "heroMedium": {
+      "kind": "inline-svg",
+      "note": "static rink diagram SVG; not moving"
+    },
+    "firstParagraph": "The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.",
+    "ctaSamples": [
+      "View Full Schedule →",
+      "Shop Gear",
+      "Get Directions"
+    ],
+    "headlineSamples": [
+      "14U Remains Undefeated",
+      "10U Pours on the Goals",
+      "Comeback Tie",
+      "Clean Sweep"
+    ],
+    "tone": "inferred: proud, plain-spoken, sports-page"
+  },
+  "voiceTable": {
+    "ctaFrequency": [
+      {
+        "label": "Home",
+        "count": 2
+      },
+      {
+        "label": "Shop Gear",
+        "count": 2
+      },
+      {
+        "label": "Tournaments",
+        "count": 2
+      },
+      {
+        "label": "Sponsors",
+        "count": 2
+      },
+      {
+        "label": "Clinics",
+        "count": 2
+      },
+      {
+        "label": "Contact",
+        "count": 2
+      },
+      {
+        "label": "View Full Schedule →",
+        "count": 1
+      },
+      {
+        "label": "Get Directions",
+        "count": 1
+      }
+    ],
+    "headingFrequency": [],
+    "toneMetrics": {
+      "headingsUppercasePercent": 100,
+      "distinctHeadings": 17,
+      "distinctCtaLabels": 17
+    }
+  },
+  "crossPromo": {
+    "detected": false
+  },
+  "embedDominated": [],
+  "register": "brand"
+}

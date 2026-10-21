@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:prototype (via impeccable craft) · writtenAt: 2026-10-07T04:00:25.847Z
+  page: index · variant: B · pageUrl: https://www.rinxhockeyclub.com/
+  againstDirection: stardust/direction.md (Active 2026-10-07T03:55:00Z) · brief: stardust/prototypes/index-B-shape.md
+  canon: inherited from stardust/prototypes/index-A-proposed.html (tokens, header, footer, rink, placeholder signature)
+  readArtifacts: [stardust/current/pages/index.json, stardust/current/pages/index.html, DESIGN-B.md, DESIGN-B.json, PRODUCT.md]
+  fontDeck: brand-inherited (Barlow Condensed + Barlow) · paletteSource: inherited + 2 A+ refinements · fidelity: refined
+  reflexRejectAudit: { bypassed: "Mode A pinned families: Barlow Condensed, Barlow" }
+  logoMappings: "opponent logos use the live site TEAM_LOGOS mapping (blocks/schedule/schedule.js)"
+  unsourcedContent:
+    - { selector: "[data-section=hero] .board-team[data-team=14u] [data-placeholder]", type: other, reason: "14U next game not published in capture" }
+    - { selector: "[data-section=game-log] .log-row[data-game=2026-09-21-14u] .opp [data-placeholder]", type: other, reason: "Sep 21 opponent not in capture" }
+    - { selector: "[data-section=game-log] .log-row[data-game=2026-09-21-14u] .score [data-placeholder]", type: other, reason: "Sep 21 tie score not in capture" }
+  critique:
+    - { source: impeccable-finish-reviewer, round: 1, findings: "8 material", verdict2: "6 resolved, 1 partial, 3 regressions", verdict3: "all resolved except board grid <600px (partial)", postVerdictFix: "specificity fix .board-line .board-when ~ .board-what at <600px; verified by DOM probe (all board children inside the panel at 360px), not re-reviewed" }
+  audit:
+    - { tool: "detect.mjs", findings: ["flat-type-hierarchy (false positive: literal-px only; reviewer confirmed 72/54/40/30 steps visible)"] }
+    - { tool: "computed WCAG contrast", fails: 0, acknowledged: ["h1 span Hockey 2.81:1 brand-name logotype (WCAG 1.4.3 exemption)"] }
+    - { check: "skip link, single h1, no skipped levels, img alt + dims, no JS-hidden state", result: pass }
+  adapt:
+    - { viewports: [1440, 800, 375, 360], overflowAt360: false, navCollapse: hamburger }
+  visionCheck: { verdict: pass, observations: ["scoreboard object in first viewport with real next game + last results", "one chronological log; both teams visible", "brand chrome identical to A"] }
+  stardustVersion: 0.10.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rinx Hockey Club | Long Island - Tier III Travel Hockey</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<meta name="description" content="The Rinx Hockey Club is a premier Tier III Long Island travel hockey program dedicated to developing young athletes through competitive hockey, professional coaching, and a commitment to teamwork and sportsmanship.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400&display=swap">
+<style>
+:root {
+  /* typography: DESIGN-A.md typography.display / body */
+  --heading-font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body-font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* perfect-fourth ladder 72 / 54 / 40 / 30 / 22 / 17 */
+  --heading-xxl: 72px;
+  --heading-xl: 54px;
+  --heading-lg: 40px;
+  --heading-md: 30px;
+  --heading-sm: 22px;
+  --body: 17px;
+  --body-sm: 15px;
+  --label: 14px;
+  --line-height-heading: 0.95;
+  --line-height-body: 1.6;
+  /* arena-gray */
+  --color-bg: #F5F6F8;
+  /* rink-navy */
+  --color-fg: #041E42;
+  /* rinx-red */
+  --color-accent: #C8102E;
+  --rink-navy: #041E42;
+  --rink-navy-raised: #0A2D5E;
+  --rinx-red: #C8102E;
+  --rinx-red-deep: #A00D24;
+  --ice: #E8F0F9;
+  --boards-white: #FFFFFF;
+  --slate-text: #4B5563;
+  --line-gray: #E5E7EB;
+  --win-green: #15803D;
+  --surface-alt: #E8F0F9;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 64px;
+  --section-padding: 64px;
+  --max-width: 1200px;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow-card: 0 2px 12px rgb(4 30 66 / 8%);
+  --shadow-card-hover: 0 8px 24px rgb(4 30 66 / 15%);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* nav burger base rule sits above every @media (mobile-nav-collapse § Source order) */
+.ds-nav-burger { display: none; }
+.ds-nav-toggle { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; hanging-punctuation: first; }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font: var(--body)/var(--line-height-body) var(--body-font-family); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4 { font-family: var(--heading-font-family); text-transform: uppercase; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.wrap { width: min(100% - 2 * var(--spacing-lg), var(--max-width)); margin-inline: auto; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; background: var(--ice); color: var(--rink-navy); padding: 10px 16px; border-radius: var(--radius-sm); font: 700 var(--label)/1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .1em; }
+.skip:focus { top: 8px; }
+:focus-visible { outline: 3px solid var(--rinx-red); outline-offset: 3px; }
+.on-navy :focus-visible { outline-color: var(--ice); }
+.label { font: 700 var(--label)/1.2 var(--heading-font-family); text-transform: uppercase; letter-spacing: .12em; }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 14px 24px; border-radius: var(--radius-sm); font: 700 var(--label)/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background-color .18s var(--ease-out), color .18s var(--ease-out), transform .18s var(--ease-out); }
+.btn-primary { background: var(--rinx-red); color: var(--boards-white); }
+.btn-primary:hover { background: var(--rinx-red-deep); }
+.btn-ghost { background: transparent; color: var(--ice); box-shadow: inset 0 0 0 2px var(--ice); }
+.btn-ghost:hover { background: var(--ice); color: var(--rink-navy); }
+.btn-navy { background: var(--rink-navy); color: var(--ice); }
+.btn-navy:hover { background: var(--rink-navy-raised); }
+.btn:active { transform: translateY(1px); }
+.more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--rinx-red-deep); text-decoration: none; font: 700 var(--label)/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; }
+.more:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* section heads: captured section-title-with-rule */
+.sec-head { display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
+.sec-head h2 { font-size: clamp(36px, 4vw, var(--heading-xl)); font-weight: 900; line-height: var(--line-height-heading); letter-spacing: .02em; flex: none; }
+.sec-head::after { content: ""; flex: 1; height: 28px; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2028%2028%22%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2214%22%20r%3D%2211%22%20fill%3D%22none%22%20stroke%3D%22%23C8102E%22%20stroke-width%3D%222.5%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2214%22%20r%3D%223.5%22%20fill%3D%22%23C8102E%22%2F%3E%3C%2Fsvg%3E") left center / 28px 28px no-repeat, linear-gradient(90deg, var(--rinx-red), rgb(200 16 46 / 0)) 28px 50% / 100% 3px no-repeat; }
+
+/* ---------- header ---------- */
+.site-header { background: var(--rink-navy); color: var(--boards-white); border-bottom: 4px solid var(--rinx-red); position: relative; z-index: 20; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-lg); min-height: 80px; }
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand img { width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--boards-white); padding: 3px; }
+.brand-name { display: block; font: 900 22px/1 var(--heading-font-family); letter-spacing: .03em; text-transform: uppercase; }
+.brand-sub { display: block; margin-top: 4px; color: var(--ice); font: 700 12px/1 var(--heading-font-family); letter-spacing: .14em; text-transform: uppercase; }
+.ds-nav { display: flex; align-items: center; gap: 2px; }
+.ds-nav > a, .ds-nav summary { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 11px; border-radius: var(--radius-sm); color: var(--boards-white); text-decoration: none; font: 700 15px/1 var(--heading-font-family); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; list-style: none; }
+.ds-nav summary::-webkit-details-marker { display: none; }
+.ds-nav summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid var(--ice); border-bottom: 2px solid var(--ice); transform: translateY(-2px) rotate(45deg); transition: transform .18s var(--ease-out); }
+.ds-nav details[open] summary::after { transform: translateY(1px) rotate(-135deg); }
+.ds-nav > a:hover, .ds-nav summary:hover, .ds-nav > a[aria-current] { background: var(--rink-navy-raised); }
+.ds-nav details { position: relative; }
+.ds-nav details > div { position: absolute; top: calc(100% + 6px); left: 0; min-width: 180px; background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card-hover); padding: 6px; }
+.ds-nav details > div a { display: block; padding: 12px 14px; border-radius: var(--radius-sm); color: var(--rink-navy); text-decoration: none; font: 700 15px/1 var(--heading-font-family); letter-spacing: .06em; text-transform: uppercase; }
+.ds-nav details > div a:hover { background: var(--ice); }
+.ds-nav .nav-shop { margin-left: 10px; background: var(--rinx-red); }
+.ds-nav .nav-shop:hover { background: var(--rinx-red-deep); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; background: var(--rink-navy); color: var(--boards-white); overflow: hidden; }
+.hero-rink { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-body { position: relative; padding-block: clamp(56px, 9vw, 104px) clamp(40px, 6vw, 64px); }
+.season { display: inline-block; background: var(--rinx-red); color: var(--boards-white); padding: 7px 12px; border-radius: var(--radius-sm); }
+.hero h1 { margin-top: var(--spacing-lg); font-size: clamp(48px, 7.4vw, var(--heading-xxl)); font-weight: 900; line-height: .9; letter-spacing: .01em; }
+.hero h1 span { color: var(--rinx-red); }
+.hero-lede { margin-top: var(--spacing-md); font-size: clamp(17px, 2vw, 22px); color: var(--ice); max-width: 36ch; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--spacing-xl); }
+.rail { position: relative; background: var(--rink-navy-raised); border-top: 1px solid rgb(232 240 249 / 16%); }
+.rail .wrap { display: grid; grid-template-columns: 1fr; }
+.rail-cell { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: baseline; padding: 20px 0; }
+.rail-cell + .rail-cell { border-top: 1px solid rgb(232 240 249 / 16%); }
+.rail-team { grid-row: span 2; color: var(--ice); font: 900 var(--heading-md)/1 var(--heading-font-family); letter-spacing: .02em; }
+.rail-team small { display: block; margin-top: 6px; font: 700 12px/1 var(--heading-font-family); letter-spacing: .14em; }
+.rail-what { font: 700 var(--heading-sm)/1.1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .03em; }
+.rail-what .label { color: var(--ice); margin-right: 10px; font-size: 14px; }
+.rail-meta { color: var(--ice); font-size: var(--body-sm); }
+.rail-meta a { color: var(--boards-white); text-underline-offset: 3px; }
+.stripe { height: 8px; background: linear-gradient(90deg, var(--rinx-red) 33.33%, var(--boards-white) 33.33% 66.66%, var(--rinx-red) 66.66%); }
+
+/* placeholder signature (proposed-file-shell § PLACEHOLDER) */
+[data-placeholder] { display: inline-flex; flex-direction: column; gap: 3px; padding: 6px 10px; outline: 2px dashed var(--color-accent); outline-offset: 0; background: rgb(232 240 249 / 96%); color: var(--rink-navy); border-radius: var(--radius-sm); vertical-align: middle; }
+.placeholder-eyebrow { font: 700 12px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; color: var(--rinx-red-deep); }
+.placeholder-shape { font: 400 12px/1.2 var(--body-font-family); text-transform: none; letter-spacing: 0; }
+
+
+/* ---------- hero (B): wordmark | scoreboard ---------- */
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--rink-navy) 0 30%, rgb(4 30 66 / 0) 56%); pointer-events: none; }
+.hero .stripe { position: relative; z-index: 1; }
+.hero-split { position: relative; z-index: 1; display: grid; gap: var(--spacing-xl); align-items: center; padding-block: clamp(48px, 7vw, 88px) clamp(40px, 6vw, 72px); }
+.board { position: relative; overflow: hidden; background: radial-gradient(120% 70% at 50% 0%, rgb(232 240 249 / 10%), rgb(232 240 249 / 0) 60%), var(--rink-navy-raised); border-radius: var(--radius); box-shadow: 0 18px 40px rgb(0 0 0 / 28%), inset 0 0 0 1px rgb(232 240 249 / 18%); }
+.board::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--rinx-red); }
+.board-top { display: flex; justify-content: space-between; gap: 12px; padding: 18px 22px 12px; color: var(--ice); border-bottom: 1px solid rgb(232 240 249 / 16%); }
+.board-team { padding: 22px 24px 20px; }
+.board-team + .board-team { border-top: 1px solid rgb(232 240 249 / 16%); }
+.board-team h2 { display: flex; align-items: baseline; gap: 10px; font-size: var(--heading-md); font-weight: 900; color: var(--boards-white); letter-spacing: .02em; }
+.board-team h2 small { font: 700 12px/1 var(--heading-font-family); letter-spacing: .14em; color: var(--ice); }
+.board-line { display: grid; grid-template-columns: 96px 1fr; gap: 4px 14px; align-items: baseline; margin-top: 12px; }
+.board-line .label { color: var(--ice); font-size: 12px; letter-spacing: .14em; }
+.board-when { font: 900 var(--heading-lg)/.95 var(--heading-font-family); letter-spacing: .01em; text-transform: uppercase; }
+.board-what, .board-when ~ .board-what { grid-column: 2; }
+.board-what { font: 700 var(--heading-sm)/1.1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .03em; }
+.board-meta { grid-column: 2; color: var(--ice); font-size: var(--body-sm); }
+.board-meta a { color: var(--boards-white); text-underline-offset: 3px; white-space: nowrap; }
+.board-score { display: flex; align-items: center; gap: 12px; }
+.board-score b { font: 900 var(--heading-xl)/.9 var(--heading-font-family); letter-spacing: .01em; }
+.board-score .badge-w { width: 36px; height: 36px; }
+
+/* ---------- game log ---------- */
+.log { background: var(--ice); padding-block: 56px; }
+.log-list { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--rink-navy); }
+.log-row { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "date chip" "game game" "story story"; gap: 10px 16px; padding: 18px 0; border-bottom: 1px solid rgb(4 30 66 / 14%); }
+.log-date { grid-area: date; color: var(--rink-navy); }
+.log-date small { display: block; font-size: 12px; letter-spacing: .14em; color: rgb(4 30 66 / 72%); margin-bottom: 4px; }
+.chip { grid-area: chip; justify-self: start; display: inline-grid; place-items: center; min-width: 52px; height: 30px; padding: 0 10px; border-radius: var(--radius-sm); background: var(--rink-navy); color: var(--ice); font: 900 var(--label)/1 var(--heading-font-family); letter-spacing: .08em; }
+.log-game { grid-area: game; display: grid; grid-template-columns: 40px 1fr auto; gap: 14px; align-items: center; }
+.log-game .logo { width: 36px; height: 36px; border-radius: 50%; object-fit: contain; background: var(--boards-white); }
+.log-game .logo.ini { display: grid; place-items: center; background: var(--rink-navy); color: var(--ice); font: 700 14px/1 var(--heading-font-family); }
+.opp { font: 700 var(--body)/1.15 var(--heading-font-family); text-transform: uppercase; letter-spacing: .02em; }
+.opp span { display: block; margin-top: 4px; font: 400 14px/1.2 var(--body-font-family); text-transform: none; letter-spacing: 0; color: rgb(4 30 66 / 72%); }
+.score { display: flex; align-items: center; gap: 12px; font: 900 var(--heading-lg)/1 var(--heading-font-family); }
+.badge-w, .badge-t { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: var(--radius-sm); font: 900 17px/1 var(--heading-font-family); }
+.badge-w { background: var(--win-green); color: var(--boards-white); }
+.badge-t { background: var(--boards-white); color: var(--rink-navy); box-shadow: inset 0 0 0 2px var(--rink-navy); }
+.log-story { grid-area: story; }
+.log-note { grid-template-areas: "date chip" "story story"; }
+.chip-both { background: var(--rinx-red); color: var(--boards-white); white-space: nowrap; }
+.log-story h3 { font-size: var(--heading-md); font-weight: 900; line-height: .95; letter-spacing: .02em; }
+.log-story p { color: var(--slate-text); font-size: var(--body-sm); margin-top: 4px; max-width: 60ch; }
+.log-more { display: flex; flex-wrap: wrap; gap: 8px 32px; margin-top: var(--spacing-lg); }
+
+/* ---------- club ---------- */
+.club { padding-block: 56px; }
+.club-grid { display: grid; gap: var(--spacing-xl); }
+.mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mosaic img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm); aspect-ratio: 4 / 3; }
+.mosaic img:first-child { grid-column: span 2; aspect-ratio: 3 / 2; object-position: center 30%; }
+.club-copy h3 { font-size: var(--heading-md); font-weight: 700; letter-spacing: .02em; padding-bottom: 14px; border-bottom: 3px solid var(--rinx-red); margin-bottom: var(--spacing-md); }
+.club-copy p { color: var(--slate-text); max-width: 64ch; }
+.club-copy p + p { margin-top: var(--spacing-md); }
+.lineup-h { margin: var(--spacing-2xl) 0 var(--spacing-lg); font-size: var(--heading-md); font-weight: 700; letter-spacing: .02em; }
+.lineup { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.lineup li { background: var(--rink-navy); color: var(--boards-white); border-radius: var(--radius); padding: 22px 16px; text-align: center; }
+.lineup li::before { content: ""; display: block; height: 4px; margin: -22px -16px 18px; background: var(--rinx-red); border-radius: var(--radius) var(--radius) 0 0; }
+.lineup img { width: 96px; height: 96px; margin: 0 auto 14px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--ice); }
+.lineup h4 { font-size: var(--heading-sm); font-weight: 700; letter-spacing: .03em; }
+.lineup p { color: var(--ice); font-size: var(--body-sm); margin-top: 4px; }
+
+/* ---------- facility ---------- */
+.facility { padding-bottom: 56px; }
+.facility-card { display: grid; background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card); overflow: hidden; }
+.facility-card > img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; }
+.facility-body { padding: clamp(20px, 3vw, 36px); }
+.facility-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 3px solid var(--rinx-red); padding-bottom: 10px; margin-bottom: var(--spacing-md); }
+.facility-head h2 { font-size: var(--heading-lg); font-weight: 900; letter-spacing: .02em; }
+.facility-head img { width: 72px; height: 72px; border-radius: 50%; }
+.facility-body p { color: var(--slate-text); }
+.facility-body .phone { margin-top: var(--spacing-md); color: var(--rink-navy); }
+.facility-body .phone a { color: var(--rink-navy); text-underline-offset: 3px; }
+.facility-body .btn { margin-top: var(--spacing-lg); width: 100%; justify-content: space-between; }
+.follow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid var(--line-gray); }
+.follow b { font: 700 var(--heading-sm)/1.1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .03em; }
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--rink-navy); color: var(--ice); border-top: 4px solid var(--rinx-red); padding-block: var(--spacing-xl) var(--spacing-lg); text-align: center; }
+.site-footer img { width: 64px; height: 64px; margin: 0 auto; border-radius: var(--radius-sm); background: var(--boards-white); padding: 3px; }
+.site-footer .foot-name { margin-top: var(--spacing-md); font: 900 22px/1 var(--heading-font-family); letter-spacing: .08em; text-transform: uppercase; color: var(--boards-white); }
+.foot-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 6px; margin: var(--spacing-lg) 0; }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; color: var(--ice); text-decoration: none; font-size: var(--body-sm); }
+.foot-nav a:hover { color: var(--boards-white); text-decoration: underline; text-underline-offset: 4px; }
+.site-footer small { display: block; font-size: 14px; }
+.site-footer small + small { margin-top: 6px; }
+
+
+@media (max-width: 899px) {
+  .site-header[data-nav-collapse="hamburger"] .wrap { min-height: 72px; }
+  .ds-nav-burger { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: var(--radius-sm); box-shadow: inset 0 0 0 2px var(--ice); color: var(--boards-white); font: 700 14px/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; user-select: none; }
+  .ds-nav-burger-icon { width: 18px; height: 12px; position: relative; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+  .ds-nav-burger-icon::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 2px; background: currentColor; }
+  .ds-nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--spacing-lg) var(--spacing-lg); background: var(--rink-navy); border-bottom: 4px solid var(--rinx-red); visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out), visibility 0s linear .18s; }
+  .ds-nav-toggle:checked ~ .ds-nav { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out), visibility 0s; }
+  .ds-nav > a, .ds-nav summary { min-height: 48px; padding: 0; font-size: 17px; border-bottom: 1px solid rgb(232 240 249 / 14%); border-radius: 0; }
+  .ds-nav > a:hover, .ds-nav summary:hover { background: transparent; color: var(--ice); }
+  .ds-nav details > div { position: static; background: transparent; box-shadow: none; padding: 0 0 8px 14px; }
+  .ds-nav details > div a { color: var(--ice); padding: 12px 0; }
+  .ds-nav details > div a:hover { background: transparent; color: var(--boards-white); }
+  .ds-nav .nav-shop { margin: var(--spacing-md) 0 0; justify-content: center; border-radius: var(--radius-sm); border: 0; }
+}
+@media (max-width: 599px) {
+  .brand img { width: 44px; height: 44px; }
+  .brand-name { font-size: 22px; }
+  .brand-sub { font-size: 12px; letter-spacing: .06em; }
+  .ds-nav-burger-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .hero-ctas .btn { flex: 1 1 140px; }
+  .hero-rink { inset: 0 -64px 0 auto; width: calc(100% + 64px); }
+  .hero::after { background: linear-gradient(180deg, rgb(4 30 66 / 70%) 0 46%, rgb(4 30 66 / 0) 70%); }
+  .board-line { grid-template-columns: 1fr; }
+  .board-line > *, .board-line .board-when ~ .board-what { grid-column: 1 / -1; }
+  .board-when { font-size: var(--heading-md); }
+  .score { font-size: var(--heading-md); }
+  .log-game { grid-template-columns: 36px 1fr auto; gap: 10px; }
+}
+@media (min-width: 600px) {
+  .lineup { grid-template-columns: repeat(4, 1fr); }
+  .log-row { grid-template-columns: 96px 64px 1fr; grid-template-areas: "date chip game" "date chip story"; align-items: start; }
+}
+@media (min-width: 900px) {
+  .hero-split { grid-template-columns: 7fr 5fr; }
+  .club-grid { grid-template-columns: 6fr 5fr; align-items: stretch; }
+  .mosaic { grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr; }
+  .mosaic img { aspect-ratio: auto; min-height: 0; }
+  .mosaic img:first-child { grid-column: auto; grid-row: span 2; aspect-ratio: auto; }
+  .facility-card { grid-template-columns: 1fr 1fr; }
+  .log-row { grid-template-columns: 110px 88px minmax(0, 1.1fr) minmax(0, 1fr); grid-template-areas: "date chip game story"; align-items: center; column-gap: 24px; }
+  .log-note .log-story { grid-column: 3 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<!-- DIRECTION CONTRACT (variant B)
+THESIS: The Jumbotron. The homepage opens like the arena scoreboard: next game and last result for both teams beside the wordmark. It refuses the poster hero and the duplicate news-plus-results split.
+OWN-WORLD: navy rink with a lit raised-navy board object (ice hairline frame, red top band), 54px Barlow Condensed 900 scorelines, navy team chips, the ice results band, the red-white-red stripe.
+STORY: a parent sees when 10U plays next and how both teams did, reads the game log, then meets the club, the coaches and The Rinx.
+FIRST VIEWPORT: 7/5 split; left: season badge, two-line wordmark, lede, Schedule/Roster; right: scoreboard with 10U (next + last) and 14U (placeholder next + last).
+FORM: brief-pinned composition (user invoked "uplift"; direction.md Variant B, live-data candidate #3). Seed: DESIGN-B.json extensions.divergence.seed.input "Rinx Hockey Club|2026-10-07" (md5 roll) → 1990s · Tailor's pattern paper · Tabloid. Applied here: Tabloid (sports-page heads lead each log row) and 1990s (broadcast-board numerals on the lit board). Declined here: Tailor's pattern paper, which is variant C's measured-rink axis; B keeps the canon rink.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header on-navy" data-section="header" data-intent="navigate" data-layout="full-width-dark" data-nav-collapse="hamburger">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Rinx Hockey Club home">
+      <img src="https://www.rinxhockeyclub.com/icons/rinx-header-128.webp" alt="" width="52" height="52">
+      <span><span class="brand-name">Rinx Hockey Club</span><span class="brand-sub">Tier III/A • Travel Hockey • LIAHL</span></span>
+    </a>
+    <input type="checkbox" id="ds-nav-toggle" class="ds-nav-toggle">
+    <label class="ds-nav-burger" for="ds-nav-toggle" role="button" tabindex="0" aria-controls="ds-nav-list" aria-expanded="false"><span class="ds-nav-burger-icon" aria-hidden="true"></span><span class="ds-nav-burger-label">Menu</span></label>
+    <nav id="ds-nav-list" class="ds-nav" aria-label="Main">
+      <a href="/" aria-current="page">Home</a>
+      <details><summary>Roster</summary><div><a href="/roster">10U Squirts</a><a href="/roster-14u">14U Bantam</a></div></details>
+      <details><summary>Schedule</summary><div><a href="/schedule">10U Squirts</a><a href="/schedule-14u">14U Bantam</a></div></details>
+      <details><summary>Stats</summary><div><a href="/stats">10U Squirts</a><a href="/stats-14u">14U Bantam</a></div></details>
+      <details><summary>Standings</summary><div><a href="/standings">10U Squirts</a><a href="/standings-14u">14U Bantam</a></div></details>
+      <a href="/tournaments">Tournaments</a>
+      <a href="/sponsors">Sponsors</a>
+      <a href="/clinics">Clinics</a>
+      <a href="/contact">Contact</a>
+      <a class="nav-shop" href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero on-navy" data-section="hero" data-intent="next game + last result" data-layout="split-media" data-items="2">
+    <svg class="hero-rink" viewBox="0 0 1200 560" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+      <rect x="18" y="18" width="1164" height="524" rx="150" fill="none" stroke="#E8F0F9" stroke-opacity=".38" stroke-width="6"/>
+      <line x1="80" y1="18" x2="80" y2="542" stroke="#C8102E" stroke-opacity=".45" stroke-width="3"/>
+      <line x1="1120" y1="18" x2="1120" y2="542" stroke="#C8102E" stroke-opacity=".45" stroke-width="3"/>
+      <line x1="380" y1="18" x2="380" y2="542" stroke="#E8F0F9" stroke-opacity=".45" stroke-width="10"/>
+      <line x1="820" y1="18" x2="820" y2="542" stroke="#E8F0F9" stroke-opacity=".45" stroke-width="10"/>
+      <line x1="600" y1="18" x2="600" y2="542" stroke="#C8102E" stroke-opacity=".7" stroke-width="10"/>
+      <circle cx="600" cy="280" r="120" fill="none" stroke="#C8102E" stroke-opacity=".55" stroke-width="4"/>
+      <circle cx="600" cy="280" r="7" fill="#E8F0F9" fill-opacity=".5"/>
+      <g fill="none" stroke="#C8102E" stroke-opacity=".45" stroke-width="3">
+        <circle cx="230" cy="160" r="70"/><circle cx="230" cy="400" r="70"/>
+        <circle cx="970" cy="160" r="70"/><circle cx="970" cy="400" r="70"/>
+      </g>
+      <g fill="#C8102E" fill-opacity=".55"><circle cx="230" cy="160" r="6"/><circle cx="230" cy="400" r="6"/><circle cx="970" cy="160" r="6"/><circle cx="970" cy="400" r="6"/></g>
+      <path d="M80 240 a40 40 0 0 1 0 80" fill="#E8F0F9" fill-opacity=".1" stroke="#C8102E" stroke-opacity=".5" stroke-width="3"/>
+      <path d="M1120 240 a40 40 0 0 0 0 80" fill="#E8F0F9" fill-opacity=".1" stroke="#C8102E" stroke-opacity=".5" stroke-width="3"/>
+    </svg>
+    <div class="wrap hero-split">
+      <div>
+        <span class="season label">2026–2027 Season</span>
+        <h1>Rinx <span>Hockey</span><br>Club</h1>
+        <p class="hero-lede">Travel Hockey • Long Island, New York</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="/schedule">Schedule</a>
+          <a class="btn btn-ghost" href="/roster">Roster</a>
+        </div>
+      </div>
+      <aside class="board" aria-label="Scoreboard: next games and last results">
+        <div class="board-team" data-team="10u">
+          <h2>10U <small>Squirts</small></h2>
+          <div class="board-line"><span class="label">Next game</span><p class="board-when num">Fri, Oct 9 · 5:05 PM</p><p class="board-what">vs Delco Phantoms</p><p class="board-meta">Hatfield Ice Arena · <a href="/mid-atlantic-fall-classic-schedule">Mid Atlantic Fall Classic schedule →</a></p></div>
+          <div class="board-line"><span class="label">Last result</span><p class="board-score"><b class="num">10–2</b><span class="badge-w" aria-label="Win">W</span></p><p class="board-meta">Long Beach Lightning · Sep 27, 2026</p></div>
+        </div>
+        <div class="board-team" data-team="14u">
+          <h2>14U <small>Bantam</small></h2>
+          <div class="board-line"><span class="label">Next game</span><p class="board-meta" style="grid-column:auto"><span data-placeholder="true" data-placeholder-type="other" data-placeholder-source="14U next game not in current/pages/index.json or GameSheet capture"><span class="placeholder-eyebrow">PLACEHOLDER · other</span><span class="placeholder-shape">e.g. vs Opponent · Sat, Oct 10 · 4:00 PM · venue</span></span></p></div>
+          <div class="board-line"><span class="label">Last result</span><p class="board-score"><b class="num">7–1</b><span class="badge-w" aria-label="Win">W</span></p><p class="board-meta">Peconic · reported Oct 3, 2026</p></div>
+        </div>
+      </aside>
+    </div>
+    <div class="stripe" aria-hidden="true"></div>
+  </section>
+
+  <section class="log" data-section="game-log" data-intent="prove form" data-layout="stack" data-items="6" aria-labelledby="log-h">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="log-h">Recent Results</h2></div>
+      <ol class="log-list">
+        <li class="log-row" data-game="2026-10-03-14u" data-team="14u">
+          <time class="log-date label" datetime="2026-10-03"><small>Reported</small>Oct 3</time>
+          <span class="chip">14U</span>
+          <div class="log-game">
+            <img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="36" height="36" loading="lazy">
+            <p class="opp">Peconic<span>The Rinx</span></p>
+            <p class="score num">7–1 <span class="badge-w" aria-label="Win">W</span></p>
+          </div>
+          <div class="log-story"><h3>14U Remains Undefeated</h3><p>14U powers through Peconic, winning 7-1 at the Rinx</p></div>
+        </li>
+        <li class="log-row" data-game="2026-09-27-10u" data-team="10u">
+          <time class="log-date label" datetime="2026-09-27">Sep 27</time>
+          <span class="chip">10U</span>
+          <div class="log-game">
+            <img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/0004c5_a.png" alt="" width="36" height="36" loading="lazy">
+            <p class="opp">Long Beach Lightning<span>The Rinx</span></p>
+            <p class="score num">10–2 <span class="badge-w" aria-label="Win">W</span></p>
+          </div>
+          <div class="log-story"><h3>10U Pours on the Goals</h3><p>10U overwhelmed Long Beach flooding the back of the net in a 10-2 victory</p></div>
+        </li>
+        <li class="log-row" data-game="2026-09-26-14u" data-team="14u">
+          <time class="log-date label" datetime="2026-09-26"><small>Reported</small>Sep 26</time>
+          <span class="chip">14U</span>
+          <div class="log-game">
+            <img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="36" height="36" loading="lazy">
+            <p class="opp">North Park</p>
+            <p class="score num">5–1 <span class="badge-w" aria-label="Win">W</span></p>
+          </div>
+          <div class="log-story"><h3>14U Keep Rolling</h3><p>14U takes the early lead and holds off North Park 5-1</p></div>
+        </li>
+        <li class="log-row" data-game="2026-09-21-14u" data-team="14u">
+          <time class="log-date label" datetime="2026-09-21"><small>Reported</small>Sep 21</time>
+          <span class="chip">14U</span>
+          <div class="log-game">
+            <span class="logo ini" aria-hidden="true">?</span>
+            <p class="opp"><span data-placeholder="true" data-placeholder-type="other" data-placeholder-source="Sep 21 opponent not in capture"><span class="placeholder-eyebrow">PLACEHOLDER · other</span><span class="placeholder-shape">e.g. opponent name</span></span></p>
+            <p class="score num"><span data-placeholder="true" data-placeholder-type="other" data-placeholder-source="Sep 21 tie score not in capture"><span class="placeholder-eyebrow">PLACEHOLDER · other</span><span class="placeholder-shape">e.g. 3–3</span></span> <span class="badge-t" aria-label="Tie">T</span></p>
+          </div>
+          <div class="log-story"><h3>Comeback Tie</h3><p>14U come back from behind in the 3rd to tie</p></div>
+        </li>
+        <li class="log-row" data-game="2026-09-20-10u" data-team="10u">
+          <time class="log-date label" datetime="2026-09-20">Sep 20</time>
+          <span class="chip">10U</span>
+          <div class="log-game">
+            <img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/002ee8_a.png" alt="" width="36" height="36" loading="lazy">
+            <p class="opp">North Park<span>The Rinx</span></p>
+            <p class="score num">13–0 <span class="badge-w" aria-label="Win">W</span></p>
+          </div>
+          <div class="log-story"><h3>10U Landslide Victory</h3><p>10U dominates North Park 56 SOG to 2, winning 13-0</p></div>
+        </li>
+        <li class="log-row" data-game="2026-09-13-10u" data-team="10u">
+          <time class="log-date label" datetime="2026-09-13">Sep 13</time>
+          <span class="chip">10U</span>
+          <div class="log-game">
+            <img class="logo" src="https://ranktech-cdn.s3.us-east-2.amazonaws.com/myhockey_prod/logos/00153e_a.png" alt="" width="36" height="36" loading="lazy">
+            <p class="opp">Peconic Wildcats<span>@ Peconic Ice Rink</span></p>
+            <p class="score num">8–2 <span class="badge-w" aria-label="Win">W</span></p>
+          </div>
+          
+        </li>
+        <li class="log-row log-note" data-game="2026-09-13-weekend">
+          <time class="log-date label" datetime="2026-09-13"><small>Reported</small>Sep 13</time>
+          <span class="chip chip-both">10U + 14U</span>
+          <div class="log-story"><h3>Clean Sweep</h3><p>10U and 14U sweep the weekend with 4 total wins</p></div>
+        </li>
+      </ol>
+      <p class="log-more"><a class="more" href="/schedule">10U full schedule →</a><a class="more" href="/schedule-14u">14U full schedule →</a></p>
+    </div>
+  </section>
+
+  <section class="club" data-section="club" data-intent="build trust" data-layout="split-media" data-media="image" data-items="4" aria-labelledby="club-h">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="club-h">About Our Team</h2></div>
+      <div class="club-grid">
+        <div class="mosaic">
+          <img src="https://www.rinxhockeyclub.com/images/4D0F41DF-57C2-45F0-A459-86825254D41B-720.webp" alt="Rinx Hockey Club" width="640" height="800" loading="lazy">
+          <img src="https://www.rinxhockeyclub.com/images/14u-720.webp" alt="Rinx Hockey Club" width="720" height="548" loading="lazy">
+          <img src="https://www.rinxhockeyclub.com/images/r1-720.webp" alt="Rinx Hockey Club" width="720" height="480" loading="lazy">
+        </div>
+        <div class="club-copy">
+          <h3>2026–2027 Rinx Hockey Club</h3>
+          <p>The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.</p>
+          <p>This season, our roster features dedicated players, led by an experienced coaching staff committed to skill development, teamwork, and competitive excellence. From the first whistle to the final buzzer, our Squirts play with heart, hustle, and Rinx pride.</p>
+        </div>
+      </div>
+      <h3 class="lineup-h">Coaching Staff</h3>
+      <ul class="lineup">
+        <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachdan.webp" alt="" width="96" height="96" loading="lazy"><h4>Dan O'Donoghue</h4><p>Head Coach • 10U Squirts</p></li>
+        <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachskillman.webp" alt="" width="96" height="96" loading="lazy"><h4>Greg Skillman</h4><p>Head Coach • 14U Bantam</p></li>
+        <li><img src="https://www.rinxhockeyclub.com/images/headshots/joecap.webp" alt="" width="96" height="96" loading="lazy"><h4>Joe Capozzoli</h4><p>Assistant Coach • 10U, 14U</p></li>
+        <li><img src="https://www.rinxhockeyclub.com/images/headshots/coachmazz.webp" alt="" width="96" height="96" loading="lazy"><h4>Jon Mazzarone</h4><p>Assistant Coach • 14U Bantam</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="facility" data-section="facility" data-intent="people and place" data-layout="split-media" data-media="image">
+    <div class="wrap">
+      <div class="facility-card">
+        <img src="https://www.rinxhockeyclub.com/media_1a149b94b09196c2bd3588a1d6303124591215985.webp?width=1200&amp;format=webply&amp;optimize=medium" alt="The Rinx — Hauppauge, NY" width="680" height="510" loading="lazy">
+        <div class="facility-body">
+          <div class="facility-head"><h2>Our Facility</h2><img src="https://www.rinxhockeyclub.com/icons/rinxlogo-140.webp" alt="The Rinx" width="72" height="72" loading="lazy"></div>
+          <p>Located at 660 Terry Road, Hauppauge, The Rinx features two full-size indoor NHL rinks, a pro shop, skate sharpening, and year-round programming on 97 acres of Hidden Pond Park.</p>
+          <p class="phone">Phone: <a href="tel:+16312323222">(631) 232-3222</a></p>
+          <a class="btn btn-navy" href="https://www.google.com/maps/search/The%20Rinx,%20660%20Terry%20Rd,%20Hauppauge,%20NY%2011788">Get Directions <span aria-hidden="true">Open in Maps →</span></a>
+          <p class="follow"><b>Follow Us on Instagram</b><a class="more" href="https://www.instagram.com/rinx10usquirts">@rinx10usquirts →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer on-navy" data-section="footer" data-intent="navigate" data-layout="stack">
+  <div class="wrap">
+    <img src="https://www.rinxhockeyclub.com/icons/rinx-header-128.webp" alt="Rinx Hockey Club" width="64" height="64" loading="lazy">
+    <p class="foot-name">Rinx Hockey Club • Long Island, NY</p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="/">Home</a><a href="/roster">Roster</a><a href="/schedule">Schedule</a><a href="/stats">Stats</a><a href="/tournaments">Tournaments</a><a href="/sponsors">Sponsors</a><a href="/clinics">Clinics</a><a href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a><a href="/contact">Contact</a>
+    </nav>
+    <small>The Rinx • 660 Terry Road, Hauppauge, NY 11788 • (631) 232-3222</small>
+    <small>© 2026 Rinx Hockey Club. All rights reserved.</small>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const t = document.getElementById('ds-nav-toggle'), b = document.querySelector('.ds-nav-burger');
+  const sync = () => b.setAttribute('aria-expanded', t.checked);
+  t.addEventListener('change', sync); sync();
+  b.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); } });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && t.checked) { t.checked = false; sync(); b.focus(); } });
+})();
+</script>
+</body>
+</html>

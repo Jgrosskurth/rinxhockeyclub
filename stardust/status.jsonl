@@ -1,0 +1,14 @@
+{"ts":"2026-10-07T03:08:33Z","skill":"stardust:uplift","phase":"setup","event":"end","detail":"hygiene applied; no prior extraction"}
+{"ts":"2026-10-07T03:08:33Z","skill":"stardust:uplift","phase":"1-extract","event":"start"}
+{"ts":"2026-10-07T03:16:29.742Z","skill":"stardust:uplift","phase":"1-extract","event":"end","detail":"1/1 pages live (playwright, medium 2500ms); 10 tensions","artifact":"stardust/current/brand-review.html"}
+{"ts":"2026-10-07T03:16:29.742Z","skill":"stardust:uplift","phase":"2-tensions","event":"start"}
+{"ts":"2026-10-07T03:20:16.453Z","skill":"stardust:uplift","phase":"2-tensions","event":"end","detail":"8 improvements, 8 candidates (3 disqualified)","artifact":"stardust/uplift-improvements.md"}
+{"ts":"2026-10-07T03:20:16.532Z","skill":"stardust:uplift","phase":"2.5-references","event":"end","detail":"partial: webfetch only, 1 usable reference"}
+{"ts":"2026-10-07T03:20:16.610Z","skill":"stardust:uplift","phase":"3-directions","event":"end","detail":"A faithful+8; B live-data; C kinetic-display rink","artifact":"stardust/direction.md"}
+{"ts":"2026-10-07T03:20:16.687Z","skill":"stardust:uplift","phase":"4-direct","event":"start"}
+{"ts":"2026-10-07T03:24:42.495Z","skill":"stardust:uplift","phase":"4-direct","event":"end","detail":"Mode A; DESIGN-A/B/C written; C register kinetic-display","artifact":"DESIGN-C.json"}
+{"ts":"2026-10-07T03:24:42.495Z","skill":"stardust:uplift","phase":"5-prototype","event":"start"}
+{"ts":"2026-10-07T04:22:00.093Z","skill":"stardust:uplift","phase":"5-prototype","event":"end","detail":"A, B, C rendered; all gates pass; C cinematic kinetic-display","artifact":"stardust/prototypes/"}
+{"ts":"2026-10-07T04:22:00.093Z","skill":"stardust:uplift","phase":"6-summary","event":"end"}
+{"ts":"2026-10-16T20:00:35Z","skill":"stardust:uplift","phase":"1-extract","event":"start","detail":"roster"}
+{"ts":"2026-10-16T20:04:30Z","skill":"stardust:uplift","phase":"1-extract","event":"end","detail":"roster: 1/1 live; 20 players, 2 coaches"}

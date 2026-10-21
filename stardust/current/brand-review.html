@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rinx Hockey Club · Current state brand review</title>
+<!-- _provenance: writtenBy stardust:extract · 2026-10-07 · reads PRODUCT.md, DESIGN.md, DESIGN.json, _brand-extraction.json, pages/index.json, _crawl-log.json -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400&display=swap">
+<style>
+:root{--primary:#c8102e;--primary-dark:#041e42;--accent:#c8102e;--secondary:#0a2d5e;--text:#041e42;--text-muted:#5b6170;--surface:#ffffff;--surface-alt:#e8f0f9;--border:#e5e7eb;--page:#f5f6f8;
+--display:"Barlow Condensed","Arial Narrow",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--body:"Barlow",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--text);font:16px/1.6 var(--body)}
+h1,h2,h3,h4,.badge,.pill,nav a,th,.label{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em}
+nav{position:sticky;top:0;z-index:5;background:var(--primary-dark);color:#fff;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;padding:10px 24px;font-size:12px;letter-spacing:1.5px;border-bottom:4px solid var(--primary)}
+nav strong{font-family:var(--display);font-size:15px;margin-right:16px;text-transform:uppercase}
+nav a{color:#fff;text-decoration:none;padding:4px 10px;border-radius:150px}nav a:hover{background:rgba(255,255,255,.18)}
+main{max-width:1200px;margin:0 auto;padding:0 24px 64px}
+section{padding:40px 0;border-bottom:1px solid var(--border)}
+h2{font-size:2.2rem;line-height:1;margin:0 0 20px;display:flex;align-items:center;gap:16px}
+h2::after{content:"";flex:1;height:3px;background:linear-gradient(90deg,var(--primary),transparent)}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;background:var(--primary-dark);color:#fff;margin-left:6px;vertical-align:middle;letter-spacing:.08em}
+.badge.inf{background:#7a6a00}.badge.syn{background:var(--secondary)}.badge.home{background:var(--primary)}
+.mast{background:var(--primary-dark);color:#fff;margin:0 -24px;padding:48px 24px 40px;border-bottom:6px solid var(--primary)}
+.mast h1{font-size:4rem;line-height:.95;margin:0}.mast h1 span{color:var(--primary)}
+.hero-line{color:#ff5a72;font-family:var(--display);font-size:1.3rem;text-transform:uppercase;margin:8px 0 0}
+.mast p{opacity:.85;max-width:760px}.mono{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+.row{display:flex;gap:16px;flex-wrap:wrap}.stat{flex:1;min-width:220px;background:var(--surface);border-radius:8px;padding:20px;box-shadow:0 2px 12px rgb(4 30 66 / 8%)}
+.stat b{font-family:var(--display);font-size:2rem;display:block}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.thumbs figure{margin:0;background:var(--surface);border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgb(4 30 66 / 8%)}
+.thumbs img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block}.thumbs figcaption{padding:10px 12px;font-size:14px}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.sw{background:var(--surface);border-radius:8px;padding:16px;min-height:200px;box-shadow:0 2px 12px rgb(4 30 66 / 8%)}
+.chip{width:96px;height:96px;border-radius:8px;border:1px solid var(--border);margin-bottom:10px}
+.sw .label{font-size:15px;display:block}.tag{display:inline-block;font-size:12px;background:var(--surface-alt);border-radius:4px;padding:1px 6px;margin:2px 2px 0 0}
+.spec{background:var(--surface);border-radius:8px;padding:16px 20px;margin-bottom:10px}
+.spec .mono{color:var(--text-muted);display:block;margin-bottom:4px}
+.voice{background:var(--surface-alt);border-radius:8px;padding:22px;margin-bottom:12px}
+table{border-collapse:collapse;width:100%;background:var(--surface);border-radius:8px;overflow:hidden}th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--border)}th{background:var(--primary-dark);color:#fff;font-size:13px}
+.pill{display:inline-block;background:var(--primary);color:#fff;border-radius:4px;padding:3px 10px;font-size:13px}
+.tensions{display:grid;grid-template-columns:1fr;gap:14px}@media(min-width:720px){.tensions{grid-template-columns:1fr 1fr}}
+.t{background:var(--surface);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:16px 18px}
+.t h4{margin:4px 0 6px;font-size:1.1rem}.t p{margin:0 0 6px;font-size:15px}.t footer{font-size:12px;color:var(--text-muted)}
+.t .badge{margin-left:0}
+.motifs{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+.m{background:var(--surface);border-radius:8px;padding:16px;text-align:center}.m div{width:72px;height:72px;margin:0 auto 10px;background:var(--primary-dark)}
+.comp li{border-left:3px solid var(--primary);background:var(--surface);padding:10px 14px;margin-bottom:8px;list-style:none}.comp{padding:0}
+.logo{display:flex;gap:32px;align-items:center;flex-wrap:wrap}.logo img{max-width:140px;background:#fff;border-radius:8px;padding:8px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0}dt{font-family:var(--display);text-transform:uppercase}dd{margin:0}
+.bars{display:flex;align-items:flex-end;gap:10px;height:90px;margin:12px 0}.bars span{width:36px;background:var(--primary-dark);color:#fff;font-size:11px;text-align:center;border-radius:4px 4px 0 0}
+.stripe{height:8px;background:linear-gradient(90deg,#c8102e 33%,#fff 33% 66%,#c8102e 66%);border-radius:2px}
+@media print{nav{position:static}section{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav><strong>Rinx Hockey Club · Current state</strong>
+<a href="#coverage">Coverage</a><a href="#pages">Pages</a><a href="#palette">Palette</a><a href="#type">Typography</a><a href="#voice">Voice</a><a href="#tensions">Tensions</a><a href="#motifs">Motifs</a><a href="#components">Components</a><a href="#system">System</a><a href="#logo">Logo</a><a href="#spacing">Spacing</a></nav>
+<main>
+<header class="mast">
+<h1>Rinx <span>Hockey</span> Club</h1>
+<p class="hero-line">Travel Hockey • Long Island, New York</p>
+<p>The Rinx Hockey Club is a premier Tier III Long Island travel hockey program dedicated to developing young athletes through competitive hockey, professional coaching, and a commitment to teamwork and sportsmanship.</p>
+<p class="mono">https://www.rinxhockeyclub.com/</p>
+</header>
+<div class="stripe"></div>
+
+<section id="coverage"><h2>Coverage</h2>
+<div class="row">
+<div class="stat"><b>1 / 1</b>Page extracted (--single, homepage only). Every cross-page field is <span class="badge home">home-only</span>.</div>
+<div class="stat"><b>medium · 2,500 ms</b>Wait strategy. Headless render, HTTP 200, full-page screenshot, plus a mobile 390px viewport.</div>
+<div class="stat"><b>8 colors · 2 families</b>Palette after clustering, Barlow Condensed + Barlow, 14 images, 1 inline SVG (the rink), 0 iframes.</div>
+</div>
+<p style="color:var(--accent)">The Instagram embed (Elfsight) rendered as empty gray tiles during capture. See Tensions.</p>
+<p class="mono">Source: _crawl-log.json · pages/index.json · .work/probe.json</p></section>
+
+<section id="pages"><h2>Pages <span class="badge home">home-only</span></h2>
+<div class="thumbs">
+<figure><img src="assets/screenshots/index.png" alt="Homepage at 1440px"><figcaption>Rinx Hockey Club | Long Island - Tier III Travel Hockey · <span class="mono">/</span></figcaption></figure>
+<figure><img src="assets/screenshots/index-mobile.png" alt="Homepage at 390px"><figcaption>Mobile viewport 390px · <span class="mono">/</span></figcaption></figure>
+</div></section>
+
+<section id="palette"><h2>Color palette <span class="badge home">home-only</span></h2>
+<div class="swatches">
+<div class="sw"><div class="chip" style="background:#041e42"></div><span class="label">Primary · Rink navy</span><span class="mono">#041E42</span><br>2,095 occ.<br><span class="tag">background</span><span class="tag">text</span><span class="tag">border</span><span class="tag">fill</span><span class="tag">stroke</span><br><small>header, hero, footer, headings</small></div>
+<div class="sw"><div class="chip" style="background:#c8102e"></div><span class="label">Accent · Rinx red</span><span class="mono">#C8102E</span><br>198 occ.<br><span class="tag">background</span><span class="tag">text</span><span class="tag">border</span><span class="tag">fill</span><br><small>Shop Gear, season pill, card rules</small></div>
+<div class="sw"><div class="chip" style="background:#f5f6f8"></div><span class="label">Background</span><span class="mono">#F5F6F8</span><br>body<br><span class="tag">background</span></div>
+<div class="sw"><div class="chip" style="background:#fff"></div><span class="label">Surface</span><span class="mono">#FFFFFF</span><br>2,706 occ.<br><span class="tag">background</span><span class="tag">text</span><br><small>cards, nav text</small></div>
+<div class="sw"><div class="chip" style="background:#6b7280"></div><span class="label">Text secondary</span><span class="mono">#6B7280</span><br>1,209 occ.<br><span class="tag">text</span><br><small>paragraphs, dates, locations</small></div>
+<div class="sw"><div class="chip" style="background:#e8f0f9"></div><span class="label">Surface alt · Ice</span><span class="mono">#E8F0F9</span><br>605 occ.<br><span class="tag">background</span><br><small>Recent Results band</small></div>
+<div class="sw"><div class="chip" style="background:#16a34a"></div><span class="label">Success · Win green</span><span class="mono">#16A34A</span><br>18 occ.<br><span class="tag">background</span><span class="tag">border</span><br><small>result cards only</small></div>
+<div class="sw"><div class="chip" style="background:#e5e7eb"></div><span class="label">Border</span><span class="mono">#E5E7EB</span><br>3 occ.<br><span class="tag">background</span><br><small>carousel dots</small></div>
+</div>
+<p class="mono">Source: _brand-extraction.json § palette. Gold #FFD700 is defined as a token and never painted.</p></section>
+
+<section id="type"><h2>Typography <span class="badge home">home-only</span> <span class="badge syn">No modular scale</span></h2>
+<div class="spec"><span class="mono">H1 · Barlow Condensed 900 / 72px / 0.95 / +1.44px · uppercase</span><span style="font:900 72px/.95 var(--display);text-transform:uppercase">Rinx <span style="color:var(--primary)">Hockey</span> Club</span></div>
+<div class="spec"><span class="mono">H2 · Barlow Condensed 900 / 35.2px / 1.0 / +1.06px</span><span style="font:900 35.2px/1 var(--display);text-transform:uppercase">Recent Results</span></div>
+<div class="spec"><span class="mono">H3 · Barlow Condensed 900 / 22.4px / 1.0 (about) · 800 / 20–20.8px (cards, columns)</span><span style="font:800 20px/1.2 var(--display);text-transform:uppercase">14U Remains Undefeated</span></div>
+<div class="spec"><span class="mono">H4 · Barlow Condensed 800 / 16.8px / +0.84px</span><span style="font:800 16.8px/1 var(--display);text-transform:uppercase">Dan O'Donoghue</span></div>
+<div class="spec"><span class="mono">Body · Barlow 400 / 15.2px / 1.7 · #6B7280</span><p style="margin:0;color:#6b7280;font-size:15.2px;line-height:1.7">The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.</p></div>
+<p class="mono">Source: _brand-extraction.json § type. Scale 72 → 35.2 → 22.4 → 20.8 → 16.8 (ratios 2.05, 1.57, 1.08, 1.24).</p></section>
+
+<section id="voice"><h2>Voice <span class="badge inf">inferred: proud, sports-page</span></h2>
+<div class="voice"><span class="label">Hero headline</span><br><b style="font:900 1.8rem var(--display);text-transform:uppercase">Rinx Hockey Club</b></div>
+<div class="voice"><span class="label">Tagline</span><br>Travel Hockey • Long Island, New York</div>
+<div class="voice"><span class="label">First paragraph</span><br>The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area… From the first whistle to the final buzzer, our Squirts play with heart, hustle, and Rinx pride.</div>
+<table><tr><th>CTA label</th><th>Count</th></tr>
+<tr><td><span class="pill">Shop Gear</span></td><td>2</td></tr><tr><td><span class="pill">Tournaments</span></td><td>2</td></tr><tr><td><span class="pill">Clinics</span></td><td>2</td></tr><tr><td><span class="pill">Contact</span></td><td>2</td></tr><tr><td><span class="pill">View Full Schedule →</span></td><td>1</td></tr><tr><td><span class="pill">Get Directions</span></td><td>1</td></tr></table>
+<div class="row" style="margin-top:16px"><div class="stat"><b>100%</b>Headings uppercase</div><div class="stat"><b>17</b>Distinct headings</div><div class="stat"><b>17</b>Distinct CTA labels</div></div>
+<p class="mono">Source: _brand-extraction.json § voice, voiceTable. Repeated-heading list omitted (single page).</p></section>
+
+<section id="tensions"><h2>Tensions</h2>
+<div class="tensions">
+<div class="t"><span class="badge">T-scale</span> <span class="badge syn">synthesized</span><h4>Type scale is ad-hoc</h4><p>72 → 35.2 → 22.4 → 20.8 → 16.8, no consistent ratio. Direct will need to decide whether the target adopts a modular scale.</p><footer>Source: _brand-extraction.json § type.scaleAudit</footer></div>
+<div class="t"><span class="badge">T-logo-variants</span><h4>Two marks, one variant each</h4><p>The header uses the shield crest (webp 128). The hero and footer use a different round "The Rinx" badge (webp 140). No SVG, monochrome or inverted variant was found. Direct should pick one primary mark and plan variants.</p><footer>Source: _brand-extraction.json § logo</footer></div>
+<div class="t"><span class="badge">T-color-imbalance</span><h4>Ice #E8F0F9 is background only</h4><p>Used for the one Recent Results band and never as a border, text or fill. Direct will need to decide whether to drop it, expand it, or keep it as a zone color.</p><footer>Source: _brand-extraction.json § palette[surface-alt].usedAs</footer></div>
+<div class="t"><span class="badge">T-color-imbalance</span><h4>Border #E5E7EB is background only</h4><p>Appears only as the inactive carousel dots (3×). It is never used as a border.</p><footer>Source: _brand-extraction.json § palette[border].usedAs</footer></div>
+<div class="t"><span class="badge">T-contrast</span> <span class="badge inf">measured</span><h4>Four text pairs fail WCAG AA</h4><p>Red #C8102E on navy (header subtitle, 11px): 2.81:1. White on win green #16A34A (W badge): 3.30:1. Gray #6B7280 on ice (result location): 4.20:1. Gray on off-white: 4.47:1.</p><footer>Source: .work/probe.json computed colors</footer></div>
+<div class="t"><span class="badge">T-weight-unloaded</span> <span class="badge inf">measured</span><h4>Weight 800 requested, never loaded</h4><p>H3/H4 ask for 800, but the Google Fonts request loads only 700/900. Card titles render at the 900 face, so they weigh the same as the H2s.</p><footer>Source: head.html font link · computed h3/h4</footer></div>
+<div class="t"><span class="badge">T-embed-empty</span> <span class="badge inf">observed</span><h4>Instagram section renders empty</h4><p>The Elfsight widget leaves 644px of gray tiles plus a "Free Instagram Feed Widget" badge. That is about 18% of the page height with no content.</p><footer>Source: screenshot index.png · probe igInfo</footer></div>
+<div class="t"><span class="badge">T-hero-no-action</span> <span class="badge inf">observed</span><h4>560px hero carries no action</h4><p>Badge logo, season pill, wordmark and lede, with no link to the next game, schedule, roster or tryouts. The first CTA ("View Full Schedule") sits about 1,300px down.</p><footer>Source: pages/index.json ctas · screenshot</footer></div>
+<div class="t"><span class="badge">T-signature-buried</span> <span class="badge inf">observed</span><h4>The rink diagram is painted over</h4><p>hero.js draws a full rink (red line, blue lines, 5 faceoff circles, creases), then lays an 88% navy rectangle on top. The brand's most distinctive asset reads as faint lines.</p><footer>Source: blocks/hero/hero.js · screenshot</footer></div>
+<div class="t"><span class="badge">T-copy-scope</span> <span class="badge inf">observed</span><h4>About copy speaks for 10U only</h4><p>"The Rinx 10U Squirts travel hockey team…" sits under "2026–2027 Rinx Hockey Club", while the nav, news and results cover both 10U and 14U.</p><footer>Source: pages/index.json body[8]</footer></div>
+</div></section>
+
+<section id="motifs"><h2>Motifs <span class="badge home">home-only</span></h2>
+<div class="motifs">
+<div class="m"><div style="border-radius:50%"></div>50% · 16×<br><small>avatars, dots, arrows</small></div>
+<div class="m"><div style="border-radius:8px"></div>8px · 15×<br><small>cards</small></div>
+<div class="m"><div style="border-radius:4px"></div>4px · 12×<br><small>buttons, tabs, pills</small></div>
+<div class="m"><div style="border-radius:10px"></div>10px · 9×<br><small>result cards</small></div>
+<div class="m"><div style="border-radius:6px"></div>6px · 4×</div>
+<div class="m"><div style="background:#fff;box-shadow:0 2px 12px rgb(4 30 66 / 8%)"></div>Card shadow · 12×</div>
+<div class="m"><div style="background:linear-gradient(90deg,#c8102e 33%,#fff 33% 66%,#c8102e 66%);border:1px solid var(--border)"></div>Red-white-red stripe</div>
+</div><p class="mono">Source: _brand-extraction.json § motifs</p></section>
+
+<section id="components"><h2>Components <span class="badge home">home-only</span></h2>
+<ul class="comp">
+<li><b>rink-diagram-hero</b>: inline SVG rink under an 88% navy overlay, badge logo, season pill, wordmark</li>
+<li><b>card-carousel</b>: 6 news cards, 3 visible, red top rule, GAME UPDATE pill, arrows + dots</li>
+<li><b>scoreline-cards</b>: 3 result cards, green top rule, opponent logo, score, W badge, 10U/14U tabs</li>
+<li><b>section-title-with-rule</b>: H2 + red→transparent rule</li>
+<li><b>photo-strip-3up</b>: about card with 3 team photos</li>
+<li><b>staff-list-bars</b>: 4 navy bars with 64px round headshots</li>
+<li><b>facility-card</b>: photo, address copy, phone, navy Get Directions bar</li>
+<li><b>embed-feed</b>: Elfsight Instagram (empty at capture)</li>
+</ul></section>
+
+<section id="system"><h2>System components <span class="badge home">home-only</span></h2>
+<ul class="comp">
+<li><span class="badge">header</span> navy bar with crest, RINX HOCKEY CLUB, red subtitle "TIER III/A • TRAVEL HOCKEY • LIAHL". CTAs: Home · Roster + · Schedule + · Stats + · Standings + · Tournaments · Sponsors · Clinics · Contact · <span class="pill">Shop Gear</span></li>
+<li><span class="badge">footer</span> navy, centered roundel, "RINX HOCKEY CLUB • LONG ISLAND, NY", 9 links, address + phone, copyright</li>
+</ul></section>
+
+<section id="logo"><h2>Logo &amp; favicon</h2>
+<div class="logo"><img src="assets/logo.webp" alt="Header crest"><img src="assets/logo-hero-roundel.webp" alt="Hero roundel"><img src="assets/favicon.png" alt="Favicon" style="max-width:64px">
+<dl><dt>Source</dt><dd>header img (crest); hero .hero-logo (roundel)</dd><dt>File</dt><dd>webp 128×128 (crest) · webp 140×138 (roundel) · png favicon</dd><dt>Variants captured</dt><dd>full-color crest, full-color roundel</dd><dt>Variants not captured</dt><dd>SVG, monochrome, inverted</dd></dl></div></section>
+
+<section id="spacing"><h2>Spacing &amp; shape <span class="badge home">home-only</span></h2>
+<p>Base unit 8px · section padding 40px · container 1200px · grid gap 24px</p>
+<div class="bars"><span style="height:16px">8</span><span style="height:32px">16</span><span style="height:36px">18</span><span style="height:48px">24</span><span style="height:64px">32</span><span style="height:80px">40</span></div>
+<p>Radii revisited: <span class="tag">2px</span><span class="tag">4px</span><span class="tag">6px</span><span class="tag">8px</span><span class="tag">10px</span><span class="tag">50%</span></p></section>
+
+<section><p>Read: PRODUCT.md, DESIGN.md, DESIGN.json, _brand-extraction.json, pages/index.json, _crawl-log.json, assets/screenshots/*. <b>What's next:</b> /stardust:direct. Badges: observed · home-only · cross-page · inferred · synthesized.</p></section>
+</main>
+</body>
+</html>

@@ -1,0 +1,207 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:direct",
+    "writtenAt": "2026-10-07T03:24:18.265Z",
+    "variant": "A",
+    "readArtifacts": [
+      "stardust/direction.md",
+      "stardust/uplift-improvements.md",
+      "stardust/current/_brand-extraction.json",
+      "DESIGN-A.md"
+    ],
+    "note": "Shared site system = variant A baseline; per-variant deltas live in DESIGN-{A,B,C}.json. Multi-variant render keys off DESIGN-<id>.json presence."
+  },
+  "schemaVersion": 2,
+  "colorMeta": {
+    "rink-navy": {
+      "role": "primary ground + headings",
+      "displayName": "Rink Navy"
+    },
+    "rinx-red": {
+      "role": "accent: CTAs, rules, center line",
+      "displayName": "Rinx Red"
+    },
+    "ice": {
+      "role": "small text on navy; zone band",
+      "displayName": "Ice"
+    },
+    "slate-text": {
+      "role": "body text",
+      "displayName": "Slate",
+      "refinedFrom": "#6B7280"
+    },
+    "win-green": {
+      "role": "W badge",
+      "displayName": "Win Green",
+      "refinedFrom": "#16A34A"
+    }
+  },
+  "extensions": {
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 2px 12px rgb(4 30 66 / 8%)"
+      },
+      {
+        "name": "card-hover",
+        "value": "0 8px 24px rgb(4 30 66 / 15%)"
+      }
+    ],
+    "breakpoints": {
+      "tablet": "600px",
+      "desktop": "900px",
+      "wide": "1200px"
+    },
+    "divergence": {
+      "toolkit_version": "v1.0 (stardust v2)",
+      "mode": "A (brand-faithful) + A+ refinements",
+      "seed": {
+        "input": "Rinx Hockey Club|2026-10-07",
+        "decade": "1990s",
+        "craft": "Tailor's pattern paper",
+        "register": "Tabloid",
+        "ground_family": "monochrome-tint",
+        "picked_by": "deterministic (research partial: webfetch returned 1 usable reference, no anchors implying dimensions)",
+        "overrides": [
+          {
+            "dimension": "ground_family",
+            "override": "brand-faithful",
+            "note": "captured ground #F5F6F8 (cool pale gray) wins; monochrome-tint informs the alt-section surface → ice #E8F0F9"
+          }
+        ],
+        "interpretation": {
+          "decade": "1990s → restrained: hockey-card / broadcast-graphic numerals for scorelines; no grunge",
+          "craft": "Tailor's pattern paper → rink drawn as a measured technical line drawing (stroke geometry, dimension-like hairlines)",
+          "register": "Tabloid → bold sports-page headline voice, matches captured \"14U Remains Undefeated\""
+        }
+      },
+      "font_deck": {
+        "name": "brand-inherited",
+        "picked_by": "user-constraint"
+      },
+      "palette": {
+        "source": "inherited from _brand-extraction.json",
+        "picked_by": "user-constraint"
+      },
+      "brand_faithful_inversions": [
+        {
+          "item": "pure white #FFFFFF retained as card surface",
+          "reason": "captured surface color; descriptive fidelity"
+        },
+        {
+          "item": "role renaming",
+          "reason": "primary/secondary → rink-navy / rinx-red (brand-native names per toolkit § 4)"
+        }
+      ],
+      "brand_adjacent_refinements": [
+        {
+          "kind": "single-role-recolor",
+          "captured": "#6B7280 (text-secondary)",
+          "replacement": "#4B5563",
+          "evidence": "4.47:1 on #F5F6F8, 4.20:1 on #E8F0F9 (probe)",
+          "improvementsItem": 4
+        },
+        {
+          "kind": "single-role-recolor",
+          "captured": "#16A34A (success)",
+          "replacement": "#15803D",
+          "evidence": "white text 3.30:1 on #16A34A (W badge)",
+          "improvementsItem": 4
+        }
+      ],
+      "anti_toolbox_count": 1,
+      "anti_toolbox_hits": [
+        {
+          "move": "UPPERCASE condensed sans as the primary display register",
+          "justification": "Captured brand surface: Barlow Condensed uppercase is 100% of the live site's headings and the club wordmark. Mode A pins it; removing it would be a rebrand."
+        }
+      ],
+      "off_toolbox_moves": [
+        {
+          "move": "Rink-geometry structural motif",
+          "basis": "blocks/hero/hero.js rink SVG (center line, blue lines, faceoff circles, creases): exists only for this hockey club"
+        }
+      ],
+      "audit_adjustments": [],
+      "references_used": [
+        {
+          "tier": "webfetch (partial)",
+          "ref": "https://www.nhl.com/bluejackets/",
+          "use": "game recap promoted to module 2. Supports results-near-top (improvements #2)."
+        }
+      ]
+    },
+    "componentStyle": {
+      "buttons": {
+        "primary": "rinx-red fill, white label type, 4px",
+        "secondary": "navy fill, ice label type, 4px"
+      },
+      "cards": "white, 8px, card shadow, optional 4px red top rule",
+      "inputs": null,
+      "dualCTAPattern": "primary-then-secondary"
+    },
+    "systemComponentRoles": {
+      "header": {
+        "purpose": "brand + nav + Shop Gear",
+        "position": "top, navy"
+      },
+      "footer": {
+        "purpose": "mark, nav, address/phone",
+        "position": "bottom, navy"
+      }
+    },
+    "voice": {
+      "do": [
+        "Tabloid sports-page heads from real results (\"14U Remains Undefeated\")",
+        "Plain facts: date · opponent · score · venue",
+        "Name both teams: 10U Squirts, 14U Bantam"
+      ],
+      "dont": [
+        "Invented records or stat bars",
+        "Editorial vocabulary (journal, dispatches)",
+        "Exclamation-point hype"
+      ]
+    },
+    "iaPriorities": [
+      {
+        "signal": "season-results",
+        "evidence": "pages/index.json headings: news slider (6 Game Update cards) + Recent Results (10U/14U scorelines)",
+        "preserveAs": "above-the-fold-adjacent",
+        "scope": "home",
+        "mutability": "movable"
+      },
+      {
+        "signal": "commercial-conversion",
+        "evidence": "header CTA \"Shop Gear\" → rinxspring2026.itemorder.com (red pill, only filled CTA in the header)",
+        "preserveAs": "header-persistent",
+        "scope": "site-wide",
+        "mutability": "movable"
+      },
+      {
+        "signal": "audience-routing",
+        "evidence": "nav: Roster/Schedule/Stats/Standings dropdowns per team (10U Squirts, 14U Bantam)",
+        "preserveAs": "both-teams-equal",
+        "scope": "site-wide",
+        "mutability": "movable"
+      },
+      {
+        "signal": "place-wayfinding",
+        "evidence": "facility card: 660 Terry Road, Hauppauge · (631) 232-3222 · Get Directions",
+        "preserveAs": "present-on-home",
+        "scope": "home",
+        "mutability": "movable"
+      }
+    ],
+    "density": "balanced (hands-off default: multi-audience floor fired, >5 sections)",
+    "iaFidelity": "reimagined (phrase: \"what if\")"
+  },
+  "narrative": {
+    "northStar": "Home Ice",
+    "overview": "The club families know, with the eight measured fixes applied.",
+    "rules": [
+      "Ice-on-navy: small text on navy is ice, never red",
+      "Real or placeholder: no invented data",
+      "Both teams always visible"
+    ]
+  }
+}

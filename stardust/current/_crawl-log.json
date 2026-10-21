@@ -1,0 +1,30 @@
+{
+  "discovery": {
+    "fetchTechnique": "headless",
+    "count": 1,
+    "concurrency": 4
+  },
+  "consent": {
+    "method": "auto"
+  },
+  "favicon": {
+    "url": "https://www.rinxhockeyclub.com/icons/rinxlogo.png",
+    "file": "assets/favicon.png"
+  },
+  "crawl": {
+    "failures": []
+  },
+  "visionCheck": [
+    {
+      "slug": "index",
+      "verdict": "ok",
+      "notes": "Rendered fully; hero, carousel, results, about, staff, facility, footer visible. Instagram embed renders empty grey tiles (third-party widget), recorded as tension not capture failure. Supplementary computed-style probe + 390px mobile screenshot taken (.work/probe.mjs, same recipe)."
+    }
+  ],
+  "siblingCandidates": [],
+  "userChoice": "--single (uplift)",
+  "captureGaps": {
+    "roots": [],
+    "detail": "uncaptured first-level targets: none (no locale root captured)"
+  }
+}

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- stardust:provenance
+  writtenBy: stardust:prototype (via impeccable craft) · writtenAt: 2026-10-16T20:50:49.383Z
+  page: roster · variant: C (cinematic) · pageUrl: https://www.rinxhockeyclub.com/roster
+  againstDirection: stardust/direction.md (roster, Active 2026-10-16T19:45:00Z) · brief: stardust/prototypes/roster-C-shape.md
+  canon: tokens + header/footer from stardust/prototypes/index-A-proposed.html, header patched to the live nav (Awards) + champions banner
+  readArtifacts: [stardust/current/pages/roster.json, stardust/current/pages/roster.html, stardust/.work/roster-data.json, DESIGN-C.md, DESIGN-C.json, PRODUCT.md]
+  fontDeck: brand-inherited (Barlow Condensed + Barlow) · reflexRejectAudit: { bypassed: "Mode A pinned families" }
+  dataSources: [roster.plain.html (names, numbers, positions, photos), data/stats-lihockey-10u.json, data/stats-mid-atlantic.json]
+  unsourcedContent: []
+  motion: { register: kinetic-display, registerSource: heuristic, runtime: "roster kinetic-display runtime (Lenis + per-digit split-flap + per-card clip wipes)", attributesEmitted: [data-flip, data-wipe, ".kd", ".sign-head .word"] }
+  stardustVersion: 0.10.0
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10U Squirts Roster | Rinx Hockey Club</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<meta name="description" content="The Rinx Hockey Club is a premier Tier III Long Island travel hockey program dedicated to developing young athletes through competitive hockey, professional coaching, and a commitment to teamwork and sportsmanship.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400&display=swap">
+<script>document.documentElement.classList.add('js-anim');addEventListener('load',()=>{if(!window.__kdReady)document.documentElement.classList.remove('js-anim');});</script>
+<link rel="stylesheet" href="lenis.min.css">
+<noscript><style>.kd > *, .word { clip-path: none !important; transform: none !important; } .count { transform: none !important; }</style></noscript>
+<style>
+:root {
+  /* typography: DESIGN-A.md typography.display / body */
+  --heading-font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body-font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* perfect-fourth ladder 72 / 54 / 40 / 30 / 22 / 17 */
+  --heading-xxl: 72px;
+  --heading-xl: 54px;
+  --heading-lg: 40px;
+  --heading-md: 30px;
+  --heading-sm: 22px;
+  --body: 17px;
+  --body-sm: 15px;
+  --label: 14px;
+  --line-height-heading: 0.95;
+  --line-height-body: 1.6;
+  /* arena-gray */
+  --color-bg: #F5F6F8;
+  /* rink-navy */
+  --color-fg: #041E42;
+  /* rinx-red */
+  --color-accent: #C8102E;
+  --rink-navy: #041E42;
+  --rink-navy-raised: #0A2D5E;
+  --rinx-red: #C8102E;
+  --rinx-red-deep: #A00D24;
+  --ice: #E8F0F9;
+  --boards-white: #FFFFFF;
+  --slate-text: #4B5563;
+  --line-gray: #E5E7EB;
+  --win-green: #15803D;
+  --surface-alt: #E8F0F9;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 64px;
+  --section-padding: 64px;
+  --max-width: 1200px;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow-card: 0 2px 12px rgb(4 30 66 / 8%);
+  --shadow-card-hover: 0 8px 24px rgb(4 30 66 / 15%);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* nav burger base rule sits above every @media (mobile-nav-collapse § Source order) */
+.ds-nav-burger { display: none; }
+.ds-nav-toggle { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; hanging-punctuation: first; }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font: var(--body)/var(--line-height-body) var(--body-font-family); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4 { font-family: var(--heading-font-family); text-transform: uppercase; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.wrap { width: min(100% - 2 * var(--spacing-lg), var(--max-width)); margin-inline: auto; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; background: var(--ice); color: var(--rink-navy); padding: 10px 16px; border-radius: var(--radius-sm); font: 700 var(--label)/1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .1em; }
+.skip:focus { top: 8px; }
+:focus-visible { outline: 3px solid var(--rinx-red); outline-offset: 3px; }
+.on-navy :focus-visible { outline-color: var(--ice); }
+.label { font: 700 var(--label)/1.2 var(--heading-font-family); text-transform: uppercase; letter-spacing: .12em; }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 14px 24px; border-radius: var(--radius-sm); font: 700 var(--label)/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background-color .18s var(--ease-out), color .18s var(--ease-out), transform .18s var(--ease-out); }
+.btn-primary { background: var(--rinx-red); color: var(--boards-white); }
+.btn-primary:hover { background: var(--rinx-red-deep); }
+.btn-ghost { background: transparent; color: var(--ice); box-shadow: inset 0 0 0 2px var(--ice); }
+.btn-ghost:hover { background: var(--ice); color: var(--rink-navy); }
+.btn-navy { background: var(--rink-navy); color: var(--ice); }
+.btn-navy:hover { background: var(--rink-navy-raised); }
+.btn:active { transform: translateY(1px); }
+.more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--rinx-red-deep); text-decoration: none; font: 700 var(--label)/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; }
+.more:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* section heads: captured section-title-with-rule */
+.sec-head { display: flex; align-items: center; gap: var(--spacing-lg); margin-bottom: var(--spacing-xl); }
+.sec-head h2 { font-size: clamp(36px, 4vw, var(--heading-xl)); font-weight: 900; line-height: var(--line-height-heading); letter-spacing: .02em; flex: none; }
+.sec-head::after { content: ""; flex: 1; height: 28px; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2028%2028%22%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2214%22%20r%3D%2211%22%20fill%3D%22none%22%20stroke%3D%22%23C8102E%22%20stroke-width%3D%222.5%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2214%22%20r%3D%223.5%22%20fill%3D%22%23C8102E%22%2F%3E%3C%2Fsvg%3E") left center / 28px 28px no-repeat, linear-gradient(90deg, var(--rinx-red), rgb(200 16 46 / 0)) 28px 50% / 100% 3px no-repeat; }
+
+/* ---------- header ---------- */
+.site-header { background: var(--rink-navy); color: var(--boards-white); border-bottom: 4px solid var(--rinx-red); position: relative; z-index: 20; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-lg); min-height: 80px; }
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand img { width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--boards-white); padding: 3px; }
+.brand-name { display: block; font: 900 22px/1 var(--heading-font-family); letter-spacing: .03em; text-transform: uppercase; }
+.brand-sub { display: block; margin-top: 4px; color: var(--ice); font: 700 12px/1 var(--heading-font-family); letter-spacing: .14em; text-transform: uppercase; }
+.ds-nav { display: flex; align-items: center; gap: 2px; }
+.ds-nav > a, .ds-nav summary { display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 11px; border-radius: var(--radius-sm); color: var(--boards-white); text-decoration: none; font: 700 15px/1 var(--heading-font-family); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; list-style: none; }
+.ds-nav summary::-webkit-details-marker { display: none; }
+.ds-nav summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid var(--ice); border-bottom: 2px solid var(--ice); transform: translateY(-2px) rotate(45deg); transition: transform .18s var(--ease-out); }
+.ds-nav details[open] summary::after { transform: translateY(1px) rotate(-135deg); }
+.ds-nav > a:hover, .ds-nav summary:hover, .ds-nav > a[aria-current] { background: var(--rink-navy-raised); }
+.ds-nav details { position: relative; }
+.ds-nav details > div { position: absolute; top: calc(100% + 6px); left: 0; min-width: 180px; background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card-hover); padding: 6px; }
+.ds-nav details > div a { display: block; padding: 12px 14px; border-radius: var(--radius-sm); color: var(--rink-navy); text-decoration: none; font: 700 15px/1 var(--heading-font-family); letter-spacing: .06em; text-transform: uppercase; }
+.ds-nav details > div a:hover { background: var(--ice); }
+.ds-nav .nav-shop { margin-left: 10px; background: var(--rinx-red); }
+.ds-nav .nav-shop:hover { background: var(--rinx-red-deep); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; background: var(--rink-navy); color: var(--boards-white); overflow: hidden; }
+.hero-rink { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-body { position: relative; padding-block: clamp(56px, 9vw, 104px) clamp(40px, 6vw, 64px); }
+.season { display: inline-block; background: var(--rinx-red); color: var(--boards-white); padding: 7px 12px; border-radius: var(--radius-sm); }
+.hero h1 { margin-top: var(--spacing-lg); font-size: clamp(48px, 7.4vw, var(--heading-xxl)); font-weight: 900; line-height: .9; letter-spacing: .01em; }
+.hero h1 span { color: var(--rinx-red); }
+.hero-lede { margin-top: var(--spacing-md); font-size: clamp(17px, 2vw, 22px); color: var(--ice); max-width: 36ch; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--spacing-xl); }
+.rail { position: relative; background: var(--rink-navy-raised); border-top: 1px solid rgb(232 240 249 / 16%); }
+.rail .wrap { display: grid; grid-template-columns: 1fr; }
+.rail-cell { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: baseline; padding: 20px 0; }
+.rail-cell + .rail-cell { border-top: 1px solid rgb(232 240 249 / 16%); }
+.rail-team { grid-row: span 2; color: var(--ice); font: 900 var(--heading-md)/1 var(--heading-font-family); letter-spacing: .02em; }
+.rail-team small { display: block; margin-top: 6px; font: 700 12px/1 var(--heading-font-family); letter-spacing: .14em; }
+.rail-what { font: 700 var(--heading-sm)/1.1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .03em; }
+.rail-what .label { color: var(--ice); margin-right: 10px; font-size: 14px; }
+.rail-meta { color: var(--ice); font-size: var(--body-sm); }
+.rail-meta a { color: var(--boards-white); text-underline-offset: 3px; }
+.stripe { height: 8px; background: linear-gradient(90deg, var(--rinx-red) 33.33%, var(--boards-white) 33.33% 66.66%, var(--rinx-red) 66.66%); }
+
+/* placeholder signature (proposed-file-shell § PLACEHOLDER) */
+[data-placeholder] { display: inline-flex; flex-direction: column; gap: 3px; padding: 6px 10px; outline: 2px dashed var(--color-accent); outline-offset: 0; background: rgb(232 240 249 / 96%); color: var(--rink-navy); border-radius: var(--radius-sm); vertical-align: middle; }
+.placeholder-eyebrow { font: 700 12px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; color: var(--rinx-red-deep); }
+.placeholder-shape { font: 400 12px/1.2 var(--body-font-family); text-transform: none; letter-spacing: 0; }
+
+
+/* caption step (DESIGN.md type ramp: 12px) */
+:root { --caption: 12px; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ds-nav > a, .ds-nav summary, .brand-sub { white-space: nowrap; }
+/* live header runs full width: the 11-item nav needs it */
+.site-header .wrap { width: min(100% - 48px, 1392px); }
+.brand { flex: none; }
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .ds-nav > a, .ds-nav summary { padding: 0 6px; letter-spacing: .05em; }
+}
+/* ---------- champions banner (live site chrome) ---------- */
+.promo { background: var(--rink-navy-raised); color: var(--boards-white); border-bottom: 1px solid rgb(232 240 249 / 14%); }
+.promo .wrap { display: flex; align-items: center; gap: 14px; min-height: 64px; padding-block: 8px; }
+.promo img { width: 26px; height: auto; }
+.promo p { flex: 1; font: 900 var(--body)/1.1 var(--heading-font-family); text-transform: uppercase; letter-spacing: .04em; }
+.promo strong { display: inline-block; margin-left: 4px; padding: 3px 8px 2px; border-radius: var(--radius-sm); background: var(--rinx-red); color: var(--boards-white); }
+.promo .btn { min-height: 40px; padding: 10px 16px; }
+
+/* ---------- roster page ---------- */
+.page-head { padding-block: var(--spacing-xl) var(--spacing-lg); }
+.page-head h1 { font-size: var(--heading-xl); font-weight: 900; line-height: .92; letter-spacing: .01em; }
+.page-head .sub { margin-top: 10px; color: var(--slate-text); font-size: var(--body-sm); }
+.page-head-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 32px; }
+.group { padding-bottom: var(--spacing-2xl); }
+.group .sec-head { margin-bottom: var(--spacing-lg); }
+.group .sec-head h2 { font-size: var(--heading-lg); }
+.count { display: inline-grid; place-items: center; min-width: 30px; height: 30px; margin-left: 12px; padding: 0 8px; border-radius: var(--radius-sm); background: var(--rink-navy); color: var(--ice); font: 900 var(--label)/1 var(--heading-font-family); vertical-align: middle; letter-spacing: 0; }
+.cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pc { display: flex; flex-direction: column; background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card); overflow: hidden; }
+.pc-photo { position: relative; margin: 0; aspect-ratio: 4 / 5; background: var(--ice); }
+.pc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.pc-num { position: absolute; left: 0; bottom: 0; padding: 6px 10px 4px; background: var(--rink-navy); color: var(--boards-white); font: 900 var(--heading-lg)/1 var(--heading-font-family); text-align: center; border-top-right-radius: var(--radius); font-variant-numeric: tabular-nums; min-width: calc(2ch + 20px); }
+.pc-body { display: flex; flex-direction: column; gap: 8px; padding: 12px 12px 14px; }
+.pc-name { font-size: var(--body); font-weight: 700; line-height: 1.1; letter-spacing: .03em; }
+.pos { align-self: flex-start; padding: 4px 8px; border-radius: var(--radius-sm); font: 700 var(--caption)/1 var(--heading-font-family); letter-spacing: .1em; text-transform: uppercase; }
+.pos-offense { background: var(--rink-navy); color: var(--boards-white); }
+.pos-defense { background: var(--rinx-red); color: var(--boards-white); }
+.pos-goalie { background: var(--win-green); color: var(--boards-white); }
+.pos-reserve { background: var(--ice); color: var(--rink-navy); box-shadow: inset 0 0 0 1px rgb(4 30 66 / 30%); }
+.coaches { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.coach { display: flex; align-items: center; gap: 16px; padding: 14px 16px; background: var(--boards-white); border-radius: var(--radius); box-shadow: var(--shadow-card); }
+.coach img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; }
+.coach h3 { font-size: var(--heading-sm); font-weight: 700; letter-spacing: .03em; }
+.coach p { color: var(--slate-text); font-size: var(--body-sm); margin-top: 2px; }
+.stats-link { white-space: nowrap; }
+.group-pair { display: grid; }
+@media (min-width: 900px) {
+  .group-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+  .group-pair .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) {
+  .group-pair { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 20px; }
+  .group-pair > .group { grid-column: span 2; }
+}
+@media (min-width: 600px) {
+  .page-head h1 { font-size: var(--heading-xxl); }
+  .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .coaches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) {
+  .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .coaches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) {
+  .cards { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+}
+
+/* ---------- C: row cards (smaller photos, number as headline) ---------- */
+.cards-row { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.pc-row { flex-direction: row; align-items: stretch; }
+.pc-row .pc-photo { flex: 0 0 96px; aspect-ratio: 4 / 5; }
+.pc-row .pc-body { flex: 1; flex-direction: row; align-items: center; gap: 14px; padding: 10px 14px; min-width: 0; }
+.pc-row .pc-num { position: static; flex: none; width: 1.1em; min-width: 0; padding: 0; background: none; border-radius: 0; color: var(--rink-navy); font-size: var(--heading-xl); text-align: left; }
+.pc-row[data-pos="defense"] .pc-num { color: var(--rinx-red); }
+.pc-row[data-pos="goalie"] .pc-num { color: var(--win-green); }
+.pc-id { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+@media (min-width: 600px) {
+  .cards-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+}
+@media (min-width: 900px) {
+  .cards-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pair-row { display: block; }
+  .pair-row .cards-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) {
+  .cards-row { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .pc-row .pc-photo { flex-basis: 104px; }
+  .pair-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+  .pair-row > .group { grid-column: auto; }
+  .pair-row .cards-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- C: kinetic-display layer ---------- */
+:root { --ease-expo: cubic-bezier(0.16, 1, 0.3, 1); }
+.sign-head .word { display: inline-block; }
+/* card wipe: the card stays observable (never clipped); its contents wipe top-down */
+html.js-anim .kd { transition: box-shadow .3s linear, background-color .3s linear; transition-delay: calc(var(--i, 0) * 60ms); }
+html.js-anim .kd:not(.in) { background-color: transparent; box-shadow: none; }
+html.js-anim .kd > * { transition: clip-path .7s var(--ease-expo); transition-delay: calc(var(--i, 0) * 60ms); }
+html.js-anim .kd:not(.in) > * { clip-path: inset(0 0 100% 0); }
+html.js-anim .kd.in > * { clip-path: inset(0 0 0 0); }
+html.js-anim [data-wipe] .word { transition: clip-path .6s var(--ease-expo); transition-delay: calc(var(--w, 0) * 110ms); }
+html.js-anim [data-wipe]:not(.in) .word { clip-path: inset(-.15em 100% -.3em 0); }
+html.js-anim [data-wipe].in .word { clip-path: inset(-.15em 0 -.3em 0); }
+/* the H1 (LCP) wipes on CSS alone, so first paint never waits for the runtime */
+@keyframes kd-word { from { clip-path: inset(-.15em 100% -.3em 0); } to { clip-path: inset(-.15em 0 -.3em 0); } }
+html.js-anim .page-head h1 .word { animation: kd-word .6s var(--ease-expo) both; animation-delay: calc(var(--w, 0) * 110ms); }
+html.js-anim .sec-head::after { transform-origin: left; transition: transform .7s var(--ease-expo) .45s, opacity .2s linear .45s; }
+html.js-anim .sec-head:not(.in)::after { transform: scaleX(0); opacity: 0; }
+html.js-anim .sec-head .count { transition: transform .35s var(--ease-expo) .5s; }
+html.js-anim .sec-head:not(.in) .count { transform: scale(0); }
+.count .cn { display: inline-block; min-width: 2ch; font-variant-numeric: tabular-nums; }
+@media print {
+  .kd > *, .word { clip-path: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .kd, html.js-anim .kd > *, html.js-anim .sign-head .word, html.js-anim .sec-head .count { clip-path: none !important; transform: none !important; transition: none !important; animation: none !important; }
+  html.js-anim .kd { background-color: var(--boards-white) !important; box-shadow: var(--shadow-card) !important; }
+  html.js-anim .sec-head::after { transform: none !important; opacity: 1 !important; transition: none !important; }
+}
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--rink-navy); color: var(--ice); border-top: 4px solid var(--rinx-red); padding-block: var(--spacing-xl) var(--spacing-lg); text-align: center; }
+.site-footer img { width: 64px; height: 64px; margin: 0 auto; border-radius: var(--radius-sm); background: var(--boards-white); padding: 3px; }
+.site-footer .foot-name { margin-top: var(--spacing-md); font: 900 22px/1 var(--heading-font-family); letter-spacing: .08em; text-transform: uppercase; color: var(--boards-white); }
+.foot-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 6px; margin: var(--spacing-lg) 0; }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; color: var(--ice); text-decoration: none; font-size: var(--body-sm); }
+.foot-nav a:hover { color: var(--boards-white); text-decoration: underline; text-underline-offset: 4px; }
+.site-footer small { display: block; font-size: 14px; }
+.site-footer small + small { margin-top: 6px; }
+
+
+/* 11 live nav items need the full desktop width: burger below 1200px */
+@media (max-width: 1199px) {
+  .site-header[data-nav-collapse="hamburger"] .wrap { min-height: 72px; }
+  .ds-nav-burger { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: var(--radius-sm); box-shadow: inset 0 0 0 2px var(--ice); color: var(--boards-white); font: 700 14px/1 var(--heading-font-family); letter-spacing: .12em; text-transform: uppercase; cursor: pointer; user-select: none; }
+  .ds-nav-burger-icon { width: 18px; height: 12px; position: relative; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+  .ds-nav-burger-icon::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 2px; background: currentColor; }
+  .ds-nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--spacing-lg) var(--spacing-lg); background: var(--rink-navy); border-bottom: 4px solid var(--rinx-red); visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out), visibility 0s linear .18s; }
+  .ds-nav-toggle:checked ~ .ds-nav { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out), visibility 0s; }
+  .ds-nav > a, .ds-nav summary { min-height: 48px; padding: 0; font-size: 17px; border-bottom: 1px solid rgb(232 240 249 / 14%); border-radius: 0; }
+  .ds-nav > a:hover, .ds-nav summary:hover { background: transparent; color: var(--ice); }
+  .ds-nav details > div { position: static; background: transparent; box-shadow: none; padding: 0 0 8px 14px; }
+  .ds-nav details > div a { color: var(--ice); padding: 12px 0; }
+  .ds-nav details > div a:hover { background: transparent; color: var(--boards-white); }
+  .ds-nav .nav-shop { margin: var(--spacing-md) 0 0; justify-content: center; border-radius: var(--radius-sm); border: 0; }
+}
+@media (max-width: 599px) {
+  .brand img { width: 44px; height: 44px; }
+  .brand-name { font-size: 22px; }
+  .brand-sub { font-size: var(--caption); letter-spacing: .06em; }
+  .ds-nav-burger-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .promo p { font-size: var(--label); }
+  .promo .btn { padding: 8px 12px; font-size: var(--caption); }
+  .promo .wrap { flex-wrap: wrap; gap: 8px 12px; }
+  .promo p { flex: 1 1 calc(100% - 40px); }
+  .promo .btn { flex: 1 1 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<!-- DIRECTION CONTRACT (roster variant C (cinematic))
+THESIS: Line Change. The lineup comes on the ice: the title and each position group's sign wipe in, the jersey numbers split-flap digit by digit to their real values like an arena scoreboard, cards are revealed with hard wipes as they reach the screen. It refuses fade-up-everything and the 11px number.
+OWN-WORLD: variant A's world (tokens, chrome, groups, order) with row cards: a smaller 4:5 photo beside a 54px jersey numeral (navy forwards, red defense, green goalies), name and label; plus kinetic-display motion: clip-path sign wipes, per-digit split-flap numerals (cards and count chips), one-shot card wipes.
+STORY: as A; motion turns finding your player into watching the lineup take the ice.
+FIRST VIEWPORT: title, then the Forwards head and two rows of row cards (8 players at 1440); on load the title (CSS-only, LCP-safe) and the Forwards sign wipe in and the first row's numbers flip into place.
+FORM: brief-pinned, no concept roll (direction.md Variant C, display-typography candidate #1, kinetic-display auto-picked).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header on-navy" data-section="header" data-intent="navigate" data-layout="full-width-dark" data-nav-collapse="hamburger">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Rinx Hockey Club home">
+      <img src="https://www.rinxhockeyclub.com/icons/rinx-header-128.webp" alt="" width="52" height="52">
+      <span><span class="brand-name">Rinx Hockey Club</span><span class="brand-sub">Tier III/A • NY Travel Hockey • LIAHL</span></span>
+    </a>
+    <input type="checkbox" id="ds-nav-toggle" class="ds-nav-toggle">
+    <label class="ds-nav-burger" for="ds-nav-toggle" role="button" tabindex="0" aria-controls="ds-nav-list" aria-expanded="false"><span class="ds-nav-burger-icon" aria-hidden="true"></span><span class="ds-nav-burger-label">Menu</span></label>
+    <nav id="ds-nav-list" class="ds-nav" aria-label="Main">
+      <a href="/">Home</a>
+      <details><summary aria-current="page">Roster</summary><div><a href="/roster">10U Squirts</a><a href="/roster-14u">14U Bantam</a></div></details>
+      <details><summary>Schedule</summary><div><a href="/schedule">10U Squirts</a><a href="/schedule-14u">14U Bantam</a></div></details>
+      <details><summary>Stats</summary><div><a href="/stats">10U Squirts</a><a href="/stats-14u">14U Bantam</a></div></details>
+      <details><summary>Standings</summary><div><a href="/standings">10U Squirts</a><a href="/standings-14u">14U Bantam</a></div></details>
+      <a href="/tournaments">Tournaments</a>
+      <a href="/trophy-room">Awards</a>
+      <a href="/sponsors">Sponsors</a>
+      <a href="/clinics">Clinics</a>
+      <a href="/contact">Contact</a>
+      <a class="nav-shop" href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a>
+    </nav>
+  </div>
+</header>
+
+<aside class="promo" aria-label="Club news">
+  <div class="wrap">
+    <img src="https://www.rinxhockeyclub.com/fragments/media_1b11bc66d210d852b67f09fc46ccdd6762b2db20e.webp?width=120&amp;format=webply&amp;optimize=medium" alt="" width="40" height="60">
+    <p>10U Mid-Atlantic Fall Classic <strong>Champions</strong></p>
+    <a class="btn btn-primary" href="/mid-atlantic-fall-classic-schedule">View Tournament Details</a>
+  </div>
+</aside>
+
+<main id="main">
+    <section class="page-head" data-section="page-head" data-intent="orient" data-layout="contained">
+      <div class="wrap page-head-row">
+        <div><h1 class="sign-head"><span class="word" style="--w:0">10U</span> <span class="word" style="--w:1">Squirts</span> <span class="word" style="--w:2">Roster</span></h1><p class="sub">2026–2027 Season • Rinx Hockey Club • 10U Squirts • Tier III/A</p></div>
+        <a class="more stats-link" href="/stats">Season stats →</a>
+      </div>
+    </section>
+    <section class="group" data-section="forwards" data-intent="find a player" data-layout="grid" data-items="10" aria-labelledby="h-forwards">
+      <div class="wrap">
+        <div class="sec-head" data-wipe><h2 id="h-forwards" class="sign-head"><span class="word">Forwards</span><span class="count"><span class="cn" data-flip="10">10</span><span class="vh"> players</span></span></h2></div>
+        <ul class="cards cards-row">
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_15f507a146184b4d529a4ff65089e2d9778e7a8d0.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager" fetchpriority="high"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="4">4</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 4, </span>Ryan Bachert</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1388ab09f0dfd88d6176818659978d2258f4e8d40.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="11">11</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 11, </span>DJ Pierre Canel</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1445e691099507eaff1e6e5c53f51c85b939f8bac.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="18">18</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 18, </span>Sean Fox</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1ccfd1953e1ffd4d62ed192e65fdaa70c5e489d26.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="19">19</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 19, </span>Ari Mazzarone</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_13030af021c19039a3032d9560273edb69dc5a97a.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="20">20</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 20, </span>Jorge Leonardo</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_14709384b766a7c3e21fa1af018019cc480cd2fef.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="21">21</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 21, </span>Tristen Pajak</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_16efc31c2c840f411d6f2c202aef2b090e9ae1798.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="75">75</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 75, </span>Matthew Grosskurth</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1c80a7f1c2d73bbcfeaa6f482f15f0025e31085dd.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="eager"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="93">93</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 93, </span>Evan Martin</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1554ad4c86fff9eb895a7b68a03014d4e766b243a.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="96">96</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 96, </span>Ryan Lupia</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="offense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_18587035eea3ea92a958f6965c085047a62ee9267.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="98">98</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 98, </span>Aiden Brown</h3><span class="pos pos-offense">Offense</span></div></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="group" data-section="defense" data-intent="find a player" data-layout="grid" data-items="6" aria-labelledby="h-defense">
+      <div class="wrap">
+        <div class="sec-head" data-wipe><h2 id="h-defense" class="sign-head"><span class="word">Defense</span><span class="count"><span class="cn" data-flip="6">6</span><span class="vh"> players</span></span></h2></div>
+        <ul class="cards cards-row">
+          <li class="pc pc-row kd" data-pos="defense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_176783ff157f4dc23f4309ea7ef58029bd16738e0.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="3">3</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 3, </span>Ryan Christman</h3><span class="pos pos-defense">Defense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="defense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1c591b964a857472d2a9c706190b003400c06f24c.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="5">5</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 5, </span>Declan Nimmo</h3><span class="pos pos-defense">Defense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="defense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1ac0f0f2bb9faa13bce0d83ac3472beb5f7bf7e0b.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="23">23</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 23, </span>Conor Wilkens</h3><span class="pos pos-defense">Defense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="defense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1c403a806e6b59568e6d140ca88d7de4113043f6b.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="28">28</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 28, </span>Stevie Kull</h3><span class="pos pos-defense">Defense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="defense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1e2a207f03e8ad723a77d1052ba6ec9d4d701a60d.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="90">90</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 90, </span>Nicholas Capozzoli</h3><span class="pos pos-defense">Defense</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="defense">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1b82b16ca8f7be13fed42502b57114a63b2abd773.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="95">95</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 95, </span>Connor Hassett</h3><span class="pos pos-defense">Defense</span></div></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <div class="wrap group-pair pair-row">
+    <section class="group" data-section="goalies" data-intent="find a player" data-layout="grid" data-items="2" aria-labelledby="h-goalies">
+      <div>
+        <div class="sec-head" data-wipe><h2 id="h-goalies" class="sign-head"><span class="word">Goalies</span><span class="count"><span class="cn" data-flip="2">2</span><span class="vh"> players</span></span></h2></div>
+        <ul class="cards cards-row">
+          <li class="pc pc-row kd" data-pos="goalie">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1b4a8b7d8684d8d1c2eace2aac6d9f5fb49c1b95e.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="1">1</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 1, </span>Connor Daly</h3><span class="pos pos-goalie">Goalie</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="goalie">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_1c54de1ac0d935bd3038cd063a183f4bc305181e2.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="35">35</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 35, </span>Louie Savola</h3><span class="pos pos-goalie">Goalie</span></div></div>
+          </li>
+        </ul>
+    </section>
+    <section class="group" data-section="reserves" data-intent="find a player" data-layout="grid" data-items="2" aria-labelledby="h-reserves">
+      <div>
+        <div class="sec-head" data-wipe><h2 id="h-reserves" class="sign-head"><span class="word">Reserves</span><span class="count"><span class="cn" data-flip="2">2</span><span class="vh"> players</span></span></h2></div>
+        <ul class="cards cards-row">
+          <li class="pc pc-row kd" data-pos="reserve">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_13c1fb9dd5bb3c64711f3e9208eb2cf0fbff1af49.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="10">10</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 10, </span>Edward Carbone</h3><span class="pos pos-reserve">Reserve</span></div></div>
+          </li>
+          <li class="pc pc-row kd" data-pos="reserve">
+            <figure class="pc-photo"><img src="https://www.rinxhockeyclub.com/media_116b75d8e4bf6451d1e115c43d05514daa9ec73c6.png?width=750&amp;format=webply&amp;optimize=medium" alt="" width="120" height="150" loading="lazy"></figure>
+            <div class="pc-body"><span class="pc-num" aria-hidden="true" data-flip="48">48</span><div class="pc-id"><h3 class="pc-name"><span class="vh">Number 48, </span>Mikey Barral</h3><span class="pos pos-reserve">Reserve</span></div></div>
+          </li>
+        </ul>
+    </section>
+    </div>
+    <section class="group" data-section="coaching-staff" data-intent="people" data-layout="grid" data-items="2" aria-labelledby="h-coaches">
+      <div class="wrap">
+        <div class="sec-head" data-wipe><h2 id="h-coaches" class="sign-head"><span class="word">Coaching</span> <span class="word">Staff</span></h2></div>
+        <ul class="coaches">
+          <li class="coach"><img src="https://www.rinxhockeyclub.com/images/headshots/coachdan.webp" alt="" width="72" height="72" loading="lazy"><div><h3>Dan O'Donoghue</h3><p>Head Coach • 10U Squirts</p></div></li>
+          <li class="coach"><img src="https://www.rinxhockeyclub.com/images/headshots/joecap.webp" alt="" width="72" height="72" loading="lazy"><div><h3>Joe Capozzoli</h3><p>Assistant Coach • 10U Squirts</p></div></li>
+        </ul>
+      </div>
+    </section>
+</main>
+
+<footer class="site-footer on-navy" data-section="footer" data-intent="navigate" data-layout="stack">
+  <div class="wrap">
+    <img src="https://www.rinxhockeyclub.com/icons/rinx-header-128.webp" alt="Rinx Hockey Club" width="64" height="64" loading="lazy">
+    <p class="foot-name">Rinx Hockey Club • Long Island, NY</p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="/">Home</a><a href="/roster">Roster</a><a href="/schedule">Schedule</a><a href="/stats">Stats</a><a href="/tournaments">Tournaments</a><a href="/trophy-room">Trophy Room</a><a href="/sponsors">Sponsors</a><a href="/clinics">Clinics</a><a href="https://rinxspring2026.itemorder.com/shop/home/">Shop Gear</a><a href="/contact">Contact</a>
+    </nav>
+    <small>The Rinx • 660 Terry Road, Hauppauge, NY 11788 • (631) 232-3222</small>
+    <small>© 2026 Rinx Hockey Club. All rights reserved.</small>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const t = document.getElementById('ds-nav-toggle'), b = document.querySelector('.ds-nav-burger');
+  const sync = () => b.setAttribute('aria-expanded', t.checked);
+  t.addEventListener('change', sync); sync();
+  b.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); } });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && t.checked) { t.checked = false; sync(); b.focus(); } });
+})();
+</script>
+<script src="lenis.min.js"></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) { root.classList.remove('js-anim'); window.__kdReady = true; return; } // final state, native scroll, no loops
+
+  // ── Lenis smooth scroll ──
+  const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+  window.__lenis = lenis;
+  (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
+
+  // ── split-flap: every digit flaps on its own, locking left to right on the real value ──
+  const flip = (el, delay) => {
+    const target = el.dataset.flip;
+    const len = target.length;
+    let frame = 0;
+    setTimeout(function step() {
+      const locked = Math.max(0, Math.floor((frame - 6) / 3));
+      el.textContent = [...target].map((d, i) => (i < locked || d < '0' || d > '9' ? d : String(Math.floor(Math.random() * 10)))).join('');
+      frame += 1;
+      if (locked < len) setTimeout(step, 45); else el.textContent = target;
+    }, delay);
+  };
+
+  // ── sign heads: words wipe in, rule draws, count chip pops and flips ──
+  document.querySelectorAll('[data-wipe]').forEach((h) => h.querySelectorAll('.word').forEach((w, i) => w.style.setProperty('--w', i)));
+  const sign = (el) => { if (el.classList.contains('in')) return; el.classList.add('in'); el.querySelectorAll('[data-flip]').forEach((n) => flip(n, 520)); };
+  const signIO = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { sign(e.target); signIO.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('[data-wipe]').forEach((el) => signIO.observe(el));
+
+  // ── cards: one-shot wipe per card as it reaches the screen; cards arriving together stagger 60ms (max 6) ──
+  const show = (card, i) => { if (card.classList.contains('in')) return; card.style.setProperty('--i', i); card.classList.add('in'); card.querySelectorAll('[data-flip]').forEach((n) => flip(n, i * 60 + 250)); };
+  const cardIO = new IntersectionObserver((es) => {
+    es.filter((e) => e.isIntersecting).forEach((e, i) => { show(e.target, Math.min(i, 6)); cardIO.unobserve(e.target); });
+  }, { rootMargin: '0px 0px -2% 0px' });
+  document.querySelectorAll('.kd').forEach((el) => cardIO.observe(el));
+
+  // safety net: anything on screen 2.5s after load is shown
+  addEventListener('load', () => setTimeout(() => {
+    document.querySelectorAll('[data-wipe]:not(.in)').forEach((el) => { if (el.getBoundingClientRect().top < innerHeight) sign(el); });
+    document.querySelectorAll('.kd:not(.in)').forEach((el) => { if (el.getBoundingClientRect().top < innerHeight) show(el, 0); });
+  }, 2500));
+  window.__kdReady = true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+{
+  "_provenance": {
+    "writtenBy": "stardust:extract",
+    "writtenAt": "2026-10-07T03:14:27.587Z",
+    "mode": "descriptive",
+    "readArtifacts": [
+      "stardust/current/_brand-extraction.json",
+      "stardust/current/DESIGN.md"
+    ]
+  },
+  "schemaVersion": 2,
+  "colorMeta": {
+    "navy": {
+      "role": "primary",
+      "displayName": "Rink Navy"
+    },
+    "red": {
+      "role": "secondary",
+      "displayName": "Rinx Red"
+    },
+    "ice": {
+      "role": "surface-alt",
+      "displayName": "Ice"
+    },
+    "off-white": {
+      "role": "background"
+    },
+    "gray": {
+      "role": "text-secondary"
+    },
+    "win-green": {
+      "role": "status-win"
+    },
+    "gold-unused": {
+      "role": "unused-token"
+    }
+  },
+  "extensions": {
+    "componentStyle": {
+      "buttons": {
+        "primary": {
+          "background": "#c8102e",
+          "color": "#ffffff",
+          "borderRadius": "4px",
+          "padding": "8px 16px",
+          "fontWeight": 700,
+          "fontFamily": "Barlow Condensed",
+          "textTransform": "uppercase",
+          "letterSpacing": "0.08em",
+          "source": "a.nav-shop (Shop Gear)"
+        },
+        "secondary": {
+          "background": "#041e42",
+          "color": "#ffffff",
+          "border": "2px solid #041e42",
+          "borderRadius": "4px",
+          "padding": "7px 18px",
+          "source": ".recent-results tab (active)"
+        },
+        "ghost": {
+          "background": "transparent",
+          "color": "#041e42",
+          "border": "2px solid #041e42",
+          "borderRadius": "4px",
+          "source": ".recent-results tab (inactive)"
+        }
+      },
+      "dualCTAPattern": null,
+      "cards": {
+        "background": "#ffffff",
+        "borderRadius": "8px",
+        "padding": "32-40px",
+        "shadow": "0 2px 12px rgb(4 30 66 / 8%)",
+        "border": "none; 4px top rule on news/result cards"
+      },
+      "inputs": null
+    },
+    "motifs": {
+      "borderRadius": {
+        "primary": "8px",
+        "secondary": "4px",
+        "pill": "50%",
+        "primarySources": [
+          "index"
+        ],
+        "occurrences": {
+          "50%": 16,
+          "8px": 15,
+          "4px": 12,
+          "10px": 9,
+          "6px": 4,
+          "2px": 1
+        }
+      },
+      "shadows": [
+        {
+          "value": "0 2px 12px rgb(4 30 66 / 8%)",
+          "uses": "cards (12×)"
+        },
+        {
+          "value": "0 4px 16px rgb(4 30 66 / 15%)",
+          "uses": "card hover"
+        },
+        {
+          "value": "0 2px 20px rgb(0 0 0 / 40%)",
+          "uses": "hero logo"
+        }
+      ],
+      "gradients": [
+        {
+          "value": "linear-gradient(90deg, #c8102e 33%, #fff 33% 66%, #c8102e 66%)",
+          "uses": "hero-stripe (red-white-red bar under hero)"
+        },
+        {
+          "value": "linear-gradient(90deg, #c8102e 0%, transparent 100%)",
+          "uses": "section-title rule"
+        },
+        {
+          "value": "radial ice gradient #e8f4fc→#bcd6f0 under 88% navy overlay",
+          "uses": "hero rink SVG"
+        }
+      ],
+      "patterns": [
+        {
+          "name": "rink-diagram-hero",
+          "evidence": "inline SVG rink (center red line, blue lines, faceoff circles, creases) under 88% navy overlay"
+        },
+        {
+          "name": "red-white-red-stripe",
+          "evidence": "hero-stripe bar under the hero"
+        },
+        {
+          "name": "card-top-rule",
+          "evidence": "4px red border-top on news cards, 4px green on result cards"
+        },
+        {
+          "name": "section-title-with-rule",
+          "evidence": "H2 + red-to-transparent gradient rule on Recent Results / About"
+        },
+        {
+          "name": "card-carousel",
+          "evidence": "news-slider 3-up with arrows + dots (6 slides)"
+        },
+        {
+          "name": "scoreline-cards",
+          "evidence": "recent-results 3 cards with opponent logo, score, W badge, 10U/14U tabs"
+        },
+        {
+          "name": "photo-strip-3up",
+          "evidence": "about: 3 team photos"
+        },
+        {
+          "name": "staff-list-bars",
+          "evidence": "4 navy bars with circular headshot"
+        },
+        {
+          "name": "embed-feed",
+          "evidence": "Elfsight Instagram widget, renders empty grey tiles"
+        }
+      ]
+    },
+    "voice": {
+      "heroHeadline": "Rinx Hockey Club",
+      "heroLede": "Travel Hockey • Long Island, New York",
+      "heroImage": null,
+      "heroMedium": {
+        "kind": "inline-svg",
+        "note": "static rink diagram SVG; not moving"
+      },
+      "firstParagraph": "The Rinx 10U Squirts travel hockey team represents the best young talent from the Long Island area, competing at the Tier III/A level. Based out of The Rinx in Hauppauge, New York, our program is dedicated to developing elite young players both on and off the ice.",
+      "ctaSamples": [
+        "View Full Schedule →",
+        "Shop Gear",
+        "Get Directions"
+      ],
+      "headlineSamples": [
+        "14U Remains Undefeated",
+        "10U Pours on the Goals",
+        "Comeback Tie",
+        "Clean Sweep"
+      ],
+      "tone": "inferred: proud, plain-spoken, sports-page"
+    },
+    "systemComponents": [
+      {
+        "kind": "header",
+        "occurrences": 1,
+        "headingSequence": [],
+        "ctaLabels": [
+          "Home",
+          "Roster +",
+          "Schedule +",
+          "Stats +",
+          "Standings +",
+          "Tournaments",
+          "Sponsors",
+          "Clinics",
+          "Contact",
+          "Shop Gear"
+        ],
+        "notes": "navy bar, crest + RINX HOCKEY CLUB + red subtitle TIER III/A • TRAVEL HOCKEY • LIAHL, red Shop Gear pill"
+      },
+      {
+        "kind": "footer",
+        "occurrences": 1,
+        "headingSequence": [],
+        "ctaLabels": [
+          "Home",
+          "Roster",
+          "Schedule",
+          "Stats",
+          "Tournaments",
+          "Sponsors",
+          "Clinics",
+          "Shop Gear",
+          "Contact"
+        ],
+        "notes": "navy, centered roundel, address + phone, copyright"
+      }
+    ],
+    "scaleAudit": {
+      "kind": "ad-hoc",
+      "sizesPx": [
+        72,
+        35.2,
+        22.4,
+        20.8,
+        16.8
+      ],
+      "ratios": [
+        2.045,
+        1.571,
+        1.077,
+        1.238
+      ],
+      "matchedScale": null
+    },
+    "shadows": [
+      {
+        "value": "0 2px 12px rgb(4 30 66 / 8%)",
+        "uses": "cards (12×)"
+      },
+      {
+        "value": "0 4px 16px rgb(4 30 66 / 15%)",
+        "uses": "card hover"
+      },
+      {
+        "value": "0 2px 20px rgb(0 0 0 / 40%)",
+        "uses": "hero logo"
+      }
+    ],
+    "signature": {
+      "rinkDiagram": "blocks/hero/hero.js inline SVG — center red line, two blue lines, 5 faceoff circles, creases; overlaid at 88% navy",
+      "stripe": "red-white-red 3-band bar under hero"
+    }
+  }
+}
