@@ -31,6 +31,14 @@ const okImageHost = (u) => {
   } catch { return false; }
 };
 const exists = (f) => access(f).then(() => true, () => false);
+// Captions for the homepage cards: up to ~300 characters, cut at a word.
+const CAPTION_MAX = 300;
+const clip = (text = '') => {
+  const t = text.trim();
+  if (t.length <= CAPTION_MAX) return t;
+  const cut = t.slice(0, CAPTION_MAX);
+  return `${cut.slice(0, Math.max(cut.lastIndexOf(' '), CAPTION_MAX - 40)).trimEnd()}…`;
+};
 
 const res = await fetch(
   `https://api.apify.com/v2/acts/${ACTOR}/run-sync-get-dataset-items`,
@@ -75,7 +83,7 @@ for (const m of candidates) {
       account: handle,
       permalink: m.url,
       image: file,
-      caption: (m.caption || '').slice(0, 160),
+      caption: clip(m.caption || ''),
       timestamp: m.timestamp,
       video: m.type === 'Video',
       carousel: m.type === 'Sidecar',
