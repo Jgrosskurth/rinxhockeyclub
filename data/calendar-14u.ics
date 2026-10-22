@@ -106,17 +106,6 @@ DESCRIPTION:Exhibition\nFinal: L 0-4\nSchedule: https://www.rinxhockeyclub.
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
-UID:gamesheet-3095440@rinxhockeyclub.com
-DTSTAMP:20261017T000000Z
-DTSTART;VALUE=DATE:20261017
-DTEND;VALUE=DATE:20261018
-SUMMARY:Rinx 14U vs Brewster Hockey (Wiese) (L 2-8)
-LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL\nFinal: L 2-8\nSchedule: https://www.rinxhockeyclub.com/s
- chedule-14u
-URL:https://www.rinxhockeyclub.com/schedule-14u
-END:VEVENT
-BEGIN:VEVENT
 UID:gamesheet-2990035@rinxhockeyclub.com
 DTSTAMP:20261018T114000Z
 DTSTART;TZID=America/New_York:20261018T114000
