@@ -42,7 +42,7 @@ export default function decorate(block) {
         <a href="/sponsors">Sponsors</a>
         <a href="/clinics">Clinics</a>
         <a href="/contact">Contact</a>
-        <a href="https://rinxspring2026.itemorder.com/shop/home/" target="_blank" class="nav-shop">Shop Gear</a>
+        <a href="https://rinxspring2026.itemorder.com/shop/home/" target="_blank" class="nav-shop">Shop Merch</a>
       </nav>
     </div>
   `;
