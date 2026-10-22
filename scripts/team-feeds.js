@@ -88,6 +88,12 @@ export function playerName(name) {
   return hit ? hit.display : name;
 }
 
+// Teams the club shows by another name than the tidied one, keyed by the
+// lowercased tidied name (as TEAM_DISPLAY in build_calendars.py).
+const TEAM_DISPLAY = {
+  'pal sound tigers': 'PAL Sound Tigers AA',
+};
+
 /**
  * Clean up GameSheet's coded team names, keeping the coach's last name so two
  * teams from one club stay apart: "NYH4033-002-North Park-10U Mauro 04 - 10U
@@ -116,7 +122,8 @@ export function tidyTeam(name) {
   }
   s = titleCase(s.replace(/^[-–\s]+|[-–\s]+$/g, '').replace(/\s+/g, ' ').trim());
   if (!s) return name;
-  return coach ? `${s} (${titleCase(coach)})` : s;
+  const tidy = coach ? `${s} (${titleCase(coach)})` : s;
+  return TEAM_DISPLAY[tidy.toLowerCase()] || tidy;
 }
 
 // Game types, in the order the schedule and standings filters show them.
