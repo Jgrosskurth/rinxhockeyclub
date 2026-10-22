@@ -288,8 +288,10 @@ export default async function decorate(block) {
     });
   }
 
-  // Opponent logo: shrunk to fit 128px (keeping transparency) and sent as a
-  // small data: image; the form-games workflow saves it to the site.
+  // Opponent logo: shrunk to fit 128px and sent as a small data: image; the
+  // form-games workflow saves it to the site. The answer goes into one sheet
+  // cell (50,000 characters at most), so keep it well under that.
+  const LOGO_MAX = 20000;
   let logoData = '';
   const logoInput = $('#gs-logo');
   const preview = $('.gs-logo-preview');
@@ -305,10 +307,19 @@ export default async function decorate(block) {
     const canvas = document.createElement('canvas');
     canvas.width = Math.max(1, Math.round(bitmap.width * scale));
     canvas.height = Math.max(1, Math.round(bitmap.height * scale));
-    canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    // WebP where the browser can make it, else PNG.
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    // WebP keeps transparency and is small, but Safari (iPhone, iPad) can't
+    // make it. Its PNG of a logo is often 40,000+ characters, so a big PNG
+    // becomes a JPEG on white instead.
     const webp = canvas.toDataURL('image/webp', 0.85);
-    return webp.startsWith('data:image/webp') ? webp : canvas.toDataURL('image/png');
+    if (webp.startsWith('data:image/webp')) return webp;
+    const png = canvas.toDataURL('image/png');
+    if (png.length <= LOGO_MAX) return png;
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL('image/jpeg', 0.85);
   }
   logoInput?.addEventListener('change', async () => {
     const file = logoInput.files[0];
@@ -316,7 +327,7 @@ export default async function decorate(block) {
     try {
       if (file.size > 15 * 1024 * 1024) throw new Error('too big');
       const data = await shrink(file);
-      if (data.length > 60000) throw new Error('too big');
+      if (data.length > LOGO_MAX) throw new Error('too big');
       logoData = data;
       preview.querySelector('img').src = data;
       preview.hidden = false;
