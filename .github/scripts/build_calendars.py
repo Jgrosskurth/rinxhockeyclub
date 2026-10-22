@@ -205,6 +205,12 @@ def title_case(text):
     return re.sub(r'\bMc([a-z])', lambda m: 'Mc' + m[1].upper(), text.title())
 
 
+# As TEAM_DISPLAY in scripts/team-feeds.js
+TEAM_DISPLAY = {
+    'pal sound tigers': 'PAL Sound Tigers AA',
+}
+
+
 def tidy_team(name):
     """'NYH4033-002-North Park-10U Mauro 04 - 10U SILVER' -> 'North Park (Mauro)'
     (as tidyTeam in scripts/team-feeds.js; tournament names have no coach)."""
@@ -224,7 +230,8 @@ def tidy_team(name):
     s = title_case(re.sub(r'\s+', ' ', s.strip(' -–')).strip())
     if not s:
         return name
-    return f'{s} ({title_case(coach)})' if coach else s
+    tidy = f'{s} ({title_case(coach)})' if coach else s
+    return TEAM_DISPLAY.get(tidy.lower(), tidy)
 
 
 def division(opponent, tournament, fallback=''):
