@@ -23,6 +23,21 @@
     },
     {
       "rank": "2",
+      "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "gp": "6",
+      "w": "3",
+      "l": "2",
+      "t": "1",
+      "otl": "0",
+      "pts": "7",
+      "gf": "28",
+      "ga": "29",
+      "diff": "-1",
+      "streak": "Tied 1",
+      "ours": false
+    },
+    {
+      "rank": "3",
       "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
       "gp": "5",
       "w": "3",
@@ -34,21 +49,6 @@
       "ga": "15",
       "diff": "+18",
       "streak": "Won 1",
-      "ours": false
-    },
-    {
-      "rank": "3",
-      "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
-      "gp": "5",
-      "w": "3",
-      "l": "2",
-      "t": "0",
-      "otl": "0",
-      "pts": "6",
-      "gf": "25",
-      "ga": "26",
-      "diff": "-1",
-      "streak": "Lost 2",
       "ours": false
     },
     {
@@ -114,16 +114,16 @@
     {
       "rank": "8",
       "team": "NYH0093-006 Dix Hills Selects 10U Goldfine",
-      "gp": "2",
+      "gp": "3",
       "w": "0",
       "l": "1",
-      "t": "1",
+      "t": "2",
       "otl": "0",
-      "pts": "1",
-      "gf": "10",
-      "ga": "11",
+      "pts": "2",
+      "gf": "13",
+      "ga": "14",
       "diff": "-1",
-      "streak": "Tied 1",
+      "streak": "Tied 2",
       "ours": false
     },
     {

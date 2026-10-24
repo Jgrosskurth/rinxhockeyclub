@@ -204,6 +204,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989472"
+    },
+    {
+      "date": "Oct 24, 2026",
+      "visitor": "NYH0093-006 Dix Hills Selects 10U Goldfine",
+      "home": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "visitorScore": 3,
+      "homeScore": 3,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2992372"
     }
   ]
 }
