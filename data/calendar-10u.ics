@@ -138,17 +138,6 @@ DESCRIPTION:LIAHL · 10U Silver\nFinal: W 9-0\nSchedule: https://www.rinxho
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
-UID:gamesheet-2989474@rinxhockeyclub.com
-DTSTAMP:20261024T160000Z
-DTSTART;TZID=America/New_York:20261024T160000
-DTEND;TZID=America/New_York:20261024T173000
-SUMMARY:Rinx 10U at North Park (Mauro)
-LOCATION:Port Washington Skating Center\, Port Washington\, NY
-DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
- chedule
-URL:https://www.rinxhockeyclub.com/schedule
-END:VEVENT
-BEGIN:VEVENT
 UID:gamesheet-sheet-10u-20261025-prestige-stars@rinxhockeyclub.com
 DTSTAMP:20261025T073000Z
 DTSTART;TZID=America/New_York:20261025T073000
