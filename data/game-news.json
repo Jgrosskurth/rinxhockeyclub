@@ -2,6 +2,16 @@
  "type": "game-news",
  "cards": [
   {
+   "age": "10U",
+   "iso": "2026-10-24",
+   "time": "16:00",
+   "date": "October 24, 2026",
+   "title": "10U Beats North Park Hockey (Mauro)",
+   "body": "The 10U Squirts beat North Park Hockey (Mauro) 18-0 at Port Washington Skating Center.",
+   "link": "/box-score?team=10u&game=5942",
+   "source": "lihockey"
+  },
+  {
    "age": "14U",
    "iso": "2026-10-18",
    "time": "11:40",

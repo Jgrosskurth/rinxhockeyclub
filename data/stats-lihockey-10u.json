@@ -3,10 +3,21 @@
  "source": "lihockey.com",
  "team": "10u",
  "teamPage": "https://lihockey.com/teams/1162/",
- "updated": "2026-10-19T20:26:00+00:00",
+ "updated": "2026-10-24T21:45:39+00:00",
  "players": [
   {
    "name": "Matthew Grosskurth",
+   "number": "",
+   "pos": "",
+   "gp": "6",
+   "g": "15",
+   "a": "0",
+   "pts": "15",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
+   "name": "Donald Pierre Canel",
    "number": "",
    "pos": "",
    "gp": "5",
@@ -14,27 +25,16 @@
    "a": "0",
    "pts": "10",
    "plusminus": "0",
-   "pim": "1"
+   "pim": "0"
   },
   {
    "name": "Sean Fox",
    "number": "",
    "pos": "",
-   "gp": "5",
-   "g": "9",
+   "gp": "6",
+   "g": "10",
    "a": "0",
-   "pts": "9",
-   "plusminus": "0",
-   "pim": "0"
-  },
-  {
-   "name": "Donald Pierre Canel",
-   "number": "",
-   "pos": "",
-   "gp": "4",
-   "g": "8",
-   "a": "0",
-   "pts": "8",
+   "pts": "10",
    "plusminus": "0",
    "pim": "0"
   },
@@ -53,10 +53,10 @@
    "name": "Aiden Brown",
    "number": "",
    "pos": "",
-   "gp": "4",
-   "g": "4",
+   "gp": "5",
+   "g": "5",
    "a": "0",
-   "pts": "4",
+   "pts": "5",
    "plusminus": "0",
    "pim": "2"
   },
@@ -64,10 +64,10 @@
    "name": "Ryan Bachert",
    "number": "",
    "pos": "",
-   "gp": "4",
-   "g": "3",
+   "gp": "5",
+   "g": "5",
    "a": "0",
-   "pts": "3",
+   "pts": "5",
    "plusminus": "0",
    "pim": "9"
   },
@@ -75,10 +75,10 @@
    "name": "Ryan Lupia",
    "number": "",
    "pos": "",
-   "gp": "2",
-   "g": "3",
+   "gp": "3",
+   "g": "5",
    "a": "0",
-   "pts": "3",
+   "pts": "5",
    "plusminus": "0",
    "pim": "0"
   },
@@ -86,10 +86,10 @@
    "name": "Tristen Pajak",
    "number": "",
    "pos": "",
-   "gp": "2",
-   "g": "2",
+   "gp": "3",
+   "g": "3",
    "a": "0",
-   "pts": "2",
+   "pts": "3",
    "plusminus": "0",
    "pim": "1"
   },
@@ -97,12 +97,23 @@
    "name": "Conor Wilkens",
    "number": "",
    "pos": "",
-   "gp": "1",
-   "g": "1",
+   "gp": "2",
+   "g": "2",
    "a": "0",
-   "pts": "1",
+   "pts": "2",
    "plusminus": "0",
    "pim": "0"
+  },
+  {
+   "name": "Nicholas Capozzoli",
+   "number": "",
+   "pos": "",
+   "gp": "3",
+   "g": "2",
+   "a": "0",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "1"
   },
   {
    "name": "Declan Nimmo",
@@ -127,7 +138,18 @@
    "pim": "0"
   },
   {
-   "name": "Nicholas Capozzoli",
+   "name": "Ryan Christman",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "0"
+  },
+  {
+   "name": "Stephen Kull",
    "number": "",
    "pos": "",
    "gp": "2",
@@ -141,7 +163,7 @@
    "name": "Connor Daly",
    "number": "",
    "pos": "G",
-   "gp": "4",
+   "gp": "5",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -158,30 +180,19 @@
    "pts": "0",
    "plusminus": "0",
    "pim": "0"
-  },
-  {
-   "name": "Stephen Kull",
-   "number": "",
-   "pos": "",
-   "gp": "1",
-   "g": "0",
-   "a": "0",
-   "pts": "0",
-   "plusminus": "0",
-   "pim": "1"
   }
  ],
  "goalies": [
   {
    "name": "Connor Daly",
    "number": "",
-   "gp": 4,
-   "sa": 20,
+   "gp": 5,
+   "sa": 25,
    "ga": 2,
-   "sv": 18,
-   "w": 2,
+   "sv": 23,
+   "w": 3,
    "l": 0,
-   "svpct": "0.900"
+   "svpct": "0.920"
   },
   {
    "name": "Louie Savola",
@@ -196,6 +207,408 @@
   }
  ],
  "games": [
+  {
+   "id": "5942",
+   "date": "Oct 24",
+   "home": false,
+   "opponent": "North Park Hockey 10U Silver - Mauro",
+   "result": "W",
+   "score": "18-0",
+   "box": {
+    "skaters": [
+     {
+      "id": "7088",
+      "name": "Matthew Grosskurth",
+      "number": "",
+      "g": 5,
+      "a": 0,
+      "pts": 5,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7090",
+      "name": "Ryan Lupia",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8368",
+      "name": "Ryan Bachert",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8371",
+      "name": "Donald Pierre Canel",
+      "number": "",
+      "g": 2,
+      "a": 0,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7087",
+      "name": "Sean Fox",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9074",
+      "name": "Conor Wilkens",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9070",
+      "name": "Ryan Christman",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9068",
+      "name": "Stephen Kull",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8370",
+      "name": "Aiden Brown",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8369",
+      "name": "Nicholas Capozzoli",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7091",
+      "name": "Tristen Pajak",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9071",
+      "name": "Connor Daly",
+      "number": "",
+      "min": "—",
+      "sa": "5",
+      "ga": "0",
+      "sv": "5",
+      "svpct": "1.000",
+      "wl": "W"
+     }
+    ]
+   },
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "Rinx Hockey 10U Silver - O'Donoghue",
+      "record": "5-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "4",
+       "6",
+       "8"
+      ],
+      "total": "18",
+      "skaters": [
+       {
+        "name": "Matthew Grosskurth",
+        "number": "",
+        "badge": "Hat trick",
+        "g": "5",
+        "a": "0",
+        "pts": "5",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Lupia",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Bachert",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Donald Pierre Canel",
+        "number": "",
+        "badge": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Sean Fox",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Conor Wilkens",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Christman",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Stephen Kull",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aiden Brown",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Nicholas Capozzoli",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Tristen Pajak",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Connor Daly",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "5",
+        "ga": "0",
+        "sv": "5",
+        "svpct": "1.000",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "18",
+       "a": "0",
+       "pts": "18",
+       "pim": "0"
+      }
+     },
+     {
+      "side": "home",
+      "name": "North Park Hockey 10U Silver - Mauro",
+      "record": "1-4-1-0",
+      "abbr": "NPH",
+      "periods": [
+       "0",
+       "0",
+       "0"
+      ],
+      "total": "0",
+      "skaters": [
+       {
+        "name": "Jacob Acker",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Fisher Kaplowitz",
+        "number": "",
+        "badge": "",
+        "min": "—",
+        "sa": "57",
+        "ga": "18",
+        "sv": "39",
+        "svpct": "0.684",
+        "wl": "L"
+       }
+      ],
+      "totals": {
+       "g": "0",
+       "a": "0",
+       "pts": "0",
+       "pim": "1"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Matthew Grosskurth",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "5G"
+     },
+     {
+      "rank": "2",
+      "name": "Ryan Lupia",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     },
+     {
+      "rank": "3",
+      "name": "Ryan Bachert",
+      "team": "Rinx Hockey 10U Silver - O'Donoghue",
+      "line": "2G"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Matthew Grosskurth",
+      "val": "5"
+     },
+     {
+      "cat": "Points",
+      "name": "Matthew Grosskurth",
+      "val": "5"
+     },
+     {
+      "cat": "Saves",
+      "name": "Fisher Kaplowitz",
+      "val": "39"
+     }
+    ],
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Saturday, October 24 · 4:00 PM"
+    ],
+    "dateLong": "Saturday, October 24, 2026",
+    "venue": "Port Washington Skating Center",
+    "isoDate": "2026-10-24",
+    "recap": null
+   },
+   "url": "https://lihockey.com/games/5942/"
+  },
   {
    "id": "5896",
    "date": "Oct 18",
