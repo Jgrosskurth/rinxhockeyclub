@@ -471,6 +471,23 @@ async function addTournamentBoxScores(games) {
   });
 }
 
+// Exhibition games with a team-reported box score (data/boxscores-exhibition-<team>.json,
+// matched by day and opponent) get a link to /box-score too.
+const EXHIBITION_BOX_SCORES = { '10u': 'boxscores-exhibition-10u' };
+
+async function addExhibitionBoxScores(key, games) {
+  const feed = EXHIBITION_BOX_SCORES[key];
+  if (!feed) return;
+  const data = await fetch(`${FEED_BASE}/${feed}.json`)
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const posted = (data?.games || []).filter((x) => x.detail?.teams?.length === 2);
+  games.forEach((g) => {
+    if (g.type === 'League' || g.type === 'Tournament' || !g.result) return;
+    const hit = posted.find((x) => sameGame({ date: g.rawDate, opponent: g.opp }, x));
+    if (hit) g.boxScore = `/box-score?event=exhibition-${key}&game=${hit.id}`;
+  });
+}
+
 async function loadFeedGames() {
   const cfg = feedConfig();
   const tournamentPage = cfg.key === 'mid-atlantic';
@@ -490,7 +507,11 @@ async function loadFeedGames() {
   if (!tournamentPage) {
     const extra = await extraGames(cfg.key, raw);
     extra.forEach((g) => games.push({ ...fromFeed(g, ''), type: g.type, sheet: true }));
-    await Promise.all([addBoxScores(cfg.key, games), addTournamentBoxScores(games)]);
+    await Promise.all([
+      addBoxScores(cfg.key, games),
+      addTournamentBoxScores(games),
+      addExhibitionBoxScores(cfg.key, games),
+    ]);
   } else {
     await addTournamentBoxScores(games);
   }

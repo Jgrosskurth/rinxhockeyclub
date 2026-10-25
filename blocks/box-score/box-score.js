@@ -9,6 +9,9 @@ import { teamLogo, RINX_LOGO } from '../../scripts/team-logos.js';
 //   GameSheet page (Box Score + Lineups tabs), saved by
 //   .github/scripts/pull_gamesheet_boxscores.py in data/boxscores-<event>.json.
 //   Same layout, plus the scoring summary and penalties GameSheet records.
+// - Exhibition games (/box-score?event=exhibition-10u&game=2026-10-25-prestige-stars),
+//   kept by hand in data/boxscores-exhibition-<team>.json from what the team
+//   reports: often just the score and three stars.
 // Without ?game, lists every box score.
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
@@ -21,11 +24,25 @@ const EVENTS = {
     feed: 'boxscores-mid-atlantic',
     schedulePath: '/mid-atlantic-fall-classic-schedule',
   },
+  'exhibition-10u': {
+    label: 'Exhibition games',
+    team: '10u',
+    feed: 'boxscores-exhibition-10u',
+    club: true,
+  },
 };
 
 // Where a game came from: drives the hero line, links and source note.
 function sourceOf(key, eventKey) {
   const ev = EVENTS[eventKey];
+  if (ev?.club) {
+    return {
+      site: '',
+      backPath: TEAMS[key].schedulePath,
+      backLabel: `${TEAMS[key].label} schedule`,
+      note: 'Box score reported by the team.',
+    };
+  }
   if (ev) {
     return {
       site: 'GameSheet',
@@ -115,7 +132,7 @@ function hero(d, game, key, src) {
       <p class="bx-foot">${esc(d.dateLong)}${time ? ` &middot; ${esc(time)}` : ''}${d.venue ? ` &middot; ${esc(d.venue)}` : ''}</p>
       <p class="bx-actions">
         ${d.recap ? `<a class="bx-btn" href="${esc(d.recap.url)}" target="_blank" rel="noopener">Read the recap</a>` : ''}
-        <a class="bx-btn" href="${esc(game.url)}" target="_blank" rel="noopener">View on ${esc(src.site)}</a>
+        ${game.url ? `<a class="bx-btn" href="${esc(game.url)}" target="_blank" rel="noopener">View on ${esc(src.site)}</a>` : ''}
         <a class="bx-btn bx-btn-solid" href="${esc(src.backPath)}">${esc(src.backLabel)}</a>
       </p>
     </header>`;
@@ -257,26 +274,29 @@ function sidebar(d, game, src) {
         <p class="bx-info"><strong>${esc(d.info[0] || d.league)}</strong>${d.info[1] ? `<br>${esc(d.info[1])}` : ''}</p>
         <p class="bx-info"><strong>${esc(d.info[2] || d.dateLong)}</strong>${d.venue ? `<br>${esc(d.venue)}` : ''}</p>
       </div>
-      <p class="bx-source">Box score from <a href="${esc(game.url)}" target="_blank" rel="noopener">${esc(src.noteLink)}</a>${esc(src.note)}</p>
+      <p class="bx-source">${game.url ? `Box score from <a href="${esc(game.url)}" target="_blank" rel="noopener">${esc(src.noteLink)}</a>` : ''}${esc(src.note)}</p>
       ${d.correction ? `<p class="bx-source"><strong>Note:</strong> ${esc(d.correction)}</p>` : ''}
     </aside>`;
 }
 
 function gameHtml(game, key, src) {
   const d = game.detail;
+  // Team-reported games may have no player stats: skip the empty tables.
+  const hasPlayers = d.teams.some((t) => t.skaters?.length || t.goalies?.length);
+  const main = `
+        ${leaders(d)}
+        ${scoringSummary(d, key)}
+        ${hasPlayers ? `<section class="bx-section" aria-labelledby="bx-box-h">
+          <h2 id="bx-box-h" class="bx-h2">Box Score</h2>
+          ${d.teams.map((t) => teamCard(t, key)).join('')}
+        </section>` : ''}
+        ${penaltyList(d, key)}`;
+  const solo = !main.trim();
   return `
     ${hero(d, game, key, src)}
     ${stars(d, key)}
-    <div class="bx-layout">
-      <div class="bx-main">
-        ${leaders(d)}
-        ${scoringSummary(d, key)}
-        <section class="bx-section" aria-labelledby="bx-box-h">
-          <h2 id="bx-box-h" class="bx-h2">Box Score</h2>
-          ${d.teams.map((t) => teamCard(t, key)).join('')}
-        </section>
-        ${penaltyList(d, key)}
-      </div>
+    <div class="bx-layout${solo ? ' bx-layout-solo' : ''}">
+      ${solo ? '' : `<div class="bx-main">${main}</div>`}
       ${sidebar(d, game, src)}
     </div>`;
 }
@@ -312,7 +332,7 @@ function indexHtml(feeds, events) {
       .join('');
     return section(TEAMS[key].label, items) + tournaments;
   }).join('');
-  return `<header class="bx-hero bx-hero-index"><h1 class="bx-index-h1">Box Scores</h1><p class="bx-foot">League games from LIHockey.com &middot; tournament games from GameSheet</p></header><div class="bx-layout bx-layout-index"><div class="bx-main">${lists}</div></div>`;
+  return `<header class="bx-hero bx-hero-index"><h1 class="bx-index-h1">Box Scores</h1><p class="bx-foot">League games from LIHockey.com &middot; tournament games from GameSheet &middot; exhibition games from the team</p></header><div class="bx-layout bx-layout-index"><div class="bx-main">${lists}</div></div>`;
 }
 
 const getJson = (name) => fetch(`${FEED_BASE}/${name}.json`)
@@ -343,7 +363,8 @@ export default async function decorate(block) {
   const feed = await getJson(event ? event.feed : `stats-lihockey-${key}`);
   const game = (feed?.games || []).find((g) => String(g.id) === id);
   if (!game?.detail?.teams?.length) {
-    const when = event ? 'Tournament box scores are saved from GameSheet within a day of the game.' : 'Box scores usually appear on LIHockey.com a few days after the game.';
+    let when = event ? 'Tournament box scores are saved from GameSheet within a day of the game.' : 'Box scores usually appear on LIHockey.com a few days after the game.';
+    if (event?.club) when = 'Exhibition box scores are added once the team reports the game.';
     block.innerHTML = `<div class="bx-missing"><h1>Box score not available</h1><p>This game’s box score hasn’t been posted yet. ${when}</p><p><a class="bx-btn bx-btn-solid" href="${esc(src.backPath || '/schedule')}">Back to the schedule</a> <a class="bx-btn" href="/box-score">All box scores</a></p></div>`;
     return;
   }
