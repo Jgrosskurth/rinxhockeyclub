@@ -27,8 +27,84 @@
       "name": "Rinx",
       "total": "12",
       "periods": [],
-      "skaters": [],
-      "goalies": []
+      "skaters": [
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "g": "3",
+        "a": "",
+        "pts": "3",
+        "pim": ""
+       },
+       {
+        "number": "11",
+        "name": "Donald Pierre Canel",
+        "g": "2",
+        "a": "",
+        "pts": "2",
+        "pim": ""
+       },
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "g": "2",
+        "a": "",
+        "pts": "2",
+        "pim": ""
+       },
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "g": "2",
+        "a": "",
+        "pts": "2",
+        "pim": ""
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "g": "2",
+        "a": "",
+        "pts": "2",
+        "pim": ""
+       },
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       }
+      ],
+      "goalies": [
+       {
+        "number": "1",
+        "name": "Connor Daly",
+        "min": "",
+        "sa": "8",
+        "ga": "0",
+        "sv": "8",
+        "svpct": "1.000",
+        "wl": ""
+       },
+       {
+        "number": "35",
+        "name": "Louie Savola",
+        "min": "",
+        "sa": "11",
+        "ga": "2",
+        "sv": "9",
+        "svpct": ".818",
+        "wl": ""
+       }
+      ],
+      "totals": {
+       "g": "12",
+       "a": "",
+       "pts": "12",
+       "pim": ""
+      }
      },
      {
       "name": "Prestige Stars",
@@ -39,27 +115,39 @@
       "goalies": []
      }
     ],
-    "leaders": [],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Aiden Brown",
+      "val": "3"
+     },
+     {
+      "cat": "Saves",
+      "name": "Louie Savola",
+      "val": "9"
+     }
+    ],
     "stars": [
      {
       "rank": "1",
       "name": "Aiden Brown",
       "team": "Rinx",
-      "line": ""
+      "line": "3G"
      },
      {
       "rank": "2",
       "name": "Donald Pierre Canel",
       "team": "Rinx",
-      "line": ""
+      "line": "2G"
      },
      {
       "rank": "3",
       "name": "Sean Fox",
       "team": "Rinx",
-      "line": ""
+      "line": "2G"
      }
-    ]
+    ],
+    "note": "Assists, penalties and goalie minutes weren’t recorded."
    }
   }
  ]

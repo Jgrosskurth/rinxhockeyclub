@@ -37,6 +37,7 @@ function sourceOf(key, eventKey) {
   const ev = EVENTS[eventKey];
   if (ev?.club) {
     return {
+      club: true,
       site: '',
       backPath: TEAMS[key].schedulePath,
       backLabel: `${TEAMS[key].label} schedule`,
@@ -276,19 +277,22 @@ function sidebar(d, game, src) {
       </div>
       <p class="bx-source">${game.url ? `Box score from <a href="${esc(game.url)}" target="_blank" rel="noopener">${esc(src.noteLink)}</a>` : ''}${esc(src.note)}</p>
       ${d.correction ? `<p class="bx-source"><strong>Note:</strong> ${esc(d.correction)}</p>` : ''}
+      ${d.note ? `<p class="bx-source">${esc(d.note)}</p>` : ''}
     </aside>`;
 }
 
 function gameHtml(game, key, src) {
   const d = game.detail;
-  // Team-reported games may have no player stats: skip the empty tables.
-  const hasPlayers = d.teams.some((t) => t.skaters?.length || t.goalies?.length);
+  // Team-reported games may have no player stats, or only ours: skip the empty tables.
+  const withPlayers = (t) => t.skaters?.length || t.goalies?.length;
+  const hasPlayers = d.teams.some(withPlayers);
+  const cards = src.club ? d.teams.filter(withPlayers) : d.teams;
   const main = `
         ${leaders(d)}
         ${scoringSummary(d, key)}
         ${hasPlayers ? `<section class="bx-section" aria-labelledby="bx-box-h">
           <h2 id="bx-box-h" class="bx-h2">Box Score</h2>
-          ${d.teams.map((t) => teamCard(t, key)).join('')}
+          ${cards.map((t) => teamCard(t, key)).join('')}
         </section>` : ''}
         ${penaltyList(d, key)}`;
   const solo = !main.trim();
