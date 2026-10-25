@@ -1,4 +1,5 @@
 import { loadGameUpdates, parseNewsDate } from '../../scripts/game-updates.js';
+import { TEAMS, loadTeamGames } from '../../scripts/team-feeds.js';
 
 // Cards older than this are hidden (authored ones stay in the document but
 // don't render; auto-generated ones simply stop being produced).
@@ -12,13 +13,34 @@ function isRecent(slide) {
   return slide.time >= today.getTime() - MAX_AGE_DAYS * DAY;
 }
 
-// An authored card already covers a game if it's dated within a day of it and
-// mentions the same age group (e.g. "Clean Sweep: 10U and 14U ..." covers both).
-function coveredByAuthored(card, authored) {
+const startOfDay = (time) => new Date(time).setHours(0, 0, 0, 0);
+
+// Each age group's finished game days ({ '10U': [time, ...] }), from the same
+// feeds as the schedule (league, tournament and exhibition games).
+async function finalDays() {
+  const days = {};
+  await Promise.all(Object.values(TEAMS).map(async (team) => {
+    const { finals } = await loadTeamGames(team.key).catch(() => ({ finals: [] }));
+    days[team.label.split(' ')[0]] = finals.map((g) => g.day.getTime());
+  }));
+  return days;
+}
+
+// An authored card already covers a game if it mentions the same age group
+// and is dated within a day of it (authors often date a card the day after).
+// It covers one game day: the team's game day closest to its date, so a card
+// about Sunday's game doesn't hide Saturday's.
+function coveredByAuthored(card, authored, days) {
   const age = card.age.toLowerCase();
-  return authored.some((a) => a.time != null
-    && Math.abs(a.time - card.time) <= DAY
-    && `${a.tag} ${a.title} ${a.body}`.toLowerCase().includes(age));
+  const cardDay = startOfDay(card.time);
+  return authored.some((a) => {
+    if (a.time == null || Math.abs(a.time - card.time) > DAY
+      || !`${a.tag} ${a.title} ${a.body}`.toLowerCase().includes(age)) return false;
+    const near = (days[card.age] || []).filter((d) => Math.abs(d - a.time) <= DAY);
+    if (!near.length) return true;
+    const closest = near.reduce((x, y) => (Math.abs(y - a.time) < Math.abs(x - a.time) ? y : x));
+    return closest === cardDay;
+  });
 }
 
 const ARROW = (d) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -92,8 +114,8 @@ export default function decorate(block) {
   // Show authored cards right away (this block sits near the top of the
   // homepage), then merge in the auto-generated Game Update cards.
   render(block, recentAuthored);
-  loadGameUpdates().then((updates) => {
-    const fresh = updates.filter((u) => isRecent(u) && !coveredByAuthored(u, authored));
+  Promise.all([loadGameUpdates(), finalDays()]).then(([updates, days]) => {
+    const fresh = updates.filter((u) => isRecent(u) && !coveredByAuthored(u, authored, days));
     if (fresh.length) render(block, [...recentAuthored, ...fresh].sort(newestFirst));
   });
 }
