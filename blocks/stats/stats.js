@@ -383,17 +383,20 @@ function feedKey() {
 // Current season, by game type. League stats are LIAHL's GameSheet team
 // page; tournament stats come from tournament team pages (built-in below,
 // plus any the club links in the other-games sheet, see
-// .github/scripts/pull_sheet_stats.py). No exhibition tab: those games have no stats source.
+// .github/scripts/pull_sheet_stats.py). Exhibition stats are added up from the
+// team-reported box scores (data/boxscores-exhibition-<team>.json).
 const TYPES = [
   { type: 'All', label: 'All Stats' },
   { type: 'League', label: 'League Stats' },
   { type: 'Tournament', label: 'Tournament Stats' },
+  { type: 'Exhibition', label: 'Exhibition Stats' },
 ];
 // League stats come from LIHockey.com box scores (pull_lihockey.py), since
 // GameSheet isn't recording LIAHL player stats; sources sharing a "group" are
 // alternatives, and only the first one with players is used (no double count).
 const LIHOCKEY = { label: 'LI Hockey', url: 'https://lihockey.com' };
 const GAMESHEET = { label: 'GameSheet', url: 'https://gamesheetstats.com' };
+const TEAM_BOX = { label: 'team box scores', url: '/box-score' };
 const BUILT_IN = {
   '10u': [
     {
@@ -404,6 +407,9 @@ const BUILT_IN = {
     },
     {
       type: 'Tournament', name: '2026 Mid-Atlantic Fall Classic', file: 'stats-mid-atlantic.json', via: GAMESHEET,
+    },
+    {
+      type: 'Exhibition', name: 'Exhibition games', file: 'boxscores-exhibition-10u.json', via: TEAM_BOX, boxScores: true,
     },
   ],
   '14u': [
@@ -420,6 +426,32 @@ const fetchJson = (file) => fetch(`${FEED_BASE}/${file}`)
   .then((r) => (r.ok ? r.json() : null))
   .catch(() => null);
 
+const num = (v) => parseFloat(v) || 0;
+
+// Season totals from box scores (our team's side of each game): one row per
+// player, GP = games they appear in.
+function fromBoxScores(data) {
+  const players = new Map();
+  const goalies = new Map();
+  const add = (map, p, stats) => {
+    const key = nameKey(p.name);
+    const row = map.get(key) || { name: p.name, number: p.number || '', gp: 0 };
+    row.gp += 1;
+    Object.entries(stats).forEach(([k, v]) => { row[k] = (row[k] || 0) + v; });
+    map.set(key, row);
+  };
+  (data?.games || []).forEach((game) => {
+    const us = (game.detail?.teams || []).find((t) => /\brinx\b/i.test(t.name || ''));
+    (us?.skaters || []).forEach((p) => add(players, p, {
+      g: num(p.g), a: num(p.a), pts: num(p.pts), pim: num(p.pim),
+    }));
+    (us?.goalies || []).forEach((p) => add(goalies, p, {
+      sa: num(p.sa), ga: num(p.ga), sv: num(p.sv), w: +(p.wl === 'W'), l: +(p.wl === 'L'),
+    }));
+  });
+  return { players: [...players.values()], goalies: [...goalies.values()] };
+}
+
 let sourcesCache;
 // Every stats source for the team, each with its players (possibly none).
 function loadSources(key) {
@@ -434,17 +466,17 @@ function loadSources(key) {
       const data = await Promise.all(all.map((src) => fetchJson(src.file)));
       return all.map((src, i) => ({
         ...src,
-        players: data[i]?.players || [],
-        goalies: data[i]?.goalies || [],
-        // LI Hockey feeds list the team's games (each with a box score).
+        ...(src.boxScores ? fromBoxScores(data[i]) : {
+          players: data[i]?.players || [],
+          goalies: data[i]?.goalies || [],
+        }),
+        // LI Hockey and box score feeds list the team's games.
         games: data[i]?.games?.length || 0,
       }));
     });
   }
   return sourcesCache;
 }
-
-const num = (v) => parseFloat(v) || 0;
 
 // One row per player across sources: games, goals, assists, points,
 // +/- and PIM added up.
@@ -480,6 +512,7 @@ const EMPTY = {
   All: 'No player stats have been posted yet this season.',
   League: 'No league stats yet. They’ll show here once the first box scores are posted.',
   Tournament: 'No tournament stats yet. Tournament stats show here once the tournament posts them on GameSheet.',
+  Exhibition: 'No exhibition stats yet. They show here once the team reports an exhibition game’s box score.',
 };
 
 async function showTypeStats(block, container, key, type) {
@@ -577,11 +610,10 @@ export default function decorate(block) {
       + '<a href="https://gamesheetstats.com" target="_blank" rel="noopener">View on GameSheet &rarr;</a></p></div>';
   };
 
-  const showSeason = async (idx) => {
-    current = idx;
+  // One load at a time, so a slow earlier load can't overwrite the tab picked after it.
+  let queue = Promise.resolve();
+  const render = async (idx) => {
     const season = seasons[idx];
-    block.querySelectorAll('.season-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
-    if (types) types.hidden = season.type !== 'types';
     loading();
     if (season.type === 'types') {
       try {
@@ -596,8 +628,14 @@ export default function decorate(block) {
         unavailable();
       }
     } else {
-      loadStats(block, season.url);
+      await loadStats(block, season.url);
     }
+  };
+  const showSeason = (idx) => {
+    current = idx;
+    block.querySelectorAll('.season-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+    if (types) types.hidden = seasons[idx].type !== 'types';
+    queue = queue.then(() => render(idx));
   };
 
   block.querySelectorAll('.season-btn').forEach((btn) => {
