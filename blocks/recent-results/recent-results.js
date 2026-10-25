@@ -6,6 +6,7 @@
  */
 import {
   TEAMS, DEFAULT_TEAM, loadTeamGames, resultBadge, selectTeam, onTeamChange, directionsUrl,
+  loadBoxScores, boxScoreFor,
 } from '../../scripts/team-feeds.js';
 
 const PIN = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>';
@@ -13,7 +14,7 @@ const PIN = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
 const FINALS = 3;
 const UPCOMING = 5;
 
-function card(g, isNext) {
+function card(g, isNext, boxScore) {
   let top = g.dayLabel;
   let cls = 'fx';
   if (g.result) {
@@ -34,9 +35,13 @@ function card(g, isNext) {
   const pin = rink
     ? `<a class="fx-map" href="${directionsUrl(g)}" target="_blank" rel="noopener" title="Directions" aria-label="Directions to ${rink.replace(/"/g, '&quot;')} (opens Google Maps)">${PIN}</a>`
     : '';
-  return `<li class="${cls}">
+  // Finals with a box score: the opponent is a link, stretched over the card.
+  const opp = boxScore
+    ? `<a class="fx-link" href="${boxScore}" aria-label="Box score: ${g.prefix} ${g.opp}, ${g.result} ${g.score}">${g.prefix} ${g.opp}</a>`
+    : `<span>${g.prefix} ${g.opp}</span>`;
+  return `<li class="${cls}${boxScore ? ' fx-has-box' : ''}">
     <p class="fx-top">${top}</p>
-    <p class="fx-opp">${logo}<span>${g.prefix} ${g.opp}</span></p>
+    <p class="fx-opp">${logo}${opp}</p>
     ${res}
     <p class="fx-meta">${g.type && g.type !== 'League' ? `${g.type} · ` : ''}${rink || ''}${pin}</p>
   </li>`;
@@ -88,7 +93,10 @@ export default function decorate(block) {
     buttons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.team === key));
     rail.setAttribute('aria-label', `${team.label} results and upcoming games, scroll for more`);
     try {
-      const { finals, upcoming } = await loadTeamGames(key);
+      const [{ finals, upcoming }, boxScores] = await Promise.all([
+        loadTeamGames(key),
+        loadBoxScores(key).catch(() => []),
+      ]);
       if (shown !== key) return;
       const games = [...finals.slice(-FINALS), ...upcoming.slice(0, UPCOMING)];
       if (!games.length) {
@@ -96,7 +104,11 @@ export default function decorate(block) {
         return;
       }
       const nextIndex = Math.min(finals.slice(-FINALS).length, games.length - 1);
-      rail.innerHTML = games.map((g, i) => card(g, i === nextIndex && !g.result)).join('');
+      rail.innerHTML = games.map((g, i) => card(
+        g,
+        i === nextIndex && !g.result,
+        boxScoreFor(boxScores, { ...g, opponent: g.opp }),
+      )).join('');
       openOnNext(rail);
     } catch {
       if (shown !== key) return;

@@ -103,6 +103,32 @@
   box-shadow: 0 8px 18px rgb(0 0 0 / 28%);
 }
 
+/* Finals with a box score: the whole card opens it; the map pin sits above. */
+.recent-results .fx-has-box {
+  position: relative;
+}
+
+.recent-results .fx-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.recent-results .fx-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+}
+
+.recent-results .fx-link:focus-visible {
+  outline: none;
+}
+
+.recent-results .fx-has-box:has(.fx-link:focus-visible) {
+  outline: 3px solid var(--color-red);
+  outline-offset: 2px;
+}
+
 .recent-results .fx-next {
   background: var(--color-white);
   color: var(--color-navy);
@@ -174,8 +200,10 @@
   color: var(--color-gray);
 }
 
-/* Map pin after the rink: Google Maps directions. */
+/* Map pin after the rink: Google Maps directions (above a box score link). */
 .recent-results .fx-map {
+  position: relative;
+  z-index: 1;
   display: inline-grid;
   place-items: center;
   width: 24px;

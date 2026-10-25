@@ -513,6 +513,7 @@ function normalizeGame(g, feed, team) {
     day: local,
     dayLabel: `${DAYS[local.getDay()]} ${MONTHS[when.month]} ${when.day}`,
     shortDate: `${MONTHS[when.month]} ${when.day}`,
+    date: g.date,
     time: when.timed ? g.time.trim().toUpperCase() : '',
     opp,
     oppLogo: g.logo || teamLogo(opp) || g.logoFallback || '',
@@ -557,6 +558,61 @@ export async function loadTeamGames(key) {
     finals: games.filter((g) => g.result),
     upcoming: games.filter((g) => !g.result && g.day >= today),
   };
+}
+
+// Box score pages (/box-score, see the box-score block), by game type:
+// league games from LI Hockey (matched by day and opponent), tournament games
+// from GameSheet (by game id), exhibition games the team reported (day and opponent).
+const TOURNAMENT_BOX_SCORES = { 'mid-atlantic': { team: '10u', feed: 'boxscores-mid-atlantic.json' } };
+const EXHIBITION_BOX_SCORES = { '10u': 'boxscores-exhibition-10u.json' };
+
+/**
+ * Every box score page for a team (or a tournament key such as 'mid-atlantic').
+ * @param {string} key '10u' | '14u' | tournament key
+ * @returns {Promise<Array>} { kind, id, date, opponent, href } per box score
+ */
+export async function loadBoxScores(key) {
+  const sources = [];
+  if (TEAMS[key]) {
+    sources.push({ kind: 'league', file: `stats-lihockey-${key}.json`, href: (id) => `/box-score?team=${key}&game=${id}` });
+  }
+  Object.entries(TOURNAMENT_BOX_SCORES)
+    .filter(([event, ev]) => ev.team === key || event === key)
+    .forEach(([event, ev]) => sources.push({ kind: 'tournament', file: ev.feed, href: (id) => `/box-score?event=${event}&game=${id}` }));
+  if (EXHIBITION_BOX_SCORES[key]) {
+    sources.push({ kind: 'exhibition', file: EXHIBITION_BOX_SCORES[key], href: (id) => `/box-score?event=exhibition-${key}&game=${id}` });
+  }
+  const feeds = await Promise.all(sources.map((src) => loadFeed(src.file).catch(() => null)));
+  return sources.flatMap((src, i) => (feeds[i]?.games || [])
+    .filter((x) => x.detail?.teams?.length === 2)
+    .map((x) => {
+      const [y, m, d] = (x.detail.isoDate || '').split('-');
+      return {
+        kind: src.kind,
+        id: String(x.id),
+        date: y ? `${MONTH_NAMES[+m - 1]} ${+d}, ${y}` : x.date,
+        opponent: x.opponent,
+        href: src.href(x.id),
+      };
+    }));
+}
+
+/**
+ * The box score page for a finished game, or ''.
+ * @param {Array} list from loadBoxScores
+ * @param {object} g { date, opponent, type, gameId, result }
+ */
+export function boxScoreFor(list, g) {
+  if (!g.result) return '';
+  const type = g.type || 'League';
+  let hit;
+  if (type === 'Tournament') {
+    hit = g.gameId && list.find((x) => x.kind === 'tournament' && x.id === String(g.gameId));
+  } else {
+    const kind = type === 'League' ? 'league' : 'exhibition';
+    hit = list.find((x) => x.kind === kind && sameGame(g, x));
+  }
+  return hit ? hit.href : '';
 }
 
 /**

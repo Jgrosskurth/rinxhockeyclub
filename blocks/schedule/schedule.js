@@ -2,7 +2,7 @@ import {
   gameSheetLogo, findLogoId, findLocalLogo, MHR_CDN,
 } from '../../scripts/team-logos.js';
 import {
-  rinkAddress, extraGames, tidyTeam, sameGame, directionsUrl,
+  rinkAddress, extraGames, tidyTeam, directionsUrl, loadBoxScores, boxScoreFor,
 } from '../../scripts/team-feeds.js';
 
 const PIN = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></svg>';
@@ -434,57 +434,15 @@ function gameOrder(g) {
 
 const MONTH_ABBR = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// League games LI Hockey has a box score for get a link to /box-score
-// (data/stats-lihockey-<team>.json, matched by day and opponent).
+// Finished games we have a box score page for (league, tournament or
+// exhibition; see loadBoxScores in team-feeds.js) get a link to it.
 async function addBoxScores(key, games) {
-  const feed = await fetch(`${FEED_BASE}/stats-lihockey-${key}.json`)
-    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const posted = (feed?.games || [])
-    .filter((x) => x.detail?.isoDate && x.detail.teams?.length === 2)
-    .map((x) => {
-      const [y, m, d] = x.detail.isoDate.split('-');
-      return { id: x.id, date: `${MONTH_ABBR[+m - 1]} ${+d}, ${y}`, opponent: x.opponent };
-    });
+  const list = await loadBoxScores(key);
   games.forEach((g) => {
-    if ((g.type || 'League') !== 'League' || !g.result) return;
-    const hit = posted.find((x) => sameGame({ date: g.rawDate, opponent: g.opp }, x));
-    if (hit) g.boxScore = `/box-score?team=${key}&game=${hit.id}`;
-  });
-}
-
-// Tournament games GameSheet has a box score for (data/boxscores-<event>.json,
-// matched by game id) get a link to /box-score too.
-const TOURNAMENT_BOX_SCORES = { 'mid-atlantic': 'boxscores-mid-atlantic' };
-
-async function addTournamentBoxScores(games) {
-  const events = Object.entries(TOURNAMENT_BOX_SCORES);
-  const feeds = await Promise.all(events.map(([, feed]) => fetch(`${FEED_BASE}/${feed}.json`)
-    .then((r) => (r.ok ? r.json() : null)).catch(() => null)));
-  events.forEach(([event], i) => {
-    const posted = new Set((feeds[i]?.games || [])
-      .filter((x) => x.detail?.teams?.length === 2).map((x) => String(x.id)));
-    games.forEach((g) => {
-      if (g.type === 'Tournament' && g.gameId && posted.has(String(g.gameId))) {
-        g.boxScore = `/box-score?event=${event}&game=${g.gameId}`;
-      }
+    const href = boxScoreFor(list, {
+      date: g.rawDate, opponent: g.opp, type: g.type, gameId: g.gameId, result: g.result,
     });
-  });
-}
-
-// Exhibition games with a team-reported box score (data/boxscores-exhibition-<team>.json,
-// matched by day and opponent) get a link to /box-score too.
-const EXHIBITION_BOX_SCORES = { '10u': 'boxscores-exhibition-10u' };
-
-async function addExhibitionBoxScores(key, games) {
-  const feed = EXHIBITION_BOX_SCORES[key];
-  if (!feed) return;
-  const data = await fetch(`${FEED_BASE}/${feed}.json`)
-    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
-  const posted = (data?.games || []).filter((x) => x.detail?.teams?.length === 2);
-  games.forEach((g) => {
-    if (g.type === 'League' || g.type === 'Tournament' || !g.result) return;
-    const hit = posted.find((x) => sameGame({ date: g.rawDate, opponent: g.opp }, x));
-    if (hit) g.boxScore = `/box-score?event=exhibition-${key}&game=${hit.id}`;
+    if (href) g.boxScore = href;
   });
 }
 
@@ -507,13 +465,9 @@ async function loadFeedGames() {
   if (!tournamentPage) {
     const extra = await extraGames(cfg.key, raw);
     extra.forEach((g) => games.push({ ...fromFeed(g, ''), type: g.type, sheet: true }));
-    await Promise.all([
-      addBoxScores(cfg.key, games),
-      addTournamentBoxScores(games),
-      addExhibitionBoxScores(cfg.key, games),
-    ]);
+    await addBoxScores(cfg.key, games);
   } else {
-    await addTournamentBoxScores(games);
+    await addBoxScores(cfg.key, games);
   }
   return games.filter((g) => g.opp).sort((a, b) => gameOrder(a) - gameOrder(b));
 }
