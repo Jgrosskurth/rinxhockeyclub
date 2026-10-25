@@ -75,7 +75,7 @@ function titleCase(text) {
 // the club wants them shown, matched by a lowercased part of the name (feeds
 // may send ALL CAPS, e.g. "DONALD PIERRE CANEL").
 const NAME_OVERRIDES = [
-  { match: 'donald pierre can', display: 'DJ Pierre Canal' },
+  { match: 'donald pierre can', display: 'DJ Pierre Canel' },
 ];
 
 /**
