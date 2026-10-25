@@ -153,9 +153,10 @@ UID:gamesheet-sheet-10u-20261025-prestige-stars@rinxhockeyclub.com
 DTSTAMP:20261025T073000Z
 DTSTART;TZID=America/New_York:20261025T073000
 DTEND;TZID=America/New_York:20261025T090000
-SUMMARY:Rinx 10U at Prestige Stars · Exhibition
+SUMMARY:Rinx 10U at Prestige Stars · Exhibition (W 12-2)
 LOCATION:Abe Stark Rink\, Coney Island Beach
-DESCRIPTION:Exhibition\nSchedule: https://www.rinxhockeyclub.com/schedule
+DESCRIPTION:Exhibition\nFinal: W 12-2\nSchedule: https://www.rinxhockeyclub
+ .com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
