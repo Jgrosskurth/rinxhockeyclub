@@ -795,7 +795,8 @@
     padding: 32px 24px 56px;
   }
 
-  .box-score .bx-layout-index {
+  .box-score .bx-layout-index,
+  .box-score .bx-layout-solo {
     grid-template-columns: minmax(0, 1fr);
     max-width: 800px;
   }

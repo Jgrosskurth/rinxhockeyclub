@@ -1,0 +1,66 @@
+{
+ "type": "boxscores",
+ "_about": "Box scores for 10U exhibition games, kept by hand from what the team reports (score from the Google Form, three stars from the coaches). Shown at /box-score?event=exhibition-10u&game=<id>. Teams are [away, home]. Add skaters/goalies/periods when the team has them; leave them empty otherwise.",
+ "team": "10u",
+ "games": [
+  {
+   "id": "2026-10-25-prestige-stars",
+   "url": "",
+   "date": "Oct 25, 2026",
+   "opponent": "Prestige Stars",
+   "detail": {
+    "league": "Exhibition",
+    "info": [
+     "Exhibition game",
+     "",
+     "Oct 25, 2026, 7:30 AM",
+     "Abe Stark Rink, Coney Island Beach"
+    ],
+    "status": "Final",
+    "dateLong": "Sunday, October 25, 2026",
+    "isoDate": "2026-10-25",
+    "time": "7:30 AM",
+    "venue": "Abe Stark Rink, Coney Island Beach",
+    "periodLabels": [],
+    "teams": [
+     {
+      "name": "Rinx",
+      "total": "12",
+      "periods": [],
+      "skaters": [],
+      "goalies": []
+     },
+     {
+      "name": "Prestige Stars",
+      "logo": "/images/opponents/prestige-stars-f925ede3.webp",
+      "total": "2",
+      "periods": [],
+      "skaters": [],
+      "goalies": []
+     }
+    ],
+    "leaders": [],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Aiden Brown",
+      "team": "Rinx",
+      "line": ""
+     },
+     {
+      "rank": "2",
+      "name": "Donald Pierre Canel",
+      "team": "Rinx",
+      "line": ""
+     },
+     {
+      "rank": "3",
+      "name": "Sean Fox",
+      "team": "Rinx",
+      "line": ""
+     }
+    ]
+   }
+  }
+ ]
+}
