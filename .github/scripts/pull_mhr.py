@@ -37,6 +37,7 @@ TEAMS = {
 }
 MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 TYPES = {'*': 'League', '**': 'Tournament'}  # no marker: an exhibition
+ATTEMPTS = 3  # reads of a page that comes back without games
 
 
 def crawl(urls):
@@ -125,6 +126,18 @@ def games(page):
 
 def main():
     pages = crawl(list(TEAMS.values()))
+    # A page sometimes loads without its game rows (seen for 14U on
+    # 2026-10-26, minutes after a full read): try those again.
+    for _ in range(ATTEMPTS - 1):
+        empty = [u for u in TEAMS.values() if not (pages.get(u) and games(pages[u]))]
+        if not empty:
+            break
+        print(f'[mhr] no games on {len(empty)} page(s), trying again')
+        try:
+            pages.update({u: p for u, p in crawl(empty).items() if games(p)})
+        except Exception as err:  # keep what the first read got
+            print(f'[mhr] retry failed: {err}')
+            break
     if '--dump' in sys.argv:
         (ROOT / 'mhr-raw.json').write_text(json.dumps(pages, indent=1))
     for key, url in TEAMS.items():
