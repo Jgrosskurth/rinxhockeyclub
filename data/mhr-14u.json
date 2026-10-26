@@ -1,7 +1,7 @@
 {
  "type": "mhr",
  "team": "14u",
- "url": "https://myhockeyrankings.com/team-info/34340/2026",
+ "url": "https://myhockeyrankings.com/team-info/34340/2026/games",
  "title": "Long Island Rinx (South) 14U A",
  "games": [
   {
@@ -113,7 +113,18 @@
    "score": "9-3",
    "mhrGame": "10101331",
    "mhrTeam": "24788"
+  },
+  {
+   "date": "Oct 24, 2026",
+   "time": "10:00 AM",
+   "opponent": "Rye Rangers 14U",
+   "type": "Exhibition",
+   "rink": "Playland Ice",
+   "result": "W",
+   "score": "14-0",
+   "mhrGame": "10118469",
+   "mhrTeam": "18040"
   }
  ],
- "updated": "2026-10-26T14:20:00+00:00"
+ "updated": "2026-10-26T20:06:58+00:00"
 }
