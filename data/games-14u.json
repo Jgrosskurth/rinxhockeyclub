@@ -117,6 +117,16 @@
     },
     {
       "date": "Oct 17, 2026",
+      "visitor": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "home": "TB NYH0041-005 Great Neck Bruins 14U Bowden",
+      "visitorScore": 0,
+      "homeScore": 9,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990060"
+    },
+    {
+      "date": "Oct 17, 2026",
       "visitor": "NYH0007-004 Long Island Sharks 14u Manno",
       "home": "NYH0036-007 Aviator Hockey Club 14U Leonard",
       "visitorScore": 6,
