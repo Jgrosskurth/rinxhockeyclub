@@ -9,6 +9,11 @@ name: Pull MyHockeyRankings games
 # pull.
 on:
   workflow_dispatch:
+    inputs:
+      dump:
+        description: 'Debug: save the raw pages as an artifact and commit nothing'
+        type: boolean
+        default: false
   schedule:
     - cron: '30 12 * * *'   # 08:30 ET (12:30 UTC)
     - cron: '30 0 * * *'    # 20:30 ET (00:30 UTC)
@@ -33,9 +38,19 @@ jobs:
       - name: Read MyHockeyRankings team pages (via Apify)
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-        run: python .github/scripts/pull_mhr.py
+        run: python .github/scripts/pull_mhr.py ${{ inputs.dump && '--dump' || '' }}
+
+      - name: Save the raw pages
+        if: ${{ inputs.dump }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: mhr-raw
+          path: |
+            mhr-raw.json
+            data/mhr-*.json
 
       - name: Commit results
+        if: ${{ !inputs.dump }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

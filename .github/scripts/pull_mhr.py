@@ -8,9 +8,11 @@ source wins over it.
 
 MyHockeyRankings is behind Cloudflare, so its pages are read through the
 club's Apify account (APIFY_TOKEN, the Website Content Crawler actor, which
-respects robots.txt). Each team's main page lists its games: date, start time,
-opponent (with MyHockeyRankings' * league / ** tournament marker), rink,
-result and score. A team whose page can't be read keeps its saved file.
+respects robots.txt). Each team's Games page lists its games: date, start
+time, opponent (with MyHockeyRankings' * league / ** tournament marker), rink,
+result and score. (The main team page loads its games separately and often
+shows "Failed to retrieve game scores" instead.) A team whose page can't be
+read keeps its saved file.
 
 Run by .github/workflows/pull-mhr.yml. --dump saves the raw pages to
 mhr-raw.json for debugging.
@@ -30,15 +32,16 @@ DATA = ROOT / 'data'
 ACTOR = 'apify~website-content-crawler'
 SEASON = 2026  # MyHockeyRankings' "y": the 2026-27 season
 TEAMS = {
-    '10u': f'https://myhockeyrankings.com/team-info/19306/{SEASON}',
-    '14u': f'https://myhockeyrankings.com/team-info/34340/{SEASON}',
+    '10u': f'https://myhockeyrankings.com/team-info/19306/{SEASON}/games',
+    '14u': f'https://myhockeyrankings.com/team-info/34340/{SEASON}/games',
 }
 MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 TYPES = {'*': 'League', '**': 'Tournament'}  # no marker: an exhibition
 
 
 def crawl(urls):
-    """{url: {'status', 'title', 'html'}} for each page, via the Apify actor."""
+    """{url: {'status', 'title', 'html', 'markdown'}} for each page, via the
+    Apify actor."""
     token = os.environ.get('APIFY_TOKEN')
     if not token:
         sys.exit('APIFY_TOKEN not set')
@@ -50,7 +53,7 @@ def crawl(urls):
         'proxyConfiguration': {'useApifyProxy': True},
         'respectRobotsTxtFile': True,
         'saveHtml': True,
-        'saveMarkdown': False,
+        'saveMarkdown': True,
         'htmlTransformer': 'none',
         'removeElementsCssSelector': 'script, style, noscript, svg',
         'removeCookieWarnings': True,
@@ -71,6 +74,7 @@ def crawl(urls):
             'status': crawl_info.get('httpStatusCode'),
             'title': (it.get('metadata') or {}).get('title') or '',
             'html': it.get('html') or '',
+            'markdown': it.get('markdown') or '',
         }
     return pages
 
