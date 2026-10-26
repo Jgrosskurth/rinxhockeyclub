@@ -139,6 +139,17 @@ DESCRIPTION:LIAHL · 14U Silver\nFinal: W 9-3\nSchedule: https://www.rinxho
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-sheet-14u-20261024-rye-rangers-14u@rinxhockeyclub.com
+DTSTAMP:20261024T100000Z
+DTSTART;TZID=America/New_York:20261024T100000
+DTEND;TZID=America/New_York:20261024T113000
+SUMMARY:Rinx 14U at Rye Rangers · Exhibition (W 14-0)
+LOCATION:Playland Ice
+DESCRIPTION:Exhibition\nFinal: W 14-0\nSchedule: https://www.rinxhockeyclub
+ .com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-2990058@rinxhockeyclub.com
 DTSTAMP:20261024T183000Z
 DTSTART;TZID=America/New_York:20261024T183000
