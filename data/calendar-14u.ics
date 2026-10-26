@@ -49,6 +49,17 @@ DESCRIPTION:LIAHL · 14U Silver\nFinal: W 7-0\nSchedule: https://www.rinxho
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-sheet-14u-20260919-great-neck-bruins-14u@rinxhockeyclub.com
+DTSTAMP:20260919T183000Z
+DTSTART;TZID=America/New_York:20260919T183000
+DTEND;TZID=America/New_York:20260919T200000
+SUMMARY:Rinx 14U at Great Neck Bruins · Exhibition (W 3-1)
+LOCATION:Andrew Stergiopoulos Ice Rink
+DESCRIPTION:Exhibition\nFinal: W 3-1\nSchedule: https://www.rinxhockeyclub.
+ com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-sheet-14u-20260920-greater-new-york-stars-14u-a@rinxhockeyclu
  b.com
 DTSTAMP:20260920T090000Z
@@ -103,6 +114,17 @@ SUMMARY:Rinx 14U at New York Aviators · Exhibition (L 0-4)
 LOCATION:Aviator Sports and Events Center
 DESCRIPTION:Exhibition\nFinal: L 0-4\nSchedule: https://www.rinxhockeyclub.
  com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-sheet-14u-20261017-westchester-express-14u@rinxhockeyclub.com
+DTSTAMP:20261017T154700Z
+DTSTART;TZID=America/New_York:20261017T154700
+DTEND;TZID=America/New_York:20261017T171700
+SUMMARY:Rinx 14U at Westchester Express (L 2-8)
+LOCATION:
+DESCRIPTION:League\nFinal: L 2-8\nSchedule: https://www.rinxhockeyclub.com/
+ schedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT

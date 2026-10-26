@@ -178,6 +178,31 @@ def merge_rows(club, submitted):
     return rows
 
 
+def load_mhr_rows():
+    """Finished games MyHockeyRankings lists (data/mhr-<team>.json, written by
+    pull_mhr.py), as sheet rows (as loadMhrRows in team-feeds.js)."""
+    rows = []
+    for key in TEAMS:
+        try:
+            games = json.loads((DATA / f'mhr-{key}.json').read_text()).get('games', [])
+        except (OSError, ValueError):
+            continue
+        rows += [{'Team': key.upper(), 'Type': g.get('type'), 'Date': g.get('date'), 'Time': g.get('time'),
+                  'Opponent': g.get('opponent'), 'Rink': g.get('rink'), 'Score': g.get('score'),
+                  'Result': g.get('result'), 'fromMhr': True} for g in games]
+    return rows
+
+
+def with_mhr(rows, mhr):
+    """Sheet rows plus the MyHockeyRankings games none of them has (GameSheet
+    still wins later, in build), as loadOtherSheet in team-feeds.js."""
+    def same(a, b):
+        return bool(row_team(a)) and row_team(a) == row_team(b) and same_game(
+            {'date': a.get('Date') or '', 'opponent': a.get('Opponent') or ''},
+            {'date': b.get('Date') or '', 'opponent': b.get('Opponent') or ''})
+    return rows + [m for m in mhr if not any(same(r, m) for r in rows)]
+
+
 def same_game(a, b):
     """Same day and (loosely) the same opponent."""
     def norm(x):
@@ -360,6 +385,6 @@ def build(key, team, sheet_rows):
 
 
 if __name__ == '__main__':
-    rows = merge_rows(load_other_rows(), load_submitted_rows())
+    rows = with_mhr(merge_rows(load_other_rows(), load_submitted_rows()), load_mhr_rows())
     for k, t in TEAMS.items():
         build(k, t, rows)

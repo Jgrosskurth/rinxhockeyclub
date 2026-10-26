@@ -1,0 +1,119 @@
+{
+ "type": "mhr",
+ "team": "14u",
+ "url": "https://myhockeyrankings.com/team-info/34340/2026",
+ "title": "Long Island Rinx (South) 14U A",
+ "games": [
+  {
+   "date": "Sep 12, 2026",
+   "time": "5:00 PM",
+   "opponent": "Peconic Wildcats (Minor) 14U",
+   "type": "League",
+   "rink": "",
+   "result": "W",
+   "score": "8-3",
+   "mhrGame": "10026742",
+   "mhrTeam": "14888"
+  },
+  {
+   "date": "Sep 13, 2026",
+   "time": "10:00 AM",
+   "opponent": "Great Neck Bruins 14U",
+   "type": "League",
+   "rink": "",
+   "result": "W",
+   "score": "7-0",
+   "mhrGame": "10026734",
+   "mhrTeam": "24787"
+  },
+  {
+   "date": "Sep 19, 2026",
+   "time": "6:30 PM",
+   "opponent": "Great Neck Bruins 14U",
+   "type": "Exhibition",
+   "rink": "Andrew Stergiopoulos Ice Rink",
+   "result": "W",
+   "score": "3-1",
+   "mhrGame": "10047681",
+   "mhrTeam": "24787"
+  },
+  {
+   "date": "Sep 20, 2026",
+   "time": "9:00 AM",
+   "opponent": "Greater New York Stars 14U",
+   "type": "Exhibition",
+   "rink": "Abe Stark Rink",
+   "result": "T",
+   "score": "4-4",
+   "mhrGame": "10034553",
+   "mhrTeam": "14673"
+  },
+  {
+   "date": "Sep 26, 2026",
+   "time": "3:45 PM",
+   "opponent": "North Park 14U",
+   "type": "League",
+   "rink": "",
+   "result": "W",
+   "score": "5-1",
+   "mhrGame": "10047420",
+   "mhrTeam": "4577"
+  },
+  {
+   "date": "Sep 27, 2026",
+   "time": "4:50 PM",
+   "opponent": "Darien Youth 14U",
+   "type": "Exhibition",
+   "rink": "Stamford Twin Rinks",
+   "result": "W",
+   "score": "5-0",
+   "mhrGame": "10044505",
+   "mhrTeam": "12151"
+  },
+  {
+   "date": "Oct 3, 2026",
+   "time": "4:45 PM",
+   "opponent": "Peconic Wildcats (Minor) 14U",
+   "type": "League",
+   "rink": "",
+   "result": "W",
+   "score": "7-1",
+   "mhrGame": "10063701",
+   "mhrTeam": "14888"
+  },
+  {
+   "date": "Oct 11, 2026",
+   "time": "2:00 PM",
+   "opponent": "New York Aviators 14U",
+   "type": "Exhibition",
+   "rink": "Aviator Sports and Events Center",
+   "result": "L",
+   "score": "0-4",
+   "mhrGame": "10077108",
+   "mhrTeam": "14552"
+  },
+  {
+   "date": "Oct 17, 2026",
+   "time": "3:47 PM",
+   "opponent": "Westchester Express 14U",
+   "type": "League",
+   "rink": "",
+   "result": "L",
+   "score": "2-8",
+   "mhrGame": "10101349",
+   "mhrTeam": "22051"
+  },
+  {
+   "date": "Oct 18, 2026",
+   "time": "11:45 AM",
+   "opponent": "Long Island Sharks 14U",
+   "type": "League",
+   "rink": "",
+   "result": "W",
+   "score": "9-3",
+   "mhrGame": "10101331",
+   "mhrTeam": "24788"
+  }
+ ],
+ "updated": "2026-10-26T14:20:00+00:00"
+}

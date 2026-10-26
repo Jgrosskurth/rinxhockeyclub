@@ -240,12 +240,15 @@ function rowTeam(r) {
  * @param {object[]} club rows of /other-games
  * @param {object[]} submitted rows of data/form-games.json, oldest first
  */
+// Two sheet rows for the same team, day and opponent.
+const asRowGame = (r) => ({ date: sheetDate(r.Date), opponent: r.Opponent || '' });
+const sameRow = (a, b) => rowTeam(a) && rowTeam(a) === rowTeam(b)
+  && sameGame(asRowGame(a), asRowGame(b));
+
 export function mergeSheetRows(club, submitted) {
   const rows = club.map((r) => ({ ...r, fromClub: true }));
-  const asGame = (r) => ({ date: sheetDate(r.Date), opponent: r.Opponent || '' });
-  const same = (a, b) => rowTeam(a) && rowTeam(a) === rowTeam(b) && sameGame(asGame(a), asGame(b));
   submitted.forEach((s) => {
-    const hit = rows.find((r) => same(r, s));
+    const hit = rows.find((r) => sameRow(r, s));
     if (!hit) {
       rows.push({ ...s });
       return;
@@ -386,11 +389,41 @@ export function loadSubmittedRows() {
   return submittedRows;
 }
 
+let mhrRows;
+/**
+ * Finished games MyHockeyRankings lists (data/mhr-<team>.json, saved by
+ * .github/scripts/pull_mhr.py), as sheet rows. A check on the other sources:
+ * see loadOtherSheet.
+ */
+function loadMhrRows() {
+  if (!mhrRows) {
+    mhrRows = Promise.all(Object.keys(TEAMS).map((key) => loadFeed(`mhr-${key}.json`)
+      .then((feed) => (feed.games || []).map((g) => ({
+        Team: key.toUpperCase(),
+        Type: g.type,
+        Date: g.date,
+        Time: g.time,
+        Opponent: g.opponent,
+        Rink: g.rink,
+        Score: g.score,
+        Result: g.result,
+        fromMhr: true,
+      })))
+      .catch(() => []))).then((teams) => teams.flat());
+  }
+  return mhrRows;
+}
+
 let otherSheet;
+// The club's sheet rows, form submissions, then MyHockeyRankings games no
+// other row has (GameSheet and LI Hockey win later, in extraGames).
 function loadOtherSheet() {
   if (!otherSheet) {
-    otherSheet = Promise.all([loadClubRows(), loadSubmittedRows()])
-      .then(([club, submitted]) => mergeSheetRows(club, submitted));
+    otherSheet = Promise.all([loadClubRows(), loadSubmittedRows(), loadMhrRows()])
+      .then(([club, submitted, mhr]) => {
+        const rows = mergeSheetRows(club, submitted);
+        return [...rows, ...mhr.filter((m) => !rows.some((r) => sameRow(r, m)))];
+      });
   }
   return otherSheet;
 }

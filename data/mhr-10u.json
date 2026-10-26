@@ -1,0 +1,130 @@
+{
+ "type": "mhr",
+ "team": "10u",
+ "url": "https://myhockeyrankings.com/team-info/19306/2026",
+ "title": "Long Island Rinx 10U A",
+ "games": [
+  {
+   "date": "Sep 12, 2026",
+   "time": "7:00 AM",
+   "opponent": "Great Neck Bruins 10U",
+   "type": "Exhibition",
+   "rink": "Andrew Stergiopoulos Ice Rink",
+   "result": "W",
+   "score": "14-0",
+   "mhrGame": "10092473",
+   "mhrTeam": "3641"
+  },
+  {
+   "date": "Sep 13, 2026",
+   "time": "8:08 AM",
+   "opponent": "Peconic Wildcats (Minor) 10U",
+   "type": "League",
+   "rink": "Peconic Ice Rinks",
+   "result": "W",
+   "score": "8-2",
+   "mhrGame": "10026737",
+   "mhrTeam": "30254"
+  },
+  {
+   "date": "Sep 20, 2026",
+   "time": "11:45 AM",
+   "opponent": "North Park (Mauro) 10U",
+   "type": "League",
+   "rink": "The Rinx at Hauppauge",
+   "result": "W",
+   "score": "13-0",
+   "mhrGame": "10034380",
+   "mhrTeam": "19140"
+  },
+  {
+   "date": "Sep 27, 2026",
+   "time": "10:10 AM",
+   "opponent": "Long Beach Lightning 10U",
+   "type": "League",
+   "rink": "The Rinx at Hauppauge",
+   "result": "W",
+   "score": "10-2",
+   "mhrGame": "10047415",
+   "mhrTeam": "15956"
+  },
+  {
+   "date": "Oct 9, 2026",
+   "time": "5:05 PM",
+   "opponent": "Delco Phantoms 10U",
+   "type": "Tournament",
+   "rink": "Hatfield Ice Arena",
+   "result": "W",
+   "score": "7-1",
+   "mhrGame": "10077456",
+   "mhrTeam": "17714"
+  },
+  {
+   "date": "Oct 10, 2026",
+   "time": "7:52 AM",
+   "opponent": "Central Penn Panthers (American) 10U",
+   "type": "Tournament",
+   "rink": "Hatfield Ice Arena",
+   "result": "W",
+   "score": "9-0",
+   "mhrGame": "10083031",
+   "mhrTeam": "39797"
+  },
+  {
+   "date": "Oct 10, 2026",
+   "time": "6:30 PM",
+   "opponent": "Philadelphia Genesis Hockey Club 9U",
+   "type": "Tournament",
+   "rink": "Hatfield Ice Arena",
+   "result": "W",
+   "score": "5-2",
+   "mhrGame": "10084826",
+   "mhrTeam": "14802"
+  },
+  {
+   "date": "Oct 11, 2026",
+   "time": "10:31 AM",
+   "opponent": "Long Island Gulls 9U",
+   "type": "Tournament",
+   "rink": "Hatfield Ice Arena",
+   "result": "W",
+   "score": "4-2",
+   "mhrGame": "10077509",
+   "mhrTeam": "32767"
+  },
+  {
+   "date": "Oct 17, 2026",
+   "time": "8:35 AM",
+   "opponent": "Long Beach Lightning 10U",
+   "type": "League",
+   "rink": "Long Beach Municipal Ice Arena",
+   "result": "W",
+   "score": "9-0",
+   "mhrGame": "10097028",
+   "mhrTeam": "15956"
+  },
+  {
+   "date": "Oct 18, 2026",
+   "time": "8:15 AM",
+   "opponent": "Long Island Sharks 10U",
+   "type": "League",
+   "rink": "Iceland Skating Rink",
+   "result": "W",
+   "score": "9-0",
+   "mhrGame": "10097032",
+   "mhrTeam": "30253"
+  },
+  {
+   "date": "Oct 25, 2026",
+   "time": "7:30 AM",
+   "opponent": "Greater New York Stars 10U",
+   "type": "Exhibition",
+   "rink": "Abe Stark Rink",
+   "result": "W",
+   "score": "12-2",
+   "mhrGame": "10113105",
+   "mhrTeam": "34398"
+  }
+ ],
+ "updated": "2026-10-26T14:20:00+00:00"
+}
