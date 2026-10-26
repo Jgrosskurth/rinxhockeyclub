@@ -82,6 +82,7 @@ const LOCAL_LOGOS = {
   'isles elite': '/images/soundtigers.jpeg',
   'sound tigers': '/images/sound-tigers.webp', // else "tigers" gives Mamaroneck's
   'iceworks islanders': '/images/iceworks-islanders.webp',
+  'rye rangers': '/images/opponents/ryerangers.png',
 };
 
 export function findLogoId(oppName) {
