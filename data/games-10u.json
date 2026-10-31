@@ -244,6 +244,36 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989474"
+    },
+    {
+      "date": "Oct 31, 2026",
+      "visitor": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "home": "NYH4033-005-North Park 10U Lewis",
+      "visitorScore": 0,
+      "homeScore": 4,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "3086855"
+    },
+    {
+      "date": "Oct 31, 2026",
+      "visitor": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "home": "NYH0007-001 Long Island Sharks 10u Davis",
+      "visitorScore": 1,
+      "homeScore": 1,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989513"
+    },
+    {
+      "date": "Oct 31, 2026",
+      "visitor": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "home": "NYH4033-005-North Park 10U Lewis",
+      "visitorScore": 15,
+      "homeScore": 0,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "3086857"
     }
   ]
 }
