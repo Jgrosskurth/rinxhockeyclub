@@ -161,6 +161,18 @@ DESCRIPTION:LIAHL · 14U Silver\nSchedule: https://www.rinxhockeyclub.com/s
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-sheet-14u-20261031-nassau-county-lions-13uaa@rinxhockeyclub.c
+ om
+DTSTAMP:20261031T140500Z
+DTSTART;TZID=America/New_York:20261031T140500
+DTEND;TZID=America/New_York:20261031T153500
+SUMMARY:Rinx 14U vs Nassau county lions 13uAA · Exhibition (W 6-2)
+LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
+DESCRIPTION:Exhibition\nFinal: W 6-2\nSchedule: https://www.rinxhockeyclub.
+ com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-2990053@rinxhockeyclub.com
 DTSTAMP:20261108T191000Z
 DTSTART;TZID=America/New_York:20261108T191000
