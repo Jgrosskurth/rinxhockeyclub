@@ -274,6 +274,26 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "3086857"
+    },
+    {
+      "date": "Nov 1, 2026",
+      "visitor": "NYH0124-002 Iceworks Islanders 10U Fortunato",
+      "home": "NYH0007-001 Long Island Sharks 10u Davis",
+      "visitorScore": 0,
+      "homeScore": 5,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989506"
+    },
+    {
+      "date": "Nov 1, 2026",
+      "visitor": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "home": "NYH0036-010 Aviator Hockey Club 10U Janss",
+      "visitorScore": 11,
+      "homeScore": 1,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989491"
     }
   ]
 }
