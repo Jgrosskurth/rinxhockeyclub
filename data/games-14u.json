@@ -154,6 +154,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2992409"
+    },
+    {
+      "date": "Nov 1, 2026",
+      "visitor": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "home": "NYH0036-007 Aviator Hockey Club 14U Leonard",
+      "visitorScore": 7,
+      "homeScore": 5,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990039"
     }
   ]
 }

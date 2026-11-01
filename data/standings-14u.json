@@ -68,6 +68,21 @@
     },
     {
       "rank": "5",
+      "team": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "gp": "7",
+      "w": "2",
+      "l": "5",
+      "t": "0",
+      "otl": "0",
+      "pts": "4",
+      "gf": "25",
+      "ga": "42",
+      "diff": "-17",
+      "streak": "Won 2",
+      "ours": false
+    },
+    {
+      "rank": "6",
       "team": "NYH0093-008 Dix Hills Selects 14U Flanagan",
       "gp": "2",
       "w": "1",
@@ -82,33 +97,18 @@
       "ours": false
     },
     {
-      "rank": "6",
-      "team": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
-      "gp": "6",
-      "w": "1",
-      "l": "5",
-      "t": "0",
-      "otl": "0",
-      "pts": "2",
-      "gf": "18",
-      "ga": "37",
-      "diff": "-19",
-      "streak": "Won 1",
-      "ours": false
-    },
-    {
       "rank": "7",
       "team": "NYH0036-007 Aviator Hockey Club 14U Leonard",
-      "gp": "3",
+      "gp": "4",
       "w": "0",
-      "l": "2",
+      "l": "3",
       "t": "1",
       "otl": "0",
       "pts": "1",
-      "gf": "9",
-      "ga": "23",
-      "diff": "-14",
-      "streak": "Tied 1",
+      "gf": "14",
+      "ga": "30",
+      "diff": "-16",
+      "streak": "Lost 1",
       "ours": false
     }
   ]
