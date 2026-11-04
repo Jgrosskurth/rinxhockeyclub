@@ -1,0 +1,6 @@
+{
+ "_about": "GameSheet games the club says were never played. .github/scripts/fill_league_games.py drops them from data/schedule-<team>.json after every GameSheet pull, so the site and the team calendars stop showing them. Key: team, then GameSheet game id (gamesheetstats.com/seasons/<season>/games/<id>). Remove an entry if the game is rescheduled under the same id.",
+ "14u": {
+  "2990058": { "note": "Oct 24, 2026 at Great Neck Bruins (Bowden), Parkwood Ice Rink, 6:30 PM. Never played (club, 2026-11-04)." }
+ }
+}
