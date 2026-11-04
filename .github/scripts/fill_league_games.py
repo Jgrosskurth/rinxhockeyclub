@@ -7,6 +7,10 @@ this adds the ones GameSheet doesn't have to data/schedule-<team>.json, tagged
 "source": "lihockey", so the site, the team calendars and the records all treat
 them as league games. GameSheet wins whenever it lists the game itself.
 
+It also drops the games listed in data/games-not-played.json (GameSheet game
+ids the club says were never played, e.g. 14U's Oct 24 game at Great Neck),
+which GameSheet keeps listing with no score.
+
 Runs in pull-schedule.yml after both pulls. Safe to rerun: earlier fills are
 dropped before matching again.
 """
@@ -65,12 +69,26 @@ def covers(listed, game):
     return not SCORE.match(score) or score == game['score']
 
 
+def not_played(key):
+    """Game ids data/games-not-played.json lists for a team."""
+    return set((read(DATA / 'games-not-played.json') or {}).get(key) or {})
+
+
 def fill(key):
     path = DATA / f'schedule-{key}.json'
     schedule = read(path)
+    if not isinstance(schedule, dict):
+        print(f'[{key}] skipped: schedule feed missing', file=sys.stderr)
+        return
+    drop = not_played(key)
+    for g in schedule.get('games') or []:
+        if str(g.get('gameId')) in drop:
+            print(f"[{key}] dropped {g.get('date')} vs {g.get('opponent')} (not played)")
+    schedule['games'] = [g for g in schedule.get('games') or [] if str(g.get('gameId')) not in drop]
     lihockey = read(DATA / f'stats-lihockey-{key}.json')
-    if not isinstance(schedule, dict) or not isinstance(lihockey, dict):
-        print(f'[{key}] skipped: schedule or LI Hockey feed missing', file=sys.stderr)
+    if not isinstance(lihockey, dict):
+        print(f'[{key}] LI Hockey feed missing, no fill', file=sys.stderr)
+        path.write_text(json.dumps(schedule, indent=2))
         return
     listed = [g for g in schedule.get('games') or [] if g.get('source') != 'lihockey']
     division = (read(DATA / f'standings-{key}.json') or {}).get('division') or ''

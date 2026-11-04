@@ -150,17 +150,6 @@ DESCRIPTION:Exhibition\nFinal: W 14-0\nSchedule: https://www.rinxhockeyclub
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
-UID:gamesheet-2990058@rinxhockeyclub.com
-DTSTAMP:20261024T183000Z
-DTSTART;TZID=America/New_York:20261024T183000
-DTEND;TZID=America/New_York:20261024T200000
-SUMMARY:Rinx 14U at Great Neck Bruins (Bowden)
-LOCATION:Parkwood Ice Rink\, Great Neck\, NY
-DESCRIPTION:LIAHL · 14U Silver\nSchedule: https://www.rinxhockeyclub.com/s
- chedule-14u
-URL:https://www.rinxhockeyclub.com/schedule-14u
-END:VEVENT
-BEGIN:VEVENT
 UID:gamesheet-sheet-14u-20261031-nassau-county-lions-13uaa@rinxhockeyclub.c
  om
 DTSTAMP:20261031T140500Z
