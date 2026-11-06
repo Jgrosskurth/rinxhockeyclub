@@ -160,6 +160,28 @@ DESCRIPTION:Exhibition\nFinal: W 12-2\nSchedule: https://www.rinxhockeyclub
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-sheet-10u-20261031-pal-sound-tigers-10u-aa@rinxhockeyclub.com
+DTSTAMP:20261031T140000Z
+DTSTART;TZID=America/New_York:20261031T140000
+DTEND;TZID=America/New_York:20261031T153000
+SUMMARY:Rinx 10U vs PAL Sound Tigers AA · Exhibition (L 1-6)
+LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
+DESCRIPTION:Exhibition\nFinal: L 1-6\nSchedule: https://www.rinxhockeyclub.
+ com/schedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-sheet-10u-20261108-beaver-dam-winter-sports-club@rinxhockeycl
+ ub.com
+DTSTAMP:20261108T081500Z
+DTSTART;TZID=America/New_York:20261108T081500
+DTEND;TZID=America/New_York:20261108T094500
+SUMMARY:Rinx 10U at Beaver Dam Winter Sports Club · Exhibition
+LOCATION:Beaver Dam Winter Sports Club
+DESCRIPTION:Exhibition\nSchedule: https://www.rinxhockeyclub.com/schedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-2989497@rinxhockeyclub.com
 DTSTAMP:20261115T100000Z
 DTSTART;TZID=America/New_York:20261115T100000

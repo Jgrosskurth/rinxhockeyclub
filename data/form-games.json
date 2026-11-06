@@ -83,6 +83,34 @@
    "Score": "6-2",
    "Result": "W",
    "Status": ""
+  },
+  {
+   "Submitted": "2026-11-06 14:28:32",
+   "Action": "Upcoming",
+   "Team": "10U",
+   "Type": "Exhibition",
+   "Date": "Nov 8, 2026",
+   "Time": "8:15 AM",
+   "Opponent": "Beaver Dam Winter Sports Club",
+   "Logo": "/images/opponents/beaver-dam-winter-sports-club-9e344b2f.webp",
+   "Rink": "Beaver Dam Winter Sports Club",
+   "Score": "",
+   "Result": "",
+   "Status": ""
+  },
+  {
+   "Submitted": "2026-11-06 14:29:59",
+   "Action": "Score",
+   "Team": "10U",
+   "Type": "Exhibition",
+   "Date": "Oct 31, 2026",
+   "Time": "2:00 PM",
+   "Opponent": "PAL Sound Tigers 10U AA",
+   "Logo": "/images/opponents/pal-sound-tigers-10u-aa-942bb621.webp",
+   "Rink": "The Rinx (Away)",
+   "Score": "1-6",
+   "Result": "L",
+   "Status": ""
   }
  ]
 }
