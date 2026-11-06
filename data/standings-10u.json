@@ -38,6 +38,21 @@
     },
     {
       "rank": "3",
+      "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "gp": "8",
+      "w": "4",
+      "l": "2",
+      "t": "2",
+      "otl": "0",
+      "pts": "10",
+      "gf": "45",
+      "ga": "30",
+      "diff": "+15",
+      "streak": "Tied 2",
+      "ours": false
+    },
+    {
+      "rank": "4",
       "team": "NYH0007-001 Long Island Sharks 10u Davis",
       "gp": "9",
       "w": "3",
@@ -49,21 +64,6 @@
       "ga": "36",
       "diff": "+1",
       "streak": "Won 1",
-      "ours": false
-    },
-    {
-      "rank": "4",
-      "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
-      "gp": "7",
-      "w": "3",
-      "l": "2",
-      "t": "2",
-      "otl": "0",
-      "pts": "8",
-      "gf": "29",
-      "ga": "30",
-      "diff": "-1",
-      "streak": "Tied 2",
       "ours": false
     },
     {
@@ -144,15 +144,15 @@
     {
       "rank": "10",
       "team": "NYH0041-009 Great Neck Bruins 10U Marsella",
-      "gp": "3",
+      "gp": "4",
       "w": "0",
-      "l": "3",
+      "l": "4",
       "t": "0",
       "otl": "0",
       "pts": "0",
       "gf": "4",
-      "ga": "12",
-      "diff": "-8",
+      "ga": "28",
+      "diff": "-24",
       "streak": "Lost 3",
       "ours": false
     }

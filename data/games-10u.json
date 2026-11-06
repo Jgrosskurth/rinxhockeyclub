@@ -197,6 +197,16 @@
     },
     {
       "date": "Oct 18, 2026",
+      "visitor": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "home": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "visitorScore": 16,
+      "homeScore": 0,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989512"
+    },
+    {
+      "date": "Oct 18, 2026",
       "visitor": "NYH0017-010 Rinx Travel 10U O'Donoghue",
       "home": "NYH0007-001 Long Island Sharks 10u Davis",
       "visitorScore": 9,
