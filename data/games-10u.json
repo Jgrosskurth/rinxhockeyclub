@@ -304,6 +304,26 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989491"
+    },
+    {
+      "date": "Nov 7, 2026",
+      "visitor": "NYH0041-009 Great Neck Bruins 10U Marsella",
+      "home": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "visitorScore": 0,
+      "homeScore": 10,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989486"
+    },
+    {
+      "date": "Nov 7, 2026",
+      "visitor": "NYH0036-010 Aviator Hockey Club 10U Janss",
+      "home": "NYH0007-001 Long Island Sharks 10u Davis",
+      "visitorScore": 1,
+      "homeScore": 7,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989478"
     }
   ]
 }
