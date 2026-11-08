@@ -324,6 +324,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989478"
+    },
+    {
+      "date": "Nov 8, 2026",
+      "visitor": "NYH4033-002-North Park-10U Mauro",
+      "home": "NYH0093-006 Dix Hills Selects 10U Goldfine",
+      "visitorScore": 2,
+      "homeScore": 10,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2992365"
     }
   ]
 }
