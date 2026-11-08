@@ -645,6 +645,62 @@
    }
   },
   {
+   "id": "2026-10-31-pal-sound-tigers",
+   "url": "",
+   "date": "Oct 31, 2026",
+   "opponent": "PAL Sound Tigers AA",
+   "detail": {
+    "league": "Exhibition",
+    "info": [
+     "Exhibition game",
+     "",
+     "Oct 31, 2026, 2:00 PM",
+     "The Rinx"
+    ],
+    "status": "Final",
+    "dateLong": "Saturday, October 31, 2026",
+    "isoDate": "2026-10-31",
+    "time": "2:00 PM",
+    "venue": "The Rinx",
+    "periodLabels": [],
+    "teams": [
+     {
+      "name": "Rinx",
+      "total": "1",
+      "periods": [],
+      "skaters": [
+       {
+        "number": "5",
+        "name": "Declan Nimmo",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       }
+      ],
+      "goalies": [],
+      "totals": {
+       "g": "1",
+       "a": "",
+       "pts": "1",
+       "pim": ""
+      }
+     },
+     {
+      "name": "PAL Sound Tigers AA",
+      "logo": "/images/sound-tigers.webp",
+      "total": "6",
+      "periods": [],
+      "skaters": [],
+      "goalies": []
+     }
+    ],
+    "leaders": [],
+    "stars": [],
+    "note": "Goals reported by the team; assists, penalties and saves weren’t recorded. Rinx were the away team at The Rinx."
+   }
+  },
+  {
    "id": "2026-11-08-beaver-dam",
    "url": "",
    "date": "Nov 8, 2026",
