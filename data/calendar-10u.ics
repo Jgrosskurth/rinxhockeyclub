@@ -176,9 +176,10 @@ UID:gamesheet-sheet-10u-20261108-beaver-dam-winter-sports-club@rinxhockeycl
 DTSTAMP:20261108T081500Z
 DTSTART;TZID=America/New_York:20261108T081500
 DTEND;TZID=America/New_York:20261108T094500
-SUMMARY:Rinx 10U at Beaver Dam Winter Sports Club · Exhibition
+SUMMARY:Rinx 10U at Beaver Dam Winter Sports Club · Exhibition (W 6-2)
 LOCATION:Beaver Dam Winter Sports Club
-DESCRIPTION:Exhibition\nSchedule: https://www.rinxhockeyclub.com/schedule
+DESCRIPTION:Exhibition\nFinal: W 6-2\nSchedule: https://www.rinxhockeyclub.
+ com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT

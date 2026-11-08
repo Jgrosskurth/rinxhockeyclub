@@ -166,10 +166,10 @@ UID:gamesheet-sheet-14u-20261107-nyc-cyclones-a-@rinxhockeyclub.com
 DTSTAMP:20261107T150000Z
 DTSTART;TZID=America/New_York:20261107T150000
 DTEND;TZID=America/New_York:20261107T163000
-SUMMARY:Rinx 14U vs NYC Cyclones (A) · Exhibition
+SUMMARY:Rinx 14U vs NYC Cyclones (A) · Exhibition (W 17-0)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:Exhibition\nSchedule: https://www.rinxhockeyclub.com/schedule-1
- 4u
+DESCRIPTION:Exhibition\nFinal: W 17-0\nSchedule: https://www.rinxhockeyclub
+ .com/schedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT

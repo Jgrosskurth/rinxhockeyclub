@@ -125,6 +125,34 @@
    "Score": "",
    "Result": "",
    "Status": ""
+  },
+  {
+   "Submitted": "2026-11-08 10:15:56",
+   "Action": "Score",
+   "Team": "10U",
+   "Type": "Exhibition",
+   "Date": "Nov 8, 2026",
+   "Time": "8:15 AM",
+   "Opponent": "Beaver Dam Winter Sports Club",
+   "Logo": "",
+   "Rink": "Beaver Dam Winter Sports Club",
+   "Score": "6-2",
+   "Result": "W",
+   "Status": ""
+  },
+  {
+   "Submitted": "2026-11-08 10:16:32",
+   "Action": "Score",
+   "Team": "14U",
+   "Type": "Exhibition",
+   "Date": "Nov 7, 2026",
+   "Time": "3:00 PM",
+   "Opponent": "NYC Cyclones (A)",
+   "Logo": "",
+   "Rink": "The Rinx",
+   "Score": "17-0",
+   "Result": "W",
+   "Status": ""
   }
  ]
 }
