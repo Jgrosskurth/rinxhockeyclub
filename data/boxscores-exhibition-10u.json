@@ -5,7 +5,7 @@
  "games": [
   {
    "id": "2026-10-25-prestige-stars",
-   "url": "",
+   "url": "https://gamesheetstats.com/seasons/15387/games/3105509",
    "date": "Oct 25, 2026",
    "opponent": "Prestige Stars",
    "detail": {
@@ -21,60 +21,164 @@
     "isoDate": "2026-10-25",
     "time": "7:30 AM",
     "venue": "Abe Stark Rink, Coney Island Beach",
-    "periodLabels": [],
+    "periodLabels": [
+     "1st",
+     "2nd",
+     "3rd"
+    ],
     "teams": [
      {
       "name": "Rinx",
       "total": "12",
-      "periods": [],
+      "periods": [
+       "5",
+       "4",
+       "3"
+      ],
       "skaters": [
        {
-        "number": "98",
-        "name": "Aiden Brown",
-        "g": "3",
-        "a": "",
-        "pts": "3",
-        "pim": ""
+        "number": "3",
+        "name": "Ryan Christman",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
        },
        {
-        "number": "11",
-        "name": "Donald Pierre Canel",
-        "g": "2",
-        "a": "",
-        "pts": "2",
-        "pim": ""
-       },
-       {
-        "number": "18",
-        "name": "Sean Fox",
-        "g": "2",
-        "a": "",
-        "pts": "2",
-        "pim": ""
-       },
-       {
-        "number": "75",
-        "name": "Matthew Grosskurth",
-        "g": "2",
-        "a": "",
-        "pts": "2",
-        "pim": ""
-       },
-       {
-        "number": "20",
-        "name": "Jorge Leonardo",
-        "g": "2",
-        "a": "",
-        "pts": "2",
-        "pim": ""
+        "number": "4",
+        "name": "Ryan Bachert",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
        },
        {
         "number": "5",
         "name": "Declan Nimmo",
+        "pos": "",
         "g": "1",
-        "a": "",
+        "a": "0",
         "pts": "1",
-        "pim": ""
+        "pim": "0"
+       },
+       {
+        "number": "11",
+        "name": "Donald Pierre Canel",
+        "pos": "",
+        "g": "2",
+        "a": "2",
+        "pts": "4",
+        "pim": "0"
+       },
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "pos": "",
+        "g": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "0"
+       },
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "pos": "",
+        "g": "3",
+        "a": "0",
+        "pts": "3",
+        "pim": "0"
+       },
+       {
+        "number": "21",
+        "name": "Tristen Pajak",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "23",
+        "name": "Conor Wilkens",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "28",
+        "name": "Stephen Kull",
+        "pos": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "pos": "",
+        "g": "2",
+        "a": "0",
+        "pts": "2",
+        "pim": "0"
+       },
+       {
+        "number": "90",
+        "name": "Nicholas Capozzoli",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "93",
+        "name": "Evan Martin",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "95",
+        "name": "Connor Hassett",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "96",
+        "name": "Ryan Lupia",
+        "pos": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "pos": "",
+        "g": "3",
+        "a": "1",
+        "pts": "4",
+        "pim": "0"
        }
       ],
       "goalies": [
@@ -101,25 +205,184 @@
       ],
       "totals": {
        "g": "12",
-       "a": "",
-       "pts": "12",
-       "pim": ""
+       "a": "7",
+       "pts": "19",
+       "pim": "0"
       }
      },
      {
       "name": "Prestige Stars",
       "logo": "/images/opponents/prestige-stars-f925ede3.webp",
       "total": "2",
-      "periods": [],
-      "skaters": [],
+      "periods": [
+       "2",
+       "0",
+       "0"
+      ],
+      "skaters": [
+       {
+        "number": "2",
+        "name": "Salvatore Zambito",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "9",
+        "name": "William Case",
+        "pos": "D",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "3"
+       },
+       {
+        "number": "10",
+        "name": "Michael Rossetti",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "13",
+        "name": "George Cohen",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "16",
+        "name": "Eleftherios Drenis",
+        "pos": "F",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0"
+       },
+       {
+        "number": "22",
+        "name": "Michael Russo",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "23",
+        "name": "Ryan Kalezic",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "24",
+        "name": "Alexander Avdeev",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "28",
+        "name": "Zvi Zlotnikov",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "55",
+        "name": "Kelly Carney",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "77",
+        "name": "Ilan Plikh",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "86",
+        "name": "Brendan Bobe",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "88",
+        "name": "Raymond Pollard",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "94",
+        "name": "Mustafa Mandour",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "97",
+        "name": "Mard Khudaverdiyev",
+        "pos": "F",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       },
+       {
+        "number": "99",
+        "name": "Soomin Kim",
+        "pos": "D",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0"
+       }
+      ],
       "goalies": []
      }
     ],
     "leaders": [
      {
       "cat": "Goals",
-      "name": "Aiden Brown",
+      "name": "Jorge Leonardo, Aiden Brown",
       "val": "3"
+     },
+     {
+      "cat": "Assists",
+      "name": "Donald Pierre Canel",
+      "val": "2"
+     },
+     {
+      "cat": "Points",
+      "name": "Donald Pierre Canel, Aiden Brown",
+      "val": "4"
      },
      {
       "cat": "Saves",
@@ -132,22 +395,294 @@
       "rank": "1",
       "name": "Aiden Brown",
       "team": "Rinx",
-      "line": "3G"
+      "line": "3G 1A"
      },
      {
       "rank": "2",
       "name": "Donald Pierre Canel",
       "team": "Rinx",
-      "line": "2G"
+      "line": "2G 2A"
      },
      {
       "rank": "3",
       "name": "Sean Fox",
       "team": "Rinx",
-      "line": "2G"
+      "line": "1G 1A"
      }
     ],
-    "note": "Assists, penalties and goalie minutes weren’t recorded."
+    "note": "Goals, assists and penalties from the official GameSheet game sheet; goalies as reported by the team.",
+    "goals": [
+     {
+      "period": "1st",
+      "time": "10:56",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "5",
+       "name": "Declan Nimmo",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "1st",
+      "time": "08:06",
+      "tags": [],
+      "team": "Prestige Stars",
+      "scorer": {
+       "number": "9",
+       "name": "William Case",
+       "count": "15"
+      },
+      "assists": []
+     },
+     {
+      "period": "1st",
+      "time": "06:46",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "11",
+       "name": "Donald Pierre Canel",
+       "count": "1"
+      },
+      "assists": []
+     },
+     {
+      "period": "1st",
+      "time": "05:07",
+      "tags": [],
+      "team": "Prestige Stars",
+      "scorer": {
+       "number": "16",
+       "name": "Eleftherios Drenis",
+       "count": "7"
+      },
+      "assists": []
+     },
+     {
+      "period": "1st",
+      "time": "04:44",
+      "tags": [
+       "GWG"
+      ],
+      "team": "Rinx",
+      "scorer": {
+       "number": "18",
+       "name": "Sean Fox",
+       "count": "1"
+      },
+      "assists": []
+     },
+     {
+      "period": "1st",
+      "time": "03:30",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "98",
+       "name": "Aiden Brown",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "11",
+        "name": "Donald Pierre Canel",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "1st",
+      "time": "02:59",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "98",
+       "name": "Aiden Brown",
+       "count": "2"
+      },
+      "assists": []
+     },
+     {
+      "period": "2nd",
+      "time": "10:20",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "20",
+       "name": "Jorge Leonardo",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "count": "1"
+       },
+       {
+        "number": "23",
+        "name": "Conor Wilkens",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "06:42",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "1"
+      },
+      "assists": [
+       {
+        "number": "28",
+        "name": "Stephen Kull",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "04:55",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "11",
+       "name": "Donald Pierre Canel",
+       "count": "2"
+      },
+      "assists": [
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "count": "1"
+       }
+      ]
+     },
+     {
+      "period": "2nd",
+      "time": "01:11",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "75",
+       "name": "Matthew Grosskurth",
+       "count": "2"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "13:34",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "20",
+       "name": "Jorge Leonardo",
+       "count": "2"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "03:22",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "20",
+       "name": "Jorge Leonardo",
+       "count": "3"
+      },
+      "assists": []
+     },
+     {
+      "period": "3rd",
+      "time": "03:14",
+      "tags": [],
+      "team": "Rinx",
+      "scorer": {
+       "number": "98",
+       "name": "Aiden Brown",
+       "count": "3"
+      },
+      "assists": [
+       {
+        "number": "11",
+        "name": "Donald Pierre Canel",
+        "count": "2"
+       }
+      ]
+     }
+    ],
+    "penalties": [
+     {
+      "period": "2nd",
+      "time": "02:58",
+      "team": "Prestige Stars",
+      "number": "9",
+      "name": "William Case",
+      "infraction": "Cross-Checking - Minor, 1.5 min"
+     },
+     {
+      "period": "3rd",
+      "time": "04:57",
+      "team": "Prestige Stars",
+      "number": "9",
+      "name": "William Case",
+      "infraction": "Roughing - Minor, 1.5 min"
+     }
+    ]
+   }
+  },
+  {
+   "id": "2026-11-08-beaver-dam",
+   "url": "",
+   "date": "Nov 8, 2026",
+   "opponent": "Beaver Dam Winter Sports Club",
+   "detail": {
+    "league": "Exhibition",
+    "info": [
+     "Outdoor exhibition game",
+     "",
+     "Nov 8, 2026, 8:15 AM",
+     "Beaver Dam Winter Sports Club"
+    ],
+    "status": "Final",
+    "dateLong": "Sunday, November 8, 2026",
+    "isoDate": "2026-11-08",
+    "time": "8:15 AM",
+    "venue": "Beaver Dam Winter Sports Club",
+    "periodLabels": [],
+    "teams": [
+     {
+      "name": "Rinx",
+      "total": "6",
+      "periods": [],
+      "skaters": [],
+      "goalies": []
+     },
+     {
+      "name": "Beaver Dam Winter Sports Club",
+      "logo": "/images/beaverdam.png",
+      "total": "2",
+      "periods": [],
+      "skaters": [],
+      "goalies": []
+     }
+    ],
+    "leaders": [],
+    "stars": [],
+    "note": "Played outdoors. Scorers, assists and saves haven’t been reported yet."
    }
   }
  ]

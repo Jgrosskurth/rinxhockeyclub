@@ -141,12 +141,9 @@ def last(name):
     return name.split()[-1]
 
 
-def tournament_card(detail, team, event_name, short_event, record, first):
-    rinx = next(t for t in detail['teams'] if 'rinx' in t['name'].lower())
-    opp = next(t for t in detail['teams'] if t is not rinx)
-    us, them = int(rinx['total']), int(opp['total'])
-    opp_name = tidy_team(opp['name'])
-    score = f'{max(us, them)}-{min(us, them)}'
+def scoring(rinx, them):
+    """From Rinx's side of a box score: (multi-goal skaters, who-scored clause,
+    goalie clause, winning goalie). Clauses are '' when the box score lacks them."""
     multi = sorted((p for p in rinx['skaters'] if int(p['g'] or 0) >= 2), key=lambda p: -int(p['g']))
     scorers = [p for p in rinx['skaters'] if int(p['g'] or 0) > 0]
     if multi:
@@ -170,6 +167,16 @@ def tournament_card(detail, team, event_name, short_event, record, first):
         goalie = f"{winner['name']} made {winner['sv']} saves"
     else:
         goalie = ''
+    return multi, lead, goalie, winner
+
+
+def tournament_card(detail, team, event_name, short_event, record, first):
+    rinx = next(t for t in detail['teams'] if 'rinx' in t['name'].lower())
+    opp = next(t for t in detail['teams'] if t is not rinx)
+    us, them = int(rinx['total']), int(opp['total'])
+    opp_name = tidy_team(opp['name'])
+    score = f'{max(us, them)}-{min(us, them)}'
+    multi, lead, goalie, winner = scoring(rinx, them)
     w, l, t = record
     if first:
         context = f'to open {event_name}'
@@ -196,6 +203,44 @@ def tournament_card(detail, team, event_name, short_event, record, first):
         title = f"{last(multi[0]['name'])} Scores Twice as {age} Beats {opp_name}"
     else:
         title = f'{age} Beats {opp_name} {score} at {short_event}'
+    return title, body
+
+
+def exhibition_card(detail, team):
+    """A hand-kept exhibition box score (data/boxscores-exhibition-<team>.json):
+    the scorers and goalie when the team reported them, else just the result."""
+    rinx = next(t for t in detail['teams'] if 'rinx' in t['name'].lower())
+    opp = next(t for t in detail['teams'] if t is not rinx)
+    us, them = int(rinx['total']), int(opp['total'])
+    opp_name = tidy_team(opp['name'])
+    score = f'{max(us, them)}-{min(us, them)}'
+    named = lambda people: [{**p, 'name': NAMES.get(p['name'], p['name'])} for p in people]  # noqa: E731
+    rinx = {**rinx, 'skaters': named(rinx['skaters']), 'goalies': named(rinx['goalies'])}
+    multi, lead, goalie, winner = scoring(rinx, them)
+    outdoor = re.search(r'outdoor', ' '.join(detail.get('info') or []), re.I)
+    venue = (detail.get('venue') or '').strip()
+    # The opponent's own rink ("Beaver Dam Winter Sports Club" at Beaver Dam) reads as "on the road".
+    place = where({'location': '' if opp_name.lower() in venue.lower() else venue, 'venue': 'Away'})
+    context = f"in an {'outdoor ' if outdoor else ''}exhibition {place}"
+    verb = {True: 'beat', False: 'lost to'}[us > them] if us != them else 'tied'
+    clause = ' and '.join(x for x in (lead, goalie) if x)
+    body = f"{clause[0].upper() + clause[1:]} as the {team['label']} {verb} {opp_name} {score} {context}." if clause \
+        else f"The {team['label']} {verb} {opp_name} {score} {context}."
+    hat = next((p for p in multi if int(p['g']) >= 3), None)
+    age = team['age']
+    if us <= them:
+        title = f'{age} {"Ties" if us == them else "Falls to"} {opp_name}'
+    elif hat:
+        feat = 'Hat Trick' if int(hat['g']) == 3 else f"{GOALS.get(int(hat['g']), '').split()[0].title()}-Goal Game"
+        title = f"{last(hat['name'])}'s {feat} Leads {age} Past {opp_name}"
+    elif winner and them == 0:
+        title = f"{last(winner['name'])} Blanks {opp_name} as {age} Wins {score}"
+    elif len(multi) >= 2:
+        title = f"{last(multi[0]['name'])}, {last(multi[1]['name'])} Lead {age} Past {opp_name}"
+    elif multi:
+        title = f"{last(multi[0]['name'])} Scores Twice as {age} Beats {opp_name}"
+    else:
+        title = f"{age} Beats {opp_name} {score}{' Outdoors' if outdoor else ''}"
     return title, body
 
 
@@ -247,6 +292,18 @@ def build():
                 cards.append(card(team, d['isoDate'], clock(d.get('time', '')), title, body,
                                   f"/box-score?event={event_key}&game={g['id']}", 'gamesheet'))
                 seen.append((d['isoDate'], f'{us}-{them}'))
+
+        # Exhibition games the team reported, with hand-kept box scores
+        for g in read(f'boxscores-exhibition-{key}.json').get('games', []):
+            d = g.get('detail') or {}
+            if not d.get('isoDate') or d.get('status') != 'Final':
+                continue
+            title, body = exhibition_card(d, team)
+            rinx = next(x for x in d['teams'] if 'rinx' in x['name'].lower())
+            opp = next(x for x in d['teams'] if x is not rinx)
+            cards.append(card(team, d['isoDate'], clock(d.get('time', '')), title, body,
+                              f"/box-score?event=exhibition-{key}&game={g['id']}", 'exhibition'))
+            seen.append((d['isoDate'], f"{rinx['total']}-{opp['total']}"))
 
         # Everything else in the schedule feeds (once per game)
         feeds = [f'schedule-{key}.json'] + [f'schedule-{e[0]}.json' for e in team['events']]
