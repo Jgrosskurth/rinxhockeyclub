@@ -3,6 +3,26 @@
  "cards": [
   {
    "age": "10U",
+   "iso": "2026-11-08",
+   "time": "08:15",
+   "date": "November 8, 2026",
+   "title": "10U Beats Beaver Dam Winter Sports Club 6-2 Outdoors",
+   "body": "The 10U Squirts beat Beaver Dam Winter Sports Club 6-2 in an outdoor exhibition on the road.",
+   "link": "/box-score?event=exhibition-10u&game=2026-11-08-beaver-dam",
+   "source": "exhibition"
+  },
+  {
+   "age": "10U",
+   "iso": "2026-10-25",
+   "time": "07:30",
+   "date": "October 25, 2026",
+   "title": "Leonardo's Hat Trick Leads 10U Past Prestige Stars",
+   "body": "Jorge Leonardo and Aiden Brown each had a hat trick and DJ Pierre Canel and Matthew Grosskurth each scored twice and Louie Savola made 9 saves as the 10U Squirts beat Prestige Stars 12-2 in an exhibition at Abe Stark Rink, Coney Island Beach.",
+   "link": "/box-score?event=exhibition-10u&game=2026-10-25-prestige-stars",
+   "source": "exhibition"
+  },
+  {
+   "age": "10U",
    "iso": "2026-10-24",
    "time": "16:00",
    "date": "October 24, 2026",
