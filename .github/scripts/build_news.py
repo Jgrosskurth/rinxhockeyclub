@@ -135,6 +135,7 @@ def fallback_card(game, team, n):
 
 # ---------- tournament copy, from the GameSheet box score ----------
 GOALS = {2: 'twice', 3: 'a hat trick', 4: 'four goals', 5: 'five goals'}
+COUNT = {3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten'}
 
 
 def last(name):
@@ -157,7 +158,7 @@ def scoring(rinx, them):
             parts.append(f"{who} {'each ' if len(names) > 1 else ''}{verb} {GOALS.get(g, f'{g} goals')}")
         lead = ' and '.join(parts)
     elif scorers:
-        lead = f'{len(scorers)} different players scored' if len(scorers) > 2 else f"{' and '.join(p['name'] for p in scorers)} scored"
+        lead = f'{COUNT.get(len(scorers), len(scorers))} different players scored' if len(scorers) > 2 else f"{' and '.join(p['name'] for p in scorers)} scored"
     else:
         lead = ''
     winner = next((g for g in rinx['goalies'] if g.get('wl') == 'W'), None)
@@ -239,6 +240,9 @@ def exhibition_card(detail, team):
         title = f"{last(multi[0]['name'])}, {last(multi[1]['name'])} Lead {age} Past {opp_name}"
     elif multi:
         title = f"{last(multi[0]['name'])} Scores Twice as {age} Beats {opp_name}"
+    elif sum(1 for p in rinx['skaters'] if int(p['g'] or 0) > 0) >= 4:
+        n = sum(1 for p in rinx['skaters'] if int(p['g'] or 0) > 0)
+        title = f"{COUNT.get(n, n).title()} Different Scorers Lift {age} Past {opp_name}{' Outdoors' if outdoor else ''}"
     else:
         title = f"{age} Beats {opp_name} {score}{' Outdoors' if outdoor else ''}"
     return title, body

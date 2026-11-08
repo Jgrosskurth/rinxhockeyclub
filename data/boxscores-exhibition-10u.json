@@ -668,8 +668,63 @@
       "name": "Rinx",
       "total": "6",
       "periods": [],
-      "skaters": [],
-      "goalies": []
+      "skaters": [
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "18",
+        "name": "Sean Fox",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "11",
+        "name": "Donald Pierre Canel",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       }
+      ],
+      "goalies": [],
+      "totals": {
+       "g": "6",
+       "a": "",
+       "pts": "6",
+       "pim": ""
+      }
      },
      {
       "name": "Beaver Dam Winter Sports Club",
@@ -682,7 +737,7 @@
     ],
     "leaders": [],
     "stars": [],
-    "note": "Played outdoors. Scorers, assists and saves haven’t been reported yet."
+    "note": "Played outdoors. Goals reported by the team; assists, penalties and saves weren’t recorded."
    }
   }
  ]
