@@ -173,6 +173,17 @@ DESCRIPTION:Exhibition\nFinal: W 17-0\nSchedule: https://www.rinxhockeyclub
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-2990053@rinxhockeyclub.com
+DTSTAMP:20261108T000000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:Rinx 14U at North Park (Pala) (W 6-1)
+LOCATION:City Ice Pavilion\, Long Island City\, NY
+DESCRIPTION:LIAHL · 14U Silver\nFinal: W 6-1\nSchedule: https://www.rinxho
+ ckeyclub.com/schedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-2990048@rinxhockeyclub.com
 DTSTAMP:20270109T140000Z
 DTSTART;TZID=America/New_York:20270109T140000
