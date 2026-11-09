@@ -6,16 +6,6 @@
   "last_page_title": "Games | Long Island Amateur Hockey League - 2026/2027 \u00bb USAH - New York District",
   "games": [
     {
-      "date": "Nov 8, 2026",
-      "visitor": "NYH0149-006 Long Beach Lightning 10U Ponte",
-      "home": "NYH0036-010 Aviator Hockey Club 10U Janss",
-      "visitorScore": 8,
-      "homeScore": 0,
-      "ot": false,
-      "type": "Regular Season",
-      "gameId": "2989511"
-    },
-    {
       "date": "Sep 12, 2026",
       "visitor": "NYH0036-010 Aviator Hockey Club 10U Janss",
       "home": "NYH4033-002-North Park-10U Mauro",
@@ -344,6 +334,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2992365"
+    },
+    {
+      "date": "Nov 8, 2026",
+      "visitor": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "home": "NYH0036-010 Aviator Hockey Club 10U Janss",
+      "visitorScore": 10,
+      "homeScore": 0,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989511"
     }
   ]
 }
