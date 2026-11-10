@@ -110,6 +110,21 @@
       "diff": "-25",
       "streak": "Lost 2",
       "ours": false
+    },
+    {
+      "rank": "8",
+      "team": "NYH0123-005 NYC CYCLONES 14U GULBRANSON",
+      "gp": "0",
+      "w": "0",
+      "l": "0",
+      "t": "0",
+      "otl": "0",
+      "pts": "0",
+      "gf": "0",
+      "ga": "0",
+      "diff": "0",
+      "streak": "-",
+      "ours": false
     }
   ]
 }
