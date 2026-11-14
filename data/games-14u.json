@@ -204,6 +204,16 @@
       "ot": false,
       "type": "Exhibition",
       "gameId": "3181373"
+    },
+    {
+      "date": "Nov 14, 2026",
+      "visitor": "NYH0093-008 Dix Hills Selects 14U Flanagan",
+      "home": "NYH0007-004 Long Island Sharks 14u Manno",
+      "visitorScore": 9,
+      "homeScore": 5,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2992407"
     }
   ]
 }
