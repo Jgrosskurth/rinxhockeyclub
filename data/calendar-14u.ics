@@ -185,13 +185,13 @@ URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-3181373@rinxhockeyclub.com
-DTSTAMP:20261114T122000Z
-DTSTART;TZID=America/New_York:20261114T122000
-DTEND;TZID=America/New_York:20261114T135000
-SUMMARY:Rinx 14U at DIX HILL Hawks (Karbot)
-LOCATION:
-DESCRIPTION:LIAHL · 14U Gold\nSchedule: https://www.rinxhockeyclub.com/sch
- edule-14u
+DTSTAMP:20261114T000000Z
+DTSTART;VALUE=DATE:20261114
+DTEND;VALUE=DATE:20261115
+SUMMARY:Rinx 14U at DIX HILL Hawks (Karbot) (W 7-2)
+LOCATION:Dix Hills Ice Rink\, Dix Hills\, NY
+DESCRIPTION:LIAHL · 14U Gold\nFinal: W 7-2\nSchedule: https://www.rinxhock
+ eyclub.com/schedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT

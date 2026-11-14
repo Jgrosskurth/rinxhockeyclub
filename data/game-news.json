@@ -2,6 +2,16 @@
  "type": "game-news",
  "cards": [
   {
+   "age": "14U",
+   "iso": "2026-11-14",
+   "time": "",
+   "date": "November 14, 2026",
+   "title": "14U Gets Past DIX HILL Hawks (Karbot)",
+   "body": "DIX HILL Hawks (Karbot) fell to the 14U Bantams 7-2 at Dix Hills Ice Rink.",
+   "link": "",
+   "source": "fallback"
+  },
+  {
    "age": "10U",
    "iso": "2026-11-08",
    "time": "08:15",
