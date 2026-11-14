@@ -184,6 +184,17 @@ DESCRIPTION:LIAHL · 14U Silver\nFinal: W 6-1\nSchedule: https://www.rinxho
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-3181373@rinxhockeyclub.com
+DTSTAMP:20261114T122000Z
+DTSTART;TZID=America/New_York:20261114T122000
+DTEND;TZID=America/New_York:20261114T135000
+SUMMARY:Rinx 14U at DIX HILL Hawks (Karbot)
+LOCATION:
+DESCRIPTION:LIAHL · 14U Gold\nSchedule: https://www.rinxhockeyclub.com/sch
+ edule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-3175955@rinxhockeyclub.com
 DTSTAMP:20261219T140500Z
 DTSTART;TZID=America/New_York:20261219T140500
