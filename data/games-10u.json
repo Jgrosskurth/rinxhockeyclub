@@ -354,6 +354,26 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989523"
+    },
+    {
+      "date": "Nov 15, 2026",
+      "visitor": "NYH0149-006 Long Beach Lightning 10U Ponte",
+      "home": "NYH4033-002-North Park-10U Mauro",
+      "visitorScore": 9,
+      "homeScore": 1,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989514"
+    },
+    {
+      "date": "Nov 15, 2026",
+      "visitor": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "home": "NYH0017-010 Rinx Travel 10U O'Donoghue",
+      "visitorScore": 2,
+      "homeScore": 1,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989497"
     }
   ]
 }

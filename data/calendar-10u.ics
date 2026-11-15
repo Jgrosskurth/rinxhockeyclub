@@ -184,13 +184,13 @@ URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
 UID:gamesheet-2989497@rinxhockeyclub.com
-DTSTAMP:20261115T100000Z
-DTSTART;TZID=America/New_York:20261115T100000
-DTEND;TZID=America/New_York:20261115T113000
-SUMMARY:Rinx 10U vs Peconic Wildcats (McCarthy)
+DTSTAMP:20261115T000000Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:Rinx 10U vs Peconic Wildcats (McCarthy) (L 1-2)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
-DESCRIPTION:LIAHL · 10U Silver\nSchedule: https://www.rinxhockeyclub.com/s
- chedule
+DESCRIPTION:LIAHL · 10U Silver\nFinal: L 1-2\nSchedule: https://www.rinxho
+ ckeyclub.com/schedule
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT

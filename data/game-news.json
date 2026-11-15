@@ -2,12 +2,22 @@
  "type": "game-news",
  "cards": [
   {
+   "age": "10U",
+   "iso": "2026-11-15",
+   "time": "",
+   "date": "November 15, 2026",
+   "title": "10U Drops a Game to Peconic Wildcats (McCarthy)",
+   "body": "The 10U Squirts came up short against Peconic Wildcats (McCarthy), 2-1, at The Rinx.",
+   "link": "",
+   "source": "fallback"
+  },
+  {
    "age": "14U",
    "iso": "2026-11-14",
    "time": "",
    "date": "November 14, 2026",
-   "title": "14U Gets Past DIX HILL Hawks (Karbot)",
-   "body": "DIX HILL Hawks (Karbot) fell to the 14U Bantams 7-2 at Dix Hills Ice Rink.",
+   "title": "14U Wins 7-2 Over DIX HILL Hawks (Karbot)",
+   "body": "A 7-2 win for the 14U Bantams over DIX HILL Hawks (Karbot) at Dix Hills Ice Rink.",
    "link": "",
    "source": "fallback"
   },
@@ -26,8 +36,8 @@
    "iso": "2026-11-08",
    "time": "",
    "date": "November 8, 2026",
-   "title": "14U Beats North Park (Pala)",
-   "body": "The 14U Bantams beat North Park (Pala) 6-1 at City Ice Pavilion.",
+   "title": "14U Gets Past North Park (Pala)",
+   "body": "North Park (Pala) fell to the 14U Bantams 6-1 at City Ice Pavilion.",
    "link": "",
    "source": "fallback"
   },
