@@ -6,16 +6,6 @@
   "last_page_title": "Games | Long Island Amateur Hockey League - 2026/2027 \u00bb USAH - New York District",
   "games": [
     {
-      "date": "Nov 14, 2026",
-      "visitor": "NYH4033-002-North Park-10U Mauro",
-      "home": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
-      "visitorScore": 0,
-      "homeScore": 8,
-      "ot": false,
-      "type": "Regular Season",
-      "gameId": "2989523"
-    },
-    {
       "date": "Sep 12, 2026",
       "visitor": "NYH0036-010 Aviator Hockey Club 10U Janss",
       "home": "NYH4033-002-North Park-10U Mauro",
@@ -354,6 +344,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989511"
+    },
+    {
+      "date": "Nov 14, 2026",
+      "visitor": "NYH4033-002-North Park-10U Mauro",
+      "home": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "visitorScore": 0,
+      "homeScore": 12,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2989523"
     }
   ]
 }

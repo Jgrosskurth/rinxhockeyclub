@@ -38,6 +38,21 @@
     },
     {
       "rank": "3",
+      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "gp": "8",
+      "w": "6",
+      "l": "2",
+      "t": "0",
+      "otl": "0",
+      "pts": "12",
+      "gf": "71",
+      "ga": "16",
+      "diff": "+55",
+      "streak": "Won 4",
+      "ours": false
+    },
+    {
+      "rank": "4",
       "team": "NYH0007-001 Long Island Sharks 10u Davis",
       "gp": "10",
       "w": "4",
@@ -49,21 +64,6 @@
       "ga": "37",
       "diff": "+7",
       "streak": "Won 2",
-      "ours": false
-    },
-    {
-      "rank": "4",
-      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
-      "gp": "7",
-      "w": "5",
-      "l": "2",
-      "t": "0",
-      "otl": "0",
-      "pts": "10",
-      "gf": "59",
-      "ga": "16",
-      "diff": "+43",
-      "streak": "Won 3",
       "ours": false
     },
     {
@@ -114,16 +114,16 @@
     {
       "rank": "8",
       "team": "NYH4033-002-North Park-10U Mauro",
-      "gp": "8",
+      "gp": "9",
       "w": "1",
-      "l": "6",
+      "l": "7",
       "t": "1",
       "otl": "0",
       "pts": "3",
       "gf": "16",
-      "ga": "71",
-      "diff": "-55",
-      "streak": "Lost 2",
+      "ga": "83",
+      "diff": "-67",
+      "streak": "Lost 3",
       "ours": false
     },
     {
