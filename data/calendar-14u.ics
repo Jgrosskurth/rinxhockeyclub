@@ -195,6 +195,17 @@ DESCRIPTION:LIAHL · 14U Gold\nFinal: W 7-2\nSchedule: https://www.rinxhock
 URL:https://www.rinxhockeyclub.com/schedule-14u
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-3185173@rinxhockeyclub.com
+DTSTAMP:20261206T173000Z
+DTSTART;TZID=America/New_York:20261206T173000
+DTEND;TZID=America/New_York:20261206T190000
+SUMMARY:Rinx 14U at Nyc Cyclones (Gulbranson)
+LOCATION:Sky Rink @ Chelsea Piers
+DESCRIPTION:LIAHL · 14U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-3175955@rinxhockeyclub.com
 DTSTAMP:20261219T140500Z
 DTSTART;TZID=America/New_York:20261219T140500
@@ -267,6 +278,17 @@ DTSTART;TZID=America/New_York:20270206T164000
 DTEND;TZID=America/New_York:20270206T181000
 SUMMARY:Rinx 14U vs Dix Hills Selects (Flanagan)
 LOCATION:The Rinx\, 660 Terry Road\, Hauppauge\, NY 11788
+DESCRIPTION:LIAHL · 14U Silver\nSchedule: https://www.rinxhockeyclub.com/s
+ chedule-14u
+URL:https://www.rinxhockeyclub.com/schedule-14u
+END:VEVENT
+BEGIN:VEVENT
+UID:gamesheet-3185175@rinxhockeyclub.com
+DTSTAMP:20270207T100000Z
+DTSTART;TZID=America/New_York:20270207T100000
+DTEND;TZID=America/New_York:20270207T113000
+SUMMARY:Rinx 14U at Nyc Cyclones (Gulbranson)
+LOCATION:SKy Rink @ Chelsea Piers
 DESCRIPTION:LIAHL · 14U Silver\nSchedule: https://www.rinxhockeyclub.com/s
  chedule-14u
 URL:https://www.rinxhockeyclub.com/schedule-14u
