@@ -3,6 +3,16 @@
  "cards": [
   {
    "age": "10U",
+   "iso": "2026-11-21",
+   "time": "",
+   "date": "November 21, 2026",
+   "title": "10U Wins 10-0 Over North Park (Lewis)",
+   "body": "A 10-0 win for the 10U Squirts over North Park (Lewis) at The Rinx.",
+   "link": "",
+   "source": "fallback"
+  },
+  {
+   "age": "10U",
    "iso": "2026-11-15",
    "time": "",
    "date": "November 15, 2026",
@@ -16,8 +26,8 @@
    "iso": "2026-11-14",
    "time": "",
    "date": "November 14, 2026",
-   "title": "14U Wins 7-2 Over DIX HILL Hawks (Karbot)",
-   "body": "A 7-2 win for the 14U Bantams over DIX HILL Hawks (Karbot) at Dix Hills Ice Rink.",
+   "title": "14U Beats DIX HILL Hawks (Karbot)",
+   "body": "The 14U Bantams beat DIX HILL Hawks (Karbot) 7-2 at Dix Hills Ice Rink.",
    "link": "",
    "source": "fallback"
   },
@@ -36,8 +46,8 @@
    "iso": "2026-11-08",
    "time": "",
    "date": "November 8, 2026",
-   "title": "14U Gets Past North Park (Pala)",
-   "body": "North Park (Pala) fell to the 14U Bantams 6-1 at City Ice Pavilion.",
+   "title": "14U Wins 6-1 Over North Park (Pala)",
+   "body": "A 6-1 win for the 14U Bantams over North Park (Pala) at City Ice Pavilion.",
    "link": "",
    "source": "fallback"
   },

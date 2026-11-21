@@ -384,6 +384,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989497"
+    },
+    {
+      "date": "Nov 21, 2026",
+      "visitor": "NYH4033-005-North Park 10U Lewis",
+      "home": "NYH0017-010 Rinx Travel 10U O'Donoghue",
+      "visitorScore": 0,
+      "homeScore": 10,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "3085750"
     }
   ]
 }
