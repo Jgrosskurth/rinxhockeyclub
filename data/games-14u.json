@@ -224,6 +224,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2990047"
+    },
+    {
+      "date": "Nov 21, 2026",
+      "visitor": "NYH0044-007 PECONIC WILDCATS-14U-DIAZ",
+      "home": "NYH0007-004 Long Island Sharks 14u Manno",
+      "visitorScore": 6,
+      "homeScore": 5,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "2990050"
     }
   ]
 }
