@@ -8,6 +8,21 @@
   "teams": [
     {
       "rank": "1",
+      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "gp": "10",
+      "w": "8",
+      "l": "2",
+      "t": "0",
+      "otl": "0",
+      "pts": "16",
+      "gf": "80",
+      "ga": "18",
+      "diff": "+62",
+      "streak": "Won 6",
+      "ours": false
+    },
+    {
+      "rank": "2",
       "team": "NYH0149-006 Long Beach Lightning 10U Ponte",
       "gp": "11",
       "w": "7",
@@ -22,7 +37,7 @@
       "ours": false
     },
     {
-      "rank": "2",
+      "rank": "3",
       "team": "NYH0017-010 Rinx Travel 10U O'Donoghue",
       "gp": "8",
       "w": "7",
@@ -35,21 +50,6 @@
       "diff": "+72",
       "streak": "Won 1",
       "ours": true
-    },
-    {
-      "rank": "3",
-      "team": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
-      "gp": "9",
-      "w": "7",
-      "l": "2",
-      "t": "0",
-      "otl": "0",
-      "pts": "14",
-      "gf": "73",
-      "ga": "17",
-      "diff": "+56",
-      "streak": "Won 5",
-      "ours": false
     },
     {
       "rank": "4",
@@ -129,16 +129,16 @@
     {
       "rank": "9",
       "team": "NYH4033-005-North Park 10U Lewis",
-      "gp": "4",
+      "gp": "5",
       "w": "1",
-      "l": "3",
+      "l": "4",
       "t": "0",
       "otl": "0",
       "pts": "2",
-      "gf": "4",
-      "ga": "31",
-      "diff": "-27",
-      "streak": "Lost 2",
+      "gf": "5",
+      "ga": "38",
+      "diff": "-33",
+      "streak": "Lost 3",
       "ours": false
     },
     {

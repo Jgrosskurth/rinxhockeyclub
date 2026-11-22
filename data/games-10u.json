@@ -16,16 +16,6 @@
       "gameId": "2992364"
     },
     {
-      "date": "Nov 21, 2026",
-      "visitor": "NYH4033-005-North Park 10U Lewis",
-      "home": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
-      "visitorScore": 0,
-      "homeScore": 6,
-      "ot": false,
-      "type": "Regular Season",
-      "gameId": "3086859"
-    },
-    {
       "date": "Sep 12, 2026",
       "visitor": "NYH0036-010 Aviator Hockey Club 10U Janss",
       "home": "NYH4033-002-North Park-10U Mauro",
@@ -414,6 +404,16 @@
       "ot": false,
       "type": "Regular Season",
       "gameId": "2989508"
+    },
+    {
+      "date": "Nov 21, 2026",
+      "visitor": "NYH4033-005-North Park 10U Lewis",
+      "home": "NYH0044-009 PECONIC WILDCATS-10U-MCCARTHY",
+      "visitorScore": 1,
+      "homeScore": 7,
+      "ot": false,
+      "type": "Regular Season",
+      "gameId": "3086859"
     }
   ]
 }
