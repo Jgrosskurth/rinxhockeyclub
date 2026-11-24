@@ -51,17 +51,23 @@ def num(value):
 
 
 def results(page):
-    """[{id, date, home, opponent, result, score}] from a team page's Results list."""
-    start = page.find('>Results<')
-    if start < 0:
-        return []
-    games = []
+    """[{id, date, home, opponent, result, score}] from a team page's result cards.
+
+    Only finished games have a result and score, so upcoming-game cards (which
+    use the same markup) don't match. Since late Oct 2026 the page has no
+    "Results" heading, and cards can appear more than once, so the whole page
+    is read and each game is kept once.
+    """
+    games, seen = [], set()
     for m in re.finditer(r'href="https://lihockey\.com/games/(\d+)/"[^>]*class="team-result-card[^"]*"\s*>(.*?)</a>',
-                         page[start:], re.S):
+                         page, re.S):
+        if m[1] in seen:
+            continue
         t = text(m[2])
         # "Sep 27 vs Long Beach Lightning 10U Silver - Ponte W 10-2 R"
         g = re.match(r'([A-Z][a-z]{2} \d{1,2}) (vs|@) (.+?) ([WLT]|OTL|SOL) (\d+)-(\d+)', t)
         if g:
+            seen.add(m[1])
             games.append({'id': m[1], 'date': g[1], 'home': g[2] == 'vs', 'opponent': g[3],
                           'result': g[4], 'score': f'{g[5]}-{g[6]}'})
     return games
