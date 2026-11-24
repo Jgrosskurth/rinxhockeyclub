@@ -205,6 +205,16 @@ DESCRIPTION:LIAHL · 10U Silver\nFinal: W 10-0\nSchedule: https://www.rinxh
 URL:https://www.rinxhockeyclub.com/schedule
 END:VEVENT
 BEGIN:VEVENT
+UID:gamesheet-sheet-10u-20261128-long-island-kings@rinxhockeyclub.com
+DTSTAMP:20261128T141000Z
+DTSTART;TZID=America/New_York:20261128T141000
+DTEND;TZID=America/New_York:20261128T154000
+SUMMARY:Rinx 10U at Long Island Kings · Exhibition
+LOCATION:Superior Ice Rink\, Kings Park\, NY
+DESCRIPTION:Exhibition\nSchedule: https://www.rinxhockeyclub.com/schedule
+URL:https://www.rinxhockeyclub.com/schedule
+END:VEVENT
+BEGIN:VEVENT
 UID:gamesheet-2989475@rinxhockeyclub.com
 DTSTAMP:20261129T151500Z
 DTSTART;TZID=America/New_York:20261129T151500
