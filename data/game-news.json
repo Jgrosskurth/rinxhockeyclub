@@ -14,12 +14,12 @@
   {
    "age": "10U",
    "iso": "2026-11-15",
-   "time": "",
+   "time": "10:00",
    "date": "November 15, 2026",
-   "title": "10U Drops a Game to Peconic Wildcats (McCarthy)",
-   "body": "The 10U Squirts came up short against Peconic Wildcats (McCarthy), 2-1, at The Rinx.",
-   "link": "",
-   "source": "fallback"
+   "title": "10U Falls to Peconic Wildcats (McCarthy)",
+   "body": "Peconic Wildcats (McCarthy) beat the 10U Squirts 2-1 at The Rinx.",
+   "link": "/box-score?team=10u&game=6125",
+   "source": "lihockey"
   },
   {
    "age": "14U",
@@ -32,6 +32,16 @@
    "source": "fallback"
   },
   {
+   "age": "14U",
+   "iso": "2026-11-08",
+   "time": "19:10",
+   "date": "November 8, 2026",
+   "title": "14U Beats North Park Hockey (Pala)",
+   "body": "The 14U Bantams beat North Park Hockey (Pala) 6-1 at City Ice Pavilion.",
+   "link": "/box-score?team=14u&game=6089",
+   "source": "lihockey"
+  },
+  {
    "age": "10U",
    "iso": "2026-11-08",
    "time": "08:15",
@@ -40,16 +50,6 @@
    "body": "Six different players scored as the 10U Squirts beat Beaver Dam Winter Sports Club 6-2 in an outdoor exhibition on the road.",
    "link": "/box-score?event=exhibition-10u&game=2026-11-08-beaver-dam",
    "source": "exhibition"
-  },
-  {
-   "age": "14U",
-   "iso": "2026-11-08",
-   "time": "",
-   "date": "November 8, 2026",
-   "title": "14U Wins 6-1 Over North Park (Pala)",
-   "body": "A 6-1 win for the 14U Bantams over North Park (Pala) at City Ice Pavilion.",
-   "link": "",
-   "source": "fallback"
   },
   {
    "age": "10U",
@@ -76,8 +76,8 @@
    "iso": "2026-10-24",
    "time": "16:00",
    "date": "October 24, 2026",
-   "title": "10U Beats North Park Hockey (Mauro)",
-   "body": "The 10U Squirts beat North Park Hockey (Mauro) 18-0 at Port Washington Skating Center.",
+   "title": "10U Gets Past North Park Hockey (Mauro)",
+   "body": "North Park Hockey (Mauro) fell to the 10U Squirts 18-0 at Port Washington Skating Center.",
    "link": "/box-score?team=10u&game=5942",
    "source": "lihockey"
   },

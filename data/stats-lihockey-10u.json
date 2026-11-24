@@ -3,18 +3,18 @@
  "source": "lihockey.com",
  "team": "10u",
  "teamPage": "https://lihockey.com/teams/1162/",
- "updated": "2026-10-24T21:45:39+00:00",
+ "updated": "2026-11-24T18:16:40+00:00",
  "players": [
   {
    "name": "Matthew Grosskurth",
    "number": "",
    "pos": "",
-   "gp": "6",
+   "gp": "7",
    "g": "15",
    "a": "0",
    "pts": "15",
    "plusminus": "0",
-   "pim": "1"
+   "pim": "2"
   },
   {
    "name": "Donald Pierre Canel",
@@ -42,34 +42,34 @@
    "name": "Jorge Leonardo",
    "number": "",
    "pos": "",
-   "gp": "4",
-   "g": "6",
+   "gp": "5",
+   "g": "7",
    "a": "0",
-   "pts": "6",
+   "pts": "7",
    "plusminus": "0",
-   "pim": "0"
+   "pim": "1"
   },
   {
    "name": "Aiden Brown",
    "number": "",
    "pos": "",
-   "gp": "5",
+   "gp": "6",
    "g": "5",
    "a": "0",
    "pts": "5",
    "plusminus": "0",
-   "pim": "2"
+   "pim": "3"
   },
   {
    "name": "Ryan Bachert",
    "number": "",
    "pos": "",
-   "gp": "5",
+   "gp": "6",
    "g": "5",
    "a": "0",
    "pts": "5",
    "plusminus": "0",
-   "pim": "9"
+   "pim": "10"
   },
   {
    "name": "Ryan Lupia",
@@ -163,7 +163,7 @@
    "name": "Connor Daly",
    "number": "",
    "pos": "G",
-   "gp": "5",
+   "gp": "6",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -171,10 +171,21 @@
    "pim": "0"
   },
   {
+   "name": "Connor Hassett",
+   "number": "",
+   "pos": "",
+   "gp": "1",
+   "g": "0",
+   "a": "0",
+   "pts": "0",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
    "name": "Louie Savola",
    "number": "",
    "pos": "G",
-   "gp": "3",
+   "gp": "4",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -186,27 +197,374 @@
   {
    "name": "Connor Daly",
    "number": "",
-   "gp": 5,
-   "sa": 25,
-   "ga": 2,
-   "sv": 23,
+   "gp": 6,
+   "sa": 29,
+   "ga": 3,
+   "sv": 26,
    "w": 3,
-   "l": 0,
-   "svpct": "0.920"
+   "l": 1,
+   "svpct": "0.897"
   },
   {
    "name": "Louie Savola",
    "number": "",
-   "gp": 3,
-   "sa": 16,
-   "ga": 0,
-   "sv": 16,
+   "gp": 4,
+   "sa": 22,
+   "ga": 1,
+   "sv": 21,
    "w": 2,
    "l": 0,
-   "svpct": "1.000"
+   "svpct": "0.955"
   }
  ],
  "games": [
+  {
+   "id": "6125",
+   "date": "Nov 15",
+   "home": true,
+   "opponent": "Peconic Wildcats 10U Silver - McCarthy",
+   "result": "L",
+   "score": "1-2",
+   "box": {
+    "skaters": [
+     {
+      "id": "7089",
+      "name": "Jorge Leonardo",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7088",
+      "name": "Matthew Grosskurth",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9075",
+      "name": "Connor Hassett",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8370",
+      "name": "Aiden Brown",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "8368",
+      "name": "Ryan Bachert",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "9071",
+      "name": "Connor Daly",
+      "number": "",
+      "min": "30:00",
+      "sa": "4",
+      "ga": "1",
+      "sv": "3",
+      "svpct": "0.750",
+      "wl": "L"
+     },
+     {
+      "id": "9076",
+      "name": "Louie Savola",
+      "number": "",
+      "min": "30:00",
+      "sa": "6",
+      "ga": "1",
+      "sv": "5",
+      "svpct": "0.833",
+      "wl": "-"
+     }
+    ]
+   },
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "Peconic Wildcats 10U Silver - McCarthy",
+      "record": "5-2-0-0",
+      "abbr": "PWC",
+      "periods": [
+       "1",
+       "1",
+       "0"
+      ],
+      "total": "2",
+      "skaters": [
+       {
+        "name": "Bear Van Keuren",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Lincoln Bruno",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jake Difiglia",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Carmine Delucia",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Dawson Shull",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Kyle Fish",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Lucas Faranda",
+        "number": "",
+        "badge": "",
+        "min": "60:00",
+        "sa": "17",
+        "ga": "1",
+        "sv": "16",
+        "svpct": "0.941",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "2",
+       "a": "0",
+       "pts": "2",
+       "pim": "5"
+      }
+     },
+     {
+      "side": "home",
+      "name": "Rinx Hockey 10U Silver - O'Donoghue",
+      "record": "6-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "1",
+       "0",
+       "0"
+      ],
+      "total": "1",
+      "skaters": [
+       {
+        "name": "Jorge Leonardo",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Matthew Grosskurth",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Connor Hassett",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aiden Brown",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Bachert",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Connor Daly",
+        "number": "",
+        "badge": "",
+        "min": "30:00",
+        "sa": "4",
+        "ga": "1",
+        "sv": "3",
+        "svpct": "0.750",
+        "wl": "L"
+       },
+       {
+        "name": "Louie Savola",
+        "number": "",
+        "badge": "",
+        "min": "30:00",
+        "sa": "6",
+        "ga": "1",
+        "sv": "5",
+        "svpct": "0.833",
+        "wl": "-"
+       }
+      ],
+      "totals": {
+       "g": "1",
+       "a": "0",
+       "pts": "1",
+       "pim": "5"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Bear Van Keuren",
+      "team": "Peconic Wildcats 10U Silver - McCarthy",
+      "line": "1G"
+     },
+     {
+      "rank": "2",
+      "name": "Lincoln Bruno",
+      "team": "Peconic Wildcats 10U Silver - McCarthy",
+      "line": "1G"
+     },
+     {
+      "rank": "3",
+      "name": "Lucas Faranda",
+      "team": "Peconic Wildcats 10U Silver - McCarthy",
+      "line": "16 SV"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "Jorge Leonardo",
+      "val": "1"
+     },
+     {
+      "cat": "Points",
+      "name": "Jorge Leonardo",
+      "val": "1"
+     },
+     {
+      "cat": "Saves",
+      "name": "Lucas Faranda",
+      "val": "16"
+     }
+    ],
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Sunday, November 15 · 10:00 AM"
+    ],
+    "dateLong": "Sunday, November 15, 2026",
+    "venue": "The Rinx",
+    "isoDate": "2026-11-15",
+    "recap": null
+   },
+   "url": "https://lihockey.com/games/6125/"
+  },
   {
    "id": "5942",
    "date": "Oct 24",
@@ -343,7 +701,7 @@
       "id": "9071",
       "name": "Connor Daly",
       "number": "",
-      "min": "—",
+      "min": "60:00",
       "sa": "5",
       "ga": "0",
       "sv": "5",
@@ -500,7 +858,7 @@
         "name": "Connor Daly",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "60:00",
         "sa": "5",
         "ga": "0",
         "sv": "5",
@@ -544,7 +902,7 @@
         "name": "Fisher Kaplowitz",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "60:00",
         "sa": "57",
         "ga": "18",
         "sv": "39",
@@ -690,7 +1048,7 @@
       "id": "9071",
       "name": "Connor Daly",
       "number": "",
-      "min": "—",
+      "min": "30:00",
       "sa": "6",
       "ga": "0",
       "sv": "6",
@@ -701,7 +1059,7 @@
       "id": "9076",
       "name": "Louie Savola",
       "number": "",
-      "min": "—",
+      "min": "30:00",
       "sa": "8",
       "ga": "0",
       "sv": "8",
@@ -803,7 +1161,7 @@
         "name": "Connor Daly",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "6",
         "ga": "0",
         "sv": "6",
@@ -814,7 +1172,7 @@
         "name": "Louie Savola",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "8",
         "ga": "0",
         "sv": "8",
@@ -858,7 +1216,7 @@
         "name": "Paul Megerian Jr",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "11",
         "ga": "2",
         "sv": "9",
@@ -869,7 +1227,7 @@
         "name": "Luca Petrocelli",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "15",
         "ga": "7",
         "sv": "8",
@@ -1019,7 +1377,7 @@
       "id": "9071",
       "name": "Connor Daly",
       "number": "",
-      "min": "—",
+      "min": "30:00",
       "sa": "2",
       "ga": "0",
       "sv": "2",
@@ -1030,7 +1388,7 @@
       "id": "9076",
       "name": "Louie Savola",
       "number": "",
-      "min": "—",
+      "min": "30:00",
       "sa": "3",
       "ga": "0",
       "sv": "3",
@@ -1132,7 +1490,7 @@
         "name": "Connor Daly",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "2",
         "ga": "0",
         "sv": "2",
@@ -1143,7 +1501,7 @@
         "name": "Louie Savola",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "3",
         "ga": "0",
         "sv": "3",
@@ -1209,7 +1567,7 @@
         "name": "Dominic Grosso",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "35",
         "ga": "7",
         "sv": "28",
@@ -1220,7 +1578,7 @@
         "name": "Sullivan Pearsall",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "9",
         "ga": "2",
         "sv": "7",
@@ -1426,7 +1784,7 @@
       "id": "9071",
       "name": "Connor Daly",
       "number": "",
-      "min": "—",
+      "min": "30:00",
       "sa": "10",
       "ga": "2",
       "sv": "8",
@@ -1437,7 +1795,7 @@
       "id": "9076",
       "name": "Louie Savola",
       "number": "",
-      "min": "—",
+      "min": "30:00",
       "sa": "5",
       "ga": "0",
       "sv": "5",
@@ -1539,7 +1897,7 @@
         "name": "Sullivan Pearsall",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "60:00",
         "sa": "29",
         "ga": "10",
         "sv": "19",
@@ -1693,7 +2051,7 @@
         "name": "Connor Daly",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "10",
         "ga": "2",
         "sv": "8",
@@ -1704,7 +2062,7 @@
         "name": "Louie Savola",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "5",
         "ga": "0",
         "sv": "5",
@@ -1876,7 +2234,7 @@
       "id": "9071",
       "name": "Connor Daly",
       "number": "",
-      "min": "—",
+      "min": "60:00",
       "sa": "2",
       "ga": "0",
       "sv": "2",
@@ -1911,7 +2269,7 @@
         "name": "Fisher Kaplowitz",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "60:00",
         "sa": "20",
         "ga": "13",
         "sv": "7",
@@ -2027,7 +2385,7 @@
         "name": "Connor Daly",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "60:00",
         "sa": "2",
         "ga": "0",
         "sv": "2",

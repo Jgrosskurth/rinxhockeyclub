@@ -3,24 +3,46 @@
  "source": "lihockey.com",
  "team": "14u",
  "teamPage": "https://lihockey.com/teams/1182/",
- "updated": "2026-10-27T07:20:25+00:00",
+ "updated": "2026-11-24T18:16:56+00:00",
  "players": [
   {
    "name": "Luka Mazzarone",
    "number": "94",
    "pos": "",
-   "gp": "5",
-   "g": "6",
-   "a": "1",
-   "pts": "7",
+   "gp": "6",
+   "g": "7",
+   "a": "2",
+   "pts": "9",
    "plusminus": "0",
-   "pim": "16"
+   "pim": "17"
+  },
+  {
+   "name": "Konstantinos Krokidis",
+   "number": "93",
+   "pos": "",
+   "gp": "5",
+   "g": "5",
+   "a": "3",
+   "pts": "8",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
+   "name": "Ryan Ohliger",
+   "number": "",
+   "pos": "",
+   "gp": "5",
+   "g": "4",
+   "a": "2",
+   "pts": "6",
+   "plusminus": "0",
+   "pim": "0"
   },
   {
    "name": "Brody Meyer",
    "number": "87",
    "pos": "",
-   "gp": "5",
+   "gp": "6",
    "g": "4",
    "a": "1",
    "pts": "5",
@@ -28,54 +50,43 @@
    "pim": "4"
   },
   {
-   "name": "Konstantinos Krokidis",
-   "number": "93",
+   "name": "Jake Totans",
+   "number": "27",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
    "g": "4",
    "a": "1",
    "pts": "5",
    "plusminus": "0",
-   "pim": "1"
+   "pim": "0"
   },
   {
    "name": "Dylan Lashuk",
    "number": "",
    "pos": "",
-   "gp": "5",
+   "gp": "6",
    "g": "3",
-   "a": "1",
-   "pts": "4",
+   "a": "2",
+   "pts": "5",
    "plusminus": "0",
    "pim": "2"
   },
   {
-   "name": "Jake Totans",
-   "number": "27",
+   "name": "Thomas Klingensmith",
+   "number": "53",
    "pos": "",
-   "gp": "4",
+   "gp": "6",
    "g": "3",
-   "a": "1",
-   "pts": "4",
+   "a": "2",
+   "pts": "5",
    "plusminus": "0",
-   "pim": "0"
-  },
-  {
-   "name": "Ryan Ohliger",
-   "number": "",
-   "pos": "",
-   "gp": "4",
-   "g": "3",
-   "a": "1",
-   "pts": "4",
-   "plusminus": "0",
-   "pim": "0"
+   "pim": "2"
   },
   {
    "name": "Camden Collins",
    "number": "57",
    "pos": "",
-   "gp": "5",
+   "gp": "6",
    "g": "2",
    "a": "2",
    "pts": "4",
@@ -83,21 +94,10 @@
    "pim": "1"
   },
   {
-   "name": "Thomas Klingensmith",
-   "number": "53",
-   "pos": "",
-   "gp": "5",
-   "g": "2",
-   "a": "2",
-   "pts": "4",
-   "plusminus": "0",
-   "pim": "2"
-  },
-  {
    "name": "Luke Ventura",
    "number": "88",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
    "g": "1",
    "a": "3",
    "pts": "4",
@@ -119,7 +119,7 @@
    "name": "Brody Arthur",
    "number": "77",
    "pos": "",
-   "gp": "5",
+   "gp": "6",
    "g": "2",
    "a": "1",
    "pts": "3",
@@ -130,34 +130,34 @@
    "name": "Aedan Dowling",
    "number": "70",
    "pos": "",
-   "gp": "5",
+   "gp": "6",
    "g": "1",
    "a": "2",
    "pts": "3",
    "plusminus": "0",
-   "pim": "7"
-  },
-  {
-   "name": "Nicholas Pulice",
-   "number": "11",
-   "pos": "",
-   "gp": "5",
-   "g": "1",
-   "a": "1",
-   "pts": "2",
-   "plusminus": "0",
-   "pim": "14"
+   "pim": "8"
   },
   {
    "name": "Charlie Remsen",
    "number": "94",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
    "g": "0",
-   "a": "2",
-   "pts": "2",
+   "a": "3",
+   "pts": "3",
    "plusminus": "0",
    "pim": "0"
+  },
+  {
+   "name": "Nicholas Pulice",
+   "number": "11",
+   "pos": "",
+   "gp": "6",
+   "g": "1",
+   "a": "1",
+   "pts": "2",
+   "plusminus": "0",
+   "pim": "14"
   },
   {
    "name": "Samuel Meyer",
@@ -174,7 +174,7 @@
    "name": "Daniel Cesa",
    "number": "",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
    "g": "1",
    "a": "0",
    "pts": "1",
@@ -182,10 +182,21 @@
    "pim": "0"
   },
   {
+   "name": "Joseph Capozzoli Jr",
+   "number": "",
+   "pos": "",
+   "gp": "5",
+   "g": "1",
+   "a": "0",
+   "pts": "1",
+   "plusminus": "0",
+   "pim": "1"
+  },
+  {
    "name": "Connor Scully",
    "number": "",
    "pos": "",
-   "gp": "4",
+   "gp": "5",
    "g": "0",
    "a": "1",
    "pts": "1",
@@ -207,18 +218,7 @@
    "name": "Joseph Azar",
    "number": "27",
    "pos": "G",
-   "gp": "2",
-   "g": "0",
-   "a": "0",
-   "pts": "0",
-   "plusminus": "0",
-   "pim": "0"
-  },
-  {
-   "name": "Joseph Capozzoli Jr",
-   "number": "",
-   "pos": "",
-   "gp": "4",
+   "gp": "3",
    "g": "0",
    "a": "0",
    "pts": "0",
@@ -241,16 +241,688 @@
   {
    "name": "Joseph Azar",
    "number": "27",
-   "gp": 2,
+   "gp": 3,
    "sa": 29,
-   "ga": 0,
+   "ga": 1,
    "sv": 29,
-   "w": 1,
+   "w": 2,
    "l": 0,
    "svpct": "1.000"
   }
  ],
  "games": [
+  {
+   "id": "6089",
+   "date": "Nov 8",
+   "home": false,
+   "opponent": "North Park Hockey 14U Silver - Pala",
+   "result": "W",
+   "score": "6-1",
+   "box": {
+    "skaters": [
+     {
+      "id": "602",
+      "name": "Konstantinos Krokidis",
+      "number": "93",
+      "g": 1,
+      "a": 2,
+      "pts": 3,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "7351",
+      "name": "Ryan Ohliger",
+      "number": "",
+      "g": 1,
+      "a": 1,
+      "pts": 2,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "605",
+      "name": "Luka Mazzarone",
+      "number": "94",
+      "g": 1,
+      "a": 1,
+      "pts": 2,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "92",
+      "name": "Jake Totans",
+      "number": "27",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "930",
+      "name": "Thomas Klingensmith",
+      "number": "53",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9091",
+      "name": "Joseph Capozzoli Jr",
+      "number": "",
+      "g": 1,
+      "a": 0,
+      "pts": 1,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "6928",
+      "name": "Dylan Lashuk",
+      "number": "",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "612",
+      "name": "Charlie Remsen",
+      "number": "94",
+      "g": 0,
+      "a": 1,
+      "pts": 1,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9088",
+      "name": "Daniel Cesa",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "9095",
+      "name": "Connor Scully",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11032",
+      "name": "Brody Arthur",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11038",
+      "name": "Brody Meyer",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "11042",
+      "name": "Camden Collins",
+      "number": "",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "160",
+      "name": "Luke Ventura",
+      "number": "88",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "262",
+      "name": "Nicholas Pulice",
+      "number": "11",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 0,
+      "plusminus": 0,
+      "sog": 0
+     },
+     {
+      "id": "916",
+      "name": "Aedan Dowling",
+      "number": "70",
+      "g": 0,
+      "a": 0,
+      "pts": 0,
+      "pim": 1,
+      "plusminus": 0,
+      "sog": 0
+     }
+    ],
+    "goalies": [
+     {
+      "id": "1666",
+      "name": "Joseph Azar",
+      "number": "27",
+      "min": "45:00",
+      "sa": "-",
+      "ga": "1",
+      "sv": "-",
+      "svpct": "-",
+      "wl": "W"
+     }
+    ]
+   },
+   "detail": {
+    "league": "LIAHL · 14U Silver",
+    "status": "Final",
+    "periodLabels": [
+     "1",
+     "2",
+     "3",
+     "OT",
+     "SO"
+    ],
+    "teams": [
+     {
+      "side": "away",
+      "name": "Rinx Hockey 14U Silver - Skillman",
+      "record": "5-0-0-0",
+      "abbr": "RINX",
+      "periods": [
+       "2",
+       "1",
+       "3",
+       "0",
+       "0"
+      ],
+      "total": "6",
+      "skaters": [
+       {
+        "name": "Konstantinos Krokidis",
+        "number": "93",
+        "badge": "",
+        "g": "1",
+        "a": "2",
+        "pts": "3",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Ryan Ohliger",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luka Mazzarone",
+        "number": "94",
+        "badge": "",
+        "g": "1",
+        "a": "1",
+        "pts": "2",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jake Totans",
+        "number": "27",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Thomas Klingensmith",
+        "number": "53",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Joseph Capozzoli Jr",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Dylan Lashuk",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Charlie Remsen",
+        "number": "94",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Daniel Cesa",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Connor Scully",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brody Arthur",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brody Meyer",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Camden Collins",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Luke Ventura",
+        "number": "88",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Nicholas Pulice",
+        "number": "11",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Aedan Dowling",
+        "number": "70",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "1",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Joseph Azar",
+        "number": "27",
+        "badge": "",
+        "min": "45:00",
+        "sa": "-",
+        "ga": "1",
+        "sv": "-",
+        "svpct": "-",
+        "wl": "W"
+       }
+      ],
+      "totals": {
+       "g": "6",
+       "a": "6",
+       "pts": "12",
+       "pim": "3"
+      }
+     },
+     {
+      "side": "home",
+      "name": "North Park Hockey 14U Silver - Pala",
+      "record": "3-3-0-0",
+      "abbr": "NPH",
+      "periods": [
+       "1",
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      "total": "1",
+      "skaters": [
+       {
+        "name": "Lexington Baruch",
+        "number": "",
+        "badge": "",
+        "g": "1",
+        "a": "0",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Loic Sarmazian",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "1",
+        "pts": "1",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Devlin O'Connor",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Maxwell Herman",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Peter McAndrew",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Hugo Lin",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Sasha Igoshin",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Etienne Ramos-Esteban",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Jacob Platt",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Nicholas Rybacki",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Graham Howard",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Brian Li",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Franklin Giordano",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "0",
+        "plusminus": "0",
+        "sog": "0"
+       },
+       {
+        "name": "Theodore Beil",
+        "number": "",
+        "badge": "",
+        "g": "0",
+        "a": "0",
+        "pts": "0",
+        "pim": "2",
+        "plusminus": "0",
+        "sog": "0"
+       }
+      ],
+      "goalies": [
+       {
+        "name": "Daniel Gonzalez",
+        "number": "",
+        "badge": "",
+        "min": "15:00",
+        "sa": "-",
+        "ga": "2",
+        "sv": "-",
+        "svpct": "-",
+        "wl": "L"
+       },
+       {
+        "name": "Jacob Alston",
+        "number": "",
+        "badge": "",
+        "min": "30:00",
+        "sa": "-",
+        "ga": "4",
+        "sv": "-",
+        "svpct": "-",
+        "wl": "-"
+       }
+      ],
+      "totals": {
+       "g": "1",
+       "a": "1",
+       "pts": "2",
+       "pim": "2"
+      }
+     }
+    ],
+    "stars": [
+     {
+      "rank": "1",
+      "name": "Konstantinos Krokidis",
+      "team": "Rinx Hockey 14U Silver - Skillman · #93",
+      "line": "1G 2A"
+     },
+     {
+      "rank": "2",
+      "name": "Ryan Ohliger",
+      "team": "Rinx Hockey 14U Silver - Skillman",
+      "line": "1G 1A"
+     },
+     {
+      "rank": "3",
+      "name": "Luka Mazzarone",
+      "team": "Rinx Hockey 14U Silver - Skillman · #94",
+      "line": "1G 1A"
+     }
+    ],
+    "leaders": [
+     {
+      "cat": "Goals",
+      "name": "#93 Konstantinos Krokidis",
+      "val": "1"
+     },
+     {
+      "cat": "Assists",
+      "name": "#93 Konstantinos Krokidis",
+      "val": "2"
+     },
+     {
+      "cat": "Points",
+      "name": "#93 Konstantinos Krokidis",
+      "val": "3"
+     }
+    ],
+    "info": [
+     "LIAHL · 14U Silver",
+     "Regular Season",
+     "Sunday, November 8 · 7:10 PM"
+    ],
+    "dateLong": "Sunday, November 8, 2026",
+    "venue": "City Ice Pavilion",
+    "isoDate": "2026-11-08",
+    "recap": null
+   },
+   "url": "https://lihockey.com/games/6089/"
+  },
   {
    "id": "5907",
    "date": "Oct 18",
@@ -518,7 +1190,7 @@
        },
        {
         "name": "Jake Goldstein",
-        "number": "79",
+        "number": "",
         "badge": "",
         "g": "0",
         "a": "1",
@@ -2125,7 +2797,7 @@
         "name": "Daniel Gonzalez",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "20",
         "ga": "1",
         "sv": "19",
@@ -2136,7 +2808,7 @@
         "name": "Jacob Alston",
         "number": "",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "16",
         "ga": "4",
         "sv": "12",
@@ -2599,7 +3271,7 @@
       "id": "1666",
       "name": "Joseph Azar",
       "number": "27",
-      "min": "—",
+      "min": "60:00",
       "sa": "21",
       "ga": "0",
       "sv": "21",
@@ -2668,7 +3340,7 @@
         "name": "James Carlin",
         "number": "31",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "29",
         "ga": "7",
         "sv": "22",
@@ -2679,7 +3351,7 @@
         "name": "Jayce Vanasco",
         "number": "31",
         "badge": "",
-        "min": "—",
+        "min": "30:00",
         "sa": "3",
         "ga": "0",
         "sv": "3",
@@ -2855,7 +3527,7 @@
         "name": "Joseph Azar",
         "number": "27",
         "badge": "",
-        "min": "—",
+        "min": "60:00",
         "sa": "21",
         "ga": "0",
         "sv": "21",
