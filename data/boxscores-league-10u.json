@@ -99,7 +99,28 @@
         "pim": ""
        }
       ],
-      "goalies": [],
+      "goalies": [
+       {
+        "number": "1",
+        "name": "Connor Daly",
+        "min": "",
+        "sa": "3",
+        "ga": "0",
+        "sv": "3",
+        "svpct": "1.000",
+        "wl": ""
+       },
+       {
+        "number": "35",
+        "name": "Louie Savola",
+        "min": "",
+        "sa": "2",
+        "ga": "0",
+        "sv": "2",
+        "svpct": "1.000",
+        "wl": ""
+       }
+      ],
       "totals": {
        "g": "10",
        "a": "",
@@ -110,7 +131,7 @@
     ],
     "leaders": [],
     "stars": [],
-    "note": "Goals reported by the team; assists, penalties and saves weren’t recorded. LIHockey.com doesn’t list this game, so it isn’t in the season stats."
+    "note": "Goals and saves reported by the team; assists and penalties weren’t recorded. LIHockey.com doesn’t list this game, so it isn’t in the season stats."
    }
   }
  ]
