@@ -1,0 +1,117 @@
+{
+ "type": "boxscores",
+ "_about": "Box scores for 10U league games that LIHockey.com doesn't list (so pull_lihockey.py can't save them), kept by hand from what the team reports. Shown at /box-score?event=league-10u&game=<id> and linked from the schedule's league row. Same shape as boxscores-exhibition-10u.json: teams are [away, home].",
+ "team": "10u",
+ "games": [
+  {
+   "id": "2026-11-21-north-park-lewis",
+   "url": "",
+   "date": "Nov 21, 2026",
+   "opponent": "North Park (Lewis)",
+   "detail": {
+    "league": "LIAHL · 10U Silver",
+    "info": [
+     "LIAHL · 10U Silver",
+     "Regular Season",
+     "Saturday, November 21 · 2:05 PM"
+    ],
+    "status": "Final",
+    "dateLong": "Saturday, November 21, 2026",
+    "isoDate": "2026-11-21",
+    "time": "2:05 PM",
+    "venue": "The Rinx",
+    "periodLabels": [],
+    "teams": [
+     {
+      "name": "North Park 10U Lewis",
+      "total": "0",
+      "periods": [],
+      "skaters": [],
+      "goalies": []
+     },
+     {
+      "name": "Rinx",
+      "total": "10",
+      "periods": [],
+      "skaters": [
+       {
+        "number": "75",
+        "name": "Matthew Grosskurth",
+        "g": "2",
+        "a": "",
+        "pts": "2",
+        "pim": ""
+       },
+       {
+        "number": "3",
+        "name": "Ryan Christman",
+        "g": "2",
+        "a": "",
+        "pts": "2",
+        "pim": ""
+       },
+       {
+        "number": "98",
+        "name": "Aiden Brown",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "95",
+        "name": "Connor Hassett",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "20",
+        "name": "Jorge Leonardo",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "21",
+        "name": "Tristen Pajak",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "19",
+        "name": "Ari Mazzarone",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       },
+       {
+        "number": "11",
+        "name": "Donald Pierre Canel",
+        "g": "1",
+        "a": "",
+        "pts": "1",
+        "pim": ""
+       }
+      ],
+      "goalies": [],
+      "totals": {
+       "g": "10",
+       "a": "",
+       "pts": "10",
+       "pim": ""
+      }
+     }
+    ],
+    "leaders": [],
+    "stars": [],
+    "note": "Goals reported by the team; assists, penalties and saves weren’t recorded. LIHockey.com doesn’t list this game, so it isn’t in the season stats."
+   }
+  }
+ ]
+}

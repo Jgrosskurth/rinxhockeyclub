@@ -12,6 +12,9 @@ import { teamLogo, RINX_LOGO } from '../../scripts/team-logos.js';
 // - Exhibition games (/box-score?event=exhibition-10u&game=2026-10-25-prestige-stars),
 //   kept by hand in data/boxscores-exhibition-<team>.json from what the team
 //   reports: often just the score and three stars.
+// - League games LIHockey.com doesn't list (/box-score?event=league-10u&game=<id>),
+//   kept by hand in data/boxscores-league-<team>.json the same way. They are
+//   listed with the team's other league games.
 // Without ?game, lists every box score.
 
 const FEED_BASE = 'https://raw.githubusercontent.com/Jgrosskurth/rinxhockeyclub/main/data';
@@ -29,6 +32,13 @@ const EVENTS = {
     team: '10u',
     feed: 'boxscores-exhibition-10u',
     club: true,
+  },
+  'league-10u': {
+    label: 'League games',
+    team: '10u',
+    feed: 'boxscores-league-10u',
+    club: true,
+    league: true,
   },
 };
 
@@ -326,9 +336,17 @@ function indexList(games, key, href) {
 function indexHtml(feeds, events) {
   const section = (title, items) => `<section class="bx-section"><h2 class="bx-h2">${esc(title)}</h2>${items ? `<ul class="bx-index">${items}</ul>` : '<p class="bx-none">No box scores posted yet.</p>'}</section>`;
   const lists = Object.keys(TEAMS).map((key) => {
-    const items = indexList(feeds[key]?.games || [], key, (g) => `/box-score?team=${key}&amp;game=${esc(g.id)}`);
+    // LIHockey's league games plus the ones kept by hand, newest first.
+    const league = [
+      ...(feeds[key]?.games || []).map((g) => ({ ...g, boxHref: `/box-score?team=${key}&amp;game=${esc(g.id)}` })),
+      ...Object.entries(EVENTS)
+        .filter(([, ev]) => ev.team === key && ev.league)
+        .flatMap(([ek, ev]) => (events[ev.feed]?.games || [])
+          .map((g) => ({ ...g, boxHref: `/box-score?event=${ek}&amp;game=${esc(g.id)}` }))),
+    ].sort((a, b) => (b.detail?.isoDate || '').localeCompare(a.detail?.isoDate || ''));
+    const items = indexList(league, key, (g) => g.boxHref);
     const tournaments = Object.entries(EVENTS)
-      .filter(([, ev]) => ev.team === key && events[ev.feed]?.games?.length)
+      .filter(([, ev]) => ev.team === key && !ev.league && events[ev.feed]?.games?.length)
       .map(([ek, ev]) => section(
         `${TEAMS[key].label} · ${ev.label}`,
         indexList(events[ev.feed].games, key, (g) => `/box-score?event=${ek}&amp;game=${esc(g.id)}`),
@@ -368,7 +386,7 @@ export default async function decorate(block) {
   const game = (feed?.games || []).find((g) => String(g.id) === id);
   if (!game?.detail?.teams?.length) {
     let when = event ? 'Tournament box scores are saved from GameSheet within a day of the game.' : 'Box scores usually appear on LIHockey.com a few days after the game.';
-    if (event?.club) when = 'Exhibition box scores are added once the team reports the game.';
+    if (event?.club) when = `${event.league ? 'League' : 'Exhibition'} box scores are added once the team reports the game.`;
     block.innerHTML = `<div class="bx-missing"><h1>Box score not available</h1><p>This game’s box score hasn’t been posted yet. ${when}</p><p><a class="bx-btn bx-btn-solid" href="${esc(src.backPath || '/schedule')}">Back to the schedule</a> <a class="bx-btn" href="/box-score">All box scores</a></p></div>`;
     return;
   }

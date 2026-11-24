@@ -595,9 +595,11 @@ export async function loadTeamGames(key) {
 
 // Box score pages (/box-score, see the box-score block), by game type:
 // league games from LI Hockey (matched by day and opponent), tournament games
-// from GameSheet (by game id), exhibition games the team reported (day and opponent).
+// from GameSheet (by game id), exhibition games the team reported (day and opponent),
+// and league games LI Hockey doesn't list, also reported by the team.
 const TOURNAMENT_BOX_SCORES = { 'mid-atlantic': { team: '10u', feed: 'boxscores-mid-atlantic.json' } };
 const EXHIBITION_BOX_SCORES = { '10u': 'boxscores-exhibition-10u.json' };
+const LEAGUE_BOX_SCORES = { '10u': 'boxscores-league-10u.json' };
 
 /**
  * Every box score page for a team (or a tournament key such as 'mid-atlantic').
@@ -608,6 +610,9 @@ export async function loadBoxScores(key) {
   const sources = [];
   if (TEAMS[key]) {
     sources.push({ kind: 'league', file: `stats-lihockey-${key}.json`, href: (id) => `/box-score?team=${key}&game=${id}` });
+  }
+  if (LEAGUE_BOX_SCORES[key]) {
+    sources.push({ kind: 'league', file: LEAGUE_BOX_SCORES[key], href: (id) => `/box-score?event=league-${key}&game=${id}` });
   }
   Object.entries(TOURNAMENT_BOX_SCORES)
     .filter(([event, ev]) => ev.team === key || event === key)
