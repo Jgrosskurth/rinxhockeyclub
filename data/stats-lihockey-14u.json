@@ -3,7 +3,7 @@
  "source": "lihockey.com",
  "team": "14u",
  "teamPage": "https://lihockey.com/teams/1182/",
- "updated": "2026-11-24T18:16:56+00:00",
+ "updated": "2026-11-28T03:03:03+00:00",
  "players": [
   {
    "name": "Luka Mazzarone",
@@ -1178,17 +1178,6 @@
         "sog": "0"
        },
        {
-        "name": "Jordan Daley",
-        "number": "10",
-        "badge": "",
-        "g": "1",
-        "a": "2",
-        "pts": "3",
-        "pim": "8",
-        "plusminus": "0",
-        "sog": "0"
-       },
-       {
         "name": "Jake Goldstein",
         "number": "",
         "badge": "",
@@ -1218,17 +1207,6 @@
         "a": "0",
         "pts": "0",
         "pim": "0",
-        "plusminus": "0",
-        "sog": "0"
-       },
-       {
-        "name": "Stephen Laton",
-        "number": "58",
-        "badge": "",
-        "g": "0",
-        "a": "0",
-        "pts": "0",
-        "pim": "9",
         "plusminus": "0",
         "sog": "0"
        },
@@ -1279,17 +1257,6 @@
        {
         "name": "Krishav Aggarwal",
         "number": "46",
-        "badge": "",
-        "g": "0",
-        "a": "0",
-        "pts": "0",
-        "pim": "0",
-        "plusminus": "0",
-        "sog": "0"
-       },
-       {
-        "name": "Cole Kasin",
-        "number": "37",
         "badge": "",
         "g": "0",
         "a": "0",
